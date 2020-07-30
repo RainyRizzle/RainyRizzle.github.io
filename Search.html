@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <!-- 부트스트랩 -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!--------------->
+
+    <script type="text/javascript">   
+    
+       var testFunc = function()
+       {        
+            //alert("인라인 함수를 실행합니다.");
+            var inputTex, inputTextArr, searchtext, items, keywords, curKeyword, i, iTex, isShow;
+            
+            inputTex = document.getElementById("searchbox").value.toUpperCase();
+            if(inputTex.length == 0)
+            {
+                return;
+            }
+            inputTex = inputTex.replace(",", " ");
+            inputTextArr = inputTex.split(" ");
+            if(inputTextArr.length == 0)
+            {
+                return;
+            }
+
+            //searchtext = document.getElementById("searchbox").value.toUpperCase();
+            //alert(searchtext);
+            items = document.getElementsByClassName("item");
+
+            for(i = 0; i < items.length; i++)
+            {
+                keywords = items[i].getElementsByClassName("keywords");
+                
+                if(keywords.length > 0)
+                {
+                    curKeyword = keywords[0].innerHTML.toUpperCase();//사실 1개짜리 Element이다.
+
+                    //키워드에 input 텍스트가 포함되는가
+                    //input에 키워드가 포함되는가
+                    isShow = false;
+
+                    for(iTex = 0; iTex < inputTextArr.length; iTex++)
+                    {
+                        searchtext = inputTextArr[iTex];
+
+                        if(curKeyword.indexOf(searchtext) > -1)
+                        {
+                            //키워드에 검색어가 포함된다.
+                            isShow = true;
+                        }
+                        else
+                        {
+                            //입력의 글자가 8 이상인 경우, 앞의 8글자가 포함된다.align-content-around
+                            if(searchtext.length > 8)
+                            {
+                                if(curKeyword.indexOf(searchtext.substring(0, 8)) > -1)
+                                {
+                                    isShow = true;
+                                }
+                            }
+                        }
+
+                        if(isShow)
+                        {
+                            break;
+                        }
+                        
+                    }
+
+
+                    if(isShow)
+                    {
+                        items[i].className = "item";//보이기
+                    }
+                    else
+                    {
+                        items[i].className = "item d-none";//숨기기
+                    }
+                }
+            }
+       }
+
+       var enterKeyAndSearch = function()
+        {
+            if(window.event.keyCode == 13 || window.event.which == 13)
+            {
+                testFunc();
+            }
+        }
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+</head>
+<body>
+
+    <p>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">NavBar</a>
+    </nav>
+    </p>
+    <div class="container">
+        <!--<p><div id="headers"></div></p>-->
+        
+        
+        <h2>검색 페이지</h2>
+        <p>검색 기능입니다.</p>
+
+        
+        <div class="input-group mb-3">
+            <input type="text" id="searchbox" class="form-control" placeholder="키워드를 입력하세요" aria-label="키워드를 입력하세요" aria-describedby="button-addon" onkeypress="javascript:enterKeyAndSearch();">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="button-addon" href="#" onclick="javascript:testFunc();">
+                  검색
+              </button>
+            </div>
+        </div>
+
+        <!--검색 항목들-->
+        <div class="item d-none">   
+            <span class="keywords" hidden="true">Tutorial,item,page,1</span>
+            <div class="alert alert-dark" role="alert">
+                <h5><a href="TestPage.html>">튜토리얼 페이지 1</a></h5>
+                <p>튜토리얼 페이지1에 관한 설명입니다.</p>
+            </div>
+        </div>
+
+        <div class="item d-none">
+            <span class="keywords" hidden="true">Tutorial,item,page,2</span>
+            <div class="alert alert-dark" role="alert">
+                <h5><a href="TestPage.html>">튜토리얼 페이지 2</a></h5>
+                <p>튜토리얼 페이지2에 관한 설명입니다.</p>
+            </div>
+        </div>
+        
+    </div>
+
+    <br>
+    <p>검색해봅시다.</p>
+
+    <br>
+
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <!--------------->
+
+</body>
+</html>
