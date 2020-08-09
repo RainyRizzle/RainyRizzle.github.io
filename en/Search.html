@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Search</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../css/bootstrap.css">
+        <!--------------->
+        <script type="text/javascript">
+        var testFunc = function()
+        {
+            //alert("인라인 함수를 실행합니다.");
+            var inputTex, inputTextArr, searchtext, items, keywords, curKeyword, i, iTex, isShow;
+            
+            inputTex = document.getElementById("searchbox").value.toUpperCase();
+            if(inputTex.length == 0)
+            {
+                return;
+            }
+            inputTex = inputTex.replace(",", " ");
+            inputTextArr = inputTex.split(" ");
+            if(inputTextArr.length == 0)
+            {
+                return;
+            }
+            
+            items = document.getElementsByClassName("item");
+            
+            for(i = 0; i < items.length; i++)
+            {
+                keywords = items[i].getElementsByClassName("keywords");
+                if(keywords.length > 0)
+                {
+                    curKeyword = keywords[0].innerHTML.toUpperCase();//사실 1개짜리 Element이다.
+                    
+                    //키워드에 input 텍스트가 포함되는가
+                    //input에 키워드가 포함되는가
+                    isShow = false;
+                    
+                    for(iTex = 0; iTex < inputTextArr.length; iTex++)
+                    {
+                        searchtext = inputTextArr[iTex];
+                        
+                        if(curKeyword.indexOf(searchtext) > -1)
+                        {
+                            //키워드에 검색어가 포함된다.
+                            isShow = true;
+                        }
+                        else
+                        {
+                            //입력의 글자가 8 이상인 경우, 앞의 8글자가 포함된다.align-content-around
+                            if(searchtext.length > 8)
+                            {
+                                if(curKeyword.indexOf(searchtext.substring(0, 8)) > -1)
+                                {
+                                    isShow = true;
+                                }
+                            }
+                        }
+                        
+                        if(isShow)
+                        {
+                            break;
+                        }
+                        
+                    }
+                    
+                    if(isShow)
+                    {
+                        items[i].className = "item";//보이기
+                    }
+                    else
+                    {
+                        items[i].className = "item d-none";//숨기기
+                    }
+                }
+            }
+        }
+        
+        var enterKeyAndSearch = function()
+        {
+            if(window.event.keyCode == 13 || window.event.which == 13)
+            {
+                testFunc();
+            }
+        }
+        </script>
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../en/Search.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../kr/Search.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../jp/Search.html">JP</a>
+                </div>
+
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 29. 검색 세트 자동 생성 -->
+    <h1 class="display-4"><strong>Search</strong></h1>
+    <p>Enter words to search for the page you need.</p>
+    <br>
+    
+    <div class="input-group mb-3">
+        <input type="text" id="searchbox" class="form-control" placeholder="Enter relevant keywords here." aria-label="Enter relevant keywords here." aria-describedby="button-addon" onkeypress="javascript:enterKeyAndSearch();">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon" href="#" onclick="javascript:testFunc();">
+                Search
+            </button>
+        </div>
+    </div>
+    
+    <!--검색 항목들-->
+    
+    <div class="item d-none">
+        <span class="keywords" hidden="true">test,child,page,hello,letter,properly,font,yourself,colors,blue,green,red,yellow,mix,tried,separating,syntax,comes,link,link테스트,자식,문서2,internal,document2,opening,tab,simply,write,link_tab테스트,external,links,open,pixiv,thank,</span>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><strong>Test Child Page 1</strong></h5>
+                <p class="card-text">Test Page 1</p>
+                <a href="../en/Test/TestChild1.html" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+        <br>
+    </div>
+    
+    <div class="item d-none">
+        <span class="keywords" hidden="true">test,child,page,</span>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><strong>Test Child Page 2</strong></h5>
+                <p class="card-text">Test Page 2</p>
+                <a href="../en/Test/TestChild2.html" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+        <br>
+    </div>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>
