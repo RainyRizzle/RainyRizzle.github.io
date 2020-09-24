@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Bake Dialog</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_BakeDialog.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_BakeDialog.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_BakeDialog.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Bake Dialog</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Bake Dialog</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.1.8</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_398.jpg"/>
+    <br>
+    
+    <p>
+    As of v1.1.0, the UI of the Bake dialog has been partially changed.<br>
+    When you press the <strong>Bake button</strong> at the top of the screen, the Bake dialog box appears.<br>
+    At the top of the dialog are the <strong>Bake tab</strong> and the <strong>Setting tab</strong>.<br>
+    The Settings tab contains settings for apPortrait for Bake.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    <strong>[ Bake Tab ]</strong><br>
+    <strong>1. Portrait</strong> : The apPortrait currently being edited.<br>
+    <strong>2. Bake Scale</strong> : Since the coordinate system of AnyPortrait is different from the coordinate system of Unity, it is the ratio of size to fit this.<br>
+    <strong>3. Z Per Depth</strong> : The Z interval of each mesh. Too small may cause Z-Fighting problems.<br>
+    <strong>4. Bake </strong>: Bake to Unity scene.<br>
+    <strong>5. Optimized Baking Target</strong><br>
+    <strong>6. Optimized Bake </strong>: Optimized Bake to Unity scene.<br>
+    ​<br>
+    <strong>[ Setting Tab ]</strong><br>
+    <strong>7. Color Space</strong> <br>
+    : Bake according to Color space. (Gamma / Linear)<br>
+    ​<br>
+    <strong>8. Sorting Layer / Order</strong> <br>
+    : This is an option to determine the rendering order, and you can decide how to assign Sorting Order. (<a href="../../en/AdvancedManual/AD_SortingLayer.html">Related page</a>)<br>
+    ​<br>
+    <strong>9. Mecanim Settings</strong><br>
+    : You can set whether to use Mecanim and the path where the Animation Clip assets to be included in Animator are saved.<br>
+    ​<br>
+    <strong>10. Important Settings</strong><br>
+    : If you turn off Important, only the specified FPS is updated. For objects or NPCs that are not important in games, etc., you can turn off Important and optimize for updates. It is on by default.<br>
+    (<a href="../../en/AdvancedManual/AD_ImportantOption.html">Related page</a>)<br>
+    ​<br>
+    <strong>11. Billboard</strong> <br>
+    : This setting makes the character look at the camera.<br>
+    Once the billboard is active, it is possible to use a perspective camera, allowing the character to be placed in the 3D scene.<br>
+    (<a href="../../en/AdvancedManual/AD_BillboardPers.html">Related page</a>)<br>
+    ​<br>
+    <strong>12. Shadow Settings</strong><br>
+    : You can specify the Shadow settings of the created Mesh Renderer in batch. (Shaders that are shipped by default do not apply shadows when you turn on Receive Shadows.)<br>
+    ​<br>
+    <strong>13. Render Pipeline</strong><br>
+    : This option can be set according to the project's Render Pipeline (Default / Scriptable Render Pipeline).<br>
+    (This option is supported since Unity 2019.)<br>
+    This option causes the clipping mesh to render properly.<br>
+    See the following pages for a description of the render pipeline and materials.<br>
+    (<a href="../../en/AdvancedManual/AD_MaterialLibrary.html">Material Library</a> / <a href="../../en/AdvancedManual/AD_LWRP.html">Lightweight Render Pipeline</a>)<br>
+    ​<br>
+    <strong>14. VR Option</strong><br>
+    : It is the rendering option when using VR or using multiple cameras.<br>
+    This option makes the clipping mesh and billboard calculations work for your environment.<br>
+    Refer to the following page for the description of VR.<br>
+    (<a href="../../en/AdvancedManual/AD_VR.html">Build to VR</a>)<br>
+    ​<br>
+    <strong>15. Set Ambient Light to Black color</strong><br>
+    : This makes the Unity scene's Ambient color black to prevent characters from rendering too bright.<br>
+    ​<br>
+    ​<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_769.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Change Ambient Light setting</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.1.2</span></h4>
+    
+    <p>
+    If you create a character in AnyPortrait and then bake it, you may have experienced the character's appearance too bright.<br>
+    This is because the character of AnyPortrait receives the <strong>Ambient Light</strong> of the scene.<br>
+    You need to change the Ambient Light to black for proper application, and you can do this quickly in the Bake dialog.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_414.jpg"/>
+    <br>
+    
+    <p>
+    This is the render screen in the scene right after Bake.<br>
+    You can see that it is being rendered too bright, unlike the original color.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_415.jpg"/>
+    <br>
+    
+    <p>
+    On the Setting tab of the Bake dialog, click the "<strong>Set Ambient Light to Black Color</strong>" button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_416.jpg"/>
+    <br>
+    
+    <p>
+    You can see that the Ambient settings change and render to normal brightness.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_RootUnit.html">< Register and Release Root Unit</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ScreenCapture.html">Screen capture ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

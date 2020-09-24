@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>2.4. Adding Bones</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/GettingStarted/GS_2_4.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/GettingStarted/GS_2_4.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/GettingStarted/GS_2_4.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/GettingStarted.html"><span class="text-dark">Getting Started</span></a> > 2.4. Adding Bones</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">2.4. Adding Bones</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    It covers how to add a bone for a bone animation.<br>
+    AnyPortrait supports <strong>Bone IK (Inverse Kinematics)</strong> and supports <strong>Bone Socket</strong>.<br>
+    Details can be found on the relevant page (<a href="../../en/AdvancedManual/AD_BoneIK.html">IK Guide</a>, <a href="../../en/AdvancedManual/AD_Socket.html">Socket Guide</a>).<br>
+    This page tells you how to add basic bones and how to set up for the next tutorial.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_44.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the <strong>Bone</strong> menu.<br>
+    <strong>(2)</strong> <strong>Press the Start Editing Bones button</strong> to activate the Bone editing mode.<br>
+    <strong>(3)</strong> <strong>Select the Adding tool</strong> from the three Bone editing tools.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_20.jpg"/>
+    <br>
+    
+    <p>
+    The above screen is the UI for the Bone edit mode.<br>
+    <strong>1. Bone Editing Enable/Disable Button</strong> : Turns Bone Edit Mode on or off. You can only edit it while it is on.<br>
+    <strong>2. Selection tool</strong> : Bone can be selected.<br>
+    <strong>3. Adding tool</strong> : You can add bones. If there is a selected Bone, it is automatically registered as <strong>a Child Bone</strong>. If you <strong>uncheck</strong> it with the&nbsp;&nbsp;<kbd>Right Click</kbd> , and&nbsp;&nbsp;<kbd>Right Click again</kbd> , it <strong>switches to this selection tool</strong>.<br>
+    <strong>4. Connecting tool</strong> : Connect two bones and connect them in <strong>Parent-Child relationship</strong>. The second selected bone becomes <strong>the Parent Bone</strong>. If you <strong>uncheck</strong> it with the&nbsp;&nbsp;<kbd>Right Click</kbd> , and&nbsp;&nbsp;<kbd>Right Click again</kbd> , it <strong>switches to this selection tool</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    We will learn how to add bones and we will proceed with the next step.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_19.jpg"/>
+    <br>
+    
+    <p>
+    With Bone not selected, create a bone with <strong>(1)</strong> <strong>the first clicked position as the start point, and (2) the second clicked position as the end point</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_18.jpg"/>
+    <br>
+    
+    <p>
+    When Bone is selected, create a bone with <strong>(1)</strong> <strong>the end point of the selected bone as the start point</strong> and <strong>(2)</strong> <strong>the end point that is clicked</strong>.<br>
+    At this time, the <strong>Name and Color</strong> of the newly created Bone will be set similar to the previously selected Bone, and the <strong>Shape</strong> will be the same.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_22.jpg"/>
+    <br>
+    
+    <p>
+    Add a bone to the pelvis, which is the center of your body. <br>
+    The direction of the pelvic bone is not so important, so we made it easy to choose later in the future.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_23.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Change to the Selection tool </strong>and select the bone you just created.<br>
+    <strong>(2)</strong> <strong>Set the name</strong> of the selected Bone to <strong>"Bone Pelvis"</strong>.<br>
+    <strong>(3)</strong> <strong>Modify the color and shape</strong> of the bone.<br>
+    For large bones, it is easy to select larger ones, so we recommend setting the size to make it easier to work on later.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_24.jpg"/>
+    <br>
+    
+    <p>
+    Now make bones of body.<br>
+    First create a new bone and name it <strong>"Bone Spine1"</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_25.jpg"/>
+    <br>
+    
+    <p>
+    Create a second bone with <strong>"Bone Spine1"</strong> selected.<br>
+    The name of the second bone is <strong>automatically</strong> named <strong>"Bone Spine2"</strong> and its <strong>size or color</strong> is set similar to the previous bone.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_26.jpg"/>
+    <br>
+    
+    <p>
+    Add a head bone (<strong>"Bone Head"</strong>).<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_27.jpg"/>
+    <br>
+    
+    <p>
+    Also add a bone to the ear decor of the character hoodie.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_28.jpg"/>
+    <br>
+    
+    <p>
+    Set the bones as above.<br>
+    Set various bones depending on which animation you are creating and which image you are targeting.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now the next task is to connect the finished bones together.<br>
+    If you connect the bone properly, you can move naturally like a real person.<br>
+    It is common to first set the <strong>Pelvis</strong> to the parent bone (Root Parent Bone), and connect the head, hands, and feet to the ends.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_29.jpg"/>
+    <br>
+    
+    <p>
+    To connect the bones <strong>(1)</strong> <strong>Select the Connecting tool</strong>.<br>
+    <strong>(2)</strong> <strong>Select body's starting bone ("Bone Spine 1")</strong>, and <strong>(3)</strong> <strong>select the pelvis ("Bone Pelvis")</strong>.<br>
+    In this way, the pelvis becomes the parent and the body becomes the child.<br>
+     <kbd>Right Click</kbd>  to deselect the next selection.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_30.jpg"/>
+    <br>
+    
+    <p>
+    In the same way, Select <strong>legs </strong>and connect them to <strong>pelvis</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_31.jpg"/>
+    <br>
+    
+    <p>
+    <strong>The head and both arms</strong> are connected to the uppermost bone (<strong>"Bone Spine2"</strong>) of the body.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_32.jpg"/>
+    <br>
+    
+    <p>
+    Attach the bones (<strong>hood ears and hood tails</strong>) of your head to the head (<strong>"Bone Head"</strong>).<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_33.jpg"/>
+    <br>
+    
+    <p>
+    Hierarchy with completed bones.<br>
+    You do not have to be like this, so think about the connection of the bones of the person and make it freely.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>If the bones are not visible?</h4>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_34.jpg"/>
+    <br>
+    
+    <p>
+    There are buttons to show or hide the bones at the top of the screen. This button has 3 states.<br>
+    1. The bones are not visible when the button is off.<br>
+    2. When the button is on, the bones appear filled in color.<br>
+    3. When the button is on but the hollow icon is on, the bones appear only as lines.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    <strong>Note</strong> : This page provides a rough overview of bone settings.<br>
+    The configuration of this setting screen is as follows.<br>
+    ​Please refer to <a href="../../en/AdvancedManual/AD_BoneIK.html">Related Page</a>.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_35.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    <strong>1. Name</strong> : Sets the name of the bone.<br>
+    <strong>2. Base Pose Transformation</strong> : Position, rotation, size value of bone.<br>
+    <strong>3. Socket</strong> : To refer to the bone after bake, turn on the socket.<br>
+    <strong>4. IK Setting</strong> : This is the area to set the IK function of the bone.<br>
+    <strong>5. Hierarchy</strong> : You can select parent bone, child bone here.<br>
+    <strong>6. Shape</strong> : Set color and shape. The larger the taper, the tapered tip.<br>
+    <strong>7. Remove Remove Bone</strong> : Delete the bone. You can also delete all children by selecting the dialog box.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
+    <br><br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Color presets and "Needle shape" bones</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.2.3</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_917.jpg"/>
+    <br>
+    
+    <p>
+    You can quickly change the color of the bones using the "<strong>Color Preset</strong>" feature added in v1.2.3.<br>
+    If you click the 6 color buttons, it will change to the color of the corresponding color series.<br>
+    Each time the button is pressed, a different color is assigned.<br>
+    Since the range of colors from the preset is moderately wide, it is easy to make the colors of the bones of the same series similar.<br>
+    ​<br>
+    As of v1.2.3, you can change the settings to the bones of "<strong>Arrowhead shape</strong>" and "<strong>Needle shape</strong>". (<a href="../../en/AdvancedManual/AD_SettingDialog.html">Related page</a>)<br>
+    If “<strong>Needle Shape</strong>” is selected, <strong>Width</strong> and <strong>Taper</strong> settings are not applied.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/GettingStarted/GS_2_3.html">< 2.3. Clipping Layer</a>
+        <a class="btn btn-light" role="button" href="../../en/GettingStarted/GS_2_5.html">2.5. Using the Rigging Modifier ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

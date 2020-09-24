@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Sorting Layer/Order 설정</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_SortingLayer.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_SortingLayer.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_SortingLayer.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > Sorting Layer/Order 설정</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Sorting Layer/Order 설정</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.1.8</span></h4>
+    
+    <p>
+    게임을 실행하면 여러개의 GameObject들을 하나씩 렌더링을 합니다.<br>
+    이때, 렌더링 되는 순서를 설정하는 것은 매우 중요합니다.<br>
+    일반적으로는 카메라로부터의 거리에 따라서 순서가 정해지지만, 이 순서를 직접 지정하는 것이 가능합니다.<br>
+    Unity에서 제공하는 <strong>Sorting Layer</strong>와 <strong>Sorting Order</strong>를 이용하여 렌더링 순서를 정할 수 있습니다.<br>
+    스크립트 문서는 <a href="../../kr/Script/SC_Init.html">관련 페이지</a>를 참고하세요.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_171.jpg"/>
+    <br>
+    
+    <p>
+    Bake 다이얼로그에 <strong>Sorting Layer</strong>와 <strong>Sorting Order</strong>를 설정할 수 있는 기능이 추가되었습니다.<br>
+    Sorting Layer는 <strong>Edit &gt; Project Settings &gt; Tags and Layers</strong>에서 설정할 수 있습니다.<br>
+    Sorting Order는 정수 타입의 값을 가지며 기본값은 0입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_172.jpg"/>
+    <br>
+    
+    <p>
+    Sorting Layer/Order 기능을 테스트하기 위해 Sprite Renderer를 가지는 GameObject을 옆에 두었습니다.<br>
+    두 GameObject의 Sorting Layer는 동일합니다.<br>
+    Sprite Renderer의 Sorting Order는 0입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_173.jpg"/>
+    <br>
+    
+    <p>
+    게임 실행 중에 Inspector에서 Sorting Layer와 Sorting Order를 수정할 수 있습니다.<br>
+    게임을 실행한 상태에서 Sorting Order를 1로 설정하면 슬라임이 앞쪽에서 렌더링됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_174.jpg"/>
+    <br>
+    
+    <p>
+    반대로 Sprite Renderer의 Sorting Order보다 작은 -1을 입력하면 슬라임이 뒤에서 렌더링이 됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Sorting Group 이용하기</h3>
+    <br>
+    
+    <p>
+    AnyPortrait의 v1.1.8부터 <strong>Sorting Group</strong> 기능을 지원합니다.<br>
+    <strong>Sorting Group</strong> 기능을 이용하면 <strong>그룹으로 존재하는 객체의 렌더링 순서</strong>를 결정할 수 있습니다.<br>
+    이 페이지에서는 두가지 경우의 문제를 Sorting Group을 이용하여 해결하는 과정을 다룹니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_770.jpg"/>
+    <br>
+    
+    <p>
+    캐릭터가 겹쳐있는 경우의 예시입니다.<br>
+    AnyPortrait로 제작된 캐릭터처럼 여러개의 <strong>Mesh Renderer</strong>나 <strong>Sprite Renderer</strong>로 구성된 캐릭터들이 서로 겹치는 경우,<br>
+    캐릭터간의 렌더링 순서가 정해지지 않아 복잡한 형태로 렌더링이 됩니다.<br>
+    이 이슈는 위에서 설명한 Sorting Order나 Sorting Layer를 다르게 입력하여 처리할 수 있지만, <br>
+    가장 좋은 방법은 Sorting Group으로 묶는 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_771.jpg"/>
+    <br>
+    
+    <p>
+    Sorting Group을 이용하기 전에 AnyPortrait로 만든 캐릭터의 설정을 변경해야합니다.<br>
+    <strong>(1)</strong> 에디터를 열고 <strong>Bake 버튼</strong>을 눌러서 다이얼로그를 엽니다.<br>
+    <strong>(2)</strong> <strong>Setting 탭</strong>을 선택합니다.<br>
+    <strong>(3)</strong> <strong>Sorting Order Option</strong> 항목의 값을 <span class="text-danger"><strong>Depth To Order</strong></span>로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    v1.1.8에서 추가된 설정인 <strong>Sorting Order Option</strong>은 각각의 메시의 Order가 어떤 값을 가질지 결정합니다.<br>
+    옵션의 내용은 다음과 같습니다.<br>
+    <strong>- Set Order</strong> : 기존의 방식입니다. Sorting Order 항목의 값이 일괄적으로 메시에 지정됩니다.<br>
+    <strong>- Disabled</strong> : Bake할 때 메시들의 Order를 설정하지 않습니다.<br>
+    <strong>- Depth To Order</strong> : 뒤에서부터 앞으로 Order가 증가합니다.<br>
+    <strong>- Reverse Depth To Order </strong>: 앞에서부터 뒤로 Order가 증가합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    Sorting Group을 이용하지 않더라도, 필요에 따라 Sorting Order Option을 설정하시면 됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_772.jpg"/>
+    <br>
+    
+    <p>
+    Sorting Order Option을 <strong>Inspector UI</strong>에서 설정할 수도 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_773.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait로 만든 캐릭터에 Sorting Group 컴포넌트를 추가합니다.<br>
+    <strong>(1)</strong> <strong>Add Component 버튼</strong>을 누릅니다.<br>
+    <strong>(2)</strong> <strong>Sorting Group 컴포넌트</strong>를 선택하여 추가합니다. (검색하여 찾는 것을 권장합니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_774.jpg"/>
+    <br>
+    
+    <p>
+    이제 메시들이 그룹 단위로 렌더링 순서가 결정되어 예쁘게 나타납니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_775.jpg"/>
+    <br>
+    
+    <p>
+    두번째 예제입니다.<br>
+    이 예제는 캐릭터들과 울타리들이 배치된 씬입니다.<br>
+    카메라가 위에서 아래를 바라보는 2D 게임에서 일반적으로 사용되는 구성이며,<br>
+    <strong>아래에 위치한 오브젝트</strong>가 <strong>앞에서 렌더링</strong>되어야 합니다.<br>
+    하지만 현재는 오브젝트의 Y 좌표와 무관하게 렌더링 순서가 결정됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    스크립트로 일일이 Sorting Order를 수정하는 방법도 있지만,<br>
+    가장 편리한 방법은 프로젝트의 설정을 수정하는 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_776.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Project Settings</strong>을 열고 <strong>Graphics</strong>를 선택합니다.<br>
+    <strong>(2)</strong> <strong>Camera Settings</strong>의 <strong>Transparency Sort Mode</strong>를 <strong>Custom Axis</strong>로 변경하고,<br>
+    <strong>Transparency Sort Axis</strong>를 <strong>(0, 1, 0)</strong>으로 변경합니다.<br>
+    이제 렌더링 순서를 결정하는 기준이 Z축에서 Y축으로 변경되었습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_777.jpg"/>
+    <br>
+    
+    <p>
+    이제 <strong>Sorting Group</strong>을 적용해봅시다.<br>
+    캐릭터를 선택하고 <strong>Bake 다이얼로그</strong> 또는 <strong>Inspector UI</strong>에서 <strong>Sorting Order Option</strong>을 <strong>Depth To Order</strong>로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_778.jpg"/>
+    <br>
+    
+    <p>
+    캐릭터에 <strong>Sorting Group 컴포넌트</strong>를 추가합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_779.jpg"/>
+    <br>
+    
+    <p>
+    이제 캐릭터와 울타리들이 위에서부터 아래로 순서대로 렌더링이 됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_OptimizedBake.html">< 최적화된 Bake</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_EditingPrefabs.html">프리팹 편집하기 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

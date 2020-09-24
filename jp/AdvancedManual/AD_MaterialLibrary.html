@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>マテリアルライブラリ</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_MaterialLibrary.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MaterialLibrary.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_MaterialLibrary.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > マテリアルライブラリ</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">マテリアルライブラリ</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.1.8</span></h4>
+    
+    <p>
+    <strong>v1.1.7から適用される機能です。</strong>AnyPortraitの基本的なレンダリング目的は、「光が適用されず、イラストの元の色を表現すること」です。<br>
+    しかしながら、プロジェクトに応じて、キャラクターが光の影響を受ける必要もあり、ユーザーが作成した「Shader」に実装された様々な効果が適用されることが必要でもあるでしょう。<br>
+    AnyPortrait v1.1.7に、これらのユーザーのニーズを満たすための機能が追加されました。<br>
+    「<strong>マテリアルライブラリ（Material Library）</strong>」を利用して、様々なマテリアルを設定してBakeをすることができ、マテリアルの初期値を設定することも可能です。<br>
+    また、頻繁に使用される「<strong>マテリアルセット（Material Set）</strong>」をプリセットとして保存して、これを他のキャラクターに簡単に適用することもできます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>マテリアルライブラリからマテリアルセットを作成して適用</h3>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_571.jpg"/>
+    <br>
+    
+    <p>
+    「Directional Light」、「Point Light」が配置され、「Ambient Color」が黒より明るく設定されたユニティシーンです。<br>
+    このとき、基本的な方法でBakeされたAnyPortraitで作成されたキャラクターが過度に明るく表示される問題が発生します。<br>
+    以前は、このような場合は、ユーザーが作成した「Shader」をいちいちメッシュに適用する方法で問題を解決していました。<br>
+    （<a href="../../jp/AdvancedManual/AD_MeshShader.html">関連ページ</a>）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_572.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitエディタを開きます。<br>
+    <strong>(1)</strong> 「<strong>ルートユニット</strong>」を選択します。<br>
+    <strong>(2)</strong> エディタの上部に追加された「<strong>Material Library</strong>」ボタンを押します。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_573.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>マテリアルライブラリ</strong>」ウィンドウが開きます。<br>
+    マテリアルライブラリは、「<strong>マテリアルセット</strong>」を作成して変更することができる機能です。<br>
+    （マテリアルライブラリのインターフェイスの詳細については、このページの下で見ることができます。）<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <p>
+    条件に応じて、他のShaderが適用されます。<br>
+    したがって、複数のShaderを1つのグループにまとめて管理する必要がありますが、これを「マテリアルセット」で呼ばれます。<br>
+    いくつかのShaderが適用されるかについての条件は、次のとおりです。<br>
+    <strong>- GammaまたはLinearカラースペース</strong><br>
+    <strong>- クリッピングするかどうか</strong><br>
+    <strong>- 4つのブレンド方式</strong><br>
+    </p>
+    <br>
+    
+    <p>
+    そしてクリッピングメッシュのための「Alpha Mask Shader」を含みます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_574.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>マテリアルライブラリ</strong>」は、上記のように構成されます。<br>
+    <strong>(1)</strong> マテリアルセット：現在のキャラクターに保存されたマテリアルセットが表示され、マテリアルのセットを生成することができるボタンがあります。<br>
+    <strong>(2)</strong> プリセット：他のキャラクターにも適用するために一般的に共有されているプリセットが表示されます。プリセットを作成したり、予め指定されたパッケージからプリセットを作成することができるボタンがあります。<br>
+    <strong>(3)</strong> マテリアルセット属性：選択されたマテリアルセットの属性があります。名前とアイコン、Shaderとマテリアルのプロパティなどを設定することができます。<br>
+    <strong>(4)</strong> マテリアルセットの編集機能：プリセットと接続して値を同期したり、他のマテリアルのセットを複製する機能などが提供されます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_575.jpg"/>
+    <br>
+    
+    <p>
+    現在は、デフォルトの「<strong>Unlit</strong>」プリセットのみです。<br>
+    パッケージの形で提供されているプリセットを設置しましょう。<br>
+    <strong>(1)</strong> 「<strong>Unpack Advanced Presets</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> パッケージがインストールされると、マテリアルライブラリを再起動する必要があるというメッセージが表示されます。<br>
+    <strong>OK</strong>ボタンを押すと、マテリアルライブラリが終了され、パッケージがインストールされます。<br>
+    インストールが終了すると、再マテリアルライブラリを開きます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_576.jpg"/>
+    <br>
+    
+    <p>
+    現在、多くのマテリアルセットプリセットがインストールされます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_626.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_627.jpg"/>
+    <br>
+    
+    <p>
+    v1.1.8からプリセットを選択するためのボタンが変更されました。<br>
+    <strong>(1)</strong> インストールしようとする「プリセット」を選択します。<br>
+    <strong>(2)</strong> 「Unpack Preset」ボタンを押すと、選択されたプリセットが選択されます。<br>
+    - 「LWRP Unlit、LWRP 2D」プリセットの説明は、「<a href="../../jp/AdvancedManual/AD_LWRP.html">関連ページ</a>」を参照してください。<br>
+    - 「VR」プリセットの説明は、「<a href="../../jp/AdvancedManual/AD_VR.html">関連ページ</a>」を参照してください。<br>
+    - 「Keep Alpha」プリセットの説明は、「<a href="../../jp/AdvancedManual/AD_RenderTexture.html">関連ページ</a>」を参照してください。<br>
+    - 「URP」プリセットの説明は「<a href="../../jp/AdvancedManual/AD_URP.html">関連ページ</a>」を参照してください。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_577.jpg"/>
+    <br>
+    
+    <p>
+    続いて、新しいマテリアルのセットを作ってみましょう。<br>
+    <strong>(3)</strong> 「<strong>Make Material Set</strong>」ボタンを押します。<br>
+    <strong>(4)</strong> マテリアルのセットを簡単に作るためにプリセットを選択することができます。この段階では、「<strong>Lit</strong>」プリセットを選択してみましょう。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_578.jpg"/>
+    <br>
+    
+    <p>
+    新しいマテリアルセットが生成され、その属性は「Lit」プリセットに基づいて自動的に作成されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_579.jpg"/>
+    <br>
+    
+    <p>
+    まだこのマテリアルセットは作成のみされただけで、実際に適用されていない状態です。<br>
+    生成されたLitマテリアルセットがデフォルトにならなければBakeをしたとき、実際に適用されます。<br>
+    <strong>(5)</strong> 「<strong>Default Material</strong>」ボタンを押してLitマテリアルセットがデフォルトになるように設定します。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_580.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitエディタでは、マテリアルによるレンダリングをサポートしていません。<br>
+    Bakeを実行して、ユニティシーンでどのように表示されるか確認してみましょう。<br>
+    「Bakeダイアログ」を開き、「Bakeボタン」を押します。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_581.jpg"/>
+    <br>
+    
+    <p>
+    今、さまざまな光のため、きれいに表示されるキャラクターを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>マテリアルプリセットを利用した様々なレンダリング</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_582.jpg"/>
+    <br>
+    
+    <p>
+    「Lit」プリセットのほか、様々なマテリアルプリセットが提供されます。<br>
+    このマテリアルを一つずつ用いてレンダリングをしてみましょう。<br>
+    <strong>(1)</strong> 先に作成された「<strong>Lit</strong>」マテリアルセットを選択します。<br>
+    <strong>(2)</strong> 「<strong>Change</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> 他のプリセットを選択して同期することができます。今回は「<strong>Bumped</strong>」プリセットを選択してみましょう。<br>
+    <strong>(4)</strong> 選択されたプリセットと同じになるよう属性をすべて変更するか尋ねます。 <strong>OK</strong>ボタンを押します。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_583.jpg"/>
+    <br>
+    
+    <p>
+    「Bumped」プリセットの属性と同じようにマテリアルセットの属性が変更されました。<br>
+    マテリアルセットの名前とアイコンなどを変更することができます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_585.jpg"/>
+    <br>
+    
+    <p>
+    Bumpedマテリアルは「<strong>ノーマルマップ</strong>」（または「<strong>バンプマップ</strong>」）を必要とします。<br>
+    マテリアルのプロパティに「ノーマルマップ」を入力しヘジュオヤします。<br>
+    <strong>(5)</strong> マテリアルセット属性領域をスクロールすると、下部に「<strong>マテリアルプロパティ</strong>」があります。ここで「<strong>_BumpMap</strong>」プロパティに「<strong>ノーマルマップ</strong>」を適用する必要があります。<br>
+    <strong>(6)</strong> 「<strong>ノーマルマップ</strong>」は、一般的に青のテクスチャで作成され、外部のツールを利用して、ユーザーが直接作成します。<br>
+    <span class="text-primary"><strong>参考</strong></span><br>
+    このページでは、「ノーマルマップ」のようなテクスチャを作成する方法については説明しません。<br>
+    「2D Normal Map」のキーワードで検索をすると、さまざまな製作方法が紹介されます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_586.jpg"/>
+    <br>
+    
+    <p>
+    「Lit」マテリアルと似て見えるが、そこに体積感が追加されたレンダリング結果を見ることができます。<br>
+    ほとんどのライティングは、「ノーマルベクトル」を必要とするので、以下のすべての材料は、「<strong>Bumped</strong>」マテリアルをベースに作成されました。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_587.jpg"/>
+    <br>
+    
+    <p>
+    今回は「<strong>Bumped Specular</strong>」マテリアルを適用してみましょう。<br>
+    上記の説明と同じ手順でプリセットを選択して適用します。<br>
+    <strong>(1)</strong> 「<strong>Change</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Bumped Specular</strong>」プリセットを選択します。<br>
+    <strong>(3)</strong> マテリアルプロパティ項目に「<strong>_SpecularPower</strong>」と「<strong>_SpecularMap</strong>」プロパティが追加されました。<br>
+    「<strong>_SpecularPower</strong>」プロパティは、「SpecularのShininess」を計算する累乗です。数字が大きければ小さく鮮やかな反射光が表示されます。<br>
+    「<strong>_SpecularMap</strong>」プロパティは、「Specular」の計算に使用されるテクスチャです。ここで適用されるテクスチャの「RGBチャンネル」は、「プラス式」に適用される「Specularの色」を意味し、「Alphaチャンネル」は、「_SpecularPowerに乗じなるパラメータ」を意味します。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_588.jpg"/>
+    <br>
+    
+    <p>
+    光の方向に応じてキャラクターがさらに輝くことを見ることができます。<br>
+    （一般的には「Specularの世紀」は、光の方向とカメラの向きに応じて変わるが、AnyPortraitで作成されたキャラクターは「Billboard」方式で動作するため、残念ながらSpecularの効果が大きくない。）<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_589.jpg"/>
+    <br>
+    
+    <p>
+    同じように、「<strong>Bumped Specular Emission</strong>」マテリアルを適用してみました。<br>
+    Emissionマテリアルは、自己発光の効果が加わるのが特徴です。<br>
+    （瞳と銃、服の金属部分が明るく表示されたことを見ることができます。）<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <p>
+    このマテリアルは、次の二つのプロパティが追加されます。<br>
+    「<strong>_EmissionMap</strong>」プロパティは、「発光される色（RGB）の情報を持つテクスチャ」です。レンダリングでは、「プラス式」に適用されます。<br>
+    「<strong>_EmissionColor</strong>」プロパティは、「_EmissionMapに乗算色」パラメータです。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_590.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bumped Rimlight</strong>」マテリアルもかなりきれいなレンダリング結果を示しています。<br>
+    「<strong>リムライト（Rim Light）</strong>」は、背面からの反射光を表現した手法です。<br>
+    次のプロパティが追加されます。<br>
+    「<strong>_RimPower</strong>」は「リムライトのサイズ」を設定するプロパティです。乗方式で適用されるので、値が小さいほど広く表示されます。<br>
+    「<strong>_RimColor</strong>」は「リムライトの色（RGB）」です。 「プラス式」に適用されます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_591.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bumped Ramp</strong>」マテリアルは、最も特別な結果を示す興味深い材料です。<br>
+    ライティング方法を「<strong>Gradient Map</strong>」に指定することができます。<br>
+    「<strong>_RampMap</strong>」プロパティに「Gradient Map」を適用します。<br>
+    このテクスチャは、画像ごとに指定する必要がないので、テクスチャプロパティの方式が「<strong>Common Texture</strong>」であることを見ることができます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_592.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bumped Ramp</strong>」マテリアルを使用して、かなり人為で印象的なレンダリング結果を作成することができます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>「Custom Shader」が適用されたマテリアルセットを作成</h3>
+    <br>
+    
+    <p>
+    ユーザーが作成したShaderを利用して、マテリアルを作成することができます。<br>
+    このページでは、作成された単純なエフェクトのShaderをマテリアルセットに入れて適用してみるのプロセスを説明します。<br>
+    （ここで説明されたShaderアセットはAnyPortraitパッケージに含まれていません。）<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_593.jpg"/>
+    <br>
+    
+    <p>
+    既存のマテリアルセットから複製して新しいマテリアルのセットを作ってみましょう。<br>
+    <strong>(1)</strong> 現在使用中のマテリアルのセットを選択した後、「<strong>Duplicate</strong>」ボタンを押してマテリアルのセットを複製します。<br>
+    <strong>(2)</strong> リストに複製されたマテリアルのセットが追加されました。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_594.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> 名前とアイコンを設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_595.jpg"/>
+    <br>
+    
+    <p>
+    作成したShaderをマテリアルセットに適用します。<br>
+    条件によって合計16個のShaderをそれぞれ作成して適用するべきなのに、エフェクトマテリアルを作成する場合には、あえてすべての条件に対してShaderを作成する必要がありません。<br>
+    <strong>(4)</strong> 作成したShaderを最も基本となる「<strong>Gamma Color Space / Basic Rendering / Alpha Blend</strong>」に適用します。<br>
+    ​<br>
+    このページで使用されてShaderは、次のように作成されました。<br>
+    プリセットとして提供されている「Bumped Ramp」マテリアルのShaderに若干のコードが追加されたものです。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "CustomShader/Character FX"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_BumpMap("Bump Texture (Normalmap)", 2D) = "bump" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_RampMap("Ramp Gradient Map (RGB)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_NoiseMap</strong>("Gray Noise Map (Gray)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_FadeValue</strong>("Fade Value (0~1)", Float) = 0<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_FadeColor1</strong>("Fade Color 1 (RGB)", Color) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_FadeColor2</strong>("Fade Color 2 (RGB)", Color) = (1, 1, 0, 1)<br>
+    &emsp;&emsp;}&emsp;&emsp;<br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags{ "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <br>
+    &emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma surface surf SimpleColor alpha<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma target 3.0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <br>
+    &emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _BumpMap;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _RampMap;<br>
+    &emsp;&emsp;&emsp;&emsp;// Custom Code<br>
+    &emsp;&emsp;&emsp;&emsp;//--------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D <strong>_NoiseMap</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;float <strong>_FadeValue</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;half4 <strong>_FadeColor1</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;half4 <strong>_FadeColor2</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;//--------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;struct Input<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv_MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv_BumpMap;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 color : COLOR;<br>
+    &emsp;&emsp;&emsp;&emsp;};<br>
+    &emsp;&emsp;&emsp;&emsp;half4 LightingSimpleColor(SurfaceOutput s, half3 lightDir, half atten)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 c;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half nl = max(0, dot(s.Normal, lightDir));<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half halfDiff = (nl * 0.5f) + 0.5f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half3 rampColor = tex2D(_RampMap, float2(halfDiff, 0.5f)).rgb;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb = saturate(s.Albedo * _LightColor0.rgb * (rampColor * atten));<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb + s.Emission;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a = s.Alpha;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return c;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;void surf(Input IN, inout SurfaceOutput o)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 c = tex2D(_MainTex, IN.uv_MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb *= _Color.rgb * 2.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Alpha = c.a * _Color.a;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Albedo = c.rgb;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Custom Code<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//---------------------------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Emission = half4(0, 0, 0, 0);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half noise = tex2D(<strong>_NoiseMap</strong>, IN.uv_MainTex).r;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;if (noise < <strong>_FadeValue</strong> - 0.03f)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Alpha = 0.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half smoothFade = (noise - <strong>_FadeValue</strong>) / 0.6f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;if (noise < <strong>_FadeValue</strong>)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Emission = <strong>_FadeColor2</strong>.rgb;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;else if (noise < <strong>_FadeValue</strong> + 0.6f)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Albedo = (o.Albedo * <strong>_FadeColor1</strong>.rgb) * (1.0f - smoothFade) + o.Albedo * smoothFade;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//---------------------------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    このShaderコードに合わせてプロパティを設定してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_596.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(5)</strong> 「<strong>Add Property</strong>」ボタンを押します。<br>
+    <strong>(6)</strong> 新しい「<strong>プロパティ</strong>」が追加されたことを見ることができます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_597.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(7)</strong> プロパティの名前を「<strong>_NoiseMap</strong>」に設定し、「<strong>Texture</strong>」タイプに変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_598.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(8)</strong> このテクスチャは、画像に関係なく共通に適用されるので、「<strong>Common Texture</strong>」方式に変更します。<br>
+    <strong>(9)</strong> 効果のために製作されたノイズテクスチャを適用します。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_599.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(10)</strong> ような方法でFloatタイプの「<strong>_FloatValue</strong>」、Colorタイプの「<strong>_FadeColor1</strong>」と「<strong>_FadeColor2</strong>」プロパティを追加します。<br>
+    追加されたプロパティに適切な値を設定します。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_600.jpg"/>
+    <br>
+    
+    <p>
+    このマテリアルのセットをレンダリングに適用してみましょう。<br>
+    <strong>(11)</strong> マテリアルの「<strong>Default Material</strong>」の設定をONに変更してBakeを行います。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_601.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターが消えたり、表示される効果を見ることができます。<br>
+    他のスクリプトを利用して、「<strong>_FadeValue</strong>」を制御すると、アニメーションされる効果を作成することができます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <p>
+    実装方法は、下記の例を参考にして見れば良いです。<br>
+    下の例は、次のように動作します。<br>
+    - 「Aキー」、「Sキー」が押されると「<strong>fadeValue</strong>」変数が増加したり、減少します。<br>
+    - 「<strong>SetMeshCustomFloatAll</strong>」関数を利用して、材料の「<strong>_FadeValue</strong>」プロパティの値を「<strong>fadeValue</strong>」値に更新します。<br>
+    （関数の詳細については、「<a href="../../jp/Script/SC_Mesh.html">関連ページ</a>」を参照してください。）<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using </span>UnityEngine;<br>
+    <span class="text-primary">using </span><strong>AnyPortrait</strong>;<br>
+    ​<br>
+    <span class="text-primary">public class </span><span class="text-success">CharacterFadeTester </span>: <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;&emsp;&emsp;   <span class="text-primary">public </span><span class="text-success">apPortrait </span><strong>portrait</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;   <span class="text-primary">public float </span><strong>fadeValue </strong>= 0.5f;<br>
+    ​<br>
+    &emsp;&emsp;&emsp;&emsp;   <span class="text-primary">void</span> Update ()<br>
+    &emsp;&emsp;&emsp;&emsp;   {<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKey(<span class="text-success">KeyCode</span>.A) )<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  {<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <strong>fadeValue </strong>-= <span class="text-success">Time</span>.deltaTime * 0.5f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <strong>portrait</strong>.<span class="text-danger"><strong>SetMeshCustomFloatAll</strong></span>(<strong>fadeValue</strong>, <span class="text-danger"><strong>"_FadeValue"</strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  }<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKey(<span class="text-success">KeyCode</span>.S) )<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  {<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <strong>fadeValue </strong>+= <span class="text-success">Time</span>.deltaTime * 0.5f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <strong>portrait</strong>.<span class="text-danger"><strong>SetMeshCustomFloatAll</strong></span>(<strong>fadeValue</strong>, <span class="text-danger"><strong>"_FadeValue"</strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  }<br>
+    &emsp;&emsp;&emsp;&emsp;   }<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/qdywjDvkrMw" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    <p>
+    ​このページで説明されたすべてマテリアルを動画でご覧いただけます。<br>
+    また、このページで説明されたテクスチャは以下の通りです。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_602.jpg"/>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>プリセットとして保存</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_603.jpg"/>
+    <br>
+    
+    <p>
+    作成したマテリアルセットをプリセットとして作っておけば、他のキャラクターにも迅速にマテリアルを適用することができます。<br>
+    <strong>(1)</strong> プリセットとして保存しようとするマテリアルセットを選択します。<br>
+    <strong>(2)</strong> 「<strong>Register as a Preset</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> マテリアルセットがプリセットにコピーされ、登録されたことがわかります。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>一部のメッシュに他のマテリアルのセットを適用</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_604.jpg"/>
+    <br>
+    
+    <p>
+    メッシュを選択して、デフォルト以外のマテリアルのセットを適用することができます。<br>
+    <strong>(1)</strong> 「<strong>メッシュグループ</strong>」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Settingタブ</strong>」を選択します。<br>
+    <strong>(3)</strong> 対象となる「<strong>メッシュ</strong>」を選択します。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_605.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Use Default Material Set</strong>」ボタンを押してOFF状態に変更します。<br>
+    <strong>(2)</strong> 「<strong>Change</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> 適用しようとする「<strong>マテリアルセット</strong>」を選択し、「Select」ボタンを押します。<br>
+    ​<br>
+    この段階まで設定すると、マテリアルのセットが適用されます<br>
+    もしこのメッセージに対してマテリアルセットのプロパティを別の方法で適用したい場合は、次の段階まで実行ください。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_606.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Add Custom Property</strong>」ボタンを押します。<br>
+    新しいカスタムプロパティが追加されました。<br>
+    このプロパティは、マテリアルのセットやCustom Shaderの設定に関係なく、Unityシーンに適用されます。<br>
+    （マテリアルのセットのプロパティの設定よりも優先されます。）<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_607.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> プロパティの名前とタイプ、値を設定します。<br>
+    ここに先立ち設定のようColorタイプの「<strong>_FadeColor1</strong>」に設定しました。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_608.jpg"/>
+    <br>
+    
+    <p>
+    同じように、「<strong>_FadeColor2</strong>」プロパティも追加しました。<br>
+    マテリアルセットの設定とは異なる色に設定したので、結果も異なってレンダリングされます。<br>
+    ​<br>
+    おそらくマテリアル設定を他のメッシュにも同様に適用する必要があるでしょう。<br>
+    次の説明をご覧ください。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_609.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Copy Settings to other meshes</strong>」ボタンを押します。<br>
+    この機能は、メッシュの属性を他のメッシュにコピーする機能であり、マテリアル設定を含む、さまざまな属性を選択的にコピーすることができます。<br>
+    <strong>(2)</strong> 属性がコピーされるメッシュを選択します。<br>
+    <strong>(3)</strong> ここでマテリアルの設定とカスタムプロパティをコピーしようとするので、「<strong>Material Set</strong>」と「<strong>Custom Material Properties</strong>」をチェックします。<br>
+    <strong>(4)</strong> 「<strong>Apply</strong>」ボタンを押します。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_612.jpg"/>
+    <br>
+    
+    <p>
+    BakeをしUnityシーンでレンダリング結果を確認してみると、選択されたメッシュだけマテリアルが異なって適用されたことを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>マテリアルライブラリのインターフェイス</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_613.jpg"/>
+    <br>
+    
+    <p>
+    <strong>1. マテリアルセットリスト</strong><br>
+    : キャラクターに適用することができるマテリアルのセットがあり、新しいマテリアルのセットを生成することができる「<strong>Make Material Set</strong>」ボタンがあります。<br>
+    ​ <br>
+    <strong>2. プリセットリスト</strong><br>
+    : 「マテリアルセットプリセット」があります。そしてプリセットを作成するためのボタンがあります。<br>
+    - <strong>Make Material Preset</strong> : 新しいプリセットを作成します。<br>
+    - <strong>Unpack Advanced Presets</strong> : 上記で紹介された様々なマテリアルが含まれているパッケージをインストールして、プリセットを追加します。<br>
+    - <strong>Unpack LWRP Preset</strong> : Lightweight Render Pipeline（LWRP）のマテリアル1種を含むパッケージをインストールします。<br>
+    ​ <br>
+    <strong>3. マテリアル編集機能</strong><br>
+    : 選択されたマテリアルセットを編集する機能です。<br>
+    - 接続されたプリセットと<strong>Change</strong>、<strong>Restore</strong>ボタン：このマテリアルセットがプリセットがない場合は、プリセットと連動することができます。 「<strong>Change</strong>」ボタンを押して、他のプリセットを選択して接続することができ、「<strong>Restore</strong>」ボタンを押してプリセットと同じ値を持つように同期させることができます。<br>
+    - <strong>Duplicate </strong>: 選択されたマテリアルのセットを複製します。<br>
+    - <strong>Register as a Preset</strong> : このマテリアルセットをプリセットとして登録します。<br>
+    - <strong>Remove </strong>: このマテリアルのセットを削除します。デフォルトの「Unlit」プリセットは削除できません。<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    ​<strong>1. 名前、アイコン、Ambient色</strong><br>
+    : マテリアルセットの名前とアイコンタイプです。このマテリアルセットが「黒のAmbient」を必要とするチェックすると、Bake時「Ambient色」に基づいて案内メッセージが表示されます。<br>
+    ​ <br>
+    <strong>2. アイコン画像</strong><br>
+    <strong>3. Default Material設定</strong><br>
+    : マテリアルセットをデフォルトに設定すると、別の設定がないすべてのメッシュに自動的にマテリアルセットが適用されます。<br>
+    ​ <br>
+    <strong>4. Shaderアセット</strong><br>
+    : カラースペース、クリッピングするかどうか、ブレンドタイプに応じて詳細にどのようなShaderアセットを適用するかを設定します。<br>
+    ​ <br>
+    <strong>5. スケジュールされたプロパティ</strong><br>
+    : AnyPortraitで使用される4つのプロパティです。このプロパティは、ユーザーが制御することはできません。<br>
+    ​ <br>
+    <strong>6. 画像ごとに指定されたテクスチャプロパティ</strong><br>
+    : 画像ごとにそれぞれのテクスチャを設定することができます。 「<strong>Texture per Image</strong>」ボタンを押して変更することができます。<br>
+    ​ <br>
+    <strong>7. 共通テクスチャプロパティ</strong><br>
+    : 画像に関係なく、1つのテクスチャをプロパティで指定します。 「<strong>Common Texture</strong>」ボタンを押して変更することができます。<br>
+    ​ <br>
+    <strong>8. Float、Int、Vector、Colorタイプのプロパティ</strong><br>
+    : テクスチャではなく、タイプのプロパティです。左から、次のような要素があります。<br>
+    - <strong>アクティブ/アクティブチェックボックス : </strong>このチェックボックスをオフにするとBakeには適用されません。<br>
+    - <strong>名前 : </strong>プロパティの名前であり、同じ名前がShaderにする必要があり適用されます。<br>
+    - <strong>タイプ : </strong>プロパティのタイプです。 「Float、Int、Vector、Color、Texture」タイプをサポートします。<br>
+    - <strong>値 : </strong>プロパティの値です。<br>
+    - <strong>削除ボタン : </strong>プロパティを削除します。<br>
+    ​ <br>
+    <strong>9. Add Property</strong><br>
+    : プロパティを追加します。<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_614.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_CameraScene.html">< シーンのカメラ設定</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_Shortcuts.html">ショートカット ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

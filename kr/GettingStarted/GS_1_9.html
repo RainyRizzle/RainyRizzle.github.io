@@ -33,18 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/GettingStarted/GS_1_9.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/GettingStarted/GS_1_9.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/GettingStarted/GS_1_9.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -61,29 +65,184 @@
     <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/GettingStarted.html"><span class="text-dark">시작하기</span></a> > 1.9. 물리 효과 추가하기</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
-    <h1 class="display-4"><strong>1.9. 물리 효과 추가하기</strong></h1>
+    <h1 class="display-5">1.9. 물리 효과 추가하기</h1>
+    <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    모디파이어 중에는 물리 효과를 주는 것이 있습니다.<br>
+    장력과 관성 등을 표현하여 재미있는 효과를 추가할 수 있습니다.<br>
+    물리 효과를 설정하기 위해서는 이론을 알고 여러가지 설정을 해야겠지만, <br>
+    이 페이지에서는 미리 만들어진 물리 재질을 적용하여 쉽게 효과를 주는 법을 배워보겠습니다.<br>
+    ​<br>
     </p>
+    <br>
     
-    
-    <br><br>
-    
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_78.jpg"/>
     <br>
     
     <p>
-    본문 입력<br>
+    ​Physic 모디파이어를 추가합니다.<br>
     </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_43.jpg"/>
+    <br>
+    
+    <p>
+    물리 효과를 설정하기 전에 먼저 작업 영역에서 물리 효과가 적용되지 않도록 합니다.<br>
+    <strong>(1)</strong> <strong>화면 상단의 물리 효과 설정</strong>을 켜거나 끌 수 있습니다.<br>
+    <strong>(2)</strong> <strong>슬라임 몸통에 해당하는 메시를 선택</strong>한 뒤에 <strong>(3)</strong> <strong>Add to Physics 버튼</strong>을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_추가_4.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Start Editing 버튼</strong>을 눌러서 편집 모드를 켭니다.<br>
+    편집 모드를 켠 상태에서 버텍스 가중치를 수정할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_80.jpg"/>
+    <br>
+    
+    <p>
+    물리 재질을 설정하기 전에 모든 버텍스를 선택한 뒤, <strong>점성 그룹(Viscosity Group)의 ID</strong>를 <strong>1</strong>로 지정해줍니다.<br>
+    점성 그룹 ID를 공유하는 버텍스 간에 점성력이 적용되기 때문입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_81.jpg"/>
+    <br>
+    
+    <p>
+    물리 재질 설정을 하는 것은 어려운 작업입니다.<br>
+    여기서는 미리 만들어진 프리셋을 선택해보겠습니다.<br>
+    ​우측 UI를 내려보면 <strong>물리 프리셋(Physics Presets) 버튼</strong>이 있습니다. 이를 눌러서 물리 프리셋 다이얼로그를 엽니다.<br>
+    물리 프리셋 다이얼로그의 화면 구성은 다음과 같습니다.<br>
+    <strong>1. 현재 물리 설정을 프리셋으로 저장</strong> : 선택되어있는 메시의 물리 설정값을 프리셋으로 저장합니다. 이름과 아이콘을 지정하고 저장할 수 있습니다.<br>
+    <strong>2. 물리 프리셋들</strong> : 기본적으로 만들어졌거나 사용자가 추가한 물리 프리셋들입니다.<br>
+    <strong>3. 선택된 물리 프리셋의 값</strong> : 선택된 물리 프리셋의 상세 설정입니다. 여기서 수정은 안되며, 사용자가 추가한 프리셋은 삭제 가능합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_82.jpg"/>
+    <br>
+    
+    <p>
+    슬라임과 비슷한 재질인 <strong>"부드러운 고무(Rubber Soft)"</strong> 재질을 선택해서 적용합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_85.jpg"/>
+    <br>
+    
+    <p>
+    물리 재질이 적용되면 위 화면과 같이 설정됩니다.<br>
+    이 페이지에서는 간략하게 화면 구성에 대해서만 설명합니다.<br>
+    <strong>1. Set Important</strong> : Important 설정이 적용된 버텍스를 중심으로 효과가 적용됩니다.<br>
+    <strong>2. 가중치 툴</strong> : 물리 효과를 얼마나 받을지 가중치를 지정하는 툴입니다. 0~1의 값을 가집니다.<br>
+    <strong>3. Blend</strong> : 주면 버텍스의 가중치를 바탕으로 부드럽게 만드는 기능입니다.<br>
+    <strong>4. Grow / Shrink</strong> : 더 많은 버텍스를 선택하거나 제외하는 기능입니다.<br>
+    <strong>5. 점성 그룹 ID</strong> : 점성력 계산을 위한 점성 ID를 지정합니다. 1~9의 값을 가지며 중복 가능합니다.<br>
+    <strong>6. 물리 재질 설정</strong> : 물리 재질의 값입니다. 질량, 공기 저항, 장력, 관성, 복원력, 점성력의 값을 가집니다.<br>
+    <strong>7. 중력과 바람</strong> : 중력과 바람을 설정할 수 있습니다. 고정값으로 지정할 수도 있고, 컨트롤 파라미터의 값을 이용할 수도 있습니다.<br>
+    <strong>8. 물리 프리셋(Physics Presets)</strong> : 미리 설정된 물리 프리셋 다이얼로그를 열어서 프리셋을 열거나 저장할 수 있습니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_83.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_84.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>중앙의 버텍스들을 선택</strong>한 뒤, <strong>(2)</strong> <strong>가중치를 1로 지정</strong>합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_86.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_87.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>위, 아래의 끝점들을 제외하고 나머지 버텍스들을 선택</strong>합니다.<br>
+    <strong>(2)</strong> <strong>Blend 버튼</strong>을 몇번 눌러서 가중치를 적당히 지정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_88.jpg"/>
+    <br>
+    
+    <p>
+    ​가중치가 너무 작거나 크다면 <strong>가중치 툴</strong>을 이용하여 증감할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_89.jpg"/>
+    <br>
+    
+    <p>
+    중간의 몇개의 버텍스를 선택하여 <strong>Set Important 버튼</strong>을 누릅니다.<br>
+    Important 설정이 붙은 버텍스를 중심으로 물리 효과가 발생합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_90.jpg"/>
+    <br>
+    
+    <p>
+    설정된 물리 효과가 제대로 작동하는지 확인해봅시다.<br>
+    <strong>(1)</strong> <strong>물리 효과</strong>를 다시 켜고 제대로 적용되는지 확인해봅니다.<br>
+    <strong>(2)</strong> <strong>화면 하단에 물리 테스트를 위한 Wind On/Off 버튼</strong>이 있습니다. 이를 눌러서 테스트해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/FeegIfVrlio" allowfullscreen></iframe>
+    </div>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
-    <nav class="navbar bottom navbar-light bg-light">
+    <nav class="navbar fixed-bottom navbar-light bg-light">
         <a class="btn btn-light" role="button" href="../../kr/GettingStarted/GS_1_8.html">< 1.8. 다양한 툴을 사용하여 버텍스 편집하기</a>
         <a class="btn btn-light" role="button" href="../../kr/GettingStarted/GS_1_10.html">1.10. 썸네일 만들기 ></a>
     </nav>

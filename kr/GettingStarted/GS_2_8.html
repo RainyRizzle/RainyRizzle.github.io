@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>2.8. 애니메이션 커브 이해하기</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/GettingStarted/GS_2_8.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/GettingStarted/GS_2_8.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/GettingStarted/GS_2_8.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/GettingStarted.html"><span class="text-dark">시작하기</span></a> > 2.8. 애니메이션 커브 이해하기</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">2.8. 애니메이션 커브 이해하기</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    키프레임 애니메이션을 이해할 때 가장 중요한 원리는 <strong>보간(Interpolation)</strong>입니다.<br>
+    보간은 키프레임과 키프레임 사이에 어떤 형태를 가질 것인가를 계산하는 과정입니다.<br>
+    보간 방식에 따라서 동일한 키프레임을 가지더라도 애니메이션의 결과가 다를 수 있습니다.<br>
+    ​이 페이지에서는 보간 방식을 다루는 <strong>애니메이션 커브</strong>에 대해서 다룹니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_90.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>키프레임을 하나 선택</strong>하고, <strong>(2)</strong> <strong>Curve 탭</strong>을 선택합니다.<br>
+    애니메이션 커브를 수정할 때에는 작업 영역에서도 커브의 종류가 굵은 선으로 나타납니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_91.jpg"/>
+    <br>
+    
+    <p>
+    현재 선택된 키프레임을 기준으로 <strong>이전 키프레임과의 커브(Previous Curve)</strong>와 <strong>다음 키프레임과의 커브(Next Curve)</strong>를 선택할 수 있습니다.<br>
+    ​선택된 커브는 타임라인 작업 영역에서 <strong>밝은 색</strong>으로 나타납니다.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_92.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    애니메이션 커브의 상세 설정 화면입니다.<br>
+    <strong>1. Prev/Next</strong> : 키프레임 기준으로 이전 커브, 다음 커브를 선택합니다.<br>
+    <strong>2. 커브 종류</strong> : 커브의 보간 계산 방식을 결정합니다. 각각 선형(Linear), 자유 곡선(Smooth), 고정값(Constant) 방식입니다.<br>
+    <strong>3. 커브 편집</strong> : 커브를 직접 편집하거나 볼 수 있습니다. 자유 곡선 방식인 경우 조절점을 직접 편집할 수 있습니다.<br>
+    <strong>4. Reset Smooth Setting</strong> : 자유 곡선 방식인 경우 조절점을 초기값으로 되돌립니다.<br>
+    <strong>5. Copy Curve to All Keyframes</strong> : 현재 커브의 설정을 해당 타임라인 레이어의 모든 키프레임에 적용합니다.<br>
+    <strong>6. 키프레임 복사/붙여넣기</strong> : 키프레임 정보를 임시로 복사하거나 붙여넣습니다.<br>
+    <strong>7. 자세 내보내기/가져오기</strong> : 본 애니메이션의 키프레임인 경우 자세를 저장하거나 열 수 있습니다.<br>
+    <strong>8. 키프레임 삭제</strong><br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <p>
+    커브 계산 방식의 종류에 따라 다르게 애니메이션이 처리됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_93.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    <strong>1. 선형 (Linear)</strong><br>
+    움직임, 크기 등이 일정하게 변합니다.​<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_94.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    <strong>2. 자유 곡선 (Smooth)</strong><br>
+    움직임, 크기 등이 부드럽게 변합니다.<br>
+    사용자가 변화하는 정도를 직접 지정할 수 있습니다.<br>
+    ​가속도를 주거나 키프레임 전후에서 부드럽게 전환될 때 용이합니다.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_95.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    <strong>3. 고정값 (Constant)</strong><br>
+    키프레임간의 끝 지점을 기준으로 값이 바뀝니다.<br>
+    ​스프라이트 애니메이션 같은 효과를 줄 수 있습니다.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
+    <br><br>
+    
+    <p>
+    커브 종류에 따라 실제로 어떻게 다른지 확인해보겠습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_57.jpg"/>
+    <br>
+    
+    <p>
+    <strong>1. 선형 (Linear)</strong><br>
+    커브의 색상은 <span class="text-danger"><strong>붉은색</strong></span>입니다.<br>
+    ​시작부터 끝까지 일정한 간격으로 변하는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_58.jpg"/>
+    <br>
+    
+    <p>
+    <strong>2. 자유 곡선 (Smooth)</strong><br>
+    커브의 색상은 <span class="text-primary"><strong>푸른색</strong></span>입니다.<br>
+    기본값 상태에서는 선형과 유사하지만 시작과 끝 부분에 약간의 가속, 감속이 존재합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_59.jpg"/>
+    <br>
+    
+    <p>
+    <strong>2-1. 가속되는 자유 곡선 (Smooth)</strong><br>
+    자유 곡선의 변형 예시입니다.<br>
+    ​시작 키프레임 값에 가깝게 유지하다가 나중에 빠르게 가속되어 변합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_60.jpg"/>
+    <br>
+    
+    <p>
+    <strong>2-2. 감속되는 자유 곡선 (Smooth)</strong><br>
+    자유 곡선의 변형 예시입니다.<br>
+    ​시작 키프레임에서 빠르게 변한 뒤 감속하는 모습을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_61.jpg"/>
+    <br>
+    
+    <p>
+    <strong>3. 고정값 (Constant)</strong><br>
+    커브의 색상은 <span class="text-success"><strong>녹색</strong></span>입니다.<br>
+    보간 상태가 시작, 끝 두가지 밖에 없습니다.<br>
+    끝 지점을 기준으로 변형이 됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/GettingStarted/GS_2_7.html">< 2.7. 타임라인 추가하기</a>
+        <a class="btn btn-light" role="button" href="../../kr/GettingStarted/GS_2_9.html">2.9. 본 애니메이션 만들기 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

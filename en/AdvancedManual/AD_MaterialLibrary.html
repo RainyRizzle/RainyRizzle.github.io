@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Material Library</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_MaterialLibrary.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MaterialLibrary.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_MaterialLibrary.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Material Library</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Material Library</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.1.8</span></h4>
+    
+    <p>
+    <strong>This applies from v1.1.7.</strong>The basic rendering goal of AnyPortrait is "to express the original color of the illustration without applying light".<br>
+    However, depending on the project, the characters need to be affected by the light, and various effects implemented by the user-created shader may need to be implemented.<br>
+    New features have been added to AnyPortrait v1.1.7 to meet users' needs.<br>
+    You can set various materials by using "<strong>Material Library</strong>", and you can set the initial value of the material.<br>
+    You can also easily apply a commonly used "<strong>Material Set</strong>" to a different character by setting it as a preset.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Create and apply a Material Set in Material Library</h3>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_571.jpg"/>
+    <br>
+    
+    <p>
+    This is a Unity scene with Directional Light, Point Lights placed and Ambient Color brighter than black.<br>
+    At this time, there is a problem that characters created in AnyPortrait in the basic way are rendered too brightly.<br>
+    Previously, in these cases, you had to troubleshoot the problem by applying the Custom Shader to every mesh individually. (<a href="../../en/AdvancedManual/AD_MeshShader.html">Related page</a>)<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_572.jpg"/>
+    <br>
+    
+    <p>
+    Open the AnyPortrait editor.<br>
+    <strong>(1)</strong> Select the <strong>Root Unit</strong>.<br>
+    <strong>(2)</strong> Click the <strong>Material Library button</strong> added to the top of the editor.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_573.jpg"/>
+    <br>
+    
+    <p>
+    "<strong>Material Library</strong>" window is opened.<br>
+    <strong>Material Library</strong> is a feature that can create and modify "<strong>Material Set</strong>"s.<br>
+    (You can find more information about Material Library interface at the bottom of this page.)<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <p>
+    Different Shaders are applied to meshes of AnyPortrait according to the condition.<br>
+    Therefore, you have to manage several shaders in one group, which is called "<strong>Material Set</strong>".<br>
+    The conditions for which shader applies are:<br>
+    <strong>- Gamma or Linear Color Space</strong><br>
+    <strong>- Clipping</strong><br>
+    <strong>- Blending type</strong><br>
+    </p>
+    <br>
+    
+    <p>
+    And an Alpha Mask Shader for clipping meshes.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_574.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Material Library</strong> is structured as shown above.<br>
+    <strong>(1)</strong> <strong>Material Sets</strong> : Material Sets stored in the current character are displayed, and there is a button to be able to create a new Material Set.<br>
+    <strong>(2)</strong> <strong>Presets </strong>: Presets commonly shared for other characters are displayed. There are buttons to create a preset or to create presets from pre-provided packages.<br>
+    <strong>(3)</strong> <strong>Material Set attributes</strong> : There are attributes of the selected Material Set. You can set the name, icon, shaders, and properties of materials.<br>
+    <strong>(4)</strong> <strong>Material Set edit functions</strong> : It provides functions to synchronize the values ​​by connecting with the Preset or duplicate it.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_575.jpg"/>
+    <br>
+    
+    <p>
+    Currently there is only a default "<strong>Unlit</strong>" preset.<br>
+    Let's install Material Set Presets provided in a package.<br>
+    <strong>(1)</strong> Press the <strong>Unpack Advanced Presets button</strong>.<br>
+    <strong>(2)</strong> When the package is installed, <strong>a message appears</strong> indicating that Material Library needs to be restarted.<br>
+    Click the <strong>Okay button </strong>to exit Material Library, and then the package will be installed.<br>
+    When the installation is finished, open Material Library again.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_576.jpg"/>
+    <br>
+    
+    <p>
+    Various <strong>Material Set presets</strong> are now installed.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_626.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_627.jpg"/>
+    <br>
+    
+    <p>
+    The buttons for selecting presets in v1.1.8 have changed.<br>
+    <strong>(1)</strong> Select the Material Set preset you want to install.<br>
+    <strong>(2)</strong> Press the Unpack Preset button to install the selected preset.<br>
+    - For a description of the LWRP Unlit and LWRP 2D presets, see the <a href="../../en/AdvancedManual/AD_LWRP.html">Related page</a>.<br>
+    - For a description of the VR presets, see the <a href="../../en/AdvancedManual/AD_VR.html">Related page</a>.<br>
+    - For a description of the Keep Alpha presets, see the <a href="../../en/AdvancedManual/AD_RenderTexture.html">Related page</a>.<br>
+    - For a description of the URP presets, refer to the <a href="../../en/AdvancedManual/AD_URP.html">Related page</a>.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_577.jpg"/>
+    <br>
+    
+    <p>
+    Next, let's create a new Material Set.<br>
+    <strong>(3)</strong> Press the <strong>Make Material Set button</strong>.<br>
+    <strong>(4)</strong> Presets can be selected to make the Material Set easier. In this step, let's select the "<strong>Lit</strong>" preset.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_578.jpg"/>
+    <br>
+    
+    <p>
+    A new Material Set is created and the attributes are automatically created based on the "Lit" preset.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_579.jpg"/>
+    <br>
+    
+    <p>
+    This Material Set has been created, but not applied yet.<br>
+    When the generated Lit Material Set becomes the default, it is actually applied when the bake is done.<br>
+    <strong>(5)</strong> Press the <strong>Default Material button</strong> to set the Lit Material Set to default.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_580.jpg"/>
+    <br>
+    
+    <p>
+    The AnyPortrait editor does not support material-dependent rendering.<br>
+    Let's run Bake and see how it looks in Unity scene.<br>
+    Open the Bake dialog and press the Bake button.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_581.jpg"/>
+    <br>
+    
+    <p>
+    Now you can see the character that is rendered beautifully by various lights.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Render using Material Presets</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_582.jpg"/>
+    <br>
+    
+    <p>
+    In addition to "<strong>Lit</strong>" preset, various presets are provided.<br>
+    Let's try to render using these materials one by one.<br>
+    <strong>(1</strong>) Select the <strong>"Lit" Material Set</strong> created above.<br>
+    <strong>(2)</strong> Press the <strong>Change button</strong>.<br>
+    <strong>(3)</strong> You can select another Material Preset to synchronize. Now let's choose the "<strong>Bumped</strong>" preset.<br>
+    <strong>(4)</strong> The message dialog appears that asks whether you want to change all the properties to be the same as the selected preset. Press the <strong>Okay button.</strong><br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_583.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Attributes </strong>of the "Bumped" Material Set are ​​changed.<br>
+    If necessary, you can modify the <strong>name </strong>and <strong>icon </strong>of the Material Set.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_585.jpg"/>
+    <br>
+    
+    <p>
+    "<strong>Bumped material</strong>" requires a <strong>Normal map</strong> (or <strong>Bump map</strong>).<br>
+    You must enter a normal map in the properties of the material.<br>
+    <strong>(5)</strong> When you scroll through the Material Set attributes area, there is "<strong>Material Properties</strong>" at the bottom. You need to assign the normal map to the "<strong>_BumpMap</strong>" property.<br>
+    <strong>(6)</strong> The normal map is usually created with a blue texture and must be created manually by an external tool.<br>
+    ​<br>
+    <span class="text-primary"><strong>Note</strong></span><br>
+    This page does not describe how to make textures like Normal maps.<br>
+    Search by keyword like "2D Normal Map", and various production methods will be introduced.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_586.jpg"/>
+    <br>
+    
+    <p>
+    You can see rendering results that look <strong>convex and thick</strong> compared to <strong>Lit </strong>material.<br>
+    Since most lighting requires normal vectors, all of the following materials are based on the <strong>Bumped material</strong>.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_587.jpg"/>
+    <br>
+    
+    <p>
+    Now let's apply the "<strong>Bumped Specular</strong>" material.<br>
+    You can select and apply the material in the same process as described above.<br>
+    <strong>(1)</strong> Press the <strong>Change </strong>button.<br>
+    <strong>(2)</strong> Select the "<strong>Bumped Specular</strong>" Preset.<br>
+    <strong>(3)</strong> "<strong>_SpecularPower</strong>" and "<strong>_SpecularMap</strong>" properties are added to the material property items.<br>
+    The "<strong>_SpecularPower</strong>" property is the square of the Specular's Shininess. If the number is large, a small, bright reflected light appears.<br>
+    The "<strong>_SpecularMap</strong>" property is the texture to be used for the Specular calculation. The <strong>RGB channel </strong>of the texture refers to the color of the Specular to be applied as a "plus operation", and the <strong>Alpha channel</strong> means the parameter to be multiplied by <strong>_SpecularPower</strong>.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_588.jpg"/>
+    <br>
+    
+    <p>
+    Now you can see that the material becomes brighter along the direction of light.<br>
+    (In general, the specular intensity changes according to the direction of the light and the direction of the camera. However, because the character created by AnyPortrait is rendered by the billboard method, the effect of specular is not great.)<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_589.jpg"/>
+    <br>
+    
+    <p>
+    Let's apply "<strong>Bumped Specular Emission</strong>" material in the same way.<br>
+    The feature of the emission material is that it adds the <strong>self-luminous effect.</strong><br>
+    (You can see brightly rendered metal parts of eyes, guns, and clothes.)<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <p>
+    The following two properties are added to this material.<br>
+    The "<strong>_EmissionMap</strong>" property is a texture with <strong>color (RGB)</strong> information that is <strong>self-illuminating</strong>. Rendering is applied as a "plus operation".<br>
+    The "<strong>_EmissionColor</strong>" property is a color parameter that is <strong>multiplied</strong> by the color of "<strong>_EmissionMap</strong>".<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_590.jpg"/>
+    <br>
+    
+    <p>
+    The "<strong>Bumped Rimlight</strong>" material also shows nice rendering results.<br>
+    <strong>Rim Light</strong> is a technique for expressing reflected light from the rear.<br>
+    The following properties are added.<br>
+    "<strong>_RimPower</strong>" is a property that sets <strong>the size of the rim light area</strong>. Because it is applied by square operation, the smaller the value, the wider it appears.<br>
+    "<strong>_RimColor</strong>" is <strong>the color of the rim light (RGB)</strong>, and that is applied by the plus operation.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_591.jpg"/>
+    <br>
+    
+    <p>
+    The "<strong>Bumped Ramp</strong>" material is an interesting material showing the most extraordinary results.<br>
+    With this material, the user can set how to be shaded using a <strong>Gradient Map</strong>.<br>
+    Applies a gradient map to the "<strong>_RampMap</strong>" property.<br>
+    Since this texture does not need to be specified for each image, you can see that the texture property is "<strong>Common Texture</strong>".<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_592.jpg"/>
+    <br>
+    
+    <p>
+    Using "<strong>Bumped Ramp</strong>" material, you can create quite artificial and impressive rendering results.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Create a Material Set with Custom Shaders</h3>
+    <br>
+    
+    <p>
+    You can create a material by applying a customized shader.<br>
+    This page describes how to put a simple effect shader into a Material Set.<br>
+    (The shader asset described here is not included in the AnyPortrait package.)<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_593.jpg"/>
+    <br>
+    
+    <p>
+    Let's create a new Material Set by cloning from an existing Material Set.<br>
+    <strong>(1)</strong> <strong>Select the Material Set</strong> and click the <strong>Duplicate button</strong> to duplicate it.<br>
+    <strong>(2)</strong> The new <strong>Material Set duplicated</strong> is added to the list.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_594.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> Set <strong>name</strong> and <strong>icon</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_595.jpg"/>
+    <br>
+    
+    <p>
+    Apply the created shader to the Material Set.<br>
+    Depending on the condition, you need to create and apply a total of 16 shaders each. But, if it is an effect shader, you do not have to make it for every case.<br>
+    <strong>(4)</strong> Apply the created shader to the most basic "<strong>Gamma Color Space / Basic Rendering / Alpha Blend</strong>".<br>
+    ​<br>
+    The shader used on this page is written as follows:<br>
+    (This is a shader that some code is added to the "Bumped Ramp" shader provided as a preset.)<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "CustomShader/Character FX"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_BumpMap("Bump Texture (Normalmap)", 2D) = "bump" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_RampMap("Ramp Gradient Map (RGB)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_NoiseMap</strong>("Gray Noise Map (Gray)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_FadeValue</strong>("Fade Value (0~1)", Float) = 0<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_FadeColor1</strong>("Fade Color 1 (RGB)", Color) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_FadeColor2</strong>("Fade Color 2 (RGB)", Color) = (1, 1, 0, 1)<br>
+    &emsp;&emsp;}&emsp;&emsp;<br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags{ "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <br>
+    &emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma surface surf SimpleColor alpha<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma target 3.0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <br>
+    &emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _BumpMap;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _RampMap;<br>
+    &emsp;&emsp;&emsp;&emsp;// Custom Code<br>
+    &emsp;&emsp;&emsp;&emsp;//--------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D <strong>_NoiseMap</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;float <strong>_FadeValue</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;half4 <strong>_FadeColor1</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;half4 <strong>_FadeColor2</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;//--------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;struct Input<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv_MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv_BumpMap;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 color : COLOR;<br>
+    &emsp;&emsp;&emsp;&emsp;};<br>
+    &emsp;&emsp;&emsp;&emsp;half4 LightingSimpleColor(SurfaceOutput s, half3 lightDir, half atten)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 c;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half nl = max(0, dot(s.Normal, lightDir));<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half halfDiff = (nl * 0.5f) + 0.5f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half3 rampColor = tex2D(_RampMap, float2(halfDiff, 0.5f)).rgb;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb = saturate(s.Albedo * _LightColor0.rgb * (rampColor * atten));<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb + s.Emission;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a = s.Alpha;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return c;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;void surf(Input IN, inout SurfaceOutput o)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 c = tex2D(_MainTex, IN.uv_MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb *= _Color.rgb * 2.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Alpha = c.a * _Color.a;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Albedo = c.rgb;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Custom Code<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//---------------------------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Emission = half4(0, 0, 0, 0);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half noise = tex2D(<strong>_NoiseMap</strong>, IN.uv_MainTex).r;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;if (noise < <strong>_FadeValue</strong> - 0.03f)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Alpha = 0.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half smoothFade = (noise - <strong>_FadeValue</strong>) / 0.6f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;if (noise < <strong>_FadeValue</strong>)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Emission = <strong>_FadeColor2</strong>.rgb;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;else if (noise < <strong>_FadeValue</strong> + 0.6f)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Albedo = (o.Albedo * <strong>_FadeColor1</strong>.rgb) * (1.0f - smoothFade) + o.Albedo * smoothFade;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//---------------------------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Let's make the properties for this shader code.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_596.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(5)</strong> Press the <strong>Add Property button</strong>.<br>
+    <strong>(6)</strong> You can see that a <strong>new property</strong> is added.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_597.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(7)</strong> Set the property <strong>name</strong> to "<strong>_NoiseMap</strong>" and change it to "<strong>Texture</strong>" <strong>type</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_598.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(8)</strong> Since this texture should be applied in common regardless of image, change it to "<strong>Common Texture</strong>" method.<br>
+    <strong>(9)</strong> Set the <strong>Noise texture</strong> created for the effect.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_599.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(10)</strong> In the same way, add "<strong>_FloatValue</strong>" of Float type, "<strong>_FadeColor1</strong>" and "<strong>_FadeColor2</strong>" property of Color type.<br>
+    Set the appropriate values for the added properties.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_600.jpg"/>
+    <br>
+    
+    <p>
+    Let's apply this Material Set to render the character.<br>
+    <strong>(11)</strong> Change the <strong>Default Material</strong> setting of the material to <strong>ON </strong>and execute the Bake.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_601.jpg"/>
+    <br>
+    
+    <p>
+    You can see the effect of the disappearing or appearing character.<br>
+    You can use a script to control the "<strong>_FadeValue</strong>" to create an animated effect.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <p>
+    See the example below for how to implement it.<br>
+    The example below works as follows:<br>
+    - When <strong>A key</strong> or <strong>S key</strong> is pressed, the "<strong>fadeValue"</strong> variable is increased or decreased.<br>
+    - Use the <strong>SetMeshCustomFloatAll</strong> function to update the material's <strong>"_FadeValue"</strong> property with the <strong>fadeValue</strong> value.<br>
+    (For more information about the function, see the <a href="../../en/Script/SC_Mesh.html">related page</a>.)<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using </span>UnityEngine;<br>
+    <span class="text-primary">using </span><strong>AnyPortrait</strong>;<br>
+    ​<br>
+    <span class="text-primary">public class </span><span class="text-success">CharacterFadeTester </span>: <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;&emsp;&emsp;   <span class="text-primary">public </span><span class="text-success">apPortrait </span><strong>portrait</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;   <span class="text-primary">public float </span><strong>fadeValue </strong>= 0.5f;<br>
+    ​<br>
+    &emsp;&emsp;&emsp;&emsp;   <span class="text-primary">void</span> Update ()<br>
+    &emsp;&emsp;&emsp;&emsp;   {<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKey(<span class="text-success">KeyCode</span>.A) )<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  {<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <strong>fadeValue </strong>-= <span class="text-success">Time</span>.deltaTime * 0.5f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <strong>portrait</strong>.<span class="text-danger"><strong>SetMeshCustomFloatAll</strong></span>(<strong>fadeValue</strong>, <span class="text-danger"><strong>"_FadeValue"</strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  }<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKey(<span class="text-success">KeyCode</span>.S) )<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  {<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <strong>fadeValue </strong>+= <span class="text-success">Time</span>.deltaTime * 0.5f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <strong>portrait</strong>.<span class="text-danger"><strong>SetMeshCustomFloatAll</strong></span>(<strong>fadeValue</strong>, <span class="text-danger"><strong>"_FadeValue"</strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  }<br>
+    &emsp;&emsp;&emsp;&emsp;   }<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/qdywjDvkrMw" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    <p>
+    ​All materials described on this page are shown in the video.<br>
+    In addition, the textures described on this page are shown below.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_602.jpg"/>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Save as a preset</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_603.jpg"/>
+    <br>
+    
+    <p>
+    If you make the Material Set as a preset, you can quickly apply the Material Set to other characters.<br>
+    <strong>(1)</strong> <strong>Select the Material Set</strong> you want to save as preset.<br>
+    <strong>(2)</strong> Press the Register as a Preset button.<br>
+    <strong>(3)</strong> You can see that the <strong>Material Set</strong> is copied and registered as a <strong>preset</strong>.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Apply a different Material Set to only some meshes</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_604.jpg"/>
+    <br>
+    
+    <p>
+    You can select a mesh to apply a Material Set other than the default.<br>
+    <strong>(1)</strong> Select the <strong>Mesh Group</strong>.<br>
+    <strong>(2)</strong> Select the <strong>Setting tab</strong>.<br>
+    <strong>(3)</strong> Select the <strong>Mesh</strong>.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_605.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Use Default Material Set button</strong> to change to the <strong>OFF </strong>state.<br>
+    <strong>(2)</strong> Press the <strong>Change button</strong>.<br>
+    <strong>(3)</strong> <strong>Select the Material Set</strong> you want to apply and press the <strong>Select button</strong>.<br>
+    If you set up this step, the Material Set will be applied.<br>
+    If you want to apply different properties of the Material Set to this mesh, you can do the following steps.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_606.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Click the <strong>Add Custom Property button</strong>.<br>
+    A new custom property is added.<br>
+    This property applies to Unity scenes, regardless of the Material Set or Custom Shader settings.<br>
+    (It takes precedence over the property set of the Material Set.)<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_607.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> Set the property <strong>name</strong>, <strong>type</strong>, and <strong>value</strong>.<br>
+    Here, we set the Color type "<strong>_FadeColor1</strong>" as in the previous setting.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_608.jpg"/>
+    <br>
+    
+    <p>
+    Add the "<strong>_FadeColor2</strong>" property in the same way.<br>
+    It will be rendered differently because we set it to a different color than the setting of the Material Set.<br>
+    ​<br>
+    Perhaps you need to apply the same material settings to other meshes.<br>
+    Check out the following explanation.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_609.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Copy Settings to other meshes button</strong>.<br>
+    This function copies the settings of the mesh to other meshes and allows you to selectively copy various settings, including material settings.<br>
+    <strong>(2)</strong> <strong>Select meshes</strong> to copy settings.<br>
+    <strong>(3)</strong> Check <strong>Material Set</strong> and <strong>Custom Material Properties</strong> to copy the settings which were described this page.<br>
+    <strong>(4)</strong> Press the <strong>Apply button</strong>.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_612.jpg"/>
+    <br>
+    
+    <p>
+    When you execute <strong>Bake </strong>and check the rendering results in the Unity scene, you can see that only the selected meshes are applied differently.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Material Library interface</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_613.jpg"/>
+    <br>
+    
+    <p>
+    <strong>1. The list of Material Sets</strong><br>
+    : There are <strong>Material Sets</strong> that can be applied to characters and a <strong>Make Material Set button</strong> that can be used to create a Material Set.<br>
+    ​ <br>
+    <strong>2. The list of Presets</strong><br>
+    : There are <strong>Material Set Presets</strong>. There are buttons to create presets.<br>
+    - <strong>Make Material Preset</strong> : Create a new preset.<br>
+    - <strong>Unpack Advanced Presets</strong> : Add presets by installing the package containing the various materials described above.<br>
+    - <strong>Unpack LWRP Preset</strong> : Install the package containing one Material Set for Lightweight Render Pipeline (LWRP).<br>
+    ​ <br>
+    <strong>3. Material Set Editing Functions</strong><br>
+    : Functions to edit the selected Material Set.<br>
+    - <strong>Connected Preset</strong> and <strong>Change, Restore</strong>: If this Material Set is not a preset, it can be linked with Preset. You can click the Change button to select another preset to connect, or you can press the Restore button to synchronize to the same values as the preset.<br>
+    - <strong>Duplicate</strong>: Duplicates the selected Material Set.<br>
+    - <strong>Register as a Preset</strong> : Register this Material Set as a preset.<br>
+    - <strong>Remove </strong>: Remove this Material Set. The default "Unlit" preset can not be removed.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    ​<strong>1. Name, Icon, and Ambient Color option</strong><br>
+    : These are name and icon type of the material set. If you check that this Material Set requires "Black Ambient Color", a message will appear depending on the Ambient color when you run the bake.<br>
+    ​ <br>
+    <strong>2. Image of the icon</strong><br>
+    <strong>3. Default Material option</strong><br>
+    : If you set a Material Set as the default, this will automatically be applied to all meshes that do not have the other settings.<br>
+    ​ <br>
+    <strong>4. Shaders</strong><br>
+    : Set which shader assets to apply in detail based on color space, clipping, and blending type.<br>
+    ​ <br>
+    <strong>5. Reserved Shader Properties</strong><br>
+    : The four properties used by AnyPortrait. These properties are not user controlled.<br>
+    ​ <br>
+    <strong>6. Texture Property different for each image</strong><br>
+    : You can set each texture for each image. You can change it by pressing the <strong>Texture per Image</strong> button.<br>
+    ​ <br>
+    <strong>7. Common Texture Property</strong><br>
+    : Specifies a texture as property, regardless of the image. You can change it by pressing the <strong>Common Texture</strong> button.<br>
+    ​ <br>
+    <strong>8. Float, Int, Vector, Color Properties</strong><br>
+    : These are non-texture type properties. From the left are the following elements:<br>
+    <strong>- Enable Checkbox</strong>: Turning off this check box does not apply to Bake.<br>
+    <strong>- Name</strong>: The name of the property, the same name must be defined in the shader.<br>
+    <strong>- Type</strong>: The type of the property. Float, Int, Vector, Color, Texture types are supported.<br>
+    <strong>- Value</strong>: The value of the property.<br>
+    <strong>- Remove button</strong> : Remove the property.<br>
+    ​ <br>
+    <strong>9. Add Property</strong><br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_614.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_CameraScene.html">< Camera settings in scene</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_Shortcuts.html">Shortcuts ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

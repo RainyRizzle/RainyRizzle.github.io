@@ -45,6 +45,8 @@
                     <a role="button" class="btn btn-secondary active" href="../../jp/GettingStarted/GS_1_4.html">JP</a>
                 </div>
 
+                <p></p>
+
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -61,14 +63,310 @@
     <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/GettingStarted.html"><span class="text-dark">入門ガイド</span></a> > 1.4. メッシュグループの作成</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
-    <h1 class="display-4"><strong>1.4. メッシュグループの作成</strong></h1>
+    <h1 class="display-5">1.4. メッシュグループの作成</h1>
+    <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.7</span></h4>
+    
+    <p>
+    AnyPortraitのさまざまな要素の中で最も中心的なものが「<strong>メッシュグループ(Mesh Group)</strong>」です。<br>
+    名前を見ると、「メッシュは一緒です」と見るのは簡単ですが、メッシュグループにさまざまな機能を追加するとさまざまな効果が得られます。<br>
+    この場合、追加された関数は「<strong>モディファイア(Modifier)</strong>」と呼ばれます。<br>
+    メッシュグループに追加するモディファイアに応じて、ボーンアニメーションを追加したり、モーフィングアニメーションを追加することができます。<br>
+    このセクションでは、メッシュグループを作成してモディファイアを追加する前の手順について説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_12.jpg"/>
+    <br>
+    
+    <p>
+    階層UIで、<strong>(1)</strong> <strong>「メッシュグループの追加」</strong>ボタンをクリックし、作成されたメッシュグループを選択します。<br>
+    メッシュグループを選択すると、右の画面に <strong>「Setting」、「Bone」、「Modifier」</strong>メニューが表示されます。<br>
+    設定メニューが選択された状態で、<strong>(2)</strong> <strong>メッシュグループ（Slime）の名前を書き留めます</strong>。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_13.jpg"/>
+    <br>
+    
+    <p>
+    メッシュグループ詳細画面は、3つの領域に分かれています。<br>
+    <strong>1. メインメニュー</strong> : 「Setting」、「Bone」、「Modifier」メニューがあります。 各メニューのデフォルト設定またはサブメニューを表示します。<br>
+    <strong>2. サブメッシュ/メッシュグループ階層、ボーン階層</strong> : メッシュグループのメッシュ、メッシュグループ、またはボーンを表示します。<br>
+    <strong>3. オブジェクト情報</strong> : 「メッシュ」、「モディファイア」、「ボーン」などの選択されたオブジェクトの情報が表示されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    今度は、メッシュグループの基本的な作業を行う必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_14.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    <strong>1. メニュータブ</strong> : 「Setting」、「Bone」、「Modifier」メニューがあります。<br>
+    <strong>2. Name</strong> : 名前を編集できます。<br>
+    <strong>3. Edit Default Transform</strong> : この機能が有効な間にメッシュを移動できます。 これは、メッシュの「デフォルト位置」を指定する関数です。<br>
+    <strong>4. Set Root Unit</strong> : ボタンを押すと、現在のメッシュグループがルートユニットとして登録されます。 ルートユニットとして登録されたメッシュグループのみがシーンに移動されます。<br>
+    <strong>5. Remove Mesh Group</strong> : このメッシュグループを削除します。<br>
+    <strong>6. メニューを折り畳む</strong> : 折り畳みゾーンを最小限に抑えます。<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_15.jpg"/>
+    <br>
+    
+    <p>
+    メッシュをメッシュグループに追加します。<br>
+    <strong>(1)</strong> <strong>「+」ボタン</strong>を押してダイアログを開き追加するターゲットを選択します。<br>
+    このダイアログでは、メッシュを選択するか、別のメッシュグループを選択してメッシュを追加できます。<br>
+    <strong>(2)</strong> <strong>「Mesh」</strong>タブをクリックします。<br>
+    <strong>(3)</strong> メッシュを選択し、<strong>(4)</strong> <strong>「Add」ボタン</strong>をクリックしてメッシュを追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_16.jpg"/>
+    <br>
+    
+    <p>
+    上記のように1つのメッシュが追加されました。 <br>
+    すべてのメッシュに対して上記の手順を繰り返します。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_625.jpg"/>
+    <br>
+    
+    <p>
+    v1.1.7から、複数のメッシュ、メッシュグループを選択して、一度に追加することが可能になりました。<br>
+     <kbd>Ctrl</kbd> キーまたは <kbd>Shift</kbd> キーを押しながら複数のメッシュとメッシュグループを選択します。<br>
+    <strong>「Select All / Deselect All」</strong>ボタンを押して、すべてオンまたはオフにすることができます。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_17.jpg"/>
+    <br>
+    
+    <p>
+    すべてのメッシュを追加すると、上のようになります。<br>
+    すべての位置が原点で集められているので、形はきれいではありません。<br>
+    さらに、一度にレンダリングされるため、すべての目と口の形を区別することは困難です。<br>
+    各メッシュのデフォルトの位置を変更し、デフォルトとして可視性を設定する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_18.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>「Edit Default Transform」ボタン</strong>を押します。 ボタンを押すと、ボタンが青色に変わり、アクティブになります。<br>
+    この状態では、メッシュとメッシュグループを移動してデフォルトシェイプを取得できます。<br>
+    <strong>(2)</strong> <strong>「選択」、「移動」、「回転」、「スケール」</strong>ツール（ショートカットキー <kbd>Q、W、E、R</kbd> ）を使用して、<br>
+    <strong>(3)</strong> メッシュを適切な位置に配置し。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_35.jpg"/>
+    <br>
+    
+    <p>
+    登録メッシュのレンダリング順序を変更する必要がある場合、または削除する必要がある場合は、サブメッシュ階層のトップメニューを使用できます。<br>
+    <strong>1. 下位レイヤーへのクリッピング</strong> : 選択したレイヤーの下位レイヤーをクリッピングマスクとして使用します。<br>
+    <strong>2. レンダリング順序増減</strong> : レンダリング順序を変更します。 レンダリングの順序は、上のメッシュの前にレンダリングされます。<br>
+    <strong>3. 選択したオブジェクトを削除</strong> : 追加したメッシュまたはメッシュグループを削除します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_19.jpg"/>
+    <br>
+    
+    <p>
+    作業中は、メッシュが重なり合って見えなくなることがあります。<br>
+    サブメッシュ階層の各アイテムには、各アイテムの左右に目のアイコンがあります。<br>
+    各オブジェクトを表示または非表示にする関数です。 <br>
+    しかし、違いがあります。<br>
+    <span class="text-danger">「左の目の形のボタン」</span>は、タスクの<span class="text-danger">「一時の可視性」</span>を決定します。 実際に格納されている値ではありません。<br>
+    <span class="text-success">「右の目の形のボタン」</span>は<span class="text-success">「保存された可視性」</span>です。<br>
+    <strong>「Default Edit Transform」</strong>を使用して作業している現在の状態では、「修飾子がない場合の最初の可視性」が決定されます。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>< メッシュの一時の可視性 ></h4>
+    <br>
+    
+    <p>
+    作業のための「メッシュの一時の可視性」に関連したヒントです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_624.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> リストの上部のボタンを押すと、「一時の可視性」がすべてリセットされます。<br>
+    <strong>(2)</strong>  <kbd>Ctrl</kbd> を押して目の形のアイコンをクリックすると、残りのすべてのメッシュが選択されたメッシュの可視性と逆に設定されます。<br>
+    <strong>(3)</strong> エディタの設定に応じて作業が進行中「一時の可視性」が自動的にリセットされないようにすることができます。 （<a href="../../jp/AdvancedManual/AD_SettingDialog.html">関連ページ</a>）<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_20.jpg"/>
+    <br>
+    
+    <p>
+    メッシュのデフォルト位置とデフォルトの可視性の両方を設定している場合は、<br>
+    <strong>(1)</strong> <strong>「Edit Default Transform」</strong>モードをオフにします。<br>
+    このスライムを <strong>(2)</strong> <strong>Root Unit</strong>としてシーンに移動します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_21.jpg"/>
+    <br>
+    
+    <p>
+    ルート単位として設定すると、左側のUIに<strong>「Root Unit 0」</strong>が追加されていることがわかります。<br>
+    <strong>(1)</strong> <strong>「Root Unit 0」</strong>を選択し、作業しているメッシュグループがレンダリングされているかどうかを確認します。<br>
+    <strong>(2)</strong>  <strong>「Bake」ボタン</strong>を押すと、シーンにエクスポートするダイアログが開きます。<br>
+    <strong>(3)</strong> ダイアログ上の <strong>「Bake」ボタン</strong>を押しエディタを終了します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary"><strong>参考 : </strong></span><br>
+    「Bake」はすべてのルートユニットをシーンにエクスポートします。<br>
+    「Root Unit 0」が最初に表示され、残りは隠されています。<br>
+    スクリプトやアニメーションを使用して別のルートユニットに置き換えることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_38.jpg"/>
+    <br>
+    
+    <p>
+    シーンにスライムが適用されているのを見ることができます。<br>
+    ゲームを実行すると、「既定で指定された可視性」が機能することがわかります。<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>AnyPortraitのシーンを設定</h3>
+    <br>
+    
+    <p>
+    キャラクターをシーンにエキスポートすると、正しく表示されないことがあります。または、明るくまたは暗くなることがあります。<br>
+    キャラクターとマテリアルのシーンを設定する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_추가_1.jpg"/>
+    <br>
+    
+    <p>
+    最初に、シーンを作成するときに自動的に追加される<strong>Directional Light</strong>を削除します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_추가_2.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>「Main Camera」</strong>を選択します。<br>
+    <strong>(2)</strong> カメラの設定を次のように変更します。<br>
+    - <strong>「Clear Flags」</strong>を<strong>「Solid Color」</strong>に設定します。<br>
+    - <strong>「Projection」</strong>を<strong>「Orthographic」</strong>タイプに変更します。<br>
+    - <strong>「Size」</strong>を変更します。 通常、AnyPortraitが作成した出力には値<strong>10</strong>を指定することをお勧めします。<br>
+    - <strong>「Clipping Planes」</strong>を設定します。 <strong>Near</strong>と<strong>Far</strong>の距離は<strong>500</strong>以内にすることをお勧めします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_추가_3.jpg"/>
+    <br>
+    
+    <p>
+    トップメニューの<strong>「Window > Lighting」</strong>をクリックして、ライトの設定を開きます。<br>
+    この設定を次のように変更します。<br>
+    - <strong>Skybox</strong>を無効にする。<br>
+    - <strong>Ambient Source</strong>を<strong>Color</strong>に変更します。<br>
+    - <strong>Ambient Color</strong>を<strong>黒(0, 0, 0)</strong>に変更します。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
-    <nav class="navbar bottom navbar-light bg-light">
+    <nav class="navbar fixed-bottom navbar-light bg-light">
         <a class="btn btn-light" role="button" href="../../jp/GettingStarted/GS_1_3.html">< 1.3. メッシュの作成</a>
         <a class="btn btn-light" role="button" href="../../jp/GettingStarted/GS_1_5.html">1.5. 制御パラメータの追加 ></a>
     </nav>

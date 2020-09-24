@@ -39,12 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/GettingStarted/GS_1_6.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/GettingStarted/GS_1_6.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/GettingStarted/GS_1_6.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -61,14 +65,260 @@
     <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/GettingStarted.html"><span class="text-dark">入門ガイド</span></a> > 1.6. 「Transform Modifier」で顔を変更</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
-    <h1 class="display-4"><strong>1.6. 「Transform Modifier」で顔を変更</strong></h1>
+    <h1 class="display-5">1.6. 「Transform Modifier」で顔を変更</h1>
+    <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.6</span></h4>
+    
+    <p>
+    AnyPortraitの最も重要なプロセスは、メッシュグループの<strong>「モディファイア(Modifier)」</strong>を追加することです。<br>
+    モディファイアの動作原理は複雑なので、追加および使用方法についてのみ説明します。<br>
+    モディファイアの種類、特性、注意については、<a href="../../jp/AdvancedManual/AD_LayerWeightInterpolation.html">​関連ページ</a>を確認してください。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページでは、<strong>「Transform（Controller）」</strong>モディファイアがさまざまなモディファイアの間で使用されています。<br>
+    <strong>「Transform」</strong>モディファイアを使用すると、位置やサイズなどを変更したり、コントロールパラメータに合わせて色や視認性を変更することができます。<br>
+    したがって、画像を置き換えることで表情を変えるのが適している。<br>
+    最も基本的な修飾子として使用するのは簡単です。<br>
+    (「Morph」モディファイアで色をコントロールすることもできます)。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_25.jpg"/>
+    <br>
+    
+    <p>
+    前のページで作成した <strong>(1)</strong> <strong>「Slime」</strong>メッシュグループを選択します。<br>
+    <strong>(2)</strong> <strong>「Modifier」</strong>メニューを選択します。 まだモディファイアが登録されていないことを確認できます。<br>
+    <strong>(3)</strong> <strong>「Add Modifier」ボタン</strong>を押して、モディファイアを追加するダイアログを開きます。<br>
+    さまざまなモディファイアの中から <strong>(4)</strong> <strong>「Transform（Controller）」</strong>モディファイアを選択します。<br>
+    <strong>(5)</strong> <strong>「Select」ボタン</strong>を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_26.jpg"/>
+    <br>
+    
+    <p>
+    これは、モディファイアを追加した後に表示される画面です。<br>
+    （モディファイアによって多少異なります。）<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Modifier Stack</strong> : モディファイアは順番に計算されます。 （以下のモディファイアが最初に数えられます。）<br>
+    <strong>2. モディファイアのオン/オフ</strong> : 操作中にモディファイアを一時的に無効にすることができます。 電球のアイコンをクリックしてオン/オフを切り替えます。<br>
+    <strong>3. 選択された修飾子</strong> : 現在選択されているモディファイアの名前、アイコン、およびレイヤーの位置。<br>
+    <strong>4. Color Option On / Off</strong> : 「Transform / Morph」モディファイアで色の値を制御できます。 このボタンは、カラー値を制御するかどうかを決定します。<br>
+    <strong>5. Blend</strong> : モディファイアと他のモディファイアとのブレンド方法を指定します。<br>
+    - <strong>Method</strong> : 値をマージする方法。 <strong>「Interpolation」</strong>と<strong>「Additive」</strong>が利用可能です。<br>
+    - <strong>Weight</strong> : 値をマージするときの重み。 値は0〜1です。<br>
+    - <strong>Layer Up / Down</strong> : モディファイアの計算順序を変更します。<br>
+    <br>
+    <strong>6. Control Parameters</strong> : 登録された制御パラメータを入力値として表示します。<br>
+    <strong>7. Remove Modifier</strong> : 選択した修飾子を削除します。<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <p>
+    モディファイアは、<span class="text-primary"><strong>「入力キー」</strong></span>と<span class="text-danger"><strong>「変更値」</strong></span>の組み合わせで構成されます。<br>
+    このとき、現在のサンプルの<span class="text-primary"><strong>「入力キー」</strong></span>に対応するのが<span class="text-primary"><strong>制御パラメータ</strong></span>であり、<span class="text-danger"><strong>「変更値」</strong></span>は<span class="text-danger"><strong>メッシュが色付けされているかレンダリングされているか</strong></span>である。<br>
+    したがって、次のタスクは、<span class="text-primary"><strong>「制御パラメータを入力値として」</strong></span>および<span class="text-danger"><strong>「変更を適用するメッシュ」</strong></span>を選択して一緒に登録することです。<br>
+    詳細は<a href="../../jp/AdvancedManual/AD_LayerWeightInterpolation.html">​「関連ページ」</a>をご覧ください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_27.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>「Controller」タブ</strong>を選択します。<br>
+    <strong>(2)</strong> <strong>メッシュ(Eye1)</strong>を選択します。<br>
+    「Controller」タブが選択された状態で、以前作成した <strong>「Eye Shape」</strong>パラメータをチェックします。<br>
+    制御パラメータを入力値として受け取る修飾子を選択しているときに、<strong>「赤い記録ボタン」</strong>が表示されていることがわかります。<br>
+    <strong>(3)</strong> 「Eye Shape」パラメータの「録音ボタン」を押して、モディファイアに登録します。<br>
+    これにより、次のように画面が切り替わります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_28.jpg"/>
+    <br>
+    
+    <p>
+    制御パラメータの背景が赤に変わり、新しい設定が右側のUIに表示されます。<br>
+    この状態は、<strong>「制御パラメータ+メッシュ」</strong>がモディファイアに登録されていることです。<br>
+    </p>
+    <br>
+    
+    <p>
+    他の「目の形のメッシュ」をモディファイアに登録しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_29.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>「Eye Shape」制御パラメータ</strong>が既に登録されているので、<br>
+    <strong>(2)</strong> 他の目のメッシュ（Eye2）を選択する。<br>
+    <strong>(3)</strong> <strong>「Add to Keys」ボタン</strong>をクリックして登録してください。<br>
+    </p>
+    <br>
+    
+    <p>
+    同様に、4つすべての目のメッシュ（Eye1、Eye2、Eye3、Eye4）を登録します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_30.jpg"/>
+    <br>
+    
+    <p>
+    4つのメッシュすべてを登録した場合は、上記のように緑色のアイコンが表示されます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <p>
+    次の作業は、実際に制御パラメータの各値に式を割り当てることです。<br>
+    目の形状パラメータの値が0の場合、Eye1メッシュのみが表示され、<br>
+    値が1の場合、Eye2メッシュだけが表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_50.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> パラメータ値を1に移動します。「赤い記録ボタン」は、その位置にキーがないためにアクティブです。<br>
+    「Parameter value = 1」のとき、<strong>(2)</strong> レコードボタンを押してキーを生成します。<br>
+    同様に、<strong>(3)</strong> パラメータを2に移動し、<strong>(4)</strong> 記録ボタンを押してキーを生成する。<br>
+    <strong>(5)</strong>、<strong>(6)</strong>となり、計4個の鍵が生成される。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_추가_5.jpg"/>
+    <br>
+    
+    <p>
+    あなたが現在使用しているAnyPortraitバージョンがv1.1.6またはそれ以降のバージョンであれば、この段階で、<strong>Color Option</strong>を有効にする必要があります。<br>
+    メッシュの色、透明度、出力するかどうかを制御するためには、モディファイアの<strong>Color Option</strong>がオンの状態である必要がするが、v1.1.6から最適化のためには、このオプションのデフォルト値がOFFに変更されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_추가_6.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> モディファイヤの<strong>「Color Option」</strong>を入れます。<br>
+    <strong>(2)</strong> 登録された制御パラメータの<strong>「Color Option」</strong>がオフになっている場合ボタンを押してオンにします。<br>
+    <strong>(3)</strong> ここで、メッシュのレンダリングを変更することができる「黄色の目ボタン」が表示されます。<br>
+    Color Optionについては、「<a href="../../jp/AdvancedManual/AD_ColorModifier.html">関連ページ</a>」をご覧ください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_31.jpg"/>
+    <br>
+    
+    <p>
+    目のメッシュの視認性は、制御パラメータの4つのキーによって決定されます。<br>
+    まず、<strong>(1)</strong> <strong>制御パラメー</strong>タを最初の位置に戻す。 （キー値= 0）<br>
+    <strong>(2)</strong> <strong>Eye1メッシュの黄色の目のボタン</strong>をオンにし、残りをオフにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_32.jpg"/>
+    <br>
+    
+    <p>
+    次に、2番目のキーを操作します。<br>
+    <strong>(1)</strong> <strong>制御パラメー</strong>タを第2の位置（キー値= 1）に移動させた後、<br>
+    <strong>(2)</strong> <strong>Eye2メッシュの黄色の目のボタン</strong>をオンにして、残りをオフにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_33.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_34.jpg"/>
+    <br>
+    
+    <p>
+    残りの2つのキーを同じ方法で操作して、4つの表情の設定を完了します。<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/ehD-GUpbVlg" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_35.jpg"/>
+    <br>
+    
+    <p>
+    ​上記と同じ方法で<span class="text-primary"><strong>「Mouth Shape」</strong></span>を操作することもできます。<br>
+    目と口の両方の表現を作成した場合は、ゲームからテストすることができます。<br>
+    Unity Editorで <strong>Bake</strong>機能を実行してシーンに移動し、テストすることができます。<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/AQazzGUI5yI" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    
+    <br><br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
-    <nav class="navbar bottom navbar-light bg-light">
+    <nav class="navbar fixed-bottom navbar-light bg-light">
         <a class="btn btn-light" role="button" href="../../jp/GettingStarted/GS_1_5.html">< 1.5. 制御パラメータの追加</a>
         <a class="btn btn-light" role="button" href="../../jp/GettingStarted/GS_1_7.html">1.7. 「Morph Modifier」を使う ></a>
     </nav>

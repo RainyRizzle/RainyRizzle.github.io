@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>최적화된 Bake</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_OptimizedBake.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_OptimizedBake.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_OptimizedBake.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > 최적화된 Bake</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">최적화된 Bake</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    AnyPortrait에서 작업한 캐릭터를 씬으로 옮기는 것을 Bake라고 합니다.<br>
+    <span class="text-primary"><strong>"에디터에서 사용하는 데이터"</strong></span>와 <span class="text-danger"><strong>"씬에서 실행되는 데이터"</strong></span>가 달라서 항상 Bake 과정을 거쳐야 합니다.<br>
+    만약에 모든 편집 과정이 끝난 결과물의 경우, <span class="text-primary"><strong>"에디터에서 사용되는 데이터"</strong></span>가 더 이상 필요가 없게 됩니다.<br>
+    따라서 오직 <span class="text-danger"><strong>"씬에서 실행되는 데이터"</strong></span>만 존재하는 Bake를 하면 메모리와 프리팹 용량 등을 아낄 수 있습니다.<br>
+    이 페이지에서는 <strong>최적화된 Bake(Optimized Bake)</strong>를 하는 방법을 다룹니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_34.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Bake 다이얼로그</strong>를 엽니다.<br>
+    <strong>(2)</strong> <strong>Optimized Bake 버튼</strong>을 눌러서 최적화된 Bake를 실행합니다.<br>
+    버튼 위에 Target 칸이 있는데, 지정된 대상으로 Bake를 할 수 있습니다.<br>
+    Target이 비어있다면 새로운 객체를 만듭니다.<br>
+    에디터에서 작업 중인 객체를 Target으로 지정할 수 없습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_35.jpg"/>
+    <br>
+    
+    <p>
+    씬을 확인하면 기존의 캐릭터 외에 <strong>"(Optimized)"</strong>가 이름에 더해진 캐릭터를 볼 수 있습니다.<br>
+    이 객체는 오직 <strong>"씬에서 실행되는 데이터"</strong>만 가지고 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_36.jpg"/>
+    <br>
+    
+    <p>
+    최적화된 Bake를 한 이후에는 자동으로 <strong>Target</strong>에 연결됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    참고 : AnyPortrait 에디터는 편집이 안되는 "최적화된 apPortrait"를 구분합니다.<br>
+    따라서 이 객체들은 에디터에 노출이 되지 않습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_ScreenCapture.html">< 화면 캡쳐</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_SortingLayer.html">Sorting Layer/Order 설정 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

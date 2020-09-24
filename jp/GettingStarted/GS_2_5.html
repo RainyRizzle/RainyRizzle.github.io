@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>2.5. 「Rigging Modifier」を使用</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/GettingStarted/GS_2_5.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/GettingStarted/GS_2_5.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/GettingStarted/GS_2_5.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/GettingStarted.html"><span class="text-dark">入門ガイド</span></a> > 2.5. 「Rigging Modifier」を使用</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">2.5. 「Rigging Modifier」を使用</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    骨のアニメーションでは、「<strong>Rigging(リギング)</strong>」と呼ばれるプロセスが不可欠です。<br>
+    Riggingは、「頂点をボーンに接続する」として定義できます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_62.jpg"/>
+    <br>
+    
+    <p>
+    頂点が骨の動きに追従するように、頂点に「骨に付けられた重さ」を入力することが重要です。<br>
+    左の図では、すべての頂点の重みが「<span class="text-danger"><strong>Bone 1：1.0</strong></span>」です。<br>
+    したがって、「<span class="text-success"><strong>緑の骨(Bone 2)</strong></span>」の動きには依存しません。<br>
+    右側では、頂点の重みが徐々に「<span class="text-success"><strong>Bone 2</strong></span>」に増加しています。<br>
+    あなたは 「<span class="text-success"><strong>緑の骨(Bone 2)</strong></span>」の滑らかな動きを見ることができます。<br>
+    ​​>TXT<br>
+    つまり、「<strong>Rigging</strong>」は、「<strong>頂点+骨</strong>」の接続ウェイトを設定するプロセスです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_45.jpg"/>
+    <br>
+    
+    <p>
+    「Rigging」モディファイアを追加します。<br>
+    <strong>(1)</strong> 「<strong>Add Modifier</strong>」ボタンを押して <strong>(2)</strong> 「<strong>Riggingモディファイア</strong>」を選択して追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_38.jpg"/>
+    <br>
+    
+    <p>
+    まず、ヘッドフードを改造します。<br>
+    <strong>(1)</strong> <strong>「Hood」</strong>メッシュを選択し、<strong>(2)</strong> <strong>「Add to Rigging」ボタン</strong>を押してメッシュをモディファイアに登録します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_39.jpg"/>
+    <br>
+    
+    <p>
+    画面の左下にある<strong>「Binding」ボタン</strong>を押してRiggingを開始します。<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <p>
+    RiggingツールのUIは以下のように構成されています。<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    <strong>1. 메시 등록/해제</strong> : 메시를 리깅 모디파이어에 등록하거나 해제합니다.<br>
+    <strong>2. 가중치 직접 지정</strong> : 버튼의 값으로 가중치가 지정됩니다.<br>
+    <strong>3. 가중치 툴</strong> : 가중치를 지정하는 툴들입니다.<br>
+    <strong>Set Weight</strong> : 왼쪽에 작성된 숫자만큼 가중치를 지정합니다.<br>
+    <strong>Set Weight +/-</strong> : 0.05 단위로 가중치를 더하거나 뺍니다.<br>
+    <strong>Scale Weight</strong> : 왼쪽에 작성된 숫자만큼 가중치를 곱합니다.<br>
+    <strong>Scale Weight +/-</strong> : 가중치에 1.05를 곱하거나(+ 버튼), 0.95를 곱합니다. (-버튼)<br>
+    <strong>4. 가중치 보조 툴</strong> : 선택된 버텍스의 가중치를 지정할 때 도움을 주는 툴입니다.<br>
+    <strong>Auto Normalize</strong> : 이 기능이 활성된 상태에서는 가중치 합이 1로 보정됩니다.<br>
+    <strong>Blend</strong> : 버텍스의 가중치를 주변 버텍스 값과 적절히 섞어서 부드럽게 만듭니다.<br>
+    <strong>Normalize</strong> : 가중치 합이 1이 되도록 보정합니다.<br>
+    <strong>Prune</strong> : 매우 낮은 가중치 값을 가지는 본 정보를 삭제합니다.<br>
+    <strong>Auto Rig </strong>: 등록된 본 정보를 바탕으로 자동으로 리깅을 합니다.<br>
+    <strong>5. Grow / Shrink</strong> : 버텍스를 더 선택하거나 제외 시켜서 범위를 조절합니다.<br>
+    <strong>6. Copy / Paste</strong> : 선택된 버텍스의 리깅 정보를 복사하거나 붙여넣습니다.<br>
+    <strong>7. 본 리깅 정보</strong> : 리깅에 등록된 본과 리깅 값입니다. X 버튼을 눌러서 본을 제외시킬 수 있습니다. 이 화면에서도 직접 본을 선택할 수 있습니다.<br>
+    <strong>1. 追加 / 削除</strong> : メッシュを「Riggingモディファイア」に登録または登録解除します。<br>
+    <strong>2. 手動で重量を設定</strong> : 重量は、ボタンの値によって割り当てられます。<br>
+    <strong>3. 重みツール</strong> : 重みを設定するためのツールです。<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Set Weight</strong> : 左側の数字としてウェイトを割り当てます。<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Set Weight +/-</strong> : 重量は0.05単位で加算または減算されます。<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Scale Weight</strong> : 体重に左の数字を掛けます。<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Scale Weight</strong> +/- : 重量1.05（+ボタン）を乗算または0.95を乗算します。（ - ボタン）<br>
+    <strong>4. Assistant tools</strong> : このツールは、選択した頂点の重みを指定するのに役立ちます。<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Auto Normalize</strong> : これが有効な場合、重み付けされた合計は1に補正されます。<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Blend</strong> : 周囲の頂点値と適切に混合することによって、頂点のウェイトを滑らかにします。<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Normalize</strong> : 加重和を1に較正します。<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Prune</strong> : 重みが非常に低いの情報を削除します。<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Auto Rig</strong> : 登録された骨の情報に基づいて自動的に「Rigging」。<br>
+    <strong>5. Grow / Shrink</strong> : 頂点をさらに選択または除外して範囲を調整します。<br>
+    <strong>6. Copy / Paste</strong> : 選択した頂点の「Rigging」情報をコピーまたは貼り付けます。<br>
+    <strong>7. 「Rigging」情報</strong> : 「Rigging」に登録された「骨」と「重量」の値。 Xボタンを押して骨を除外することができます。 この画面から骨を選択することもできます。<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_61.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_36.jpg"/>
+    <br>
+    
+    <p>
+    画面下部のUIで「Rigging重みを表示する4つのモード」を選択することができます。<br>
+    骨の色を使用するか、またはテクスチャを一緒に表示するかどうかを決定することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_40.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> すべての頂点を選択し、<strong>(2)</strong> 「Bone Head」を選択します。<br>
+    骨が選択されていない場合は、「<strong>選択ロック(Selection Lock)</strong>」をオフにするか、右のメニューから選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_41.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bone Head</strong>」のすべての頂点の重みを<strong>1</strong>に設定します。<br>
+    メッシュの色が頭の骨の色のように変わるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_42.jpg"/>
+    <br>
+    
+    <p>
+    簡単に <strong>(1)</strong> 「<strong>選択ロック</strong>」を解除し、<strong>(2)</strong> 「<strong>Bone Ear R</strong>」を選択します。<br>
+    「選択ロック」を解除しない場合は、右のメニューから選択してください。<br>
+    頂点を選択すると、<strong>(3)</strong> <strong>重みを0.5に設定</strong>します。<br>
+    「<strong>Bone Ear R</strong>」のRigging情報が登録されていることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_43.jpg"/>
+    <br>
+    
+    <p>
+    反対側の耳にもウェイトを割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_44.jpg"/>
+    <br>
+    
+    <p>
+    もう一度 「<strong>Bone Head</strong>」を選択してください。 すべての頂点を選択し、ウェイト<strong>1</strong>を割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_45.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bone Ear R</strong>」を選択し、周囲の頂点を選択して、ウェイト<strong>1</strong>を割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_46.jpg"/>
+    <br>
+    
+    <p>
+    重みは、耳の周りにのみ適用され、色を変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_47.jpg"/>
+    <br>
+    
+    <p>
+    同様に、反対側の耳にウェイトを割り当てます。<br>
+    </p>
+    <br>
+    
+    <p>
+    「リギング」は一度に完了するのが難しい作業です。<br>
+    体重が指定されていても、実際に骨を動かすときには、厄介な点を見るのは簡単です。<br>
+    したがってRiggingモディファイヤは、一時的に骨を動かすことができる「<strong>Pose Test</strong>」機能を提供します。<br>
+    「<strong>Pose Test</strong>」機能を使用して、ウェイトが正しく適用されているかどうかを確認し、修正を試みます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_48.jpg"/>
+    <br>
+    
+    <p>
+    まず、骨が画面に表示される確認します。<br>
+    <strong>(1)</strong> 骨が「色が満たされた状態」に表示します。<br>
+    <strong>(2)</strong> 「<strong>Pose Test</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_49.jpg"/>
+    <br>
+    
+    <p>
+    骨を選択して自由に動くことができます。<br>
+    それが「重量」に正しく割り当てられていることを確認してください。<br>
+    </p>
+    <br>
+    
+    <p>
+    現在の状態での「Rigging」はスムーズに適用されていない。<br>
+    あなたはそれを円滑にし、問題の領域を修正する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_50.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Pose Test</strong>」ボタンを押して無効にし、再度重量を修正します。<br>
+    <strong>(1)</strong> 耳の周りのすべての頂点を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_51.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> 「<strong>Blend</strong>」ボタンを数回押して、重量値を柔らかくします。<br>
+    （体重値を<strong>"Bone Color Off + Texture Off"</strong>に変更しました）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_52.jpg"/>
+    <br>
+    
+    <p>
+    ウェイトは以前よりもスムーズに分散されていることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_53.jpg"/>
+    <br>
+    
+    <p>
+    ​もう一度試してみましょう。<br>
+    <strong>(1)</strong> 「<strong>Pose Test</strong>」モードをオンにします。<br>
+    <strong>(2)</strong> 耳を傾けて重み値が正しく適用されているかどうかを確認する。<br>
+    このサンプルでは、キャラクターの片側が傾いており、反対側も動いていることがわかります。<br>
+    他方の頂点が動いてはいけないと仮定してみましょう。<br>
+    （「Rigging」はデザイナーの意図によって異なる）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_54.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> 頭部の中心の頂点を選択する。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_55.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> 「<strong>Bone Head</strong>」を選択し、<strong>(5)</strong> 「<strong>Set Weight +ボタン</strong>」を数回押してウェイトを追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_56.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(6)</strong> 耳の頂点の1つを選択し、<strong>(7)</strong> 耳(<strong>Bone Ear R / L</strong>)を選択します。<br>
+    体重が中心を超えて適用されていることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_57.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(8)</strong> 重み<strong>0</strong>を設定します。<br>
+    反対側の耳と頂点についても同じようにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_58.jpg"/>
+    <br>
+    
+    <p>
+    「Riggingモディファイア」に他のメッシュを追加します。<br>
+    顔メッシュは頭部（Bone Head）にのみ登録する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_59.jpg"/>
+    <br>
+    
+    <p>
+    他のメッシュは、「Pose Test」を適切に使用しながら調整されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    下のスクリーンショットは、各骨の「Rigging」の結果を示しています。<br>
+    「Rigging」については、これらを参照してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_60.jpg"/>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/GettingStarted/GS_2_4.html">< 2.4. 骨追加する</a>
+        <a class="btn btn-light" role="button" href="../../jp/GettingStarted/GS_2_6.html">2.6. アニメーションクリップを作成 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

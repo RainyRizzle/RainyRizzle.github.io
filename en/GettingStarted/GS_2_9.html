@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>2.9. Creating Bone Animation</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/GettingStarted/GS_2_9.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/GettingStarted/GS_2_9.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/GettingStarted/GS_2_9.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/GettingStarted.html"><span class="text-dark">Getting Started</span></a> > 2.9. Creating Bone Animation</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">2.9. Creating Bone Animation</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    On this page, let's create a simple animation.<br>
+    Learn the entire process while creating a repeating animation in which the character bounces lightly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_101.jpg"/>
+    <br>
+    
+    <p>
+    Creates a new animation clip or deletes animation keyframes that were created before.<br>
+    If you delete keyframes,<br>
+    <strong>(1)</strong> <strong>Select all keyframes</strong> <strong>(2)</strong> <strong>Press the Remove Keyframes button</strong> to remove.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_68.jpg"/>
+    <br>
+    
+    <p>
+    Selecting all the bones and adding them to the timeline is cumbersome and time-consuming.<br>
+    <strong>(1)</strong> <strong>With the Bones tab</strong> selected<br>
+    <strong>(2)</strong> <strong>Press the All Bones to Layers button</strong> to create a timeline layer for all bones at once.<br>
+    Skips work for already added bones.<br>
+    (With the Meshes tab selected, add all meshes as timeline layers.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_69.jpg"/>
+    <br>
+    
+    <p>
+    All bones are registered on the timeline.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_70.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Turn on Loop</strong> of animation to create loop animation.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_71.jpg"/>
+    <br>
+    
+    <p>
+    You need to create a second frame, which can be cumbersome if you have multiple timeline layers.<br>
+    In this case, it is convenient to use <strong>Add Keyframes to All Layers</strong> function.<br>
+    <strong>(1)</strong> <strong>Move the time slider</strong>, and <strong>(2)</strong> <strong>press the Add Keyframes to All Layers button</strong> to create keyframes in batches.<br>
+    (<strong>Note</strong>: <strong>Edit mode</strong> must be activated to create keyframes.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_72.jpg"/>
+    <br>
+    
+    <p>
+    Move the time slider to where the generated keyframe is located and turn on edit mode.<br>
+    In this state, it will hold a pose that makes the character jump.<br>
+    It may be convenient to <strong>turn off the Selection Lock</strong> and work on it. ( <kbd>S</kbd> )<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_73.jpg"/>
+    <br>
+    
+    <p>
+    When moving keyframes, it can be cumbersome if there are many timeline layers.<br>
+    Selecting a <strong>Common Keyframe</strong> located below the time slider allows you to select and control all the keyframes at that location at once.<br>
+    Create animations by moving or copying keyframes.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_74.jpg"/>
+    <br>
+    
+    <p>
+    Let's make a few more repetitions of pose 1 and 2.<br>
+    Select all keyframes.<br>
+    You can select a common keyframe by dragging the mouse.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_75.jpg"/>
+    <br>
+    
+    <p>
+    Copy keyframes in this step. (Hold down the&nbsp;&nbsp;<kbd>Shift</kbd>&nbsp;&nbsp;or&nbsp;&nbsp;<kbd>Ctrl</kbd>&nbsp;&nbsp;( <kbd>Command</kbd> ) and  <kbd>Drag Mouse</kbd> )<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_76.jpg"/>
+    <br>
+    
+    <p>
+    The pattern of the animation repeating pose 1, 2 is copied.<br>
+    This sample will no longer be modified, but you can create an animated pattern and then make some variations to create interesting results.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_77.jpg"/>
+    <br>
+    
+    <p>
+    Copy the pattern one more time to complete the animation.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_78.jpg"/>
+    <br>
+    
+    <p>
+    Now we move the finished animation to the scene.<br>
+    <strong>(1)</strong> <strong>Select mesh group</strong> again, and <strong>(2)</strong> <strong>Confirm</strong> that it is registered as <strong>Root Unit</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_79.jpg"/>
+    <br>
+    
+    <p>
+    If you <strong>(1)</strong> <strong>select Root Unit 0</strong> in the Hierarchy menu, the completed animation is automatically registered.<br>
+    You can test by <strong>(2)</strong> <strong>selecting animation</strong> and executing it.<br>
+    <strong>(3)</strong> <strong>Press the Auto Play button</strong> to set the animation to play automatically in the scene.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_80.jpg"/>
+    <br>
+    
+    <p>
+    Bake to move the character you created so far to the scene.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_81.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game in the scene, you can see that the animation is running automatically.<br>
+    </p>
+    <br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/AFhtfYQjrjw" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/GettingStarted/GS_2_8.html">< 2.8. Animation Curves</a>
+        <a class="btn btn-light" role="button" href="#"></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

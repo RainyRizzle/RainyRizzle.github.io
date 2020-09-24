@@ -39,12 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/GettingStarted/GS_1_7.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/GettingStarted/GS_1_7.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/GettingStarted/GS_1_7.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -61,14 +65,154 @@
     <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/GettingStarted.html"><span class="text-dark">入門ガイド</span></a> > 1.7. 「Morph Modifier」を使う</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
-    <h1 class="display-4"><strong>1.7. 「Morph Modifier」を使う</strong></h1>
+    <h1 class="display-5">1.7. 「Morph Modifier」を使う</h1>
+    <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    <strong>「Morph」モディファイア(Modifier)</strong>は、頂点を直接変形する機能を提供します。<br>
+    「Transform」モディファイアよりも正確な作業を行うことができます。<br>
+    主にイラストの見た目を調整してかさばるか活気を感じさせるために使用されます。<br>
+    このページには、「Morph」モディファイアを追加することによる基本的な変換プロセスが含まれています。<br>
+    頂点を編集するためのツールを表示するには、次のページに進みます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_36.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>「Add Modifier」ボタンを押し</strong>、<strong>(2)</strong> <strong>「Morph (Controller)」モディファイアを選択して追加します</strong>。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_37.jpg"/>
+    <br>
+    
+    <p>
+    Morphモディファイアの作業画面は、Transformモディファイアの作業画面とほとんど変わりません。<br>
+    <strong>(1)</strong> <strong>Morph (Controller)モディファイア</strong>を選択し、<strong>(2)</strong> <strong>「Body」メッシュを選択します</strong>。<br>
+    そして、<strong>（3） 「Vertical Position」パラメータの記録ボタンを押します</strong>。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_38.jpg"/>
+    <br>
+    
+    <p>
+    先に学んだように、制御パラメータにキーを追加します。<br>
+    「Vertical Position」パラメータの右側は「空気中に浮かぶスライム」を意味し、左側は「スライムが地面にある」ことを意味する。<br>
+    各パラメータの <strong>"0"、 "0.25"、 "1"</strong>の位置にキーを追加します。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_39.jpg"/>
+    <br>
+    
+    <p>
+    Morphを適用するには、頂点を選択して編集の準備をする必要があります。<br>
+    現在、頂点を選択したり、頂点を編集することはできません。<br>
+    これは、「<strong>編集モード(Editing Mode)</strong>」でのみ編集が可能なためです。<br>
+    編集するには、<strong>(1)</strong> <strong>対象の 「body」メッシュが登録されていることを確認し</strong>、<br>
+    <strong>(2)</strong> <strong>「Start Editing」ボタンを押して 「</strong><strong>編集モード</strong><strong>」を作成します</strong>。<br>
+    (ボタンをもう一度押すと、「編集モード」が解除されます)。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_63.jpg"/>
+    <br>
+    
+    <p>
+    画面の下部には、「編集モード」に関連するUIがあります。<br>
+    <strong>1. 編集ボタン</strong> : 「編集モード」のオン/オフを切り替えるボタンです。 編集が不可能な場合は、自動的にオフになります。 ショートカットは「 <kbd>A</kbd> 」です。<br>
+    <strong>2. 選択ロック(Selection Lock)</strong> : 有効になっている場合、ワークスペース上の他のメッシュやボーンを選択することはできません。 ショートカットは「 <kbd>S</kbd> 」です。<br>
+    <strong>3. モディファイアロック(Modifier Lock)</strong> : アクティブになっている場合は、動作中のモディファイアのみが計算され、残りはオフになります。 一方、オフの場合、計算は「非衝突モディファイア」に対してのみ行われます。 ショートカットは「 <kbd>D</kbd> 」です。<br>
+    <strong>4. 選択された入力値</strong> : 現在の入力値として選択された制御パラメータおよびキー値。 ターゲットはモディファイアによって変わることがあります。<br>
+    <strong>5. 選択されたオブジェクト</strong> : 処理されるオブジェクト。 これは「Body」メッシュです。さて、頂点を修正して、 「Morph」を使ってみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_60.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>スライダを「空中」のキーに移動した後</strong>、<strong>(2)</strong> <strong>マウスをドラッグしてすべての頂点を選択します</strong>。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_61.jpg"/>
+    <br>
+    
+    <p>
+    <strong>「移動」ツール</strong>（ショートカット <kbd>W</kbd> ）を使用して頂点を上に移動します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_62.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>値が0.25のキーにスライダを移動し</strong>、<strong>(2)</strong> <strong>「薄いスライム」を作成します</strong>。<br>
+    「移動」ツールと「スケール」ツールを使用して簡単に作成できます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <p>
+    上記の手順をすべて完了した場合は、以下のムービークリップのようにスライダを移動するたびに「スライム」が上下に移動します。<br>
+    </p>
+    <br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/qcNHrIHHtzg" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_64.jpg"/>
+    <br>
+    
+    <p>
+    このサンプルでは、Morphモディファイアは色を制御しません。<br>
+    色をコントロールしない場合は、他のモディファイアとの競合を避けるため、設定の「<strong>Color Option</strong>」をオフにします。<br>
+    <strong>(1)</strong> 上記の画像のように<strong>「Color Option」ボタンを押してオフにします</strong>。<br>
+    「<strong>Blend Method</strong>」を「Interpolation」から <strong>(2)</strong> 「<strong>Additive</strong>」に変更します。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <p>
+    複数のモディファイアをマージしている場合、通常は<strong>Additive</strong>メソッドを使用します。<br>
+    <strong>Interpolation</strong>メソッドを選択した場合、値は上書きされるため、特殊な場合にのみ値を使用してください。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
-    <nav class="navbar bottom navbar-light bg-light">
+    <nav class="navbar fixed-bottom navbar-light bg-light">
         <a class="btn btn-light" role="button" href="../../jp/GettingStarted/GS_1_6.html">< 1.6. 「Transform Modifier」で顔を変更</a>
         <a class="btn btn-light" role="button" href="../../jp/GettingStarted/GS_1_8.html">1.8. さまざまなツールを使って頂点を編集 ></a>
     </nav>

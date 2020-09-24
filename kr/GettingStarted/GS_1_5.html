@@ -33,18 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/GettingStarted/GS_1_5.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/GettingStarted/GS_1_5.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/GettingStarted/GS_1_5.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -61,29 +65,161 @@
     <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/GettingStarted.html"><span class="text-dark">시작하기</span></a> > 1.5. 컨트롤 파라미터 추가하기</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
-    <h1 class="display-4"><strong>1.5. 컨트롤 파라미터 추가하기</strong></h1>
+    <h1 class="display-5">1.5. 컨트롤 파라미터 추가하기</h1>
+    <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    메시 그룹(Mesh Group)의 모디파이어를 제어하는 방법은 두가지가 있습니다.<br>
+    하나는 <strong>컨트롤 파라미터(Control Parameter)</strong>를 이용하는 방법이 있고, 다른 하나는 <strong>애니메이션의 키프레임(Keyframe)</strong>을 이용한 방법입니다. (애니메이션에서 컨트롤 파라미터를 제어할 수도 있습니다.)<br>
+    ​여기서는 <strong>컨트롤 파라미터</strong>를 추가하는 내용을 배우며, 이것은 다음에 이어지는 모디파이어(Modifier)에서 활용될 것입니다.<br>
     </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_39.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Add Control Parameter</strong>를 눌러서 파라미터를 생성합니다.<br>
+    생성된 파라미터를 선택한 뒤, <strong>(2)</strong> <strong>파라미터의 이름</strong>을 지정합니다.<br>
+    여기서는 <span class="text-primary"><strong>"눈 모양(Eye Shape)", "입 모양(Mouth Shape)", "위치 값(Vertical Position)"</strong></span>의 3개의 파라미터를 만듭니다.<br>
+    </p>
+    <br>
     
     
     <br><br>
     
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_40.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    컨트롤 파라미터의 설정 화면 구성은 왼쪽과 같습니다.<br>
+    "입력 타입과 범위"를 설정해야 합니다.​<br>
+    </p>
     <br>
     
     <p>
-    본문 입력<br>
+    <strong>1. Name</strong> : 파라미터의 이름을 설정합니다. 스크립트로 제어할 수 있는 ID로 활용되기 때문에 고유한 값을 넣어야 합니다.<br>
+    <strong>2. Type</strong> : 입력 타입을 설정합니다. 정수형(Int), 실수형(Float), 2차원 벡터(Vector2) 중 하나를 결정할 수 있습니다.<br>
+    <strong>3. Category</strong> : UI에서 필터로 파라미터를 정리할 수 있습니다. 이때 사용되는 값입니다.<br>
+    <strong>4. Icon Preset</strong> : UI에서 파라미터를 표시하는 아이콘을 설정합니다.<br>
+    <strong>5. Default Value</strong> : 기본값을 지정합니다.<br>
+    <strong>6. Range Value Label</strong> : UI에 표시되는 Min, Max에 해당하는 이름입니다.<br>
+    <strong>7. Range Value</strong> : 입력 범위값입니다.<br>
+    <strong>8. Presets</strong> : 미리 만들어진 파라미터 프리셋을 사용하거나, 새로 프리셋으로 저장합니다.<br>
+    <strong>9. Remove Control Parameter</strong> : 파라미터를 삭제합니다.<br>
     </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
+    <br><br>
+    
+    <p>
+    위 이미지에 나온 것처럼 <span class="text-primary"><strong>눈 모양(Eye Shape) 파라미터</strong></span>에 값을 넣어줍니다.<br>
+    - 눈 모양은 이미지가 4개 입니다. <strong>Type</strong>으로 <strong>정수형(Int)</strong>을 설정, <strong>Range Value</strong>엔 4개의 값이 들어가도록 <strong>0과 3</strong>을 넣어줍니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_41.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_42.jpg"/>
+    <br>
+    
+    <p>
+    작성된 컨트롤 파라미터는 좌측 UI의 <strong>Controller 탭</strong>에서 확인할 수 있습니다.<br>
+    <strong>Controller 탭</strong>을 누르면 방금 작성된 <span class="text-primary"><strong>눈 모양(Eye Shape) 파라미터</strong></span>가 등록되어 있습니다.<br>
+    Controller 화면 내의 구성은 다음과 같습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Category</strong> : 컨트롤 파라미터가 너무 많은 경우, 필요한 파라미터만 보이도록 필터를 지정할 수 있습니다.<br>
+    <strong>2. Set Default All</strong> : 모든 파라미터의 현재 값을 기본값으로 되돌립니다. (설정이 초기화되는 것은 아닙니다.)<br>
+    <strong>3. 컨트롤 파라미터</strong> : 등록된 컨트롤 파라미터의 영역입니다.<br>
+    <strong>4. 아이콘과 이름</strong> : 위 설정에서 Name, Icon Preset에서 지정한 이름과 아이콘이 나옵니다.<br>
+    <strong>5. Set Default</strong> : 파라미터의 현재 값을 기본값으로 되돌립니다. 위 설정에서 Default Value에 해당하는 값으로 바뀝니다.<br>
+    <strong>6. Edit</strong> : 어느 화면에 있더라도 바로 컨트롤 파라미터의 설정 화면으로 이동하여 수정할 수 있도록 합니다.<br>
+    <strong>7. 현재 값</strong> : 컨트롤 파라미터의 현재 값입니다.<br>
+    <strong>8. 슬라이더</strong> : 마우스로 제어할 수 있는 슬라이더입니다. 2차원 벡터(Vector2) 타입인 경우 슬라이더가 아닌 격자가 나타납니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이제 <span class="text-primary"><strong>입 모양(Mouth Shape)</strong></span>과 <span class="text-primary"><strong>위치 값(Vertical Position)</strong></span>의 컨트롤 파라미터도 만들어봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_43.jpg"/>
+    <br>
+    
+    <p>
+    위 화면처럼 각각의 파라미터 2종을 설정합니다.<br>
+    <span class="text-primary"><strong>위치 값(Vertical Position)</strong></span>의 타입을 <strong>실수형(Float)</strong>으로 지정하게되면, 설정 하단에 <strong>(1)</strong> <strong>Snap Size</strong>가 나타나게 됩니다.<br>
+    <strong>​Snap Size</strong>는 <strong>Min~Max</strong>의 값을 <strong>몇등분</strong>할지 결정하는 값입니다. 여기서는 <strong>4</strong>를 입력해줍니다.<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>< Snap Size가 필요한 이유 ></h4>
+    <br>
+    
+    <p>
+    정수형(Int)의 경우 "Min = 0, Max = 3"으로 지정하면 각각 "0", "1", "2", "3"에서 키(Key)를 생성할 수 있습니다.<br>
+    반면에 실수형(Float)과 2차원 벡터형(Vector2)의 경우 키를 어디서 생성할 지 알 수 없습니다.<br>
+    (0.1 단위로 키를 생성해야 할지, 0.5 단위로 키를 생성해야할 지 알 수 없기 때문입니다.)​<br>
+    </p>
+    <br>
+    
+    <p>
+    따라서 범위를 n등분하여 키가 배치될 위치를 지정하는 것입니다.<br>
+    단, Default Value가 n등분한 위치에 포함되지 않는다면 문제가 생길 수 있습니다.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
-    <nav class="navbar bottom navbar-light bg-light">
+    <nav class="navbar fixed-bottom navbar-light bg-light">
         <a class="btn btn-light" role="button" href="../../kr/GettingStarted/GS_1_4.html">< 1.4. 메시 그룹 만들기</a>
         <a class="btn btn-light" role="button" href="../../kr/GettingStarted/GS_1_6.html">1.6. Transform 모디파이어로 표정 바꾸기 ></a>
     </nav>

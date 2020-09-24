@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Sorting Layer/Order Setting</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_SortingLayer.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_SortingLayer.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_SortingLayer.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Sorting Layer/Order Setting</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Sorting Layer/Order Setting</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.1.8</span></h4>
+    
+    <p>
+    When you run the game, Unity renders multiple GameObjects one by one.<br>
+    It is very important to set the order in which they are rendered.<br>
+    In general, the order is determined by the distance from the camera, but it is possible to specify the order directly.<br>
+    You can use the <strong>Sorting Layer</strong> and <strong>Sorting Order</strong> provided by Unity to determine the rendering order.<br>
+    Please refer to <a href="../../en/Script/SC_Init.html">related page</a> for script document.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_171.jpg"/>
+    <br>
+    
+    <p>
+    You can set the <strong>Sorting Layer</strong> and <strong>Sorting Order</strong> in the Bake dialog box.<br>
+    The sorting layer can be set in <strong>Edit &gt; Project Settings &gt; Tags and Layers</strong>.<br>
+    Sorting Order has a value of integer type. The default value is 0.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_172.jpg"/>
+    <br>
+    
+    <p>
+    To test the Sorting Layer / Order function, we placed a GameObject with a Sprite Renderer next to it.<br>
+    The two GameObjects have the same sorting layer.<br>
+    The Sorting Order of the Sprite Renderer is 0.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_173.jpg"/>
+    <br>
+    
+    <p>
+    You can modify the Sorting Layer and Sorting Order in the Inspector while the game is running.<br>
+    If you set the Sorting Order to 1 while the game is running, the slime will be rendered from the front.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_174.jpg"/>
+    <br>
+    
+    <p>
+    Conversely, if you enter a smaller -1 than the Sprite Renderer's Sorting Order, the slime will render from the back.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Sorting Group</h3>
+    <br>
+    
+    <p>
+    As of v1.1.8, AnyPortrait supports <strong>Sorting Group</strong>.<br>
+    You can use the <strong>Sorting Group</strong> to determine the rendering order of objects in a group.<br>
+    This page covers the issues of using the Sorting Group to solve two cases.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_770.jpg"/>
+    <br>
+    
+    <p>
+    This is an example of when characters are overlapped.<br>
+    If characters composed of multiple <strong>Mesh Renderers</strong> or <strong>Sprite Renderers</strong> are overlapped each other (such as those made with AnyPortrait), the order of rendering between characters is not distinguished, so they are rendered in a complex form.<br>
+    This issue can be handled by entering a different Sorting Order or Sorting Layer as described above,<br>
+    but the best way is to group them into a Sorting Group.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_771.jpg"/>
+    <br>
+    
+    <p>
+    Before using the Sorting Group, you need to change the settings of the character created with AnyPortrait.<br>
+    <strong>(1)</strong> Open the editor and press the <strong>Bake button</strong> to open the dialog.<br>
+    <strong>(2)</strong> Select the <strong>Setting tab</strong>.<br>
+    <strong>(3)</strong> Change the value of the <strong>Sorting Order Option</strong> to "<span class="text-danger"><strong>Depth To Order</strong></span>".<br>
+    </p>
+    <br>
+    
+    <p>
+    The setting added in v1.1.8, "<strong>Sorting Order Option</strong>", determines what order value of each mesh is assigned.<br>
+    The contents of the options are as follows:<br>
+    <strong>- Set Order</strong> : This is the basic way. The values of the Sorting Order item are assigned to the meshes.<br>
+    <strong>- Disabled</strong> : Do not set the order of the meshes when baking<br>
+    <strong>- Depth To Order</strong> : Order increases from back to front.<br>
+    <strong>- Reverse Depth To Order </strong>: Order increases from front to back.<br>
+    </p>
+    <br>
+    
+    <p>
+    Even if you do not use Sorting Group, you can set Sorting Order Option as needed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_772.jpg"/>
+    <br>
+    
+    <p>
+    You can also set the Sorting Order Option in the <strong>Inspector UI</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_773.jpg"/>
+    <br>
+    
+    <p>
+    Add the Sorting Group component to the character created with AnyPortrait.<br>
+    <strong>(1)</strong> Press the <strong>Add Component button</strong>.<br>
+    <strong>(2)</strong> Select and add the <strong>Sorting Group component</strong>. (We recommend searching and finding.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_774.jpg"/>
+    <br>
+    
+    <p>
+    Now the meshes are grouped and rendered in nice order.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_775.jpg"/>
+    <br>
+    
+    <p>
+    Second example.<br>
+    This example is a scene where characters and fences are placed.<br>
+    This is a common configuration for 2D games where the camera is looking from top to bottom.<br>
+    The object located below should be rendered in front.<br>
+    Currently, however, the rendering order is determined regardless of the Y coordinate of the object.<br>
+    </p>
+    <br>
+    
+    <p>
+    Of course, you can also modify Sorting Order manually with a script,<br>
+    however, the most convenient way is to modify the project's settings.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_776.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open <strong>Project Settings</strong> and select <strong>Graphics</strong>.<br>
+    <strong>(2)</strong> Change the <strong>Transparency Sort Mode</strong> in <strong>Camera Settings</strong> to <span class="text-danger"><strong>Custom Axis</strong></span><br>
+    and change the <strong>Transparency Sort Axis</strong> to <span class="text-danger"><strong>(0, 1, 0)</strong></span>.<br>
+    The criteria for determining the rendering order is now changed from the Z axis to the Y axis.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_777.jpg"/>
+    <br>
+    
+    <p>
+    Now let's apply the <strong>Sorting Group</strong>.<br>
+    Select the character and change the <strong>Sorting Order Option</strong> to <strong>Depth To Order</strong> in the Bake dialog or Inspector UI.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_778.jpg"/>
+    <br>
+    
+    <p>
+    Add the <strong>Sorting Group component</strong> to the character.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_779.jpg"/>
+    <br>
+    
+    <p>
+    Characters and fences are now rendered in order from top to bottom.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_OptimizedBake.html">< Optimized Bake</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_EditingPrefabs.html">Editing Prefabs ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

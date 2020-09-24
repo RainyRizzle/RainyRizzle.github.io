@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>「ルートユニット」の登録と解放</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_RootUnit.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_RootUnit.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_RootUnit.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 「ルートユニット」の登録と解放</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">「ルートユニット」の登録と解放</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_22.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターをシーンに移動させるには、「<strong>ルートユニット(Root Unit)</strong>」として登録する必要があります。<br>
+    メッシュグループの 「<strong>Setting</strong>」タブを選択して、 <strong>「Set Root Unit」ボタン</strong>を押して、ルートユニットとして登録します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_23.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Root Unit 0</strong>」はHierarchy UIに新規に登録されていることがわかります。<br>
+    ルート単位は名前を持たず、登録順にインデックス番号が与えられます。<br>
+    スクリプトで制御する場合は、この番号を使用して区別することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_24.jpg"/>
+    <br>
+    
+    <p>
+    ルートユニットを選択する画面では、<strong>(1)</strong> 自動的にアニメーションが開始されるように設定したり、<br>
+    または <strong>(2)</strong> ルートユニットから登録を取り消す。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_25.jpg"/>
+    <br>
+    
+    <p>
+    2つ以上の「ルートユニット」を登録することもできます。<br>
+    複数の「ルートユニット」を登録して使用する場合、以下の機能が利用できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    - 「Root Unit 0」はデフォルトであり、残りは隠されています。<br>
+    - スクリプト内の関数を使用して、 「ルートユニット」を切り替えることができます。<br>
+    - スクリプトを使用してアニメーションを実行すると、自動的にアニメーションに対応する「ルートユニット」に切り替わります。<br>
+    - 「ルートユニット」の索引は、登録順に指定されます。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_InvertedScale.html">< 反転スケールとドローコール</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_BakeDialog.html">Bakeダイアログ ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

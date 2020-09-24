@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>2.5. Rigging 모디파이어 사용하기</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/GettingStarted/GS_2_5.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/GettingStarted/GS_2_5.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/GettingStarted/GS_2_5.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/GettingStarted.html"><span class="text-dark">시작하기</span></a> > 2.5. Rigging 모디파이어 사용하기</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">2.5. Rigging 모디파이어 사용하기</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    본 애니메이션을 위해서는 <strong>리깅(Rigging)</strong>이라는 과정이 필수적입니다.<br>
+    리깅은 <strong>"버텍스를 본에 연결하는 것"</strong>이라고 간단히 요약해볼 수 있습니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_62.jpg"/>
+    <br>
+    
+    <p>
+    버텍스에 <strong>"본과 연결하는 가중치(Weight)"</strong>를 입력하여 본의 움직임에 따라가도록 하는 것이 핵심입니다.<br>
+    왼쪽 그림에서 모든 버텍스들이 <span class="text-danger"><strong>"Bone 1 : 1.0"</strong></span>이라는 가중치를 가지고 있습니다.<br>
+    ​따라서 <span class="text-success"><strong>녹색 본(Bone 2)</strong></span>의 움직임을 따라가지 않습니다.<br>
+    오른쪽 그림은 버텍스의 가중치가 점점 <span class="text-success"><strong>"Bone 2"</strong></span>로 증가하고 있습니다.<br>
+    그래서 <span class="text-success"><strong>녹색 본</strong></span>의 움직임에 부드럽게 따라가는 것을 볼 수 있습니다.<br>
+    ​>TXT<br>
+    즉, ​리깅이라는 작업은 <strong>"버텍스 + 본"</strong>의 연결 가중치를 입력하는 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_45.jpg"/>
+    <br>
+    
+    <p>
+    Rigging ​모디파이어를 추가합니다.<br>
+    <strong>(1)</strong> <strong>Add Modifier 버튼</strong>을 눌러서 <strong>(2)</strong> <strong>Rigging 모디파이어</strong>를 선택한 뒤 추가합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_38.jpg"/>
+    <br>
+    
+    <p>
+    먼저 머리의 후드를 수정합니다.<br>
+    <strong>(1)</strong> <strong>Hood 메시를 선택</strong>한 뒤, <strong>(2)</strong> <strong>Add to Rigging 버튼</strong>을 눌러 모디파이어에 메시를 등록합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_39.jpg"/>
+    <br>
+    
+    <p>
+    화면 왼쪽 아래의 <strong>Binding 버튼</strong>을 눌러서 리깅 작업을 시작합니다.<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <p>
+    ​리깅 작업에 앞서서 리깅 툴 UI에 대한 설명입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    <strong>1. 메시 등록/해제</strong> : 메시를 리깅 모디파이어에 등록하거나 해제합니다.<br>
+    <strong>2. 가중치 직접 지정</strong> : 버튼의 값으로 가중치가 지정됩니다.<br>
+    <strong>3. 가중치 툴</strong> : 가중치를 지정하는 툴들입니다.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Set Weight</strong> : 왼쪽에 작성된 숫자만큼 가중치를 지정합니다.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Set Weight +/-</strong> : 0.05 단위로 가중치를 더하거나 뺍니다.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Scale Weight</strong> : 왼쪽에 작성된 숫자만큼 가중치를 곱합니다.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Scale Weight +/-</strong> : 가중치에 1.05를 곱하거나(+ 버튼), 0.95를 곱합니다. (-버튼)<br>
+    <strong>4. 가중치 보조 툴</strong> : 선택된 버텍스의 가중치를 지정할 때 도움을 주는 툴입니다.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Auto Normalize</strong> : 이 기능이 활성된 상태에서는 가중치 합이 1로 보정됩니다.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Blend</strong> : 버텍스의 가중치를 주변 버텍스 값과 적절히 섞어서 부드럽게 만듭니다.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Normalize</strong> : 가중치 합이 1이 되도록 보정합니다.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Prune</strong> : 매우 낮은 가중치 값을 가지는 본 정보를 삭제합니다.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Auto Rig </strong>: 등록된 본 정보를 바탕으로 자동으로 리깅을 합니다.<br>
+    <strong>5. Grow / Shrink</strong> : 버텍스를 더 선택하거나 제외 시켜서 범위를 조절합니다.<br>
+    <strong>6. Copy / Paste</strong> : 선택된 버텍스의 리깅 정보를 복사하거나 붙여넣습니다.<br>
+    <strong>7. 본 리깅 정보</strong> : 리깅에 등록된 본과 리깅 값입니다. X 버튼을 눌러서 본을 제외시킬 수 있습니다. 이 화면에서도 직접 본을 선택할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_61.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_36.jpg"/>
+    <br>
+    
+    <p>
+    화면 하단의 UI에서 <strong>리깅 가중치</strong>를 시각적으로 표시하는 <strong>4가지 모드</strong>를 선택할 수 있습니다.<br>
+    ​본 색상을 사용할지 여부를 결정하거나, 텍스쳐를 같이 표시할지 여부를 선택할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_40.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>모든 버텍스를 선택</strong>한 뒤, <strong>(2)</strong> <strong>머리 본("Bone Head")를 선택</strong>합니다.<br>
+    본이 선택이 안된다면 선택 잠금(Selection Lock)을 해제하거나 오른쪽 메뉴에서 선택하세요.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_41.jpg"/>
+    <br>
+    
+    <p>
+    <strong>모든 버텍스의 가중치</strong>를 <strong>Bone Head</strong>에 대해서 <strong>1</strong>로 지정합니다.<br>
+    ​메시의 색상이 머리 본 색상과 유사하게 바뀌는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_42.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 잠시 <strong>선택 잠금(Selection Lock)</strong>을 풀고 <strong>(2)</strong> <strong>후드 귀(Bone Ear R)</strong>를 선택합니다.<br>
+    선택 잠금을 풀지 않는 경우 오른쪽 메뉴에서 선택하세요.<br>
+    버텍스가 선택된 상태에서 <strong>(3)</strong> <strong>가중치를 0.5</strong>로 지정합니다.<br>
+    <strong>"Bone Ear R" </strong>본의 리깅 정보가 등록되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_43.jpg"/>
+    <br>
+    
+    <p>
+    반대편 귀에 대해서도 동일하게 가중치를 지정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_44.jpg"/>
+    <br>
+    
+    <p>
+    다시 <strong>머리(Bone Head)를</strong> 선택합니다. <strong>모든 버텍스를 선택</strong>하고 가중치를 <strong>1</strong>로 지정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_45.jpg"/>
+    <br>
+    
+    <p>
+    <strong>​후드 귀(Bone Ear R)</strong>를 선택한 뒤, 그 <strong>주변 버텍스</strong>를 선택하고 가중치를 <strong>1</strong>로 지정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_46.jpg"/>
+    <br>
+    
+    <p>
+    귀 주위에만 가중치가 적용되어 색상이 바뀝니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_47.jpg"/>
+    <br>
+    
+    <p>
+    같은 방식으로 맞은편 귀에 대해서도 가중치를 지정해줍니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    리깅은 한번에 완료하기 어려운 작업입니다.<br>
+    가중치를 지정하더라도 실제로 본을 움직여보면 어색한 점이 나타나기 쉽습니다.<br>
+    따라서 Rigging 모디파이어에서는 <strong>"본을 임시로 움직여볼 수 있는 기능(Pose Test)"</strong>을 제공합니다.<br>
+    <strong>Pose Test </strong>기능을 이용하여 가중치가 제대로 적용되었는지 확인하고 수정해보도록 합시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_48.jpg"/>
+    <br>
+    
+    <p>
+    먼저 본이 화면에 나타나도록 해야합니다.<br>
+    <strong>(1)</strong> <strong>본이 "색이 채워진 상태"</strong>로 나타나도록 합니다.<br>
+    <strong>(2)</strong> <strong>Pose Test 버튼</strong>을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_49.jpg"/>
+    <br>
+    
+    <p>
+    본을 선택하여 자유롭게 움직여볼 수 있습니다.<br>
+    ​제대로 리깅이 되었는지 확인해보세요.<br>
+    </p>
+    <br>
+    
+    <p>
+    현재 상태의 리깅에서는 결과가 매끄럽지 않습니다.<br>
+    ​이를 부드럽게 만들고 문제가 생기는 부분을 수정하는 작업이 필요합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_50.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Pose Test 버튼</strong>을 눌러 <strong>비활성</strong>한 뒤 다시 리깅을 수정합니다.<br>
+    <strong>(1)</strong> <strong>귀 주위의 버텍스</strong>들을 모두 선택해줍시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_51.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> <strong>Blend 버튼</strong>을 몇번 눌러서 가중치 값을 부드럽게 만들어줍니다.<br>
+    (가중치 값을 보기 편하게 <strong>"Bone Color Off + Texture Off"</strong> 상태로 바꾸었습니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_52.jpg"/>
+    <br>
+    
+    <p>
+    이전보다 가중치 값이 완만하게 분포된 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_53.jpg"/>
+    <br>
+    
+    <p>
+    ​이제 다시 테스트를 해봅시다.<br>
+    <strong>(1)</strong> <strong>Pose Test 모드</strong>를 켭니다.<br>
+    <strong>(2)</strong> <strong>귀를 기울여서</strong> Blend된 리깅이 잘 적용되었는지 확인해봅니다.<br>
+    이 샘플에서는 한쪽 귀을 기울이면 반대편도 같이 움직이는 것을 볼 수 있습니다.<br>
+    반대편 귀쪽의 버텍스가 움직이지 않아야 한다고 가정하고 수정을 해보겠습니다.<br>
+    (리깅의 경우 디자이너의 의도에 따라 작업이 다르게 진행됩니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_54.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> <strong>​머리 중앙의 버텍스</strong>를 선택을 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_55.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> <strong>머리(Bone Head)</strong>를 선택하고, <strong>(5)</strong> <strong>Set Weight + 버튼</strong>을 몇번 눌러서 가중치를 추가합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_56.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(6)</strong> <strong>귀 한쪽의 버텍스들을 선택</strong>한 뒤<strong>, (7) 맞은편 귀(Bone Ear R 또는 L)</strong>를 선택합니다.<br>
+    ​가중치가 중심을 넘어서 적용된 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_57.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(8)</strong> <strong>가중치 </strong><strong>0</strong>을 지정합니다.<br>
+    맞은 편 귀와 버텍스에 대해서도 동일하게 작업해줍니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_58.jpg"/>
+    <br>
+    
+    <p>
+    이제 다른 메시들도 리깅 모디파이어에 등록합니다.<br>
+    얼굴의 메시들은 머리(Bone Head) 한개에만 리깅을 등록합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_59.jpg"/>
+    <br>
+    
+    <p>
+    그 외의 메시들은 Pose Test를 적절히 사용해가면서 리깅을 해줍니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    아래의 스크린샷은 각각의 본에 대한 리깅 결과입니다.<br>
+    이를 참고하시어 리깅을 하시면 되겠습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_60.jpg"/>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/GettingStarted/GS_2_4.html">< 2.4. 본 추가하기</a>
+        <a class="btn btn-light" role="button" href="../../kr/GettingStarted/GS_2_6.html">2.6. 애니메이션 클립 생성하기 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

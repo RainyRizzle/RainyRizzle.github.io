@@ -39,12 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/GettingStarted/GS_1_9.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/GettingStarted/GS_1_9.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/GettingStarted/GS_1_9.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -61,14 +65,188 @@
     <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/GettingStarted.html"><span class="text-dark">入門ガイド</span></a> > 1.9. 物理効果の追加</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
-    <h1 class="display-4"><strong>1.9. 物理効果の追加</strong></h1>
+    <h1 class="display-5">1.9. 物理効果の追加</h1>
+    <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    物理的な効果を与えるモディファイアがあります。<br>
+    張力と慣性を表現することで、興味深い効果を加えることができます。<br>
+    物理的効果を設定するには、理論を知り、さまざまな設定を行う必要があります。<br>
+    このページでは、事前に作成した物理マテリアルを適用しやすくする方法を学習します。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_78.jpg"/>
+    <br>
+    
+    <p>
+    <strong>「Physic」モディファイア</strong>を追加してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_43.jpg"/>
+    <br>
+    
+    <p>
+    物理効果を設定する前に、ワークスペースに物理的な効果が適用されていないことを確認してください。<br>
+    画面上部の <strong>(1)</strong> <strong>物理効果設定のオン/オフを切り替えることができます</strong>。<br>
+    <strong>(2)</strong> <strong>スライム「Body」メッシュを選択</strong> <strong>(3)</strong> <strong>「Add to Physics」ボタンを押します</strong>。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_추가_4.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Start Editing</strong>」ボタンを押して編集モードをオンにします。<br>
+    編集モードをオンにすると、頂点の重みを変更できます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_80.jpg"/>
+    <br>
+    
+    <p>
+    物理材質を設定する前に、<strong>すべての頂点を選択して</strong>、<strong>「Viscosity Group」のID</strong>を<strong>1</strong>に設定してください。<br>
+    これは、「Viscosity Group」IDを共有する頂点間に粘性力が適用されるためです。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_81.jpg"/>
+    <br>
+    
+    <p>
+    物理材質の設定は難しい作業です。<br>
+    この段階では、あらかじめ作成されたプリセットを選択します。<br>
+    「<strong>Physics Presets</strong>」ボタンは、UIの右側にあります。 クリックすると、 物理プリセットダイアログが開きます。<br>
+    物理プリセットダイアログボックスの画面構成は次のとおりです。<br>
+    <strong>1. 現在の物理設定をプリセットとして保存</strong> : 選択したメッシュの物理設定値をプリセットとして保存します。名前とアイコンを指定して保存することができます。<br>
+    <strong>2. 物理プリセット</strong> : デフォルトで作成されるか、ユーザーが追加した"物理プリセット」です。<br>
+    <strong>3. 選択した物理プリセット値</strong> : 選択した物理プリセットの詳細設定。 ここで変更することはできず、ユーザが追加したプリセットは削除することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_82.jpg"/>
+    <br>
+    
+    <p>
+    スライムの材質と同様の「<strong>Rubber Soft</strong>」材質を適用します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_85.jpg"/>
+    <br>
+    
+    <p>
+    物理材質が適用されると、上の画面に設定されます。<br>
+    このページでは、画面構成についてのみ簡単に説明します。<br>
+    <strong>1. Set Important</strong> : 物理的な効果は、設定が適用される頂点を中心に適用されます。<br>
+    <strong>2. 重み付けツール</strong> : 物理的な効果をどのくらい受け取りたいかを指定するツールです。 値は0〜1です。<br>
+    <strong>3. Blend</strong> : 選択された頂点の重みが均等に分布するように作成します。<br>
+    <strong>4. Grow / Shrink</strong> : より多くの頂点を選択または除外します。<br>
+    <strong>5. Viscosity group ID</strong> : 粘度計算のための 「粘度(Viscosity)」 IDを指定します。 1〜9の値を持ち、複数の値を持つことができます。<br>
+    <strong>6. 物理材料設定</strong> : 物理材料の値。 質量、空気抵抗、張力、慣性、反発力、および粘性。<br>
+    <strong>7. Gravity and Wind</strong> : 重力と風を設定することができます。 固定値を指定するか、制御パラメータの値を使用できます。<br>
+    <strong>8. Physics Presets</strong> : プリセットは、ダイアログを開いて開くことも、保存することもできます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_83.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_84.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>中央の頂点を選択します</strong>。<strong>(2)</strong> <strong>ウェイトを1に設定します</strong>。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_86.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_87.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 上端と下端を除く残りの<strong>頂点を選択します</strong>。<br>
+    <strong>(2)</strong> <strong>「Blend」ボタンを数回押して</strong>、重量を適切に設定します。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_88.jpg"/>
+    <br>
+    
+    <p>
+    重量が小さすぎたり大きすぎたりする場合は、<strong>加重ツール</strong>を使用して重量を増減することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_89.jpg"/>
+    <br>
+    
+    <p>
+    中央のいくつかの頂点を選択し、「<strong>Set Important</strong>」ボタンを押します。<br>
+    物理的効果は、「重要(Important)」の設定で頂点の周りに発生します。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_90.jpg"/>
+    <br>
+    
+    <p>
+    設定された物理的効果が適切に機能するかどうかを見てみましょう。<br>
+    <strong>(1)</strong> <strong>「物理的効果」をもう一度オンにし</strong>、正常に機能するかどうかを確認します。<br>
+    <strong>(2)</strong> 物理テストのための「<strong>Wind On/Off</strong>」ボタンが画面の下部にあります。 それを押して試してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/FeegIfVrlio" allowfullscreen></iframe>
+    </div>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
-    <nav class="navbar bottom navbar-light bg-light">
+    <nav class="navbar fixed-bottom navbar-light bg-light">
         <a class="btn btn-light" role="button" href="../../jp/GettingStarted/GS_1_8.html">< 1.8. さまざまなツールを使って頂点を編集</a>
         <a class="btn btn-light" role="button" href="../../jp/GettingStarted/GS_1_10.html">1.10. サムネイルの作成 ></a>
     </nav>

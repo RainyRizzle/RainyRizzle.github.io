@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>2.8. アニメーション曲線</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/GettingStarted/GS_2_8.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/GettingStarted/GS_2_8.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/GettingStarted/GS_2_8.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/GettingStarted.html"><span class="text-dark">入門ガイド</span></a> > 2.8. アニメーション曲線</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">2.8. アニメーション曲線</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    キーフレームアニメーションを理解する際には、「<strong>補間(Interpolation)</strong>」が最も重要な原則です。<br>
+    補間は、キーフレームとキーフレームの間でどのような形式をとるかを計算するプロセスです。<br>
+    補間方法によっては、同じキーフレームでもアニメーションの結果が異なる場合があります。<br>
+    このページでは、補間方法を扱う「<strong>アニメーション曲線(Animation Curve)</strong>」について説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_90.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> キーフレームを1つ選択し、<strong>(2)</strong> <strong>「Curve」</strong>タブを選択します。<br>
+    アニメーションカーブを変更すると、カーブのタイプがタイムラインワークスペースに太い線として表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_91.jpg"/>
+    <br>
+    
+    <p>
+    前のキーフレームの「<strong>前のカーブ (Previous Curve)</strong>」を選択し、次のキーフレームの「<strong>次のカーブ (Next Curve)</strong>」を選択することもできます。<br>
+    選択したカーブはタイムラインワークスペースで明るく表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_92.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    左はアニメーション曲線の詳細プロパティUI。<br>
+    <strong>1. Prev/Next</strong> : 前のカーブまたは次のカーブを選択します。<br>
+    <strong>2. 曲線のタイプ</strong> : カーブの補間方法を決定します。 それらは「Linear」、「Smooth」、および「Constant」です。<br>
+    <strong>3. 曲線を編集する</strong> : カーブを編集または表示できます。 「Smooth」メソッドの場合、コントロールポイントを編集することができます。<br>
+    <strong>4. Reset Smooth Setting</strong> : 「Smooth」メソッドの場合、コントロールポイントは初期値に戻ります。<br>
+    <strong>5. Copy Curve to All Keyframes</strong> : タイムラインレイヤのすべてのキーフレームに現在のカーブ設定を適用します。<br>
+    <strong>6. Copy / Paste</strong> : 一時的にキーフレーム情報をコピーまたは貼り付けます。<br>
+    <strong>7. Export / Import </strong>: 骨アニメーションのキーフレームである場合、姿勢を保存したり、開くことができます。<br>
+    <strong>8. Remove the keyframe</strong><br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <p>
+    アニメーションは、カーブの計算方法の種類によって処理が異なります。<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_93.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    <strong>1. Linear</strong><br>
+    ムーブメントやサイズなどは一律に変更されます。<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_94.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    <strong>2. Smooth</strong><br>
+    動き、サイズがスムーズに変化します。<br>
+    ユーザーはカーブの形状を編集できます。<br>
+    加速を与えたり、キーフレームからスムーズに切り替えるときに適しています。<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_95.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    <strong>3. Constant</strong><br>
+    値はキーフレーム間のエンドポイントで変更されます。<br>
+    スプライトアニメーションのような効果を与えることができます。<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
+    <br><br>
+    
+    <p>
+    曲線の種類によって実際にどのように変化するかを見てみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_57.jpg"/>
+    <br>
+    
+    <p>
+    <strong>1. Linear</strong><br>
+    曲線の色は「<span class="text-danger"><strong>赤</strong></span>」です。<br>
+    最初から最後まで定期的に変化することがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_58.jpg"/>
+    <br>
+    
+    <p>
+    <strong>2. Smooth</strong><br>
+    カーブの色は「<span class="text-primary"><strong>青</strong></span>」です。<br>
+    デフォルトの状態は「Linear」に似ていますが、開始時と終了時にいくつかの加速と減速があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_59.jpg"/>
+    <br>
+    
+    <p>
+    <strong>2-1. 加速された Smooth</strong><br>
+    「Smooth」曲線の変形例。<br>
+    開始キーフレーム値に近づき、加速して素早く変化します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_60.jpg"/>
+    <br>
+    
+    <p>
+    <strong>2-2. 減速された Smooth</strong><br>
+    「Smooth」曲線の変形例。<br>
+    開始キーフレームの速度変化を確認してから減速します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_61.jpg"/>
+    <br>
+    
+    <p>
+    <strong>3. Constant</strong><br>
+    曲線の色は「<span class="text-success"><strong>緑</strong></span>」です。<br>
+    補間状態は開始と終了の2つしかありません。<br>
+    これはエンドポイント上で変換されます。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/GettingStarted/GS_2_7.html">< 2.7. タイムラインの追加</a>
+        <a class="btn btn-light" role="button" href="../../jp/GettingStarted/GS_2_9.html">2.9. 骨のアニメーションを作成 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

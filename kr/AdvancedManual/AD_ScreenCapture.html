@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>화면 캡쳐</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ScreenCapture.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_ScreenCapture.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ScreenCapture.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > 화면 캡쳐</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">화면 캡쳐</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.1.2</span></h4>
+    
+    <p>
+    AnyPortrait는 유니티를 거치지 않고 직접 화면을 캡쳐하는 기능을 제공합니다.<br>
+    전문적인 캡쳐 도구는 아니므로 간단히 SNS 등으로 공유하는 정도의 목적으로 사용하시는 것을 권장합니다.<br>
+    v1.0.3부터 화면 캡쳐 기능이 개선되었으며, 이전버전과 달리 Mac OSX에서도 이 기능을 지원합니다.<br>
+    변경된 내용을 이 페이지에서 확인하실 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_175.jpg"/>
+    <br>
+    
+    <p>
+    화면 캡쳐 기능을 이용하기 위해서<br>
+    <strong>(1)</strong> <strong>Root Unit</strong>을 선택합니다.<br>
+    화면이 캡쳐되는 영역을 보기 위해 <strong>(2)</strong> <strong>Show Frame 버튼</strong>을 누릅니다. (기본적으로 켜진 상태입니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_176.jpg"/>
+    <br>
+    
+    <p>
+    오른쪽 화면에서 <strong>(1)</strong> <strong>Capture 탭</strong>을 선택합니다.<br>
+    4개의 화면 캡쳐 도구를 보실 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>Thumbnail</strong> : AnyPortrait 에디터의 첫 화면에서 사용하는 썸네일을 캡쳐합니다.<br>
+    <strong>Screenshot</strong> : 스크린샷 이미지를 파일로 저장합니다.<br>
+    <strong>GIF Anim</strong> : 애니메이션을 선택하여 GIF 애니메이션 파일로 저장합니다.<br>
+    <strong>Spritesheet</strong> : 애니메이션들을 선택하여 스프라이트 시트(Sprite Sheet)나 연속된 이미지(Sequence Image)로 저장합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>썸네일 만들기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_177.jpg"/>
+    <br>
+    
+    <p>
+    썸네일을 만들 수 있는 화면입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. 캡쳐 영역</strong> : 이미지로 저장될 영역입니다. 노란색 사각형이 썸네일로 저장되는 영역입니다.<br>
+    <strong>2. 4개의 캡쳐 도구</strong> : 화면 캡쳐하는 4개의 도구입니다. 여기서는 Thumbnail을 선택합니다.<br>
+    <strong>3. 캡쳐 영역 위치</strong> : 캡쳐 영역을 이동할 수 있습니다. 기본적으로는 (0, 0)입니다.<br>
+    <strong>4. 캡쳐 영역 폭과 배경색</strong> : 캡쳐 영역의 폭과 배경 색상을 설정할 수 있습니다. 폭을 설정하면 높이는 자동으로 지정됩니다.<br>
+    <strong>5. 썸네일 미리보기</strong> : 저장된 썸네일을 볼 수 있습니다.<br>
+    <strong>6. 저장 경로</strong> : 썸네일이 저장되는 경로를 지정합니다. Assets 폴더 내에 위치해야합니다.<br>
+    <strong>7. Make Thumbnail</strong> : 썸네일을 생성하는 버튼입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_178.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>캡쳐 영역의 위치와 크기, 배경색</strong>을 설정합니다.<br>
+    <strong>(2)</strong> <strong>Change 버튼</strong>을 눌러서 <strong>썸네일 이미지가 저장될 파일 경로</strong>를 설정합니다. <span class="text-primary"><strong>Assets 폴더</strong></span> 내에 위치해야합니다.<br>
+    <strong>(3)</strong> <strong>Make Thumbnail 버튼</strong>을 눌러서 썸네일을 만듭니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_179.jpg"/>
+    <br>
+    
+    <p>
+    썸네일이 저장된 것을 바로 확인할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_180.jpg"/>
+    <br>
+    
+    <p>
+    저장된 썸네일은 에디터를 실행하고 캐릭터를 선택할 때 나타납니다.<br>
+    썸네일을 이용하면 많은 캐릭터를 만들 때 편리합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>스크린샷 저장하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_181.jpg"/>
+    <br>
+    
+    <p>
+    현재 화면을 이미지 파일로 저장하는 기능입니다.<br>
+    화면 구성은 썸네일 도구와 유사합니다.<br>
+    캡쳐 영역은 화면상의 하늘색 사각형입니다.<br>
+    <strong>(1)</strong> <strong>Screenshot 도구</strong>를 선택합니다.<br>
+    <strong>(2)</strong> <strong>캡쳐 영역의 위치와 크기</strong>를 선택합니다.<br>
+    <strong>(3)</strong> <strong>저장될 이미지의 크기</strong>와 <strong>배경색</strong>을 선택합니다.<br>
+    <strong>(4)</strong> <strong>Fixed Aspect Ratio</strong>가 활성화되면 폭과 높이의 비율이 일정하게 유지되며, 캡쳐 영역과 이미지 크기의 비율도 동일해집니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_182.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Take a Screenshot 버튼</strong>을 눌러서 이미지를 저장합니다.<br>
+    <strong>(2)</strong> <strong>저장 위치</strong>는 Assets 폴더의 외부여도 상관이 없습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_192_Shot1.jpg"/>
+    <br>
+    
+    <p>
+    이미지가 저장되면, 자동으로 저장된 폴더와 이미지가 열립니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>스크린샷 저장하기 - 애니메이션을 선택하여 화면 캡쳐하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_183.jpg"/>
+    <br>
+    
+    <p>
+    이번에는 다른 애니메이션을 선택한 뒤, 저장하고자 하는 프레임을 지정하여 화면을 캡쳐해보겠습니다.<br>
+    <strong>(1)</strong> <strong>Setting 탭</strong>으로 이동합니다.<br>
+    <strong>(2)</strong> <strong>애니메이션을 선택</strong>합니다.<br>
+    <strong>(3)</strong> <strong>슬라이더</strong>를 이용하여 <strong>저장하고자 하는 프레임</strong>으로 이동합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_184.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> 다시 <strong>Capture 탭</strong>을 선택합니다.<br>
+    <strong>(5)</strong> <strong>Take a Screenshot 버튼</strong>을 눌러서 이미지를 저장합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_192_Shot2.jpg"/>
+    <br>
+    
+    <p>
+    위와 같이 원하는 애니메이션 포즈를 캡쳐하여 저장할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>GIF 애니메이션 저장하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_185.jpg"/>
+    <br>
+    
+    <p>
+    애니메이션을 재생할 수 있는 GIF 파일 포맷으로 저장하는 방법입니다.<br>
+    <strong>GIF Anim (GIF Animation) 도구</strong>를 선택하면 위와 같이 다양한 설정들이 나타납니다.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    <strong>1. 캡쳐 영역 위치</strong><br>
+    <strong>2. 캡쳐 영역 크기</strong><br>
+    <strong>3. 저장하고자 하는 이미지의 크기와 배경색</strong><br>
+    <strong>4. 물리 적용 여부</strong><br>
+    : 기본적으로 화면을 캡쳐할 때에는 Physics 모디파이어가 꺼진 상태입니다. 이 기능에 체크를 하면 Physics 모디파이어가 적용된 상태로 화면이 캡쳐됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>5. Fixed Aspect Ratio (이미지 종횡비 고정)</strong><br>
+    <strong>6. 선택된 애니메이션 이름</strong><br>
+    : GIF 파일로 저장하고자 하는 애니메이션의 이름이 나타납니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>7. 화면 포커스의 위치와 확대 비율 설정</strong><br>
+    : 캡쳐 영역과 별도로, 화면의 포커스를 지정할 수 있습니다.<br>
+    마우스 휠 드래그나 휠 스크롤이 아닌 이 설정에서 직접 제어할 수 있습니다. 값을 입력하고 Set 버튼을 누르면 됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>8. Move to Center 버튼, Zoom 버튼</strong><br>
+    : 화면을 중심으로 이동하거나 확대/축소를 한단계씩 할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>9. GIF Quality, Loop Count</strong><br>
+    GIF 이미지의 압축 품질을 0에서 100까지 지정할 수 있습니다. 높은 품질일 수록 용량과 저장 시간이 오래 걸립니다.<br>
+    GIF 애니메이션 캡쳐시 반복 횟수 만큼 캡쳐를 합니다. 최소 1 이상의 값을 가집니다. (GIF 파일 자체 설정은 "무한 반복"의 값을 가집니다.)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>10. Take a GIF Animation 버튼</strong><br>
+    GIF 애니메이션을 저장합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>11. Animation Clips</strong><br>
+    저장하고자 하는 애니메이션 클립을 선택할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_186.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_187.jpg"/>
+    <br>
+    
+    <p>
+    기존 설정을 유지한 상태로 GIF 애니메이션을 만들어봅시다.<br>
+    <strong>(1)</strong> <strong>애니메이션을 선택</strong>합니다.<br>
+    <strong>(2)</strong> <strong>Take a GIF Animation 버튼</strong>을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_194_GIF1.jpg"/>
+    <br>
+    
+    <p>
+    GIF 애니메이션이 캡쳐되기 위해 애니메이션이 동시에 실행이 됩니다.<br>
+    애니메이션이 캡쳐되는 동안 진행 상황을 확인할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>주의</strong></span><br>
+    이 상태에서 AnyPortrait의 창 위치나 크기를 제어하거나 다른 메뉴나 기능을 선택하면 안됩니다.<br>
+    외부의 다른 프로그램을 실행하는 것은 상관없습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_195_GIF3.gif"/>
+    <br>
+    
+    <p>
+    완성된 GIF 애니메이션 파일을 확인하실 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>스프라이트 시트(Sprite Sheet) 저장하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_188.jpg"/>
+    <br>
+    
+    <p>
+    애니메이션의 각 프레임을 이미지로 만들고, 이미지들을 합쳐놓은 것을 스프라이트 시트(Sprite Sheet)라고 합니다.<br>
+    스프라이트 시트는 유니티 뿐만 아니라 다른 2D 게임 엔진에서도 종종 사용되는 에셋 방식입니다.<br>
+    AnyPortrait v1.0.3 부터 스프라이트 시트 저장 기능이 추가되었습니다.<br>
+    스프라이트 시트 도구를 선택하면 상당히 많은 설정들을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    <strong>1. Image Size per Frame</strong><br>
+    : 스프라이트의 각각의 프레임의 이미지 크기입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Size of Sprite Sheet</strong><br>
+    : 스프라이트 시트 이미지 전체의 크기입니다. 2의 지수 크기로 지정할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. Method of Compressing size</strong><br>
+    : 스프라이트 프레임의 크기 압축 방식입니다. 기본값인 Fixed는 위에서 지정한 프레임 크기를 사용합니다. Compressed 방식을 선택하면 이미지를 분석하여 조금 더 크롭된 이미지를 프레임 크기로 설정합니다. 이때의 압축된 이미지 크기는 같은 애니메이션의 프레임들 간에 공통으로 적용됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>4. Margin, BG Color, Physics Enabled</strong><br>
+    : 각각의 프레임간의 여백(Pixel)입니다. GIF 애니메이션 저장과 마찬가지로 배경색과 물리 적용 여부를 설정할 수도 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>5. 예상 스프라이트 정보</strong><br>
+    : 스프라이트의 이미지 크기를 분석하여, 한개의 스프라이트 시트에 몇개의 프레임이 포함될지 나타납니다. Compressed 방식으로 저장하는 경우, 여기서 예상한 결과보다 더 많은 프레임이 포함될 수도 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>6. Export Meta File</strong><br>
+    : 스프라이트 시트의 정보가 포함된 메타 파일을 저장할지 여부를 결정할 수 있습니다. 파일 포맷은 XML, JSON, TXT입니다. 복수개 선택이 가능합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>7. 화면 포커스와 확대 비율</strong><br>
+    <strong>8. Export Sprite Sheets</strong><br>
+    : 스프라이트 시트로 저장하는 버튼입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>9. Export Sequence Files</strong><br>
+    : 프레임 이미지들을 스프라이트 시트로 합치지 않고, 각각의 이미지 파일로 저장합니다. 메타 파일도 동일한 방식으로 저장되는데, 내용은 조금 다릅니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>10. Animation Clips</strong><br>
+    : 저장하고자 하는 애니메이션 클립을 선택할 수 있습니다. 복수개의 애니메이션을 선택하는 것이 가능합니다.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_189.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_190.jpg"/>
+    <br>
+    
+    <p>
+    스프라이트 시트를 만드는 순서입니다.<br>
+    <strong>(1)</strong> <strong>프레임의 크기</strong>를 설정합니다.<br>
+    <strong>(2)</strong> <strong>스프라이트 시트의 크기</strong>를 설정합니다. 사용하고자 하는 개발 환경에 맞는 가장 큰 크기를 권장합니다.<br>
+    <strong>(3)</strong> <strong>크기 압축 방식</strong>을 결정합니다. 적은 용량을 위해 Compressed 방식을 권장하지만 이 경우 메타 파일을 확인해야합니다.<br>
+    <strong>(4)</strong> <strong>여백과 배경색</strong>을 설정합니다. 개발 환경에 맞게 배경색을 결정하는 것이 좋습니다. 여기서는 투명색을 설정했습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_191.jpg"/>
+    <br>
+    
+    <p>
+    위에 이어진 저장 순서입니다.<br>
+    <strong>(1)</strong> <strong>같이 저장할 메타 파일</strong>을 선택합니다. 개발 환경에 맞게 선택합니다.<br>
+    <strong>(2)</strong> <strong>저장하고자 하는 애니메이션들</strong>을 선택합니다.<br>
+    <strong>(3)</strong> <strong>Export 버튼</strong>을 누릅니다. 스프라이트 시트일지 시퀸스 파일일지에 따라서 버튼을 누르면 되겠습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_196_Sprite1.jpg"/>
+    <br>
+    
+    <p>
+    완성된 스프라이트 시트입니다.<br>
+    자동으로 이미지와 폴더가 실행됩니다.<br>
+    각각의 프레임이 몇개의 이미지 파일로 저장된 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_196_Sprite2.jpg"/>
+    <br>
+    
+    <p>
+    메타 파일을 열면 저장된 애니메이션의 정보와 프레임의 크기와 위치 정보 등이 기록된 것을 볼 수 있습니다.<br>
+    XML, JSON은 실제로 사용될 수 있도록 작성되었으며 TXT 포맷은 쉽게 알아보기 쉬운 방식으로 작성되었습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>스프라이트 시트(Sprite Sheet) 저장하기 - 시퀸스 이미지로 저장하기</h3>
+    <br>
+    
+    <p>
+    위 과정에서 <strong>Export Sequence Files 버튼</strong>을 누르면 프레임들이 각각의 이미지로 저장됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_197_Sequence.jpg"/>
+    <br>
+    
+    <p>
+    모든 프레임들이 각각의 이미지로 저장되는 것을 볼 수 있습니다.<br>
+    프레임 크기나 메타 파일이 생성되는 것은 스프라이트 시트와 동일합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>스프라이트 시트(Sprite Sheet) 저장하기 - 크기 압축 방식 비교</h3>
+    <br>
+    
+    <p>
+    크기 압축 방식에 따라 스프라이트 시트의 결과가 다르게 나타납니다.<br>
+    그 차이점은 다음과 같습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_196_Sprite5_Com1.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_196_Sprite5_Com2.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <p>
+    왼쪽이 <strong>Fixed 방식</strong>이고 오른쪽이 <strong>Compressed 방식</strong>입니다.<br>
+    <strong>Fixed 방식</strong>에서는 설정된 프레임 크기대로 스프라이트 시트를 구성합니다.<br>
+    <strong>Compressed 방식</strong>에서는 프레임 크기를 기준으로 이미지를 분석하여 최대한 여백이 없도록 크롭을 하여 스프라이트 시트를 구성합니다.<br>
+    이미지에 따라서 스프라이트 시트에 더 많은 프레임을 포함할 수 있어서 최적화하기 좋습니다.<br>
+    프레임의 크기는 메타 파일에 저장되어 있습니다.<br>
+    Compressed 방식이라 하더라도 같은 애니메이션의 프레임들은 동일한 크기를 가지므로, 완벽히 모든 여백이 사라지는 것은 아닙니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>스프라이트 시트(Sprite Sheet) 저장하기 - 메타 파일 양식</h3>
+    <br>
+    
+    <p>
+    <strong>1. XML</strong><br>
+    <strong>1) 스프라이트 시트</strong><br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    &lt;?xml version="1.0" encoding="utf-8" standalone="yes"?&gt;<br>
+    &lt;Content&gt;<br>
+    &nbsp;&nbsp;&lt;AnimationClip&gt;<br>
+    &emsp;&emsp;&lt;Clip Index="0" Name="Idle" FPS="30" Frames="130" /&gt;<br>
+    &emsp;&emsp;&lt;Clip Index="1" Name="Run" FPS="40" Frames="24" /&gt;<br>
+    &emsp;&emsp;&lt;Clip Index="2" Name="Jump" FPS="60" Frames="59" /&gt;<br>
+    &nbsp;&nbsp;&lt;/AnimationClip&gt;<br>
+    &nbsp;&nbsp;&lt;FrameImage&gt;<br>
+    &emsp;&emsp;&lt;Image AnimationClipIndex="0" Frame="0" SpriteIndex="0" X="4" Y="4" Width="200" Height="200" /&gt;<br>
+    &emsp;&emsp;&lt;Image AnimationClipIndex="0" Frame="1" SpriteIndex="0" X="208" Y="4" Width="200" Height="200" /&gt;<br>
+    &emsp;&emsp;&lt;Image AnimationClipIndex="0" Frame="2" SpriteIndex="0" X="412" Y="4" Width="200" Height="200" /&gt;<br>
+    &emsp;&emsp;&lt;Image AnimationClipIndex="0" Frame="3" SpriteIndex="0" X="616" Y="4" Width="200" Height="200" /&gt;<br>
+    &emsp;&emsp;&lt;Image AnimationClipIndex="0" Frame="4" SpriteIndex="0" X="820" Y="4" Width="200" Height="200" /&gt;<br>
+    &emsp;&emsp;....<br>
+    &nbsp;&nbsp;&lt;/FrameImage&gt;<br>
+    &lt;/Content&gt;<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    <strong>&lt;Content&gt;</strong> : 루트 노드<br>
+    <strong>&lt;AnimationClip&gt;</strong> : 애니메이션 클립 정보가 포함된 그룹 노드<br>
+    <strong>&lt;Clip&gt;</strong> : 각각의 애니메이션 클립에 대한 노드<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Index</strong> : 애니메이션 노드를 구분하는 인덱스<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Name</strong> : 애니메이션 클립의 이름<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>FPS</strong> : 애니메이션의 FPS(Frame Per Second)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Frames</strong> : 애니메이션에 해당하는 프레임 이미지의 개수<br>
+    <strong>&lt;FrameImage&gt;</strong> : 프레임 이미지들이 포함된 그룹 노드<br>
+    <strong>&lt;Image&gt;</strong> : 각각의 프레임 이미지에 대한 노드<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>AnimationClipIndex</strong> : 해당 프레임이 어느 애니메이션에 나타내는 인덱스. Clip 노드의 Index 속성을 의미<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Frame</strong> : 애니메이션 내에서의 프레임 (시작은 0)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <span class="text-primary"><strong>SpriteIndex</strong></span> : 다수의 스프라이트 시트 파일이 생성된 경우, 저장된 이미지 파일의 번호 (시작은 0)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <span class="text-primary"><strong>X, Y, Width, Height</strong></span> : 프레임의 위치와 크기 (단위는 픽셀)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2) 시퀸스 파일</strong><br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    &lt;?xml version="1.0" encoding="utf-8" standalone="yes"?&gt;<br>
+    &lt;Content&gt;<br>
+    &nbsp;&nbsp;&lt;AnimationClip&gt;<br>
+    &emsp;&emsp;&lt;Clip Index="0" Name="Idle" FPS="30" Frames="130" /&gt;<br>
+    &emsp;&emsp;&lt;Clip Index="1" Name="Run" FPS="40" Frames="24" /&gt;<br>
+    &emsp;&emsp;&lt;Clip Index="2" Name="Jump" FPS="60" Frames="59" /&gt;<br>
+    &nbsp;&nbsp;&lt;/AnimationClip&gt;<br>
+    &nbsp;&nbsp;&lt;FrameImage&gt;<br>
+    &emsp;&emsp;&lt;Image AnimationClipIndex="0" Frame="0" FileName="Sequence_2018415_182230_Idle__0.png" /&gt;<br>
+    &emsp;&emsp;&lt;Image AnimationClipIndex="0" Frame="1" FileName="Sequence_2018415_182230_Idle__1.png" /&gt;<br>
+    &emsp;&emsp;&lt;Image AnimationClipIndex="0" Frame="2" FileName="Sequence_2018415_182230_Idle__2.png" /&gt;<br>
+    &emsp;&emsp;....<br>
+    &nbsp;&nbsp;&lt;/FrameImage&gt;<br>
+    &lt;/Content&gt;<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    <strong>&lt;Content&gt;</strong> : 루트 노드<br>
+    <strong>&lt;AnimationClip&gt;</strong> : 애니메이션 클립 정보가 포함된 그룹 노드<br>
+    <strong>&lt;Clip&gt;</strong> : 각각의 애니메이션 클립에 대한 노드<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Index</strong> : 애니메이션 노드를 구분하는 인덱스<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Name</strong> : 애니메이션 클립의 이름<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>FPS</strong> : 애니메이션의 FPS(Frame Per Second)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Frames</strong> : 애니메이션에 해당하는 프레임 이미지의 개수<br>
+    <strong>&lt;FrameImage&gt;</strong> : 프레임 이미지들이 포함된 그룹 노드<br>
+    <strong>&lt;Image&gt;</strong> : 각각의 프레임 이미지에 대한 노드<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>AnimationClipIndex</strong> : 해당 프레임이 어느 애니메이션에 나타내는 인덱스. Clip 노드의 Index 속성을 의미<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Frame</strong> : 애니메이션 내에서의 프레임 (시작은 0)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <span class="text-danger"><strong>FileName</strong></span> : 프레임 이미지의 시퀸스 이미지 파일 이름<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <p>
+    <strong>2. JSON</strong><br>
+    <strong>1) 스프라이트 시트</strong><br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    {<br>
+    &emsp;&emsp;"AnimationClip":&#91;<br>
+    &emsp;&emsp;{ "Index":0, "Name":"Idle", "FPS":30, "Frames":130 },<br>
+    &emsp;&emsp;{ "Index":1, "Name":"Run", "FPS":40, "Frames":24 },<br>
+    &emsp;&emsp;{ "Index":2, "Name":"Jump", "FPS":60, "Frames":59 }<br>
+    &emsp;&emsp;&#93;,<br>
+    &emsp;&emsp;"FrameImage":&#91;<br>
+    &emsp;&emsp;{ "AnimationClipIndex":0, "Frame":0, "SpriteIndex":0, "X":4, "Y":4, "Width":200, "Height":200 },<br>
+    &emsp;&emsp;{ "AnimationClipIndex":0, "Frame":1, "SpriteIndex":0, "X":208, "Y":4, "Width":200, "Height":200 },<br>
+    &emsp;&emsp;{ "AnimationClipIndex":0, "Frame":2, "SpriteIndex":0, "X":412, "Y":4, "Width":200, "Height":200 },<br>
+    &emsp;&emsp;....<br>
+    &emsp;&emsp;&#93;<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    <strong>AnimationClip</strong> : 애니메이션 클립 정보들이 포함된 리스트<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Index</strong> : 애니메이션 노드를 구분하는 인덱스<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Name</strong> : 애니메이션 클립의 이름<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>FPS</strong> : 애니메이션의 FPS(Frame Per Second)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Frames</strong> : 애니메이션에 해당하는 프레임 이미지의 개수<br>
+    <strong>FrameImage</strong> : 프레임 이미지 정보들이 포함된 리스트<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>AnimationClipIndex</strong> : 해당 프레임이 어느 애니메이션에 나타내는 인덱스. Clip 노드의 Index 속성을 의미<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Frame</strong> : 애니메이션 내에서의 프레임 (시작은 0)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <span class="text-primary"><strong>SpriteIndex</strong></span> : 다수의 스프라이트 시트 파일이 생성된 경우, 저장된 이미지 파일의 번호 (시작은 0)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <span class="text-primary"><strong>X, Y, Width, Height</strong></span> : 프레임의 위치와 크기 (단위는 픽셀)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2) 시퀸스 파일</strong><br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    {<br>
+    &emsp;&emsp;"AnimationClip":&#91;<br>
+    &emsp;&emsp;{ "Index":0, "Name":"Idle", "FPS":30, "Frames":130 },<br>
+    &emsp;&emsp;{ "Index":1, "Name":"Run", "FPS":40, "Frames":24 },<br>
+    &emsp;&emsp;{ "Index":2, "Name":"Jump", "FPS":60, "Frames":59 }<br>
+    &emsp;&emsp;&#93;,<br>
+    &emsp;&emsp;"FrameImage":&#91;<br>
+    &emsp;&emsp;{ "AnimationClipIndex":0, "Frame":0, "FileName":"Sequence_2018415_182230_Idle__0.png" },<br>
+    &emsp;&emsp;{ "AnimationClipIndex":0, "Frame":1, "FileName":"Sequence_2018415_182230_Idle__1.png" },<br>
+    &emsp;&emsp;{ "AnimationClipIndex":0, "Frame":2, "FileName":"Sequence_2018415_182230_Idle__2.png" },<br>
+    &emsp;&emsp;....<br>
+    &emsp;&emsp;&#93;<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    <strong>AnimationClip</strong> : 애니메이션 클립 정보들이 포함된 리스트<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Index</strong> : 애니메이션 노드를 구분하는 인덱스<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Name</strong> : 애니메이션 클립의 이름<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>FPS</strong> : 애니메이션의 FPS(Frame Per Second)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Frames</strong> : 애니메이션에 해당하는 프레임 이미지의 개수<br>
+    <strong>FrameImage</strong> : 프레임 이미지 정보들이 포함된 리스트<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>AnimationClipIndex</strong> : 해당 프레임이 어느 애니메이션에 나타내는 인덱스. Clip 노드의 Index 속성을 의미<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Frame</strong> : 애니메이션 내에서의 프레임 (시작은 0)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <span class="text-danger"><strong>FileName</strong></span> : 프레임 이미지의 시퀸스 이미지 파일 이름<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <p>
+    <strong>3. TXT</strong><br>
+    <strong>1) 스프라이트 시트</strong><br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    =========================================================================<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;AnyPortrait Sprite Sheet Data&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;<br>
+    =========================================================================<br>
+    AnimationClip : 3<br>
+    Index&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;FPS&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Frames<br>
+    0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;Idle&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;30&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;130<br>
+    1&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;Run&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;40&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;24<br>
+    2&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;Jump&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;60&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;59<br>
+    =========================================================================<br>
+    FrameImage : 213<br>
+    ClipIndex&emsp;&emsp;&nbsp;&nbsp;&nbsp;Frame&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;SpriteIndex&emsp;&emsp;&emsp;&emsp;X&emsp;&emsp;&emsp;&emsp;Y&emsp;&emsp;&emsp;&emsp;Width&emsp;&emsp; Height<br>
+    0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;4&emsp;&emsp;&emsp;&emsp; 4&emsp;&emsp;&emsp;&emsp;200&emsp;&emsp;&emsp;&emsp;200<br>
+    0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;1&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;208&emsp;&emsp;&nbsp;&nbsp;4&emsp;&emsp;&emsp;&emsp;200&emsp;&emsp;&emsp;&emsp;200<br>
+    0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;2&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;412&emsp;&emsp;&nbsp;&nbsp;4&emsp;&emsp;&emsp;&emsp;200&emsp;&emsp;&emsp;&emsp;200<br>
+    ....<br>
+    =========================================================================<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    <strong>AnimationClip</strong> : 애니메이션 클립 정보의 개수<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Index</strong> : 애니메이션 노드를 구분하는 인덱스<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Name</strong> : 애니메이션 클립의 이름<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>FPS</strong> : 애니메이션의 FPS(Frame Per Second)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Frames</strong> : 애니메이션에 해당하는 프레임 이미지의 개수<br>
+    <strong>FrameImage</strong> : 프레임 이미지 정보들의 총 개수<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>ClipIndex</strong> : 해당 프레임이 어느 애니메이션에 나타내는 인덱스. Clip 노드의 Index 속성을 의미<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Frame</strong> : 애니메이션 내에서의 프레임 (시작은 0)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <span class="text-primary"><strong>SpriteIndex</strong></span> : 다수의 스프라이트 시트 파일이 생성된 경우, 저장된 이미지 파일의 번호 (시작은 0)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <span class="text-primary"><strong>X, Y, Width, Height</strong></span> : 프레임의 위치와 크기 (단위는 픽셀)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2) 시퀸스 파일</strong><br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    =========================================================================<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;AnyPortrait Sprite Sheet Data&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;<br>
+    =========================================================================<br>
+    AnimationClip : 3<br>
+    Index&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;FPS&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Frames<br>
+    0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;Idle&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;30&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;130<br>
+    1&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;Run&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;40&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;24<br>
+    2&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;Jump&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;60&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;59<br>
+    =========================================================================<br>
+    FrameImage : 213<br>
+    ClipIndex&emsp;&emsp;&nbsp;&nbsp;&nbsp;Frame&emsp;&emsp;&nbsp;&nbsp;FileName<br>
+    0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Sequence_2018415_182230_Idle__0.png<br>
+    0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 1&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Sequence_2018415_182230_Idle__1.png<br>
+    0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 2&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Sequence_2018415_182230_Idle__2.png<br>
+    ....<br>
+    =========================================================================<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    <strong>AnimationClip</strong> : 애니메이션 클립 정보들이 포함된 리스트<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Index</strong> : 애니메이션 노드를 구분하는 인덱스<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Name</strong> : 애니메이션 클립의 이름<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>FPS</strong> : 애니메이션의 FPS(Frame Per Second)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Frames</strong> : 애니메이션에 해당하는 프레임 이미지의 개수<br>
+    <strong>FrameImage</strong> : 프레임 이미지 정보들이 포함된 리스트<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>ClipIndex</strong> : 해당 프레임이 어느 애니메이션에 나타내는 인덱스. Clip 노드의 Index 속성을 의미<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <strong>Frame</strong> : 애니메이션 내에서의 프레임 (시작은 0)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;- <span class="text-danger"><strong>FileName</strong></span> : 프레임 이미지의 시퀸스 이미지 파일 이름<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>MP4 영상 저장하기</h3>
+    <br>
+    
+    <p>
+    애니메이션을 선택해서 MP4 영상 파일로 저장하여 내보낼 수 있습니다.<br>
+    이 기능은 <strong>Unity 2017.4</strong> 또는 그 이후의 버전에서 사용이 가능합니다.<br>
+    <strong>Unity 2018.1</strong> 버전부터는 더 향상된 화질의 영상으로 저장됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_405.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Root Unit을 선택한 상태에서 <strong>Capture</strong> 탭을 선택합니다.<br>
+    <strong>(2)</strong> <strong>Animation</strong> 탭 (기존의 GIF Anim 탭)을 선택합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_406.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 화면을 캡쳐할 <strong>영역의 위치와 크기</strong>를 정하고, <strong>저장할 영상의 크기</strong>를 정합니다.<br>
+    작업 화면에서 바로 촬영하는 것이므로, 화면 전체를 촬영하는 것은 지원되지 않습니다.<br>
+    기본적인 1080p 화면을 기준으로 대략 <strong>720p (1280x720)</strong>까지 촬영이 가능합니다.<br>
+    <strong>(2)</strong> GIF와 달리 계속해서 영상이 반복되서 재생되지 않으므로, <strong>Loop Count</strong>에 적당한 값을 입력합니다.<br>
+    <strong>(3)</strong> 촬영하고자 하는 <strong>Animation Clip</strong>을 선택합니다.<br>
+    <strong>(4)</strong> <strong>Export as MP4</strong> 버튼을 클릭합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_407.jpg"/>
+    <br>
+    
+    <p>
+    MP4 영상 파일의 경로와 이름을 설정하고 저장 버튼을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_408.jpg"/>
+    <br>
+    
+    <p>
+    애니메이션이 자동으로 재생되면서 영상이 촬영됩니다.<br>
+    이 과정은 매우 오래 걸리며, 이 과정에는 다른 작업을 하지 마시길 바랍니다.<br>
+    Cancel 버튼을 눌러서 촬영을 중단할 수 있습니다.<br>
+    작업이 완료되면 저장된 영상 파일이 자동으로 실행됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_BakeDialog.html">< Bake 다이얼로그</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_OptimizedBake.html">최적화된 Bake ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

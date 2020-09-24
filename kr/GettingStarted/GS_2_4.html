@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>2.4. 본 추가하기</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/GettingStarted/GS_2_4.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/GettingStarted/GS_2_4.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/GettingStarted/GS_2_4.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/GettingStarted.html"><span class="text-dark">시작하기</span></a> > 2.4. 본 추가하기</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">2.4. 본 추가하기</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    본(Bone) 애니메이션을 위해서 본을 추가하는 방법을 다룹니다.<br>
+    AnyPortrait에서는 <strong>본 IK(Inverse Kinematics)</strong>를 지원하며, <strong>본 소켓(Socket)</strong>을 지원합니다.<br>
+    자세한 것은 관련 페이지(<a href="../../kr/AdvancedManual/AD_BoneIK.html">IK 설명</a>, <a href="../../kr/AdvancedManual/AD_Socket.html">소켓 설명</a>)에서 확인할 수 있습니다.<br>
+    ​이 페이지에서는 기초적인 본 추가 과정과 다음 튜토리얼을 위한 설정 상태를 알려줍니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_44.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>본(Bone) 메뉴</strong>를 선택합니다.<br>
+    본 작업을 위해서 <strong>(2)</strong> <strong>Start Editing Bones 버튼</strong>을 눌러서 본 편집 모드를 활성화합니다.<br>
+    <strong>(3)</strong> <strong>3개의 본 편집 툴 중에서 본 추가 툴을 선택</strong>합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_20.jpg"/>
+    <br>
+    
+    <p>
+    ​본 편집 모드 관련 화면입니다.<br>
+    <strong>1. 본 편집 활성/비활성 버튼</strong> : 본 편집 모드를 켜거나 끕니다. 켜진 상태에서만 수정할 수 있습니다.<br>
+    <strong>2. 본 선택 툴</strong> : 본을 선택할 수 있습니다.<br>
+    <strong>3. 본 추가 툴</strong> : 본을 추가할 수 있습니다. 선택된 본이 있으면 <strong>자식 본(Child Bone)</strong>으로 자동으로 등록합니다.&nbsp;&nbsp;<kbd>마우스 우클릭</kbd> 으로 <strong>선택을 취소</strong>하고,&nbsp;&nbsp;<kbd>한번 더 우클릭</kbd> 을 하면 <strong>본 선택 툴로 전환</strong>됩니다.<br>
+    <strong>4. 본 연결 툴</strong> : 두개의 본을 연결하여 <strong>부모-자식 관계(Parent-Child)</strong> 로 연결합니다. 두번째 선택된 본이 <strong>부모 본(Parent Bone)</strong>이 됩니다.&nbsp;&nbsp;<kbd>마우스 우클릭</kbd> 으로 <strong>선택을 취소</strong>하고,&nbsp;&nbsp;<kbd>한번 더 우클릭</kbd> 을 하면 <strong>본 선택 툴로 전환</strong>됩니다.<br>
+    본을 추가하는 방법을 익히고 다음 작업을 진행하겠습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_19.jpg"/>
+    <br>
+    
+    <p>
+    본이 선택되지 않은 상태에서는 <strong>(1)</strong> <strong>처음 클릭한 위치</strong>를 <strong>시작점</strong>으로, <strong>(2)</strong> <strong>두번째 클릭한 위치</strong>를 <strong>끝점</strong>으로 하여 본을 생성합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_18.jpg"/>
+    <br>
+    
+    <p>
+    본이 선택된 상태에서는 <strong>(1)</strong> <strong>선택한 본의 끝점</strong>을 <strong>시작점</strong>으로, <strong>(2)</strong> <strong>이어서 클릭한 위치</strong>를 <strong>끝점</strong>으로 하여 본을 생성합니다.<br>
+    ​이때, 새로 생성된 본의 <strong>이름과 색상</strong>은 이전에 선택된 본과 유사하게 설정이 되며, <strong>모양</strong>은 동일하게 됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_22.jpg"/>
+    <br>
+    
+    <p>
+    몸의 중심이 되는 골반에 본을 추가합니다. 방향은 상관 없으나 나중에 선택하기 쉽게 가로로 만들었습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_23.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>본 선택 툴</strong>로 바꾸어 방금 만든 본을 선택합니다.<br>
+    <strong>(2)</strong> <strong>선택한 본의 이름</strong>을 <strong>"Bone Pelvis"</strong>로 설정합니다.<br>
+    <strong>(3)</strong> <strong>본의 색상과 모양</strong>을 수정합니다.<br>
+    ​중요한 본의 경우 크기가 크면 선택하기 쉬우므로 작업하기 편하게 설정하는 것이 좋습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_24.jpg"/>
+    <br>
+    
+    <p>
+    이제 몸 관절을 만듭니다.<br>
+    먼저 새로운 본을 생성하여 <strong>"Bone Spine1"</strong>으로 이름을 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_25.jpg"/>
+    <br>
+    
+    <p>
+    <strong>"Bone Spine1"</strong> 본을 선택한 상태에서 바로 두번째 본을 생성을 합니다.<br>
+    두번째 본의 이름은 <strong>자동으로</strong> <strong>"Bone Spine2"</strong>으로 이름이 지정되며, <strong>크기나 색상</strong>이 이전 본과 유사하게 설정됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_26.jpg"/>
+    <br>
+    
+    <p>
+    <strong>머리 본("Bone Head")</strong>을 추가합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_27.jpg"/>
+    <br>
+    
+    <p>
+    캐릭터 후드티의 귀 장식에도 본을 추가합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_28.jpg"/>
+    <br>
+    
+    <p>
+    위와 같이 본을 설정합니다.<br>
+    어떤 애니메이션을 만들지, 어떤 이미지를 대상으로 하는지에 따라 다양하게 본을 설정할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이제 다음 작업은 완성된 본들을 서로 연결하는 것입니다.<br>
+    본을 제대로 연결하면 실제 사람처럼 자연스럽게 움직일 수 있습니다.<br>
+    <strong>골반(Pelvis)</strong>을 부모 본(Root Parent Bone)으로 하고, 머리, 손, 발을 끝으로 연결하는 것이 일반적입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_29.jpg"/>
+    <br>
+    
+    <p>
+    본을 연결하기 위하여 <strong>(1)</strong> <strong>본 연결 툴을 선택</strong>합니다.<br>
+    <strong>(2)</strong> <strong>몸의 시작 본("Bone Spine1")</strong>을 선택한 뒤, <strong>(3)</strong> <strong>골반("Bone Pelvis")을 선택</strong>합니다.<br>
+    이렇게 하면 골반을 부모로, 몸을 자식으로 연결됩니다.<br>
+    ​다음 선택을 위해  <kbd>마우스 우클릭</kbd> 을 하여 선택을 해제합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_30.jpg"/>
+    <br>
+    
+    <p>
+    같은 방식으로 <strong>다리</strong>를 선택한 뒤, <strong>골반</strong>으로 연결합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_31.jpg"/>
+    <br>
+    
+    <p>
+    <strong>머리</strong>와 <strong>양 팔</strong>은 <strong>몸의 가장 위쪽 본("Bone Spine2")</strong>에 연결합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_32.jpg"/>
+    <br>
+    
+    <p>
+    머리에 있는 <strong>각종 장식(후드 귀와 후드 꼬리)</strong> 본들을 <strong>머리("Bone Head")</strong>로 연결합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_33.jpg"/>
+    <br>
+    
+    <p>
+    완성된 본들과 계층 구조입니다.<br>
+    ​꼭 이 방식과 같을 필요는 없으나 사람의 뼈의 연결 관계를 생각하시어 만들면 되겠습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>본이 보이지 않는다면?</h4>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_34.jpg"/>
+    <br>
+    
+    <p>
+    화면 상단의 본을 보이게 하거나 숨기는 버튼이 있습니다. 이 버튼은 3가지 상태가 있습니다.<br>
+    1. ​버튼이 꺼진 상태에서는 본이 보이지 않습니다.<br>
+    2. 버튼이 켜진 상태에서는 본이 색이 채워진 형태로 나타납니다.<br>
+    3. 버튼이 켜져있으나 속이 빈 아이콘인 상태에서는 본이 선으로만 나타납니다.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    <strong>참고</strong> : 이 페이지에서는 본 설정을 자세히 다루지 않고 개략적으로 다루었습니다.<br>
+    본 설정 화면의 구조는 다음과 같습니다.<br>
+    ​사용법은 <a href="../../kr/AdvancedManual/AD_BoneIK.html">관련 페이지</a>를 참조하세요.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_35.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    <strong>1. Name : </strong>본의 이름을 설정합니다.<br>
+    <strong>2. Base Pose Transformation : </strong>본의 위치, 회전, 크기값입니다.<br>
+    <strong>3. Socket : </strong>Bake 후에 본을 참조하기 위해선 소켓을 켜면 됩니다.<br>
+    <strong>4. IK Setting : </strong>본의 IK 기능을 설정하는 구역입니다.<br>
+    <strong>5. Hierarchy : </strong>부모 본, 자식 본을 여기서 직접 선택할 수 있습니다.<br>
+    <strong>6. Shape : </strong>색상과 모양을 설정합니다. Taper가 클수록 끝이 뾰족하게 됩니다.<br>
+    <strong>7. Remove Bone : </strong>본을 삭제합니다. 다이얼로그 선택에 따라 모든 자식 본들을 삭제할 수도 있습니다.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
+    <br><br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>​색상 프리셋과 "바늘 모양" 본에 관한 변경 사항</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.2.3</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_917.jpg"/>
+    <br>
+    
+    <p>
+    v1.2.3에 추가된 기능인 <strong>색상 프리셋</strong>을 이용하면 본의 색상을 빠르게 변경할 수 있습니다.<br>
+    6개의 색상 버튼을 클릭하면, 해당 색상과 비슷하게 변경됩니다.<br>
+    버튼을 누를 때마다 다른 색상이 지정됩니다.<br>
+    프리셋으로부터의 색상의 범위가 적당히 넓기 때문에, 같은 계열의 본들의 색상을 비슷하게 만드는 것도 용이합니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <p>
+    v1.2.3부터 "<strong>화살촉 모양</strong>"과 "<strong>바늘 모양</strong>"의 본으로 설정을 변경할 수 있습니다. (<a href="../../kr/AdvancedManual/AD_SettingDialog.html">관련 페이지</a>)<br>
+    "<strong>바늘 모양</strong>"을 선택한 경우, <strong>Width</strong>와 <strong>Taper</strong> 설정은 적용되지 않습니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/GettingStarted/GS_2_3.html">< 2.3. 클리핑 레이어 이해하기</a>
+        <a class="btn btn-light" role="button" href="../../kr/GettingStarted/GS_2_5.html">2.5. Rigging 모디파이어 사용하기 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

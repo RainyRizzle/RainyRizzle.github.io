@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>2.5. Using the Rigging Modifier</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/GettingStarted/GS_2_5.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/GettingStarted/GS_2_5.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/GettingStarted/GS_2_5.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/GettingStarted.html"><span class="text-dark">Getting Started</span></a> > 2.5. Using the Rigging Modifier</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">2.5. Using the Rigging Modifier</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    For bone animation, a process called <strong>Rigging</strong> is essential.<br>
+    Rigging can be defined as <strong>"Connecting vertices to bones"</strong>.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_62.jpg"/>
+    <br>
+    
+    <p>
+    It is important to enter the <strong>"Weight attached to the bone"</strong> in the vertex so that the vertex follows the movement of the bone.<br>
+    In the left figure, all vertices have a weight of <span class="text-danger"><strong>"Bone 1: 1.0"</strong></span>.<br>
+    Therefore, it does not depend on the movement of <span class="text-success"><strong>the green bone (Bone 2)</strong></span>.<br>
+    So you can see the smooth movement of <span class="text-success"><strong>the green bone</strong></span>.<br>
+    ​>TXT<br>
+    That is, <strong>Rigging</strong> is the process of setting the connection weights of <strong>"vertex + bone"</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_45.jpg"/>
+    <br>
+    
+    <p>
+    Add Rigging modifier.<br>
+    <strong>(1)</strong> <strong>Press the Add Modifier button</strong> to select <strong>(2)</strong> <strong>Rigging modifier</strong> and add it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_38.jpg"/>
+    <br>
+    
+    <p>
+    First, modify the head hood.<br>
+    <strong>(1)</strong> <strong>Select the Hood mesh</strong>, and <strong>(2)</strong> <strong>press the Add to Rigging button</strong> to register the mesh in the modifier.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_39.jpg"/>
+    <br>
+    
+    <p>
+    Press <strong>the Binding button</strong> in the lower left of the screen to start rigging.<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <p>
+    The rigging tool UI is structured as a below.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    <strong>1. Add / Remove</strong> : Registers or unregisters the mesh with the rigging modifier.<br>
+    <strong>2. Set Weight Manually</strong> : Weight is assigned by the value of the button.<br>
+    <strong>3. Weight tools</strong> : These are tools that set weights.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Set Weight</strong> : Assigns a weight to the number on the left.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Set Weight +/-</strong> : Weight is added or subtracted in units of 0.05.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Scale Weight</strong> : Multiply the weight by the number created on the left.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Scale Weight +/-</strong> : Weight is multiplied by 1.05 (+ button) or multiplied by 0.95. (-button)<br>
+    <strong>4. Assistant tools</strong> : This tool helps you to specify the weights of selected vertices.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Auto Normalize</strong> : When this is active, the weighted sum is corrected to 1.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Blend</strong> : Makes the weight of the vertex smooth by mixing it appropriately with the surrounding vertex values.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Normalize</strong> : Calibrate the weighted sum to 1.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Prune</strong> : Delete this information with a very low weight value.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Auto Rig</strong> : Rigging automatically based on registered bone information.<br>
+    <strong>5. Grow / Shrink</strong> : Adjusts the range by further selecting or excluding vertices.<br>
+    <strong>6. Copy / Paste</strong> : Copy or Paste the rigging information of the selected vertex.<br>
+    <strong>7. Bone Rigging Information</strong> : Bones and rigging values registered for rigging. You can exclude the bone by pressing the X button. You can also select bone from this screen.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_61.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_36.jpg"/>
+    <br>
+    
+    <p>
+    In the UI at the bottom of the screen, you can select <strong>4 modes</strong> to <strong>visually display the rigging weights</strong>.<br>
+    You can decide whether to use the bone color, or whether to display the texture together.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_40.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select all vertices</strong>, and then <strong>(2)</strong> <strong>select "Bone Head"</strong>.<br>
+    If the bone is not selected, turn off <strong>Selection Lock</strong> or choose from the menu on the right.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_41.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Set the weight of all vertices</strong> to <strong>1</strong> for <strong>Bone Head</strong>.<br>
+    You can see that the color of the mesh changes like the color of the head bone.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_42.jpg"/>
+    <br>
+    
+    <p>
+    Briefly <strong>(1)</strong> <strong>release the Selection Lock</strong>&nbsp;&nbsp;and <strong>(2)</strong> <strong>select "Bone Ear R"</strong>.<br>
+    If you do not release the selection lock, please select it from the right menu.<br>
+    With vertices selected , <strong>(3)</strong> <strong>set weights to 0.5</strong>.<br>
+    You can see that the rigging information of <strong>"Bone Ear R"</strong> is registered.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_43.jpg"/>
+    <br>
+    
+    <p>
+    Weights are assigned to the opposite ear as well.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_44.jpg"/>
+    <br>
+    
+    <p>
+    Select <strong>"Bone Head"</strong> again. <strong>Select all vertices</strong> and assign a weight of <strong>1</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_45.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Select "Bone Ear R"</strong>, <strong>select its surrounding vertices</strong>, and assign a weight of <strong>1</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_46.jpg"/>
+    <br>
+    
+    <p>
+    Weights are applied only around the ears to change the color.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_47.jpg"/>
+    <br>
+    
+    <p>
+    In the same way, we assign weights for the opposite ear.<br>
+    </p>
+    <br>
+    
+    <p>
+    Rigging is a task that is difficult to complete at once.<br>
+    Even if weights are specified, it is easy to see awkward points when actually moving the bone.<br>
+    Therefore, the Rigging modifier provides a <strong>"Pose Test"</strong> function that allows you to <strong>temporarily move bones</strong>.<br>
+    Use the <strong>Pose Test</strong> function to see if the weights are applied properly and try to fix them.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_48.jpg"/>
+    <br>
+    
+    <p>
+    First, make sure the bones appear on the screen.<br>
+    <strong>(1)</strong> Make the bone appear as <strong>"filled"</strong>.<br>
+    <strong>(2)</strong> Press the <strong>Pose Test</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_49.jpg"/>
+    <br>
+    
+    <p>
+    You can select a bone to move freely.<br>
+    Please check that it is properly assigned weight.<br>
+    </p>
+    <br>
+    
+    <p>
+    Rigging in the current state is not smooth.<br>
+    You need to make it smoother and fix the problem areas.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_50.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Press the Pose Test button to disable it</strong>, and then modify the rigging again.<br>
+    <strong>(1)</strong> <strong>Select all the vertices around the ears</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_51.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> <strong>Press the Blend button</strong> several times to soften the weight value.<br>
+    (We changed the weight value to <strong>"Bone Color Off + Texture Off"</strong>.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_52.jpg"/>
+    <br>
+    
+    <p>
+    You can see that the weights are distributed more smoothly than before.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_53.jpg"/>
+    <br>
+    
+    <p>
+    Now let's test again.<br>
+    <strong>(1)</strong> Turn on <strong>Pose Test mode</strong>.<br>
+    <strong>(2)</strong> <strong>Tilt ears</strong> to see if the rigged rigging is applied properly.<br>
+    In this sample, you can see that one side of the character is tilted and the opposite side moves as well.<br>
+    Let's suppose that the vertex on the other side should not move.<br>
+    (Rigging is done differently depending on the intention of the designer.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_54.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> <strong>Select vertices</strong> of the center of the head.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_55.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> <strong>Select "Bone Head"</strong>, and <strong>(5)</strong> <strong>press the Set Weight + button</strong> several times to add weights.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_56.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(6)</strong> <strong>Select one of the vertices on the ear</strong>, and then <strong>(7)</strong> <strong>select Ear (Bone Ear R or L)</strong>.<br>
+    You can see that the weights are applied beyond the center.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_57.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(8)</strong> <strong>Set weight </strong><strong>0</strong>.<br>
+    Make the same for the opposite ear and vertices.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_58.jpg"/>
+    <br>
+    
+    <p>
+    Now add other meshes to the Rigging Modifier.<br>
+    Face meshes should be registered only on the head (Bone Head).<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_59.jpg"/>
+    <br>
+    
+    <p>
+    Other meshes are rigged while properly using the <strong>Pose Test</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    The screenshot below shows the rigging results for each bone.<br>
+    Please refer to these for rigging.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_60.jpg"/>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/GettingStarted/GS_2_4.html">< 2.4. Adding Bones</a>
+        <a class="btn btn-light" role="button" href="../../en/GettingStarted/GS_2_6.html">2.6. Creating an Animation Clip ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

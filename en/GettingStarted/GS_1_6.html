@@ -39,12 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/GettingStarted/GS_1_6.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/GettingStarted/GS_1_6.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/GettingStarted/GS_1_6.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -61,14 +65,261 @@
     <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/GettingStarted.html"><span class="text-dark">Getting Started</span></a> > 1.6. Changing the face with Transform Modifier</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
-    <h1 class="display-4"><strong>1.6. Changing the face with Transform Modifier</strong></h1>
+    <h1 class="display-5">1.6. Changing the face with Transform Modifier</h1>
+    <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.6</span></h4>
+    
+    <p>
+    Adding the <strong>Modifier</strong> of the Mesh Group is the most important process of AnyPortrait.<br>
+    The modifier's working principle is complex, so we will only cover how to add and use it.<br>
+    Please check <a href="../../en/AdvancedManual/AD_LayerWeightInterpolation.html">​the related page</a> for the type, characteristics and cautions of the modifier.<br>
+    </p>
+    <br>
+    
+    <p>
+    On this page, the <strong>"Transform (Controller)"</strong> modifier is used among the various modifiers.<br>
+    With the <strong>"Transform" modifier</strong>, you can change the <strong>position, size, etc.</strong>, or change the <strong>color and visibility</strong> by the Control Parameters.<br>
+    Therefore, it is suitable to change the facial expression by replacing images.<br>
+    It is easy to use as the most basic modifier.<br>
+    (Note that you can also control the color in the "Morph" modifier.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_25.jpg"/>
+    <br>
+    
+    <p>
+    Select the <strong>(1)</strong> <strong>Slime</strong> mesh group created on the previous page.<br>
+    When you <strong>(2)</strong> select <strong>Modifier menu</strong>, you can confirm that no modifier is registered yet.<br>
+    <strong>(3)</strong> Press the <strong>Add Modifier</strong> button to open a dialog that adds a modifier.<br>
+    <strong>(4)</strong> Select the <strong>"Transform (Controller)" modifier</strong> among the various modifiers <strong>(5)</strong> Press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_26.jpg"/>
+    <br>
+    
+    <p>
+    This is the screen you can see after adding a modifier.<br>
+    (It varies slightly depending on the modifier.)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Modifier Stack</strong> : Modifiers are calculated sequentially. (The following modifiers are counted first.)<br>
+    <strong>2. Modifier On / Off</strong> : You can temporarily disable the modifier during the operation. Click the light bulb icon to turn On / Off.<br>
+    <strong>3. Selected Modifier</strong> : The name, icon, and layer position of the currently selected modifier.<br>
+    <strong>4. Color Option On / Off</strong> : The Transform / Morph modifier can control the color value. This button determines whether or not to control the color value.<br>
+    <strong>5. Modifier Blend</strong> : Determines how the modifier blends with other modifiers.<br>
+    - <strong>Method</strong> : The method of merging values. <strong>Interpolation</strong> and <strong>Additive</strong> are available.<br>
+    - <strong>Weight</strong> : The weight when merging values. It has a value between 0 and 1.<br>
+    - <strong>Layer Up / Down</strong> : Changes the modifier calculation order.<br>
+    <br>
+    <strong>6. Control Parameters</strong> : Display the registered control parameters as input values.<br>
+    <strong>7. Remove Modifier</strong> : Removes the selected modifier.<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <p>
+    The modifier consists of a combination of <span class="text-primary"><strong>"Input key"</strong></span> and <span class="text-danger"><strong>"Modified value"</strong></span>.<br>
+    At this time, corresponding to the <span class="text-primary"><strong>"Input key"</strong></span> in the current sample is <span class="text-primary"><strong>the Control Parameter</strong></span>, and the <span class="text-danger"><strong>"Modified value"</strong></span> is <span class="text-danger"><strong>"whether the mesh is colored / rendered"</strong></span>.<br>
+    Therefore, the next task is to select a <span class="text-primary"><strong>"Control Parameter as input value"</strong></span> and a <span class="text-danger"><strong>"Mesh to be applied modifier"</strong></span> and register together.<br>
+    Detailed explanation can be found on <a href="../../en/AdvancedManual/AD_LayerWeightInterpolation.html">​the related page</a>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_27.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the <strong>Controller tab</strong>.<br>
+    <strong>(2)</strong> <strong>Select a mesh (Eye1)</strong>.<br>
+    With the Controller tab selected, check the <span class="text-primary"><strong>Eye Shape parameter</strong></span> you created earlier.<br>
+    You can see that the <strong>Red Recording button</strong> appears while selecting the modifier that receives the control parameter as input value.<br>
+    <strong>(3)</strong> Press <strong>the Record button of the Eye Shape parameter</strong> to register it in the modifier.<br>
+    This will change the screen as follows.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_28.jpg"/>
+    <br>
+    
+    <p>
+    The background of the Control Parameter changes to red, and the new settings appear in the right UI.<br>
+    This state is that <strong>"Control Parameter + Mesh"</strong> is registered in the modifier.<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's register other <strong>"Eye-shaped meshes"</strong> with the modifier.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_29.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Since the <strong>"Eye Shape"</strong> control parameter is already registered,<br>
+    <strong>(2)</strong> Select <strong>another eye-shaped mesh (Eye2)</strong><br>
+    <strong>(3)</strong> Click the <strong>Add to Keys</strong> button to register.<br>
+    </p>
+    <br>
+    
+    <p>
+    In the same way, register all 4 eye-shaped meshes (Eye1, Eye2, Eye3, Eye4).<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_30.jpg"/>
+    <br>
+    
+    <p>
+    If you have registered all 4 meshes, <strong>Green icons</strong> will appear as shown above.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <p>
+    The next task is to actually assign the expression to each value of the control parameter.<br>
+    When the value of the eye shape parameter is 0, only the Eye1 mesh is displayed,<br>
+    When the value is 1, only the Eye2 meshes are displayed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_50.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Move the parameter value to 1</strong>. <strong>The Red Recording button</strong> is activated because there is no key at that position.<br>
+    <strong>(2)</strong> <strong>Press the Record button</strong> to generate the key when <strong>"Parameter value = 1"</strong>.<br>
+    Likewise, <strong>(3)</strong> <strong>move the parameter to 2</strong> and <strong>(4)</strong> <strong>press the Record button</strong> to generate the key.<br>
+    <strong>(5)</strong> and <strong>(6)</strong>, so that a total of four keys are generated.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_추가_5.jpg"/>
+    <br>
+    
+    <p>
+    If your current AnyPortrait version is v1.1.6 or later, you need to enable <strong>Color Option</strong> at this step.<br>
+    To control the mesh's Color, Transparency, and Visibility, the modifier's <strong>Color Option</strong> must be turned on. <br>
+    From v1.1.6, the default value of this option has been changed to OFF for optimization.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_추가_6.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Turn on the "Color Option"</strong> of the modifier.<br>
+    <strong>(2)</strong> If the <strong>"Color Option" of the registered Control Parameter</strong> is off, press the button to <strong>turn it on</strong>.<br>
+    <strong>(3)</strong> Now, <strong>"Yellow eye buttons"</strong> are displayed to change the rendering of the mesh.<br>
+    For information on the Color option, please see <a href="../../en/AdvancedManual/AD_ColorModifier.html">the related page</a>.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_31.jpg"/>
+    <br>
+    
+    <p>
+    Visibility of the eye meshes is determined by the four keys of the control parameter.<br>
+    First, <strong>(1)</strong> <strong>move the Control Parameter</strong> back to <strong>the first position (key value = 0)</strong>.<br>
+    <strong>(2)</strong> <strong>Turn On the Yellow eye button of Eye1 mesh</strong> and <strong>turn off the rest</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_32.jpg"/>
+    <br>
+    
+    <p>
+    Then let's work on the second key.<br>
+    After <strong>(1)</strong> <strong>moving the Control Parameter to the second position (key value = 1)</strong>,<br>
+    <strong>(2)</strong> <strong>Turn On the Yellow eye button of the Eye2 mesh</strong> and <strong>turn off the rest</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_33.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_34.jpg"/>
+    <br>
+    
+    <p>
+    Do the same work with the remaining two keys in the same way to complete the settings for the four facial expressions.<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/ehD-GUpbVlg" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_35.jpg"/>
+    <br>
+    
+    <p>
+    ​You can also work on the <span class="text-primary"><strong>Mouth Shape</strong></span> in the same way as above.<br>
+    If you have created both eye and mouth expressions, you can test right from the game.<br>
+    You can run the <strong>Bake</strong> function, move it to the scene, and test it right in Unity Editor.<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/AQazzGUI5yI" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    
+    <br><br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
-    <nav class="navbar bottom navbar-light bg-light">
+    <nav class="navbar fixed-bottom navbar-light bg-light">
         <a class="btn btn-light" role="button" href="../../en/GettingStarted/GS_1_5.html">< 1.5. Adding Control Parameters</a>
         <a class="btn btn-light" role="button" href="../../en/GettingStarted/GS_1_7.html">1.7. Using Morph Modifier ></a>
     </nav>

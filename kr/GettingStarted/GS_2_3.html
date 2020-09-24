@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>2.3. 클리핑 레이어 이해하기</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/GettingStarted/GS_2_3.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/GettingStarted/GS_2_3.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/GettingStarted/GS_2_3.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/GettingStarted.html"><span class="text-dark">시작하기</span></a> > 2.3. 클리핑 레이어 이해하기</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">2.3. 클리핑 레이어 이해하기</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_15.jpg"/>
+    <br>
+    
+    <p>
+    메시 그룹을 열어보면 <strong>"Teeth", "Tongue" 메시</strong> 앞에 <strong>꺾인 화살표 모양의 아이콘</strong>이 있는 것을 확인할 수 있습니다.<br>
+    "Teeth", "Tongue" 메시를 선택하면 메시가 일부만 나타나고 있습니다.<br>
+    그 이유는 "Teeth", "Tongue" 메시가 <strong>클리핑(Clipping) 레이어 속성</strong>을 가지고 있기 때문입니다.<br>
+    두개의 메시는 바로 아래의 <strong>"Mouth" 메시</strong>를 <strong>마스크(Mask)</strong>로 삼고 있는 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_16.jpg"/>
+    <br>
+    
+    <p>
+    시험삼아 두개의 메시에 적용된 클리핑 레이어 속성을 꺼보도록 합시다.<br>
+    ​그러면 이미지가 가려지는 부분 없이 모두 렌더링 되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_17.jpg"/>
+    <br>
+    
+    <p>
+    클리핑 기능은 다른 메시의 형태를 마스크로 삼는 기능입니다.<br>
+    주로 눈, 입 등에서 사용되는 기능입니다.<br>
+    다만, 주의할 점은 다음과 같습니다.<br>
+    <strong>1.</strong> 클리핑 기능은 처리 과정이 무거워서 게임을 느려지게 하는 원인이 됩니다. 꼭 필요한 부분에만 사용하세요.<br>
+    <strong>2.</strong> 직접 <strong>쉐이더(Shader)</strong>를 만들어서 이용하는 경우 클리핑 기능에 관련된 코드도 작성해야합니다.<br>
+    ​<br>
+    ​클리핑 쉐이더를 작성하는 방법은 <a href="../../kr/Script/SC_CustomShader.html">관련 페이지</a>를 참고하세요.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/GettingStarted/GS_2_2.html">< 2.2. 본 애니메이션을 위해 메시 수정하기</a>
+        <a class="btn btn-light" role="button" href="../../kr/GettingStarted/GS_2_4.html">2.4. 본 추가하기 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

@@ -39,12 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/GettingStarted/GS_1_7.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/GettingStarted/GS_1_7.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/GettingStarted/GS_1_7.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -61,14 +65,152 @@
     <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/GettingStarted.html"><span class="text-dark">Getting Started</span></a> > 1.7. Using Morph Modifier</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
-    <h1 class="display-4"><strong>1.7. Using Morph Modifier</strong></h1>
+    <h1 class="display-5">1.7. Using Morph Modifier</h1>
+    <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    <strong>The Morph Modifier</strong> provides the ability to directly deform vertices.<br>
+    You can do more precise work than the Transform Modifier.<br>
+    It is mainly used to adjust the appearance of illustrations to make them feel bulky or lively.<br>
+    This page contains a basic transformation process by adding a Morph Modifier.<br>
+    To see the tools for editing vertices, go to the next page.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_36.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Press the Add Modifier button</strong> and <strong>(2)</strong>  select and add the <strong>"Morph (Controller)" modifier</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_37.jpg"/>
+    <br>
+    
+    <p>
+    The Morph modifier's working screen is not much different from the Transform modifier's working screen.<br>
+    <strong>(1)</strong> <strong>Select the Morph (Controller) modifier</strong>, and then <strong>(2)</strong> <strong>select "Body" Mesh</strong>.<br>
+    And <strong>(3)</strong> <strong>press the Record button</strong> of the <strong>Vertical Position parameter</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_38.jpg"/>
+    <br>
+    
+    <p>
+    Add the key to the Control Parameter as you learned earlier.<br>
+    The right side of the Vertical Position parameter means "slime floating in the air", and the left side will represent "the slime in the ground".<br>
+    Add a key to the <strong>"0", "0.25", "1"</strong> position of each parameter.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_39.jpg"/>
+    <br>
+    
+    <p>
+    To apply Morph, you need to select the vertex and prepare it for editing.<br>
+    Currently, you can not select vertices or edit vertices.<br>
+    This is because editing is possible only in <strong>"Editing status"</strong>.<br>
+    To edit, <strong>(1)</strong> Make sure that the <strong>target body mesh is registered</strong>,<br>
+    <strong>(2)</strong> <strong>Press "Start Editing" button</strong> to make "Editing status".<br>
+    (If you press the button again, "Editing status" is released.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_63.jpg"/>
+    <br>
+    
+    <p>
+    At the bottom of the screen there is a UI associated with the "Editing status".<br>
+    <strong>1. Editing button</strong> : It is a button to turn on / off the Editing status. If editing is not possible, it will be automatically turned off. The shortcut is the  <kbd>A</kbd> .<br>
+    <strong>2. Selection Lock</strong> : You can not select other meshes or bones on the workspace. The shortcut is the  <kbd>S</kbd> .<br>
+    <strong>3. Modifier Lock</strong> : In the On state, only the modifier in operation is calculated and the rest is turned off. In the Off state, the calculation is done only for the "non-colliding modifier". The shortcut is the  <kbd>D</kbd> .<br>
+    <strong>4. Selected Input Value</strong> : The control parameter and key value selected as the current input value. The target may change depending on the modifier.<br>
+    <strong>5. Selected object</strong> : Objects to be processed. This is the "Body" mesh.Now let's modify the vertex and use the "Morph" function.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_60.jpg"/>
+    <br>
+    
+    <p>
+    After <strong>(1)</strong> <strong>moving the slider</strong> to the key that corresponds to <strong>"floating in the air"</strong>, drag the mouse to <strong>(2)</strong> <strong>select all the vertices</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_61.jpg"/>
+    <br>
+    
+    <p>
+    Use the <strong>Move tool</strong> (shortcut is  <kbd>W</kbd> ) to move vertices upward.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_62.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Move the slider to a key</strong> with a value of <strong>0.25</strong> and <strong>(2)</strong> <strong>create a "flat slime"</strong>.<br>
+    It is easy to create using the Move and Scale tools.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <p>
+    If you have finished all the above steps, you can see the slime going up and down every time you move the slider like the movie clip below.<br>
+    </p>
+    <br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/qcNHrIHHtzg" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_64.jpg"/>
+    <br>
+    
+    <p>
+    In this sample, the Morph modifier does not control color.<br>
+    If you do not control the color, turn off the <strong>Color Option</strong> in Settings to avoid conflict with other modifiers.<br>
+    <strong>(1)</strong> <strong>Press the Color Option button to turn it off</strong> as shown in the above image.<br>
+    Change the <strong>Blend Method</strong> from Interpolation to <strong>(2)</strong> <strong>Additive</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    If you are merging multiple modifiers, you typically use the <strong>Additive method</strong>.<br>
+    If you choose the <strong>interpolation method</strong>, the value will be overwritten, so use it only for special cases.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
-    <nav class="navbar bottom navbar-light bg-light">
+    <nav class="navbar fixed-bottom navbar-light bg-light">
         <a class="btn btn-light" role="button" href="../../en/GettingStarted/GS_1_6.html">< 1.6. Changing the face with Transform Modifier</a>
         <a class="btn btn-light" role="button" href="../../en/GettingStarted/GS_1_8.html">1.8. Editing Vertices using various tools ></a>
     </nav>

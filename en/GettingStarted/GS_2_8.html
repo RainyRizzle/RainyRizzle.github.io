@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>2.8. Animation Curves</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/GettingStarted/GS_2_8.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/GettingStarted/GS_2_8.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/GettingStarted/GS_2_8.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/GettingStarted.html"><span class="text-dark">Getting Started</span></a> > 2.8. Animation Curves</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">2.8. Animation Curves</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    <strong>Interpolation</strong> is the most important principle when understanding keyframe animation.<br>
+    Interpolation is the process of calculating what form to take between a keyframe and a keyframe.<br>
+    Depending on the interpolation method, even if you have the same keyframe, the result of the animation might be different.<br>
+    This page covers <strong>Animation curves</strong> that deal with interpolation methods.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_90.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select one keyframe</strong>, <strong>(2)</strong> <strong>Select the Curve tab</strong>.<br>
+    When you modify an animation curve, the type of curve appears in the timeline workspace as a bold line.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_91.jpg"/>
+    <br>
+    
+    <p>
+    You can select <strong>a Previous Curve with the previous keyframe</strong> and <strong>a Next Curve with the next keyframe</strong> based on the currently selected keyframe.<br>
+    The selected curve appears <strong>bright</strong> in the timeline workspace.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_92.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    Animation curve detail property UI<br>
+    <strong>1. Prev/Next</strong> : Select previous curve or next curve.<br>
+    <strong>2. Curve type</strong> : Determines the interpolation method of the curve. They are Linear, Smooth, and Constant.<br>
+    <strong>3. Edit curve</strong> : You can edit or view the curve. In the case of the Smooth method, the control points can be edited.<br>
+    <strong>4. Reset Smooth Setting</strong> : In the case of the Smooth method, the control point is returned to the initial value.<br>
+    <strong>5. Copy Curve to All Keyframes</strong> : Applies the current curve settings to all keyframes in the timeline layer.<br>
+    <strong>6. Copy / Paste keyframe</strong> : Temporarily copy or paste keyframe information.<br>
+    <strong>7. Export / Import posture </strong>: If it is a keyframe in the bone animation, you can save or open the posture.<br>
+    <strong>8. Delete the keyframe</strong><br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <p>
+    The animation is processed differently depending on the type of curve calculation method.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_93.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    <strong>1. Linear</strong><br>
+    Movement, size, etc. are changed uniformly.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_94.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    <strong>2. Smooth</strong><br>
+    Movement, size changes smoothly.<br>
+    The user can edit the shape of the curve.<br>
+    It is appropriate when giving acceleration or smoothly switching from keyframe.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_95.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    <strong>3. Constant</strong><br>
+    The value changes at the end point between the keyframes.<br>
+    It can give effect like sprite animation.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
+    <br><br>
+    
+    <p>
+    Let's see how it actually varies depending on the curve type.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_57.jpg"/>
+    <br>
+    
+    <p>
+    <strong>1. Linear</strong><br>
+    The color of the curve is <span class="text-danger"><strong>red</strong></span>.<br>
+    You can see that it changes at regular intervals from start to finish.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_58.jpg"/>
+    <br>
+    
+    <p>
+    <strong>2. Smooth</strong><br>
+    The color of the curve is <span class="text-primary"><strong>blue</strong></span>.<br>
+    The default state is similar to linear but there are some acceleration and deceleration at the beginning and end.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_59.jpg"/>
+    <br>
+    
+    <p>
+    <strong>2-1. Accelerated Smooth</strong><br>
+    A variation example of a Smooth curve.<br>
+    It keeps close to the starting keyframe value and then accelerates and changes quickly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_60.jpg"/>
+    <br>
+    
+    <p>
+    <strong>2-2. Decelerating Smooth</strong><br>
+    A variation example of a Smooth curve.<br>
+    You can see the speed change in the start key frame and then decelerate.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_61.jpg"/>
+    <br>
+    
+    <p>
+    <strong>3. Constant</strong><br>
+    The color of the curve is <span class="text-success"><strong>green</strong></span>.<br>
+    There are only two interpolation states: start and end.<br>
+    It is transformed based on the end point.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/GettingStarted/GS_2_7.html">< 2.7. Adding the Timeline</a>
+        <a class="btn btn-light" role="button" href="../../en/GettingStarted/GS_2_9.html">2.9. Creating Bone Animation ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>크기 반전과 드로우콜</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_InvertedScale.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_InvertedScale.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_InvertedScale.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > 크기 반전과 드로우콜</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">크기 반전과 드로우콜</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.1.6</span></h4>
+    
+    <p>
+    완성된 캐릭터의 좌우, 또는 상하를 반전하고자 하는 경우, 일반적으로 Transform의 <strong>Scale의 값의 부호를 반전</strong>하면 됩니다.<br>
+    하지만 이렇게 Scale의 값을 반전하는 것은 <strong>드로우콜(Drawcall)</strong>이 증가하는 원인이 됩니다.<br>
+    AnyPortrait의 1.1.6 버전에서 크기를 반전하더라도 드로우콜이 증가하지 않도록 개선되었습니다.<br>
+    아래의 스크린샷을 통해서 크기 반전과 드로우콜의 관계를 확인해볼 수 있습니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_511.jpg"/>
+    <br>
+    
+    <p>
+    크기가 반전되지 않은 상태입니다.<br>
+    이 캐릭터는 2개 이상의 Atlas를 및 Render Texture를 사용하기 때문에 씬에서의 드로우콜은 12로 측정됩니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_512.jpg"/>
+    <br>
+    
+    <p>
+    Scale의 X값을 -1로 반전시킨 상태입니다.<br>
+    캐릭터의 좌우가 반전되어 렌더링이 됩니다.<br>
+    드로우콜 배칭(Drawcall Batching)이 해제되어 드로우콜이 증가하는 것이 일반적입니다.<br>
+    하지만 여기서는 크기가 반전된 상태에서도 드로우콜이 동일하게 12로 측정됩니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_513.jpg"/>
+    <br>
+    
+    <p>
+    Scale의 Y값을 반전하더라도 드로우콜은 12로 동일하게 유지됩니다.<br>
+    이제 ​게임을 만들 때, 최적화를 걱정하지 말고 크기 반전을 하면 되겠습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_InspectorUI.html">< 인스펙터 UI</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_RootUnit.html">루트 유닛 등록과 해제 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

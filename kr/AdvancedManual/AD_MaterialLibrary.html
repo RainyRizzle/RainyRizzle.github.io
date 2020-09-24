@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>재질 라이브러리</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_MaterialLibrary.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_MaterialLibrary.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_MaterialLibrary.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > 재질 라이브러리</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">재질 라이브러리</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.1.8</span></h4>
+    
+    <p>
+    AnyPortrait의 기본적인 렌더링 목표는 "빛이 적용되지 않고 일러스트의 원색을 표현하는 것"입니다.<br>
+    그렇지만 프로젝트에 따라서 캐릭터가 빛의 영향을 받을 필요도 있으며, 사용자가 작성한 쉐이더(Shader)로 구현된 다양한 효과가 구현될 필요도 있을 것입니다.<br>
+    AnyPortrait v1.1.7 에 이러한 사용자들의 요구를 충족하기 위한 기능이 추가되었습니다.<br>
+    <strong>"재질 라이브러리 (Material Library)"</strong>를 이용하여 다양한 재질을 설정하여 Bake를 할 수 있으며, 재질의 초기값을 설정하는 것도 가능합니다.<br>
+    또한, 자주 사용되는 <strong>"재질 세트 (Material Set)"</strong>를 프리셋으로 설정하여, 다른 캐릭터에 쉽게 적용할 수도 있습니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>재질 라이브러리에서 재질 세트를 만들고 적용하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_571.jpg"/>
+    <br>
+    
+    <p>
+    Directional Light, Point Light등이 배치되고 Ambient Color가 검은색보다 밝게 설정된 유니티 씬입니다.<br>
+    이 때, 기본적인 방식으로 Bake된 AnyPortrait로 작성된 캐릭터가 지나치게 밝게 렌더링되는 문제가 발생합니다.<br>
+    이전에는 이러한 경우 사용자가 작성한 Shader를 일일이 메시에 적용하는 방식으로 문제를 해결해야 했습니다. (<a href="../../kr/AdvancedManual/AD_MeshShader.html">관련 페이지</a>)<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_572.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait 에디터를 엽니다.<br>
+    <strong>(1)</strong> <strong>루트 유닛(Root Unit)</strong>을 선택합니다.<br>
+    <strong>(2)</strong> 에디터 상단에 추가된 <strong>Material Library 버튼</strong>을 누릅니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_573.jpg"/>
+    <br>
+    
+    <p>
+    <strong>"재질 라이브러리 (Material Library)"</strong> 윈도우가 열립니다.<br>
+    재질 라이브러리는 <strong>"재질 세트 (Material Set)"</strong>를 생성하고 변경할 수 있는 기능입니다.<br>
+    (재질 라이브러리 인터페이스에 대한 자세한 설명은 이 페이지 하단에서 보실 수 있습니다.)<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortrait의 메시들은 조건에 따라 서로 다른 Shader가 적용됩니다.<br>
+    따라서 여러 개의 Shader를 하나의 그룹으로 묶어서 관리를 해야하는데, 이것을 "재질 세트"로 부릅니다.<br>
+    어떤 Shader가 적용되는지에 관한 조건은 다음과 같습니다.<br>
+    - <strong>Gamma 또는 Linear 색상 공간</strong><br>
+    - <strong>클리핑 여부</strong><br>
+    - <strong>4개의 블렌딩 방식</strong><br>
+    </p>
+    <br>
+    
+    <p>
+    그리고 클리핑 메시를 위한 Alpha Mask Shader를 포함합니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_574.jpg"/>
+    <br>
+    
+    <p>
+    <strong>"재질 라이브러리"</strong>는 위와 같이 구성됩니다.<br>
+    <strong>(1)</strong> <strong>재질 세트</strong> : 현재의 캐릭터에 저장된 재질 세트들이 표시되며, 재질 세트를 생성할 수 있는 버튼이 있습니다.<br>
+    <strong>(2)</strong> <strong>프리셋</strong> : 다른 캐릭터에도 적용하기 위해 공통적으로 공유되는 프리셋들이 나타납니다. 프리셋을 생성하거나, 미리 제공된 패키지로부터 프리셋을 만들 수 있는 버튼들이 있습니다.<br>
+    <strong>(3)</strong> <strong>재질 세트 속성</strong> : 선택한 재질 세트의 속성들이 있습니다. 이름과 아이콘, Shader들과 재질의 프로퍼티등을 설정할 수 있습니다.<br>
+    <strong>(4)</strong> <strong>재질 세트 편집 기능</strong> : 프리셋과 연결하여 값을 동기화하거나 다른 재질세트를 복제하는 기능 등이 제공됩니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_575.jpg"/>
+    <br>
+    
+    <p>
+    현재는 재질 프리셋이 기본값인 "<strong>Unlit</strong>"밖에 없습니다.<br>
+    패키지 형태로 제공되는 재질 세트 프리셋을 설치해봅시다.<br>
+    <strong>(1)</strong> <strong>Unpack Advanced Presets 버튼</strong>을 누릅니다.<br>
+    <strong>(2)</strong> 패키지가 설치되면 <strong>재질 라이브러리를 다시 시작해야한다는 메시지</strong>가 나타납니다.<br>
+    <strong>확인 버튼</strong>을 누르면 재질 라이브러리가 종료되고 패키지가 설치됩니다.<br>
+    설치가 종료되면 다시 재질 라이브러리를 엽니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_576.jpg"/>
+    <br>
+    
+    <p>
+    이제 다양한 <strong>재질 세트 프리셋</strong>들이 설치되었습니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_626.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_627.jpg"/>
+    <br>
+    
+    <p>
+    v1.1.8에서 프리셋을 선택하는 버튼이 변경되었습니다.<br>
+    <strong>(1)</strong> 설치하고자 하는 재질 세트 프리셋을 선택합니다.<br>
+    <strong>(2)</strong> Unpack Preset 버튼을 누르면 선택된 프리셋이 설치됩니다.<br>
+    - LWRP Unlit, LWRP 2D 프리셋에 대한 설명은 <a href="../../kr/AdvancedManual/AD_LWRP.html">관련 페이지</a>를 참고하세요.<br>
+    - VR 프리셋에 대한 설명은 <a href="../../kr/AdvancedManual/AD_VR.html">VR와 관련된 페이지</a>를 참고하세요.<br>
+    - Keep Alpha 프리셋에 대한 설명은 <a href="../../kr/AdvancedManual/AD_RenderTexture.html">렌더링 텍스쳐와 관련된 페이지</a>를 참고하세요.<br>
+    - URP 프리셋에 대한 설명은 <a href="../../kr/AdvancedManual/AD_URP.html">관련 페이지</a>를 참고하세요.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_577.jpg"/>
+    <br>
+    
+    <p>
+    이어서, 새로운 재질 세트를 만들어봅시다.<br>
+    <strong>(3)</strong> <strong>Make Material Set 버튼</strong>을 누릅니다.<br>
+    <strong>(4)</strong> 재질 세트를 쉽게 만들기 위해서 프리셋을 선택할 수 있습니다. 이 단계에서는 "<strong>Lit</strong>" 재질 프리셋을 선택해봅시다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_578.jpg"/>
+    <br>
+    
+    <p>
+    새로운 재질 세트가 생성되었으며, 그 속성들은 "Lit" 프리셋을 기반으로 자동으로 작성됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_579.jpg"/>
+    <br>
+    
+    <p>
+    아직 이 재질 세트는 생성만 되었을 뿐, 실제로 적용되지는 않은 상태입니다.<br>
+    생성된 Lit 재질 세트가 기본값이 되어야 Bake를 했을 때 실제로 적용이 됩니다.<br>
+    <strong>(5)</strong> <strong>Default Material 버튼</strong>을 눌러서 Lit 재질 세트가 <strong>기본값</strong>이 되도록 설정합니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_580.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait 에디터에서는 재질에 따른 렌더링을 지원하지 않습니다.<br>
+    Bake를 하여 유니티 씬에서 어떻게 보여지는지 확인해봅시다.<br>
+    Bake 다이얼로그를 열고 Bake 버튼을 누릅니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_581.jpg"/>
+    <br>
+    
+    <p>
+    이제 다양한 라이트에 따라서 예쁘게 렌더링되는 캐릭터를 보실 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>재질 프리셋을 이용하여 다양하게 렌더링하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_582.jpg"/>
+    <br>
+    
+    <p>
+    <strong>"Lit 재질 프리셋"</strong> 외에도 다양한 재질 프리셋들이 제공됩니다.<br>
+    이 재질들을 하나씩 이용하여 렌더링을 해봅시다.<br>
+    <strong>(1)</strong> 앞서 만든 <strong>"Lit" 재질 세트</strong>를 선택합니다.<br>
+    <strong>(2)</strong> <strong>Change 버튼</strong>을 누릅니다.<br>
+    <strong>(3)</strong> 다른 재질 프리셋을 선택하여 동기화할 수 있습니다. 이번에는 "<strong>Bumped</strong>"재질을 선택해봅시다.<br>
+    <strong>(4)</strong> 선택한 프리셋과 동일하게 되도록 속성들을 모두 변경할 것인지 물어봅니다. <strong>확인 버튼</strong>을 누릅니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_583.jpg"/>
+    <br>
+    
+    <p>
+    Bumped 재질 프리셋의 속성들과 동일하도록 재질 세트의 값들이 변경되었습니다.<br>
+    필요한 경우 <strong>재질 세트의 이름</strong>과 <strong>아이콘</strong> 등을 수정할 수 있습니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_585.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bumped 재질</strong>은 <strong>노멀맵 (또는 범프맵)</strong>을 필요로 합니다.<br>
+    재질의 프로퍼티에 노멀맵을 입력해주어야 합니다.<br>
+    <strong>(5)</strong> 재질 세트 속성 영역을 스크롤하면 아래쪽에 <strong>"재질 프로퍼티"</strong>들이 있습니다. 여기에 <strong>"_BumpMap"</strong> 프로퍼티에 <strong>노멀맵</strong>을 적용해야합니다.<br>
+    <strong>(6)</strong> 노멀맵은 일반적으로 푸른색의 텍스쳐로 작성되며, 외부의 툴을 이용하여 사용자가 직접 만들어야 합니다.<br>
+    ​<br>
+    <span class="text-primary"><strong>참고</strong></span><br>
+    이 페이지에서는 노멀맵과 같은 텍스쳐를 제작하는 방식은 다루지 않습니다.<br>
+    "2D Normal Map"의 키워드로 검색을 하면 다양한 제작 방식들이 소개됩니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_586.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Lit 재질</strong>과 비슷해보이지만, <strong>부피감</strong>이 추가된 렌더링 결과물을 보실 수 있습니다.<br>
+    대부분의 라이팅은 <strong>노멀 벡터</strong>를 필요로 하므로, 이하의 모든 재질은 <strong>Bumped 재질</strong>을 기반으로 작성되었습니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_587.jpg"/>
+    <br>
+    
+    <p>
+    이번에는 "<strong>Bumped Specular</strong>" 재질을 적용해봅시다.<br>
+    위에서 설명된 것과 동일한 과정으로 재질을 선택하고 적용하면 됩니다.<br>
+    <strong>(1)</strong> <strong>Change 버튼</strong>을 누릅니다.<br>
+    <strong>(2)</strong> <strong>Bumped Specular 프리셋</strong>을 선택합니다.<br>
+    <strong>(3)</strong> 재질 프로퍼티 항목에 "<strong>_SpecularPower</strong>"와 "<strong>_SpecularMap</strong>" 프로퍼티가 추가되었습니다.<br>
+    "<strong>_SpecularPower</strong>" 프로퍼티는 Specular의 Shininess를 계산하는 제곱수입니다. 숫자가 크면 작고 선명한 반짝임이 나타납니다.<br>
+    "<strong>_SpecularMap</strong>" 프로퍼티는 Specular의 계산에 사용될 텍스쳐입니다. 여기에 적용되는 텍스쳐의 <strong>RGB 채널</strong>은 "더하기 식"으로 적용될 <strong>Specular의 색상</strong>을 의미하며, <strong>Alpha 채널</strong>은 <strong>_SpecularPower에 곱해질 파라미터</strong>를 의미합니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_588.jpg"/>
+    <br>
+    
+    <p>
+    이제 재질의 빛의 방향에 따라서 더욱 반짝이는 것을 볼 수 있습니다.<br>
+    (일반적으로 Specular의 세기는 빛의 방향과 카메라의 방향에 따라서 바뀌는데, AnyPortrait로 작성된 캐릭터는 빌보드 방식으로 동작하므로 아쉽게도 Specular의 효과가 크지 않습니다.)<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_589.jpg"/>
+    <br>
+    
+    <p>
+    같은 방식으로 "<strong>Bumped Specular Emission</strong>" 재질을 적용해보았습니다.<br>
+    Emission 재질은 <strong>자체 발광 효과</strong>가 더해지는 것이 특징입니다.<br>
+    (눈동자와 총, 옷의 금속 재질 부분이 밝게 렌더링된 것을 보실 수 있습니다.)<br>
+    </p>
+    <br>
+    
+    <p>
+    이 재질에는 다음의 두개의 프로퍼티가 더 추가됩니다.<br>
+    <strong>"_EmissionMap"</strong> 프로퍼티는 <strong>발광되는 색상(RGB)</strong> 정보를 가진 텍스쳐입니다. 렌더링에서는 "더하기 식"으로 적용됩니다.<br>
+    <strong>"_EmissionColor"</strong> 프로퍼티는 <strong>"_EmissionMap"</strong>의 색상에 곱해지는 색상 파라미터입니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_590.jpg"/>
+    <br>
+    
+    <p>
+    "<strong>Bumped Rimlight</strong>" 재질도 꽤 예쁜 렌더링 결과를 보여줍니다.<br>
+    <strong>림 라이트(Rim Light)</strong>는 후면으로부터의 반사광을 표현한 기법입니다.<br>
+    다음의 프로퍼티들이 추가됩니다.<br>
+    <strong>"_RimPower"</strong>는 <strong>림 라이트 영역의 크기</strong>를 설정하는 프로퍼티입니다.<br>
+    제곱 방식으로 적용되기 때문에, 값이 작을 수록 넓게 나타납니다.<br>
+    <strong>"_RimColor"</strong>는 <strong>림 라이트의 색상(RGB)</strong>입니다. 더하기 식으로 적용됩니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_591.jpg"/>
+    <br>
+    
+    <p>
+    "<strong>Bumped Ramp</strong>" 재질은 가장 특별한 결과를 보여주는 흥미로운 재질입니다.<br>
+    라이팅되는 방식을 <strong>그라디언트 맵(Gradient Map)</strong>으로 지정할 수 있습니다.<br>
+    "<strong>_RampMap</strong>" 프로퍼티에 그라디언트 맵을 적용합니다.<br>
+    이 텍스쳐는 이미지마다 지정될 필요가 없기에, 텍스쳐 프로퍼티의 방식이 "<strong>Common Texture</strong>"인 것을 보실 수 있습니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_592.jpg"/>
+    <br>
+    
+    <p>
+    "<strong>Bumped Ramp</strong>" 재질을 이용하여 꽤 인위적이고 인상적인 렌더링 결과물을 만들 수 있습니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>커스텀 쉐이더가 적용된 재질 세트 만들기</h3>
+    <br>
+    
+    <p>
+    사용자가 작성한 쉐이더(Shader)를 적용하여 재질을 만들 수 있습니다.<br>
+    이 페이지에서는 작성된 간단한 이펙트용 쉐이더를 재질 세트에 넣어서 적용해보는 과정을 설명합니다.<br>
+    (여기서 설명된 쉐이더 에셋은 AnyPortrait 패키지에 포함되지 않습니다.)<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_593.jpg"/>
+    <br>
+    
+    <p>
+    기존의 재질 세트로부터 복제하여 새로운 재질 세트를 만들어봅시다.<br>
+    <strong>(1)</strong> 현재 사용 중인 재질 세트를 선택한 후, <strong>Duplicate 버튼</strong>을 눌러서 재질 세트를 복제합니다.<br>
+    <strong>(2)</strong> 리스트에 <strong>복제된 재질 세트</strong>가 추가되었습니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_594.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> <strong>이름</strong>과 <strong>아이콘</strong>을 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_595.jpg"/>
+    <br>
+    
+    <p>
+    작성한 쉐이더를 재질 세트에 적용합니다.<br>
+    조건에 따라서 총 16개의 쉐이더들을 각각 만들고 적용해야하는데, 이펙트인 경우 굳이 모든 경우에 대해서 만들 필요는 없습니다.<br>
+    <strong>(4)</strong> 작성한 쉐이더를 가장 기본이 되는 "<strong>Gamma Color Space / Basic Rendering / Alpha Blend</strong>"에 적용합니다.<br>
+    ​<br>
+    이 페이지에서 사용된 쉐이더는 다음과 같이 작성되었습니다.<br>
+    프리셋으로 제공되는 "Bumped Ramp" 재질의 쉐이더에 약간의 코드를 추가한 쉐이더입니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "CustomShader/Character FX"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_BumpMap("Bump Texture (Normalmap)", 2D) = "bump" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_RampMap("Ramp Gradient Map (RGB)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_NoiseMap</strong>("Gray Noise Map (Gray)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_FadeValue</strong>("Fade Value (0~1)", Float) = 0<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_FadeColor1</strong>("Fade Color 1 (RGB)", Color) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_FadeColor2</strong>("Fade Color 2 (RGB)", Color) = (1, 1, 0, 1)<br>
+    &emsp;&emsp;}&emsp;&emsp;<br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags{ "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <br>
+    &emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma surface surf SimpleColor alpha<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma target 3.0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <br>
+    &emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _BumpMap;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _RampMap;<br>
+    &emsp;&emsp;&emsp;&emsp;// Custom Code<br>
+    &emsp;&emsp;&emsp;&emsp;//--------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D <strong>_NoiseMap</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;float <strong>_FadeValue</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;half4 <strong>_FadeColor1</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;half4 <strong>_FadeColor2</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;//--------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;struct Input<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv_MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv_BumpMap;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 color : COLOR;<br>
+    &emsp;&emsp;&emsp;&emsp;};<br>
+    &emsp;&emsp;&emsp;&emsp;half4 LightingSimpleColor(SurfaceOutput s, half3 lightDir, half atten)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 c;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half nl = max(0, dot(s.Normal, lightDir));<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half halfDiff = (nl * 0.5f) + 0.5f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half3 rampColor = tex2D(_RampMap, float2(halfDiff, 0.5f)).rgb;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb = saturate(s.Albedo * _LightColor0.rgb * (rampColor * atten));<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb + s.Emission;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a = s.Alpha;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return c;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;void surf(Input IN, inout SurfaceOutput o)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 c = tex2D(_MainTex, IN.uv_MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb *= _Color.rgb * 2.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Alpha = c.a * _Color.a;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Albedo = c.rgb;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Custom Code<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//---------------------------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Emission = half4(0, 0, 0, 0);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half noise = tex2D(<strong>_NoiseMap</strong>, IN.uv_MainTex).r;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;if (noise < <strong>_FadeValue</strong> - 0.03f)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Alpha = 0.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half smoothFade = (noise - <strong>_FadeValue</strong>) / 0.6f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;if (noise < <strong>_FadeValue</strong>)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Emission = <strong>_FadeColor2</strong>.rgb;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;else if (noise < <strong>_FadeValue</strong> + 0.6f)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Albedo = (o.Albedo * <strong>_FadeColor1</strong>.rgb) * (1.0f - smoothFade) + o.Albedo * smoothFade;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//---------------------------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    이 쉐이더 코드에 맞게 프로퍼티를 설정해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_596.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(5)</strong> <strong>Add Property 버튼</strong>을 누릅니다.<br>
+    <strong>(6)</strong> <strong>새로운 프로퍼티</strong>가 추가된 것을 볼 수 있습니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_597.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(7)</strong> <strong>프로퍼티의 이름</strong>을 "<strong>_NoiseMap</strong>"으로 설정하고, "<strong>Texture</strong>" 타입으로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_598.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(8)</strong> 이 텍스쳐는 이미지에 관계없이 공통으로 적용되어야 하므로, "<strong>Common Texture</strong>" 방식으로 변경합니다.<br>
+    <strong>(9)</strong> 효과를 위해 제작된 <strong>노이즈 텍스쳐</strong>를 적용합니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_599.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(10)</strong> 같은 방식으로 Float 타입의 "<strong>_FloatValue</strong>", Color 타입의 "<strong>_FadeColor1</strong>"과 "<strong>_FadeColor2</strong>" 프로퍼티를 추가합니다.<br>
+    추가된 프로퍼티에 적절한 값들을 설정합니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_600.jpg"/>
+    <br>
+    
+    <p>
+    이 재질 세트를 렌더링에 적용해봅시다.<br>
+    <strong>(11)</strong> 재질의 <strong>Default Material</strong> 설정을 <strong>ON</strong>으로 변경하고 Bake를 합니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_601.jpg"/>
+    <br>
+    
+    <p>
+    캐릭터가 사라지거나 나타나는 효과를 볼 수 있습니다.<br>
+    다른 스크립트를 이용하여 "<strong>_FadeValue</strong>"를 제어하면 애니메이션되는 효과를 만들 수 있습니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <p>
+    구현 방법은 아래의 예시를 참고해보시면 좋습니다.<br>
+    아래의 예시는 다음과 같이 구동됩니다.<br>
+    - <strong>A키</strong>와 <strong>S키</strong>를 누르면 <strong>fadeValue</strong> 변수가 서서히 증가되거나 감소됩니다.<br>
+    - <span class="text-danger"><strong>SetMeshCustomFloatAll</strong></span> 함수를 이용하여 재질의 <strong>"_FadeValue"</strong> 프로퍼티의 값을 <strong>fadeValue</strong> 값으로 갱신합니다.<br>
+    ​(함수에 대한 자세한 설명은 <a href="../../kr/Script/SC_Mesh.html">관련 페이지</a>를 참고하세요.)<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using </span>UnityEngine;<br>
+    <span class="text-primary">using </span><strong>AnyPortrait</strong>;<br>
+    ​<br>
+    <span class="text-primary">public class </span><span class="text-success">CharacterFadeTester </span>: <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;&emsp;&emsp;   <span class="text-primary">public </span><span class="text-success">apPortrait </span><strong>portrait</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;   <span class="text-primary">public float </span><strong>fadeValue </strong>= 0.5f;<br>
+    ​<br>
+    &emsp;&emsp;&emsp;&emsp;   <span class="text-primary">void</span> Update ()<br>
+    &emsp;&emsp;&emsp;&emsp;   {<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKey(<span class="text-success">KeyCode</span>.A) )<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  {<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <strong>fadeValue </strong>-= <span class="text-success">Time</span>.deltaTime * 0.5f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <strong>portrait</strong>.<span class="text-danger"><strong>SetMeshCustomFloatAll</strong></span>(<strong>fadeValue</strong>, <span class="text-danger"><strong>"_FadeValue"</strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  }<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKey(<span class="text-success">KeyCode</span>.S) )<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  {<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <strong>fadeValue </strong>+= <span class="text-success">Time</span>.deltaTime * 0.5f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <strong>portrait</strong>.<span class="text-danger"><strong>SetMeshCustomFloatAll</strong></span>(<strong>fadeValue</strong>, <span class="text-danger"><strong>"_FadeValue"</strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  }<br>
+    &emsp;&emsp;&emsp;&emsp;   }<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/qdywjDvkrMw" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    <p>
+    ​이 페이지에서 설명된 모든 재질들을 동영상으로 보실 수 있습니다.<br>
+    또한, 이 페이지에서 설명된 텍스쳐는 아래와 같습니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_602.jpg"/>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>프리셋으로 저장하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_603.jpg"/>
+    <br>
+    
+    <p>
+    작성한 재질 세트를 프리셋으로 만들어두면, 다른 캐릭터에도 빠르게 재질을 적용할 수 있습니다.<br>
+    <strong>(1)</strong> 프리셋으로 저장하고자 하는 <strong>재질 세트를 선택</strong>합니다.<br>
+    <strong>(2)</strong> <strong>Register as a Preset 버튼</strong>을 누릅니다.<br>
+    <strong>(3)</strong> 재질 세트가 <strong>프리셋</strong>으로 복사되어 등록된 것을 볼 수 있습니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>일부의 메시만 다른 재질 세트를 적용하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_604.jpg"/>
+    <br>
+    
+    <p>
+    메시를 선택하여 기본값이 아닌 다른 재질 세트를 적용할 수 있습니다.<br>
+    <strong>(1)</strong> <strong>메시 그룹</strong>을 선택합니다.<br>
+    <strong>(2)</strong> <strong>Setting 탭</strong>을 선택합니다.<br>
+    <strong>(3)</strong> <strong>대상이 되는 메시</strong>를 선택합니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_605.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Use Default Material Set 버튼</strong>을 눌러서 <strong>OFF 상태</strong>로 변경합니다.<br>
+    <strong>(2)</strong> <strong>Change 버튼</strong>을 누릅니다.<br>
+    <strong>(3)</strong> 적용하고자 하는 <strong>재질 세트</strong>를 선택하고 <strong>Select 버튼</strong>을 누릅니다.<br>
+    ​<br>
+    이 단계까지 설정하면 재질 세트가 적용이 됩니다.<br>
+    만약 이 메시에 대해서 재질 세트의 프로퍼티를 다르게 적용하고 싶다면 다음의 단계까지 수행하시면 됩니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_606.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Add Custom Property 버튼</strong>을 누릅니다.<br>
+    새로운 커스텀 프로퍼티가 추가되었습니다.<br>
+    이 프로퍼티는 재질 세트나 커스텀 쉐이더의 설정에 관계없이 유니티 씬에서 적용됩니다.<br>
+    (재질 세트의 프로퍼티 설정보다 우선시 됩니다.)<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_607.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> <strong>프로퍼티의 이름과 타입, 값</strong>을 설정합니다.<br>
+    여기서는 앞서 설정과 같이 Color 타입의 "<strong>_FadeColor1</strong>"으로 설정했습니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_608.jpg"/>
+    <br>
+    
+    <p>
+    같은 방식으로 "<strong>_FadeColor2</strong>" 프로퍼티도 추가했습니다.<br>
+    재질 세트의 설정과 다른 색상으로 설정했으므로 다르게 렌더링 될 것입니다.<br>
+    ​<br>
+    아마도 재질 설정을 다른 메시에도 동일하게 적용할 필요가 있을 것입니다.<br>
+    다음의 설명을 확인해보세요.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_609.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Copy Settings to other meshes 버튼</strong>을 누릅니다.<br>
+    이 기능은 메시의 설정을 다른 메시로 복사하는 기능이며, 재질 설정을 포함하여 다양한 설정들을 선택적으로 복사할 수 있습니다.<br>
+    <strong>(2)</strong> <strong>설정이 복사될 메시들을 선택</strong>합니다.<br>
+    <strong>(3)</strong> 여기서는 재질 설정과 커스텀 프로퍼티를 복사하고자 하므로 <strong>Material Set</strong>과 <strong>Custom Material Properties</strong>를 체크합니다.<br>
+    <strong>(4)</strong> <strong>Apply 버튼</strong>을 누릅니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_612.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>를 하고 유니티 씬에서 렌더링 결과를 확인해보면, 선택된 메시만 재질이 다르게 적용된 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>재질 라이브러리 인터페이스</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_613.jpg"/>
+    <br>
+    
+    <p>
+    <strong>1. 재질 세트 리스트</strong><br>
+    : 캐릭터에 적용할 수 있는 <strong>재질 세트</strong>들과 재질 세트를 생성할 수 있는 <strong>Make Material Set 버튼</strong>이 있습니다.<br>
+    ​ <br>
+    <strong>2. 프리셋 리스트</strong><br>
+    : <strong>재질 세트 프리셋</strong>들이 있습니다. 프리셋을 생성하는 버튼들이 있습니다.<br>
+    - <strong>Make Material Preset</strong> : 새로운 프리셋을 생성합니다.<br>
+    - <strong>Unpack Advanced Presets</strong> : 위에서 소개된 다양한 재질이 포함된 패키지를 설치하여 프리셋들을 추가합니다.<br>
+    - <strong>Unpack LWRP Preset</strong> : Lightweight Render Pipeline(LWRP)용 재질 1종이 포함된 패키지를 설치합니다.<br>
+    ​ <br>
+    <strong>3. 재질 편집 기능</strong><br>
+    : 선택된 재질 세트를 편집하는 기능들입니다.<br>
+    - <strong>연결된 프리셋</strong>과 <strong>Change, Restore</strong> : 이 재질 세트가 프리셋이 아니라면 프리셋과 연동할 수 있습니다. Change 버튼을 눌러서 다른 프리셋을 선택하여 연결할 수 있으며, Restore 버튼을 눌러서 프리셋과 동일한 값을 가지도록 동기화할 수 있습니다.<br>
+    - <strong>Duplicate </strong>: 선택된 재질 세트를 복제합니다.<br>
+    - <strong>Register as a Preset</strong> : 이 재질 세트를 프리셋으로 등록합니다.<br>
+    - <strong>Remove </strong>: 이 재질 세트를 삭제합니다. 기본값인 "Unlit" 프리셋은 삭제할 수 없습니다.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    <strong>1. 이름, 아이콘, Ambient 색상</strong><br>
+    : 재질 세트의 이름과 아이콘 타입입니다. 이 재질 세트가 "검은색의 Ambient"를 필요로 한다고 체크하면, Bake시 Ambient 색상에 따라 안내 메시지가 나타납니다.<br>
+    ​ <br>
+    <strong>2. 아이콘 이미지</strong><br>
+    <strong>3. Default Material 설정</strong><br>
+    : 재질 세트를 기본값으로 설정하면, 별도의 설정이 없는 모든 메시에 자동으로 이 재질 세트가 적용됩니다.<br>
+    ​ <br>
+    <strong>4. 쉐이더 에셋들</strong><br>
+    : 색상 공간, 클리핑 여부, 블렌딩 타입에 따라 상세하게 어떤 쉐이더 에셋을 적용할지 설정합니다.<br>
+    ​ <br>
+    <strong>5. 예약된 쉐이더 프로퍼티</strong><br>
+    : AnyPortrait에서 사용하는 4개의 프로퍼티들입니다. 이 프로퍼티는 사용자가 제어할 수 없습니다.<br>
+    ​ <br>
+    <strong>6. 이미지별로 지정된 텍스쳐 프로퍼티</strong><br>
+    : 이미지마다 각각의 텍스쳐를 설정할 수 있습니다. <strong>Texture per Image</strong> 버튼을 눌러서 변경할 수 있습니다.<br>
+    ​ <br>
+    <strong>7. 공통 텍스쳐 프로퍼티</strong><br>
+    : 이미지에 관계없이 1개의 텍스쳐를 프로퍼티로 지정합니다. <strong>Common Texture</strong> 버튼을 눌러서 변경할 수 있습니다.<br>
+    ​ <br>
+    <strong>8. Float, Int, Vector, Color 타입의 프로퍼티</strong><br>
+    : 텍스쳐가 아닌 타입의 프로퍼티입니다. 왼쪽부터 다음과 같은 요소들이 있습니다.<br>
+    <strong>- 활성/비활성 체크박스</strong> : 이 체크박스를 끄면 Bake에 적용되지 않습니다.<br>
+    <strong>- 이름</strong> : 프로퍼티의 이름이며, 동일한 이름이 쉐이더에 있어야 적용됩니다.<br>
+    <strong>- 타입</strong> : 프로퍼티의 타입입니다. Float, Int, Vector, Color, Texture 타입을 지원합니다.<br>
+    <strong>- 값</strong> : 프로퍼티의 값입니다.<br>
+    <strong>- 삭제 버튼</strong> : 프로퍼티를 삭제합니다.<br>
+    ​ <br>
+    <strong>9. Add Property</strong><br>
+    : 프로퍼티를 추가합니다.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_614.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_CameraScene.html">< 씬에서의 카메라 설정</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_Shortcuts.html">단축키 모음 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

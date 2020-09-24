@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Bakeダイアログ</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_BakeDialog.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_BakeDialog.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_BakeDialog.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > Bakeダイアログ</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Bakeダイアログ</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.1.8</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_398.jpg"/>
+    <br>
+    
+    <p>
+    v1.1.0以降、BakeダイアログのUIが部分的に変更されました。<br>
+    画面の上部にある<strong>Bakeボタン</strong>を押すと、Bakeダイアログボックスが表示されます。<br>
+    ダイアログの上部には、 <strong>「Bake」</strong><strong>タブ</strong>と <strong>「Setting」</strong><strong>タブ</strong>があります。<br>
+    「Setting」タブには、Bake用のapPortraitの設定が含まれています。<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    <strong>[ Bakeタブ ]</strong><br>
+    <strong>1. Portrait</strong> : apPortraitは現在編集中です。<br>
+    <strong>2. Bake Scale</strong> : AnyPortraitの座標系はUnityの座標系とは異なるので、これに合うのはサイズの比です。<br>
+    <strong>3. Z Per Depth</strong> : 各メッシュのZ間隔。 小さすぎると「Z-Fighting」の問題が発生することがあります。<br>
+    <strong>4. Bake </strong>: BakeしてUnityに出す。<br>
+    <strong>5. Optimized Baking Target</strong><br>
+    <strong>6. Optimized Bake </strong>: 最適化されたBakeをしてUnityに出す。<br>
+    ​<br>
+    <strong>[ Settingタブ ]</strong><br>
+    <strong>7. Color Space</strong> <br>
+    : Unityの色空間（Gamma / Linear）に合わせてBakeをすることができます。<br>
+    ​<br>
+    <strong>8. Sorting Layer / Order</strong> <br>
+    : メッシュのレンダリング順序を決定するオプションであり、「Sorting Order」を割り当てる方法を決定することができます。 （<a href="../../jp/AdvancedManual/AD_SortingLayer.html">関連ページ</a>）<br>
+    ​<br>
+    <strong>9. Mecanim 設定</strong><br>
+    : 「Mecanim」を使用するかどうかと、「Animator」に含まれる「Animation Clipが生成されるパス」を設定することができます。<br>
+    ​<br>
+    <strong>10. Important 設定</strong> <br>
+    : 「Important」をオフにすると、指定した「FPS」分だけ更新をします。<br>
+    ゲームなどで重要でないオブジェクトやNPCの場合、最適化のために「Important」をオフにして更新を制限することができます。基本的にはオンになっています。 （<a href="../../jp/AdvancedManual/AD_ImportantOption.html">関連ページ</a>）<br>
+    ​<br>
+    <strong>11. Billboard</strong> <br>
+    : 正面が常にカメラを向くように強制する設定です。<br>
+    「ビルボード」が有効な場合、「Perspectiveカメラ」を利用することが可能で、キャラクターを3Dシーンに配置することが可能です。 （<a href="../../jp/AdvancedManual/AD_BillboardPers.html">関連ページ</a>）<br>
+    ​<br>
+    <strong>12. Shadow 設定</strong> <br>
+    : 「Mesh Renderer」の「Shadow設定」を一括して指定することができます。<br>
+    （基本的に提供されるShaderでは「Receive Shadows」をつけても影が適用されません。）<br>
+    ​<br>
+    <strong>13. Render Pipeline</strong><br>
+    : プロジェクトの「Render Pipeline（Default / Scriptable Render Pipeline）」に合わせて設定するためのオプションです。<br>
+    （Unity 2019からサポートされているオプションです。）<br>
+    このオプションは、クリッピングメッシュが正常に描画されるよう作成されます。<br>
+    「Render Pipeline」と「マテリアル」に関する設定は、次のページを参照してください。<br>
+    （<a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">マテリアルライブラリ</a> / <a href="../../jp/AdvancedManual/AD_LWRP.html">Lightweight Render Pipeline</a>）<br>
+    ​<br>
+    <strong>14. VR Option</strong><br>
+    : VRを利用したり、複数のカメラを利用する場合のレンダリングオプションです。<br>
+    このオプションは、クリッピングメッシュとビルボード計算が実行環境に合わせて作成します。<br>
+    VRの説明は、次のページを参照してください。<br>
+    （<a href="../../jp/AdvancedManual/AD_VR.html">VRにビルド</a>）<br>
+    ​<br>
+    <strong>15. Set Ambient Light to Black color</strong><br>
+    : Unityシーンの「Ambient色」を黒に作ってキャラクターが過度に明るく表示されることを防止します。<br>
+    ​<br>
+    ​<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_769.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Ambient Light設定をAnyPortraitに合わせて変更</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.1.2</span></h4>
+    
+    <p>
+    AnyPortraitでキャラクターを作成し、「Bake」をすると、文字が過度に明るく表示される経験を一度経験し見たことです。<br>
+    これAnyPortraitのキャラクターがシーンの「<strong>Ambient Light</strong>」の適用を受けるためです。<br>
+    正しく適用するためには、「Ambient Light」を黒に変えなければならが、Bakeダイアログでこの作業を迅速に行うことができます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_414.jpg"/>
+    <br>
+    
+    <p>
+    Bake直後にUnityシーンでのレンダリング画面です。<br>
+    元の色と異なって、過度に明るくレンダリングがされていることを見ることができます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_415.jpg"/>
+    <br>
+    
+    <p>
+    Bakeダイアログの「Setting」タブで「<strong>Set Ambient Light to Black Color</strong>」ボタンをクリックします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_416.jpg"/>
+    <br>
+    
+    <p>
+    Ambient設定が変わり、通常の明るさでレンダリングがされていることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_RootUnit.html">< 「ルートユニット」の登録と解放</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_ScreenCapture.html">画面キャプチャ ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>2.3. クリッピングレイヤー</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/GettingStarted/GS_2_3.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/GettingStarted/GS_2_3.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/GettingStarted/GS_2_3.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/GettingStarted.html"><span class="text-dark">入門ガイド</span></a> > 2.3. クリッピングレイヤー</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">2.3. クリッピングレイヤー</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_15.jpg"/>
+    <br>
+    
+    <p>
+    メッシュグループを開くと、「<strong>Teeth</strong>」と「<strong>Tongue</strong>」のメッシュの前に「<strong>折りたたまれた矢印形のアイコン</strong>」があることがわかります。<br>
+    「<strong>Teeth</strong>」または「<strong>Tongue</strong>」メッシュを選択すると、メッシュが部分的にしかレンダリングされていないことがわかります。<br>
+    これは、「<strong>Teeth</strong>」および「<strong>Tongue</strong>」メッシュに「<strong>クリッピングレイヤー(Clipping Layer)</strong>」プロパティがあるためです。<br>
+    2つのメッシュの<strong>マスク</strong>は、すぐ下の「<strong>Mouth</strong>」メッシュです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_16.jpg"/>
+    <br>
+    
+    <p>
+    テストとして、2つのメッシュに適用されたクリッピングレイヤープロパティをオフにしましょう。<br>
+    画像が隠されていない状態でレンダリングされていることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_17.jpg"/>
+    <br>
+    
+    <p>
+    クリッピング機能は、別のメッシュをマスクとして指定してメッシュの一部だけをレンダリングすることです。<br>
+    主に目、口などに使用されています。<br>
+    ​<br>
+    但し、以下の点にご注意ください。<br>
+    <strong>1.</strong> クリッピング機能により、処理が遅くなるため、ゲームの速度が遅くなります。 ゲームの必要な部分だけを使用してください。<br>
+    <strong>2.</strong> 「<strong>カスタムシェーダー(Custom Shader)</strong>」を作成して使用する場合は、クリッピング関数に関連するコードも記述する必要があります。<br>
+    ​<br>
+    クリッピングシェーダを作成するには、<a href="../../jp/Script/SC_CustomShader.html">関連ページ</a>を参照してください。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/GettingStarted/GS_2_2.html">< 2.2. アニメーション用のメッシュを編集</a>
+        <a class="btn btn-light" role="button" href="../../jp/GettingStarted/GS_2_4.html">2.4. 骨追加する ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

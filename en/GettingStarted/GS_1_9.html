@@ -39,12 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/GettingStarted/GS_1_9.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/GettingStarted/GS_1_9.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/GettingStarted/GS_1_9.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -61,14 +65,185 @@
     <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/GettingStarted.html"><span class="text-dark">Getting Started</span></a> > 1.9. Adding Physical Effects</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
-    <h1 class="display-4"><strong>1.9. Adding Physical Effects</strong></h1>
+    <h1 class="display-5">1.9. Adding Physical Effects</h1>
+    <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    There is a modifier that gives a physical effect.<br>
+    You can add interesting effects by expressing tension and inertia.<br>
+    To set the physical effects, you need to know the theory and make various settings,<br>
+    On this page, you will learn how to apply prebuilt physical materials to make them easier to apply.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_78.jpg"/>
+    <br>
+    
+    <p>
+    Add a Physic modifier.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_43.jpg"/>
+    <br>
+    
+    <p>
+    Before you set up a physical effect, make sure that no physical effects are applied in the workspace.<br>
+    You can <strong>(1)</strong> <strong>turn on / off the physics effect setting</strong> at the top of the screen.<br>
+    <strong>(2)</strong> <strong>Select the slime body mesh</strong> <strong>(3)</strong> <strong>Press the Add to Physics button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_추가_4.jpg"/>
+    <br>
+    
+    <p>
+    Press the <strong>Start Editing button</strong> to turn on edit mode.<br>
+    You can modify vertex weights with edit mode on.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_80.jpg"/>
+    <br>
+    
+    <p>
+    Before setting the physical material, <strong>Select all vertices</strong> and set the <strong>ID of the Viscosity Group</strong> to <strong>1</strong>.<br>
+    This is because viscous forces are applied between the vertices sharing the viscous group ID.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_81.jpg"/>
+    <br>
+    
+    <p>
+    Setting physical materials is a difficult task.<br>
+    At this stage, we will select a pre-created preset.<br>
+    <strong>The Physics Presets button</strong> is on the right side of the UI. Click it to open the Physical Preset dialog.<br>
+    The screen configuration of the physical preset dialog box is as follows.<br>
+    <strong>1. Save current physical setting as preset</strong> : Save the physical setting value of the selected mesh as a preset. You can specify and save names and icons.<br>
+    <strong>2. Physical Presets</strong> : These are the physical presets created by default or added by the user.<br>
+    <strong>3. Selected Physical Preset Values</strong> : Detailed setting of the selected physical preset. It can not be modified here, and any user-added presets can be deleted.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_82.jpg"/>
+    <br>
+    
+    <p>
+    Apply the <strong>"Rubber Soft"</strong> material, which is similar to the slime material.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_85.jpg"/>
+    <br>
+    
+    <p>
+    When physical material is applied, it is set as the above screen.<br>
+    This page briefly describes the screen configuration only.<br>
+    <strong>1. Set Important</strong> : The physics effect is applied around the vertex to which the setting is applied.<br>
+    <strong>2. Weighting tools</strong> : These are the tools that specify how much you want to receive the physical effects. It has a value between 0 and 1.<br>
+    <strong>3. Blend</strong> : This is a function that smoothes the weight based on the weight of the vertex.<br>
+    <strong>4. Grow / Shrink</strong> : Select or exclude more vertices.<br>
+    <strong>5. Viscosity group ID</strong> : Specify the viscosity ID for viscosity calculation. It has a value from 1 to 9 and can have multiple values.<br>
+    <strong>6. Physical material settings</strong> : Value of physical material. Mass, air resistance, tension, inertia, resilience, and viscosity.<br>
+    <strong>7. Gravity and Wind</strong> : Gravity and wind can be set. You can specify a fixed value or use the value of a control parameter.<br>
+    <strong>8. Physics Presets</strong> : Presets can be opened or saved by opening dialogs.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_83.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_84.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select the vertices</strong> in the center, <strong>(2)</strong> <strong>Set the weight to 1</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_86.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_87.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select the remaining vertices</strong> except the upper and lower endpoints.<br>
+    <strong>(2)</strong> <strong>Press the Blend button</strong> several times to set the weight appropriately.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_88.jpg"/>
+    <br>
+    
+    <p>
+    If the weight is too small or too large, you can increase or decrease it using <strong>the weighting tool</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_89.jpg"/>
+    <br>
+    
+    <p>
+    Select some vertices in the middle and press the <strong>Set Important button</strong>.<br>
+    Physical effects occur around vertices with the "Important" setting.<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS1_90.jpg"/>
+    <br>
+    
+    <p>
+    Let's see if the set physical effect works properly.<br>
+    <strong>(1)</strong> <strong>Turn on the physical effects</strong> again and see if they work properly.<br>
+    <strong>(2)</strong> <strong>There is a Wind On / Off buttons</strong> for the physical test at the bottom of the screen. Let's test it by pressing it.<br>
+    </p>
+    <br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/FeegIfVrlio" allowfullscreen></iframe>
+    </div>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
-    <nav class="navbar bottom navbar-light bg-light">
+    <nav class="navbar fixed-bottom navbar-light bg-light">
         <a class="btn btn-light" role="button" href="../../en/GettingStarted/GS_1_8.html">< 1.8. Editing Vertices using various tools</a>
         <a class="btn btn-light" role="button" href="../../en/GettingStarted/GS_1_10.html">1.10. Creating a Thumbnail ></a>
     </nav>

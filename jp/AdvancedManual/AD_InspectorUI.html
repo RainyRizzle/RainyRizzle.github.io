@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>インスペクタUI</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_InspectorUI.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_InspectorUI.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_InspectorUI.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > インスペクタUI</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">インスペクタUI</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.2.5</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_395.jpg"/>
+    <br>
+    
+    <p>
+    Unity EditorでAnyPortraitで作成したapPortraitオブジェクトを選択すると、情報が「<strong>インスペクタ(Inspector)</strong>」に表示されます。<br>
+    このページでは、「インスペクタ」の設定について説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    <strong>1. Open Editor and Select</strong> : エディタを開き、現在のオブジェクトをすぐに編集することができます。 (Optimized Bakeの場合はエディタを開くことはできますが、編集はできません。)<br>
+    <strong>2. Quick Bake</strong> : まさに「Bake」を実行します。<br>
+    <strong>3. Is Important</strong> : この設定がオンの場合、ゲームの各フレームで更新されます。 逆に、オフの場合は、下位のFPSによって更新されます。 実行するFPSは、設定ダイアログまたは「Bake」ダイアログボックスで変更できます。<br>
+    <strong>4. Event Listener</strong> : アニメーションイベントを受け取るように 「Monobehaviour」を設定します。<br>
+    <strong>5. Sorting Layer/Order</strong> : 出力順序を変更します。<br>
+    <strong>6. Billboard Type</strong> : ビルボードの設定を変更します。<br>
+    <strong>7. Root Portraits</strong> : ルート単位が表示されます。<br>
+    <strong>8. Animation Clips</strong> : アニメーションが表示されます。 「Mecanim」を使用すると、対応する「Animation Clip」アセットが一緒に表示されます。<br>
+    <strong>9. Empty Animation Clip</strong> : 「Mecanim」を使用している場合、「Empty State」に対応する「Animation Clip」アセット。<br>
+    <strong>10. Mecanim Settings</strong> : 「Mecanim」と 「Animator」を使用するかどうか。<br>
+    <strong>11. Animator Layer, Refresh</strong> : 「Mecanim」を使用すると、「Animator」のレイヤーが表示されます。 「Refresh Layers」ボタンをクリックするまで更新されません。<br>
+    <strong>12. Control Parameters</strong> : これらは、スライダをすぐに動かすことで確認できる制御パラメータです。 ゲームが実行されていなくてもテストすることができます<br>
+    ​<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_396.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_Onion.html">< 残像(Onion Skin)</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_InvertedScale.html">反転スケールとドローコール ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

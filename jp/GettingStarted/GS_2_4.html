@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>2.4. 骨追加する</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/GettingStarted/GS_2_4.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/GettingStarted/GS_2_4.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/GettingStarted/GS_2_4.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/GettingStarted.html"><span class="text-dark">入門ガイド</span></a> > 2.4. 骨追加する</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">2.4. 骨追加する</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    骨のアニメーションを作成するために、骨を追加する方法を説明します。<br>
+    AnyPortraitは「<strong>Bone IK（Inverse Kinematics）</strong>」をサポートし、「<strong>Bone Socket</strong>」をサポートしています。<br>
+    詳細は、該当するページ（<a href="../../jp/AdvancedManual/AD_BoneIK.html">IKガイド</a>、<a href="../../jp/AdvancedManual/AD_Socket.html">ソケットガイド</a>）を参照してください。<br>
+    このページは、基本的な骨組みを追加する方法と、次のチュートリアルを設定する方法を示します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/Re_AP가이드_GS1_44.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>「Bone」メニューを選択します</strong>。<br>
+    <strong>(2)</strong> <strong>「Start Editing Bones」ボタンを押して</strong>、「骨編集モード」を有効にしてください。<br>
+    <strong>(3)</strong> 骨の3つの編集ツールから<strong>「追加ツール」を選択します</strong>。<br>
+    ​<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_20.jpg"/>
+    <br>
+    
+    <p>
+    上記の画面は、骨編集モードのUIです。<br>
+    <strong>1. 「骨編集(Editing Bones)」有効/無効ボタン</strong> : 骨編集モードのオン/オフを切り替えます。 オンになっている間だけ編集することができます。<br>
+    <strong>2. 選択ツール</strong> : 骨を選択することができます。<br>
+    <strong>3. 追加ツール</strong> : あなたは骨を追加することができます。選択された骨がある場合、自動的に <strong>子骨</strong>として登録されます。&nbsp;&nbsp;<kbd>右クリック</kbd> で<strong>チェックを外す</strong>ことができます。 そして、再度 <kbd>マウス右クリック</kbd> をクリックすると、<strong>選択ツール</strong>に切り替わります。<br>
+    <strong>4. 接続ツール</strong> : 二つの骨を接続して、「<strong>親 - 子の関係</strong>」にします。二番目に選択された骨は、<strong>親の骨</strong>になります。 <kbd>右クリック</kbd> で<strong>チェックを外す</strong>ことができます。 そして、再度 <kbd>マウス右クリック</kbd> をクリックすると、<strong>選択ツール</strong>に切り替わります。<br>
+    </p>
+    <br>
+    
+    <p>
+    骨を追加する方法を学び、次のステップを進めます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_19.jpg"/>
+    <br>
+    
+    <p>
+    骨が選択されていない状態で、<strong>(1)</strong> 最初のクリックされた位置を開始点として、<strong>(2)</strong> 2番目のクリックされた位置を端点として、骨を作成します。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_18.jpg"/>
+    <br>
+    
+    <p>
+    骨が選択されたら、<strong>(1)</strong> 選択された骨の終点を開始点として、<strong>(2)</strong> クリックされた終点で骨を作成します。<br>
+    このとき、新しく作成されたボーンの<strong>名前</strong>と<strong>色</strong>は以前選択されたボーンと同様に設定され、<strong>形状(Shape)</strong>は同じになります。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_22.jpg"/>
+    <br>
+    
+    <p>
+    あなたの体の中心である骨盤に骨を追加します。<br>
+    骨盤の骨の方向は、それほど重要ではないので、後で簡単に選択できるように作られています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_23.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>選択ツール</strong>」に変更して作成した骨を選択してください。<br>
+    <strong>(2)</strong> 選択した骨の名前を「<strong>Bone Pelvis</strong>」に設定します。<br>
+    <strong>(3)</strong> 骨の「<strong>色(Color)</strong>」と「<strong>形(Shape)</strong>」を変更する。<br>
+    大きな骨の場合は大きなものを選択するのは簡単ですので、後で作業しやすくするためにサイズを設定することをお勧めします。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_24.jpg"/>
+    <br>
+    
+    <p>
+    今、体の骨を作る。<br>
+    最初に、新しい骨を作成し、それを 「<strong>Bone Spine1</strong>」という名前にします。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_25.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bone Spine1</strong>」を選択した状態で、第二の骨を作成します。<br>
+    第2の骨の名前は自動的に 「<strong>Bone Spine2</strong>」と命名され、そのサイズまたは色は以前の骨と同様に設定されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_26.jpg"/>
+    <br>
+    
+    <p>
+    頭の骨を追加します。(「<strong>Bone Head</strong>」)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_27.jpg"/>
+    <br>
+    
+    <p>
+    また、キャラクターの耳の装飾に骨を追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_28.jpg"/>
+    <br>
+    
+    <p>
+    上記のように骨を設定します。<br>
+    作成しているアニメーションと対象とする画像に応じて、さまざまなボーンを設定します。<br>
+    </p>
+    <br>
+    
+    <p>
+    次に、完成した骨をつなぎ合わせることです。<br>
+    骨を正しく接続すると、実際の人のように自然に動くことができます。<br>
+    まず、「<strong>骨盤(Pelvis)</strong>」を親(Root Parent Bone)に設定し、頭、手、足を端に接続するのが一般的です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_29.jpg"/>
+    <br>
+    
+    <p>
+    骨を接続するには、<strong>(1)</strong> 「<strong>接続ツール</strong>」を選択します。<br>
+    <strong>(2)</strong> 身体の開始骨(「<strong>Bone Spine 1</strong>」)を選択し、<strong>(3)</strong> 骨盤(「<strong>Bone Pelvis</strong>」)を選択する。<br>
+    このように骨盤の骨は親になり、体の骨は子供になります。<br>
+     <kbd>右クリック</kbd> で次の選択を解除します。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_30.jpg"/>
+    <br>
+    
+    <p>
+    同様に、脚を選択して骨盤に接続します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_31.jpg"/>
+    <br>
+    
+    <p>
+    頭と両腕は身体の最上部の骨(「<strong>Body Spine 2</strong>」)に接続されています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_32.jpg"/>
+    <br>
+    
+    <p>
+    フードのボーン(「<strong>Bone Ear L/R</strong>」, 「<strong>Bone HoodTail L/R</strong>」)をヘッド(「<strong>Bone Head</strong>」)にリンクします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_33.jpg"/>
+    <br>
+    
+    <p>
+    完成した骨を持つ階層です。<br>
+    あなたがこのように同じように作成する必要はないので、人の骨が接続されている方法を考えながら自由に作成できます。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>骨が見えない場合は？</h4>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_34.jpg"/>
+    <br>
+    
+    <p>
+    画面の上部に骨を表示または非表示するボタンがあります。このボタンには、3つの状態があります。<br>
+    1. ボタンがオフになっているときに、骨が見えません。<br>
+    2. ボタンが点灯した場合、骨が満たされたままになります。<br>
+    3. ボタンが点灯しているが、透明のアイコンが点灯している場合、骨は線でのみ表示されます。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    <strong>参考</strong> : このページは、本設定のおおよその概要を提供しています。<br>
+    設定画面の構成は次のとおりです。<br>
+    使い方は、<a href="../../jp/AdvancedManual/AD_BoneIK.html">関連ページ</a>を参照してください。<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_35.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    <strong>1. 名前</strong> : 骨の名前を設定します。<br>
+    <strong>2. Base Pose Transformation</strong> : 骨の位置、回転、サイズの値。<br>
+    <strong>3. Socket</strong> : ベーキング後に骨を参照するには、ソケットを有効にします。<br>
+    <strong>4. IK Setting</strong> : これは、骨のIK機能を設定する領域です。<br>
+    <strong>5. Hierarchy</strong> : ここで親骨、子骨を選択することができます。<br>
+    <strong>6. Shape</strong> : 色と形を設定します。 テーパ値が大きいほど、先端は先細になる。<br>
+    <strong>7. Remove Remove Bone</strong> : 骨を削除します。 ダイアログボックスを選択して、すべての子を削除することもできます。<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
+    <br><br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>「色プリセット」と「針状（Needle Shape）」の骨</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.2.3</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_917.jpg"/>
+    <br>
+    
+    <p>
+    v1.2.3に追加された機能である「<strong>色プリセット</strong>」を利用すれば、骨の色をすばやく変更することができます。<br>
+    6色のボタンをクリックすると、対応するカラーシリーズの色に変わります。<br>
+    ボタンを押すたびに、他の色が指定されます。<br>
+    プリセットからの色の範囲が適度に広いため、同じシリーズのボーンの色を類似させるのは簡単です。<br>
+    </p>
+    <br>
+    
+    <p>
+    v1.2.3から骨の外形を「<strong>矢印形（Arrowhead Shape）</strong>」と「<strong>針状（Needle Shape）</strong>」に変更することができます。 （<a href="../../jp/AdvancedManual/AD_SettingDialog.html">関連ページ</a>）<br>
+    「針状」を選択した場合、「Width」と「Taper」属性は適用されません。<br>
+    ​<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/GettingStarted/GS_2_3.html">< 2.3. クリッピングレイヤー</a>
+        <a class="btn btn-light" role="button" href="../../jp/GettingStarted/GS_2_5.html">2.5. 「Rigging Modifier」を使用 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>「Sorting Layer/Order」設定</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_SortingLayer.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_SortingLayer.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_SortingLayer.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 「Sorting Layer/Order」設定</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">「Sorting Layer/Order」設定</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.1.8</span></h4>
+    
+    <p>
+    ゲームを実行すると、Unityは複数のGameObjectを1つずつレンダリングします。<br>
+    レンダリングの順序を設定することは非常に重要です。<br>
+    一般に、順序はカメラからの距離によって決定されますが、順序を直接指定することは可能です。<br>
+    ユニティが提供する「<strong>Sorting Layer</strong>」と「<strong>Sorting Order</strong>」を使用してレンダリング順序を決定することができます。<br>
+    スクリプトドキュメントについては、<a href="../../jp/Script/SC_Init.html">関連ページ</a>を参照してください<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_171.jpg"/>
+    <br>
+    
+    <p>
+    Bakeダイアログボックスで「<strong>Sorting Layer</strong>」と「<strong>Sorting Order</strong>」を設定できます。<br>
+    「Sorting Layer」は、「<strong>Edit &gt; Project Settings &gt; Tags and Layers</strong>」で設定できます。<br>
+    「Sorting Order」には整数型の値があります。 デフォルト値は0です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_172.jpg"/>
+    <br>
+    
+    <p>
+    「Sorting Layer / Order」機能をテストするために、ゲームオブジェクトの隣に「Sprite Renderer」を配置しました。<br>
+    2つのゲームオブジェクトは、同じ「Sorting Layer」を持ちます。<br>
+    「Sprite Renderer」の 「Sorting Order」は0です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_173.jpg"/>
+    <br>
+    
+    <p>
+    ゲームの実行中にインスペクタで「Sorting Layer」と「Sorting Order」を変更することができます。<br>
+    ゲームの実行中に「Sorting Order」を1に設定すると、スライムが前面からレンダリングされます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_174.jpg"/>
+    <br>
+    
+    <p>
+    逆に、「Sprite Renderer」の「Sorting Order」より小さい-1を入力すると、スライムが背面からレンダリングされます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Sorting Group</h3>
+    <br>
+    
+    <p>
+    AnyPortrait v1.1.8から「<strong>Sorting Group</strong>」機能をサポートします。<br>
+    「Sorting Group」機能を利用すれば、グループに存在するオブジェクトのレンダリング順序を決定することができます。<br>
+    このページでは、二つの場合の問題を「Sorting Group」を利用して解決する過程を説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_770.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターが重なっている場合の例です。<br>
+    AnyPortraitで製作された文字のように複数の「<strong>Mesh Renderer</strong>」や「<strong>Sprite Renderer</strong>」で構成されたキャラクターが重なり合う場合には、キャラクター間のレンダリング順序が定まっておらず、複雑な形でレンダリングがされます。<br>
+    この問題は、上記の「Sorting Order」や「Sorting Layer」を別の方法で入力して処理することができますが、最良の方法は、「<strong>Sorting Group</strong>」を使用することです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_771.jpg"/>
+    <br>
+    
+    <p>
+    「Sorting Group」を利用する前にAnyPortraitで作られたキャラクターの設定を変更する必要があります。<br>
+    <strong>(1)</strong> エディタを開いて、「<strong>Bakeボタン</strong>」を押してダイアログを開きます。<br>
+    <strong>(2)</strong> 「<strong>Settingタブ</strong>」を選択します。<br>
+    <strong>(3)</strong> 「<strong>Sorting Order Option</strong>」項目の値を「<span class="text-danger"><strong>Depth To Order</strong></span>」に変更します。<br>
+    </p>
+    <br>
+    
+    <p>
+    v1.1.8で追加された設定である「<strong>Sorting Order Option</strong>」は、それぞれのメッシュの「Order」がどのような値を持つかを決定します。<br>
+    オプションの内容は、次のとおりです。<br>
+    <strong>- Set Order</strong> : 従来の方式です。「<strong>Sorting Order</strong>」の項目の値がすべてのメッシュに指定されます。<br>
+    <strong>- Disabled</strong> : Bakeする際、メッシュのOrderを設定しません。<br>
+    <strong>- Depth To Order</strong> : 後ろから前にOrderが増加します。<br>
+    <strong>- Reverse Depth To Order </strong>: 前から後ろOrderが増加します。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>Sorting Group</strong>」を利用していなくても、必要に応じて「<strong>Sorting Order Option</strong>」を設定ください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_772.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Inspector UI</strong>」から「Sorting Order Option」を設定することもできます。<br>
+    </p>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_773.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitで作ったキャラクターに「Sorting Group」コンポーネントを追加します。<br>
+    <strong>(1)</strong> 「<strong>Add Component</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Sorting Group</strong>」コンポーネントを選択して追加します。 （検索して見つけることをお勧めします。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_774.jpg"/>
+    <br>
+    
+    <p>
+    今メッシがグループ単位でレンダリング順序が決定されて表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_775.jpg"/>
+    <br>
+    
+    <p>
+    第二の例です。<br>
+    この例では、キャラクターとフェンスが配置されたシーンです。<br>
+    この例では、カメラが上から下を眺める2Dゲームで一般的に使用される構成です。<br>
+    上に位置するオブジェクトが後方、下に位置するオブジェクトが前のレンダリングされます。<br>
+    しかし、現在では、オブジェクトのY座標とは無関係に、レンダリングの順序が決定されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    スクリプトでいちいち「Sorting Order」を変更する方法もあるが、最も便利な方法は、プロジェクトの設定を変更することです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_776.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Project Settings</strong>」を開き、「<strong>Graphics</strong>」を選択します。<br>
+    <strong>(2)</strong> <strong>Camera Settings</strong>の「<strong>Transparency Sort Mode</strong>」を「<strong>Custom Axis</strong>」に変更し、<br>
+    「<strong>Transparency Sort Axis</strong>」を<strong>(0, 1, 0)</strong>に変更します。<br>
+    今レンダリング順序を決定する基準がZ軸で「Y軸」に変更されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_777.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Sorting Group</strong>」を適用してみましょう。<br>
+    キャラクターを選択して、「<strong>Bakeダイアログ</strong>」または「<strong>Inspector UI</strong>」から「<strong>Sorting Order Option</strong>」を「<strong>Depth To Order</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_778.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターに「<strong>Sorting Group</strong>」コンポーネントを追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_779.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターとフェンスが上から下へ順にレンダリングがされます。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_OptimizedBake.html">< 最適化されたBake</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_EditingPrefabs.html">「Prefab」を編集 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>
