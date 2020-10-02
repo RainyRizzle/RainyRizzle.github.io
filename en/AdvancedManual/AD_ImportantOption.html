@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_ImportantOption.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ImportantOption.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ImportantOption.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,13 +69,153 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.3</span></h4>
+    
+    <p>
+    When you create a game, there are often a lot of characters appearing on the screen.<br>
+    A common example is when a player and a large number of monsters appear.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, if many characters appear, the game will be very slow and you will not be able to play the game.<br>
+    Changing the "<strong>Important option</strong>" of AnyPortrait can improve performance.<br>
+    </p>
+    <br>
+    
+    <p>
+    - <span class="text-primary"><strong>Important option is on</strong></span>: Updated every frame to smooth the animation. (Default)<br>
+    - <span class="text-danger"><strong>Important option is off</strong></span>: Update frames are limited, resulting in a slight drop in animation quality but improved performance.<br>
+    </p>
+    <br>
+    
+    <p>
+    It is generally recommended to turn on the Important option for important objects such as player characters,<br>
+    and it is recommended that you turn off the Important option for monsters or background objects that may appear in multiple but lower quality animations.<br>
+    </p>
+    <br>
+    
+    <p>
+    In the profiling results below, you can see performance differences depending on the value of the Important option.<br>
+    (The results of the experiments below can be measured differently depending on the complexity of the character, the execution environment, and the composition of the scene.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_482.jpg"/>
+    <br>
+    
+    <p>
+    It is a screen in which 50 characters in animation are played.<br>
+    The character's Important option is on, and Frames Per Second (FPS) is around 30.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_483.jpg"/>
+    <br>
+    
+    <p>
+    20 characters are created and a total of 70 characters are placed.<br>
+    As the characters are added, the FPS decreased to 22 FPS.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_484.jpg"/>
+    <br>
+    
+    <p>
+    FPS is reduced to 15 since 100 characters are placed.<br>
+    If the performance drops like this, normal gameplay will not be expected.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_485.jpg"/>
+    <br>
+    
+    <p>
+    Now we turn off the Important option and try to place the characters.<br>
+    The value of "<strong>FPS</strong>" of the character's Important option is 30.<br>
+    When 50 characters are placed, the FPS is recorded as 30, just as if the Important option was turned on.<br>
+    In this state, you can see that the FPS in the profiler is somewhat unusual because the animation is not updated every frame.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_486.jpg"/>
+    <br>
+    
+    <p>
+    This screen is the result of placing 70 characters.<br>
+    FPS is 30 or better, which is better than when the Important option is turned on.<br>
+    AnyPortrait performs batch management of updates of the same characters with the Important option turned off.<br>
+    And in this process, we want to handle the updates of the characters in different frames as possible.<br>
+    However, if the FPS changes due to other factors, AnyPortrait adjusts the update timing of the characters, which can cause temporary <strong>frame spikes</strong>.<br>
+    (Unity's FPS changes periodically for reasons such as memory management.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_487.jpg"/>
+    <br>
+    
+    <p>
+    This is the result of placing 100 characters.<br>
+    The FPS is slightly reduced, but it is recorded around 27, which is better than when the Important option is turned on.<br>
+    You can see using the profiler that updates of characters are distributed evenly across all frames.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_488.jpg"/>
+    <br>
+    
+    <p>
+    There are several ways to change the "Important option".<br>
+    First, let's change the options in the <strong>Bake dialog</strong>.<br>
+    <strong>(1)</strong> Press the <strong>Bake button</strong>.<br>
+    <strong>(2)</strong> Select the <strong>Setting tab</strong>.<br>
+    <strong>(3)</strong> Click the "<strong>Is Important</strong>" item to change the setting.<br>
+    The "<strong>FPS</strong>" option is the update frequency when the Important option is off.<br>
+    (Normally values of 15, 20, and 30 are recommended.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_489.jpg"/>
+    <br>
+    
+    <p>
+    You can also change the settings by clicking the "<strong>Is Important</strong>" item in the <strong>Inspector UI</strong>.You can also use the script to change the Important option.<br>
+    Please check the "<strong>SetImportant(bool)</strong>" function in <a href="../../en/Script/SC_Init.html">related page</a>.<br>
+    If you use scripts, you can change the options in real time, which will help you optimize your game.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger">Note.</span><br>
+    Handling when characters run with a fixed FPS with the Important option disabled is improved in v1.2.3.<br>
+    It is improved so that intermittent <strong>frame Spike</strong> is not occurred.<br>
+    Starting with this version, <strong>fixed FPS</strong> is limited to running at half or less of the game's FPS.<br>
+    If the game's FPS is set to a low or too high fixed FPS value, it is forced to run at half or less of the game's FPS.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
         <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_BillboardPers.html">< Billboard and Perspective Camera</a>
-        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_PSD.html">Importing a PSD File ></a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ReversedRiggedMesh.html">Reversed scale of the Rigged Mesh ></a>
     </nav>
     
     <!-- 페이지 내용 끝! -->

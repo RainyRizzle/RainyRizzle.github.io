@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/Script/SC_Mesh.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/Script/SC_Mesh.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/Script/SC_Mesh.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -66,9 +68,699 @@
     <h1 class="display-5">Mesh, Mesh Group Transform</h1>
     <br>
     
-    <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <p>
+    It guides you through functions such as changing the color or texture of a mesh, or controlling its position.<br>
+    In the editor, the mesh and mesh group data is converted to <strong>apOptTransform</strong> after bake.<br>
+    Referencing apOptTransform in the scene is the same as referencing a mesh or mesh group.<br>
+    Functions for batch conversion of textures and Draw Call Batching are also provided.<br>
+    </p>
+    <br>
     
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apOptTransform</span> <strong>GetOptTransform</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apOptTransform</span> <strong>GetOptTransform</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Finds and returns apOptTransform by name.<br>
+    &nbsp;&nbsp;&nbsp;The name of apOptTransform is the name of the mesh or mesh group.<br>
+    &nbsp;&nbsp;&nbsp;If you do not specify a root unit index, first perform a full search from the root unit that is currently being rendered.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (if not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the apOptTransform (the name of the mesh or mesh group on the editor)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> : apOptTransform retrieved. Return null if not
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetOptTransformSocket</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform )</span>
+<br><span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetOptTransformSocket</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+<br><span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetOptTransformSocket</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Refers to a socket in apOptTransform.<br>
+    &nbsp;&nbsp;&nbsp;Please refer to <a href="../../en/AdvancedManual/AD_Socket.html">related page</a> about socket.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform containing socket<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (if not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the apOptTransform (the name of the mesh or mesh group on the editor)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Transform</span> : Socket Transform of apOptTransform. Return null if not
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformPosition</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformPosition</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformPosition</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Controls the position of apOptTransform.<br>
+    &nbsp;&nbsp;&nbsp;You can interpolate using weights.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to control<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (if not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the apOptTransform (the name of the mesh or mesh group on the editor)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> position : Position to move<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : World refers to the coordinate system of the scene, and Self refers to the coordinate system of apPortrait.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : Interpolation weight with original position<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : Return false if it refers to apOptTransform that does not exist
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformRotation</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformRotation</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformRotation</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Controls the angle of rotation of apOptTransform.<br>
+    &nbsp;&nbsp;&nbsp;You can interpolate using weights.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to control<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (if not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the apOptTransform (the name of the mesh or mesh group on the editor)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> angle : Angle to rotate (Degree)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : World refers to the coordinate system of the scene, and Self refers to the coordinate system of apPortrait.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : Interpolation weight with original rotation angle<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : Return false if it refers to apOptTransform that does not exist
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformScale</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformScale</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformScale</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Controls the size of apOptTransform.<br>
+    &nbsp;&nbsp;&nbsp;You can interpolate using weights<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to control<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (if not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the apOptTransform (the name of the mesh or mesh group on the editor)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> scale : Scale value<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : World refers to the coordinate system of the scene, and Self refers to the coordinate system of apPortrait.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : Interpolation weight with original size<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : Return false if it refers to apOptTransform that does not exist
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">string</span> <span class="text-muted">imageName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">string</span> <span class="text-muted">imageName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">string</span> <span class="text-muted">imageName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Replaces the texture of the apOptTransform.<br>
+    &nbsp;&nbsp;&nbsp;If the texture is replaced, the draw call may increase.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to refer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (if not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the apOptTransform (the name of the mesh or mesh group on the editor)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Texture2D</span> texture : Texture to replace<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> imageName : When replacing an image stored in the AnyPortrait editor, the name of the image<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshColor</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Color</span> <span class="text-muted">color2X )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshColor</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Color</span> <span class="text-muted">color2X )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshColor</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Color</span> <span class="text-muted">color2X )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Sets the color of the apOptTransform.<br>
+    &nbsp;&nbsp;&nbsp;Colors are calculated as 2X Multiply, so the default is gray (0.5, 0.5, 0.5, 1).<br>
+    &nbsp;&nbsp;&nbsp;If the color is not the default, the draw call may increase.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to refer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (if not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the apOptTransform (the name of the mesh or mesh group on the editor)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> color2X : Color to replace (2X Multiply)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshAlpha</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">alpha )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshAlpha</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshAlpha</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Sets the alpha (transparency) of the color of apOptTransform.<br>
+    &nbsp;&nbsp;&nbsp;The default value is 1; otherwise, the draw call may increase.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to refer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (if not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the apOptTransform (the name of the mesh or mesh group on the editor)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> alpha : Alpha to replace<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Replaces the texture of the apOptTransform.<br>
+    &nbsp;&nbsp;&nbsp;If the texture is replaced, the draw call may increase.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to refer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Texture2D</span> texture : Texture to replace<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Color</span> <span class="text-muted">color2X,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Sets the color of the apOptTransform.<br>
+    &nbsp;&nbsp;&nbsp;Colors are calculated as 2X Multiply, so the default is gray (0.5, 0.5, 0.5, 1).<br>
+    &nbsp;&nbsp;&nbsp;If the color is not the default, the draw call may increase.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to refer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> color2X : Color to replace (2X Multiply)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlpha</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Sets the alpha (transparency) of the color of apOptTransform.<br>
+    &nbsp;&nbsp;&nbsp;The default value is 1; otherwise, the draw call may increase.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to refer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> alpha : Alpha to replace<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloat</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Sets the value of the Float property of the material of apOptTransform.<br>
+    &nbsp;&nbsp;&nbsp;When this function is called, the draw call may increase.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to refer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> floatValue : Float Value<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomInt</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Sets the value of the Int property of the material of apOptTransform.<br>
+    &nbsp;&nbsp;&nbsp;When this function is called, the draw call may increase.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to refer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> intValue : Int Value<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Sets the value of the Vector4 property of the material of apOptTransform.<br>
+    &nbsp;&nbsp;&nbsp;When this function is called, the draw call may increase.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to refer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector4</span> vector4Value : Vector4 Value<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomTextureOffset</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector2</span> <span class="text-muted">textureOffsetValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.4</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Sets the value of the Offset property of the texture of the material of apOptTransform.<br>
+    &nbsp;&nbsp;&nbsp;When this function is called, the draw call may increase.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to refer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> textureOffsetValue : Texture Offset Value<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomTextureScale</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector2</span> <span class="text-muted">textureScaleValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.4</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Sets the value of the Scale property of the texture of the material of apOptTransform.<br>
+    &nbsp;&nbsp;&nbsp;When this function is called, the draw call may increase.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to refer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> textureScaleValue : Texture Scale Value<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ShowMesh</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ShowMesh</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ShowMesh</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Makes the apOptTransform containing the mesh rendered.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to render<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (if not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the apOptTransform (the name of the mesh or mesh group on the editor)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>HideMesh</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>HideMesh</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>HideMesh</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Hides the apOptTransform containing the mesh from rendering.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to hide<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (if not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the apOptTransform (the name of the mesh or mesh group on the editor)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apOptTextureData</span> <strong>GetOptTextureData</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;If the apOptTransform meshes use the same texture, it is possible to control them all in apOptTextureData.<br>
+    &nbsp;&nbsp;&nbsp;If you use the apOptTextureData functions to modify the material properties of the texture, color, etc.,<br>
+    &nbsp;&nbsp;&nbsp; all meshes that use this texture will be automatically changed.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary"><strong>Batch change functions</strong></span><br>
+    &nbsp;&nbsp;&nbsp;- SetMeshTextureAll(Texture2D texture)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomImageAll(Texture2D texture, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetMeshColorAll(Color color)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomColorAll(Color color, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomFloatAll(float floatValue, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomIntAll(int intValue, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomVector4All(Vector4 vector4Value, string propertyName)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : The name of the apOptTexture to reference. (Name of the Image of the editor.)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTextureData</span> : Referenced apOptTextureData. Return null if not
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImageAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImageAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Batchly replace textures in all meshes that use apOptTextureData.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : The name of the apOptTexture to reference. (Name of the Image of the editor.)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Texture2D</span> texture : Texture to replace<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshColorAll</strong> <span class="text-muted">( </span><span class="text-success">Color</span> <span class="text-muted">color2X )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshColorAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Color</span> <span class="text-muted">color2X )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColorAll</strong> <span class="text-muted">( </span><span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColorAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Batchly replace the colors of all the meshes.<br>
+    &nbsp;&nbsp;&nbsp;Entering optTextureName sets the color for meshes that use the corresponding apOptTextureData.<br>
+    &nbsp;&nbsp;&nbsp;When you modify mainColor, it uses 2X Multiply color by default.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : The name of the apOptTexture to reference. (Name of the Image of the editor.)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> <span class="text-success">color2X</span> <span class="text-success">/</span> color : Color to replace<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">float</span> <span class="text-muted">alpha )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Batchly replace alpha (transparency) of all meshes.<br>
+    &nbsp;&nbsp;&nbsp;​Entering optTextureName sets the alpha of meshes that use the apOptTextureData.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : The name of the apOptTexture to reference. (Name of the Image of the editor.)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> alpha : Alpha to replace<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloatAll</strong> <span class="text-muted">( </span><span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloatAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomIntAll</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomIntAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4All</strong> <span class="text-muted">( </span><span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4All</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Batchly set property values ​​for all meshes.<br>
+    &nbsp;&nbsp;&nbsp;​Entering optTextureName sets the value of the property for meshes that use apOptTextureData.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : The name of the apOptTexture to reference. (Name of the Image of the editor.)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> floatValue : Float Value<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> intValue : Int Value<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector4</span> vector4Value : Vector4 Value<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatch</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatch</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatch</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Returns the material property of the apOptTransform to the value of the Bake state.<br>
+    &nbsp;&nbsp;&nbsp;Draw calls may be reduced, which may improve performance.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : Target apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (if not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the apOptTransform (the name of the mesh or mesh group on the editor)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatchAll</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Returns the material property of all apOptTransform to the value of the Bake state.<br>
+    &nbsp;&nbsp;&nbsp;Draw calls may be reduced, which may improve performance.​<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatchByTextureName</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.4</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Returns all material properties using the requested texture to the value of the Bake state.<br>
+    &nbsp;&nbsp;&nbsp;Draw calls may be reduced, which may improve performance.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : The name of the apOptTexture to reference. (Name of the Image of the editor.)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
     <!-- 5. 바닥 네비바 -->
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">

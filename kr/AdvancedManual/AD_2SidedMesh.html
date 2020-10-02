@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_2SidedMesh.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_2SidedMesh.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_2SidedMesh.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -67,22 +69,90 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.4</span></h4>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    3D 렌더링 엔진에서 대부분은 기본적으로 단면만 렌더링을 합니다.<br>
+    유니티 엔진도 마찬가지로 뒷면은 기본적으로 렌더링하지 않으며 이는 AnyPortrait도 마찬가지입니다.<br>
+    그러나 앞, 뒷면에 상관없이 렌더링을 해야하는 경우가 있습니다.<br>
+    이 페이지는 양면 렌더링이 필요한 예시와 해결 방법을 다룹니다.<br>
     </p>
     <br>
     
-    
-    <br><br>
-    
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_232.jpg"/>
     <br>
     
     <p>
-    본문 입력<br>
+    7번째 데모 씬에는 해적 소녀 캐릭터가 있습니다.<br>
+    이 캐릭터의 Run 애니메이션을 보면 오른쪽 다리 본의 X축 크기값이 -1인 것을 확인할 수 있습니다.<br>
+    본을 반전했기 때문에 메시도 자연스럽게 X축으로 반전되서 나타나야합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_233.jpg"/>
+    <br>
+    
+    <p>
+    그렇지만 게임 씬에서 확인하면 캐릭터가 Run 애니메이션을 실행하여 달리는 모션을 취할 때,<br>
+    오른쪽 다리가 사라지는 것을 보실 수 있습니다.<br>
+    이는 메시가 X축으로 반전되어 앞면이 아닌 뒷면이 렌더링되기 때문입니다.<br>
+    따라서 오른쪽 다리는 앞면과 뒷면이 항상 렌더링될 필요가 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_234.jpg"/>
+    <br>
+    
+    <p>
+    메시의 양면이 항상 렌더링되도록 만드는 방법입니다.<br>
+    <strong>(1)</strong> 메시 그룹을 선택합니다.<br>
+    <strong>(2)</strong> Setting 탭을 선택합니다.<br>
+    <strong>(3)</strong> <strong>대상이 되는 메시</strong>를 선택합니다.<br>
+    <strong>(4)</strong> <strong>메시의 설정</strong>에서 <strong>2-Sides</strong>에 체크합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_235.jpg"/>
+    <br>
+    
+    <p>
+    이제 정상적으로 렌더링이 되는 것을 확인할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>양면 렌더링을 해야하는 경우와 주의할 점</h4>
+    <br>
+    
+    <p>
+    기본적으로 <strong>Morph</strong>나 <strong>Rigging</strong>, 또는 <strong>Physics</strong> 모디파이어에 의해서 메시의 일부가 반전되는 경우에는 양면 렌더링이 필요합니다.<br>
+    그렇지만 Transform으로 메시의 크기를 직접 반전하는 경우에는 굳이 양면 렌더링을 하지 않아도 됩니다.<br>
+    양면 렌더링을 설정하면 버텍스들을 2번 렌더링하기 때문에 다소 느려질 수 있습니다.<br>
+    사용자 설정된 Shader가 "Cull Off"로 설정되어 있다면 총 4번 렌더링될 수 있습니다. <br>
+    이때 Alpha 계산이 제대로 수행되지 않을 수 있습니다.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>참고</strong></span><br>
+    리깅이 적용된 메시의 크기가 반전된 경우에도 양면 메시로 설정하지 않은 상태로 정상적으로 렌더링할 수 있는 옵션이 v1.2.5에 추가되었습니다.<br>
+    모든 경우에 적용되는 옵션은 아니므로 이 페이지에 소개된 양면 메시 기능과 더불어서 아래의 페이지를 같이 읽어보시는 것을 권장합니다.<br>
+    - <a href="../../kr/AdvancedManual/AD_ReversedRiggedMesh.html">리깅된 메시의 크기가 반전된 경우</a><br>
     </p>
     <br>
     

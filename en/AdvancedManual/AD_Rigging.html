@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_Rigging.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_Rigging.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_Rigging.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,485 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.3</span></h4>
+    
+    <p>
+    <strong>Rigging</strong> is the process of connecting bones to a mesh and making the mesh moveable by the bones.<br>
+    In particular, <strong>setting weights</strong> to connect the vertices and bones of the mesh is the key point.<br>
+    AnyPortrait's "<strong>Rigging Modifier</strong>" provides a variety of features for this rigging task.<br>
+    This page introduces the basic usage and features of the Rigging Modifier.<br>
+    This page is also covered in <a href="../../en/GettingStarted/GS_2_5.html"><strong>Getting Started 2</strong></a>.<br>
+    See the <a href="../../en/AdvancedManual/AD_VariousRigging.html">next page</a> for more details on how to rig in various cases and advanced features.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Adding Rigging Modifiers and Linking Vertices and Bones</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_628.jpg"/>
+    <br>
+    
+    <p>
+    Select the mesh group and select the <strong>Modifier tab</strong>.<br>
+    Press the <strong>Add Modifier button</strong> and select a <strong>Rigging modifier</strong> to add.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_629.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select the Mesh</strong>.<br>
+    <strong>(2)</strong> Press the <strong>Add to Rigging button</strong> to register the mesh with the modifier.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_630.jpg"/>
+    <br>
+    
+    <p>
+    Rigging editing starts automatically when the mesh is registered with the modifier.<br>
+    If the edit mode is not started, <strong>(1)</strong> press the <strong>Start Binding button</strong> to start editing. (Shortcut key:  <kbd>A</kbd> )<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_631.jpg"/>
+    <br>
+    
+    <p>
+    With the mesh selected, you need to select a bone and vertices.<br>
+    For now, let's assign weights to all the vertices.<br>
+    <strong>(1)</strong> <strong>Select all vertices</strong> by&nbsp;&nbsp;<kbd>dragging the mouse</kbd>&nbsp;&nbsp;or pressing  <kbd>Ctrl + A</kbd> .<br>
+    <strong>(2)</strong> <strong>Click the target bone</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note that.</strong></span><br>
+     <kbd>Right-click</kbd>  when you want to deselect.<br>
+    The first right-click deselects the vertices, and the second right-click deselects the bones.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_632.jpg"/>
+    <br>
+    
+    <p>
+    Now let's connect the bones with the selected vertices.<br>
+    <strong>(1)</strong> Press <strong>"1" button</strong> on the weight tool.<br>
+    <strong>(2)</strong> In the workspace, you will see the <strong>mesh color</strong> change to the <strong>bone color</strong> or <strong>red color</strong>. (The color depends on the option.)<br>
+    <strong>(3)</strong> <strong>The selected bone (Bone 1)</strong> and the <strong>designated weight (1.0)</strong> are added to the bone rigging information.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_633.jpg"/>
+    <br>
+    
+    <p>
+    Let's connect the second bone and vertices.<br>
+    In this step, select some vertices and set the weights.<br>
+    <strong>(1)</strong>&nbsp;&nbsp;<kbd>Drag the mouse</kbd>&nbsp;&nbsp;to select the vertices. You can select additional vertices by pressing&nbsp;&nbsp;<kbd>Ctrl</kbd>&nbsp;&nbsp;or  <kbd>Shift</kbd> .<br>
+    <strong>(2)</strong> <strong>Click the second bone</strong> to select it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_634.jpg"/>
+    <br>
+    
+    <p>
+    At the joint site, it is better to make the weight between the bones change smoothly.<br>
+    Let's assign some weights to the currently selected vertices.<br>
+    <strong>(1)</strong> Press the <strong>".3" button</strong> in the weight tool.<br>
+    <strong>(2)</strong> You can also increase the weight by pressing the <strong>"+" button</strong> several times.<br>
+    <strong>(3)</strong> The rigging information about Bone 2 is added.<br>
+    <strong>(4)</strong> The color of the mesh also changes slightly to the color of the second bone.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger">Note.</span><br>
+    You can change the weight using the shortcuts.<br>
+    Press&nbsp;&nbsp;<kbd>X</kbd>&nbsp;&nbsp;or&nbsp;&nbsp;<kbd>Z</kbd>&nbsp;&nbsp;to increase or decrease the weight by <strong>0.02</strong>. Press&nbsp;&nbsp;<kbd>Shift</kbd>&nbsp;&nbsp;and press&nbsp;&nbsp;<kbd>X</kbd>&nbsp;&nbsp;or&nbsp;&nbsp;<kbd>Z</kbd>&nbsp;&nbsp;to increase or decrease weight by <strong>0.05</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_635.jpg"/>
+    <br>
+    
+    <p>
+    In the same way, select the vertices and set the weight for the second bone.<br>
+    Select the vertices closer to the second bone than before, this time assigning <strong>a weight of 0.5</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_636.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_637.jpg"/>
+    <br>
+    
+    <p>
+    Next, select the vertices and assign more weight to the second bone.<br>
+    If this weight is gradually assigned to a larger second bone, the mesh will naturally deform as the joint moves.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Manually setting weight values</h3>
+    <br>
+    
+    <p>
+    The Rigging modifier provides several convenience features for setting weights.<br>
+    The most basic of them will be "setting weights manually."<br>
+    You can simply set the weight value in the following way.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_638.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select the vertices</strong> you want to modify. (The target bone must be selected.)<br>
+    There are two ways to set the weight value manually.<br>
+    If there is <strong>only one vertex selected</strong> or <strong>the weights are the same</strong> for that bone <strong>(2)</strong> you can use the <strong>slider</strong> to modify the value.<br>
+    <strong>(3)</strong> Or after <strong>inputting weight value</strong> to set in weight tool, press <strong>Set Weight button</strong> to assign weight.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Removing rigging information</h3>
+    <br>
+    
+    <p>
+    If the weight value is zero or very small, or applied incorrectly, you may need to delete the rigging information for that bone.<br>
+    Even without this, AnyPortrait removes invalid rigging information during the Bake, so there is no problem with performance.<br>
+    However, if you are doing a complex rigging for many bones, it is a good idea to delete unnecessary rigging information beforehand.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_639.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select the vertices</strong>.<br>
+    <strong>(2)</strong> Press the <strong>"X" button</strong> of the rigging information you want to remove.<br>
+    <strong>(3)</strong> You can see that the rigging information is removed.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Visual presentation of rigging information</h3>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_640.jpg"/>
+    <br>
+    
+    <p>
+    At the bottom of the screen, you can change how the rigging information looks in the workspace.<br>
+    <strong>(1)</strong> Determines whether <strong>the image of the mesh</strong> is rendered with weighted colors.<br>
+    <strong>(2)</strong> Decide whether <strong>the color of the bone</strong> is rendered or <strong>the weight gradation</strong> of the selected bone is rendered.<br>
+    <strong>(3)</strong> Determine the appearance and color of the vertices. Weighted results can be rendered <strong>in color</strong> or <strong>in a pie chart</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_641.jpg"/>
+    <br>
+    
+    <p>
+    The image of the mesh is not rendered.<br>
+    This method has the advantage of allowing you to visually check the exact value of the weight.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_642.jpg"/>
+    <br>
+    
+    <p>
+    Changed weight color from "<strong>Color of Bones</strong>" to "<strong>Weight Gradation of the selected bone</strong>".<br>
+    As the weight increases, it changes from blue to red.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_643.jpg"/>
+    <br>
+    
+    <p>
+    The way that vertices are rendered has been changed to "<strong>pie chart</strong>".<br>
+    In this way, the vertices are rendered in a circular shape and you can see exactly the proportion of the weights in the vertices.<br>
+    The area for the selected bones is shown slightly larger.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Displaying method for not linked bones</h3>
+    <br>
+    
+    <p>
+    Bones connected to the mesh maybe part of all bones.<br>
+    In particular, in the case of lots of bones, bones that are not assigned weights do not need to be visible during rigging work.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_927.jpg"/>
+    <br>
+    
+    <p>
+    A button has been added at the bottom of the screen to set how to display unconnected bones.<br>
+    By pressing this button, you can set how to show the "not linked bones with the mesh" in 3 steps.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_928.jpg"/>
+    <br>
+    
+    <p>
+    This mode shows all bones regardless of whether they are rigged or not.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_929.jpg"/>
+    <br>
+    
+    <p>
+    Shows not linked bones in translucent gray.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_930.jpg"/>
+    <br>
+    
+    <p>
+    Bones that are not rigged are not rendered.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Settings related to bone appearance and rigging</h3>
+    <br>
+    
+    <p>
+    You can change the bone's appearance or size, or change the color and the size of vertices associated with the rigging weights.<br>
+    Create a work environment that suits you by using various options in the <a href="../../en/AdvancedManual/AD_SettingDialog.html">Setting Dialog</a>!<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Pose Test</h3>
+    <br>
+    
+    <p>
+    It's hard to know if rigging worked well until you test it.<br>
+    You'll need to make your character take different poses and repeat the process of modifying the rigging weights.<br>
+    AnyPortrait provides the ability to test poses during rigging modifier editing to make this process easier.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_644.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Pose Test button</strong> to move the bone while the rigging edit mode is on.<br>
+    Press the button again to return to the original state.<br>
+    <strong>(2)</strong> Press the <strong>Reset Pose button</strong> to return to the original shape while maintaining the test state.<br>
+    Rigging can also be done while testing a pose.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note that..</strong></span><br>
+    If a bone doesn't move right after the pose test, you can move it by selecting another bone and then selecting it again.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Rigging Tool UI</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_645.jpg"/>
+    <br>
+    
+    <p>
+    <strong>1. Add to Rigging / Remove from Rigging</strong><br>
+    : Add or remove the selected mesh to/from the Rigging modifier.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Information about selected vertices and bones</strong><br>
+    : Vertices and bones that are the target of the rigging are displayed, and the weight value can be modified.<br>
+    - <strong>A. Index or number of selected vertices</strong><br>
+    - <strong>B. Name and lock button of the selected bone</strong><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;: Lock function to fix the rigging value of bone. See the <a href="../../en/AdvancedManual/AD_VariousRigging.html">related page</a> for the lock function.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. Weight tool</strong><br>
+    : Functions to assign weight value directly.<br>
+    - <strong>C. Numpad tab and Brush tab</strong><br>
+        : Switches between assigning values with the number pad style and editing mode using the brush.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;See the <a href="../../en/AdvancedManual/AD_VariousRigging.html">related page</a> about brush mode.<br>
+    - <strong>D. Assign weight manually </strong>: The value of the button is assigned as a weight.<br>
+    - <strong>E. Set Weight</strong> : Set the numeric value in the left box as weight. Press the + and - buttons to increase or decrease the weight in 0.05 increments.<br>
+    - <strong>F. Scale Weight</strong> : Multiply the weight by the number in the left box. Press the + and - buttons to multiply the weight by 1.05 or 0.95.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>4. Weight Assist Tools</strong><br>
+    : Functions to help set weight.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>5. Vertex selection and Copy & Paste</strong><br>
+    : Auxiliary functions to select vertices and functions to copy weight values.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>6. Bone Rigging Information</strong><br>
+    : The bones and weights connected to the selected vertices are displayed in a list.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Weight Assist Tools</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_646.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Blend</strong><br>
+    Smooths weights based on rigging information around the selected vertices.<br>
+    The values are changed by the selected bones and are added automatically if there is no rigging information for the selected bones.<br>
+    Blending results vary depending on which bone is selected, so we recommend blending for each bone in the joint.<br>
+    Each time the button is pressed, a little bit of blending is performed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_647.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Normalize / Auto Normalize</strong><br>
+    "Normalize" function makes the sum of the weights to one.<br>
+    With "Auto Normalize" on, the weights are automatically corrected to 1 at all times.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_648.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Prune</strong><br>
+    Delete all rigging information with a weight value of zero or very small.<br>
+    This is useful for deleting unnecessary rigging information.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_649.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Auto Rig</strong><br>
+    This function performs rigging automatically of selected vertices<br>
+    As of v1.1.8, this feature has been significantly improved.<br>
+    See the <a href="../../en/AdvancedManual/AD_VariousRigging.html">related page</a> for details.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_650.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Grow</strong><br>
+    Expand one more step from the selected vertices to select more vertices.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_651.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Shrink</strong><br>
+    Select only those vertices that are one level smaller from the selected vertices.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_652.jpg"/>
+    <br>
+    
+    <p>
+    Select Vertices of the Bone<br>
+    Select all vertices to which the selected bone is weighted.<br>
+    Hold down the&nbsp;&nbsp;<kbd>Ctrl</kbd>&nbsp;&nbsp;( <kbd>Command</kbd>  on a Mac) and click the button to select vertices including existing selected vertices.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ShaderGraph.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ShaderGraph.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_ShaderGraph.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,432 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.2</span></h4>
+    
+    <p>
+    「<strong>Shader Graph（シェーダグラフ）</strong>」は、ノードベースのツールを利用して、シェーダを作成する機能です。<br>
+    Unity 2018で導入されたこの機能は、、LWRPとHDRPでも動作するので、互換性が良いという特徴があります。<br>
+    「Shader Graph」を利用して、「カスタムシェーダ」をルールに合わせて作成するAnyPortraitとも互換性のあるマテリアルを作成することができます。<br>
+    このページでは、「Shader Graph」を利用して、「カスタムシェーダ」を作成しマテリアルに適用する方法を説明します。<br>
+    追加情報は次のページを参照してて見ることをお勧めします。<br>
+    - <a href="../../jp/Script/SC_CustomShader.html"><strong>カスタムシェーダー</strong></a><br>
+    - <a href="https://blogs.unity3d.com/2018/02/27/introduction-to-shader-graph-build-your-shaders-with-a-visual-editor/" target="_sub"><strong>Shader Graph</strong></a> (Unity公式ページ/英語)<br>
+    - <a href="../../jp/AdvancedManual/AD_MaterialLibrary.html"><strong>マテリアルライブラリ</strong></a><br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>参考</strong></span><br>
+    このページで説明されたシェーダは、基本的なシェーダコードの内容をグラフ形式に変換したものです。<br>
+    基本的なルールだけよると、皆さんが自由にシェーダを製作することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_738.jpg"/>
+    <br>
+    
+    <p>
+    「Shader Graphアセット」を作ってみましょう。<br>
+    「<strong>Create&gt; Shader &gt; 2D Renderer</strong>」で二つの方式の「Shader Graphアセット」を作成することができます。<br>
+    この例では、「<strong>Sprite Lit Graph（Experimental）</strong>」を利用してみましょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>参考</strong></span><br>
+    この例では、LWRP 2Dと互換性のあるシェーダを作成しました。<br>
+    他の種類のグラフを作成することも可能です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_739.jpg"/>
+    <br>
+    
+    <p>
+    生成された「Shader Graphアセット」をダブルクリックすると、「グラフツール」が開きます。<br>
+    現在は、出力ノードである「<strong>Sprite Lit Master</strong>」ノードのみの状態です。<br>
+    <strong>(1)</strong> <strong>「+」ボタン</strong>を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_740.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> プロパティのタイプを選択します。ここでまず、「<strong>Texture2D</strong>」を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_741.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 新しいプロパティが追加されました。<br>
+    <strong>(2)</strong> プロパティの名前を「<strong>MainTex</strong>」に設定します。プロパティの名前は、この例と異なる設定いただいてもかまいません。<br>
+    <strong>(3)</strong> <strong>Reference</strong>の名前を「<strong>_MainTex</strong>」に設定します。この値は、シェーダでのプロパティで動作するので、この例と同じように作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_742.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> と同じ方法で、上記のように「<strong>Vector4</strong>」タイプのプロパティと「<strong>Color</strong>」タイプのプロパティを追加します。<br>
+    <strong>(2)</strong> 第二のプロパティを次のように設定します。<br>
+    - <strong>Reference</strong> : <span class="text-danger"><strong>_MainTex_ST</strong></span><br>
+    - Type : <strong>Vector4</strong><br>
+    - <strong>Default</strong> : <strong>(1, 1, 0, 0)</strong><br>
+    <strong>(3)</strong> 第三のプロパティを次のように設定します。<br>
+    - <strong>Reference</strong> : <span class="text-danger"><strong>_Color</strong></span><br>
+    - <strong>Type</strong> : <strong>Color</strong><br>
+    - <strong>Default</strong> : <strong>(0.5, 0.5, 0.5, 1)</strong><br>
+    </p>
+    <br>
+    
+    <!-- 10-2. 외부 이미지+외부 링크 (가운데 정렬+새탭열기) -->
+    <a href="https://drive.google.com/file/d/1Q2zQwWDvHIOtYCn6DBvQt39kBKUk7lPS/view?usp=sharing" target="_sub">
+        <img class="img-fluid rounded-sm mx-auto d-block" style="max-width: 90%;" src="../../Images/Advanced/AdManual_744.jpg"/>
+    </a>
+    <br>
+    
+    <p>
+    AnyPortraitのカスタムシェーダルールに合わせて、基本的なシェーダを作成しました。<br>
+    （画像をクリックすると拡大してご覧いただけます。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_745.jpg"/>
+    <br>
+    
+    <p>
+    テクスチャをサンプリングして色を作成するノードです。<br>
+    基本のUVを使用することもありますが、「<strong>MainTex ST</strong>」を使用すると、「<strong>UVのタイリング</strong>」などをさらに設定することができます。<br>
+    「<strong>MainTex ST</strong>」の値が<span class="text-danger"><strong>（1, 1, 0, 0）</strong></span>ではない場合、通常表示されないことがあります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_746.jpg"/>
+    <br>
+    
+    <p>
+    テクスチャの色と「<strong>_Color</strong>」プロパティの色を組み合わせているノードです。<br>
+    AnyPortraitは色演算時に「<strong>2X Multiply</strong>」方式を使用します。<br>
+    従ってこのグラフでも「<strong>_Color</strong>」のRGB値が<strong>2</strong>と乗算した後、「テクスチャの色」と乗算されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_747.jpg"/>
+    <br>
+    
+    <p>
+    アルファチャンネルの値は、「テクスチャのアルファ値」と「_Colorのアルファ値」を乗算となります。<br>
+    完成された色は、「<strong>Sprite Lit Master</strong>」の「<strong>Color</strong>」に接続されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_748.jpg"/>
+    <br>
+    
+    <p>
+    これで、「Shader Graph」をAnyPortraitに適用してみましょう。<br>
+    AnyPortraitエディタを開きます。<br>
+    <strong>(1)</strong> 「<strong>Root Unit</strong>」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Material Library</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> 「<strong>Make Material Set</strong>」ボタンを押します。<br>
+    <strong>(4)</strong> 新しいマテリアルセットはプリセットを使用しないので、「<strong>（None）</strong>」を選択します。<br>
+    <strong>(5)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_749.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 生成されたマテリアルのセットを選択します。<br>
+    <strong>(2)</strong> マテリアルセットの「<strong>Name</strong>」と「<strong>Icon</strong>」を設定し、「<strong>Default Material</strong>」ボタンを押して、デフォルトのマテリアルに設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_750.jpg"/>
+    <br>
+    
+    <p>
+    Shader Graphで作成されたシェーダを適用してみましょう。<br>
+    <strong>(3)</strong> 「<strong>Color Space：Gamma &gt; Basic Rendering &gt; Alpha Blend</strong>」の項目に、作成したシェーダを割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_751.jpg"/>
+    <br>
+    
+    <p>
+    Bakeをした後、Unityシーンで確認してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_752.jpg"/>
+    <br>
+    
+    <p>
+    Shader Graphで作成されたマテリアルが適用されて表示されるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>クリッピングメッシュのためのShader Graph作成</h3>
+    <br>
+    
+    <p>
+    「クリッピングメッシュ（Clipped Mesh）」を描画するためには、二種類のシェーダが必要です。<br>
+    <strong>- Clipped Shader</strong><br>
+    <strong>- Alpha Mask Shader</strong><br>
+    Shader Graphではシェーダを作成すると、クリッピングメッシュもレンダリングすることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    まず、「Clipped Shader」を作ってみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_753.jpg"/>
+    <br>
+    
+    <p>
+    前に作成しシェーダーを複製します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_754.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> クリッピング、レンダリングのための「<strong>Texture2D</strong>」タイプと「<strong>Vector4</strong>」タイプのプロパティを次のように追加します。<br>
+    <strong>(2)</strong> 「<strong>マスクテクスチャ</strong>」の入力を受けるプロパティを次のように設定します。<br>
+    - <strong>Reference</strong> : <span class="text-danger"><strong>_MaskTex</strong></span><br>
+    - <strong>Type</strong> : <strong>Texture2D</strong><br>
+    <strong>(3)</strong> 「<strong>マスクテクスチャ</strong>」の「<strong>位置とサイズ</strong>」に関連するプロパティを次のように設定します。<br>
+    - <strong>Reference</strong> : <span class="text-danger"><strong>_MaskScreenSpaceOffset</strong></span><br>
+    - <strong>Type</strong> : <strong>Vector4</strong><br>
+    - <strong>Default</strong> : <strong>(0, 0, 0, 1)</strong><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_755.jpg"/>
+    <br>
+    
+    <p>
+    上記の記述されたShader Graphを複製したので、基本的なレンダリングのためのグラフでは、完成された状態です。<br>
+    ここでクリッピングに関連するノードを追加してみましょう。<br>
+    次の3つのノードを追加します。<br>
+    <strong>(1)</strong> <strong>MaskTex プロパティ</strong><br>
+    <strong>(2)</strong> <strong>Screen Position ノード（Defaultモード）</strong><br>
+    <strong>(3)</strong> <strong>MaskScreenSpaceOffset プロパティ</strong><br>
+    </p>
+    <br>
+    
+    <!-- 10-2. 외부 이미지+외부 링크 (가운데 정렬+새탭열기) -->
+    <a href="https://drive.google.com/file/d/17onlHNxif2EeI20u44JtsZB8Lqjf_W9v/view?usp=sharing" target="_sub">
+        <img class="img-fluid rounded-sm mx-auto d-block" style="max-width: 90%;" src="../../Images/Advanced/AdManual_756.jpg"/>
+    </a>
+    <br>
+    
+    <p>
+    既存のグラフにクリッピングに関するノードを追加してShader Graphを完成しました。<br>
+    グラフの下側のノードとアルファ関連の演算ノードが追加、変更されたものです。<br>
+    （画像をクリックすると拡大してご覧いただけます。）<br>
+    </p>
+    <br>
+    
+    <p>
+    クリッピングに関するノードを見てみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_757.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Screen</strong> <strong>Position</strong>」と「<strong>MaskScreenSpaceOffset</strong>」プロパティを使用して、「マスクテクスチャのためのUV」を計算する部分です。<br>
+    これはかなり複雑に構成されているが、「AnyPortraitのクリッピングメッシュ処理の最適化」に関連しているからです。<br>
+    この部分は修正せずに、同じように作成ください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_758.jpg"/>
+    <br>
+    
+    <p>
+    「マスクテクスチャ（MaskTex）」と「Screen PositionとMaskScreenSpaceOffsetを利用して作成されたUV」を利用して、アルファ値を変更するノードです。<br>
+    このノードを追加すると、元の画像がマスクテクスチャによって透明になります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_759.jpg"/>
+    <br>
+    
+    <p>
+    クリッピングレンダリングのマスクテクスチャを生成する「<strong>Alpha Mask Shader</strong>」を作ってみましょう。<br>
+    AnyPortraitは「<strong>Rチャンネル</strong>」をマスクデータとして使用します。<br>
+    「<strong>Rチャンネル</strong>」の特性にマスク画像データは、光の影響を受けて色が変わることがあります。<br>
+    したがって、光の影響を受けない「<strong>Sprite Unlit Graph</strong>」を選択して、新しいShader Graphを生成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_760.jpg"/>
+    <br>
+    
+    <p>
+    生成された「Shader Graph」をダブルクリックして、グラフツールを開きます。<br>
+    上記のように3つのプロパティを追加します。<br>
+    このプロパティは、先に説明したプロパティと同じです。<br>
+    </p>
+    <br>
+    
+    <!-- 10-2. 외부 이미지+외부 링크 (가운데 정렬+새탭열기) -->
+    <a href="https://drive.google.com/file/d/1WAtEBjKwqrjmheefjPhTAJJ6QuvnD3Fe/view?usp=sharing" target="_sub">
+        <img class="img-fluid rounded-sm mx-auto d-block" style="max-width: 90%;" src="../../Images/Advanced/AdManual_761.jpg"/>
+    </a>
+    <br>
+    
+    <p>
+    「<strong>マスクテクスチャ</strong>」を生成するShader Graphを作成してみましょう。<br>
+    上記のShader Graphと非常に似ており、「アルファ値に関連付けられたノード」のみが、他のものを見ることができます。<br>
+    （画像をクリックすると拡大してご覧いただけます。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_762.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitのマスクテクスチャはアルファデータを「<strong>Rチャンネル</strong>」に保存します。<br>
+    「<strong>_MainTexの色</strong>」と「<strong>_Colorの色</strong>」の「<strong>Aチャンネル</strong>」の値が「<strong>Rチャンネル</strong>」に変換されることを、上記の画像で確認することができます。<br>
+    その他のグラフは、従来と同じです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_765.jpg"/>
+    <br>
+    
+    <p>
+    クリッピングレンダリングのためのマテリアルを作成しましょう。<br>
+    マテリアルライブラリを再び開き、上の画像のように作成したシェーダを設定します。<br>
+    <strong>(1)</strong> <strong>Basic Shader</strong> : <strong>Color Space : Gamma &gt; Basic Rendering &gt; Alpha Blend</strong><br>
+    <strong>(2)</strong> <strong>Clipped Shader</strong> : <strong>Color Space : Gamma &gt; Clipped Rendering &gt; Alpha Blend</strong><br>
+    <strong>(3)</strong> <strong>Alpha Mask Shader</strong> : <strong>Alpha Mask</strong><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_766.jpg"/>
+    <br>
+    
+    <p>
+    もし「<strong>LWRP</strong>」または「<strong>LWRP 2D</strong>」環境でのレンダリングをする場合は、基本的な設定では、クリッピングメッシュが正常に表示されません。<br>
+    これはシェーダの問題ではなく、Unityのカメラ処理方式の違いです。<br>
+    したがってShader Graphで汎用的なシェーダを作成しても問題が解決されません。<br>
+    クリッピングメッシュを正常にレンダリングするために、以下の方法に応じて設定します。<br>
+    <strong>(1)</strong> 「<strong>Bakeダイアログ</strong>」を開きます。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>Render Pipeline</strong>」の項目の値を現在の「<strong>Graphicsオプション</strong>」に合わせて変更します。グラフィックスの設定が「<strong>LWRP</strong>」または「<strong>LWRP 2D</strong>」になっている場合は「<strong>Scriptable Render Pipeline</strong>」に変更します。 （逆の場合は「<strong>Default</strong>」に設定します。）<br>
+    </p>
+    <br>
+    
+    <p>
+    （Unity 2019からサポートされているオプションです。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_768.jpg"/>
+    <br>
+    
+    <p>
+    BakeをしUnityシーンで確認してみるキャラクターが正常に表示されるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Shader Graphの使用について</h4>
+    <br>
+    
+    <p>
+    Shader Graphで作成されたシェーダは、従来のレンダリング方法と新しいレンダリング方式の両方を包括する高い汎用性を持っています。<br>
+    したがってLWRPと同じ「<span class="text-danger"><strong>SRP（Scriptable Render Pipeline）</strong></span>」方式をご利用の場合Shader Graphを使用します。<br>
+    AnyPortraitもShader Graphをサポートしますが、次のような問題があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Shader Graphを利用する場合</strong><span class="text-danger"><strong>Alpha Blend以外の「ブレンドモード」（Blend Mode）</strong></span><strong>をサポートしていません。</strong><br>
+    : の点は、Shader Graphが改善されたりAnyPortraitが改善されるべき問題である。<br>
+    現在、問題を解決するには、Shader Graphで作成されたシェーダのコードを直接変更する必要があります。<br>
+    AnyPortraitで提供する「<strong>LWRP 2Dプリセットパッケージ</strong>」（<a href="../../jp/AdvancedManual/AD_LWRP.html">関連ページ</a>）は、Shader Graphで作成され、私たちが直接シェーダコードを変更したので、この材質はブレンドモードがサポートされて最適化がされた。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. LWRPを使用しない場合、「</strong><span class="text-danger"><strong>Surface Shader</strong></span><strong>」をお勧めします。</strong><br>
+    : AnyPortraitはUnity 5.5から使用できるように開発されました。<br>
+    そのため、バージョンに基づいて、「Surface Shader」でレンダリングされるように作成されました。<br>
+    Unityが更新されるたびにレンダリング方式のむらがあるので、レンダリングの問題を避けるためには、最も古典的な方法である「Surface Shader」が推奨されます。<br>
+    ただし、これらのポリシーは、Unityのアップデートに応じて変えることができ、AnyPortraitは可能な最新の技術を使用することができるようサポートします。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

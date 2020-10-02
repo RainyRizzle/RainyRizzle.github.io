@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_LWRP.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_LWRP.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_LWRP.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,320 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.8</span></h4>
+    
+    <p>
+    「<strong>Lightweight Render Pipeline（軽量レンダリングパイプライン）</strong>」は、Unity 2018で導入され、Unity 2019で正式に採用された新しいレンダリング方法です。<br>
+    C#スクリプトでレンダリングを制御することができ、高品質と最適化のための機能を提供します。<br>
+    「<strong>Lightweight Render Pipeline</strong>」、略して「<strong>LWRP</strong>」は、まったく新しい方法のレンダリングパイプラインであるため、従来の「Shader」がほとんど互換性がない欠点があります。<br>
+    そして、残念ながらAnyPortraitで提供される基本的なマテリアルも同様に、「<strong>LWRP</strong>」と互換性がありません。<br>
+    この問題を解決するためにAnyPortrait v1.1.7に追加された機能である「マテリアルライブラリ」から「<strong>LWRP</strong>」のためのマテリアルが提供され、v1.1.8では「<strong>LWRP 2D</strong>」にも対応します。<br>
+    このページでは、「<strong>LWRP</strong>」をサポートしているマテリアルをインストールして設定する過程を説明します。<br>
+    追加の説明については、以下のページを参照してて見ることをお勧めします。<br>
+    </p>
+    <br>
+    
+    <p>
+    - <a href="../../jp/AdvancedManual/AD_MaterialLibrary.html"><strong>マテリアルライブラリ</strong></a><br>
+    - <a href="../../jp/AdvancedManual/AD_ShaderGraph.html"><strong>「Shader Graph」でマテリアルを作成</strong></a><br>
+    - <a href="../../jp/Script/SC_CustomShader.html"><strong>カスタムシェーダー</strong></a><br>
+    - <a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.lightweight@6.9/manual/index.html" target="_sub"><strong>About the Lightweight Render Pipeline Manual</strong></a> (Unity公式ページ/英語)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_714.jpg"/>
+    <br>
+    
+    <p>
+    まず、Unityエディタの「<strong>Package Manager</strong>」を開き、「<strong>Lightweight RP</strong>」の項目を選択します。<br>
+    「<strong>Lightweight RP</strong>」パッケージがインストールされていない場合、「<strong>Package Manager</strong>」ウィンドウの右下にインストールボタンが表示されます。<br>
+    このパッケージをインストールすると、「<strong>LWRP</strong>」を使用することができます。<br>
+    （Unityのバージョンに応じて、UIやインストール方法が異なる場合があります。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_715.jpg"/>
+    <br>
+    
+    <p>
+    メニューの「<strong>Assets &gt; Create &gt; Rendering &gt; Lightweight Render Pipeline &gt; Pipeline Asset</strong>」を選択して、「<strong>LWRPアセット</strong>」を作成します。<br>
+    生成された「LWRPアセット」を、上記の画像のように「<strong>Project Settings &gt; Graphics</strong>」の「<strong>Scriptable Render Pipeline Settings</strong>」に割り当てられます。<br>
+    レンダリング方式が「LWRP」方式に変更されます。<br>
+    （詳細については、「<a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.lightweight@6.9/manual/configuring-lwrp-for-use.html" target="_sub">関連ページ</a>」を参照してください。この方法は、Unityのバージョンごとに異なる場合があります。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_716.jpg"/>
+    <br>
+    
+    <p>
+    LWRPは、既存のShaderをサポートしていないため、マテリアルが正常に表示されません。<br>
+    この問題は、AnyPortraitだけでなく、ほとんどのUnityのアセットとマテリアルも同様です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_717.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitエディタを開きます。<br>
+    <strong>(1)</strong> 「<strong>Root Unit</strong>」を選択します。<br>
+    <strong>(2)</strong> <strong>「Material Library」ボタン</strong>を押します。<br>
+    <strong>(3)</strong> 「<strong>マテリアルライブラリ</strong>」ウィンドウ表示されたことを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_718.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> マテリアルライブラリの左下で「<strong>Advanced Presets</strong>」を「<span class="text-danger"><strong>LWRP Unlit Preset</strong></span>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_719.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> 「<strong>Unpack Preset</strong>」ボタンを押すと、選択されたプリセットのパッケージがインストールされます。<br>
+    <strong>(3)</strong> インストールが完了したら、案内メッセージの「<strong>Okay</strong>」ボタンをクリックしてマテリアルライブラリを再度開く必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_720.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>LWRP Unlit</strong>」プリセットが追加されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_721.jpg"/>
+    <br>
+    
+    <p>
+    新しいマテリアルのセットを作ってみましょう。<br>
+    <strong>(1)</strong> 「<strong>Make Material Set</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 前の手順で追加した「<strong>LWRP Unlitプリセット</strong>」を選択します。<br>
+    <strong>(3)</strong> 「<strong>Select</strong>」ボタンを押すと、マテリアルのセットが生成されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_722.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> 生成された「<strong>LWRP Unlit」</strong>を選択します。<br>
+    <strong>(5)</strong> 「<strong>Default Material</strong>」ボタンを押して、デフォルトのマテリアルに設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_723.jpg"/>
+    <br>
+    
+    <p>
+    次の手順も非常に重要です。<br>
+    LWRPのような「<strong>Scriptable Render Pipeline（SRP）</strong>」では、クリッピングメッシュが正常に出力されない問題があります。<br>
+    Unityのカメラでの「レンダリング処理方式」が既存と異なるからです。<br>
+    v1.1.8でこの問題を解決するためのオプションが提供されます。<br>
+    <strong>(1)</strong> 「<strong>Bake</strong>」ボタンを押してダイアログを開きます。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブをクリックします。<br>
+    <strong>(3)</strong> 「<strong>Render Pipeline</strong>」の項目の値を「<span class="text-danger"><strong>Scriptable Render Pipeline</strong></span>」に変更します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意。</strong></span><br>
+    このオプションは、「<strong>Unity 2019.1</strong>」からサポートされます。<br>
+    Unity 2018は、SRPを使用することができますが、提供される機能の制約でクリッピングメッシュを正常に出力することができません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_724.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>タブを選択し、<strong>Bake</strong>ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_725.jpg"/>
+    <br>
+    
+    <p>
+    Unityシーンを開くと、キャラクターが正常に表示されるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Lightweight Render Pipeline 2Dと連動</h3>
+    <br>
+    
+    <p>
+    Unity 2019からLWRPを2Dゲームに適用することができます。<br>
+    基本的にLWRPと同様の方法であるが、「LWRP 2D」は、既存のLWRPと他のShaderを利用します。<br>
+    そのため、「LWRP 2D」を利用するためには、別のShaderを作って適用する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_726.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>LWRP 2D</strong>」を設定する方法です。<br>
+    「<strong>LWRP</strong>」が設定された状態では、「<strong>LWRPアセット</strong>」の「<strong>Renderer Type</strong>」を「<strong>Custom</strong>」に変更します。<br>
+    「<strong>2D Renderer Dataアセット</strong>」を作成した後、「<strong>LWRPアセット</strong>」の「<strong>Data</strong>」に設定すると、レンダリング方式が「<strong>LWRP 2</strong>D」方式に切り替えます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_727.jpg"/>
+    <br>
+    
+    <p>
+    「LWRP 2D」を設定する方法は、ほぼ同じです。<br>
+    <strong>(1)</strong> 「<strong>Root Unit</strong>」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Material Library</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_728.jpg"/>
+    <br>
+    
+    <p>
+    インストールマテリアルプリセットを選択する必要があります。<br>
+    <strong>(1)</strong> 「<strong>LWRP 2D Lit Preset（Experimental）</strong>」を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_729.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> 「<strong>Unpack Preset</strong>」ボタンを押して、プリセットのパッケージをインストールします。<br>
+    <strong>(3)</strong> 案内メッセージの「OK」ボタンをクリックしてマテリアルライブラリを再起動します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_730.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>LWRP 2D Lit</strong>」プリセットがインストールされて追加されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_731.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Make Material Set</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>LWRP 2D Litプリセット</strong>」を選択します。<br>
+    <strong>(3)</strong> 「<strong>Select</strong>」ボタンを押して、新しいマテリアルのセットを生成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_732.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> 新たに作成された「<strong>LWRP 2D Lit</strong>」マテリアルセットを選択します。<br>
+    <strong>(5)</strong> 「<strong>Default Material</strong>」ボタンを押して、デフォルトのマテリアルに設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_733.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Bake</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Bakeダイアログ</strong>」の「<strong>Settingタブ</strong>」から「<strong>Render Pipeline</strong>」オプションを「<strong>Scriptable Render Pipeline</strong>」に設定します。<br>
+    <strong>(3)</strong> 「<strong>Bakeタブ</strong>」に切り替えて、「<strong>Bake</strong>」<strong>ボタン</strong>を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_734.jpg"/>
+    <br>
+    
+    <p>
+    Unityシーンで確認してみるキャラクターが黒またはかなり暗い色に見えることです。<br>
+    インストールされてプリセットがライティングがされているマテリアルなので、光がない場合暗くレンダリングがされます。<br>
+    シーンに光を追加する必要がするが、「<strong>LWRP 2D</strong>」で提供される機能を利用してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_735.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Hierarchy</strong>」で右クリックをします。<br>
+    <strong>(2)</strong> 「<strong>Light &gt; 2D</strong>」を選択すると、LWRP 2Dのための様々な種類の「<strong>Light 2D</strong>」を選択することができます。<br>
+    このページでは、「<strong>Freeform Light 2D</strong>」を選択してみました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_736.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Edit Shapeボタン</strong>」を押して、光の形を編集します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_737.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターが「LWRP 2D」で光を受け、レンダリングされることを見ることができます。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

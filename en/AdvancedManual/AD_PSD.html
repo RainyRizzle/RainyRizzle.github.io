@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_PSD.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_PSD.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_PSD.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,12 +69,196 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.6</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_37.jpg"/>
+    <br>
+    
+    <p>
+    To import a PSD file with layer information <strong>(1)</strong> <strong>Press the Import PSD File button</strong>.<br>
+    When the PSD Load dialog appears, <strong>(2)</strong> <strong>click Load PSD File button</strong> in step 1.<br>
+    If the PSD file is open <strong>(3)</strong> <strong>Press the Next button</strong> to proceed to the next step.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_38.jpg"/>
+    <br>
+    
+    <p>
+    In step 2, you can select the layer you want to bake and set the clipping.<br>
+    By default, it follows the settings of the PSD file, and automatically recognizes the folder (group).<br>
+    <strong>(1)</strong> <strong>Determines the clipping settings</strong> of the selected layer and whether to <strong>include it in the bake</strong>.<br>
+    If you have finished all the steps, <strong>(2)</strong> <strong>press the Next button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_39.jpg"/>
+    <br>
+    
+    <p>
+    In Step 3, combines each layer image into several Atlas.<br>
+    Before creating Atlas, specify <strong>(1)</strong> <strong>Atlas name</strong> and <strong>(2)</strong> <strong>Path to be saved as Texture Asset</strong>.<br>
+    When this process is complete, a button to Bake Atlas appears.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_40.jpg"/>
+    <br>
+    
+    <p>
+    Press the Bake button to create an Atlas.<br>
+    <strong>1. Asset Name</strong> : Atlas name. This becomes the name of the Texture Asset.<br>
+    <strong>2. Save Path</strong> : The path to save the Texture Asset. It must be located in a subfolder of the Assets folder.<br>
+    <strong>3. Atlas Width / Height</strong> : Atlas image size.<br>
+    <strong>4. Maximum Atlas / Padding</strong> : The maximum number of atlas to be baked, and the spacing of each image.<br>
+    <strong>5. Fix Border Problem</strong> : Resolves blending problems that can occur where transparency is zero when the image is scaled.<br>
+    <strong>6. Bake Button</strong> : Create Atlas as you currently have settings.<br>
+    <strong>7. Atlas Information</strong> : The percentage of shrinking from the actual image and the number of Atlas braked appear.<br>
+    <strong>8. Complete Button</strong> : Create a batched Atlas as a Texture Asset and import it into AnyPortrait, including layer information.<br>
+    <strong>9. Atlas List</strong> : It's the Atlas who bake. Once selected, you can view the details in the preview window.<br>
+    <strong>10. Preview</strong> : This is the screen to check Atlas. You can move, zoom in / out using the mouse wheel button.<br>
+    <strong>11. Background Color</strong> : The background color of the preview screen.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_41.jpg"/>
+    <br>
+    
+    <p>
+    If you modify the Bake settings, <strong>the blue Atlas information</strong> will appear as above.<br>
+    Check the changed Atlas information, press the <strong>Bake button</strong> to create the Atlas again, and press the <strong>Complete button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Determining the image reduction ratio of Atlas</h4>
+    <br>
+    
+    <p>
+    When you want to separate images created by PSD into layers and combine them into Atlas, you have no choice but to shrink the image.<br>
+    If you want to prevent the image from resizing or keep the prototype as much as possible, you can set it as follows.<br>
+    </p>
+    <br>
+    
+    <p>
+    1. Increase Atlas Width, Height.<br>
+    2. Increase the Maximum Atlas value. (In fact, a smaller Atlas will be created.)<br>
+    3. Reduce padding. (Not recommended)<br>
+    </p>
+    <br>
+    
+    <p>
+    Even if it is set as above, the image may be reduced inevitably.<br>
+    If the image size of a specific layer is larger than Atlas Width, Height, the image will be reduced to less than 100%.<br>
+    We recommend that you use a pre-resized PSD file of the appropriate size for your game.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Set the size of the generated mesh group</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.0.6</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_273.jpg"/>
+    <br>
+    
+    <p>
+    Atlas settings have changed some since v1.0.6.<br>
+    <strong>1. Atlas Bake Settings</strong> : These are the settings for creating Atlas.<br>
+    <span class="text-danger"><strong>2. Mesh Group Scale Option</strong></span> : This is a new function. You can set the size ratio of the actual mesh group based on the size of the PSD file. At 100%, use the pixel coordinates of the PSD file. It does not depend on the Atlas zoom ratio.<br>
+    <strong>3. Bake button</strong> : Create Atlas.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Modifying characters created from PSD</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_276.jpg"/>
+    <br>
+    
+    <p>
+    Atlas images and meshes were created automatically to match the configuration of the PSD file.<br>
+    <strong>(1)</strong> <strong>Select the created mesh group</strong>, and <strong>(2)</strong> <strong>press Set Root Unit button</strong> to register as root unit.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_277.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Press the Bake button</strong>, <strong>(2)</strong> <strong>Check the settings in the Bake dialog box</strong>, and then Bake to the scene.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_278.jpg"/>
+    <br>
+    
+    <p>
+    You can see that it applies to Unity as same as PSD illustration.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_279.jpg"/>
+    <br>
+    
+    <p>
+    When you convert a PSD to a mesh, it is created as a square mesh regardless of the image.<br>
+    <strong>(1)</strong> <strong>Select a mesh</strong>.<br>
+    <strong>(2)</strong> <strong>Select the Make Mesh tab</strong>.<br>
+    <strong>(3)</strong> <strong>Press the Remove All Vertices button</strong> and <strong>(4)</strong> <strong>press the Remove All button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_280.jpg"/>
+    <br>
+    
+    <p>
+    Create a mesh manually to fit the image.<br>
+    This should be done for every mesh, and it takes a lot of time and effort.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_281.jpg"/>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
-        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ImportantOption.html">< "Important" option and many objects</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_NonUniformScale.html">< Non-Uniform Scale option</a>
         <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_RePSD.html">Re-importing a PSD File ></a>
     </nav>
     

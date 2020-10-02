@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_AnimationIssueChild.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_AnimationIssueChild.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_AnimationIssueChild.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,133 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.8</span></h4>
+    
+    <p>
+    A Mesh group can be controlled by registering another mesh group as a child.<br>
+    This feature is very convenient, but can sometimes cause some problems.<br>
+    </p>
+    <br>
+    
+    <p>
+    A typical case is that <strong>the animation does not run properly</strong>.<br>
+    This problem occurs when an animation clip is <span class="text-danger"><strong>associated with a child mesh group</strong></span>.<br>
+    AnyPortrait animation clips are only valid when their target is the <strong>Root Unit</strong>. Any animation of a child mesh group that cannot be the Root Unit is ignored on Bake.<br>
+    Therefore, in principle, <strong>animation clips cannot target child mesh groups</strong>.<br>
+    However, there can be "child mesh groups associated with animation clips" in the following order:<br>
+    <strong>1)</strong> Add an Animation Modifier to the mesh group, create an animation clip, and connect it.<br>
+    <strong>2)</strong> Register the animated mesh group as a child of another mesh group.<br>
+    </p>
+    <br>
+    
+    <p>
+    If you have already created an animation and registered the target mesh group as a child of another mesh group, <br>
+    the animation you created will not be a Bake target and will not run normally.<br>
+    In v1.1.8, the feature <strong>to retain animation data</strong> when <strong>changing the animation target to "Parent Mesh Group"</strong> has been added.<br>
+    This page covers the situation where the problem occurs and how to fix it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_780.jpg"/>
+    <br>
+    
+    <p>
+    This is a common example of how animation is produced.<br>
+    The <strong>Transform (Animation) Modifier</strong> is registered in the mesh group, and an animation named "<strong>Idle</strong>" has been created.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_781.jpg"/>
+    <br>
+    
+    <p>
+    Let's create a Parent Mesh Group.<br>
+    <strong>(1)</strong> Create a <strong>new Mesh Group</strong> named "<strong>Parent Mesh Group</strong>".<br>
+    <strong>(2)</strong> Press the <strong>"+" button</strong>.<br>
+    <strong>(3)</strong> Select the <strong>Mesh Group tab</strong>.<br>
+    <strong>(4)</strong> Select the <strong>original mesh group where the animation</strong> is made.<br>
+    <strong>(5)</strong> Press the <strong>Add button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_782.jpg"/>
+    <br>
+    
+    <p>
+    <strong>A warning message</strong> appears when adding as a child mesh group<br>
+    This message is related to the "<strong>Animated Child Mesh Group</strong>" above.<br>
+    (If you do not want to register as a child mesh group at this step, you can run <strong>Detach</strong> to exclude it from the child mesh group.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_783.jpg"/>
+    <br>
+    
+    <p>
+    An existing mesh group has been registered as a child mesh group of "Parent Mesh Group".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_784.jpg"/>
+    <br>
+    
+    <p>
+    When you select an Animation Clip, <strong>the setting of Target Mesh Group</strong> turns <strong>red</strong> with the text "<strong>Invalid Mesh Group</strong>".<br>
+    This is because the target mesh group is a "child mesh group".<br>
+    This animation clip is not subject to Bake, and editing may not be properly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_785.jpg"/>
+    <br>
+    
+    <p>
+    Let's transfer this animation data to our parent "Parent Mesh Group".<br>
+    <strong>(1)</strong> Press the <strong>Change button</strong>.<br>
+    <strong>(2)</strong> Select the <strong>parent mesh group</strong> of the current mesh group from the mesh group list. This is called "Parent Mesh Group".<br>
+    <strong>(3)</strong> Press the <strong>Select button</strong>.<br>
+    <strong>(4)</strong> A message appears asking if you want to change the Target Mesh Group while the animation data is preserved. Press the <strong>Keep data button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_786.jpg"/>
+    <br>
+    
+    <p>
+    The target mesh group for the animation has been changed to the <strong>parent mesh group</strong>.<br>
+    Animation data are retained, so It will be edited and played back normally.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Caution</strong></span><br>
+    Unless you switch from a child mesh group to a parent mesh group, the animation is initialized when you change the target mesh group.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_787.jpg"/>
+    <br>
+    
+    <p>
+    If you select the parent mesh group, you will see that a "<strong>Transform (Animation</strong>)" modifier has been created automatically, and an "<strong>Idle</strong>" animation clip has been registered.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

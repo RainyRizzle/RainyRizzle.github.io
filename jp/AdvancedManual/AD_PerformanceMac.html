@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_PerformanceMac.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_PerformanceMac.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_PerformanceMac.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,102 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    macOS MojaveがインストールされてMac機器でUnityを実行するとき、AnyPortraitが数秒ごとに遅くなる現象があります。<br>
+    この現象は、別名「Stuttering問題」と呼ばれます。<br>
+    macOSのMojaveとUnityによって提供されるレンダリング方式である「Metal」がAnyPortraitでのパフォーマンスを低下させることができます。<br>
+    たまにUnityを再実行する場合、この問題が解決されることがありますが、そうでなければ以下に紹介されている方法を用いてみてください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_460.jpg"/>
+    <br>
+    
+    <p>
+    「macOS Mojave」で駆動される「Unity 2018」でAnyPortraitエディタを実行した画面です。<br>
+    このとき、測定されるFPSの値が高い状態でもエディタの実行性能が定期的に落ちる場合があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_461.jpg"/>
+    <br>
+    
+    <p>
+    プロファイラを使用して、エディタのパフォーマンスを測定しました。<br>
+    60 FPS以上で実行されるエディタの性能が2〜3秒ごとに15 FPSまで低下されることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_462.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Player Settings</strong>」画面を開きます。方法は、次のの二つがあります。<br>
+    - メニューから「<strong>File &gt; Build Settings</strong>」を開いて、「<strong>Player Settings...</strong>」ボタンを押します。<br>
+    - メニューから「<strong>Edit &gt; Project Settings</strong>」を開いて、「<strong>Player</strong>」メニューを選択します。<br>
+    <strong>(2)</strong> 「<strong>Metal Editor Support *</strong>」をオフにします。<br>
+    <strong>(3)</strong> 案内メッセージが表示されます。 「<strong>Apply</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_463.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Metal Editor Support</strong>」設定がオフになるとUnityエディタが「<strong>Metal</strong>」から「<strong>OpenGL</strong>」で描画されることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_464.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitを実行すれば、性能が低下する問題が解決されたことを見ることができます。<br>
+    プロファイラーでAnyPortraitを測定してみると、少なくともフレームが60 FPSに改善されたことを見ることができます。<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>AnyPortraitエディタの性能について</h4>
+    <br>
+    
+    <p>
+    RainyRizzleチームはAnyPortraitエディタの性能を向上させたい継続的に努力しています。<br>
+    しかし、「UnityやOSのアップデート」、「開発環境の違い」のような要因によって、当社が予想していなかったパフォーマンスの問題が発生する可能性があります。<br>
+    もし性能が低下する問題が発生した場合、いつでもお問い合わせを下さい。<br>
+    - <a href="https://www.rainyrizzle.com/anyportrait-report-jp">問い合わせページ</a><br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

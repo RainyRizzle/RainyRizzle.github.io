@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ExecutionOrderProblem.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ExecutionOrderProblem.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_ExecutionOrderProblem.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,123 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    AnyPortraitと他のアセットを一緒に使用してゲームなどを作成するときに、完全に互換性のない問題があります。<br>
+    アセットごとに独特の特徴があるので、いくつかのアセットとAnyPortraitは、互いに互換性がないことがあります。<br>
+    ただし、私たちのチームは、ユニティの機能を利用するアセットとの互換性を念頭に置いて開発するので、<br>
+    いくつかの状況につきましては、適切な解決方法を介して互換性の問題を解決することができます。<br>
+    このページでは、「<strong>スクリプトの実行順序（Script Execution Order）</strong>」による問題を解決する方法について説明します。<br>
+    Unityで提供される<strong>Cinemachine</strong>というアセットを例として聞きました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_465.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitのデモにCinemachineを連動した画面です。<br>
+    Cinemachineにカメラを制御することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_466.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、AnyPortraitで作られたキャラクターの目が異常にレンダリングされます。<br>
+    AnyPortraitの「<strong>クリッピングマスク（Clipping Mask）</strong>」機能が正常に動作していないために発生する問題です。<br>
+    AnyPortraitは、カメラの位置、方向、設定に応じてレンダリングをどうするかを決定します。<br>
+    クリッピングマスク、ビルボード、Perspective演算などがこれに該当します。<br>
+    しかしCinemachineでカメラを制御するロジックとAnyPortraitのカメラ計算ロジックが衝突して正しくレンダリングされていないことです。<br>
+    同様のロジックが互いに衝突する場合には、概ねAnyPortraitのスクリプトが後で実行されるように作成すると、問題が解決することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_467.jpg"/>
+    <br>
+    
+    <p>
+    ユニティのメニューから「<strong>Edit &gt; Project Settings</strong>」から「<strong>Script Execution Order</strong>」を実行します。<br>
+    ユニティエディタのバージョンに応じて、上記の画面とは異なる場合がありますが、「Project Settings」を実行すると、「Script Execution Order」メニューが同じ存在します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_468.jpg"/>
+    <br>
+    
+    <p>
+    他のアセットがインストールされた場合、「<strong>Script Execution Order</strong>」画面で「<strong>Default Time</strong>」のほか、アセットの実行順序が追加されていることがあります。<br>
+    Cinemachineのスクリプトが「Default Time」よりも後に実行されるように設定されたことを、上記の画面で見ることができます。<br>
+    AnyPortraitはCinemachineが実行される順序よりも後に実行する必要があります。<br>
+    <strong>(1)</strong> <strong>「+」ボタン</strong>を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_469.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>AnyPortrait.apPortrait</strong>」を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_470.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitが、他のアセットよりも後で実行されるようになります。<br>
+    <strong>(1)</strong> 他のアセットよりも大きな値の実行順序を入力します。<br>
+    <strong>(2)</strong> <strong>Applyボタン</strong>を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_471.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、現在の問題が解決されて正常にレンダリングがされます。<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>他のアセットとの互換性について</h4>
+    <br>
+    
+    <p>
+    AnyPortraitはUnityの「メッシュレンダラー（Mesh Renderer）」に関するアセットなので、<br>
+    Unityの基本的な機能や、一般的なアセットとの互換性をある程度持っています。<br>
+    しかしながら、Unityの最新機能や様々なアセットとは、ますます多様化して専門され、互換性を保証できない場合があります。<br>
+    私たちのチームにその機能やアセットとの互換性を問い合わせいただいた場合は、私たちが確認してご案内いたします。<br>
+    必要に応じて私たちのチームは、その問題についての更新に反映させていただきます。<br>
+    - <a href="https://www.rainyrizzle.com/anyportrait-report-jp">問い合わせページ</a><br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

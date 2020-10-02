@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_BoneIKController.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_BoneIKController.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_BoneIKController.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -67,23 +69,365 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.8</span></h4>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    본 IK 체인을 설정한 상태에서 외부의 본으로 IK를 제어할 수 있습니다.<br>
+    이 기능을 이용하면 다양한 애니메이션 효과를 줄 수 있습니다.<br>
+    지형에 따라 발 높이를 바꾸어 조금 더 사실적으로 걷는 애니메이션을 만들 수 있습니다.<br>
+    또는, 실시간으로 플레이어가 조준하는 위치로 무기를 들고 자세를 취할 수 있습니다.<br>
+    이 페이지에서는 본 IK 컨트롤러를 설정하는 방법부터, 실제로 게임에서 어떻게 적용할 수 있는지를 다룹니다.<br>
     </p>
     <br>
     
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_236.jpg"/>
+    <br>
     
-    <br><br>
+    <p>
+    이전 페이지에서 설명되었던 것과 같이 <strong>본 IK 체인</strong>을 구성한 상태입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_237.jpg"/>
+    <br>
+    
+    <p>
+    IK를 제어할 역할을 하는 본을 생성합니다.<br>
+    <strong>(1)</strong> <strong>본을 추가로 생성</strong>하고<br>
+    <strong>(2)</strong> <strong>Helper 본</strong>으로 설정합니다.<br>
+    Helper 본의 기능상 차이점은 없습니다.<br>
+    </p>
+    <br>
     
     <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <h3>Position Controller 설정하고 테스트하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_238.jpg"/>
     <br>
     
     <p>
-    본문 입력<br>
+    <strong>(1)</strong> <strong>IK 체인의 Target 본을 선택</strong>합니다.<br>
+    <strong>(2)</strong> <strong>IK Controller Settings</strong>를 <strong>Position</strong>으로 변경합니다.<br>
+    <strong>(3)</strong> <strong>Change 버튼</strong>을 눌러서 <strong>Effector Bone</strong>으로서 방금 만든 <strong>Helper 본</strong>을 선택합니다.<br>
+    <strong>(4)</strong> <strong>Default FK/IK Weight</strong>를 <strong>0에서 1</strong>로 바꿉니다.<br>
     </p>
+    <br>
+    
+    <p>
+    <strong>Position Controller</strong>는 IK의 Target 본의 위치가 Effector 본과 최대한 동일하도록 IK가 동작하는 모드입니다.<br>
+    <strong>Look At Controller</strong>는 IK의 Target 본이 가리키는 방향이 Effector 본을 향하도록 IK가 동작하는 모드입니다.<br>
+    <strong>Default FK/IK Weight</strong>는 별도의 가중치 설정이 없다면 적용되는 기본 가중치 값입니다.<br>
+    1이라면 IK 컨트롤러가 100% 동작하며, 0.5의 값을 가지면 50%만 적용이 됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_239.jpg"/>
+    <br>
+    
+    <p>
+    이제 IK 컨트롤러가 동작하는지 테스트를 해봅시다.<br>
+    <strong>(1)</strong> <strong>Transform (Animation) 모디파이어</strong>를 추가합니다.<br>
+    <strong>(2)</strong> <strong>애니메이션을 만들고 메시 그룹을 선택</strong>한 뒤, <strong>Transform (Animation) 타임라인</strong>을 추가합니다.<br>
+    <strong>(3)</strong> <strong>Helper 본을 선택</strong>하고 <strong>타임라인 레이어</strong>로 등록합니다.<br>
+    <strong>(4)</strong> <strong>키프레임</strong>을 생성하고 위치를 수정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_240.jpg"/>
+    <br>
+    
+    <p>
+    편집 모드를 종료하면 IK 체인이 Helper 본에 도달하도록 움직이는 것을 보실 수 있습니다.<br>
+    (위 이미지는 편집 모드인 것처럼 표현되었지만, IK 컨트롤러는 <span class="text-danger"><strong>편집 모드에서는 동작하지 않습니다.</strong></span>)<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Look At Controller 설정하고 테스트하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_241.jpg"/>
+    <br>
+    
+    <p>
+    IK 체인의 Target 본을 선택하고 이번엔 IK 컨트롤러를 <strong>Look At</strong>으로 변경합니다.<br>
+    Look At 방식은 IK 체인의 형태가 크게 바뀌지 않은 상태에서 각 본들이 조금씩 움직여서 목표를 바라보도록 동작합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_242.jpg"/>
+    <br>
+    
+    <p>
+    위에서 미리 만든 애니메이션을 선택하면 Position 방식과 다르게 IK 체인이 Helper 본에 도달하지 않습니다.<br>
+    대신 Target 본이 Helper 본을 향하며, 전체적으로 본들이 많이 회전하지 않는 특징이 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>IK 체인 없이 Look At Controller 적용하기</h4>
+    <br>
+    
+    <p>
+    Look At Controller는 Position Controller와 다르게 IK 체인이 없는 상태에서도 동작을 합니다.<br>
+    자식 본이 없거나, IK 체인이 Disabled 상태인 본에 Look At Controller를 설정하면, 단일 본을 대상으로 IK가 처리됩니다.<br>
+    IK 체인없이 동작하는 기능은 v1.1.8부터 적용됩니다.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>편집 모드에서 IK 컨트롤러 결과 미리보기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_243.jpg"/>
+    <br>
+    
+    <p>
+    편집 모드에서는 복합적으로 모디파이어를 수정해야하기 때문에 IK 컨트롤러는 동작하지 않습니다.<br>
+    그렇지만 그 결과를 미리 확인할 수는 있습니다.<br>
+    <strong>(1)</strong>&nbsp;&nbsp;<kbd>Ctrl</kbd> 을 누른 상태에서 <strong>모디파이어 잠금 버튼</strong>을 누르면 <strong>모디파이어 잠금 설정 다이얼로그</strong>가 나타납니다.<br>
+    모디파이어 잠금 설정 다이얼로그에 대해서는 <a href="../../kr/AdvancedManual/AD_ModifierLock.html">관련 페이지</a>를 확인하시길 바랍니다.<br>
+    <strong>(2)</strong> <strong>Preview Calculated Bones</strong>를 켜면 해당 잠금 상태일 때 최종적으로 계산된 본의 형태가 나타납니다.<br>
+    이때의 미리보기 상태에서의 본은 IK 컨트롤러 결과가 반영됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>IK 컨트롤러 가중치를 컨트롤 파라미터로 조절하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_244.jpg"/>
+    <br>
+    
+    <p>
+    <strong>"애니메이션으로 제작하는 FK 방식"</strong>과 <strong>"IK 컨트롤러로 제어되는 IK 방식"</strong>을 <strong>가중치</strong>로 적절히 섞어서 사용할 수 있습니다.<br>
+    실제 게임 실행 중에도 제작된 애니메이션이 필요한 경우가 있고, 외부에서 본 IK를 동작시켜야 하는 경우가 다양하게 나타납니다.<br>
+    이때 가중치 값을 언제든지 쉽게 바꿀 수 있도록 컨트롤 파라미터를 활용합니다.<br>
+    <strong>(1)</strong> <strong>컨트롤 파라미터</strong>를 생성합니다. 여기서는 "IK Weight"라는 이름으로 만들었습니다.<br>
+    <strong>(2)</strong> <strong>Type 값을 Float로 설정</strong>합니다.<br>
+    <strong>(3)</strong> <strong>Range의 값을 최소 0, 최대 1</strong>로 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_245.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Target 본을 선택</strong>합니다.<br>
+    <strong>(2)</strong> <strong>IK Controller Settings의 항목</strong> 중에서 <strong>Controller Parameter를 체크</strong>하고 <strong>Change 버튼</strong>을 누릅니다.<br>
+    <strong>(3)</strong> <strong>생성했었던 컨트롤 파라미터를 선택</strong>합니다.<br>
+    이제 컨트롤 파라미터의 값(0~1)에 따라서 IK 컨트롤러 결과가 반영됩니다.<br>
+    애니메이션이나 스크립트로 컨트롤 파라미터의 값을 제어하여 사용하실 수 있습니다.<br>
+    (이 상태에서 "Default FK/IK Weight"는 사용되지 않습니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_246.jpg"/>
+    <br>
+    
+    <p>
+    이제 애니메이션에서 컨트롤 파라미터의 값에 따라서 어떻게 바뀌는 지 확인해보겠습니다.<br>
+    <strong>(1)</strong> 앞서 만든 <strong>애니메이션을 선택</strong>합니다.<br>
+    <strong>(2)</strong> <strong>Add Timeline 버튼</strong>을 눌러서 <strong>(3)</strong> <strong>Control Parameters 타임라인을 추가</strong>합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_247.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>만들었던 컨트롤 파라미터를 선택</strong>하여 <strong>타임라인 레이어로 등록</strong>합니다.<br>
+    <strong>(2)</strong> <strong>키프레임</strong>을 만들고, <strong>(3)</strong> <strong>컨트롤 파라미터의 값을 0으로 설정</strong>합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_248.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> <strong>다음 키프레임을 생성</strong>하고 선택합니다.<br>
+    <strong>(5)</strong> 이번에는 <strong>컨트롤 파라미터의 값을 1로 설정</strong>합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_249.jpg"/>
+    <br>
+    
+    <p>
+    컨트롤 파라미터의 값에 따라서 IK가 적용되는 비율이 바뀌는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>IK 컨트롤러를 게임에 적용하는 방법 예시</h3>
+    <br>
+    
+    <p>
+    7번째 데모씬은 IK 컨트롤러가 적용된 샘플 게임입니다. (<a href="https://www.rainyrizzle.com/ap-sample7-kor">데모 샘플 게임 체험하기</a>)<br>
+    이 게임에 IK가 어떻게 적용되는가에 대해서 간단히 설명합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_250.jpg"/>
+    <br>
+    
+    <p>
+    샘플 게임에 등장하는 4족 보행 로봇입니다.<br>
+    플레이어를 따라다니며 폭탄을 발사하여 도와줍니다.<br>
+    머리 위에 있는 로봇 팔로 폭탄을 발사합니다.<br>
+    4개의 다리로 좌우로 걸어다닙니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_251.jpg"/>
+    <br>
+    
+    <p>
+    4개의 다리는 각각의 <strong>IK 체인</strong>으로 만들어졌습니다.<br>
+    <strong>발이 땅에 닿는 위치</strong>에 <strong>Helper 본들이 생성</strong>되어있습니다.<br>
+    이 Helper 본들을 IK 컨트롤러의 <strong>Effector 본</strong>으로 연결하고 <strong>Position 방식</strong>으로 설정하였습니다.<br>
+    Helper 본의 이름은 각각 <strong>"Helper Foot Front R", "Helper Foot Front L", "Helper Foot Back R", "Helper Foot Back L"</strong>입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_252.jpg"/>
+    <br>
+    
+    <p>
+    폭탄을 발사하는 로봇 팔도 <strong>IK 체인</strong>으로 만들어졌습니다.<br>
+    IK 체인으로 속하지 않은 마지막 본은 발사 위치를 알기 위한 소켓 용도의 본입니다.<br>
+    폭탄을 조준하는 애니메이션을 위해서 <strong>"Helper Aim"이라는 이름의 본</strong>을 추가하고 <strong>IK 컨트롤러</strong>로 연결하였습니다.<br>
+    IK 컨트롤러 타입은 <strong>Look At</strong>입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_253.jpg"/>
+    <br>
+    
+    <p>
+    IK 컨트롤러를 게임에서 활용하는 개략적인 방법입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>1. 지형을 인식하여 발 높이 조절하기</h3>
+    <br>
+    
+    <p>
+    실시간으로 발 위치보다 조금 위쪽에서 <strong>Raycast</strong>를 <strong>아래 방향</strong>으로 시도합니다.<br>
+    Raycast 처리가 성공했다면, <strong>땅에 도달한 위치</strong>로 <strong>Helper 본</strong>을 이동시켜야 합니다.<br>
+    이때, Helper 본을 강제로 이동시킨다면 걷는 애니메이션을 하는 내내 발이 땅에서 떨어지지 않게 됩니다.<br>
+    apPortrait의 <strong>"SetBonePositionConstraintBySurface" 함수</strong>를 이용하면 지형에 따라 발 높이가 보정되면서 걷는 애니메이션도 정상적으로 동작할 수 있습니다.<br>
+    SetBonePositionConstraintBySurface 함수에 필요한 <strong>"기준 표면 위치", "현재 표면 위치", "최소/최대 표면 위치"</strong>는 씬에서 다른 Transform을 이용하여 설정한 뒤 높이 값을 가져옵니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_256.jpg"/>
+    <br>
+    
+    <p>
+    유니티 씬에서 매개변수로 사용할 위치 값을 가져오기 위해 GameObject들을 생성하고 Transform 정보를 참조합니다.<br>
+    <strong>1. Raycast를 시도하는 시작점</strong><br>
+    <strong>2. SetBonePositionConstraintBySurface</strong> 함수 매개 변수 중 <strong>"최대 표면 위치"</strong><br>
+    <strong>3. SetBonePositionConstraintBySurface</strong> 함수 매개 변수 중 <strong>"기준 표면 위치"</strong><br>
+    <strong>4. SetBonePositionConstraintBySurface</strong> 함수 매개 변수 중 <strong>"최소 표면 위치"</strong><br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-success">RaycastHit2D </span>RaycastHit_RobotFootR = <span class="text-success">Physics2D</span>.Raycast(FootRaycast_R.position, <span class="text-primary">new </span><span class="text-success">Vector2</span>(0.0f, -1.0f), 30);<br>
+    <span class="text-primary">if</span> (RaycastHit_RobotFootR && RaycastHit_RobotFootR.collider != <span class="text-primary">null</span>)<br>
+    {<br>
+    &emsp;&emsp;robot.<strong>SetBonePositionConstraintBySurface</strong>(&nbsp;&nbsp;<span class="text-danger">"Helper Foot Front R"</span>,<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;FootPosY_Default.position.y,<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;RaycastHit_RobotFootR.point.y,<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;FootPosY_Min.position.y,<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;FootPosY_Max.position.y, <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintSurface</span>.Ysurface, <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span>.World);<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_254.jpg"/>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>2. 로봇 팔로 자연스럽게 조준하기</h3>
+    <br>
+    
+    <p>
+    게임에서 사용되는 조준점의 위치로 <strong>"Helper Aim" 본을 이동</strong>시킵니다.<br>
+    <strong>Look At IK 컨트롤러</strong>가 동작하기 때문에 그 외의 처리는 필요없습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    robot.<strong>SetBonePosition</strong>(<span class="text-danger">"Helper Aim"</span>, aimPosition, <span class="text-success">Space</span>.World);<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_255.jpg"/>
     <br>
     
     <!-- 5. 바닥 네비바 -->

@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_ToggleWOTranslucent.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ToggleWOTranslucent.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ToggleWOTranslucent.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,65 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.3</span></h4>
+    
+    <p>
+    It is possible to show or hide meshes using a modifier with the "<strong>Color Option</strong>" set.<br>
+    Using this function, it is possible to create the effect of switching two or more meshes.<br>
+    And sometimes it is necessary that there are no "<strong>Translucent step</strong>" when the meshes are switched.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_922.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_923.jpg"/>
+    <br>
+    
+    <p>
+    We created a sample in which two meshes are switched between each other with a Control Parameter named "Image Switch".<br>
+    When the value of the Control Parameter is 0, “<strong>Blue Heart</strong>” appears, and when it is 1, “<strong>Green Square</strong>” appears.<br>
+    You can see that "<strong>Transform (Controller)</strong>" modifier is used and the "<strong>Color Option</strong>" is turned on.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_924.jpg"/>
+    <br>
+    
+    <p>
+    As the Control Parameter moves from 0 to 1, you can see that it gradually changes from "Blue Heart" to "Green Square" as above.<br>
+    This is the result of a system with a translucent step for natural animation.<br>
+    In general, this conversion process is appropriate, but in some cases this process may be unnecessary.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_926.jpg"/>
+    <br>
+    
+    <p>
+    With the Control Parameter selected, press the "<strong>Toggle Visibility without blending</strong>" button located below the "Color Option" button.<br>
+    When this feature is turned on, the process of showing and hiding the mesh will change discontinuously.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_925.jpg"/>
+    <br>
+    
+    <p>
+    Now, when the Control Parameter changes from 0 to 1, the "Green Square" appears <strong>based on the median 0.5</strong> and the "Blue Heart" is hidden.<br>
+    This will be very useful when switching between meshes, as they appear without translucency.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

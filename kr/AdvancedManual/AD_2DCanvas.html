@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_2DCanvas.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_2DCanvas.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_2DCanvas.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -67,22 +69,67 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    유니티를 이용하여 2D 게임을 만들때, 캔버스(Canvas)는 화면에 맞게 스프라이트 등을 조절하는 유용한 컨테이너로서 사용됩니다.<br>
+    AnyPortrait로 생성된 캐릭터를 캔버스와 같이 게임에 사용하는 것은 좋은 방법일 수 있지만, 구조적으로 몇가지 제약사항이 있습니다.<br>
+    이 페이지에서는 캔버스와 AnyPortrait를 같이 사용하기 위해 설정하는 방법을 다룹니다.<br>
     </p>
     <br>
     
-    
-    <br><br>
-    
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_219.jpg"/>
     <br>
     
     <p>
-    본문 입력<br>
+    기본적으로 AnyPortrait로 캐릭터를 만들면 Orthographic 방식의 카메라와 2.5D의 캐릭터가 있는 씬으로 구성되어야 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_220.jpg"/>
+    <br>
+    
+    <p>
+    캔버스(Canvas)를 추가합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_221.jpg"/>
+    <br>
+    
+    <p>
+    캔버스의 Render Mode는 기본적으로 <strong>"Screen Space - Overlay"</strong>이지만,<br>
+    안타깝게도 AnyPortrait에서는 이 방식을 지원하지 않습니다.<br>
+    Render Mode를 <strong>"Screen Space - Camera"</strong>, 또는 <strong>"World Space"</strong>로 설정합니다.<br>
+    "Screen Space - Camera"로 설정한 경우 AnyPortrait로 만든 캐릭터를 렌더링하고 있는 카메라를 연결합니다.<br>
+    Plane Distance는 렌더링 범위 안에 들도록 적절히 수정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_222.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait로 만든 apPortrait 캐릭터가 캔버스의 자식 객체가 되도록 Hierarchy를 변경합니다.<br>
+    이렇게 설정해야 캔버스가 확대/축소 될 때 apPortrait 객체도 자동으로 크기가 조절됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_223.jpg"/>
+    <br>
+    
+    <p>
+    Sorting Order 등을 이용하면 다른 스프라이트(Sprite)객체와 함께 2D 게임을 구성할 수 있습니다.<br>
     </p>
     <br>
     

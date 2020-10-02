@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_RotateWOLimit.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_RotateWOLimit.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_RotateWOLimit.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,119 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.2</span></h4>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_863.jpg"/>
+    <br>
+    
+    <p>
+    This page covers the examples and solutions that limit the angle of rotation of objects in animation.<br>
+    We recommend that you read the instructions on the previous page. <a href="../../en/AdvancedManual/AD_Rotate360.html"><strong>(Related page)</strong></a><br>
+    </p>
+    <br>
+    
+    <p>
+    When creating a rotation animation, let's see what the limitations are.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_864.jpg"/>
+    <br>
+    
+    <p>
+    Let's rotate the character counterclockwise.<br>
+    You can easily check how it will be animated using the <strong>Onion Skin</strong> function. <a href="../../en/AdvancedManual/AD_Onion.html"><strong>(Related page)</strong></a><br>
+    The rotation of the keyframe is currently about <strong>25 degrees</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_865.jpg"/>
+    <br>
+    
+    <p>
+    Slightly rotated counterclockwise.<br>
+    The angle of rotation increased to approximately <strong>139 degrees</strong>.<br>
+    (AnyPortrait rotates counterclockwise as the angle increases.)<br>
+    Looking at Onion Skin, there is no problem with the animation yet.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_866.jpg"/>
+    <br>
+    
+    <p>
+    The image above shows the character rotated further.<br>
+    <strong>(1)</strong> As the angle increases, it goes beyond <strong>180 degrees</strong> and becomes <span class="text-danger"><strong>a negative value</strong></span>.<br>
+    <strong>(2)</strong> The character that looks like Onion Skin does not rotate backwards, but rather rolls forward.<br>
+    </p>
+    <br>
+    
+    <p>
+    In many animation programs and systems, the angle of rotation is often limited to "<strong>0 ~ 360</strong>", or "<strong>-180 to +180</strong>".<br>
+    AnyPortrait has been developed to have a value within "<strong>-180 ~ +180</strong>" by default.<br>
+    This method has the advantage of preventing the object from rotating too much due to incorrect input during editing, and making calculations such as IK easier.<br>
+    However, there can be problems when trying to create a rotation animation with a large amount of change as above.<br>
+    Therefore, if you encounter any of the above issues, you should turn off the limit so that keyframes have a value less than -180 degrees or more than +180 degrees.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_867.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select a keyframe and check the property UI of the keyframe. (Select the Transform tab.)<br>
+    <strong>(2)</strong> Press the <strong>180 degree limit button</strong>, <strong>(3)</strong> release the rotation angle limitation.<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's rotate the character again.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_868.jpg"/>
+    <br>
+    
+    <p>
+    Rotate the character counterclockwise in the same manner as above.<br>
+    There is no problem yet.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_869.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> As it rotates further, it is not negative this time and rotates at an <strong>angle greater than +180 degrees</strong>.<br>
+    <strong>(2)</strong> You can see that the animation is normal.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note that.</strong></span><br>
+    The rotation angle limititation is not a property of the keyframe, it is a temporary setting in the editor.<br>
+    By default, the angle is always constrained unless you release the limit of the direct rotation angle.<br>
+    Therefore, please only temporarily release this limitation if you encounter any of the above issues.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Using the Unity Recorder</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_UnityRecorder.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_UnityRecorder.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_UnityRecorder.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Using the Unity Recorder</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Using the Unity Recorder</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.2.5</span></h4>
+    
+    <p>
+    Among the packages provided by Unity, there is an interesting package called "<strong>Unity Recorder</strong>".<br>
+    This is a package that provides the ability to record the game screen of the Unity Editor and save it as an image or video.<br>
+    It is still a preview stage package, but unexpectedly, many users have inquired about compatibility with AnyPortrait.<br>
+    On this page, we will explain how to shoot a character created with AnyPortrait with <strong>Unity Recorder</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    It is also recommended to check the pages below.<br>
+    - <a href="https://docs.unity3d.com/Packages/com.unity.recorder@2.2/manual/index.html" target="_sub">Unity Recorder 2.2 Official Tutorial</a><br>
+    - <a href="../../en/AdvancedManual/AD_ScreenCapture.html">Screen capture</a><br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Notice</strong></span> : Unity Recorder is still in preview, so it may be slightly different from the description on this page depending on the version.<br>
+    The description on this page is based on <strong>Unity 2020.1</strong> and <strong>Unity Recorder 2.2</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Install the Unity Recorder package and shoot a video</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_991.jpg"/>
+    <br>
+    
+    <p>
+    Select <strong>Window &gt; Package Manager</strong> in Unity Editor.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_992.jpg"/>
+    <br>
+    
+    <p>
+    The Package Manager opens, but you won't see "Unity Recorder" in the list.<br>
+    Click <strong>Settings button</strong> and then "<strong>Advanced Project Settings</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_993.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> The <strong>Enable Preview Packages</strong> checkbox is probably turned off. Enable this option.<br>
+    <strong>(2)</strong> A message appears. Click the OK button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_994.jpg"/>
+    <br>
+    
+    <p>
+    Let's go back to the Package Manager.<br>
+    The Unity Recorder should now appear in the list.<br>
+    <strong>(1)</strong> Select "<strong>Unity Recorder</strong>".<br>
+    <strong>(2)</strong> Click the <strong>"Install" button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_995.jpg"/>
+    <br>
+    
+    <p>
+    Close the Package Manager and select <strong>Window &gt; General &gt; Recorder &gt; Recorder Window</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_996.jpg"/>
+    <br>
+    
+    <p>
+    The Recorder UI appears.<br>
+    <strong>(1)</strong> Click the <strong>"+Add New New Recorders" button</strong>.<br>
+    <strong>(2)</strong> Let's select "<strong>Movie</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_997.jpg"/>
+    <br>
+    
+    <p>
+    The setting screen for movie shooting appears.<br>
+    <strong>1.</strong> You can set the “Frame Rate” of the movie.<br>
+    <strong>2.</strong> You can select "Movie format" (MP4 or WEBM).<br>
+    <strong>3.</strong> You can set the "File Path" and the "File Name".<br>
+    <strong>4.</strong> You can set how the screen will be recorded.<br>
+    <strong>5.</strong> You can select "Movie quality".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_998.jpg"/>
+    <br>
+    
+    <p>
+    After setting the video recording settings, let's start recording.<br>
+    Characters created with AnyPortrait are placed in the Unity scene, and animations are set to start automatically when the game starts.<br>
+    (<a href="../../en/AdvancedManual/AD_RootUnit.html">How to make animation run automatically</a>)<br>
+    <strong>(1)</strong> Press the "<strong>Start Recording</strong>" button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_999.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> The game starts automatically and the character animation is played.<br>
+    <strong>(2)</strong> When it is determined that video recording is over, press the "<strong>Stop Recording</strong>" button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1000.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Let's open the folder where the video file is saved.<br>
+    <strong>(2)</strong> You can see the video saved nicely.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1001.jpg"/>
+    <br>
+    
+    <p>
+    When recording a movie, if you set it to be saved under the same name, the file may be overwritten over and over again.<br>
+    To prevent this, you can add date, time, number, etc. to the file name as above.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Saving as an image with a transparent background</h3>
+    <br>
+    
+    <p>
+    When you need to make the background transparent and save it as an image, there is a problem that characters created with AnyPortrait are not rendered.<br>
+    This problem is the same as the problem in <strong>Render Texture</strong>.<br>
+    Please refer to the explanation below or <a href="../../en/AdvancedManual/AD_RenderTexture.html">Related Page</a> for how to solve the problem when rendering with a transparent background.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1002_2.jpg"/>
+    <br>
+    
+    <p>
+    Change the camera settings to render with a transparent background.<br>
+    Set "<strong>Clear Flags</strong>" to "<strong>Solid Color</strong>", and set "<strong>Alpha</strong> of the <strong>Background color</strong>" to "<strong>0</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1002.jpg"/>
+    <br>
+    
+    <p>
+    Click the "<strong>+Add New Recorders</strong>" button and select "<strong>Image Sequence</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1003.jpg"/>
+    <br>
+    
+    <p>
+    When exporting as image sequence files, a large number of image files are created, so it is recommended to save them in a separate folder.<br>
+    <strong>(1)</strong> Click the button to change the saving path and <strong>(2)</strong> select a new empty folder.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1004.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Set the file format to "<strong>PNG</strong>".<br>
+    <strong>(2)</strong> Change the "<strong>Capture</strong>" option to "<strong>Targeted Camera</strong>" instead of <strong>Game View</strong>, and check that the selected camera is a camera that was previously "set to render with a transparent background color".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1005.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Check the "<strong>Capture Alpha</strong>" option.<br>
+    <strong>(2)</strong> Set the "<strong>Frame Rate</strong>". It is recommended to set a suitable frame rate so as not to create too many image files.<br>
+    <strong>(3)</strong> Set the <strong>Screen size and ratio</strong>.<br>
+    <strong>(4)</strong> Click the "<strong>Start Recording</strong>" button to start recording.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1006.jpg"/>
+    <br>
+    
+    <p>
+    When you open the folder after recording, you can see that the character is not visible and only transparent images have been created.<br>
+    This problem is the same for <strong>Render Texture</strong>, which can be solved by using <span class="text-primary"><strong>KeepAlpha Material</strong></span>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1012.jpg"/>
+    <br>
+    
+    <p>
+    Before recording again, delete all files that were recorded incorrectly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1007.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the AnyPortrait editor, select a character, and click the "<strong>Material Library</strong>" button.<br>
+    <strong>(2)</strong> Select the "<strong>KeepAlpha Presets</strong>" package.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1008.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Click the "<strong>Unpack Preset</strong>" button to install the <strong>KeepAlpha Presets</strong> package.<br>
+    <strong>(2)</strong> During the installation process, a message appears indicating that the <strong>Material Library</strong> is closed. Click the OK button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1009.jpg"/>
+    <br>
+    
+    <p>
+    Open the Material Library again.<br>
+    <strong>(1)</strong> Click the "<strong>Make Material Set</strong>" button.<br>
+    <strong>(2)</strong> The installed "KeepAlpha presets" appear. Select "<strong>KeepAlpha Unlit</strong>" if you are recording the color of the original image, or "<strong>KeepAlpha Lit</strong>" if it is affected by light.<br>
+    <strong>(3)</strong> Click the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1010.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> You can see that a new "<strong>KeepAlpha material set</strong>" has been added. Select the created KeepAlpha material set.<br>
+    <strong>(5)</strong> Click the "<strong>Default Material</strong>" button to set the default material.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1011.jpg"/>
+    <br>
+    
+    <p>
+    Execute Bake.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1013.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> When you return to the Unity scene, you can see the character with the material applied. (The KeepAlpha material generally shows almost the same results as the default material, especially if <strong>KeepAlpha Unlit</strong> is selected, it will look almost the same.)<br>
+    <strong>(2)</strong> Click the "<strong>Start Recording</strong>" button to start recording.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1014.jpg"/>
+    <br>
+    
+    <p>
+    End recording and open the saved image files.<br>
+    Now you can see the character rendered on a transparent background.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_RenderTexture.html">< Rendering to Render Texture</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_SpriteMask.html">Applying Sprite Mask ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_MeshShader.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_MeshShader.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_MeshShader.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -67,22 +69,194 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.7</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_49.jpg"/>
+    <br>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    AnyPortrait에서는 기본적으로 사용되는 Alpha Blend 방식 외의 쉐이더 설정을 사용하는 기능을 제공합니다.<br>
     </p>
     <br>
     
-    
-    <br><br>
+    <p>
+    <strong>(1)</strong> <strong>메시 그룹을 선택</strong>하고 <strong>Setting 탭</strong>이 선택된 상태에서 변경하고자 하는 <strong>메시를 선택</strong>합니다.<br>
+    <strong>(2)</strong> <strong>Shader Setting</strong>에서 설정을 변경할 수 있습니다.<br>
+    </p>
+    <br>
     
     <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <h3>Additive, Soft Additive, Multiplicative</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_50.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_51.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_52.jpg"/>
     <br>
     
     <p>
-    본문 입력<br>
+    Alpha Blend와 더불어서 가장 많이 사용되는 <strong>Additive, Soft Additive, Multiplicative</strong> 블렌딩 옵션을 제공합니다.<br>
+    이렇게 변경된 설정은 Bake 후에 씬에서도 그대로 적용이 되어서 확인할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>사용자 정의 쉐이더</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_53.jpg"/>
+    <br>
+    
+    <p>
+    제공되는 쉐이더가 아닌 다른 쉐이더를 사용할 수 있습니다.<br>
+    <strong>(1)</strong> <strong>Use Custom Shader</strong>에 체크를 하고, <strong>(2)</strong> <strong>쉐이더를 선택</strong>합니다.<br>
+    (쉐이더 작성법은 <a href="../../kr/Script/SC_CustomShader.html">스크립팅 페이지</a>에서 확인할 수 있습니다.)<br>
+    </p>
+    <br>
+    
+    <p>
+    에디터에서는 사용자 정의 쉐이더가 적용되지 않습니다.<br>
+    확인하기 위해 씬으로 Bake를 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_54.jpg"/>
+    <br>
+    
+    <p>
+    씬으로 Bake를 하면 설정했던 쉐이더가 적용되는 것을 확인할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>클리핑(Clipping) 메시의 마스크 텍스쳐 크기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_55.jpg"/>
+    <br>
+    
+    <p>
+    메시를 클리핑할 때, 클리핑의 마스크가 되는 메시는 <strong>"마스크 텍스쳐 크기(Mask Texture Size)"</strong> 설정을 가집니다.<br>
+    게임 씬에서 클리핑 렌더링을 할 때 <strong>Render to Texture 방식</strong>으로 처리를 하는데, 이때의 크기를 의미합니다.<br>
+    마스크 텍스쳐 크기가 크면 <strong>높은 품질</strong>로 클리핑 렌더링을 하며, 크기가 작다면 <strong>렌더링 부하</strong>가 적어집니다.<br>
+    마스크 텍스쳐 크기값은 화면상의 픽셀 단위 크기이므로, 실행 환경의 디스플레이 크기를 고려하여 설정하면 됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>v1.1.7에서의 메시 속성 UI</h3>
+    <br>
+    
+    <p>
+    AnyPortrait v1.1.7에서 메시의 렌더링에 관한 많은 변화가 있습니다.<br>
+    이에 따라 메시의 재질 속성에 관한 UI가 다소 변경되었습니다.<br>
+    아래는 변경된 UI에 대한 설명입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_618.jpg"/>
+    <br>
+    
+    <p>
+    변경된 메시의 속성 UI 중 렌더링에 관련된 부분입니다.<br>
+    <strong>(1)</strong> <strong>블렌딩 방식</strong>을 결정합니다. Alpha Blend, Additive, Soft Additive, Multiplicative의 4가지 방식을 지원합니다.<br>
+    <strong>(2)</strong> <strong>재질 세트(Material Set)</strong>와 <strong>커스텀 쉐이더(Custom Shader)</strong>를 선택할 수 있습니다.<br>
+    <strong>(3)</strong> <strong>재질 세트</strong>를 선택했을 때의 UI입니다.<br>
+    <strong>(4)</strong> 사용자가 재질의 <strong>프로퍼티</strong>의 초기값을 설정할 수 있습니다.<br>
+    <strong>(5)</strong> <strong>양면 렌더링</strong> 옵션입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_619.jpg"/>
+    <br>
+    
+    <p>
+    재질 세트 방식으로 렌더링할 때의 UI입니다.<br>
+    <strong>- Use Default Material Set ON/OFF</strong> : 기본의 재질 세트를 이용할지 여부입니다.<br>
+    <strong>- Change</strong> : 기본 재질 세트를 이용하지 않는 경우, 특정 재질 세트를 선택하는 버튼입니다.<br>
+    <strong>- Open Material Library</strong> : 재질 세트를 관리하는 <strong>재질 라이브러리(Material Library)</strong>를 엽니다. (<a href="../../kr/AdvancedManual/AD_MaterialLibrary.html">관련 페이지</a>)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_620.jpg"/>
+    <br>
+    
+    <p>
+    커스텀 쉐이더를 이용하여 렌더링할 때의 UI입니다.<br>
+    외부의 쉐이더 에셋을 지정할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_621.jpg"/>
+    <br>
+    
+    <p>
+    재질의 프로퍼티의 초기값을 지정하는 UI입니다.<br>
+    재질 세트의 설정값보다 우선시되어 적용됩니다.<br>
+    <strong>- Add Custom Property</strong> : 커스텀 프로퍼티 설정을 추가합니다.<br>
+    <strong>- 프로퍼티의 이름, 타입, 값, 삭제 버튼</strong> : 재질에 적용될 프로퍼티입니다. 쉐이더에 동일한 이름의 프로퍼티가 있어야 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_622.jpg"/>
+    <br>
+    
+    <p>
+    유니티 씬에서 메시에 그림자가 어떻게 렌더링될 것인지에 대한 설정입니다.<br>
+    <strong>Cast Shadows</strong>를 켜면 다른 메시에 그림자를 발생시키며, <strong>Receive Shadows</strong>를 켜면 해당 메시에 그림자가 드리워집니다.<br>
+    기본적으로는 Bake 다이얼로그에서의 공통의 그림자 설정을 따릅니다. (<a href="../../kr/AdvancedManual/AD_BakeDialog.html">관련 페이지</a>)<br>
+    <strong>Overwrite Shadow Setting</strong>을 켰을 때, 해당 메시만 별도로 그림자 설정이 적용됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_623.jpg"/>
+    <br>
+    
+    <p>
+    v1.1.7에 추가된 기능입니다.<br>
+    현재 선택된 메시의 속성을 다른 메시들에 일괄적으로 복사할 수 있습니다.<br>
+    <strong>(1)</strong> <strong>Copy Settings to other meshes 버튼</strong>을 누르면 복사를 위한 다이얼로그가 나타납니다.<br>
+    <strong>(2)</strong> 복사될 수 있는 <strong>다른 메시들</strong>이 나타나며, 여러개를 선택할 수 있습니다.<br>
+    <strong>(3)</strong> 복사하고자 하는 속성입니다.<br>
+    <strong>- Default Color</strong> : 모디파이어를 적용하기 전의 기본 색상<br>
+    <strong>- Blending Type</strong> : 블렌딩 옵션<br>
+    <strong>- Custom Shader</strong> : 커스텀 쉐이더 사용 여부와 쉐이더 에셋<br>
+    <strong>- Render Texture Size</strong> : 클리핑 마스크가 되는 메시의 렌더 텍스쳐의 크기<br>
+    <strong>- 2-Sided Mesh</strong> : 양면 렌더링 여부<br>
+    <strong>- Shadow Settings</strong> : 그림자 설정<br>
+    <strong>- Material Set</strong> : 재질 세트에 관한 설정<br>
+    <strong>- Custom Material Properties </strong>: 사용자가 정의한 재질의 프로퍼티 초기값<br>
+    <strong>(4)</strong> <strong>전체 선택</strong>하거나 해제하는 버튼이 있으며,&nbsp;&nbsp;<strong>Apply 버튼</strong>을 누르면 선택한 속성이 복사되어 적용됩니다.<br>
     </p>
     <br>
     

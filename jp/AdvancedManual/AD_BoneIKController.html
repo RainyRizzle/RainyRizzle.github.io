@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_BoneIKController.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_BoneIKController.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_BoneIKController.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,366 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.8</span></h4>
+    
+    <p>
+    「<strong>骨IKチェーン(Bone IK Chain)</strong>」が設定されると、外部の骨IKを制御することができます。<br>
+    この機能により、さまざまなアニメーション効果を与えることができます。<br>
+    地形に沿って足の高さを変更して、よりリアルな歩行アニメーションを作成することができます。<br>
+    またはリアルタイムでキャラクターは「プレイヤーが目的の場所」に武器をつかむことができます。<br>
+    このページでは、「<strong>骨のIKコントローラ(Bone IK Controller)</strong>」を設定する方法と、ゲームで実際に適用することができる方法について説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_236.jpg"/>
+    <br>
+    
+    <p>
+    前のページで説明したよう<strong>骨のIKチェーン</strong>を構成するための画面です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_237.jpg"/>
+    <br>
+    
+    <p>
+    IKを制御するための骨を作成します<br>
+    <strong>(1)</strong> 追加の<strong>骨</strong>を作成し、<br>
+    <strong>(2)</strong> <strong>「Helper」</strong>として設定します。<br>
+    <strong>「</strong>Helper<strong>」</strong>ボーンの機能に違いはありません。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>「Position Controller」の設定とテスト</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_238.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> IKチェーンの<strong>「Target」の骨</strong>を選択します。<br>
+    <strong>(2)</strong> 「<strong>IK Controller Settings</strong>」を「<strong>Position</strong>」に変更します。<br>
+    <strong>(3)</strong> <strong>「Change」ボタン</strong>を押して、先ほど作成した「<strong>Helper</strong>」の骨を「<strong>Effector Bone</strong>」に選択してください。<br>
+    <strong>(4)</strong> 「<strong>Default FK/IK Weight</strong>」を0から<strong>1</strong>に変更します。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>Position Controller</strong>」は、IKの<strong>「Target」骨</strong>の位置が<strong>「Effector」骨</strong>に可能な近くなるようにIKが動作するモードです。<br>
+    「<strong>Look At Controller</strong>」は、IKの<strong>「Target」骨</strong>が指す方向が<strong>「Effector」骨</strong>を指すようにIKが動作するモードです。<br>
+    「<strong>Default FK/IK Weight</strong>」は、他の重量設定がない場合に適用されるデフォルトの重量値です。<br>
+    値が1の場合、IKコントローラは100％適用されます。 値が0.5の場合、50％のみが適用されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_239.jpg"/>
+    <br>
+    
+    <p>
+    IKコントローラが動作するかをテストしてみましょう。<br>
+    <strong>(1)</strong> <strong>「Transform (Animation)」モディファイア</strong>を追加します。<br>
+    <strong>(2)</strong> アニメーションを作成し、メッシュグループを選択し、「<strong>Transform (Animation)</strong>」タイムラインを追加します。<br>
+    <strong>(3)</strong> <strong>「Helper」骨</strong>を選択して、タイムラインのレイヤーに登録します。<br>
+    <strong>(4)</strong> キーフレームを作成し位置を変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_240.jpg"/>
+    <br>
+    
+    <p>
+    編集モードを終了すると、IKチェーンが「Helper」骨に到達するように移動することを見ることができます。<br>
+    (上記の画像は編集モードのようですが、<span class="text-danger">IKコントローラは編集モードでは機能しません。</span>)<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>「Look At Controller」の設定とテスト</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_241.jpg"/>
+    <br>
+    
+    <p>
+    IKチェーンの「Target」骨を選択し、「<strong>IK Controller</strong>」タイプを「<strong>Look At</strong>」に変更します。<br>
+    「Look At」方式は、各骨組みが少し動くようにしてIKチェーンの形状を大きく変更せずに、ターゲットを見ることです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_242.jpg"/>
+    <br>
+    
+    <p>
+    上作成されたアニメーションを選択すると、IKチェーンが「Position」方式とは異なり、「Helper」骨に到達していないことを見ることができます。<br>
+    代わりに、「Target」骨は「Helper」骨を指し、これは骨が多く回転しないことを意味します。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>IKチェーンなく「Look At Controller」を適用する &RC</h4>
+    <br>
+    
+    <p>
+    「Look At Controller」は、「Position Controller」とは異なるIKチェーンがない状態でも動作します。<br>
+    子骨がないか、IKチェーンが「Disabled」状態である骨の「Look At Controller」を設定すれば、単一の骨を対象にIKが計算されます。<br>
+    IKチェーンなしで動作する機能は、v1.1.8から適用されます。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>IKコントローラーの結果を「編集モード」でプレビュー</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_243.jpg"/>
+    <br>
+    
+    <p>
+    「編集モード」では、モディファイアの処理の複雑さのためにIKコントローラが動作していません。<br>
+    しかし、結果をプレビューすることができます。<br>
+    <strong>(1)</strong>&nbsp;&nbsp;<kbd>Ctrl</kbd> を押しながら<strong>「Modifier Lock」ボタン</strong>を押すと、「<strong>Modifier Lock</strong>」設定ダイアログボックスが表示されます。<br>
+    (「Modifier Lock(モディファイアロック)」設定ダイアログボックスは、<a href="../../jp/AdvancedManual/AD_ModifierLock.html">関連ページ</a>を確認してください。)<br>
+    <strong>(2)</strong> 「<strong>Preview Calculated Bones</strong>」のプレビューがオンになっている場合、ロックがオンになっているときに、最終計算された骨の形が表示されます。<br>
+    このときIKコントローラの結果は、プレビュー状態の骨に反映されます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>制御パラメータでIKコントローラの重量を調節</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_244.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>アニメーションされるFK方式</strong>」と「<strong>IKコントローラで制御されているIK方式</strong>」は、重みを利用して、同時に使用することができます。<br>
+    ゲームの実行中にアニメーションが必要な場合やIKが必要な場合がありますので、自然に切り替える必要があります。<br>
+    このときの制御パラメータを使用して、いつでも簡単に重みを変更することができます。<br>
+    <strong>(1)</strong> <strong>制御パラメータを作成します</strong>。私は「IK Weight」という名前で、それを作成しました。<br>
+    <strong>(2)</strong> 「<strong>Type</strong>」を「<strong>Float</strong>」に設定します。<br>
+    <strong>(3)</strong> 「<strong>Range</strong>」を「Minは<strong>0</strong>、Maxは<strong>1</strong>」に設定してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_245.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>「Target」骨</strong>を選択します。<br>
+    <strong>(2)</strong> 「<strong>IK Controller Settings</strong>」のプロパティで「<strong>Controller Parameter</strong>」を確認し、<strong>「Change」ボタン</strong>を押します。<br>
+    <strong>(3)</strong> 作成した制御パラメータを選択します。<br>
+    IKコントローラの結果は、制御パラメータの値(0~1)に基づいて反映されます。<br>
+    アニメーションやスクリプトを使用して制御パラメータの値を制御することができます。<br>
+    (この状態で「Default FK/ IK Weight」は使用されません。)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_246.jpg"/>
+    <br>
+    
+    <p>
+    次に、制御パラメータの値によってアニメーションがどのように変化するかを見てみましょう。<br>
+    <strong>(1)</strong> 前に作成したアニメーションを選択します。<br>
+    <strong>(2)</strong> 「<strong>Add Timeline</strong>」ボタンを押して、<strong>(3)</strong> 「<strong>Control Parameters</strong>」タイムラインを追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_247.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 作成した制御パラメータを選択して、タイムラインのレイヤーに登録します。<br>
+    <strong>(2)</strong> キーフレームを作成し <strong>(3)</strong> の制御パラメータの値を<strong>0</strong>に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_248.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> 次のキーフレームを作成して選択します。<br>
+    <strong>(5)</strong> 制御パラメータの値を<strong>1</strong>に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_249.jpg"/>
+    <br>
+    
+    <p>
+    IKが適用される比率は、制御パラメータの値によって変化することがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>IKコントローラをゲームに適用する例</h3>
+    <br>
+    
+    <p>
+    第7回デモシーンは、IKコントローラを搭載したサンプルゲームです。 (<a href="https://www.rainyrizzle.com/ap-sample7-jp">デモサンプルゲームを試してみてください</a>。)<br>
+    ここでは、このゲームでIKがどのように動作するかを簡単に説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_250.jpg"/>
+    <br>
+    
+    <p>
+    サンプルゲームに登場する四足歩行ロボットです。<br>
+    このロボットは、プレーヤーの後ろに爆弾を投げ、手助けをします。<br>
+    ロボットは頭の上のロボットアームで爆弾を発射する。<br>
+    ロボットは4本の足で左右に歩きます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_251.jpg"/>
+    <br>
+    
+    <p>
+    4本の足は、それぞれのIKチェーンで構成されます。<br>
+    足が地面に届くところに<strong>「Helper」骨</strong>を生成しました。<br>
+    この<strong>「Helper」骨</strong>はIKコントローラの<strong>「Effector」骨</strong>に接続されて、「<strong>Position</strong>」タイプに設定されます。<br>
+    「Helper」骨は「<strong>Helper Foot Front R</strong>」、「<strong>Helper Foot Front L</strong>」、「<strong>Helper Foot Back R</strong>」と「<strong>Helper Foot Back L</strong>」と命名されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_252.jpg"/>
+    <br>
+    
+    <p>
+    爆弾を発射するロボットアームは、IKチェーンで作られています。<br>
+    IKチェーンに属していない最後の骨はソケットです。<br>
+    爆弾ターゲットアニメーション<strong>「Helper Aim」</strong>というスケルトンを追加し、これをIKコントローラに接続しました。<br>
+    IKコントローラのタイプは、<strong>「Look At」</strong>です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_253.jpg"/>
+    <br>
+    
+    <p>
+    これは、ゲームでIKコントローラを使用する大まかな方法です。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>1. 地形の認識と足の高さの調整</h3>
+    <br>
+    
+    <p>
+    リアルタイムで足の位置よりもやや上から下に「<strong>Raycast</strong>」を試みます。<br>
+    「Raycast」プロセスが成功した場合、<strong>「Helper」骨</strong>を「Ray」が地面に到達した位置に移動します。<br>
+    この時、「Helper」骨を強制的に動かすと、歩行アニメーション全体でロボットの足が地面から離れません。<br>
+    apPortraitの「<strong>SetBonePositionConstraintBySurface</strong>」関数を使用すると、足の高さが地形に応じて変更され、歩行アニメーションが正常に動作することができます。<br>
+    「<strong>SetBonePositionConstraintBySurface</strong>」機能に必要な「<span class="text-primary">基本サーフェスの位置</span>」、「<span class="text-primary">現在のサーフェスの位置</span>」と「<span class="text-primary">最小/最大サーフェスの位置</span>」は、シーンでの他の「<strong>Transform</strong>」を使用して設定し、高さの値を取得します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_256.jpg"/>
+    <br>
+    
+    <p>
+    Unityシーンでパラメータとして使用する位置の値を取得するには、 「GameObjects」を作成し、 「Transform」情報を参照します。<br>
+    <strong>1.</strong> 「<strong>Raycast</strong>」を試みるための出発点<br>
+    <strong>2.</strong> 「SetBonePositionConstraintBySurface」関数のパラメータとしての 「<strong>Max Surface Position </strong>(最大表面位置)」<br>
+    <strong>3.</strong> 「SetBonePositionConstraintBySurface」関数のパラメータとしての 「<strong>Default Surface Position </strong>(基本の表面位置)」<br>
+    <strong>4.</strong> 「SetBonePositionConstraintBySurface」関数のパラメータとしての「<strong>Min Surface Position </strong>(最小表面位置)」<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-success">RaycastHit2D </span>RaycastHit_RobotFootR = <span class="text-success">Physics2D</span>.Raycast(FootRaycast_R.position, <span class="text-primary">new </span><span class="text-success">Vector2</span>(0.0f, -1.0f), 30);<br>
+    <span class="text-primary">if</span> (RaycastHit_RobotFootR && RaycastHit_RobotFootR.collider != <span class="text-primary">null</span>)<br>
+    {<br>
+    &emsp;&emsp;robot.<strong>SetBonePositionConstraintBySurface</strong>(&nbsp;&nbsp;<span class="text-danger">"Helper Foot Front R"</span>,<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;FootPosY_Default.position.y,<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;RaycastHit_RobotFootR.point.y,<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;FootPosY_Min.position.y,<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;FootPosY_Max.position.y, <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintSurface</span>.Ysurface, <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span>.World);<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_254.jpg"/>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>2. 自然ロボットアームを制御して向けること</h3>
+    <br>
+    
+    <p>
+    <strong>「Helper Aim」の骨</strong>をゲームで使用する照準点の位置に移動します。<br>
+    「Look At」IKコントローラが有効にされたので、もはや処理する必要がありません。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    robot.<strong>SetBonePosition</strong>(<span class="text-danger">"Helper Aim"</span>, aimPosition, <span class="text-success">Space</span>.World);<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_255.jpg"/>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

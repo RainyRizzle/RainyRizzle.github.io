@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>「Sprite Mask」適用</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_SpriteMask.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_SpriteMask.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_SpriteMask.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 「Sprite Mask」適用</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">「Sprite Mask」適用</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.2.5</span></h4>
+    
+    <p>
+    Unityの「<strong>Sprite Mask（スプライトマスク）</strong>」を利用すれば、他の<strong>Sprite Renderer</strong>の一部を隠しながらレンダリングを行うことができます。<br>
+    - <a href="https://docs.unity3d.com/ja/current/Manual/class-SpriteMask.html" target="_sub">Sprite Mask （Unity公式マニュアル）</a><br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortraitで製作されたキャラクターは、<strong>Sprite Renderer</strong>ではなく、「<strong>Mesh Renderer</strong>」で構成されるため、基本的には「Sprite Mask」の影響を受けません。<br>
+    しかし、単純にシェーダを作成して「Sprite Mask」を適用することができます。<br>
+    次のチュートリアルも一緒に読んでみてことをお勧めします。<br>
+    - <a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">マテリアルライブラリ</a><br>
+    - <a href="../../jp/AdvancedManual/AD_MeshShader.html">メッシュ用シェーダ(Shader)</a><br>
+    - <a href="../../jp/Script/SC_CustomShader.html">カスタムシェーダー</a><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1016.jpg"/>
+    <br>
+    
+    <p>
+    「Sprite Mask」を生成してみましょう。<br>
+    <strong>(1)</strong> 「Sprite Mask」として使用する画像を用意して「<strong>Sprite</strong>」タイプに設定します。<br>
+    <strong>(2)</strong> 「Hierarchy」で右クリックをして、<strong>Sprite Mask</strong>を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1017.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 新たな「Sprite Mask」が生成されました。<br>
+    <strong>(2)</strong> 準備した画像を「Sprite Mask」に適用します。<br>
+    基本的には「Sprite Mask」は、「シーンビュー（Scene View）」で見えません。<br>
+    <strong>(3)</strong> シーンビューで表示される情報の中から、「<strong>Sprite Mask</strong>」が含まれるようになります。<br>
+    <strong>(4)</strong> 「Sprite Mask」がシーンビューに表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1018.jpg"/>
+    <br>
+    
+    <p>
+    シェーダ（Shader）を新たに作成してみましょう。<br>
+    AnyPortraitの1つの「マテリアルセット（Material Set）」には、複数のシェーダが含まれるが、ここでは最も多く使用される2つのシェーダだけを変更してみましょう。<br>
+    （1つの「<strong>マテリアルセット</strong>」で「<strong>カラースペース（Color Space）</strong> 」1つに含まれているシェーダは、合計9個なので、しっかりとするためには、9つのシェーダファイルの両方を変更する必要があります。）<br>
+    <strong>(1)</strong> 基本的なシェーダーが配置「<strong>Assets ＆RC AnyPortrait ＆RC Assets ＆RC Shaders</strong>」フォルダから次の二つのシェーダアセットを複製します。<br>
+    - apShader_Transparent : アルファブレンディングとなる基本的なシェーダー（ガンマカラースペース）<br>
+    - apShader_ClippedWithMask : クリッピングメッシュに適用されるアルファブレンディングとなる基本的なシェーダー（ガンマカラースペース）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1019.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> 複製されたシェーダアセットの名前を次のように変えてみました。<br>
+    - apShader_Transparent &gt; <strong>Stencil_Transparent</strong><br>
+    - apShader_ClippedWithMask &gt; <strong>Stencil_Clipped</strong><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1020.jpg"/>
+    <br>
+    
+    <p>
+    まず、「<strong>Stencil_Transparent</strong>」シェーダアセットを開いてみましょう。<br>
+    （「カスタムシェーダ」を作成する方法については、「<a href="../../jp/Script/SC_CustomShader.html">関連ページ</a>」を確認してみてください。）<br>
+    <strong>(1)</strong> 「シェーダーの名前」を変更します。区分しやすい名前に設定します。<br>
+    <strong>(2)</strong> 「Stencilコード」を追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Stencil<br>
+    {<br>
+    &emsp;&emsp;Ref 1<br>
+    &emsp;&emsp;Comp LEqual<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    「Sprite Mask」は、「<strong>Stencil</strong>」を利用するので、「Sprite Renderer」がなくてもマスキングが可能です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1021.jpg"/>
+    <br>
+    
+    <p>
+    同じように、「<strong>Stencil_Clipped</strong>」シェーダアセットを変更します。<br>
+    「名前」を変更し、「Stencilコード」を追加してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1022.jpg"/>
+    <br>
+    
+    <p>
+    作成されたシェーダアセットをキャラクターに適用してみましょう。<br>
+    <strong>(1)</strong> AnyPortraitエディタを開いて、「<strong>Material Library</strong>ボタン」を押して「マテリアルライブラリ」を開きます。<br>
+    <strong>(2)</strong> 現在適用され、「マテリアルセット」を選択した場合、<br>
+    <strong>(3)</strong> この「マテリアルセット」で使用されてシェーダを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1023.jpg"/>
+    <br>
+    
+    <p>
+    これを修正した「Stencilシェーダアセット」に交換してみましょう。<br>
+    <strong>(1)</strong> まず、「<strong>Color Space : Gamma &gt; Basic Rendering &gt; Alpha Blend</strong>」のシェーダを<br>
+    <strong>(2)</strong> 「<strong>Stencil_Transparent</strong>」に交換します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1024.jpg"/>
+    <br>
+    
+    <p>
+    同じようにクリッピングシェーダも交換します。<br>
+    <strong>(1)</strong> 「<strong>Color Space : Gamma &gt; Clipped Rendering &gt; Alpha Blend</strong>」のシェーダを<br>
+    <strong>(2)</strong> 「<strong>Stencil_Clipped</strong>」に交換します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1025.jpg"/>
+    <br>
+    
+    <p>
+    「マテリアルライブラリ」を閉じ、Bakeを実行します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1026.jpg"/>
+    <br>
+    
+    <p>
+    Unityシーンから見れば「Sprite Mask」だけ見せキャラクターは見えないことがあります。<br>
+    ゲームを実行してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1027.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行してみると「Sprite Mask」のイメージだけキャラクターが表示されるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>「Sprite Mask」領域を除いてレンダリング</h3>
+    <br>
+    
+    <p>
+    逆に「Sprite Mask」領域が非表示になって、それ以外の領域のみをレンダリングするように作られてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1028.jpg"/>
+    <br>
+    
+    <p>
+    先に作成した「<strong>Stencil_Transparent</strong>」、「<strong>Stencil_Clipped</strong>」アセットを一つずつ開いてコードを変更します。<br>
+    「Stencilの比較演算子」を「<strong>Comp LEqual</strong>」の反対である「<strong>Comp Greater</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1029.jpg"/>
+    <br>
+    
+    <p>
+    再度ゲームを実行してみると、以前の結果と対照的に、「Sprite Mask」の領域を除いた残りがレンダリングになることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>「Sprite Mask」の「Custom Range」を使用する</h3>
+    <br>
+    
+    <p>
+    「Sprite Mask」の「<strong>Custom Range</strong>」という名前のプロパティを使用して、指定された「<strong>Sorting Layer</strong>」や「<strong>Sorting Order</strong>」の対象にのみ適用を受けるようにすることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1030.jpg"/>
+    <br>
+    
+    <p>
+    テストのために、新しい「Sprite Mask」を生成してみました。<br>
+    二つの「Sprite Mask」が同時に適用されたことを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1031.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 最初の「Sprite Mask」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Custom Range</strong>」をチェックしたあと、「<strong>Front</strong>の<strong>Order in Layer</strong>」を「<span class="text-primary"><strong>5</strong></span>」、「<strong>Back</strong>の<strong>Order in Layer</strong>」を「<span class="text-success"><strong>0</strong></span>」​​に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1032.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> 第二「Sprite Mask」を選択します。<br>
+    <strong>(4)</strong> 「<strong>Custom Range</strong>」をチェックしたあと、「<strong>Front</strong>の<strong>Order in Layer</strong>」を「<span class="text-primary"><strong>15</strong></span>」、「<strong>Back</strong>の<strong>Order in Layer</strong>」を「<span class="text-success"><strong>10</strong></span>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1033.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitで作ったキャラクターの「Sorting Order」を制御するために「<strong>Sorting Group</strong>」を利用してみましょう。<br>
+    <strong>(1)</strong> AnyPortraitで作ったキャラクターや、またはその上位のGameObjectを選択します。<br>
+    <strong>(2)</strong> 「<strong>Add Component</strong>」ボタンを押して、「<strong>Sorting Group</strong>」を追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1034.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Sorting Order Option</strong>」を「<strong>Depth To Order</strong>」に変更します。<br>
+    今「Sorting Group」を利用して、いくつかの「Sprite Mask」が適用されるかを設定することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1035.jpg"/>
+    <br>
+    
+    <p>
+    「Sorting Group」の「<strong>Order in Layer</strong>」の値を「<span class="text-danger"><strong>3</strong></span>」に設定すると、最初のマスクにのみ影響を受けます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1036.jpg"/>
+    <br>
+    
+    <p>
+    「Sorting Group」の「<strong>Order in Layer</strong>」の値を「<span class="text-danger"><strong>13</strong></span>」に設定すると、第二のマスクにのみ影響を受けます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>参考</strong></span><br>
+    「Sorting Group」を使用せずにAnyPortraitの「<strong>Sorting Order Option</strong>」を「<strong>Set Order</strong>」モードに設定した状態でも同じように、この操作を実行することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_UnityRecorder.html">< 「Unity Recorder」を使用</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_CharacterCostume.html">キャラクターの衣装を交換 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

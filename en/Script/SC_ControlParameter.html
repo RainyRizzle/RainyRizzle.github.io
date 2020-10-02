@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/Script/SC_ControlParameter.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/Script/SC_ControlParameter.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/Script/SC_ControlParameter.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -66,8 +68,243 @@
     <h1 class="display-5">Control Parameter</h1>
     <br>
     
-    <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <p>
+    Control parameters can be referenced or controlled by a script.<br>
+    Controlling the control parameters affects the modifiers associated with them.<br>
+    </p>
+    <br>
+    
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apControlParam</span> <strong>GetControlParam</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">controlParamName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Retrieves the control parameter.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> controlParamName : The name of the control parameter<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apControlParam</span> : The control parameter with the requested name (null if not exist)
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>IsControlParamExist</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">controlParamName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Check that the control parameter with that name exists.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> controlParamName : The name of the control parameter<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : Whether a control parameter with the requested name exists
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetControlParamInt</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">controlParamName,</span> <span class="text-primary">int</span> <span class="text-muted">intValue )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetControlParamInt</strong> <span class="text-muted">( </span><span class="text-success">apControlParam</span> <span class="text-muted">controlParam,</span> <span class="text-primary">int</span> <span class="text-muted">intValue )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Specifies the value of an Int type control parameter.<br>
+    &nbsp;&nbsp;&nbsp;If it is outside the range of the control parameters, it is limited to the minimum or maximum value.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> controlParamName : The name of the control parameter<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apControlParam</span> controlParam : Target control parameter<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">​int</span> intValue : Int value<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : Whether the process succeeded
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetControlParamFloat</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">controlParamName,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetControlParamFloat</strong> <span class="text-muted">( </span><span class="text-success">apControlParam</span> <span class="text-muted">controlParam,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Specifies the value of an Float type control parameter.<br>
+    &nbsp;&nbsp;&nbsp;If it is outside the range of the control parameters, it is limited to the minimum or maximum value.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> controlParamName : The name of the control parameter<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apControlParam</span> controlParam : Target control parameter<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">​float</span> floatValue : Float value<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : Whether the process succeeded
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetControlParamVector2</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">controlParamName,</span> <span class="text-success">Vector2</span> <span class="text-muted">vec2Value )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetControlParamVector2</strong> <span class="text-muted">( </span><span class="text-success">apControlParam</span> <span class="text-muted">controlParam,</span> <span class="text-success">Vector2</span> <span class="text-muted">vec2Value )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Specifies the value of a control parameter of Vector2 type.<br>
+    &nbsp;&nbsp;&nbsp;If it is out of the control parameter range for X, Y axis respectively, it is limited to minimum or maximum value.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> controlParamName : The name of the control parameter<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apControlParam</span> controlParam : Target control parameter<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> vec2Value : Vector2 value<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : Whether the process succeeded
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetControlParamDefaultValue</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">controlParamName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Initializes the value of the control parameter to the default value.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> controlParamName : The name of the control parameter<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : Whether the process succeeded
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using </span>UnityEngine;<br>
+    <span class="text-primary"><strong>using </strong></span><strong>AnyPortrait;</strong><br>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">ControlParamTest</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// Target AnyPortrait<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success">apPortrait </span>portrait;<br>
+    <br>
+    &emsp;&emsp;// Parameter Values<br>
+    &emsp;&emsp;<span class="text-primary">private int </span>_eyeShape = 0;<br>
+    &emsp;&emsp;<span class="text-primary">private int </span>_mouthShape = 0;<br>
+    &emsp;&emsp;<span class="text-primary">private float </span>_verticalPosition = 0.0f;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// "Eye Shape" (0, 1, 2, 3 int)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.E))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_eyeShape++;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(_eyeShape &gt; 3) { _eyeShape = 0; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.SetControlParamInt(</strong><span class="text-danger"><strong>"Eye Shape",</strong></span> _eyeShape);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// "Mouth Shape" (0, 1, 2, int)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.M))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_mouthShape++;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(_mouthShape &gt; 2) { _mouthShape = 0; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.SetControlParamInt(</strong><span class="text-danger"><strong>"Mouth Shape"</strong></span>, _mouthShape);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// "Vertical Position" (0 ~ 1 float)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKey(<span class="text-success">KeyCode</span>.UpArrow))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Move Upward<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_verticalPosition += 2 * <span class="text-success">Time</span>.deltaTime;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(_verticalPosition &gt; 1) { _verticalPosition = 1; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.SetControlParamFloat(</strong><span class="text-danger"><strong>"Vertical Position"</strong></span>, _verticalPosition);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">else if</span>(<span class="text-success">Input</span>.GetKey(<span class="text-success">KeyCode</span>.DownArrow))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Move Downward<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_verticalPosition -= 2 * <span class="text-success">Time</span>.deltaTime;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(_verticalPosition &lt; 0) { _verticalPosition = 0; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.SetControlParamFloat(</strong><span class="text-danger"><strong>"Vertical Position"</strong></span>, _verticalPosition);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_BoneIK.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_BoneIK.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_BoneIK.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -67,22 +69,236 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_66.jpg"/>
+    <br>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    본을 제어할 때, 기본적으로는 본을 회전시켜서 제어를 합니다.<br>
+    반대로, 본을 이동하면 자동으로 다른 본들이 회전하여 제어하는 방식이 이용되기도 합니다.<br>
+    이 방식을<strong> IK(Inverse Kinematics : 역운동학)</strong>라고 합니다.<br>
+    IK를 이용하면 직관적인 제어가 가능합니다.<br>
+    AnyPortrait는 <strong>(1)</strong> <strong>에디터 편집 상의 IK 제어 기능</strong>과 <strong>(2)</strong> <strong>게임에서 호출할 수 있는 IK 함수</strong>를 모두 제공합니다.<br>
+    이 페이지에서는<strong> IK를 사용하기 위한 설정</strong>과 <strong>에디터에서의 사용법</strong>을 설명합니다.<br>
+    IK가 설정된 본을 게임에서 활용하는 스크립트는 <a href="../../kr/Script/SC_Bone.html">관련 페이지</a>에서 확인할 수 있습니다.<br>
     </p>
     <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>본 상세 정보 UI</h3>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_67.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    본 IK를 설정하기 전에, 본의 상세 정보 UI를 설명합니다.<br>
+    <strong>1. Name</strong> : 이름<br>
+    <strong>2. Base Pose Transformation</strong> : 기본 위치, 회전, 크기<br>
+    <strong>3. Socket</strong>: 소켓 설정 여부<br>
+    <strong>4. IK 모드</strong> : 4가지 IK 모드 중 현재 상태 (Single, Head, Chain, Disabled)<br>
+    <strong>5. IK 체인 정보</strong> : IK 체인의 연결 정보<br>
+    <strong>6. Constraint</strong> : IK 각도 제한 설정<br>
+    <strong>7. Hierarchy</strong> : 본의 부모, 자식 연결 정보<br>
+    <strong>8. Shape</strong> : 에디터에 출력되는 형태와 색상. Helper 체크시 위치만 출력<br>
+    <strong>9. Remove Bone</strong> : 본 삭제<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
     
     
     <br><br>
     
     <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <h3>IK 체인 만들기</h3>
     <br>
     
     <p>
-    본문 입력<br>
+    본 IK 설정을 전문적으로 다루게 되면 상당히 많은 옵션이 필요하며 어려울 수 있습니다.<br>
+    AnyPortrait는 IK를 빠르고 쉽게 사용할 수 있도록 <strong>"IK 체인(Chain)"</strong>과 <strong>"IK 모드"</strong>라는 방식을 제공합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_78.jpg"/>
+    <br>
+    
+    <p>
+    IK 체인의 개념도 입니다.<br>
+    IK 체인은 <strong>Head, Chain, Target</strong>으로 이루어져 있습니다.<br>
+    <strong>Head 본</strong>을 시작점으로 하여 <strong>Target 본</strong>의 위치로 IK 계산을 합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    IK 체인을 바탕으로 본에는 4가지 IK 모드를 설정할 수 있습니다.<br>
+    <strong>1. Single</strong> : Chain이 없이 Target이 직접 붙어있는 Head 본의 상태입니다. 자식 본이 있는 모든 본의 기본값입니다.<br>
+    <strong>2. Head</strong> : IK 체인의 시작점 입니다.<br>
+    <strong>3. Chain</strong> : IK 체인의 중간 본들의 상태입니다. Head ~ Target 사이의 모든 본은 Chain 모드이며, 이는 강제로 지정됩니다.<br>
+    <strong>4. Disabled</strong> : IK 체인에 속하지 않은 상태입니다. 자식 본이 없거나 임의로 지정된 경우입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_68.jpg"/>
+    <br>
+    
+    <p>
+    IK 체인을 만들기 위해<br>
+    <strong>(1)</strong> <strong>IK 체인의 Head가 될 본</strong>을 선택하고, <strong>(2)</strong> <strong>IK 모드를 Head</strong>로 바꿉니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_69.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> <strong>Change IK Target 버튼</strong>을 눌러서 <strong>(4)</strong> <strong>Target될 자식 본을 선택</strong>합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_70.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_71.jpg"/>
+    <br>
+    
+    <p>
+    IK 체인이 만들어지면 중간의 본들은 자동으로 Chain 모드로 변경이 됩니다.<br>
+    Target이 되는 본은 IK 체인 자체의 영향을 받지 않습니다.<br>
+    (현재는 자식 본이 없어서 Disabled 모드이지만, 새로운 IK 체인을 구성할 수도 있습니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_72.jpg"/>
+    <br>
+    
+    <p>
+    IK 체인이 만들어진 상태에서 본을 이동하면 자동으로 체인의 본들이 회전하는 것을 볼 수 있습니다.<br>
+    (본 편집, 모디파이어, 애니메이션에서도 확인할 수 있습니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>IK 회전 각도 제한</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_73.jpg"/>
+    <br>
+    
+    <p>
+    IK 계산을 하면 관절에 따라 각도를 제한하고 싶을 때가 있습니다.<br>
+    사람과 동물을 예로 들면, 평면상에서 360도 회전을 하는 어깨나 고관절과 달리,<br>
+    팔꿈치나 무릎의 관절은 한쪽 방향으로 180도 미만으로 밖에 회전을 할 수 없습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이러한 회전 각도를 제한하는 기능을 사용하는 방법을 안내합니다.<br>
+    <strong>(1)</strong> 회전 각도를 제한하고자 하는 <strong>IK 체인 내의 본</strong>을 선택합니다.<br>
+    <strong>(2)</strong> <strong>Constraint 버튼</strong>을 눌러서 Constraint On 상태로 전환합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_74.jpg"/>
+    <br>
+    
+    <p>
+    회전 제한 범위를 설정합니다.<br>
+    <strong>Min, Max</strong> 값으로 제한 범위를 설정할 수 있습니다.<br>
+    <strong>Preferred</strong> 값은 IK 계산 식에서 기본이 되는 각도를 의미합니다.<br>
+    각도 제한이 설정된 본은 화면상에서 직관적으로 확인할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_75.jpg"/>
+    <br>
+    
+    <p>
+    IK 각도 제한은 모디파이어나 애니메이션에서 확인할 수 있습니다.<br>
+    (주의 : 회전 변형 값의 제한 기능이므로, <strong>메시그룹-Bone 탭</strong>에서는 확인이 불가능 합니다.)<br>
+    모디파이어나 애니메이션에서 작업을 하면 위 화면처럼 각도가 제한된 IK가 실행 되는 것을 확인할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이 설정은 게임에서도 적용이 됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>IK가 적용되지 않는 본</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_76.jpg"/>
+    <br>
+    
+    <p>
+    IK가 적용되지 않아야 하는 경우도 존재합니다.<br>
+    다음과 같은 경우가 되면 부모 본과 IK 체인 관계로 연관되지 않습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    - 부모 본이 없는 경우<br>
+    - 부모 본이 Disabled 모드인 경우<br>
+    - 부모 본이 IK 체인을 가지고 있으나, 다른 자식 본을 대상으로 하는 경우<br>
+    </p>
+    <br>
+    
+    <p>
+    위 화면은 부모 본이 IK 체인을 가지고 있지만, 다른 자식 본에 대해서 IK 체인을 형성했기 때문에,<br>
+    자연스럽게 IK 설정이 되지 않은 본입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_77.jpg"/>
+    <br>
+    
+    <p>
+    IK가 설정되지 않은 본을 움직이면 부모 본이 회전하지 않습니다.<br>
     </p>
     <br>
     

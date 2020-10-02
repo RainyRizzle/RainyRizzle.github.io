@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_ColorProblemModifiers.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ColorProblemModifiers.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ColorProblemModifiers.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,136 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.6</span></h4>
+    
+    <p>
+    The modifier allows you to change the color of the meshes.<br>
+    However, when using multiple modifiers or control parameters, colors may be applied incorrectly and the color of the mesh may become darker.<br>
+    Typically, this problem occurs when you add a modifier after modifying the "<strong>default color of the mesh</strong>".<br>
+    This page explains when color problems occur and how to fix them.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_472.jpg"/>
+    <br>
+    
+    <p>
+    I prepared two meshes.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_473.jpg"/>
+    <br>
+    
+    <p>
+    Select the mesh, and change the default color.<br>
+    The colors are applied in a "2X Multiply" (a method in which 2x RGB and 1x Alpha are multiplied).<br>
+    In the same way I changed the default colors of the other mesh.<br>
+    (Remember the color value set at this time.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_474.jpg"/>
+    <br>
+    
+    <p>
+    Add the "<strong>Transform (Controller)</strong>" modifier.<br>
+    Likewise, you can add a "Morph (Controller)" modifier to assign a color.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_475.jpg"/>
+    <br>
+    
+    <p>
+    Turn on the "Color Option" to change the mesh color with the modifier.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_476.jpg"/>
+    <br>
+    
+    <p>
+    I created three control parameters to reproduce the color problem.<br>
+    You will get the same results as using multiple modifiers.<br>
+    <strong>(1)</strong> With the mesh selected, press the "<strong>Record button</strong>" of the control parameter.<br>
+    <strong>(2)</strong> Make sure that the control parameter added to the modifier is selected.<br>
+    <strong>(3)</strong> Turn on the "<strong>Color Option</strong>" like the modifier so that the color can be changed by the control parameter.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_477.jpg"/>
+    <br>
+    
+    <p>
+    Add the second control parameter to the modifier in the same way.<br>
+    However, you can see that the color of the mesh is getting darker.<br>
+    (Depending on the color, it may be brighter.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_478.jpg"/>
+    <br>
+    
+    <p>
+    As the third control parameter is added, you can see that the colors change more.<br>
+    Currently, I have not changed the color of the mesh according to the control parameters.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_479.jpg"/>
+    <br>
+    
+    <p>
+    Let's figure out the cause of the problem.<br>
+    <strong>(1)</strong> Select the <strong>Control Parameter</strong>.<br>
+    <strong>(2)</strong> Turn on the <strong>Edit mode</strong>.<br>
+    <strong>(3)</strong> If you check the color value while the mesh is selected, you can see that the "<strong>default color of mesh</strong>" set above is specified.<br>
+    This is what happens because the default color of the mesh is applied as the default for all control parameters or modifiers.<br>
+    While AnyPortrait can be used with multiple modifiers or control parameters,<br>
+    If multiple color values are applied at the same time, you can see unintended results.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_480.jpg"/>
+    <br>
+    
+    <p>
+    If you set the color values other than the first control parameter to <strong>gray (0.5, 0.5, 0.5, 1)</strong> which is the default value, rendering will be done normally.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_481.jpg"/>
+    <br>
+    
+    <p>
+    Alternatively, turning off the "<strong>Color Option</strong>" of control parameters or modifiers that do not control color is a good way to solve the problem.<br>
+    </p>
+    <br>
+    
+    <p>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

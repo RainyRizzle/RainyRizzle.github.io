@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_InitializeScript.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_InitializeScript.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_InitializeScript.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,235 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.7</span></h4>
+    
+    <p>
+    Unityの基本的な関数である「<strong>Instantiate</strong>」を利用して、Prefabのオブジェクトをシーンに配置したり、シーンのオブジェクトを複製することができます。<br>
+    「<strong>Instantiate</strong>」はUnityでゲームを作成するときに最も多く使用される関数のいずれかである。<br>
+    AnyPortraitで製作したキャラクターをInstantiate関数で複製するとき、たまに「初期化」のエラーを経る場合があります。<br>
+    このページは、簡単なコード例を通し、初期化について説明します。<br>
+    （初期化関数に関しては、「<a href="../../jp/Script/SC_Init.html">関連ページ</a>」を参照してください。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_615.jpg"/>
+    <br>
+    
+    <p>
+    シーンに配置されたAnyPortraitキャラクターを複製してみましょう。<br>
+    「Space Bar」を入力すると、キャラクターが複製されてわずかに右に配置され、「Move」のアニメーションが再生されるようにしましょう。<br>
+    これでスクリプトで作成すると、次のようになります。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">InitializeSample </span>: <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// 対象となるapPortrait<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success">apPortrait </span>portrait;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.Space) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// GameObjectをInstantiateを利用してコピーする<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject </span>newGameObject = <strong>Instantiate</strong>&lt;<span class="text-success">GameObject</span>&gt;(<strong>portrait</strong>.gameObject);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 位置移動<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;newGameObject.transform.position = <span class="text-primary">new </span><span class="text-success">Vector3</span>(8, 0, 0);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 複製されたGameObjectでapPortraitコンポーネント得る<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apPortrait </span><strong>newPortrait </strong>= newGameObject.GetComponent&lt;<span class="text-success">apPortrait</span>&gt;();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//&nbsp;&nbsp;Moveアニメーション<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;newPortrait.<strong>Play</strong>(<span class="text-danger">"Move"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    このスクリプトをUnityシーンに配置して、ゲームを実行してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_616.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行して、Space Barを押すとキャラクターが複製になりますが、エラーが発生します。<br>
+    そして「Move」のアニメーションも再生されません。<br>
+    このエラーは、Unityシーンに初めて配置されたキャラクターが 「初期化プロセス」を経ていない状態では、すぐに「Play」関数が呼び出されたためです。<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortraitのシステムは、自動的にキャラクターが最初にロードされると、更新フレームに直接初期化を実行します。<br>
+    しかしながら、「Instantiate」関数でロードされた直後にapPortraitの任意の関数を呼び出す場合は、まだ初期化がされていない状態なので、エラーが発生し、その関数は正常に動作しません。<br>
+    </p>
+    <br>
+    
+    <p>
+    この問題を解決する方法は、次のの二つがあります。<br>
+    <strong>(1)</strong> スクリプトを利用して、初期化を直接実行します。<br>
+    <strong>(2)</strong> ロードされたフレームでは、apPortraitの関数を呼び出すことなく、次のフレームまで待機します。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページでは、<strong>(1)</strong>の方法について説明します。<br>
+    </p>
+    <br>
+    
+    <p>
+    コードを次のように変更してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">InitializeSample </span>: <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success">apPortrait </span>portrait;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.Space) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject </span>newGameObject = <strong>Instantiate</strong>&lt;<span class="text-success">GameObject</span>&gt;(<strong>portrait</strong>.gameObject);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;newGameObject.transform.position = <span class="text-primary">new </span><span class="text-success">Vector3</span>(8, 0, 0);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apPortrait </span><strong>newPortrait </strong>= newGameObject.GetComponent&lt;<span class="text-success">apPortrait</span>&gt;();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// すぐに初期化をするためにInitialize関数を呼び出して、Moveアニメーションを再生<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger">newPortrait.</span><span class="text-danger"><strong>Initialize</strong></span>(); <br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;newPortrait.<strong>Play</strong>(<span class="text-danger">"Move"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Play関数を実行する前に、apPortraitの「<span class="text-danger"><strong>Initialize</strong></span>」関数を呼び出すように作成しました。<br>
+    「Initialize」関数は、apPortraitを初期化して、更新をすることができるように準備させる役割をします。<br>
+    </p>
+    <br>
+    
+    <p>
+    現在のゲームを実行してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_617.jpg"/>
+    <br>
+    
+    <p>
+    スライムキャラクターが複製され、エラーなしで「Move」のアニメーションが再生されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    初期化関数は、「Initialize」のほか、「AsyncInitialize」関数もあります。<br>
+    この関数の特徴は、次のとおりです。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Initialize()</strong><br>
+    : 基本的な初期化関数です。<br>
+    関数が呼び出される時点で、すべての初期化処理が行われます。<br>
+    関数が呼び出されると、初期化が完了しますので、すぐにapPortraitを制御することができる利点があります。<br>
+    キャラクターがアニメーションやモディファイヤをたくさん持っている場合、初期化コードは、非常に重く、一時的にFPS（Frames Per Second）が低下することがあります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. AsyncInitialize(OnAsyncLinkCompleted onAsyncLinkCompleted)</strong><br>
+    : 非同期の初期化関数です。<br>
+    ゲーム中に初期化がされたときFPSが大きく落ちることが問題になる場合、この関数は、良い選択になるでしょう。<br>
+    関数が呼び出されても、初期化は、若干のアップデートが行われた後に完了します。<br>
+    この関数が呼び出された直後には、apPortraitをすぐに制御することができません。<br>
+    初期化が完了したときの引数として入力されたイベントを呼び出します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. AsyncInitialize(int timePerYield, OnAsyncLinkCompleted onAsyncLinkCompleted)</strong><br>
+    : v1.1.7で追加された関数です。<br>
+    ms単位の「timePerYield」因子が追加され、非同期処理単位の制限時間を指定することができます。<br>
+    既存のAsyncInitialize関数に比べ処理時間はさらに増加されるが、ゲームのFPSを認識し、可能な限りのパフォーマンスに影響を与えないように改善しました。<br>
+    同時に多くのキャラクターをロードするときにお勧めです。<br>
+    </p>
+    <br>
+    
+    <p>
+    非同期初期化関数を利用して、コードを作成してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">InitializeSample </span>: <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success">apPortrait </span>portrait;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.Space) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject </span>newGameObject = <strong>Instantiate</strong>&lt;<span class="text-success">GameObject</span>&gt;(<strong>portrait</strong>.gameObject);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;newGameObject.transform.position = <span class="text-primary">new </span><span class="text-success">Vector3</span>(8, 0, 0);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apPortrait </span><strong>newPortrait </strong>= newGameObject.GetComponent&lt;<span class="text-success">apPortrait</span>&gt;();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 非同期初期化関数の呼び出し<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger">newPortrait.</span><span class="text-danger"><strong>AsyncInitialize</strong></span>(<strong>OnAsyncPortraitIntialized</strong>);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// またはそう作成してもされます。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// newPortrait.AsyncInitialize(100, OnAsyncPortraitIntialized);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// 初期化が完了すると、呼び出されるイベント<br>
+    &emsp;&emsp;<span class="text-primary">void </span><strong>OnAsyncPortraitIntialized</strong>(<span class="text-success">apPortrait </span>portrait)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;portrait.<strong>Play</strong>(<span class="text-danger">"Move"</span>);<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    非同期初期化処理は、すぐに完了していないので、初期化関数の呼び出しの直後にapPortraitを制御することができません。<br>
+    イベントを利用することをお勧めします。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

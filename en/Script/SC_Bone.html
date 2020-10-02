@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/Script/SC_Bone.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/Script/SC_Bone.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/Script/SC_Bone.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -66,8 +68,350 @@
     <h1 class="display-5">Bone</h1>
     <br>
     
-    <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <p>
+    Functions that reference or control bones.<br>
+    Contains functions that reference a socket or control it with IK.<br>
+    </p>
+    <br>
+    
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apOptBone</span> <strong>GetBone</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apOptBone</span> <strong>GetBone</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Find the bone by name and return it.<br>
+    &nbsp;&nbsp;&nbsp;If you do not specify a root unit index, first perform a full search from the root unit that is currently being rendered.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (If not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : Name of the bone to reference<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> : The bone retrieved. Return null if not
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetBoneSocket</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone )</span>
+<br><span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetBoneSocket</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName )</span>
+<br><span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetBoneSocket</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;References socket of a bone.<br>
+    &nbsp;&nbsp;&nbsp;Please refer to <a href="../../en/AdvancedManual/AD_Socket.html">related page</a> about socket.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : Bone containing socket<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (If not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : Name of the bone to reference<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Transform</span> : Socket Transform of bone. Return null if not
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePosition</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePosition</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePosition</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Controls the position of the bone.<br>
+    &nbsp;&nbsp;&nbsp;You can interpolate using weights<br>
+    &nbsp;&nbsp;&nbsp;IK does not work.​<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : Bone to control<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (If not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : Name of the bone to control<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> position : Position to move<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : World refers to the coordinate system of the scene, and Self refers to the coordinate system of apPortrait.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : Interpolation weight with position of animated bone<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : If it refers to a bone that does not exist, false is returned.
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneRotation</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneRotation</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneRotation</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Controls the rotation angle of the bone.<br>
+    &nbsp;&nbsp;&nbsp;You can interpolate using weights.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : Bone to control<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (If not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : Name of the bone to control<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> angle : Angle to rotate (Degree)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : World refers to the coordinate system of the scene, and Self refers to the coordinate system of apPortrait.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : Interpolation weight with rotation of animated bone<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : If it refers to a bone that does not exist, false is returned.
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneScale</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneScale</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneScale</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Controls the size of the bone.<br>
+    &nbsp;&nbsp;&nbsp;You can interpolate using weights.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : Bone to control<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (If not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : Name of the bone to control<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> scale : Scale value<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : World refers to the coordinate system of the scene, and Self refers to the coordinate system of apPortrait.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : Interpolation weight with scale of animated bone<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : If it refers to a bone that does not exist, false is returned.
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneIK</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f,</span> <span class="text-primary">bool</span> <span class="text-muted">isContinuous</span> <span class="text-muted">=</span> <span class="text-muted">true )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneIK</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f,</span> <span class="text-primary">bool</span> <span class="text-muted">isContinuous</span> <span class="text-muted">=</span> <span class="text-muted">true )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneIK</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f,</span> <span class="text-primary">bool</span> <span class="text-muted">isContinuous</span> <span class="text-muted">=</span> <span class="text-muted">true )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Use IK to move the bone.<br>
+    &nbsp;&nbsp;&nbsp;Refer to the <a href="../../en/AdvancedManual/AD_BoneIK.html">related page</a> for how to set the IK of the bone.<br>
+    &nbsp;&nbsp;&nbsp;You can interpolate using weights.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : Bone to control<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (If not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : Name of the bone to control<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> position : Position to move. Depending on the IK, the location may not be reached.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : World refers to the coordinate system of the scene, and Self refers to the coordinate system of apPortrait.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : Interpolation weight with position of animated bone<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isContiuous : If true, the IK result of the previous frame is referenced to ensure a natural result.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : If it refers to a bone that does not exist, false is returned.
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneLookAt</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneLookAt</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneLookAt</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Similar to the IK method, rotate the bone to view the requested position.<br>
+    &nbsp;&nbsp;&nbsp;Unlike SetBoneIK <strong>()</strong>, it rotates one bone.<br>
+    &nbsp;&nbsp;&nbsp;IK setting is not affected.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : Bone to control<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (If not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : Name of the bone to control<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> position : Position to look at<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : World refers to the coordinate system of the scene, and Self refers to the coordinate system of apPortrait.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : Interpolation weight with rotation value of animated bone<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : If it refers to a bone that does not exist, false is returned.
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraint</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-primary">float</span> <span class="text-muted">positionValue,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintBound</span> <span class="text-muted">constraintBound,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraint</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-primary">float</span> <span class="text-muted">positionValue,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintBound</span> <span class="text-muted">constraintBound,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraint</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-primary">float</span> <span class="text-muted">positionValue,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintBound</span> <span class="text-muted">constraintBound,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Limit the position of the bone.<br>
+    &nbsp;&nbsp;&nbsp;You can set the range for each axis.<br>
+    &nbsp;&nbsp;&nbsp;You need to call a new one for each update, and you can make duplicate calls with different ConstraintBound types.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : Target Bone<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (If not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : Name of the target bone<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> positionValue : The value of the position you want to restrict<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">ConstraintBound</span> constraintBound : It has a type of "Min, Max, Preferred" for the X and Y axes, respectively.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : World refers to the coordinate system of the scene, and Self refers to the coordinate system of apPortrait.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : If it refers to a bone that does not exist, false is returned.
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraintBySurface</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">defaultSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">currentSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">minSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">maxSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintSurface</span> <span class="text-muted">constraintSurface,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraintBySurface</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">defaultSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">currentSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">minSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">maxSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintSurface</span> <span class="text-muted">constraintSurface,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraintBySurface</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">defaultSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">currentSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">minSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">maxSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintSurface</span> <span class="text-muted">constraintSurface,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;If you set the default surface position for the X and Y axes, and input the current surface position, the position of the bone is corrected by the difference.<br>
+    &nbsp;&nbsp;&nbsp;Specify the minimum and maximum ranges to ensure stable position correction.<br>
+    &nbsp;&nbsp;&nbsp;Since it does not control the bones directly, it has the effect of preserving the animations created with FK.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : Bone to control<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (If not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : Name of the bone to control<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> defaultSurfacePosition : The default surface position should be a generally constant value.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> currentSurfacePosition : Position of current surface<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> minSurfacePosition : Minimum value of surface position<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> maxSurfacePosition : Maximum value of surface position<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">ConstraintSurface</span> constraintSurface : The axis of the surface (X, Y)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : World refers to the coordinate system of the scene, and Self refers to the coordinate system of apPortrait.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : If it refers to a bone that does not exist, false is returned.
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    
+    <br><br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary"><strong>using</strong></span> <strong>AnyPortrait</strong>;<br>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">BoneTest </span>: <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">public </span><span class="text-success">apPortrait </span>portrait;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetMouseButtonDown(0))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3 </span>touchPosWorld = <span class="text-success">Camera</span>.main.ScreenToWorldPoint(<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">new </span><span class="text-success">Vector3</span>(<span class="text-success">Input</span>.mousePosition.x, <span class="text-success">Input</span>.mousePosition.y, 0));<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetBoneIK</strong>(0, <span class="text-danger">"Bone Hand R"</span>, touchPosWorld, <span class="text-success">Space</span>.World, 1.0f, <span class="text-primary">true</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_2DCanvas.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_2DCanvas.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_2DCanvas.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,68 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    Unityを使用して2Dゲームを作成する場合、「<strong>キャンバス(Canvas)</strong>」はスプライトを調整するための便利なコンテナとして使用され、スクリーンに合わせて配置されます。<br>
+    キャンバスのゲームシーンでAnyPortraitで作成されたキャラクターを使用することは良い考えですが、いくつかのアーキテクチャ上の制限があります。<br>
+    このページでは、キャンバスとAnyPortraitを一緒に使用するように設定する方法について説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_219.jpg"/>
+    <br>
+    
+    <p>
+    基本的にAnyPortraitでキャラクターを作ると、「Orthographic」カメラと2.5Dキャラクターがいる場面で構成する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_220.jpg"/>
+    <br>
+    
+    <p>
+    キャンバスを追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_221.jpg"/>
+    <br>
+    
+    <p>
+    キャンバスの「<strong>Render Mode</strong>」は、デフォルトで「<strong>Screen Space - Overlay</strong>」です。残念ながら、AnyPortraitはこの方法をサポートしていません。<br>
+    「<strong>Render Mode</strong>」を「<strong>Screen Space - Camera</strong>」または「<strong>World Space</strong>」に設定します。<br>
+    「Screen Space - Camera」に設定すると、AnyPortraitで作成したキャラクターをレンダリングするカメラを接続します。<br>
+    「<strong>Plane Distance</strong>」は、レンダリングの範囲に合わせて変更されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_222.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitによって生成されたapPortraitのキャラクターがキャンバスの子オブジェクトになるように階層を変更します。<br>
+    この設定は、キャンバスの拡大/縮小時apPortraitオブジェクトのサイズを自動的に調整します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_223.jpg"/>
+    <br>
+    
+    <p>
+    「Sorting Order」を使用して、他の「Sprite」オブジェクトで2Dゲームを整理することができます。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

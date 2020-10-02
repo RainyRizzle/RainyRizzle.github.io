@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_LayerWeightInterpolation.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_LayerWeightInterpolation.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_LayerWeightInterpolation.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,151 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_88.jpg"/>
+    <br>
+    
+    <p>
+    In order to use various functions provided by AnyPortrait, you need to add modifiers.<br>
+    It is also possible to register the same modifier several times, and it is also possible to register several control parameters in one mesh.<br>
+    However, modifiers are processed in a specific order, and you have to choose how to merge the results of each process.<br>
+    This page describes the processing of multiple modifiers and key sets.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Modifier, Set of Keys, Key</h3>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_89.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    This is an example of the detail setting screen of the modifier.<br>
+    It displays modifier information. This UI consists of three main areas.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Modifier Information</strong><br>
+    This is the setting for the order and the way it merges with other modifiers.<br>
+    <strong>Color Option On/Off</strong> : Determines whether the modifier performs color processing.<br>
+    <strong>Blend Method</strong> : This is a way to merge with the information of the previous modifier.<br>
+    <strong>Blend Weight</strong> : The weight that is merged with the previous modifier.<br>
+    <strong>Layer Up/Down</strong> : Changes the modifier processing order. The lower layer is calculated first.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Set of Keys Information</strong><br>
+    It is the subject that controls the modifier.<br>
+    Each has a number of keys.<br>
+    The merge process between key sets is the same as that of the modifier.<br>
+    <strong>Blend Method, Weight</strong> : Weight and merge processing between key sets.<br>
+    <strong>Color Option On/Off</strong> : Determines whether the key set performs color processing.<br>
+    <strong>Layer Up/Down</strong> : Sequence of merging key sets. The lower layer is calculated first.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. Key</strong><br>
+    The actual data of the modifier is stored in the key.<br>
+    Multiple keys can be stored in a set of keys.<br>
+    <strong>Clipboard, Copy, Paste</strong> : Copy or Paste key information<br>
+    <strong>Reset Value</strong> : Reset the information of the selected key<br>
+    <strong>Key List</strong> : The generated key list. Each item is <strong>Weight of merging, Key position, Select button, Remove button</strong> from left to right.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
+    <br><br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_90.jpg"/>
+    <br>
+    
+    <p>
+    The calculation order of the modifiers.<br>
+    <strong>1. The information of each key is interpolated</strong>. This includes keying control parameters or keyframes in an animation.<br>
+    <strong>2. Merge according to the layer order</strong> between the <strong>Sets of keys</strong> with interpolated key information. This is the control parameter or animated clip.<br>
+    <strong>3. Merge modifiers</strong> with sets of keys information in layer order. It is finally reflected in the mesh group.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Processing priority of modifiers</h3>
+    <br>
+    
+    <p>
+    The modifiers are in principle processed in order of layers.<br>
+    However, depending on the nature of the modifier, it is not always processed in layer order.<br>
+    The same modifiers are processed in layer order, with the exception of the priority order.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>Priority 1</strong> : Morph (Controller), Morph (Animation)<br>
+    <strong>Priority 2</strong> : Rigging<br>
+    <strong>Priority 3</strong> : Transform (Controller), Transform (Animation)<br>
+    <strong>Priority 4</strong> : Physic<br>
+    </p>
+    <br>
+    
+    <p>
+    Note : Only one Rigging modifier should be applied.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Weight and interpolation method</h3>
+    <br>
+    
+    <p>
+    The Blend Method and Blend Weight are important settings for merging processing.<br>
+    The interpolation method and weights are handled differently in the following two ways.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Interpolation</strong> : Overwrite processing method. If the weight is 1, the modifier of the lower layer is ignored and only 100% of the current modifier is applied.<br>
+    <span class="text-danger"><strong>"Previous processing result" x (1 - Weight) + "Current modifier" x (Weight)</strong></span><br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Additive</strong> : Add processing method. The most commonly used method is to add a value of 100% to the result of "processing of previous layer" if the weight is 1.<br>
+    <span class="text-danger"><strong>"Previous processing result" + "Current modifier" x (Weight)</strong></span><br>
+    </p>
+    <br>
+    
+    <p>
+    However, when the color information is additive, interpolation is performed by 2X Multiply method instead of addition.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_InitializeScript.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_InitializeScript.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_InitializeScript.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,236 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.7</span></h4>
+    
+    <p>
+    You can use Unity's basic function, "<strong>Instantiate</strong>", to place objects in the prefab into the scene, or to duplicate objects in the scene.<br>
+    <strong>Instantiate</strong> is probably one of the most commonly used functions when creating games in Unity.<br>
+    When copying characters created by AnyPortrait with the Instantiate function, sometimes you get an error in initialization.<br>
+    This page explains initialization through a simple code example.<br>
+    (Please refer to <a href="../../en/Script/SC_Init.html">related page</a> about initialization function.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_615.jpg"/>
+    <br>
+    
+    <p>
+    Let's duplicate the AnyPortrait character placed in the scene.<br>
+    In this sample, if a player press "Space Bar", the character will be duplicated, placed slightly to the right, and "Move" animation will be played.<br>
+    In the case, perhaps, you will write a script like below:<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">InitializeSample </span>: <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// Target apPortrait<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success">apPortrait </span>portrait;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.Space) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Copy the GameObject using Instantiate function<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject </span>newGameObject = <strong>Instantiate</strong>&lt;<span class="text-success">GameObject</span>&gt;(<strong>portrait</strong>.gameObject);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Set the position<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;newGameObject.transform.position = <span class="text-primary">new </span><span class="text-success">Vector3</span>(8, 0, 0);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Get apPortrait component from the duplicated GameObject<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apPortrait </span><strong>newPortrait </strong>= newGameObject.GetComponent&lt;<span class="text-success">apPortrait</span>&gt;();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//&nbsp;&nbsp;Play "Move" Animation <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;newPortrait.<strong>Play</strong>(<span class="text-danger">"Move"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Let's put this script into Unity scene and run the game.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_616.jpg"/>
+    <br>
+    
+    <p>
+    If you run the game and press the Space Bar, the character will be cloned but an <strong>error </strong>will occur.<br>
+    And "<strong>Move</strong>" animation is not played.<br>
+    This error is because the character placed in the Unity scene is <strong>not initialized</strong> and the Play function is called immediately.<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortrait's system automatically <strong>initializes </strong>in <strong>the first update frame</strong> when the character loads.<br>
+    However, if you call an apPortrait function immediately after it is loaded with the Instantiate function, an error occurs because it is not initialized yet, and the function does not work normally.<br>
+    </p>
+    <br>
+    
+    <p>
+    There are two ways to solve this problem:<br>
+    <strong>(1)</strong> <strong>Execute the initialization</strong> directly using the <strong>script</strong>.<br>
+    <strong>(2)</strong> Do not call the function of apPortrait at the loaded frame, but <strong>wait until the next frame</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    This page explains the method in <strong>(1)</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's modify the code as follows.<br>
+    (Unnecessary comments are deleted.)<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">InitializeSample </span>: <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success">apPortrait </span>portrait;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.Space) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject </span>newGameObject = <strong>Instantiate</strong>&lt;<span class="text-success">GameObject</span>&gt;(<strong>portrait</strong>.gameObject);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;newGameObject.transform.position = <span class="text-primary">new </span><span class="text-success">Vector3</span>(8, 0, 0);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apPortrait </span><strong>newPortrait </strong>= newGameObject.GetComponent&lt;<span class="text-success">apPortrait</span>&gt;();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Call the Initialize function immediately, then play the "Move" animation<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger">newPortrait.</span><span class="text-danger"><strong>Initialize</strong></span>(); <br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;newPortrait.<strong>Play</strong>(<span class="text-danger">"Move"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    The script was modified to call the <span class="text-danger"><strong>Initialize</strong></span> function of apPortrait before executing the Play function.<br>
+    The <strong>Initialize</strong> function initializes apPortrait so that it can be updated.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now let's run the game.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_617.jpg"/>
+    <br>
+    
+    <p>
+    The Slime character is duplicated and the Move animation plays without error.<br>
+    </p>
+    <br>
+    
+    <p>
+    In addition to Initialize, there is also an AsyncInitialize function.<br>
+    These functions have the following characteristics.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Initialize()</strong><br>
+    : This is the basic initialization function.<br>
+    When the function is called, all initialization processing is done.<br>
+    This has the advantage of controlling apPortrait as soon as initialization is complete when the function is called.<br>
+    If your character has a lot of animations or modifiers, the initialization code is very heavy, and you may experience a temporary decrease in FPS (Frames Per Second) of the game.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. AsyncInitialize(OnAsyncLinkCompleted onAsyncLinkCompleted)</strong><br>
+    : This is an asynchronous initialization function.<br>
+    This function will be a good choice if it is a problem that the FPS drops significantly during initialization while the game is running.<br>
+    Even if the function is called, the initialization is completed after some updates have been made.<br>
+    Immediately after this function is called, apPortrait can not be directly controlled.<br>
+    When the initialization is completed, the event entered as an argument is called.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. AsyncInitialize(int timePerYield, OnAsyncLinkCompleted onAsyncLinkCompleted)</strong><br>
+    : This is a function added in v1.1.7.<br>
+    The timePerYield argument in msec is added to specify the timeout for asynchronous processing units.<br>
+    The processing time is increased compared to the existing AsyncInitialize function, but it has been improved to recognize the FPS of the game and not affect performance as much as possible.<br>
+    Good for loading lots of characters at the same time.<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's write code using asynchronous initialization.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">InitializeSample </span>: <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success">apPortrait </span>portrait;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.Space) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject </span>newGameObject = <strong>Instantiate</strong>&lt;<span class="text-success">GameObject</span>&gt;(<strong>portrait</strong>.gameObject);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;newGameObject.transform.position = <span class="text-primary">new </span><span class="text-success">Vector3</span>(8, 0, 0);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apPortrait </span><strong>newPortrait </strong>= newGameObject.GetComponent&lt;<span class="text-success">apPortrait</span>&gt;();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Calling an asynchronous initialization function<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger">newPortrait.</span><span class="text-danger"><strong>AsyncInitialize</strong></span>(<strong>OnAsyncPortraitIntialized</strong>);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Or you can do this.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// newPortrait.AsyncInitialize(100, OnAsyncPortraitIntialized);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// Event called when initialization is complete<br>
+    &emsp;&emsp;<span class="text-primary">void </span><strong>OnAsyncPortraitIntialized</strong>(<span class="text-success">apPortrait </span>portrait)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;portrait.<strong>Play</strong>(<span class="text-danger">"Move"</span>);<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Asynchronous initialization is not complete immediately, so apPortrait can not be controlled immediately after the initialization function call.<br>
+    We recommend using the event.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

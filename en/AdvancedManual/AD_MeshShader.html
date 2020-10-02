@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_MeshShader.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MeshShader.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_MeshShader.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,196 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.7</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_49.jpg"/>
+    <br>
+    
+    <p>
+    In AnyPortrait, users can select shader settings other than the default Alpha Blend method.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select the mesh group</strong>, and with the <strong>Setting tab</strong> selected, <strong>select the mesh</strong> you want to change.<br>
+    You can change the setting in <strong>(2)</strong> <strong>Shader Setting</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Additive, Soft Additive, Multiplicative</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_50.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_51.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_52.jpg"/>
+    <br>
+    
+    <p>
+    In addition to Alpha Blend, the most commonly used <strong>Additive, Soft Additive, </strong>and <strong>Multiplicative</strong> blending options are provided.<br>
+    This changed setting is applied to the scene after bake.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Custom Shader</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_53.jpg"/>
+    <br>
+    
+    <p>
+    You can use a shader other than the shader provided by the editor.<br>
+    <strong>(1)</strong> <strong>Check Use Custom Shader</strong>, <strong>(2)</strong> <strong>Select Shader</strong>.<br>
+    (You can find how to write shaders on the <a href="../../en/Script/SC_CustomShader.html">related page</a>.)<br>
+    </p>
+    <br>
+    
+    <p>
+    Custom shaders are not applied in the editor.<br>
+    Bake into the scene to check.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_54.jpg"/>
+    <br>
+    
+    <p>
+    When you bake in scene, you can see that the shader that you set up is applied.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>The size of the mask texture of the clipping mesh</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_55.jpg"/>
+    <br>
+    
+    <p>
+    When clipping a mesh, the mesh that becomes the mask of the clipping has the <strong>"Mask Texture Size"</strong> setting.<br>
+    When performing clipping rendering in the game scene, it is processed by <strong>Render to Texture</strong> method, which means the size at this time.<br>
+    Higher mask texture sizes result in <strong>higher quality</strong> clipping rendering, while smaller sizes result in <strong>less rendering load</strong>.<br>
+    Since the mask texture size value is the pixel unit size on the screen, you can set it by considering the display size of the execution environment.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Mesh Properties UI in v1.1.7</h3>
+    <br>
+    
+    <p>
+    There are many changes to the rendering of the mesh in AnyPortrait v1.1.7.<br>
+    As a result, the UI for the mesh's material properties has changed slightly.<br>
+    Below is a description of the changed UI.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_618.jpg"/>
+    <br>
+    
+    <p>
+    These are the rendering-related properties of the changed UI.<br>
+    <strong>(1)</strong> Determine the <strong>Blending</strong> method. You can choose Alpha Blend, Additive, Soft Additive, or Multiplicative.<br>
+    <strong>(2)</strong> <strong>Material Set</strong> or <strong>Custom Shader</strong> can be selected.<br>
+    <strong>(3)</strong> These buttons are shown when the <strong>Material Set</strong> is selected.<br>
+    <strong>(4)</strong> The user can set the <strong>initial value of the Material Property</strong>.<br>
+    <strong>(5)</strong> This is the <strong>2-sided rendering option</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_619.jpg"/>
+    <br>
+    
+    <p>
+    This is the UI when the Material Set method is selected.<br>
+    <strong>- Use Default Material Set ON/OFF</strong>: Whether to use the default Material Set.<br>
+    <strong>- Change</strong>: If you do not use the default Material Set, you can choose another one.<br>
+    <strong>- Open Material Library</strong>: Opens <strong>Material Librar</strong>y, which manages Material Sets. (<a href="../../en/AdvancedManual/AD_MaterialLibrary.html">Related page</a>)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_620.jpg"/>
+    <br>
+    
+    <p>
+    This is the UI for rendering using a Custom Shader.<br>
+    You can specify an external Shader Asset.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_621.jpg"/>
+    <br>
+    
+    <p>
+    This is the UI that specifies the initial value of the material property.<br>
+    It takes priority over the setting value of the Material Set.<br>
+    <strong>- Add Custom Property</strong>: Add a new Custom Material Property setting.<br>
+    <strong>- Property Name, Type, Value, Delete Button</strong>: This property will be applied to the material. The shader must have a property with the same name.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_622.jpg"/>
+    <br>
+    
+    <p>
+    This is the setting for how shadows are rendered on the mesh in the Unity scene.<br>
+    Turning on <strong>Cast Shadows</strong> will cast shadows to other meshes, and turning on <strong>Receive Shadows</strong> will cast shadows on this mesh.<br>
+    By default, it follows the common shadow settings in the Bake dialog. (<a href="../../en/AdvancedManual/AD_BakeDialog.html">Related page</a>)<br>
+    When <strong>Overwrite Shadow Setting</strong> is turned on, the mesh uses its setting, not the common setting.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_623.jpg"/>
+    <br>
+    
+    <p>
+    This is a feature added in v1.1.7.<br>
+    You can copy attributes of the currently selected mesh to other meshes in a batch.<br>
+    <strong>(1)</strong> Click the <strong>Copy Settings to other meshes button</strong> to display a dialog box for copying.<br>
+    <strong>(2)</strong> <strong>Other meshes</strong> that can be copied appear, and you can select several.<br>
+    <strong>(3)</strong> Attributes that can be copied.<br>
+    <strong>- Default Color</strong> : Default color before applying a modifier<br>
+    <strong>- Blending Type</strong> : 4 types of blending options<br>
+    <strong>- Custom Shader</strong> : Whether custom shaders are used and shader assets<br>
+    <strong>- Render Texture Size</strong> : The size of the render texture of the mesh as a clipping mask.<br>
+    <strong>- 2-Sided Mesh</strong> : Whether to render on both sides<br>
+    <strong>- Shadow Settings</strong> : Settings related to shadows<br>
+    <strong>- Material Set</strong> : Settings related to the Material Set<br>
+    <strong>- Custom Material Properties </strong>: The user-defined initial values of the properties of the material.<br>
+    <strong>(4)</strong> There is a button to <strong>Select</strong> or <strong>Deselect</strong> <strong>All</strong>, and pressing the <strong>Apply button</strong> copies and applies the selected attributes.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

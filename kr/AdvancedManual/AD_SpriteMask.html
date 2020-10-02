@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Sprite Mask 적용하기</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_SpriteMask.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_SpriteMask.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_SpriteMask.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > Sprite Mask 적용하기</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Sprite Mask 적용하기</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.2.5</span></h4>
+    
+    <p>
+    유니티의 "<strong>스프라이트 마스크(Sprite Mask)</strong>"를 이용하면 다른 <strong>Sprite Renderer</strong>의 일부를 숨기면서 렌더링을 할 수 있습니다.<br>
+    - <a href="https://docs.unity3d.com/kr/2020.2/Manual/class-SpriteMask.html" target="_sub">스프라이트 마스크 (유니티 공식 메뉴얼)</a><br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortrait에서 제작된 캐릭터들은 <strong>Sprite Renderer</strong>가 아닌 <strong>Mesh Renderer</strong>들로 구성되므로 기본적으로는 스프라이트 마스크의 영향을 받지 않습니다.<br>
+    하지만 간단하게 쉐이더를 작성해서 스프라이트 마스크를 적용할 수 있습니다.<br>
+    다음의 튜토리얼도 같이 읽어보시는 것을 추천합니다.<br>
+    - <a href="../../kr/AdvancedManual/AD_MaterialLibrary.html">재질 라이브러리</a><br>
+    - <a href="../../kr/AdvancedManual/AD_MeshShader.html">메시의 쉐이더(Shader) 설정</a><br>
+    - <a href="../../kr/Script/SC_CustomShader.html">커스텀 쉐이더</a><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1016.jpg"/>
+    <br>
+    
+    <p>
+    스프라이트 마스크를 생성해봅시다.<br>
+    <strong>(1)</strong> 스프라이트 마스크로 사용할 이미지를 준비하고 <strong>Sprite</strong> 타입으로 설정합니다.<br>
+    <strong>(2)</strong> Hierarchy에서 우클릭을 하고 <strong>Sprite Mask</strong>를 선택합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1017.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 새로운 스프라이트 마스크가 생성되었습니다.<br>
+    <strong>(2)</strong> 준비한 이미지를 스프라이트 마스크에 적용합니다.<br>
+    기본적으로 스프라이트 마스크는 씬 뷰(Scene View)에서 보이지 않습니다.<br>
+    <strong>(3)</strong> 씬 뷰에서 보여지는 정보 중에서 <strong>Sprite Mask</strong>가 포함되도록 만듭니다.<br>
+    <strong>(4)</strong> 이제 스프라이트 마스크가 씬 뷰에 나타납니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1018.jpg"/>
+    <br>
+    
+    <p>
+    쉐이더를 새로 작성해봅시다.<br>
+    AnyPortrait의 <strong>1개의 재질 세트(Material Set)</strong>에는 여러개의 쉐이더들이 포함되지만, 여기서는 가장 많이 사용되는 2개의 쉐이더만 수정해봅시다.<br>
+    (1개의 <strong>재질 세트</strong>에서 <strong>색상 공간(Color Space)</strong> 하나에 포함되는 쉐이더는 총 9개이므로, 제대로 하기 위해서는 9개의 쉐이더 파일을 모두 수정해야 합니다.)<br>
+    <strong>(1)</strong> 기본 쉐이더가 위치한 <strong>Assets &gt; AnyPortrait &gt; Assets &gt; Shaders</strong> 폴더에서 다음의 두개의 쉐이더 에셋을 복제합니다.<br>
+    - apShader_Transparent : 알파 블렌딩이 되는 기본 쉐이더 (감마 색상 공간)<br>
+    - apShader_ClippedWithMask : 클리핑 메시에 적용되는 알파 블렌딩이 되는 기본 쉐이더 (감마 색상 공간)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1019.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> 복제된 쉐이더 에셋들의 이름들을 다음과 같이 바꾸어보았습니다.<br>
+    - apShader_Transparent &gt; <strong>Stencil_Transparent</strong><br>
+    - apShader_ClippedWithMask &gt; <strong>Stencil_Clipped</strong><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1020.jpg"/>
+    <br>
+    
+    <p>
+    먼저, <strong>Stencil_Transparent</strong> 쉐이더 에셋을 열어봅시다.<br>
+    (커스텀 쉐이더를 작성하는 방법에 대해서는 <a href="../../kr/Script/SC_CustomShader.html">관련 페이지</a>를 확인해보세요.)<br>
+    <strong>(1)</strong> <strong>쉐이더의 이름</strong>을 변경합니다. 구분하기 쉬운 이름으로 설정하세요.<br>
+    <strong>(2)</strong> <strong>Stencil 코드</strong>를 추가합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Stencil<br>
+    {<br>
+    &emsp;&emsp;Ref 1<br>
+    &emsp;&emsp;Comp LEqual<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    스프라이트 마스크는 <strong>Stencil</strong>을 이용하므로, Sprite Renderer가 아니더라도 마스킹이 가능합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1021.jpg"/>
+    <br>
+    
+    <p>
+    같은 방식으로 <strong>Stencil_Clipped</strong> 쉐이더 에셋을 수정합니다.<br>
+    이름을 변경하고 Stencil 코드를 추가해주세요.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1022.jpg"/>
+    <br>
+    
+    <p>
+    작성된 쉐이더 에셋들을 캐릭터에 적용해봅시다.<br>
+    <strong>(1)</strong> AnyPortrait 에디터를 열고 <strong>Material Library</strong> 버튼을 눌러서 재질 라이브러리를 엽니다.<br>
+    <strong>(2)</strong> 현재 적용된 <strong>재질 세트</strong>를 선택하면,<br>
+    <strong>(3)</strong> 이 재질 세트에서 사용되는 쉐이더들을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1023.jpg"/>
+    <br>
+    
+    <p>
+    수정했던 Stencil 쉐이더 에셋으로 교체해봅시다.<br>
+    <strong>(1)</strong> 먼저 <strong>Color Space : Gamma &gt; Basic Rendering &gt; Alpha Blend</strong>의 쉐이더를 <br>
+    <strong>(2)</strong> <strong>Stencil_Transparent</strong>로 교체합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1024.jpg"/>
+    <br>
+    
+    <p>
+    같은 방식으로 클리핑 쉐이더도 교체합니다.<br>
+    <strong>(1)</strong> <strong>Color Space : Gamma &gt; Clipped Rendering &gt; Alpha Blend</strong>의 쉐이더를 <br>
+    <strong>(2)</strong> <strong>Stencil_Clipped</strong>로 교체합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1025.jpg"/>
+    <br>
+    
+    <p>
+    재질 라이브러리를 닫고, Bake를 실행합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1026.jpg"/>
+    <br>
+    
+    <p>
+    유니티 씬에서 보면 스프라이트 마스크만 보이고 캐릭터는 보이지 않을 수 있습니다.<br>
+    게임을 실행해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1027.jpg"/>
+    <br>
+    
+    <p>
+    게임을 실행해보니 스프라이트 마스크의 이미지 만큼만 캐릭터가 렌더링되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>스프라이트 마스크 영역만 제외하고 렌더링하기</h3>
+    <br>
+    
+    <p>
+    이번에는 반대로 스프라이트 마스크 영역이 숨겨지고, 그 외의 영역만 보여지도록 만들어봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1028.jpg"/>
+    <br>
+    
+    <p>
+    앞서 작성했던 <strong>Stencil_Transparent</strong>, <strong>Stencil_Clipped</strong> 에셋을 하나씩 열고 코드를 수정합니다.<br>
+    Stencil의 비교 연산자를 <strong>Comp LEqual</strong>의 반대인 <strong>Comp Greater</strong>로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1029.jpg"/>
+    <br>
+    
+    <p>
+    다시 게임을 실행해보면 이전 결과와 반대로, 스프라이트 마스크의 영역을 제외한 나머지가 렌더링이 되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>스프라이트 마스크의 Custom Range 사용하기</h3>
+    <br>
+    
+    <p>
+    스프라이트 마스크의 <strong>Custom Range</strong>라는 속성을 이용하여 지정된 <strong>Sorting Layer</strong>나 <strong>Sorting Order</strong>를 가진 대상만 적용을 받도록 만들 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1030.jpg"/>
+    <br>
+    
+    <p>
+    테스트를 위하여 새로운 스프라이트 마스크를 생성해보았습니다.<br>
+    두개의 스프라이트 마스크가 동시에 적용된 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1031.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>첫번째 스프라이트 마스크</strong>를 선택합니다.<br>
+    <strong>(2)</strong> <strong>Custom Range</strong>를 체크한 뒤, <strong>Front</strong>의 <strong>Order in Layer</strong>를 <span class="text-primary"><strong>5</strong></span>, <strong>Back</strong>의 <strong>Order in Layer</strong>를 <span class="text-success"><strong>0</strong></span>으로 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1032.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> <strong>두번째 스프라이트 마스크</strong>를 선택합니다.<br>
+    <strong>(4)</strong> <strong>Custom Range</strong>를 체크한 뒤, <strong>Front</strong>의 <strong>Order in Layer</strong>를 <span class="text-primary"><strong>15</strong></span>, <strong>Back</strong>의 <strong>Order in Layer</strong>를 <span class="text-success"><strong>10</strong></span>으로 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1033.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait로 만든 캐릭터의 <strong>Sorting Order</strong>를 제어하기 위해서 <strong>Sorting Group</strong>을 이용해봅시다.<br>
+    <strong>(1)</strong> AnyPortrait로 만든 캐릭터나 상위 GameObject를 선택합니다.<br>
+    <strong>(2)</strong> <strong>Add Component</strong> 버튼을 누르고 <strong>Sorting Group</strong>을 추가합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1034.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Sorting Order Option</strong>을 <strong>Depth To Order</strong>로 변경합니다.<br>
+    이제 Sorting Group을 이용하여 어떤 스프라이트 마스크가 적용될지 설정할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1035.jpg"/>
+    <br>
+    
+    <p>
+    Sorting Group의 <strong>Order in Layer</strong>의 값을 <span class="text-danger"><strong>3</strong></span>으로 설정하면 첫번째 마스크에만 영향을 받습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1036.jpg"/>
+    <br>
+    
+    <p>
+    Sorting Group의 <strong>Order in Layer</strong>의 값을 <span class="text-danger"><strong>13</strong></span>으로 설정하면 두번째 마스크에만 영향을 받습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>참고</strong></span><br>
+    Sorting Group을 사용하지 않고 AnyPortrait의 <strong>Sorting Order Option</strong>을 <strong>Set Order</strong> 모드로 설정한 상태에서도 동일하게 이 작업을 수행할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_UnityRecorder.html">< Unity Recorder 사용하기</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_CharacterCostume.html">캐릭터의 의상을 교체하기 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

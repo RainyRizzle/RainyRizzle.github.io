@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_MeshShader.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MeshShader.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_MeshShader.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,196 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.7</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_49.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitでは、デフォルトの「Alpha Blend」メソッド以外のシェーダ設定を選択できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> メッシュグループを選択し、「Setting」タブを選択して、変更したいメッシュを選択します。<br>
+    <strong>(2)</strong> 「<strong>Shader Setting</strong>」で設定を変更することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Additive, Soft Additive, Multiplicative</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_50.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_51.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_52.jpg"/>
+    <br>
+    
+    <p>
+    「Alpha Blend」に加えて、最も一般的に使用される「<strong>Additive</strong>」、「<strong>Soft Additive</strong>」、および「<strong>Multiplicative</strong>」ブレンドオプションが用意されています。<br>
+     この変更された設定は、「Bake」後のシーンに適用されます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Custom Shader</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_53.jpg"/>
+    <br>
+    
+    <p>
+    エディタが提供するシェーダ以外のシェーダを使用できます。<br>
+    <strong>(1)</strong> 「<strong>Use Custom Shader</strong>」をチェックし、<strong>(2)</strong> シェーダーを選択します。<br>
+    (「<a href="../../jp/Script/SC_CustomShader.html">関連ページ</a>」にシェーダを書き込む方法を見つけることができます。)<br>
+    </p>
+    <br>
+    
+    <p>
+    カスタムシェーダーはエディターには適用されません。<br>
+    確認するシーンに「Bake」を入れます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_54.jpg"/>
+    <br>
+    
+    <p>
+    シーンにBakeすると、設定したシェーダが適用されていることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>クリッピングメッシュのマスクテクスチャのサイズ</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_55.jpg"/>
+    <br>
+    
+    <p>
+    メッシュをクリッピングする場合、クリッピングのマスクになるメッシュには、「<strong>Mask Texture Size</strong>」設定があります。<br>
+    ゲームシーンでクリッピングレンダリングを実行する場合は、この時点でのサイズを意味する「<strong>Render to Texture</strong>」メソッドで処理されます。<br>
+    マスクテクスチャサイズが大きいほどクリップのレンダリング品質は高くなりますが、サイズが小さくなるほど描画負荷が低くなります。<br>
+    マスクテクスチャサイズの値は画面上のピクセル単位のサイズなので、実行環境の表示サイズを考慮して設定することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>v1.1.7でのメッシュのプロパティのUI</h3>
+    <br>
+    
+    <p>
+    AnyPortrait v1.1.7でメッシュのレンダリングに関する多くの変化があります。<br>
+    メッシュのマテリアル属性に関するUIが多少変更されました。<br>
+    以下は変更されたUIについて説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_618.jpg"/>
+    <br>
+    
+    <p>
+    変更されたメッシュのプロパティのUIのレンダリングに関連する部分です。<br>
+    <strong>(1)</strong> 「ブレンド方式」を決定します。 Alpha Blend、Additive、Soft Additive、Multiplicativeの4つの方法をサポートします。<br>
+    <strong>(2)</strong> 「マテリアルセット（Material Set）」と「カスタムシェーダ（Custom Shader）」を選択することができます。<br>
+    <strong>(3)</strong> 「マテリアルセット」を選択したときのUIです。<br>
+    <strong>(4)</strong> ユーザーがマテリアルのプロパティの初期値を設定することができます。<br>
+    <strong>(5)</strong> 両面レンダリングオプションです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_619.jpg"/>
+    <br>
+    
+    <p>
+    マテリアルセット方式でレンダリングするときのUIです。<br>
+    <strong>- Use Default Material Set ON/OFF</strong> : 基本のマテリアルセットを利用するかどうかです。<br>
+    <strong>- Change</strong> : 基本マテリアルセットを利用しない場合には、特定のマテリアルのセットを選択するボタンです。<br>
+    <strong>- Open Material Library</strong> : マテリアルセットを管理する「<strong>マテリアルライブラリ（Material Library）</strong>」を開きます。 （<a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">関連ページ</a>）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_620.jpg"/>
+    <br>
+    
+    <p>
+    Custom Shaderを利用してレンダリングするときのUIです。<br>
+    外部のShaderアセットを指定することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_621.jpg"/>
+    <br>
+    
+    <p>
+    マテリアルのプロパティの初期値を指定するUIです。<br>
+    マテリアルセットの設定よりも優先されます。<br>
+    <strong>- Add Custom Property</strong> : カスタムプロパティの設定を追加します。<br>
+    <strong>- プロパティの名前、タイプ、値、削除ボタン</strong> : マテリアルに適用されるプロパティです。 Shaderに同じ名前のプロパティがあります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_622.jpg"/>
+    <br>
+    
+    <p>
+    Unityシーンでメッシュに影がどのようにレンダリングされるのかの設定です。<br>
+    「<strong>Cast Shadows</strong>」をオンにすると、他のメッシュに影を発生させ、「<strong>Receive Shadows</strong>」をオンにすると、そのメッシュに影が垂れています。<br>
+    基本的にはBakeダイアログでの共通の影の設定に従います。 （<a href="../../jp/AdvancedManual/AD_BakeDialog.html">関連ページ</a>）<br>
+    「<strong>Overwrite Shadow Setting</strong>」をオンにしたときは、そのメッシュだけ別の影の設定が適用されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_623.jpg"/>
+    <br>
+    
+    <p>
+    v1.1.7に追加された機能です。<br>
+    現在選択されてメッシュの属性を他のメッシュに一括してコピーすることができます。<br>
+    <strong>(1)</strong> 「<strong>Copy Settings to other meshes</strong>」ボタンを押すと、コピーのためのダイアログが表示されます。<br>
+    <strong>(2)</strong> コピーすることができる他のメッシュが表示され、複数の選択ができます。<br>
+    <strong>(3)</strong> コピーしようとする属性です。<br>
+    <strong>- Default Color</strong> : モディファイヤを適用する前の基本的な色<br>
+    <strong>- Blending Type</strong> : ブレンドオプション<br>
+    <strong>- Custom Shader</strong> : カスタムシェーダを使用するかどうかとシェーダアセット<br>
+    <strong>- Render Texture Size</strong> : クリッピングマスクがされているメッシュのレンダリングテクスチャのサイズ<br>
+    <strong>- 2-Sided Mesh</strong> : 両面レンダリングするかどうか<br>
+    <strong>- Shadow Settings</strong> : 影の設定<br>
+    <strong>- Material Set</strong> : マテリアルのセットに関する設定<br>
+    <strong>- Custom Material Properties </strong>: ユーザーが定義した材質のプロパティの初期値<br>
+    <strong>(4)</strong> 全選択または選択解除するボタンがあり、Applyボタンを押すと、選択した属性がコピーされて適用されます。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_2SidedMesh.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_2SidedMesh.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_2SidedMesh.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,91 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.4</span></h4>
+    
+    <p>
+    ほとんどの3Dレンダリングエンジンは、デフォルトで前面のみをレンダリングします。<br>
+    同様に、Unityエンジンはデフォルトでバックサイドをレンダリングしません。これはAnyPortraitでも同じです。<br>
+    しかし、いつか、メッシュを前面と背面の両方でレンダリングする必要があるかもしれません。<br>
+    このページでは、両面レンダリングが必要な例と解決策について説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_232.jpg"/>
+    <br>
+    
+    <p>
+    7番目のデモシーンには、海賊の女の子のキャラクターがあります。<br>
+    この文字の「Run」アニメーションでは、右足の骨のXスケール値が-1であることがわかります。<br>
+    骨は逆転しているので、メッシュは自然にX軸上で逆に見えるはずです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_233.jpg"/>
+    <br>
+    
+    <p>
+    しかし、ゲームシーンをチェックインすると、キャラクターが「Run」アニメーションに従って動作するモーションを取ると、右足が消えます。<br>
+    これは、メッシュがX軸に反転され、背面が前面ではなくレンダリングされるためです。<br>
+    したがって、この場合、右足は常に前面と背面の両方にレンダリングする必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_234.jpg"/>
+    <br>
+    
+    <p>
+    これは、メッシュの両側を常にレンダリングする方法です。<br>
+    <strong>(1)</strong> メッシュグループを選択します。<br>
+    <strong>(2)</strong> <strong>「Setting」</strong>タブを選択します。<br>
+    <strong>(3)</strong> 対象メッシュを選択します。<br>
+    <strong>(4)</strong> メッシュ設定で「<strong>2-Sides</strong>」をチェックします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_235.jpg"/>
+    <br>
+    
+    <p>
+    これで正常にレンダリングされていることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>両面レンダリングが必要な場合と注意事項</h4>
+    <br>
+    
+    <p>
+    基本的に、「Morph」、「Rigging」、「Physics」のモディファイアでメッシュの一部を反転させる場合、両面レンダリングが必要です。<br>
+    しかし、「Transform」を使ってメッシュのサイズを直接逆にすると、両面レンダリングを行う必要はありません。<br>
+    両面レンダリングの設定は、頂点を2度レンダリングするため、少し遅くなることがあります。<br>
+    カスタマイズされたシェーダが「Cull Off」に設定されている場合、合計4回レンダリングできます。<br>
+    この場合、アルファ計算が正しく実行されないことがあります。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>参考</strong></span><br>
+    「リギングが適用されたメッシュ」の大きさが反転した場合でも、「両面メッシュ」に設定していない状態で正常にレンダリングすることができるオプションがv1.2.5に追加されました。<br>
+    すべての場合に適用されるオプションはありませんので、下のページの説明とこのページに紹介された「両面メッシュ機能」を一緒にご覧ください。<br>
+    - <a href="../../jp/AdvancedManual/AD_ReversedRiggedMesh.html">リギングが適用されたメッシュの反転サイズ</a><br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

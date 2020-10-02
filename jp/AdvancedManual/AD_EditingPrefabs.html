@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_EditingPrefabs.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_EditingPrefabs.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_EditingPrefabs.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,301 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.5</span></h4>
+    
+    <p>
+    「<strong>Prefab</strong>」はUnityを使用してゲームを作成する際に非常に重要です。<br>
+    それはGameObjectをリソースとして作成することができますので、必要に使用する機能です。<br>
+    以前のバージョンのAnyPortraitで作成されたキャラクターを「Prefab」に保存するときに、いくつかの問題点がありました。<br>
+    v1.0.3から「Prefab」のサポートが変更された、このページの指示を提供しています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_198.jpg"/>
+    <br>
+    
+    <p>
+    これAnyPortraitによって生成されたキャラクターが「Prefab」として保存されている画面です。<br>
+    Hierarchyで青い文字で表示されたことを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_199.jpg"/>
+    <br>
+    
+    <p>
+    「Prefab」に保存されたキャラクターを編集しようとするとダイアログが表示されます。<br>
+    AnyPortraitは、基本的にユニティSceneのGameObjectを編集して、開発されます。対象が「Prefab」である場合、問題が発生する可能性があります。<br>
+    Okayボタンを押すと、「Prefab」の接続が切断され、一般的なGameObjectに変換されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_200.jpg"/>
+    <br>
+    
+    <p>
+    Hierarchy をもう一度チェックすると、青色ではなくデフォルトの色に変更されていることがわかります。<br>
+    この状態は「プレハブ(Disconnected)」から「Prefab」され、「Prefab」情報は完全に失われません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_201.jpg"/>
+    <br>
+    
+    <p>
+    すべての編集が終了したら、「Apply」ボタンを押して「Prefab」に戻すことができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意</strong></span><br>
+    AnyPortraitで編集中に強制的に 「Prefab」に変換すると、エディタに正しくデータを保存できないことがあります。<br>
+    上記のように、ターゲットは編集中に 「Prefab」状態にあってはいけません。<br>
+    そして、それを「Prefab」に変換した後、それを保存する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Prefab状態UI（v1.2.5）</h3>
+    <br>
+    
+    <p>
+    私たちのチームは、複数のユーザーからのUnityエディタ上で「Prefab」を扱うことについて多くのフィードバックに受けており、また、<strong>Unity 2018.3</strong>に追加された「新方式のPrefabシステム」がAnyPortraitの方法と正常に互換性のない問題がありました。<br>
+    このような理由から、PrefabをAnyPortraitのUIから直接制御して、<strong>Apply</strong>または<strong>Disconnect</strong>をすることができる機能がv1.2.5に追加されました。<br>
+    （基本的なPrefab管理方式は、上記の説明と同じです。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_978.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> このキャラクターは「<strong>Prefab Asset</strong>」の形で保存された状態です。<br>
+    <strong>(2)</strong> 「<strong>Prefab Asset</strong>」を「<strong>Prefab Instance</strong>」としてシーンに配置します。<br>
+    （「<strong>Prefab Asset</strong>」状態で編集することができないので、常にシーンに配置した後、編集してください。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_979.jpg"/>
+    <br>
+    
+    <p>
+    既存のと同じように、<strong>Prefab Instance</strong>状態でAnyPortraitエディタを開いて編集をしてみましょう。<br>
+    <strong>(1)</strong> <strong>Prefab Instance</strong>の状態のキャラクターを選択すると、<br>
+    <strong>(2)</strong> 「Prefab」状態では、編集することができなくて、自動的に「<strong>Disconnect</strong>」というメッセージが表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_980.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターを編集して、Bakeをした後、再びUnityシーンに戻ります。<br>
+    <strong>(1)</strong> 「Prefab Instance」だったキャラクターを選択します。 Hierarchyで該当のキャラクターGameObjectの名前が<strong>青</strong>ではない<strong>黒</strong>に変わったことを見ることができます。現在「Prefabの状態」ではないか「Disconnected状態」になったからです。<br>
+    <strong>(2)</strong> v1.2.5で追加された「<span class="text-primary"><strong> Prefab状態UI</strong></span>」をInspectorで見ることができます。<br>
+    <strong>(3)</strong> 「Prefab状態UI」の「<strong>Apply</strong>」ボタンを押して再度「<strong>Prefab元と接続された状態</strong>」にしてみましょう。<br>
+    （Unity 2018.3より前のバージョンであれば、<strong>(4)</strong>のようにInspector上部のApplyボタンを押します。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_981.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> HierarchyでのGameObjectの名前が再び<strong>青</strong>に変わりました。今では「<strong>Connected Prefab Instance</strong>状態」に変わったことです。<br>
+    <strong>(2)</strong> これはAnyPortraitの「<strong>Prefab状態UI</strong>」で確認することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_982.jpg"/>
+    <br>
+    
+    <p>
+    v1.2.5に追加された<strong>Prefab状態UI</strong>です。<br>
+    選択された対象が「<strong>Prefab Instance</strong>」である場合にのみ、このUIがInspectorに表示されます。<br>
+    「<strong>Prefab Asset</strong>」と同期がされている場合（Connected）では、上の画像のように青い色でUIが表示されます。<br>
+    逆に、「<strong>Prefab Asset</strong>」と同期がされていない場合は、（DisconnectedまたはMissing）では、以下の画像のように赤い色のUIが表示されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Source Prefab</strong> : 元となる「<strong>Prefab Asset</strong>」です。同期がされない場合どのような状態なのか表示されます。<br>
+    <strong>2. Root GameObject</strong> : 選択された「Prefab Instance」の<strong>ルート</strong>です。 AnyPortraitで製作されたGameObjectだけではなく、「ルートGameObject」を基準に同期を行うことができます。<br>
+    <strong>3. Apply</strong> : 「Prefab Instance」の変更履歴を「Prefab Asset」に適用して、同期をします。 「Revert」をしようとする場合にはUnityのUIを活用したり、このオブジェクトを削除してください。<br>
+    <strong>4. Refresh</strong> : 「Prefab Asset」との同期状態を再更新します。<br>
+    <strong>5. Disconnect</strong> : 「Prefab Asset」との同期を解除します。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Unity 2018.3に導入された「新しいPrefabシステム」</h3>
+    <br>
+    
+    <p>
+    Unity 2018.3で「新しいPrefabシステム」が導入されました。<br>
+    このバージョンからは「Prefab "をよりさまざまな方法で管理し、編集することができます。<br>
+    - <a href="https://docs.unity3d.com/ja/current/Manual/Prefabs.html" target="_sub">Prefab Manual（Unity公式ページ）</a><br>
+    </p>
+    <br>
+    
+    <p>
+    残念ながら、「新しいPrefabシステム」は、以前のPrefabシステムと内部的にも大きな違いを持っ​​ていて、AnyPortraitは、このシステムの互換性を持つことができませんでした。<br>
+    「Prefab Instance」状態を維持しながら、AnyPortraitエディタで編集することは不可能し、唯一の編集されたキャラクターを「Prefab Asset」に上書きする方法のみ有効でした。<br>
+    </p>
+    <br>
+    
+    <p>
+    しかし、上で紹介した「<strong>Prefab状態UI</strong>」を利用して「<strong>Prefab Asset</strong>」との接続情報を可能な維持した状態で同期をすることが可能になりました。<br>
+    v1.2.5での既存の方式とは異なるどのように改善されたか、以下の説明をご覧ください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_983.jpg"/>
+    <br>
+    
+    <p>
+    新しいPrefabシステムでの画面です。<br>
+    <strong>(1)</strong> ソースとなる「<strong>Prefab Asset</strong>」です。<br>
+    <strong>(2)</strong> シーンに配置された「<strong>Prefab Instance</strong>」です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_984.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Prefab Instance</strong>」を選択し、AnyPortraitエディタで編集しようとすると、従来と同様に、「<strong>Prefab Asset</strong>」との接続が解除されるというメッセージが表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_985.jpg"/>
+    <br>
+    
+    <p>
+    Bakeを実行して、Unityシーンに戻ってきたら、「<strong>Prefab Assetとの接続</strong>」が解除され、「<strong>Prefab Instance</strong>」状態ではないことを見ることができます。<br>
+    この状態は、<strong>「Prefab Asset」との接続情報がない状態</strong>であるので、以前は再び「Prefab Asset」を作成したり、上書きしスイウォヤました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_986.jpg"/>
+    <br>
+    
+    <p>
+    しかし、AnyPortraitキャラクターを選択し、Inspectorを確認してみると、 「<strong>Prefab状態UI</strong>」が表示されことを見ることができます。<br>
+    AnyPortraitでは「<strong>最後のPrefabの接続情報</strong>」が記録されて、ユーザーに同期機能を提供します。<br>
+    （実際にはUnityでは「<strong>Prefab接続情報</strong>」がすべてなくなって、一般的なGameObjectに戻っています。）<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Prefab状態UI</strong>」で<strong>(2)</strong> 「<strong>Apply」ボタン</strong>を押してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_987.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> 「GameObject」が再び「<strong>Prefab Instance</strong>」で回復され、編集された内容が「<strong>Prefab Asset</strong>」に適用され、同期が完了したことを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_988.jpg"/>
+    <br>
+    
+    <p>
+    Unity 2018.3およびそれ以降のバージョンでは、AnyPortraitで編集された文字に対してPrefab接続情報が内部的に維持されないが、AnyPortraitが「Prefab接続情報」を別々に記録して同期を行うことができます。<br>
+    逆に、Prefabの接続情報を解除することもありますが、以下の2方式があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Disconnect</strong>」ボタンを押すと、「Prefab Asset」との同期を解除します。しかし、接続情報は削除しないので、再度「Apply」をクリックして同期を実行することができます。<br>
+    <strong>(2)</strong> 「<strong>Clear</strong>」ボタンを押すと、同期をオフにし、接続情報を完全に削除します。これで、このGameObjectは「Prefab Instance」としての役割を完全に喪失します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意事項</strong></span><br>
+    <strong>1.</strong> この方法は、Unityで提供される機能ではなく、AnyPortrait自体の機能なので、「Prefab Asset」の変更があった場合、正しく動作しない可能性があります。<br>
+    <strong>2.</strong> 別の方法で接続情報を記録するように、「AnyPortrait v1.2.5」に更新した直後には、「Prefab Instance」で回復することができない可能性があります。この場合には「Prefab Asset」を再作成するか、上書き被せ同期をした後に、再度「Prefab Instance」を作ってください。<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <p>
+    <strong>新しいPrefabシステム</strong>の最大の特徴の一つは、 「<strong>Prefabソースを直接編集することができるということ</strong>」です。<br>
+    しかし、このシステムの一部の機能は、安定化されていない部分があって、私たちのチームが完全にサポートすることがありませんでした。<br>
+    したがって、現在ではPrefabソースを対象にAnyPortraitエディタで編集することは制限されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_989.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Prefab Asset</strong>」を選択して、「Prefab」を編集することができる状態に移行します。<br>
+    <strong>(2)</strong> Prefab内部の「AnyPortraitキャラクター」を選択します。<br>
+    <strong>(3)</strong> 「Prefab Assetソース」であるため、「<strong>エディタを開くことができないというメッセージ</strong>」が表示されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    上記のようなメッセージは、「Unity 2020.1」から表示され、「Unity 2018.3」から「Unity 2020.1」の間のバージョンでは、このメッセージが表示されません。<br>
+    </p>
+    <br>
+    
+    <p>
+    しかし、これは、そのバージョンで 「<span class="text-danger"><strong> Prefab AssetのかPrefab Instanceのか区別できないから</strong></span>」にAnyPortraitで編集することができるように見られるだけであり、実際に「Prefab Asset」を直接編集すると、さまざまな問題が発生する可能性があります。<br>
+    したがって、常に次のような方法でのみPrefabを編集願います。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_990.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 編集したい「<strong>Prefab Asset</strong>」を選択して、シーンに配置します。<br>
+    <strong>(2)</strong> シーンに配置された「<strong>Prefab Instance</strong>」を選択すると、エディタで編集したり、「Bake」をすることができます。<br>
+    <strong>(3)</strong> 「<strong>Bake</strong>」をしたり、「<strong>Refresh Meshes</strong>」ボタンを押して、レンダリングされたキャラクターを確認した後、再同期を願います。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

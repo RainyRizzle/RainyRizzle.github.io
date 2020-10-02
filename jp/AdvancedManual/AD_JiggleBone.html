@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_JiggleBone.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_JiggleBone.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_JiggleBone.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -68,6 +70,132 @@
     
     <!-- 4. 버전 설명 -->
     <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_946.jpg"/>
+    <br>
+    
+    <p>
+    <strong>「ジグルボーン（Jiggle Bone）」</strong>は、物理的な効果が追加され、実際のと同じように動く骨を指します。<br>
+    特に、AnyPortraitは「慣性」と「空気抵抗」による物理的な効果が適用されたジグルボーンをサポートします。<br>
+    AnyPortraitでは「ジグルボーン」または「ジグル骨」と表記して同じ機能を指します。<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortraitの「ジグルボーン」には、次のような特徴があります。<br>
+    - リアルタイムでの骨のエンドポイントの位置を検出し、抵抗力と慣性を計算します。<br>
+    - 「ヘルパー骨（Helper）」や長さが0である、骨は「ジグルボーン」が動作しません。<br>
+    - 「Unityシーンでの位置の変化」と「アニメーションによる位置変化」によって、この機能が動作します。<br>
+    - アニメーションに基本的な形を作って「ジグルボーン」を設定すると、さらにクオリティが向上します。<br>
+    - 重力は適用されません。重力を表現したい場合は、「重力が適用された場合の形状」をアニメで作成した後「ジグルボーン」を適用します。<br>
+    - IKチェーンが設定される必要はなく、1つの骨にも適用できます。<br>
+    - スクリプトを利用して、apPortraitの物理動作を無効にするか(SetPhysicEnabled(bool))、Importantオプションがオフの場合には、この機能が動作しません。<br>
+    - 連続した骨を対象に「ジグルボーン」を適用すると、相対的により敏感に揺れる傾向があります。<br>
+    - AnyPortraitエディタの性能に応じて、シミュレーションの結果が多少不正確になることができます。 Unityシーンでテストを試みることをお勧めします。<br>
+    - 画面キャプチャ機能で映像を録画するとき、物理的な効果をオンにすると「ジグルボーン」が適用された状態で録画がされます。ただし、Unityシーンでの動作とは多少異なる場合があります。<br>
+    - 物理衝突による動きは演算されません。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページは、上の画像のように「長い髪が自然に動くキャラクター 」を「ジグルボーン」を利用して、簡単かつ迅速に作成する方法を説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_947.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> メッシュグループを選択します。<br>
+    <strong>(2)</strong> 「Boneタブ」を選択します。<br>
+    <strong>(3)</strong> 「ジグルボーン」を適用しようとする骨を選択します。<br>
+    <strong>(4)</strong> 「Jiggle Boneボタン」を押してON状態に切り替えます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_948.jpg"/>
+    <br>
+    
+    <p>
+    「ジグルボーン」の設定を有効にすると上記のように属性が表示されます。<br>
+    <strong>1. Mass</strong> : 質量です。値が大きくなるほど動きが鈍くなって重くなります。<br>
+    <strong>2. K-Value</strong> : 元の形に戻ろう属性です。値が大きくなるほど速く弾力的に復元されます。<br>
+    <strong>3. Air Drag</strong> : 空気抵抗を受ける程度で0から1の間の値を持ちます。値が大きいほど、外部の動きに敏感で大きく動きます。この値に基づいて「ジグルボーン」の効果の全体的な適用程度が決定されます。<br>
+    <strong>4. Damping</strong> : 減衰力です。この値が大きいほど、揺れる時間が短くなって急速に元の形に復元されます。 K-Valueとは異なり、この値が大きければ弾性が減少します。<br>
+    <strong>5. Constraint ON/OFF</strong> : 揺れる角度を制限することができます。制限しない場合は-180〜+ 180度の間の値に「ジグルボーン」が適用されます。<br>
+    <strong>6. Reset Valueボタン</strong>：「ジグルボーン」の属性値を初期化します。<br>
+    <strong>7. Testボタン</strong>：このボタンを押すと、すべての「ジグルボーン」に同じ任意の力がかかります。属性の値をテストすることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_949.jpg"/>
+    <br>
+    
+    <p>
+    回転範囲を制限してみましょう。<br>
+    <strong>(1)</strong> 「Constraintボタン」を押してON状態に移行して、角度を設定することができます。<br>
+    <strong>(2)</strong> ワークスペースで、骨の回転範囲が黄色の線で表示されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    さて、「ジグルボーン」は、指定した角度以内で揺れるされます。<br>
+    ただし、この角度は、最大範囲であり、実際には自然な動きのために範囲の約70％程度から速度が減少し始めます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_950.jpg"/>
+    <br>
+    
+    <p>
+    他の骨にも「ジグルボーン」を適用します。<br>
+    複数の骨を選択して、一度に「ジグルボーン」を適用することができます。<br>
+    <strong>(1)</strong> 対象となる骨をすべて選択します。 （CtrlキーまたはShiftキーを押して、多数の骨を選択することができます。）<br>
+    <strong>(2)</strong> 右のUIで「ジグルボーン」を同時に設定することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_951.jpg"/>
+    <br>
+    
+    <p>
+    「ジグルボーン」をすぐにテストすることができます。<br>
+    <strong>(1)</strong> 「骨編集モード」を解除します。 （骨編集モードでは、「ジグルボーン」が無効になり、テストボタンを押すことができません。）<br>
+    <strong>(2)</strong> 「Testボタン」を押します。<br>
+    <strong>(3)</strong> 「ジグルボーン」が適用されたすべての骨が動くのを見ることができます。<br>
+    テスト機能を利用して、物理属性を簡単に調節することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_952.jpg"/>
+    <br>
+    
+    <p>
+    ルートユニットやアニメーションの編集画面でアニメーションを再生すると、「ジグルボーン」が適用された状態で動くキャラクターを見ることができます。<br>
+    ワークスペースで上記のように物理的な効果を見ないように設定すると、「ジグルボーン」は適用されません。<br>
+    Bakeをした後、Unityシーンでも「ジグルボーン」をテストしてください！<br>
+    </p>
+    <br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/0NVUzoy-oDg" allowfullscreen></iframe>
+    </div>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_PerformanceMac.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_PerformanceMac.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_PerformanceMac.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,98 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    When running Unity on a Mac device, in the macOS Mojave, AnyPortrait slows down every few seconds.<br>
+    This phenomenon is called the "Stuttering problem".<br>
+    The rendering method "Metal" provided by MacOS Mojave and Unity is caused by poor performance in AnyPortrait.<br>
+    If you re-run Unity on occasion, this problem may be solved, but if not, try using the method described below.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_460.jpg"/>
+    <br>
+    
+    <p>
+    The above image shows the running AnyPortrait editor in Unity 2018 running on macOS Mojave.<br>
+    At this time, even if the measured FPS value is high, the actual performance of the editor may drop periodically.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_461.jpg"/>
+    <br>
+    
+    <p>
+    The profiler was used to measure the performance of the editor.<br>
+    You can see that the performance of the editor running above 60 FPS drops to 15 FPS every 2 to 3 seconds.<br>
+    </p>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_462.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the <strong>Player Settings</strong> screen. There are two ways to do this.<br>
+    - Open <strong>File &gt; Build Settings</strong> from the Unity menu and click the "<strong>Player Settings ...</strong>" button.<br>
+    - Open <strong>Edit&gt; Project Settings</strong> from the Unity menu and select the <strong>Player</strong> menu.<br>
+    <strong>(2)</strong> Turn off<strong> Metal Editor Support*</strong>.<br>
+    <strong>(3)</strong> An information message appears. Click the <strong>Apply</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_463.jpg"/>
+    <br>
+    
+    <p>
+    When the <strong>Metal Editor Support</strong> setting is turned off, you can see Unity Editor rendering from <strong>Metal</strong> to <strong>OpenGL</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_464.jpg"/>
+    <br>
+    
+    <p>
+    If you run AnyPortrait, you'll see that the performance issue has been resolved.<br>
+    When you measure AnyPortrait with a profiler, the minimum frame will be improved to 60 FPS.<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Performance of AnyPortrait Editor</h4>
+    <br>
+    
+    <p>
+    The RainyRizzle team is constantly working to improve the performance of the AnyPortrait editor.<br>
+    However, due to factors such as updates of Unity or OS, differences in development environments, sometimes unexpected performance problems are reported.<br>
+    If you are experiencing performance issues, please feel free to contact us.<br>
+    - <a href="https://www.rainyrizzle.com/anyportrait-report-eng">Report Page</a><br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

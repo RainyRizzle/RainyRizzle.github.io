@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/Script/SC_Mesh.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/Script/SC_Mesh.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/Script/SC_Mesh.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -66,9 +68,698 @@
     <h1 class="display-5">メッシュ、メッシュグループ</h1>
     <br>
     
-    <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <p>
+    メッシュの色やテクスチャの変更、位置の制御などの機能をガイドします。<br>
+    エディタでは、メッシュとメッシュグループのデータは、「Bake」の後に「<strong>apOptTransform</strong>」に変換されます。<br>
+    シーンの「apOptTransform」を参照することは、メッシュまたはメッシュグループを参照することと同じです。<br>
+    テクスチャのバッチ変換や「Draw Call Batching」機能も用意されています。<br>
+    </p>
+    <br>
     
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apOptTransform</span> <strong>GetOptTransform</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apOptTransform</span> <strong>GetOptTransform</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;「apOptTransform」を名で検索して返します。<br>
+    &nbsp;&nbsp;&nbsp;「apOptTransform」の名前は、メッシュまたはメッシュグループの名前です。<br>
+    &nbsp;&nbsp;&nbsp;「Root Unit」インデックスを指定しない場合は、まずレンダリングされている「Root Unit」から完全な検索を実行します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「apOptTransform」の名 (エディタ上のメッシュまたはメッシュグループの名前)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> : apOptTransformが返されます。 そうでない場合はnullを返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetOptTransformSocket</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform )</span>
+<br><span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetOptTransformSocket</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+<br><span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetOptTransformSocket</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform内のソケットを参照します。<br>
+    &nbsp;&nbsp;&nbsp;ソケットについては、<a href="../../jp/AdvancedManual/AD_Socket.html">関連ページ</a>を参照してください。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : ソケットを含む「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「apOptTransform」の名 (エディタ上のメッシュまたはメッシュグループの名前)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Transform</span> : apOptTransformの「Socket Transform」そうでない場合はnullを返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformPosition</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformPosition</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformPosition</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransformの位置を制御します。<br>
+    &nbsp;&nbsp;&nbsp;あなたは重みを使用して補間することができます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 制御される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「apOptTransform」の名 (エディタ上のメッシュまたはメッシュグループの名前)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> position : 移動する位置<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 「World」はシーンの座標系を指し、「Self」はapPortraitの座標系を指す。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : 元の値との補間のための重み<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 存在しない「apOptTransform」を参照する場合はfalseを返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformRotation</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformRotation</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformRotation</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransformの回転角度を制御します。<br>
+    &nbsp;&nbsp;&nbsp;あなたは重みを使用して補間することができます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 制御される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「apOptTransform」の名 (エディタ上のメッシュまたはメッシュグループの名前)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> angle : 回転する角度 (Degree)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 「World」はシーンの座標系を指し、「Self」はapPortraitの座標系を指す。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : 元の値との補間のための重み<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 存在しない「apOptTransform」を参照する場合はfalseを返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformScale</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformScale</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformScale</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransformのサイズを制御します。<br>
+    &nbsp;&nbsp;&nbsp;あなたは重みを使用して補間することができます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 制御される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「apOptTransform」の名 (エディタ上のメッシュまたはメッシュグループの名前)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> scale : スケール値<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 「World」はシーンの座標系を指し、「Self」はapPortraitの座標系を指す。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : 元の値との補間のための重み<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 存在しない「apOptTransform」を参照する場合はfalseを返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">string</span> <span class="text-muted">imageName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">string</span> <span class="text-muted">imageName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">string</span> <span class="text-muted">imageName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransformのテクスチャを切り替えます。<br>
+    &nbsp;&nbsp;&nbsp;テクスチャが置き換えられると、「Draw Call」が増加することがあります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「apOptTransform」の名 (エディタ上のメッシュまたはメッシュグループの名前)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Texture2D</span> texture : 置き換えるテクスチャ<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> imageName : AnyPortraitエディタに保存されている画像を置き換えるときは、画像の名前<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshColor</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Color</span> <span class="text-muted">color2X )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshColor</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Color</span> <span class="text-muted">color2X )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshColor</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Color</span> <span class="text-muted">color2X )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransformの色を設定します。<br>
+    &nbsp;&nbsp;&nbsp;色は 2X Multiplyとして計算されるので、デフォルトはグレー（0.5、0.5、0.5、1）です。<br>
+    &nbsp;&nbsp;&nbsp;色がデフォルトでない場合、「Draw Call」が増加することがあります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「apOptTransform」の名 (エディタ上のメッシュまたはメッシュグループの名前)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> color2X : 置き換える色 (2X Multiply)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshAlpha</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">alpha )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshAlpha</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshAlpha</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransformの色のアルファ（透明度）を設定します。<br>
+    &nbsp;&nbsp;&nbsp;デフォルト値は1です。 それ以外の場合は、「Draw Call」が増加することがあります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「apOptTransform」の名 (エディタ上のメッシュまたはメッシュグループの名前)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> alpha : 置換するアルファ<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransformのテクスチャを置き換えます。<br>
+    &nbsp;&nbsp;&nbsp;テクスチャが置き換えられると、「Draw Call」が増加することがあります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Texture2D</span> texture : 置き換えるテクスチャ<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Color</span> <span class="text-muted">color2X,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransformの色を設定します。<br>
+    &nbsp;&nbsp;&nbsp;色は 「2X Multiply」として計算されるので、デフォルトはグレー（0.5、0.5、0.5、1）です。<br>
+    &nbsp;&nbsp;&nbsp;色がデフォルトでない場合、「Draw Call」が増加することがあります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> color2X : 置き換える色 (2X Multiply)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlpha</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransformの色のアルファ(透明度)を設定します。<br>
+    &nbsp;&nbsp;&nbsp;デフォルト値は1です。 それ以外の場合は、「Draw Call」が増加することがあります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> alpha : 置換するアルファ<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloat</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransformのマテリアルの 「Float」プロパティの値を設定します。<br>
+    &nbsp;&nbsp;&nbsp;この関数が呼び出されると、「Draw Call」が増加することがあります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> floatValue : 「Float」値<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomInt</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransformのマテリアルの 「Int」プロパティの値を設定します。<br>
+    &nbsp;&nbsp;&nbsp;この関数が呼び出されると、「Draw Call」が増加することがあります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> intValue : 「Int」値<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransformのマテリアルの 「Vector4」プロパティの値を設定します。<br>
+    &nbsp;&nbsp;&nbsp;この関数が呼び出されると、「Draw Call」が増加することがあります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector4</span> vector4Value : 「Vector4」値<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomTextureOffset</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector2</span> <span class="text-muted">textureOffsetValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.4</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransformの材質の「Texture」の「Offset」属性の値を設定します。<br>
+    &nbsp;&nbsp;&nbsp;この関数が呼び出されると、「Draw Call」が増加することがあります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> textureOffsetValue : 「Texture Offset」値<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomTextureScale</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector2</span> <span class="text-muted">textureScaleValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.4</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransformの材質の「Texture」の「Offset」属性の値を設定します。<br>
+    &nbsp;&nbsp;&nbsp;この関数が呼び出されると、「Draw Call」が増加することがあります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> textureScaleValue : 「Texture Scale」値<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ShowMesh</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ShowMesh</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ShowMesh</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;メッシュを含むapOptTransformを表示します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : レンダリングするapOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「apOptTransform」の名 (エディタ上のメッシュまたはメッシュグループの名前)​<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>HideMesh</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>HideMesh</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>HideMesh</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;メッシュを含むapOptTransformを非表示にします。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 非表示にするapOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「apOptTransform」の名 (エディタ上のメッシュまたはメッシュグループの名前)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apOptTextureData</span> <strong>GetOptTextureData</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransformメッシュが同じテクスチャを使用する場合は、「apOptTextureData」ですべてを制御することができます。<br>
+    &nbsp;&nbsp;&nbsp;apOptTextureData関数を使用してテクスチャ、色などのマテリアルプロパティを変更する場合は、<br>
+    &nbsp;&nbsp;&nbsp;このテクスチャを使用するすべてのメッシュが自動的に変更されます。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary"><strong>一括変更関数</strong></span><br>
+    &nbsp;&nbsp;&nbsp;- SetMeshTextureAll(Texture2D texture)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomImageAll(Texture2D texture, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetMeshColorAll(Color color)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomColorAll(Color color, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomFloatAll(float floatValue, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomIntAll(int intValue, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomVector4All(Vector4 vector4Value, string propertyName)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 参照するapOptTextureの名前。 (エディタのイメージの名)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImageAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImageAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTextureDataを使用するすべてのメッシュのテクスチャを一括して置き換えます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 参照するapOptTextureの名前。 (エディタのイメージの名)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Texture2D</span> texture : 置き換えるテクスチャ<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshColorAll</strong> <span class="text-muted">( </span><span class="text-success">Color</span> <span class="text-muted">color2X )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshColorAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Color</span> <span class="text-muted">color2X )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColorAll</strong> <span class="text-muted">( </span><span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColorAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;すべてのメッシュの色を一括的に交換します。<br>
+    &nbsp;&nbsp;&nbsp;optTextureNameを入力すると、そのapOptTextureDataを使用するメッシュを対象に色を設定します。<br>
+    &nbsp;&nbsp;&nbsp;「mainColor」を変更すると、デフォルトで 「2X Multiply」カラーが使用されます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 参照するapOptTextureの名前。 (エディタのイメージの名)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> <span class="text-success">color2X</span> <span class="text-success">/</span> color : 置き換える色<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">float</span> <span class="text-muted">alpha )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;すべてのメッシュのアルファ（透明度）を一括して交換します。<br>
+    &nbsp;&nbsp;&nbsp;optTextureNameを入力すると、そのapOptTextureDataを使用するメッシュを対象にアルファを設定します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 参照するapOptTextureの名前。 (エディタのイメージの名)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> alpha : 置換するアルファ<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloatAll</strong> <span class="text-muted">( </span><span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloatAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomIntAll</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomIntAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4All</strong> <span class="text-muted">( </span><span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4All</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;すべてのメッシュのプロパティ値を一括で変更します。<br>
+    &nbsp;&nbsp;&nbsp;optTextureNameを入力すると、そのapOptTextureDataを使用するメッシュを対象にプロパティの値を設定します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 参照するapOptTextureの名前。 (エディタのイメージの名)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> floatValue : 「Float」値<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> intValue : 「Int」値<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector4</span> vector4Value : 「Vector4」値<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatch</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatch</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatch</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransformの「Material」プロパティを Bake状態の値に戻します。<br>
+    &nbsp;&nbsp;&nbsp;「Draw Call」が減少し、パフォーマンスが向上する可能性があります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : ターゲットapOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「apOptTransform」の名 (エディタ上のメッシュまたはメッシュグループの名前)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatchAll</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;すべてのapOptTransformの「Material」プロパティを Bake状態の値に戻します。<br>
+    &nbsp;&nbsp;&nbsp;「Draw Call」が減少し、パフォーマンスが向上する可能性があります。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatchByTextureName</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.4</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;要求された 「Texture」を使用しているすべての「Material」属性をBake状態の値に戻します。<br>
+    &nbsp;&nbsp;&nbsp;「Draw Call」が減少し、パフォーマンスが向上する可能性があります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 参照するapOptTextureの名前。 (エディタのイメージの名)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
     <!-- 5. 바닥 네비바 -->
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">

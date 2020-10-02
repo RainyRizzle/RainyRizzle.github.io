@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/Script/SC_Init.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/Script/SC_Init.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/Script/SC_Init.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -66,8 +68,455 @@
     <h1 class="display-5">Initialization, Basic Settings</h1>
     <br>
     
-    <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <p>
+    It guides you through the functions that should be called when using a GameObject with apPortrait and the functions that should be referenced by default.<br>
+    </p>
+    <br>
+    
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>Initialize</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Initialization function that is automatically executed just before the first update.<br>
+    &nbsp;&nbsp;&nbsp;If you load and use the Prefab in real time, you must call the Initialize<strong>()</strong> or AsyncInitialize<strong>()</strong> function.<br>
+    &nbsp;&nbsp;&nbsp;A function that takes a long execution time when there is a lot of data. It is recommended that you use the AsyncInitialize<strong>()</strong> function.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : Returns false if it is initializing or has already finished, and returns true if initialization is successful.
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>AsyncInitialize</strong> <span class="text-muted">()</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>AsyncInitialize</strong> <span class="text-muted">( </span><span class="text-success">apPortrait</span><span class="text-muted">.</span><span class="text-success">OnAsyncLinkCompleted</span> <span class="text-muted">onAsyncLinkCompleted )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>AsyncInitialize</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">timePerYield )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>AsyncInitialize</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">timePerYield,</span> <span class="text-success">apPortrait</span><span class="text-muted">.</span><span class="text-success">OnAsyncLinkCompleted</span> <span class="text-muted">onAsyncLinkCompleted )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Initialization function that performs the same function as Initialize<strong>()</strong>.<br>
+    &nbsp;&nbsp;&nbsp;If the Prefab is loaded in real time, you must call the Initialize<strong>()</strong> or AsyncInitialize<strong>()</strong> function.<br>
+    &nbsp;&nbsp;&nbsp;Use asynchronous processing to reduce execution time load using coroutine.<br>
+    &nbsp;&nbsp;&nbsp;Callback event is received as a parameter and is called on exit.<br>
+    &nbsp;&nbsp;&nbsp;<br>
+    &nbsp;&nbsp;&nbsp;If timePerYield, which is a unit of ms, is used as a parameter, it calculates the coroutine processing time as a timer, so that the load on the CPU is reduced.<br>
+    &nbsp;&nbsp;&nbsp;Instead, the initialization time may take a little longer in this case.<br>
+    &nbsp;&nbsp;&nbsp;(Processing with timePerYield will work from v1.1.7.)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apPortrait</span><span class="text-muted">.</span><span class="text-success">OnAsyncLinkCompleted</span> onAsyncLinkCompleted : Callback event invoked when initialization is finished<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> timePerYield : The timeout in milliseconds that yield is called during asynchronous processing<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : Returns false if it is initializing or has already finished, and returns true if asynchronous initialization starts
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ShowRootUnit</strong> <span class="text-muted">()</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ShowRootUnit</strong> <span class="text-muted">( </span><span class="text-success">apOptRootUnit</span> <span class="text-muted">targetOptRootUnit )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Sets the root unit to be rendered.<br>
+    &nbsp;&nbsp;&nbsp;It targets the root unit with the "animation clip started automatically" or the root unit with index 0.<br>
+    &nbsp;&nbsp;&nbsp;Other root units are automatically hidden.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptRootUnit</span> targetOptRootUnit : The root unit to be rendered.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>HideRootUnits</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Hide all root units.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>Show</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Sets the root unit to be rendered.<br>
+    &nbsp;&nbsp;&nbsp;It targets the root unit with the "animation clip started automatically" or the root unit with index 0.<br>
+    &nbsp;&nbsp;&nbsp;Other root units are automatically hidden.<br>
+    &nbsp;&nbsp;&nbsp;Same as ShowRootUnit<strong>()</strong>.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>Hide</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Hide all root units.<br>
+    &nbsp;&nbsp;&nbsp;Same as HideRootUnits<strong>()</strong>.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetImportant</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">isImportant )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Set the "Important" property.<br>
+    &nbsp;&nbsp;&nbsp;If the "Important" property is True, this object is updated every frame.<br>
+    &nbsp;&nbsp;&nbsp;If the "Important" attribute is False, the editor will update according to the FPS specified.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isImportant : Important Property<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetFPSForNotImportant</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">fps )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.2.3</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;If "Important" property is off, the character will run with a fixed FPS. (Depending on the game's FPS, it may run at fewer FPS.)<br>
+    &nbsp;&nbsp;&nbsp;You can change the value of the fixed FPS set in "Bake step" by script.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> fps : Fixed FPS value applied when the character's animation is executed. Valid only if the "Important" attribute is off.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apOptRootUnit</span> <strong>GetOptRootUnit</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Returns the root unit of the requested index.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (Default is 0)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptRootUnit</span> : The root unit corresponding to the index. Return null if not
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>CleanUpMeshesCommandBuffers</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;If there is a mesh with a clipping mask applied, it automatically works with one camera for rendering.<br>
+    &nbsp;&nbsp;&nbsp;Calling this function removes and initializes the information associated with the current camera.<br>
+    &nbsp;&nbsp;&nbsp;When re-rendering, it automatically tries to re-link.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshesCommandBuffers</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">isOnlyActiveRootUnit )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshCommandBuffer</strong> <span class="text-muted">( </span><span class="text-success">apOptRootUnit</span> <span class="text-muted">targetOptRootUnit,</span> <span class="text-primary">bool</span> <span class="text-muted">isRegistToCamera )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Re-link with the camera for all or some of the meshes with clipping masks.<br>
+    &nbsp;&nbsp;&nbsp;Depending on arguments, you can also hold back the camera and re-create the render texture (RenderTexture) only.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isOnlyActiveRootUnit : Entering true will reset the current root unit only. If false, it will target the entire root unit.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptRootUnit</span> targetOptRootUnit : The root unit to be reset<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isRegistToCamera : If it is true, it will re-link with the camera. If false, re-create the render texture (RenderTexure) and wait for the next frame.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingLayer</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">sortingLayerName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingLayer</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">string</span> <span class="text-muted">sortingLayerName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingLayer</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">string</span> <span class="text-muted">sortingLayerName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingLayer</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">string</span> <span class="text-muted">sortingLayerName )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.6</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Sets the Sorting Layer used when calculating the order in which GameObjects are rendered.<br>
+    &nbsp;&nbsp;&nbsp;The rendering order is calculated by grouping Game Objects on the same layer.<br>
+    &nbsp;&nbsp;&nbsp;The Sorting Layer can be configured in Unity's Project Settings > Tags and Layers.<br>
+    &nbsp;&nbsp;&nbsp;If you enter a name that is not set, processing will fail with an error message.<br>
+    &nbsp;&nbsp;&nbsp;​<br>
+    &nbsp;&nbsp;&nbsp;If you only want to change the Sorting Layer of a specific apOptTransform,<br>
+    &nbsp;&nbsp;&nbsp;you can specify the apOptTransform object directly or enter its name as an argument.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> sortingLayerName : Name of the Sorting Layer to set<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : The object whose Sorting Layer is to be changed<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the optTransform for which you want to change the Sorting Layer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">​int</span> rootUnitIndex : The index of the root unit to which the optTransform to change the Sorting Layer belongs to<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingOrder</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">sortingOrder )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingOrder</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">int</span> <span class="text-muted">sortingOrder )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingOrder</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">int</span> <span class="text-muted">sortingOrder )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingOrder</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">int</span> <span class="text-muted">sortingOrder )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.6</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Sets the Sorting Order used when calculating the order in which GameObjects are rendered.<br>
+    &nbsp;&nbsp;&nbsp;A GameObject with a large value in the same sorting layer is rendered on the front of the screen.<br>
+    &nbsp;&nbsp;&nbsp;​<br>
+    &nbsp;&nbsp;&nbsp;If you only want to change the Sorting Order of a specific apOptTransform,<br>
+    &nbsp;&nbsp;&nbsp;you can specify the apOptTransform object directly or enter its name as an argument.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> sortingOrder : Rendering order. Larger values render in front of the screen.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : The object whose Sorting Order is to be changed<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the optTransform for which you want to change the Sorting Order<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">​int</span> rootUnitIndex : The index of the root unit to which the optTransform to change the Sorting Order belongs to<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">string</span> <strong>GetSortingLayerName</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.0.2</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Returns the name of the currently applied Sorting Layer.<br>
+    &nbsp;&nbsp;&nbsp;The name of the Sorting Layer must be registered in Project Settings > Tags and Layers.<br>
+    &nbsp;&nbsp;&nbsp;It is not recommended to call this function frequently because it queries the settings of the project every time this function is called.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> : Name of the applied Sorting Layer. If it has a sorting layer value that does not match the project settings, it returns "Unknown Layer".
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">int</span> <strong>GetSortingOrder</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.0.2</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Returns the currently applied Sorting Order value.<br>
+    &nbsp;&nbsp;&nbsp;The larger this value is, the more the front of the screen is rendered.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> : The current rendering order.
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingOrderChangedAutomatically</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">isEnabled )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.8</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;This is the function used when the Sorting Order Option of apPortrait is "Depth To Order" or "Reverse Depth To Order".<br>
+    &nbsp;&nbsp;&nbsp;This function determines whether the "Sorting Order" value of meshes will be changed automatically by changing the depth.<br>
+    &nbsp;&nbsp;&nbsp;If you want to control the Sorting Order with a script, you must enter False to prevent the Sorting Order from being changed automatically.<br>
+    &nbsp;&nbsp;&nbsp;The default value is True.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isEnabled : If true, the Sorting Order is changed automatically.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>FindRenderingCamerasAutomatically</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.2.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Set to recognize the cameras in the scene automatically while simultaneously checking the current cameras to determine how to render.<br>
+    &nbsp;&nbsp;&nbsp;Even if this function is not called, it is set to recognize the cameras in the scene in run time.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">int</span> <strong>SetRenderingCameras</strong> <span class="text-muted">( </span><span class="text-primary">params</span> <span class="text-success">Camera</span><span class="text-muted">[]</span><span class="text-success"></span> <span class="text-muted">cameras )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.2.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;You can specify the cameras to render the character.<br>
+    &nbsp;&nbsp;&nbsp;After this function is called, it will not automatically check for cameras in the scene until the FindRenderingCamerasAutomatically<strong>()</strong> function is called.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">params</span> <span class="text-success">Camera</span><span class="text-muted">[]</span><span class="text-success"></span> cameras : Specify one or more cameras.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> : The number of cameras that can actually render the character.
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">PrefabTest</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    &emsp;&emsp;<span class="text-primary">void</span> Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyUp(<span class="text-success">KeyCode</span>.P))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject </span>swordGirl = <span class="text-success">Resources</span>.Load&lt;<span class="text-success">GameObject</span>&gt;(<span class="text-danger">"TestPrefab/SwordGirl"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;swordGirl = Instantiate&lt;<span class="text-success">GameObject</span>&gt;(swordGirl);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apPortrait</span> swordGirlPortrait = swordGirl.GetComponent&lt;<span class="text-success">apPortrait</span>&gt;();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;swordGirlPortrait.transform.parent = <span class="text-primary">this</span>.transform;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;swordGirlPortrait.transform.localPosition = <span class="text-success">Vector3</span>.zero;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;swordGirlPortrait.<strong>AsyncInitialize</strong>(OnPortraitLoadAsync);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>OnPortraitLoadAsync(<span class="text-success">apPortrait </span>portrait)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;portrait.Play(<span class="text-danger">"Idle"</span>);<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

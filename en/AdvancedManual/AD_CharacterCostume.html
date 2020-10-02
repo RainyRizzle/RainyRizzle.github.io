@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_CharacterCostume.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_CharacterCostume.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_CharacterCostume.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,12 +69,690 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.0</span></h4>
+    
+    <p>
+    Changing a character's clothing or equipment when a player gains an item from a game is a basic function.<br>
+    There are many ways to implement the ability to replace a character's costume.<br>
+    There is a way to create and replace all the clothes and equipment animations individually, or simply change the color or texture.<br>
+    This page shows how to use AnyPortrait to simply replace the costume of a character through <strong>"texture replacement"</strong>.<br>
+    It also covers how to implement the ability of a character to wear swords and shields using <strong>Sockets</strong> and scripts.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Preparing Atlas Textures configured with the same way</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_533.jpg"/>
+    <br>
+    
+    <p>
+    In order to create an example of replacing a character's costumes, I have prepared the above images.<br>
+    The first figure is a basic state in which the character does not wear any clothes.<br>
+    The second figure is about what the character wears a casual outfit and orange hair.<br>
+    In the third figure, the character is dressed as a knight in steel equipment, holding a sword and a shield.<br>
+    </p>
+    <br>
+    
+    <p>
+    I want to change the costumes so that the characters have a various appearance.<br>
+    In this page, we want to change the appearance by implementing the function to change the texture of each mesh in real time.<br>
+    This method is simple, but with the following precautions.<br>
+    </p>
+    <br>
+    
+    <p>
+    - Atlas of all textures must be configured identically.<br>
+    - The "Import PSD file" function creates Atlas automatically, so can not be used here.<br>
+    - The size and shape of the image vary, so make it fairly large when creating meshes.<br>
+    - If there is a costume that does not share physic materials or bones, you must create another mesh in advance.<br>
+    - Although not applicable to basic costumes, you need to add more bones for various costumes.<br>
+    - If you replace the texture, Drawcall may increase.<br>
+    </p>
+    <br>
+    
+    <p>
+    In accordance with the above instructions, you need to prepare a <span class="text-danger"><strong>"reference character"</strong></span> as shown in the fourth figure.<br>
+    The reference character has "basic appearance" and "size of image of costume that can be replaced later".<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_534.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_535.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_536.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_537.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <p>
+    These four character texture Atlas are completed according to the above notes.<br>
+    I separated the head and hair areas and separated also the body, arms, and legs.<br>
+    Sword and shield are not included in the Atlas.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Creating meshes using the reference character texture</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_538.jpg"/>
+    <br>
+    
+    <p>
+    Open the AnyPortrait editor and create a new character.<br>
+    Select the "Reference Character" texture from the prepared texture and add it as an image.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_539.jpg"/>
+    <br>
+    
+    <p>
+    Now create the meshes one by one.<br>
+    Unlike the normal mesh creation process, the reference character mesh should be configured as shown below.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_540.jpg"/>
+    <br>
+    
+    <p>
+    Generally, a mesh will be made to fit the shape of the image, such as a <span class="text-danger"><strong>"Red Area (Basic Area)"</strong></span>.<br>
+    However, we do not know the size of any image to be changed, so we need to make the mesh as moderately larger as the <span class="text-success"><strong>"Green Area (Maximum Area)"</strong></span>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_541.jpg"/>
+    <br>
+    
+    <p>
+    I created other meshes in the same way.<br>
+    You can see that many vertices have been added in joints.<br>
+    If there are many vertices in the mesh, it is necessary to modify the Z-Depth value of the vertex according to the image and motion. (<a href="../../en/AdvancedManual/AD_ZdepthVert.html">Related page</a>)<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Creating the Reference Character</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_542.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Create a Mesh Group</strong>.<br>
+    <strong>(2)</strong> <strong>Set the name</strong> of the Mesh Group and set it as <strong>Root Unit</strong>.<br>
+    <strong>(3)</strong> <strong>Press the "+" button</strong>, and <strong>(4)</strong> <strong>add meshes</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_543.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the "<strong>Edit Default Transform</strong>" button.<br>
+    <strong>(2)</strong> <strong>Modify the position</strong> of meshes.<br>
+    <strong>(3)</strong> <strong>Change the order</strong> of mesh appropriately.<br>
+    When you are finished, press the "<strong>Edit Default Transform</strong>" button (or the "<strong>Editing..</strong>" button) again to finish editing.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_544.jpg"/>
+    <br>
+    
+    <p>
+    You can test if your reference character is well-formed.<br>
+    <strong>(1)</strong> <strong>Select the image</strong>.<br>
+    <strong>(2)</strong> Press the "<strong>Select Image</strong>" button.<br>
+    <strong>(3)</strong> Select a character texture other than the reference texture.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_545.jpg"/>
+    <br>
+    
+    <p>
+    The current image has been changed to a basic character texture, not a reference.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_546.jpg"/>
+    <br>
+    
+    <p>
+    If you select the Mesh Group again, you can see that the texture has been replaced and the character's appearance is changed.<br>
+    If Atlas is configured in the same way, you can change the look by replacing only the textures as shown above.<br>
+    This process is for testing, so change to reference character texture again.<br>
+    (I will use this basic character texture later, but it is convenient to use reference textures at this stage.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_547.jpg"/>
+    <br>
+    
+    <p>
+    Add bones.<br>
+    If you need to add bones depending on some costume to be replaced, you may want to add bones in this step.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_548.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the "<strong>Modifier tab</strong>" and press the "<strong>Add Modifier</strong>" button.<br>
+    <strong>(2)</strong> Select and add the <strong>Rigging modifier</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_549.jpg"/>
+    <br>
+    
+    <p>
+    With the Rigging modifier selected, select each mesh to set the weights for the bones.<br>
+    Carefully set weights because the mesh is bigger than it looks like an image.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_550.jpg"/>
+    <br>
+    
+    <p>
+    Once you're done with the Rigging modifier, the next step is to create the animation using bones.<br>
+    <strong>(1)</strong> Press the "<strong>Add Modifier</strong>" button.<br>
+    <strong>(2)</strong> Select and add "<strong>Transform (Animation)</strong>" modifier.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_551.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Create</strong> a new <strong>Animation clip</strong>.<br>
+    <strong>(2)</strong> Set the <strong>name</strong> and <strong>Target Mesh Group</strong>, and click the "<strong>Add Timeline</strong>" button.<br>
+    <strong>(3)</strong> Register the "<strong>Transform (Animation)</strong>" modifier as a timeline.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_552.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the "<strong>Bones</strong>" tab.<br>
+    <strong>(2)</strong> Press the "<strong>All Bones to Layers</strong>" button to register all bones as a timeline layer.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_553.jpg"/>
+    <br>
+    
+    <p>
+    Select bones to create character animations.<br>
+    </p>
+    <br>
+    
+    <p>
+    (You do not have to create animations just by using bones. Create animations in a variety of ways.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_554.jpg"/>
+    <br>
+    
+    <p>
+    Now it's time to move the completed character animation to the Unity scene.<br>
+    <strong>(1)</strong> Select the <strong>Root Unit</strong>.<br>
+    <strong>(2)</strong> <strong>Select the Animation clip</strong> as the default.<br>
+    <strong>(3)</strong> Turn on the "<strong>Auto Play</strong>" setting.<br>
+    <strong>(4)</strong> Press the "<strong>Bake</strong>" button to open the <strong>Bake dialog</strong>.<br>
+    <strong>(5)</strong> Press the "<strong>Bake</strong>" button on the Bake dialog box to close the AnyPortrait editor.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_555.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game in Unity, you can see that the animation of the reference character is played.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Writing a script to replace a character's costume</h3>
+    <br>
+    
+    <p>
+    The next step is to create a script to implement the replacement of the character's costume.<br>
+    Using <strong>keyboard input</strong>, let's implement the transition of <strong>"character is naked"</strong>, <strong>"character is wearing casual clothes"</strong>, and <strong>"character is wearing knight's equipment"</strong>.<br>
+    In particular, let's create a separate transition between the hair and other meshes.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_556.jpg"/>
+    <br>
+    
+    <p>
+    If you have created all animations with reference characters, let's change the current texture to the texture of the basic.<br>
+    <strong>(1)</strong> <strong>Select the image</strong> and <strong>(2)</strong> press the "<strong>Select Image</strong>" button to change it to "<strong>Basic Character Texture</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_557.jpg"/>
+    <br>
+    
+    <p>
+    The texture is changed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_558.jpg"/>
+    <br>
+    
+    <p>
+    Bake again to apply to the Unity scene.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_559.jpg"/>
+    <br>
+    
+    <p>
+    It has been changed to the character "Naked".<br>
+    </p>
+    <br>
+    
+    <p>
+    Now create a new C # script and write it like this:<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">CustomSample</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// The target apPortrait<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>apPortrait </strong></span><strong>portrait</strong>;<br>
+    &emsp;&emsp;// Three character textures<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>Texture2D </strong></span><span class="text-primary"><strong>image_Basic</strong></span>;<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>Texture2D </strong></span><span class="text-warning"><strong>image_Casual</strong></span>;<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>Texture2D </strong></span><span class="text-danger"><strong>image_Knight</strong></span>;<br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Pressing Q, A, or Z changes the texture of the "Hair" mesh.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.Q) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Hair"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.A) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Hair"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.Z) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Hair"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;// Pressing W, S, and X changes the texture of other meshes except "Hair" and "Head".<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.W) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Body"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftArm"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightArm"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightHand"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftLeg"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightLeg"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.S) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Body"</strong></span>, <span class="text-warning"><strong>image_Casual</strong></span>) ;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftArm"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightArm"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightHand"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftLeg"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightLeg"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.X) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Body"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftArm"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightArm"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightHand"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftLeg"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightLeg"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    
+    <br><br>
+    
+    <p>
+    This is a simple code using apPortrait's "<strong>SetMeshImage</strong>" function. (<a href="../../en/Script/SC_Mesh.html">Related page</a>)<br>
+    You can change the appearance of your character by entering the name of the mesh you want to change the texture and the texture asset.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_560.jpg"/>
+    <br>
+    
+    <p>
+    Create a new GameObject and add the created script as a component.<br>
+    Now assign the public member variables (<strong>one apPortrait</strong> and <strong>three Texture2Ds</strong>).<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_561.jpg"/>
+    <br>
+    
+    <p>
+    When you play the game, you can see that the character's clothes and hair change according to the keystrokes.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Using sockets to replace weapons or equipment</h3>
+    <br>
+    
+    <p>
+    Some of the weapons and equipment that your character uses are those that do not change shape, so they are not affected by bones.<br>
+    Such examples are weapons such as swords, shields, and guns.<br>
+    And the hat on top of the head, small jewelry, glasses, etc. are usually not well deformed.<br>
+    If you want to wear these kinds of items to your character, it is more effective to use a <strong>Socket</strong>.<br>
+    Detailed description of socket can be seen from <a href="../../en/AdvancedManual/AD_Socket.html">related page</a>.<br>
+    This page describes how to attach a sword to the character's right hand and attach a shield to his left arm.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_562.jpg"/>
+    <br>
+    
+    <p>
+    Prepare images and materials for swords and shields, and create them as <strong>GameObjects</strong> using <strong>Quad mesh</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_563.jpg"/>
+    <br>
+    
+    <p>
+    But there is one problem here.<br>
+    The center of the image of the sword and shield is not "the location where it will be attached to the character".<br>
+    Therefore, you need to create a "<strong>point to be attached to the character</strong>".<br>
+    <strong>(1)</strong> Create a <strong>new GameObjects</strong>, respectively. I named them <strong>"Weapon_Shield"</strong> and <strong>"Weapon_Sword"</strong>.<br>
+    And set GameObjects with existing sword and shield mesh as children of new GameObjects.<br>
+    (Be careful not to do reversely.)<br>
+    <strong>(2)</strong> <strong>Modify the position of each mesh</strong> so that the position of the <strong>parent GameObject</strong> is the "<strong>attaching point</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_564.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the AnyPortrait editor and <strong>select the Mesh Group</strong>.<br>
+    <strong>(2)</strong> <strong>Add bones</strong> to where the sword and shield will be placed.<br>
+    In this example, they are added to the right hand and left arm, respectively, and are named "Bone Weapon R" and "Bone Weapon L".<br>
+    <strong>(3)</strong> Press the "<strong>Socket Disabled</strong>" button to <strong>turn on the socket option</strong>.<br>
+    And <strong>Bake</strong> again.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now add the following code to the existing script:<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">CustomSample</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// The target apPortrait<br>
+    &emsp;&emsp;<span class="text-primary">public </span><span class="text-success">apPortrait </span>portrait;<br>
+    &emsp;&emsp;// Three character textures<br>
+    &emsp;&emsp;<span class="text-primary">public </span><span class="text-success">Texture2D </span>image_Basic;<br>
+    &emsp;&emsp;<span class="text-primary">public </span><span class="text-success">Texture2D </span>image_Casual;<br>
+    &emsp;&emsp;<span class="text-primary">public </span><span class="text-success">Texture2D </span>image_Knight;<br>
+    &emsp;&emsp;// &lt;Add&gt; Add the sword and shield's parent Transforms as a member.<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>Transform </strong></span><span class="text-danger"><strong>sword;</strong></span><br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>Transform </strong></span><span class="text-danger"><strong>shield;</strong></span><br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;(skip...)<br>
+    &emsp;&emsp;&emsp;&emsp;// &lt;Add&gt; Press the E key to attach the sword and shield.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.E) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Get the two bone sockets you created.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform </span><strong>socketR </strong>= portrait.<strong>GetBoneSocket</strong>( <span class="text-danger"><strong>"Bone Weapon R"</strong></span> );<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform </span><strong>socketL</strong> = portrait.<strong>GetBoneSocket</strong>( <span class="text-danger"><strong>"Bone Weapon L"</strong></span> );<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Attach the sword (Weapon_Sword) as a child of the right hand bone socket.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sword</strong>.<strong>parent </strong>= <strong>socketR</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sword.localPosition = <span class="text-success">Vector3</span>.zero;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sword.localRotation = <span class="text-success">Quaternion</span>.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Attach the shield (Weapon_Shield) as a child of the socket of the left arm bone.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>shield</strong>.<strong>parent </strong>= <strong>socketL</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;shield.localPosition = <span class="text-success">Vector3</span>.zero;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;shield.localRotation = <span class="text-success">Quaternion</span>.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;// &lt;Add&gt; Press R key to detach the sword and shield.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.R) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sword</strong>.<strong>parent </strong>= <span class="text-primary"><strong>null</strong></span>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sword.localPosition = <span class="text-primary">new </span><span class="text-success">Vector3</span>(5, 0, 0);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sword.localRotation = <span class="text-success">Quaternion</span>.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>shield</strong>.<strong>parent </strong>= <span class="text-primary"><strong>null</strong></span>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;shield.localPosition = <span class="text-primary">new </span><span class="text-success">Vector3</span>(3, 0, 0);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;shield.localRotation = <span class="text-success">Quaternion</span>.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    
+    <br><br>
+    
+    <p>
+    After writing the script, assign <strong>Weapon_Sword</strong> to <strong>sword</strong> and <strong>Weapon_Shield</strong> to <strong>shield</strong>.<br>
+    Try running the game.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_565.jpg"/>
+    <br>
+    
+    <p>
+    When you enter the key, you will see the sword and shield attached on the character's right hand and left arm.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_566.jpg"/>
+    <br>
+    
+    <p>
+    However, you can see that the attached sword and shield are always rendered behind the character.<br>
+    The Z value of the position must be modified accordingly to ensure that the equipment is properly attached.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_567.jpg"/>
+    <br>
+    
+    <p>
+    Open the AnyPortrait editor again.<br>
+    <strong>(1)</strong> Press the "<strong>Bake</strong>" button to open the <strong>Bake dialog</strong>.<br>
+    <strong>(2)</strong> Increase the value of "<strong>Z Per Depth</strong>" property. I entered 10 here.<br>
+    <strong>(3)</strong> Press the "<strong>Bake</strong>" button to apply to the Unity scene.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_568.jpg"/>
+    <br>
+    
+    <p>
+    Now you can see that in the unity scene, the meshes are placed a little further away on the Z axis.<br>
+    Placing swords and shields as before will always be behind the character's mesh.<br>
+    Select the <strong>GameObjects</strong> with the sword and shield's <strong>mesh</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_569.jpg"/>
+    <br>
+    
+    <p>
+    Move to the Z axis to render in the proper order.<br>
+    Perhaps the value of the Z coordinate of the local coordinates will have a negative value.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_570.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you can change the character's costume, and attach swords and shields.<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/oOfEv8vAwQQ" allowfullscreen></iframe>
+    </div>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
-        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_RenderTexture.html">< Rendering to Render Texture</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_SpriteMask.html">< Applying Sprite Mask</a>
         <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_InitializeScript.html">Initialize with Script ></a>
     </nav>
     

@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/Script/SC_Init.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/Script/SC_Init.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/Script/SC_Init.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -60,36 +62,466 @@
 
     <!-- 여기서부터 페이지 내용이 작성됩니다. -->
     <!-- 1. 페이지 진입 경로 -->
-    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/Script.html"><span class="text-dark">Script</span></a> > 초기화, 기본 설정</p>
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/Script.html"><span class="text-dark">스크립트</span></a> > 초기화, 기본 설정</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
     <h1 class="display-5">초기화, 기본 설정</h1>
     <br>
     
-    <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
-    
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    apPortrait가 포함된 GameObject를 사용할 때 호출해야하는 함수들과 기본적으로 참고해야하는 함수들을 안내합니다.<br>
     </p>
     <br>
     
-    
-    <br><br>
-    
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
-    <br>
-    
-    <p>
-    본문 입력<br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>Initialize</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;첫 업데이트 직전에 자동으로 실행되는 초기화 함수입니다.<br>
+    &nbsp;&nbsp;&nbsp;만약 프리팹(Prefab)을 실시간으로 로드하여 사용하는 경우, Initialize<strong>()</strong> 또는 AsyncInitialize<strong>()</strong> 함수를 꼭 호출해야합니다.<br>
+    &nbsp;&nbsp;&nbsp;데이터가 많은 경우 실행 시간이 오래 걸리는 함수입니다. AsyncInitialize<strong>()</strong> 함수를 사용할 것을 권장합니다.<br>
     </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 초기화 중이거나 이미 끝났다면 false를 리턴하며, 초기화가 성공적으로 처리되면 true를 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>AsyncInitialize</strong> <span class="text-muted">()</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>AsyncInitialize</strong> <span class="text-muted">( </span><span class="text-success">apPortrait</span><span class="text-muted">.</span><span class="text-success">OnAsyncLinkCompleted</span> <span class="text-muted">onAsyncLinkCompleted )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>AsyncInitialize</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">timePerYield )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>AsyncInitialize</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">timePerYield,</span> <span class="text-success">apPortrait</span><span class="text-muted">.</span><span class="text-success">OnAsyncLinkCompleted</span> <span class="text-muted">onAsyncLinkCompleted )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Initialize<strong>()</strong>와 동일한 기능을 수행하는 초기화 함수입니다.<br>
+    &nbsp;&nbsp;&nbsp;​프리팹을 실시간으로 로드하여 사용되는 경우, Initialize<strong>()</strong> 또는 AsyncInitialize<strong>()</strong> 함수를 꼭 호출해야합니다.<br>
+    &nbsp;&nbsp;&nbsp;코루틴을 이용하여 실행 시간 부하가 적도록 비동기로 처리를 합니다.<br>
+    &nbsp;&nbsp;&nbsp;콜백 이벤트를 매개 변수로 입력하면, 종료 시에 호출됩니다. <br>
+    &nbsp;&nbsp;&nbsp;<br>
+    &nbsp;&nbsp;&nbsp;ms 단위의 시간인 timePerYield를 인자로 넣으면 코루틴 처리 시간을 타이머로 계산하여 CPU에 더욱 부하가 적도록 동작합니다.<br>
+    &nbsp;&nbsp;&nbsp;대신 이 경우에 초기화 시간이 다소 오래 걸릴 수 있습니다.<br>
+    &nbsp;&nbsp;&nbsp;(timePerYield를 이용한 처리는 v1.1.7부터 적용됩니다.)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apPortrait</span><span class="text-muted">.</span><span class="text-success">OnAsyncLinkCompleted</span> onAsyncLinkCompleted : 초기화가 종료되면 호출되는 콜백 이벤트<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> timePerYield : 비동기 처리시 yield가 호출되는 제한 시간(ms).<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 초기화 중이거나 이미 끝났다면 false를 리턴하며, 비동기 초기화가 시작되면 true를 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ShowRootUnit</strong> <span class="text-muted">()</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ShowRootUnit</strong> <span class="text-muted">( </span><span class="text-success">apOptRootUnit</span> <span class="text-muted">targetOptRootUnit )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;루트 유닛이 출력되도록 합니다.<br>
+    &nbsp;&nbsp;&nbsp;"자동으로 시작되는 애니메이션 클립"이 있는 루트 유닛이나 0번 인덱스의 루트 유닛을 대상으로 합니다.<br>
+    &nbsp;&nbsp;&nbsp;​다른 루트 유닛은 자동으로 숨겨집니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptRootUnit</span> targetOptRootUnit : 출력하고자 하는 루트 유닛<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>HideRootUnits</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;모든 루트 유닛을 숨깁니다.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>Show</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;루트 유닛이 출력되도록 합니다.<br>
+    &nbsp;&nbsp;&nbsp;"자동으로 시작되는 애니메이션 클립"이 있는 루트 유닛이나 0번 인덱스의 루트 유닛을 대상으로 합니다.<br>
+    &nbsp;&nbsp;&nbsp;​다른 루트 유닛은 자동으로 숨겨집니다.<br>
+    &nbsp;&nbsp;&nbsp;ShowRootUnit<strong>()</strong>과 동일합니다.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>Hide</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;모든 루트 유닛을 숨깁니다.<br>
+    &nbsp;&nbsp;&nbsp;HideRootUnits<strong>()</strong>와 동일합니다.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetImportant</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">isImportant )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Important 속성을 지정합니다.​<br>
+    &nbsp;&nbsp;&nbsp;Important 속성이 True라면 이 객체는 매 프레임마다 업데이트됩니다.<br>
+    &nbsp;&nbsp;&nbsp;Important 속성이 False라면 에디터에서 지정된 FPS에 따라 업데이트를 합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isImportant : Important 설정<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetFPSForNotImportant</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">fps )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.2.3</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Important 속성이 꺼진 경우, 캐릭터는 고정 FPS로 실행됩니다. (게임의 FPS에 따라 더 적은 FPS에서 실행될 수 있습니다.)<br>
+    &nbsp;&nbsp;&nbsp;Bake 단계에서 설정했던 고정 FPS의 값을 스크립트로 변경할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> fps : 캐릭터의 애니메이션이 실행되는 고정 FPS. Important 속성이 꺼진 경우에만 유효합니다.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apOptRootUnit</span> <strong>GetOptRootUnit</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;요청된 인덱스에 맞는 루트 유닛을 리턴합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛 인덱스. 기본은 0<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptRootUnit</span> : 인덱스에 해당하는 루트 유닛. 없다면 null 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>CleanUpMeshesCommandBuffers</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;만약 클리핑 마스크가 적용된 메시가 있다면, 렌더링을 위해 카메라 1개와 연동을 자동으로 합니다.<br>
+    &nbsp;&nbsp;&nbsp;이 함수를 호출하면 현재 카메라와 연동된 정보를 없애고 초기화합니다.<br>
+    &nbsp;&nbsp;&nbsp;다시 렌더링을 할 때, 자동으로 다시 연동을 시도합니다.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshesCommandBuffers</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">isOnlyActiveRootUnit )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshCommandBuffer</strong> <span class="text-muted">( </span><span class="text-success">apOptRootUnit</span> <span class="text-muted">targetOptRootUnit,</span> <span class="text-primary">bool</span> <span class="text-muted">isRegistToCamera )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;클리핑 마스크가 적용된 전체 또는 일부 메시들에 대해서 카메라와의 연동을 다시 실행합니다.<br>
+    &nbsp;&nbsp;&nbsp;설정에 따라 카메라와 연동은 보류하고 렌더 텍스쳐(RenderTexture)만 다시 만들 수도 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isOnlyActiveRootUnit : true를 입력하면 현재 실행 중인 루트 유닛에 한정해서 리셋을 하며, false라면 전체 루트 유닛을 대상으로 합니다.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptRootUnit</span> targetOptRootUnit : 리셋을 하고자 하는 루트 유닛<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isRegistToCamera : true라면 카메라와 연동을 다시 하며, false일 경우 렌더 텍스쳐(RenderTexure)만 다시 생성하고 다음 프레임을 기다립니다.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingLayer</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">sortingLayerName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingLayer</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">string</span> <span class="text-muted">sortingLayerName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingLayer</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">string</span> <span class="text-muted">sortingLayerName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingLayer</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">string</span> <span class="text-muted">sortingLayerName )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.6</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;GameObject들을 렌더링하는 순서를 계산할 때 사용되는 Sorting Layer를 설정합니다.<br>
+    &nbsp;&nbsp;&nbsp;동일한 레이어의 Game Object들을 묶어서 렌더링 순서를 계산합니다.<br>
+    &nbsp;&nbsp;&nbsp;Sorting Layer는 유니티의 Project Settings > Tags and Layers로 설정할 수 있습니다.<br>
+    &nbsp;&nbsp;&nbsp;설정되지 않은 이름을 입력한 경우 에러 메시지와 함께 처리가 실패됩니다.<br>
+    &nbsp;&nbsp;&nbsp;<br>
+    &nbsp;&nbsp;&nbsp;만약, 특정 apOptTransform의 Sorting Layer만 변경하고자 하는 경우, <br>
+    &nbsp;&nbsp;&nbsp;apOptTransform 객체를 직접 지정하거나 이름을 인자로 입력하면 됩니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> sortingLayerName : 설정하고자 하는 Sorting Layer의 이름<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 부분적으로 Sorting Layer를 변경하고자 하는 대상<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 부분적으로 Sorting Layer를 변경하고자 하는 optTransform의 이름<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">​int</span> rootUnitIndex : 부분적으로 Sorting Layer를 변경하고자 하는 optTransform이 속한 Root Unit의 인덱스<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingOrder</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">sortingOrder )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingOrder</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">int</span> <span class="text-muted">sortingOrder )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingOrder</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">int</span> <span class="text-muted">sortingOrder )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingOrder</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">int</span> <span class="text-muted">sortingOrder )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.6</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;GameObject들을 렌더링하는 순서를 계산할 때 사용되는 Sorting Order를 설정합니다.<br>
+    &nbsp;&nbsp;&nbsp;동일한 Sorting Layer에서 큰 값을 가진 GameObject가 앞에서 렌더링됩니다.<br>
+    &nbsp;&nbsp;&nbsp;<br>
+    &nbsp;&nbsp;&nbsp;만약, 특정 apOptTransform의 Sorting Order만 변경하고자 하는 경우, <br>
+    &nbsp;&nbsp;&nbsp;apOptTransform 객체를 직접 지정하거나 이름을 인자로 입력하면 됩니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> sortingOrder : 렌더링 순서. 큰 값일 수록 앞에서 렌더링됩니다.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 부분적으로 Sorting Order를 변경하고자 하는 대상<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 부분적으로 Sorting Order를 변경하고자 하는 optTransform의 이름<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">​int</span> rootUnitIndex : 부분적으로 Sorting Order를 변경하고자 하는 optTransform이 속한 Root Unit의 인덱스<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">string</span> <strong>GetSortingLayerName</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.0.2</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;현재 적용된 Sorting Layer의 이름을 리턴합니다.<br>
+    &nbsp;&nbsp;&nbsp;Sorting Layer의 이름은 Project Settings > Tags and Layers에 등록된 상태여야 합니다.<br>
+    &nbsp;&nbsp;&nbsp;이 함수를 호출할 때마다 프로젝트의 설정을 조회하므로, 자주 호출하는 것을 권장하지 않습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> : 적용된 Sorting Layer의 이름입니다. 프로젝트 설정과 맞지 않은 Sorting Layer 값을 가진다면 "Unknown Layer"를 리턴합니다.
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">int</span> <strong>GetSortingOrder</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.0.2</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;현재 적용된 Sorting Order 값을 리턴합니다.<br>
+    &nbsp;&nbsp;&nbsp;​이 값이 클 수록 앞에서 렌더링됩니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> : 현재의 렌더링 정렬 순서입니다.
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingOrderChangedAutomatically</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">isEnabled )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.8</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apPortrait의 Sorting Order Option이 "Depth To Order" 또는 "Reverse Depth To Order"인 경우에 사용되는 함수입니다.<br>
+    &nbsp;&nbsp;&nbsp;Depth에 의해서 메시들의 Sorting Order 값이 자동으로 변경될지 여부를 결정합니다.<br>
+    &nbsp;&nbsp;&nbsp;스크립트로 Sorting Order를 제어하고자 하는 경우 False를 입력해야 자동으로 Sorting Order가 변경되는 것을 막을 수 있습니다.<br>
+    &nbsp;&nbsp;&nbsp;기본적으로 True입니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isEnabled : true인 경우 Sorting Order가 자동으로 변경됩니다.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>FindRenderingCamerasAutomatically</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.2.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;씬에 존재하는 카메라들을 자동으로 인식하도록 설정하면서, 동시에 현재 카메라들을 확인하여 렌더링 방식을 다시 결정합니다.<br>
+    &nbsp;&nbsp;&nbsp;이 함수가 호출되지 않아도 기본적으로 씬의 카메라들을 실시간으로 인식하도록 설정되어 있습니다.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">int</span> <strong>SetRenderingCameras</strong> <span class="text-muted">( </span><span class="text-primary">params</span> <span class="text-success">Camera</span><span class="text-muted">[]</span><span class="text-success"></span> <span class="text-muted">cameras )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.2.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;캐릭터를 렌더링하는 직접 카메라들을 지정할 수 있습니다.<br>
+    &nbsp;&nbsp;&nbsp;이 함수가 호출된 이후부터는 FindRenderingCamerasAutomatically<strong>()</strong> 함수가 호출되기 전까지 자동으로 씬에 존재하는 카메라를 확인하지 않습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">params</span> <span class="text-success">Camera</span><span class="text-muted">[]</span><span class="text-success"></span> cameras : 1개 혹은 여러개의 카메라들을 지정합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> : 실제로 캐릭터를 렌더링할 수 있는 카메라의 개수입니다.
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">PrefabTest</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    &emsp;&emsp;<span class="text-primary">void</span> Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyUp(<span class="text-success">KeyCode</span>.P))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject </span>swordGirl = <span class="text-success">Resources</span>.Load&lt;<span class="text-success">GameObject</span>&gt;(<span class="text-danger">"TestPrefab/SwordGirl"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;swordGirl = Instantiate&lt;<span class="text-success">GameObject</span>&gt;(swordGirl);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apPortrait</span> swordGirlPortrait = swordGirl.GetComponent&lt;<span class="text-success">apPortrait</span>&gt;();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;swordGirlPortrait.transform.parent = <span class="text-primary">this</span>.transform;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;swordGirlPortrait.transform.localPosition = <span class="text-success">Vector3</span>.zero;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;swordGirlPortrait.<strong>AsyncInitialize</strong>(OnPortraitLoadAsync);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>OnPortraitLoadAsync(<span class="text-success">apPortrait </span>portrait)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;portrait.Play(<span class="text-danger">"Idle"</span>);<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
     <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
-        <a class="btn btn-light" role="button" href="../../kr/Script.html">< Script</a>
+        <a class="btn btn-light" role="button" href="../../kr/Script.html">< 스크립트</a>
         <a class="btn btn-light" role="button" href="../../kr/Script/SC_ControlParameter.html">컨트롤 파라미터 ></a>
     </nav>
     

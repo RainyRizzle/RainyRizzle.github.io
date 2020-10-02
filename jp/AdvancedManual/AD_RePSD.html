@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_RePSD.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_RePSD.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_RePSD.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,857 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.6</span></h4>
+    
+    <p>
+    時にはPSDファイルでキャラクターを作成し、後で元の画像を修正しようとします。<br>
+    以前は、PSDファイルの画像を修正して、変更された画像を、既に作成されたキャラクターに適用することができる方法がありませんでした。<br>
+    (作成した Atlasを編集するソリューションのみです。)<br>
+    バージョン1.0.6で追加された機能を使用すると、オリジナルを変更してAnyPortraitにインポートすることができます。<br>
+    ただし、プロセスは非常に複雑なので、次のガイドを必ずお読みください。<br>
+    必要に応じて、事前に「<strong>バックアップ</strong>」または「<strong>コピー</strong>」を作成することをお勧めします。<br>
+    このページでは、PSDファイルを再度インポートする方法について説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_284.jpg"/>
+    <br>
+    
+    <p>
+    このページで紹介されている可愛いキャラクターのイラストです。<br>
+    </p>
+    <br>
+    
+    <p>
+    画像の最初のバージョンの少女を見ると、頭に角がなく、少女は紫のキューブを持っています。<br>
+    画像の修正版には、少女の頭に角があり、紫の立方体の代わりにロボットの人形がつけられ、感情的な効果が加えられています。<br>
+    PSDファイルが変更された場合は、次の場合には別の方法で処理する必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. レイヤーを変更した場合</strong> : レイヤーの画像サイズと位置が変更されているため、位置を修正する必要があります。<br>
+    <strong>2. レイヤーが削除された場合</strong> : 再オープンするPSDからレイヤーが削除されます。 新しい 「Atlas」を作成するときには含まれていません。メッシュグループとメッシュグループは、以前の 「Atlas」を参照して維持されます。 自動的に削除されたり、このレイヤーで参照される 「Atlas「」も削除されません。<br>
+    <strong>3. レイヤーが追加されたとき</strong> : 新しいメッシュが作成されます。 ただし、新たに追加されたメッシュがメッシュグループの最上部に追加されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_282.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「Import PSD File」ボタンをクリックします。<br>
+    <strong>(2)</strong> 最初のページの「<strong>Reload PSD File</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_283.jpg"/>
+    <br>
+    
+    <p>
+    PSDファイルを再インポートするための画面のデフォルト設定。<br>
+    <strong>1. 手順5のインポートプロセス</strong> : 現在の手順が画面の上部に表示されます。 各ステップで実行するタスクがあります。<br>
+    <strong>2. Background Color, Outline Color of PSD and Mesh </strong>: プレビュー画面で、背景色、PSDの画像輪郭色、メッシュの輪郭色を設定することができます。<br>
+    <strong>3. Next, Prev, Close, Completeボタン </strong>: 各ステップを移動または終了します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_285.jpg"/>
+    <br>
+    
+    <p>
+    PSDファイルで作成されたキャラクターがいる場合、「PSDセット(PSD Set)」が追加されます。<br>
+    （そうでない場合は、このページの次の項目を参照してください。）<br>
+    <strong>(1)</strong> <strong>「PSDセット」</strong>を選択します。<br>
+    <strong>(2)</strong> のPSDファイルを変更するには、<strong>「Change」ボタン</strong>を押して、インポートPSDファイルを選択します。<br>
+    <strong>(3)</strong> 「<strong>前回のBake設定</strong>」と「<strong>インポートするPSDファイルの属性</strong>」の概要を示します。<br>
+    <strong>(4)</strong> <strong>「Next」ボタン</strong>を押して次のステップに進みます。<br>
+    上記の処理が成功しなかった場合、「Next」ボタンは無効になります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_286.jpg"/>
+    <br>
+    
+    <p>
+    2番目のページで、「<strong>PSDを適用するメッシュグループとイメージ</strong>」、「<strong>PSDファイルとメッシュグループのサイズと位置</strong>」を選択して調整する必要があります。<br>
+    それらのほとんどはデフォルトで自動的に設定されますが、プレビュー画面で手動で修正する必要があります。<br>
+    この画面は次のように構成されています。<br>
+    <strong>1. Target Mesh Group </strong>: 適用するメッシュグループ。<br>
+    <strong>2. Baked Images</strong> : 「Atlas」が上書きまたは参照する画像。 ターゲットメッシュグループによって参照されるイメージを追加できます。<br>
+    <strong>3. Bake Scale</strong> : PSDがメッシュグループに適用するサイズのパーセンテージ。<br>
+    <strong>4. Rendering Type</strong> : プレビュー画面に表示するオブジェクトを設定することができます。<br>
+    <strong>5. Offset</strong> : PSDとメッシュグループの位置の差を修正することができます。<br>
+    <strong>6. プレビュー画面 </strong>: 選択したオブジェクトを出力します。 この画面を見ながらサイズと位置を修正してください。 AnyPortraitのメインエディタと同じ方法で、マウスとキーボードを使用して画面を移動またはズームすることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_287.jpg"/>
+    <br>
+    
+    <p>
+    レンダリングタイプ（Rendering Type）は、それぞれの次のレンダリングとレンダリング方法を決定します。<br>
+    <strong>1. 画像</strong> : 左のBaked Imageリストから選択した画像をプレビューすることができます。<br>
+    <strong>2. メッシュグループ</strong> : メッシュグループ出力するかどうかを決定します。<br>
+    <strong>3. PSD画像</strong> : PSD画像出力方法を決定します。「目に見えない」、「アウトラインのみ」と「表示」の3つのモードを切り替えます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_288.jpg"/>
+    <br>
+    
+    <p>
+    画像を表示するには、<strong>(1)</strong> 画像を選択し、<strong>(2)</strong> 画像ボタンのみをオンにし、残りの画像をオフにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_289.jpg"/>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>これは最も重要なステップの1つです。</strong></span><br>
+    プレビュー画面では、<strong>(1)</strong> メッシュグループとPSDの画像が正確に重なるように、「<strong>オフセット(Offset)</strong>」の値を変更します。<br>
+    位置の値を直接入力することができます。 右のボタンを使用して、XとYの値を増減できます。<br>
+    PSDファイルのキャンバスサイズが変更された場合、定数の位置補正値と正確に重複しないことがあります。<br>
+    オフセット値には、整数でない実数を含めることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_290.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_291.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_292.jpg"/>
+    <br>
+    
+    <p>
+    「レンダリングタイプ(Rendering Type)」を変更することで、画像が正確に重なるかどうかを確認できます。<br>
+    慎重に確認したら、「Next」ボタンを押して次のステップに進みます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_293.jpg"/>
+    <br>
+    
+    <p>
+    3番目のステップでは、「どのメッシュとメッシュグループにPSDファイルのレイヤーを適用するか」を設定する必要があります。<br>
+    PSDファイルのすべてのレイヤーが表示され、右側には選択したメッシュグループのサブメッシュとサブメッシュグループが表示されます。<br>
+    この画面は次のように構成されています。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. PSD Layers</strong> : PSDファイルのレイヤー。 サムネイルが表示されるので、簡単に確認できます。 Bakeするか、どのオブジェクトを上書きするかを設定できます。<br>
+    <strong>2. 適用されるオブジェクト</strong> : ターゲットメッシュグループの子メッシュおよびメッシュグループ。 上書きするように設定されている場合、関連するPSDレイヤー名が一緒に表示されます。<br>
+    <strong>3. Auto Mapping</strong> : 名前とレイヤの順序に基づいて自動的に接続します。 あなたは使用後に確認する必要があります。<br>
+    <strong>4. Enable All / Disable All</strong> : すべてのレイヤーでBakeをオンまたはオフにします。 非アクティブなレイヤーも接続情報を失います。<br>
+    <strong>5. Reset</strong> : Bakeかどうかをそのまま置いたままの接続情報をすべて初期化します。<br>
+    <strong>6. 接続状態を色で表示</strong> : 両面の接続状況を色で簡単に表示します。<br>
+    <strong>7. アウトラインプレビュー</strong> : この機能をオンにするプレビュー画面でアウトラインが表示されます。<br>
+    <strong>8. プレビュー画面</strong> : 選択したPSD層の画像に関連付けられたメッシュを出力します。 グループタイプのPSDレイヤーが選択されている場合、何も出力されません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_294.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>接続状態を色で表示</strong>」ボタンをクリックすると、リストの背景色が異なります。<br>
+    リンクされたPSDレイヤーとオブジェクトは、同じ背景色で表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_295.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>アウトラインプレビュー</strong>」ボタンがオンの状態では、プレビュー画面でPSDレイヤーとメッシュが半透明色の輪郭で表示されます。<br>
+    色は画面の左下に変更することができます。<br>
+    (この段階では、位置とサイズが一致しないことがあります。)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_296.jpg"/>
+    <br>
+    
+    <p>
+    これは、PSDレイヤをターゲットオブジェクトに関連付ける方法です。<br>
+    <strong>(1)</strong> PSDレイヤーの 「接続」ボタンを押します。<br>
+    <strong>(2)</strong> 接続するオブジェクトの「選択」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_297.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Enable / Disableボタン</strong>を押して、PSDレイヤーが「Bake」されないようにすることができます。<br>
+    このボタンをもう一度押すと、「Bake」が有効になります。<br>
+    このボタンを押すと、接続が初期化されるので、接続情報を初期化するのに便利です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_298.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>「Auto Mapping」ボタン</strong>を押すと、オブジェクトが「<strong>有効になっており、接続されていないすべてのPSDのレイヤー</strong>」に自動的に接続されます。<br>
+    この関数は、オブジェクトの名前をレイヤー名と比較して、二つ両方を接続するため間違っ接続することができます。<br>
+    接続を確認してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_299.jpg"/>
+    <br>
+    
+    <p>
+    4番目のステップでは、すべてのPSDレイヤーとメッシュの「<strong>位置とサイズ</strong>」を修正する必要があります。<br>
+    この画面は次のように構成されています。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. PSD Layers</strong> : これらは、 BakeになるPSDレイヤーです。<br>
+    <strong>2. Rendering / Order</strong> : プレビュー画面でレンダリング方法と出力順序を変更できます。<br>
+    <strong>3. Position Offset</strong> : これらは、適用されるメッシュのPSDレイヤーの位置を修正するツールです。<br>
+    <strong>4. Prev. Atlas Scale </strong>: 以前に作成した「Atlas」のサイズを入力するためのツール。 この値はすべてのレイヤーで同じです。<br>
+    <strong>5. 前/次のレイヤーを選択ボタン</strong> : 前の次のレイヤーを選択します。<br>
+    <strong>6. プレビュー画面</strong> : 選択したメッシュとPSDレイヤーを出力します。 出力方法に関係なく、メッシュの形状を出力します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_300.jpg"/>
+    <br>
+    
+    <p>
+    プレビュー画面からの出力方法は次のとおりです。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. メッシュのレンダリング方法</strong> : メッシュのレンダリング方法として「見えない」や「アウトラインのみを表示する」または「すべてを表示する」のいずれかを選択します。<br>
+    <strong>2. レンダリングの順序の切り替え</strong> : メッシュを先に表示するか、またはPSDレイヤー画像を先に表示するかを決定します。<br>
+    <strong>3. PSD画像のレンダリング方法</strong> : PSDレイヤー画像のレンダリング方法として「見えない」や「アウトラインのみを表示する」または「すべてを表示する」のいずれかを選択します。<br>
+    </p>
+    <br>
+    
+    <p>
+    位置とサイズを調整しながら簡単に確認することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_301.jpg"/>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>これが最も重要なステップです。</strong></span><br>
+    PSDレイヤーを選択し、その位置を修正します。<br>
+    (サイズはデフォルトでは適切に設定されていますが、修正が必要な場合はこのページの下部にある情報を参照してください。)<br>
+    <strong>(1)</strong> <strong>「Position Offset」</strong>のツールを使用して変更します。 実数値を入力することができます。<br>
+    場所がプレビュー画面と正確に重なっていることを確認してください。<br>
+    終了したら、次のレイヤーを選択します。 <strong>(2)</strong> <strong>「Next」ボタン</strong>を選択すると作業効率が向上します。<br>
+    すべてのレイヤーの位置を確認し、修正します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_302.jpg"/>
+    <br>
+    
+    <p>
+    新たに追加された画像のレイヤーは、位置補正やサイズ補正は必要ありません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_303.jpg"/>
+    <br>
+    
+    <p>
+    最後のステップは Atlasを作成して適用することです。<br>
+    この機能は、PSDファイルを読み込む基本機能と同じです。<br>
+    (メッシュグループのサイズを設定する機能は除きます。)<br>
+    すでに「Bake」された状態であるため、基本的に設定が以前の「Atlas Bake」の設定値と同じです。<br>
+    <strong>(1)</strong> <strong>「Atlas」</strong>テクスチャアセットの保存する名前とパスを設定します。<br>
+    <strong>(2)</strong> <strong>「Atlas」</strong>のサイズ、数、マージン、ボーダー補正の設定を確認し、必要に応じて変更してください。<br>
+    <strong>(3)</strong> <strong>「Bake」ボタン</strong>を押して「Atlas」を作成します。<br>
+    <strong>(4)</strong> AnyPortraitエディタに適用するには、 <strong>「Complete」ボタン</strong>を押します<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_304.jpg"/>
+    <br>
+    
+    <p>
+    メインエディタに戻ると、更新されたPSDイメージが適用されていることがわかります。<br>
+    既存のオブジェクトが残っていたり、新しいオブジェクトが追加されたことを見ることができ、頂点を修正する必要があるメッシュを確認することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>レイヤーイメージが変更されたメッシュ</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_305.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_306.jpg"/>
+    <br>
+    
+    <p>
+    イメージが変わると、メッシュを変更する必要があります。<br>
+    メッシュを選択し、頂点を追加または削除して新しいイメージを修正します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意。</strong></span><br>
+    モディファイアまたはアニメーションがメッシュに適用されている場合は、既存の頂点を削除しないことをお勧めします。<br>
+    新しい頂点を追加したり、いくつかの頂点だけを削除したりすると、残りの頂点のモディファイア情報が保持されます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>レイヤーを削除したメッシュ</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_307.jpg"/>
+    <br>
+    
+    <p>
+    新しくインポートされたPSDファイルにレイヤーが存在しなくても、既存のメッシュは削除されません。<br>
+    ただし、このメッシュは新しいAtlasを共有しないため、「古いAtlas」を引き続き使用します。<br>
+    この場合、「古いAtlas」は削除されずにそのまま使用されるため、最適化の問題が発生する可能性があります。<br>
+    詳細は以下を参照してください。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>レイヤーが追加されたメッシュ</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_308.jpg"/>
+    <br>
+    
+    <p>
+    新しく追加されたメッシュはデフォルトで正方形のメッシュとして作成されます。<br>
+    PSDファイルを最初に読み込んだときのように、頂点を追加してメッシュを修正します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_309.jpg"/>
+    <br>
+    
+    <p>
+    上記の操作を完了すると、変更されたPSDイラストのキャラクターを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>「Atlas」テクスチャアセットの保存方法</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_310.jpg"/>
+    <br>
+    
+    <p>
+    「Atlas」画像が「テクスチャアセット(Texture Asset)」として保存されているフォルダを見ると、上記のように保存されていることがわかります。<br>
+    <strong>1. 「Preserved」フォルダ</strong> : 既存のAtlas画像からまだ使用されている画像が保存されます。<br>
+    <strong>2. 「Unused」フォルダ</strong> : 既存の Atlasイメージから上書きされた削除済みイメージを保存します。<br>
+    <strong>3. 新しく作成された「Atlas」テクスチャアセット</strong> : PSDの再インポートによって新たに作成されたAtlasテクスチャアセットが保存されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_311.jpg"/>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>「Preserved」</strong></span>フォルダは、既存のAtlasイメージの中でまだ使用されているテクスチャ資産が格納されているフォルダです。<br>
+    Bake処理の後、テクスチャアセット名が若干変更されることがあります。<br>
+    PSDファイルはすでに存在しますが、新しいPSDファイルに削除されたイメージレイヤのメッシュが含まれている場合、メッシュは引き続き既存の Atlasを使用する必要があります。<br>
+    この場合、Atlasイメージは「Preserved」フォルダに移動され、保存されます。<br>
+    このフォルダはデフォルトでは削除しないでくださいが、このフォルダ内のテクスチャアセットは最適化には役立ちません。<br>
+    メッシュとテクスチャが使用されなくなった場合、AnyPortraitエディタからメッシュとイメージを削除し、このフォルダのテクスチャを削除します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_312.jpg"/>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>「Unused」</strong></span>フォルダは、古いAtlasイメージがAnyPortraitから上書きされ、その資産が保存されるフォルダです。<br>
+    Bakeの処理後、各テクスチャアセットの名前にテキスト「<strong>(Unused)</strong>」が追加されます。<br>
+    Atlasのすべてのメッシュが新しいPSDファイルのレイヤーで更新されると、既存のAtlasは使用されなくなり、削除する必要があります。<br>
+    AnyPortraitエディタでは、既存の Atlas情報は削除されますが、テクスチャアセットは削除されずに 「Unused」フォルダに移動されます。<br>
+    これは、必要に応じて修復して再利用できるためです。<br>
+    ただし、デフォルトでは、このフォルダ内のアセットは使用されないため、ユーザーが手動で確認および削除することをお勧めします。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>手動でPSDセット情報を作成してインポートする</h3>
+    <br>
+    
+    <p>
+    PSDファイルの再インポートは、AnyPortrait v1.0.6以降でサポートされている機能です。<br>
+    悲しいことに、この機能で使用されているデータは、 「<span class="text-danger"><strong>以前のバージョン</strong></span>」で作成されたキャラクターに保存されていないため、 「PSDセット」情報は生成されません。<br>
+    ただし、独自の「PSDセット」情報を作成して、PSDファイルを再インポートすることができます。<br>
+    やるべきことはたくさんありますが、あなたは下の順番でそれを行うことができます。<br>
+    (これには、他の問題のためにすべての手動設定が含まれます。)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_313.jpg"/>
+    <br>
+    
+    <p>
+    PSDの再インポートダイアログを開きます。<br>
+    「PSDセット」の情報が保存されていない場合は、上記の画面のように情報が表示されません。<br>
+    <strong>(1)</strong> <strong>「Add New PSD Set」ボタン</strong>を押して、1つのPSDセットを作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_314.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> 新しく作成した<strong>PSDセット</strong>を選択します。<br>
+    （削除したい場合は、「Remove PSD Set」ボタンを押してください）。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_315.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> <strong>「Change」ボタン</strong>を押してPSDファイルを選択します。<br>
+    <strong>(4)</strong> <strong>「Next」ボタン</strong>を押して次のステップに進みます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_316.jpg"/>
+    <br>
+    
+    <p>
+    ターゲットメッシュグループと画像が設定されていません。<br>
+    メッシュグループがプレビュー画面に表示されず、「Next」ボタンが無効になっていることに注意してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_317.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>「Change」ボタン</strong>を押します。<br>
+    <strong>(2)</strong> PSD画像が適用される<strong>メッシュグループ</strong>を選択します。<br>
+    <strong>(3)</strong> <strong>「Select」ボタン</strong>を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_318.jpg"/>
+    <br>
+    
+    <p>
+    Atlas画像を登録してください。<br>
+    <strong>(1)</strong> <strong>「Add Image」ボタン</strong>を押し、<strong>(2)</strong> 画像を選択して追加します。<br>
+    <strong>「Add Images Automatically」ボタン</strong>をクリックすると、メッシュグループで使用されるすべての画像が自動的に登録されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_319.jpg"/>
+    <br>
+    
+    <p>
+    これは、メッシュグループと画像の両方が登録されている画面です。<br>
+    今、位置だけでなく、サイズは適合しません。<br>
+    上記の画面は、PSD画像よりもメッシュグループが小さくなっています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_320.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> メッシュグループとPSD画像が同じサイズになるように「<strong>Bake Scale</strong>」の値を修正します。<br>
+    サイズインクリメントツールを使用してすばやく変更できます。<br>
+    プレビュー画面で正しいサイズ値を見つけて設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_321.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> メッシュグループがPSD画像と重なるように、「<strong>Offset</strong>」の値を変更します。<br>
+    (実数を入力できます。)<br>
+    メッシュグループとPSDファイルの位置とサイズを較正したら、「Next」ボタンをクリックして次のステップに進みます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_322.jpg"/>
+    <br>
+    
+    <p>
+    第3のステップは、PSD層をメッシュグループ内のオブジェクトにマッピングすることである。<br>
+    新しいPSDセットを作成したので、何も接続されていません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_323.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> PSDレイヤーの<strong>「Not Selected」ボタン</strong>を押し、<br>
+    <strong>(2)</strong> 対象オブジェクトの<strong>「Select」ボタン</strong>をクリックして接続します。<br>
+    既に接続されている場合は、同じ方法で再接続できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_324.jpg"/>
+    <br>
+    
+    <p>
+    レイヤーとターゲットが接続されると、上記の画面が表示されます。<br>
+    また、プレビュー画面は、PSD画像レイヤーに関連付けられたメッシュをレンダリングします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_325.jpg"/>
+    <br>
+    
+    <p>
+    新しく追加されたレイヤーについては、未接続のままにしておきます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_326.jpg"/>
+    <br>
+    
+    <p>
+    インポートしたくないレイヤーがある場合は、「<strong>Enable/Disable</strong>」ボタンをクリックしてレイヤーを無効にします。<br>
+    この機能には接続をクリアする機能がありますので、接続を切断したい場合は無効にしてから再度有効にしてください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_327.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Auto Mapping</strong>」機能は、有効になっているPSDレイヤーと接続されていないPSDレイヤーを自動的にオブジェクトに接続します。<br>
+    名前とレイヤー順に接続して比較する機能であるため、正しく接続されていないことがあります。<br>
+    この機能を使用した後は、すべて確認してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_328.jpg"/>
+    <br>
+    
+    <p>
+    「接続状態を色で表示」ボタンをクリックすると、色がどのように接続されているかを簡単に確認できます。<br>
+    接続が終了したら、「Next」ボタンを押して次のステップに進みます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_329.jpg"/>
+    <br>
+    
+    <p>
+    すべてのメッシュとPSDレイヤの位置とサイズを較正する必要があります。<br>
+    新しいPSDセットを作成すると、位置とサイズに収まらないことになります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_330.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>「Prev。Atlas Scale」</strong>の値を変更してサイズを修正します。<br>
+    プレビュー画面ではPSDレイヤーの相対サイズが変更されるため、メッシュのサイズが変更されたかのように表示されます。<br>
+    この値はすべてのレイヤーで同じですので、一度だけ設定する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_331.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> メッシュとPSD画像が正確に重なるように、「<strong>Position Offset</strong>」を変更します。<br>
+    それらが正確に重なることが確認されたら、同じことをするために次のレイヤーを選択します。<br>
+    <strong>(3)</strong> <strong>「前/次レイヤの選択」ボタン</strong>を使用すると便利です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_332.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_333.jpg"/>
+    <br>
+    
+    <p>
+    すべてのレイヤーのメッシュと重なる位置を修正します。<br>
+    新しく追加されたPSDレイヤーについて何もする必要はありません。<br>
+    「Next」ボタンを押して次のステップに進みます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_334.jpg"/>
+    <br>
+    
+    <p>
+    最後のステップは AtlasとBakeを作成し、それをAnyPortraitに適用することです。<br>
+    <strong>(1)</strong> <strong>テクスチャアセット(Texture Asset)</strong>の名前を設定し、保存パスを設定します。<br>
+    既存のテクスチャアセットの名前と同じに設定することができます。(名前は自動的に変更されます。)<br>
+    <strong>(2)</strong> <strong>「Atlasのサイズ、数、マージン、ボーダー補正」</strong>を設定します。<br>
+    <strong>(3)</strong> <strong>「Bake」ボタン</strong>を押してAtlasを作成します。<br>
+    <strong>(4)</strong> <strong>「Complete」ボタン</strong>を押し、更新した情報をAnyPortraitに適用します。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>PSDファイルの再インポート機能のトラブルシューティング方法</h3>
+    <br>
+    
+    <p>
+    PSDファイルを再インポートするプロセスは非常に複雑で、各ステップは正確でなければなりません。<br>
+    いくつかの操作が不正確な場合、出力が奇妙になることがあります。<br>
+    発生する可能性のある問題とその解決方法を次に示します。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>問題1 : メッシュグループの不正確な配置</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_335.jpg"/>
+    <br>
+    
+    <p>
+    これは、メッシュグループのデフォルト位置とPSDファイルが正確に重ならない場合に発生する問題です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_336.jpg"/>
+    <br>
+    
+    <p>
+    生成されたメッシュグループが間違った補正値によって移動したことがわかります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>解決方法</strong></span><br>
+    - 設定された位置補正値を覚えておき、補正値と同じサイズと反対の符号を使用してPSDファイルを再インポートします。<br>
+    位置補正値がわからない場合は、補正値を変更してPSDファイルを再度インポートすることができます。<br>
+    - これを修正するには、メッシュグループのデフォルトの場所を変更しますが、この場合は骨やモディファイアなどの情報が誤って解釈される可能性があります。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>問題2 : メッシュおよびPSD画像レイヤーの位置補正が正しくない</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_337.jpg"/>
+    <br>
+    
+    <p>
+    メッシュおよびPSDの画像レイヤの位置補正は正しく処理されないことがあります。<br>
+    特に、PSDファイルにレイヤーが多い場合、誤ってジョブが欠落する可能性があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_338.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_339.jpg"/>
+    <br>
+    
+    <p>
+    メッシュの頂点が距離によって誤って移動し、それらが正しく配置されていないことがわかります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>解決方法</strong></span><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_340.jpg"/>
+    <br>
+    
+    <p>
+    PSDファイルを再度インポートし直してください。<br>
+    レイヤーの位置を修正するステップでは、プレビュー画面を見て、PSDイメージを移動してメッシュにオーバーラップさせます。<br>
+    メッシュのテクスチャはすでに正しく出力されていないので、<span class="text-danger">メッシュイメージに基づいて位置を修正しないでください</span>。<br>
+    この場合、位置は<span class="text-danger"><strong>メッシュのワイヤフレーム</strong></span>に対して変更する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>問題3 : Atlasの設定を変更する</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_342.jpg"/>
+    <br>
+    
+    <p>
+    サイズや余白を変更してAtlasを再作成する場合は、以前のAtlas設定と同じである必要はありません。<br>
+    PSDファイルの再インポートダイアログで必要なAtlas設定に変更した後、Bakeすることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_343.jpg"/>
+    <br>
+    
+    <p>
+    解像度を大幅に変更しても問題なく適用できます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>問題4 : 新しいレイヤーを追加する</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_344.jpg"/>
+    <br>
+    
+    <p>
+    新しいレイヤーを追加してPSDファイルを再インポートすると、メッシュが一番上に表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_345.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> レイヤー並べ替え機能を使用して、オブジェクトのレンダリング順序を適切に変更します。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

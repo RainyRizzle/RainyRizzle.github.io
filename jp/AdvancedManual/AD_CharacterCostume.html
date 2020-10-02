@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_CharacterCostume.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_CharacterCostume.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_CharacterCostume.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,12 +69,686 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.0</span></h4>
+    
+    <p>
+    ゲームで「アイテムを獲得して、キャラクターの服や装備を変えること」は、おそらく基本的な機能である。<br>
+    キャラクターの衣装を交換する機能を実装することは、様々な方法があります。<br>
+    すべての服や装備のアニメーションをいちいち作成交換する方法もあり、簡単に色やテクスチャだけ変える方法もあります。<br>
+    このページでは、AnyPortraitを利用して、キャラクターの衣装を「テクスチャの交換」を利用して交換する方法を説明します。<br>
+    また、「<strong>ソケット（Socket）</strong>」を利用して、武器と盾を付着する機能をスクリプトに実装する内容も説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>一貫性のある構成の方法で作られたAtlas準備</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_533.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターの衣装を交換する例のために上記のような画像を用意しました。<br>
+    最初の図は、キャラクターがどのような服も着ない最も基本的な状態です。<br>
+    第二映像のキャラクターは、カジュアルな服装をしており、オレンジ色のの短い髪を持っています。<br>
+    第三図のキャラクターは、鋼された装置の記事服装をしており、剣と盾を持っています。<br>
+    </p>
+    <br>
+    
+    <p>
+    上記のようにキャラクターが衣装を交換して、様々な外形を持つように作られてみましょう。<br>
+    このページでは、それぞれのメッシュのテクスチャをリアルタイムに変更する機能を実装する方法を説明します。<br>
+    この方法は簡単ですが、次の注意事項があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    - すべてのテクスチャのAtlasは同じように構成する必要があります。<br>
+    - 「PSDファイルの読み込み」機能は、Atlasを自動的に生成するので、ここでは利用できません。<br>
+    - 変更される画像の大きさと形状が異なるため、メッシュを作成するときにはかなり大きくする必要があります。<br>
+    - 同じ骨と物理材質を共有していない衣装がある場合は事前にそれに合う他のメッシュを作成します。<br>
+    - 後に追加される様々な衣装たちのために骨を事前に追加する必要があります。<br>
+    - テクスチャを交換すると、「Drawcall」が増加することができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    上記のような注意事項に沿って第四図のように「<span class="text-danger">基本のキャラクター</span>」を作成しました。<br>
+    「基本のキャラクター」は「基本的な見た目」と「後に交換することができる衣装のイメージのサイズ」を一緒に表示たのが特徴です。<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_534.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_535.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_536.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_537.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <p>
+    上記の注意事項に基づいて完成された4つのキャラクターのテクスチャAtlasです。<br>
+    頭（Head）と髪（Hair）の領域を分離し、胴体、腕と脚をそれぞれ分離しました。<br>
+    剣と盾はAtlasに含めないんでした。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>「基本のキャラクター」のテクスチャを利用して,メッシュを作成</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_538.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitエディタを開いて、新しいキャラクターを作成します。<br>
+    用意されたテクスチャの中で、「基本のキャラクター」のテクスチャを選択して、画像に追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_539.jpg"/>
+    <br>
+    
+    <p>
+    メッシュを一つずつ作成します。<br>
+    一般的なメッシュ作成のプロセスとは異なり、ここでは、次のようにメッシュを作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_540.jpg"/>
+    <br>
+    
+    <p>
+    一般的には「<span class="text-danger">赤の領域（Basic Area）</span>」のように、画像の形に合わせてメッシュを作成します。<br>
+    ただし、変更される画像がサイズをわからないので、「<span class="text-success">緑の領域（Maximum Area）</span>」のように適当に大きくします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_541.jpg"/>
+    <br>
+    
+    <p>
+    同じように、他のメッシュも作成します。<br>
+    関節のある部位で頂点がたくさん追加されたことを見ることができます。<br>
+    頂点が、多くの場合、画像や動きに応じて、頂点の「Z-Depth」値を変更する必要があります。（<a href="../../jp/AdvancedManual/AD_ZdepthVert.html">関連ページ</a>）<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>「基本のキャラクター」作成</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_542.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> メッシュグループを作成します。<br>
+    <strong>(2)</strong> メッシュグループの名前を決め、ルートユニットに設定します。<br>
+    <strong>(3)</strong> 「+」ボタンをクリックし、<strong>(4)</strong> メッシュを追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_543.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Edit Default Transform</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> それぞれのメッシュの位置を変更します。<br>
+    <strong>(3)</strong> メッシュの順序を適切に変更します。<br>
+    すべての作業が終了したら、再び「<strong>Edit Default Transform</strong>」ボタン（または「<strong>Editing..</strong>」ボタン）を押して編集を終了します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_544.jpg"/>
+    <br>
+    
+    <p>
+    「基本のキャラクター」がよく作られたかテストすることができます。<br>
+    <strong>(1)</strong> 画像を選択します。<br>
+    <strong>(2)</strong> 「<strong>Select Image</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> 「基本のテクスチャ」以外のキャラクターのテクスチャを選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_545.jpg"/>
+    <br>
+    
+    <p>
+    現在の画像が基本のキャラクターではなく、ゲームの開始キャラクターテクスチャに変更されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_546.jpg"/>
+    <br>
+    
+    <p>
+    メッシュグループを再度選択すると、テクスチャを交換する過程でキャラクターの外形を変えることができることがわかります。<br>
+    Atlasは、同じ方法で構成されている場合は、上記のようにテクスチャのみを交換して見た目を変更することができます。<br>
+    このプロセスは、テストのためのものなので、元のテクスチャに変更します。<br>
+    （後に、このゲームの開始のためのキャラクターのテクスチャを使用しますが、現在の段階では、基本のテクスチャを使用することをお勧めします。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_547.jpg"/>
+    <br>
+    
+    <p>
+    骨を追加します。<br>
+    交換される衣装の形を考え、この段階では、あらかじめ骨を追加することをお勧めします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_548.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Modifier</strong>」タブを選択し、「<strong>Add Modifier</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Rigging</strong>」モディファイヤを選択して追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_549.jpg"/>
+    <br>
+    
+    <p>
+    「Rigging」モディファイヤを選択した状態で、すべてのメッシュをそれぞれ選択して骨の重みを設定します。<br>
+    画像に見えるものよりメッシュの大きさがより大きいので、注意して重みを設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_550.jpg"/>
+    <br>
+    
+    <p>
+    「Rigging」モディファイヤの作業がすべて終わったら、次は骨を利用して、アニメーションを作成する番です。<br>
+    <strong>(1)</strong> 「<strong>Add Modifier</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Transform（Animation）</strong>」モディファイヤを選択して追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_551.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 新しい「<strong>アニメーションクリップ</strong>」を作成します。<br>
+    <strong>(2)</strong> アニメの名前と対象となるメッシュグループを設定して、「<strong>Add Timeline</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> 「<strong>Transform（Animation）</strong>」モディファイヤをタイムラインに登録します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_552.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Bones</strong>」タブを選択します。<br>
+    <strong>(2)</strong> 「<strong>All Bones to Layers</strong>」ボタンを押して、すべての骨を「<strong>タイムラインのレイヤー</strong>」に登録します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_553.jpg"/>
+    <br>
+    
+    <p>
+    骨を一つずつ選択して、キャラクターのアニメーションを作成します。<br>
+    （必ず骨のみアニメーションを作成する必要はありません。自由にアニメーションを作成してください。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_554.jpg"/>
+    <br>
+    
+    <p>
+    完成されたキャラクタアニメーションをUnity Sceneに移す番です。<br>
+    <strong>(1)</strong> 「<strong>ルートユニット</strong>」を選択します。<br>
+    <strong>(2)</strong> 基本となる「<strong>アニメクリップ</strong>」を選択します。<br>
+    <strong>(3)</strong> 「<strong>Auto Play</strong>」の設定を「ON」に変更します。<br>
+    <strong>(4)</strong> 「<strong>Bake</strong>」ボタンを押して「Bakeダイアログ」を開きます。<br>
+    <strong>(5)</strong> Bakeダイアログの「<strong>Bake</strong>」ボタンを押してAnyPortraitエディタを終了します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_555.jpg"/>
+    <br>
+    
+    <p>
+    Unityでゲームを実行すると、キャラクターのアニメーションが再生されるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>キャラクターの衣装を変えるスクリプトを作成</h3>
+    <br>
+    
+    <p>
+    次のステップは、スクリプトを作成して、キャラクターの衣装を交換する機能を実装してみることです。<br>
+    キーボード入力を利用して、「服を着ていない状態」、「カジュアルな服を着た状態」、「記事装備を着用した状態」に移行することを実装してみます。<br>
+    特に、頭（Hair）の部分とそれ以外のメッシュを区分して衣装を交換するコードを作成してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_556.jpg"/>
+    <br>
+    
+    <p>
+    これで、画像をゲームから適用されるキャラクターのテクスチャに変更してみましょう。<br>
+    <strong>(1)</strong> 画像を選択し、<strong>(2)</strong> 「<strong>Select Image</strong>」ボタンを押して、「ゲーム開始のキャラクターテクスチャ」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_557.jpg"/>
+    <br>
+    
+    <p>
+    テクスチャが変更されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_558.jpg"/>
+    <br>
+    
+    <p>
+    再びBakeをしてUnity Sceneに適用します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_559.jpg"/>
+    <br>
+    
+    <p>
+    「服を着ていない状態」のキャラクターに変更されました。<br>
+    </p>
+    <br>
+    
+    <p>
+    今、新しいC＃スクリプトを以下のように作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">CustomSample</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// 対象となるapPortrait<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>apPortrait </strong></span><strong>portrait</strong>;<br>
+    &emsp;&emsp;// 3種のキャラクターテクスチャ<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>Texture2D </strong></span><span class="text-primary"><strong>image_Basic</strong></span>;<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>Texture2D </strong></span><span class="text-warning"><strong>image_Casual</strong></span>;<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>Texture2D </strong></span><span class="text-danger"><strong>image_Knight</strong></span>;<br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Q、A、Zキーを押すと、「Hair」メッシュのテクスチャが変更されます。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.Q) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Hair"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.A) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Hair"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.Z) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Hair"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;// W、S、Xキーを押すと、「Hair」、「Head」以外のメッシュのテクスチャが変更されます。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.W) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Body"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftArm"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightArm"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightHand"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftLeg"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightLeg"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.S) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Body"</strong></span>, <span class="text-warning"><strong>image_Casual</strong></span>) ;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftArm"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightArm"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightHand"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftLeg"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightLeg"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.X) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Body"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftArm"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightArm"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightHand"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftLeg"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightLeg"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    
+    <br><br>
+    
+    <p>
+    apPortraitの「SetMeshImage」関数を利用した簡単なコードです。（<a href="../../jp/Script/SC_Mesh.html">関連ページ</a>）<br>
+    テクスチャを変更しようとするメッシュの名前とTexture2Dを入力して、キャラクターの外形を変更することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_560.jpg"/>
+    <br>
+    
+    <p>
+    新しいGameObjectを作成作成したスクリプトをComponentに追加します。<br>
+    Publicメンバ変数（1つのapPortraitと3つのTexture2D）をそれぞれ接続します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_561.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、キー入力に応じてキャラクターの服や髪が変わるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>「ソケット（Socket）」を利用して機器を交換</h3>
+    <br>
+    
+    <p>
+    キャラクターが使用するアイテムの中に形が変わらなくて、骨の動きに影響を受けないものがあります。<br>
+    剣、盾、銃のような武器が、そのような例です。<br>
+    また、頭の上にのせる帽子、小さな装飾、メガネなども大きく形が変わらないアイテムです。<br>
+    これらの種類のアイテムを装着しようとするときは、「<strong>ソケット（Socket）</strong>」を利用することが、より効果的です。<br>
+    ソケットの詳細については、「<a href="../../jp/AdvancedManual/AD_Socket.html">関連ページ</a>」でご覧いただけます。<br>
+    このページは、キャラクターの右手に剣を装備して、左腕に盾を装着する過程を説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_562.jpg"/>
+    <br>
+    
+    <p>
+    剣と盾の「Texture2D」と「Material」を用意して、「Quadメッシュ」を使用して、別の 「GameObject」をそれぞれ作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_563.jpg"/>
+    <br>
+    
+    <p>
+    ところが、ここで一つの問題があります。<br>
+    剣、盾の画像の中心が「キャラクターに装着されている部分」がありません。<br>
+    そのため、「キャラクターに装着がされている基準点」を作成します。<br>
+    <strong>(1)</strong> 新しい「<strong>GameObject</strong>」をそれぞれ作成します。ここで「<strong>Weapon_Shield</strong>」と「<strong>Weapon_Sword</strong>」と名付けました。<br>
+    そして、既存の剣、盾メッシュがあるGameObjectを「新しいGameObjectの子」として指定します。<br>
+    （逆に作らないように注意して下さい。）<br>
+    <strong>(2)</strong> 親GameObjectの位置が「基準点」となるように、それぞれのメッシュの位置を変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_564.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> AnyPortraitエディタを開いて、「<strong>メッシュグループ</strong>」を選択します。<br>
+    <strong>(2)</strong> 剣と盾が装着される位置に骨を追加します。<br>
+    骨を右手と左腕にそれぞれ追加し名前はそれぞれ「Bone Weapon R」と「Bone Weapon L」です。<br>
+    <strong>(3)</strong> 「<strong>Socket Disabled</strong>」ボタンを押して、ソケットを有効にします。<br>
+    そして「<strong>Bake</strong>」を再します。<br>
+    </p>
+    <br>
+    
+    <p>
+    ここで、次のコードを既存のに作成したスクリプトに追加で作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">CustomSample</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// 対象となるapPortrait<br>
+    &emsp;&emsp;<span class="text-primary">public </span><span class="text-success">apPortrait </span>portrait;<br>
+    &emsp;&emsp;// 3種のキャラクターテクスチャ<br>
+    &emsp;&emsp;<span class="text-primary">public </span><span class="text-success">Texture2D </span>image_Basic;<br>
+    &emsp;&emsp;<span class="text-primary">public </span><span class="text-success">Texture2D </span>image_Casual;<br>
+    &emsp;&emsp;<span class="text-primary">public </span><span class="text-success">Texture2D </span>image_Knight;<br>
+    &emsp;&emsp;// &lt;追加&gt;剣と盾の親Transformをメンバーとして追加します。<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>Transform </strong></span><span class="text-danger"><strong>sword;</strong></span><br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>Transform </strong></span><span class="text-danger"><strong>shield;</strong></span><br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;（省略...）<br>
+    &emsp;&emsp;&emsp;&emsp;// &lt;追加&gt; Eキーを押すと、剣と盾を装備します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.E) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 二つの骨のソケットを取得します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform </span><strong>socketR </strong>= portrait.<strong>GetBoneSocket</strong>( <span class="text-danger"><strong>"Bone Weapon R"</strong></span> );<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform </span><strong>socketL</strong> = portrait.<strong>GetBoneSocket</strong>( <span class="text-danger"><strong>"Bone Weapon L"</strong></span> );<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 「剣（Weapon_Sword）」を右手の骨のソケットの子として登録します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sword</strong>.<strong>parent </strong>= <strong>socketR</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sword.localPosition = <span class="text-success">Vector3</span>.zero;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sword.localRotation = <span class="text-success">Quaternion</span>.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 「盾（Weapon_Shield）」を左腕の骨のソケットの子として登録します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>shield</strong>.<strong>parent </strong>= <strong>socketL</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;shield.localPosition = <span class="text-success">Vector3</span>.zero;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;shield.localRotation = <span class="text-success">Quaternion</span>.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;// &lt;追加&gt; Rキーを押すと、剣と盾の装備を解除します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.R) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sword</strong>.<strong>parent </strong>= <span class="text-primary"><strong>null</strong></span>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sword.localPosition = <span class="text-primary">new </span><span class="text-success">Vector3</span>(5, 0, 0);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sword.localRotation = <span class="text-success">Quaternion</span>.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>shield</strong>.<strong>parent </strong>= <span class="text-primary"><strong>null</strong></span>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;shield.localPosition = <span class="text-primary">new </span><span class="text-success">Vector3</span>(3, 0, 0);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;shield.localRotation = <span class="text-success">Quaternion</span>.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    
+    <br><br>
+    
+    <p>
+    スクリプトを作成した後、「<strong>sword</strong>」には「<strong>Weapon_Sword</strong>」を割り当て、「<strong>shield</strong>」に「<strong>Weapon_Shield</strong>」を割り当てます。<br>
+    ゲームを実行してみます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_565.jpg"/>
+    <br>
+    
+    <p>
+    キーを入力すると、キャラクターの右手と左腕に剣と盾が装着されることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_566.jpg"/>
+    <br>
+    
+    <p>
+    さて、装着された剣と盾がキャラクターよりも常に後ろにレンダリングされることを見ることができます。<br>
+    Z軸の位置値を適切に変更して、アイテムが適切な位置で装着されるようにする必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_567.jpg"/>
+    <br>
+    
+    <p>
+    再びAnyPortraitエディタを開きます。<br>
+    <strong>(1)</strong> 「<strong>Bake</strong>」ボタンを押して「Bakeダイアログ」を開きます。<br>
+    <strong>(2)</strong> 「<strong>Z Per Depth</strong>」の値を増加させます。ここで10を入力しました。<br>
+    <strong>(3)</strong> 「<strong>Bake</strong>」ボタンを押してUnity Sceneに適用します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_568.jpg"/>
+    <br>
+    
+    <p>
+    今Unity Sceneで、それぞれのメッシュがZ軸に少し遠く離れて配置されたことを見ることができます。<br>
+    しかしながら、剣と盾を位置させると、まだキャラクターメッシュよりも常に後ろになります。<br>
+    剣と盾のメッシュがあるGameObjectを選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_569.jpg"/>
+    <br>
+    
+    <p>
+    適切な順序でレンダリングになるようにZ軸に移動します。<br>
+    おそらくローカル座標のZ軸の値が負の値を持つことになります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_570.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、キャラクターの衣装を変えることはもちろんのこと、剣と盾を装備して解除することが可能になりました。<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/oOfEv8vAwQQ" allowfullscreen></iframe>
+    </div>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
-        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_RenderTexture.html">< 「Render Texture」でレンダリング</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_SpriteMask.html">< 「Sprite Mask」適用</a>
         <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_InitializeScript.html">スクリプトで初期化 ></a>
     </nav>
     

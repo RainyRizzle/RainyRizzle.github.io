@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ColorProblemModifiers.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ColorProblemModifiers.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_ColorProblemModifiers.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,133 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.6</span></h4>
+    
+    <p>
+    モディファイヤを使用すると、メッシュの色を変更することができます。<br>
+    ところが、複数のモディファイヤや制御パラメータを利用する際の色が間違って適用され、メッシュの色が濃くなる場合があります。<br>
+    一般的に、「メッシュの基本色」を変更した後にモディファイヤを追加すると、この問題が発生したりします。<br>
+    このページは、色の問題が発生した場合や解決方法について説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_472.jpg"/>
+    <br>
+    
+    <p>
+    2つのメッシュを用意しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_473.jpg"/>
+    <br>
+    
+    <p>
+    メッシュを選択して、基本的な色を変更します。<br>
+    カラーは「2X Multiply」方式（2倍のRGBと1倍のAlphaが乗算方式）に適用されます。<br>
+    同じように、他のメッシュの基本色も変えました。<br>
+    （この時、設定された色の値を記憶しましょう。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_474.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Transform（Controller）</strong>」モディファイヤを追加します。<br>
+    同様に色を指定することができる「<strong>Morph（Controller）</strong>」モディファイヤを追加してもされます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_475.jpg"/>
+    <br>
+    
+    <p>
+    モディファイヤでメッシュの色を変更するために、「<strong>Color Option</strong>」を入れます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_476.jpg"/>
+    <br>
+    
+    <p>
+    色の問題を再現するために、3つの制御パラメータを生成しました。<br>
+    これは、複数のモディファイヤを利用するのと同じです。<br>
+    <strong>(1)</strong> メッシュを選択した状態で、制御パラメータの「<strong>キーの作成ボタン</strong>」を押します。<br>
+    <strong>(2)</strong> モディファイヤに追加された制御パラメータが選択されたことを確認します。<br>
+    <strong>(3)</strong> 制御パラメータにより、色が変更されることができるようモディファイヤと同様に、「<strong>Color Option</strong>」を入れます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_477.jpg"/>
+    <br>
+    
+    <p>
+    同じように第二の制御パラメータをモディファイヤに追加します。<br>
+    ところが、メッシュの色が暗くなるのを見ることができます。<br>
+    （色によって、より明るくなることがあります。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_478.jpg"/>
+    <br>
+    
+    <p>
+    第三の制御パラメータが追加されると、色がより多く変化を見ることができます。<br>
+    制御パラメータに応じたメッシュの色を変更する作業をしていない状態です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_479.jpg"/>
+    <br>
+    
+    <p>
+    問題の原因を把握しましょう。<br>
+    <strong>(1)</strong> 制御パラメータを選択します。<br>
+    <strong>(2)</strong> 「編集モード」をオンにします。<br>
+    <strong>(3)</strong> メッシュを選択した状態で、色の値を確認すると上記の設定した「メッシュの基本色」が指定されていることを見ることができます。<br>
+    「メッシュの基本色」は、すべての制御パラメータやモディファイヤの「デフォルト」に適用されるため、これらの現象が発生することです。<br>
+    AnyPortraitは、複数のモディファイアや制御パラメータを複合的に使用できるのは利点であるが、<br>
+    同時に多数のカラー値が適用されると意図しない結果を見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_480.jpg"/>
+    <br>
+    
+    <p>
+    最初の制御パラメータを除いた残りの色の値をデフォルト値である「<strong>グレー（0.5、0.5、0.5、1）</strong>」に設定すると、<br>
+    正常にレンダリングがされます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_481.jpg"/>
+    <br>
+    
+    <p>
+    または色を制御していない制御パラメータやモディファイヤの「<strong>Color Option</strong>」を引くことも問題を解決するための良い方法です。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

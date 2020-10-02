@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/Script/SC_Timeline.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/Script/SC_Timeline.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/Script/SC_Timeline.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -60,32 +62,125 @@
 
     <!-- 여기서부터 페이지 내용이 작성됩니다. -->
     <!-- 1. 페이지 진입 경로 -->
-    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/Script.html"><span class="text-dark">Script</span></a> > 타임라인</p>
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/Script.html"><span class="text-dark">스크립트</span></a> > 타임라인</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
     <h1 class="display-5">타임라인</h1>
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.6</span></h4>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    유니티의 타임라인(Timeline) 기능과 연동하기 위한 함수들입니다.<br>
+    AnyPortrait 1.1.6 버전부터 사용하실 수 있습니다.<br>
+    ​타임라인과 연동하는 방법에 대해서는 <a href="../../kr/AdvancedManual/AD_Timeline.html">관련 페이지</a>를 참고하세요.<br>
     </p>
     <br>
     
-    
-    <br><br>
-    
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
-    <br>
-    
-    <p>
-    본문 입력<br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>AddTimelineTrack</strong> <span class="text-muted">( </span><span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Playables</span><span class="text-muted">.</span><span class="text-success">PlayableDirector</span> <span class="text-muted">playableDirector,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">string</span> <span class="text-muted">trackName,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;타임라인을 연동하기 위하여 Playable Director와 트랙의 이름을 "트랙 정보"로서 등록합니다.<br>
+    &nbsp;&nbsp;&nbsp;2개 이상의 Playable Director나 트랙을 등록할 수 있습니다.<br>
+    &nbsp;&nbsp;&nbsp;공통된 Playable Director에 대해서 여러개의 트랙을 등록한 경우, 다중 레이어의 애니메이션과 같은 방식으로 처리됩니다.<br>
+    &nbsp;&nbsp;&nbsp;이때의 레이어의 순서와 혼합 방식을 인자로 입력할 수 있습니다.<br>
+    &nbsp;&nbsp;&nbsp;​서로 다른 Playable Director들을 등록한 경우, 현재 재생 중인 Playable Director 중 1개에 대해서만 제어를 받습니다.<br>
     </p>
-    <br>
     
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Playables</span><span class="text-muted">.</span><span class="text-success">PlayableDirector</span> playableDirector : 등록하고자 하는 Playable Director<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> trackName : Playable Director의 타임라인과 연동될 트랙의 이름<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> layer : 다중 레이어로 재생될 시 레이어의 순서 (기본값은 0)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> blendMethod : 다중 레이어로 재생될 시 애니메이션 혼합 방식 (기본값은 BLEND_METHOD.Additive)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : Playable Director가 존재하며 트랙의 이름이 유효하다면 true를 리턴, 그렇지 않으면 false를 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>RemoveInvalidTimelineTracks</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;현재 유효하지 않은 모든 트랙 정보를 제거합니다.<br>
+    &nbsp;&nbsp;&nbsp;​씬에 존재하지 않는 Playable Director나 Timeline Asset, 존재하지 않는 트랙 등의 이유로 연동이 불가능한 경우가 이에 해당됩니다.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>RemoveAllTimelineTracks</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;등록된 모든 트랙 정보를 제거합니다.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>UnlinkTimelinePlayableDirector</strong> <span class="text-muted">( </span><span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Playables</span><span class="text-muted">.</span><span class="text-success">PlayableDirector</span> <span class="text-muted">playableDirector )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;입력된 Playable Director와 연동된 모든 트랙 정보를 제거합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Playables</span><span class="text-muted">.</span><span class="text-success">PlayableDirector</span> playableDirector : 제거하고자 하는 Playable Director<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetTimelineEnable</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">isEnabled )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;타임라인에 연동되어 재생될지 여부를 설정합니다.<br>
+    &nbsp;&nbsp;&nbsp;true로 입력되었다면 Playable Director에 따라서 애니메이션이 재생되지만, false가 입력되었다면 Playable Director에 연동되지 않습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isEnabled : 타임라인에 연동되어 재생될 지 여부<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
     <!-- 5. 바닥 네비바 -->
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">

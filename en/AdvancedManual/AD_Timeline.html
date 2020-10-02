@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_Timeline.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_Timeline.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_Timeline.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,364 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.6</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_490.jpg"/>
+    <br>
+    
+    <p>
+    Unity's <strong>Timeline</strong> is a function that creates a cinematic scene that plays during the game.<br>
+    You can combine and control animations using sequence tools.<br>
+    You can find a description of the timeline on the Unity homepage. (<a href="https://docs.unity3d.com/Manual/TimelineSection.html" target="_sub">Related page</a>)<br>
+    AnyPortrait supports Unity Timeline from v1.1.6.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Create Playable Director and Timeline Asset and link tracks</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_491.jpg"/>
+    <br>
+    
+    <p>
+    The Timeline is a feature associated with Mecanim.<br>
+    Therefore, you have to turn on the Mecanim setting of AnyPortrait.<br>
+    <strong>(1)</strong> Press the <strong>Bake button</strong>.<br>
+    <strong>(2)</strong> Select the <strong>Setting tab</strong>.<br>
+    <strong>(3)</strong> Turn on the <strong>Mecanim setting</strong> and <strong>set the path</strong> where animation clips will be saved.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_492.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> Select the <strong>Bake tab</strong>.<br>
+    <strong>(5)</strong> Press the <strong>Bake button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_493.jpg"/>
+    <br>
+    
+    <p>
+    You can see <strong>Animator</strong> added to the character.<br>
+    Animation clips are also created.<br>
+    You can use these animation clips to make Timeline.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_494.jpg"/>
+    <br>
+    
+    <p>
+    Let's create a timeline.<br>
+    <strong>(1)</strong> Create a <strong>new GameObject</strong>. I created it here as "Director".<br>
+    <strong>(2)</strong> Add the <strong>Playable Director</strong> component to the created GameObject.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_495.jpg"/>
+    <br>
+    
+    <p>
+    Open the timeline editor with the menu <strong>Window &gt; Sequencing &gt; Timeline</strong>.<br>
+    (The menu may differ depending on the Unity version.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_496.jpg"/>
+    <br>
+    
+    <p>
+    Timeline editor opened.<br>
+    <strong>(1)</strong> Select the <strong>Director</strong> to which the <strong>Playable Director component</strong> has been added.<br>
+    <strong>(2)</strong> In the timeline editor, click the <strong>Create button</strong> to create a <strong>Timeline Asset</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_497.jpg"/>
+    <br>
+    
+    <p>
+    Timeline Asset has been created and is now ready to edit the timeline.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_498.jpg"/>
+    <br>
+    
+    <p>
+    Make the character created by AnyPortrait (Runner) become a child object of another GameObject (Player).<br>
+    It is recommended that you create a other GameObject, because local coordinates are forced to (0, 0, 0) if it uses Mecanim.<br>
+    It is recommended that you create a parent GameObject at the this case as the Timeline, and control the Transform of the parent GameObject.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_499.jpg"/>
+    <br>
+    
+    <p>
+    In the timeline editor, press the <strong>Add button</strong> and add an <strong>Animation Track</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_500.jpg"/>
+    <br>
+    
+    <p>
+    Let's connect the added track to AnyPortrait.<br>
+    <strong>(1)</strong> <strong>Select the track</strong> to be linked with AnyPortrait's character.<br>
+    <strong>(2)</strong> <strong>Set the name of the track</strong>. I set it to "Runner Anim Track" here.<br>
+    AnyPortrait will distinguish tracks to be linked with "track name", so remember the name you set at this time.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_501.jpg"/>
+    <br>
+    
+    <p>
+    Let's make a track that moves the character.<br>
+    <strong>(1)</strong> <strong>Drag and drop "Player"</strong>, the parent GameObject of the character you created, <strong>(2)</strong> <strong>to the track list</strong> in the timeline.<br>
+    <strong>(3)</strong> A track for Player has been added.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_502.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select AnyPortrait character.<br>
+    <strong>(2)</strong> In the Inspector, set the <strong>size of Track Data</strong> in the Timeline Settings item to <strong>1</strong>.<br>
+    <strong>(3)</strong> Connect Director with Playable Director to <strong>Director Item</strong>.<br>
+    <strong>(4)</strong> In the <strong>Track Name</strong> field, type the name ("Runner Anim Track") of the previously created track.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>About setting tracks in the timeline</h4>
+    <br>
+    
+    <p>
+    You can interact with tracks in the timeline in the Inspector, with the following features:<br>
+    <strong>1) Multiple layers</strong><br>
+    Linking two or more tracks to the same Playable Director is the same as creating multiple animation layers.<br>
+    You can set the blending order and method for multiple layers by changing the values of Layer and Blend.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2) Assigning multiple Playable Director</strong><br>
+    If there are "Playable Directors" in the scene, you can add them all to the Track Data.<br>
+    Only the Playable Director currently playing controls characters.<br>
+    If all Playable Director's play is completed, AnyPortrait's character is controlled by the mecanim's Animator instead of the timeline.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3) Adding or Removing Track Data with a Script</strong><br>
+    You can use scripts to connect with Playable Director while the game is running.<br>
+    Please use the following functions provided since v1.1.6.<br>
+    (Please refer to <a href="../../en/Script/SC_Timeline.html">related page</a> for detailed explanation.)<br>
+    </p>
+    <br>
+    
+    <p>
+    public bool <strong>AddTimelineTrack</strong>(  UnityEngine.Playables.PlayableDirector playableDirector, string trackName, int layer, apAnimPlayUnit.BLEND_METHOD blendMethod)<br>
+    : Connect to a track in Playable Director.<br>
+    Track name and layer information must be entered.<br>
+    If this is not a valid track, this function returns false.<br>
+    </p>
+    <br>
+    
+    <p>
+    public void <strong>RemoveInvalidTimelineTracks</strong><strong>()</strong><br>
+    : Remove all invalid track information.<br>
+    </p>
+    <br>
+    
+    <p>
+    public void <strong>RemoveAllTimelineTracks</strong><strong>()</strong><br>
+    : Remove all track information.<br>
+    </p>
+    <br>
+    
+    <p>
+    public void <strong>UnlinkTimelinePlayableDirector</strong>(UnityEngine.Playables.PlayableDirector playableDirector)<br>
+    : Disconnects from the entered Playable Director.<br>
+    </p>
+    <br>
+    
+    <p>
+    public void <strong>SetTimelineEnable</strong>(bool isEnabled)<br>
+    : Sets whether or not to be controlled by the timeline.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Place animation clip and move the character</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_503.jpg"/>
+    <br>
+    
+    <p>
+    Now that the character is linked to the track, let's put animation clips on the timeline.<br>
+    If you turn on the Mecanim setting and Bake it, animations will be saved as Animation Clip Assets.<br>
+    Simply drag and drop these animation clips onto the track.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_504.jpg"/>
+    <br>
+    
+    <p>
+    When you play the game, you can see that the timeline is played and the animations of the character are played back in order as well.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_505.jpg"/>
+    <br>
+    
+    <p>
+    If you really want to move the character, you need to make an animation the other track to which the parent GameObject is registered.<br>
+    <strong>(1)</strong> Press the <strong>track's record button</strong>.<br>
+    <strong>(2)</strong> Select <strong>"Player"</strong> as the parent GameObject.<br>
+    <strong>(3)</strong> Create keyframes by moving each position according to the frame.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_506.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game again, the animation will run as the character moves forward.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Preview the timeline in the editor</h3>
+    <br>
+    
+    <p>
+    If you have completed this step, you can see that the animation is running along the timeline during the game.<br>
+    However, if the game is not running, the animation of the character of AnyPortrait will not play even if the timeline is played.<br>
+    AnyPortrait is not automatically updated in the editor, because the mesh is updated only when there is a input event.<br>
+    To solve this, another script is provided since v1.1.6 so that it will be played by the timeline even when the game is not running.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_507.jpg"/>
+    <br>
+    
+    <p>
+    Select the character of AnyPortrait with <strong>apPortrait</strong> and press the <strong>Add Component button</strong>.<br>
+    Select <strong>AnyPortrait &gt; Timeline Simulator</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_508.jpg"/>
+    <br>
+    
+    <p>
+    The <strong>Timeline simulator (apAnimPlayTimelineSimulator)</strong> has been added as a component.<br>
+    <strong>(1)</strong> Assign the <strong>current Playable Director</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_509.jpg"/>
+    <br>
+    
+    <p>
+    While editing the timeline, you can see that your character's animation is working properly.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Properties and precautions of the timeline simulator</strong></span><br>
+    - When <strong>Simulate</strong> is turned on, animations are played together when the timeline is played, and conversely, when you turn off <strong>Simulate</strong>, the character is not controlled by the timeline.<br>
+    - When adding or removing an animation clip, the <span class="text-primary"><strong>Refresh Tracks button</strong></span> must be pressed to recognize updated track information normally.<br>
+    - The <strong>Timeline simulator</strong> only works during timeline editing and does not work when the game is run.<br>
+    - When the Timeline is complete, it is recommended to delete the Timeline Simulator component.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Animated clip information in track and completed timeline sequence</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_510.jpg"/>
+    <br>
+    
+    <p>
+    You can modify the properties of animated clips placed on a timeline track in the Inspector.<br>
+    AnyPortrait will reflect the "<strong>Clip In</strong>" and "<strong>Speed Multiplier</strong>" property values in the animation playback.<br>
+    - You can change the start point of animation by changing <strong>Clip In</strong>.<br>
+    - You can control the playback speed of the animation by changing the <strong>Speed Multiplier</strong>.<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/IiWsuaY2R0A" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    
+    <br><br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

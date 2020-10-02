@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_PackagePath.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_PackagePath.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_PackagePath.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,201 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.3</span></h4>
+    
+    <p>
+    AnyPortraitパッケージをインストールすると、パッケージのファイルは、「<strong>Assets/AnyPortrait</strong>」とその下位のパスにインストールされます。<br>
+    AnyPortraitエディタは、多くのリソースを使用しており、パッケージがインストールされてパスからロードをします。<br>
+    ユーザーによっては、コラボレーションのためにAnyPortraitがインストールされてパスを他の場所に移す必要があります。<br>
+    しかし、AnyPortraitがインストールされてフォルダを別のパスに移動させると、エディタは開きません。<br>
+    このページでは、AnyPortraitパッケージのパスを変更する方法を説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_931.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitをインストールすると、上記のように、 「<strong>Assets/AnyPortrait</strong>」にすべてのファイルがあります。<br>
+    AnyPortraitフォルダを別の場所に移動させてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_932.jpg"/>
+    <br>
+    
+    <p>
+    ここで「<strong>CustomFolder</strong>」という新しいフォルダを作成し、AnyPortraitフォルダをそのサブフォルダに移動させてみました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_933.jpg"/>
+    <br>
+    
+    <p>
+    エディタを実行してみると、エディタは開かれず、上記のような警告メッセージが表示されます。<br>
+    上記のメッセージは、パッケージの内容が壊れているか、パスが変わったことを通知します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_934.jpg"/>
+    <br>
+    
+    <p>
+    変わったパスを入力してAnyPortraitエディタが実行されるようにしましょう。<br>
+    ユニティエディタに戻り、「<strong>Window &gt; AnyPortrait &gt; Change Installation Path</strong>」を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_935.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitパッケージのパスを設定するダイアログが表示されます。<br>
+    <strong>(1)</strong> 「<strong>Change Pathボタン</strong>」を押します。<br>
+    <strong>(2)</strong> 「変更された位置のAnyPortraitフォルダ」を選択します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意</strong></span><br>
+    フォルダの名前を変更するとはならず、Assetsフォルダの外に位置してもいけません。<br>
+    AnyPortraitフォルダ内のリソースのパスを変更することも問題を引き起こすことができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_936.jpg"/>
+    <br>
+    
+    <p>
+    上記のように変更されたパスと同じように、パッケージのインストールパスの設定が変更されました。<br>
+    もしデフォルトに戻すには、「<strong>Use Default Pathボタン</strong>」を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_937.jpg"/>
+    <br>
+    
+    <p>
+    エディタを開く前に、エディタが無効なパスからリソースを継続ロードしようとすることができますので、リセットする必要があります。<br>
+    「<strong>Window &gt; AnyPortrait &gt; Reset Editor</strong>」を実行します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_938.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitエディタが正常に実行されます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>変更されたパスに「マテリアルプリセット」をインストール</h3>
+    <br>
+    
+    <p>
+    AnyPortraitのほとんどのリソースは、設定に応じて変更されたパスからロードになります。<br>
+    しかし、例外が一つあります。<br>
+    「<strong>マテリアルライブラリ</strong>」（<a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">関連ページ</a>）の「<strong>マテリアルプリセット</strong>」は、デフォルトのパスにインストールされるからです。<br>
+    この場合には次の方法で問題を解決してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_939.jpg"/>
+    <br>
+    
+    <p>
+    マテリアルライブラリを開いてマテリアルプリセットを設置しましょう。<br>
+    「<strong>Material Libraryボタン</strong>」を押して「マテリアルライブラリ」を開きます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_940.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「マテリアルプリセット」を選択し、「<strong>Unpack Presetボタン</strong>」を押してインストールします。<br>
+    <strong>(2)</strong> インストールが完了したら、「<strong>マテリアルライブラリ</strong>」を再起動するようにメッセージが表示されます。 Okayボタンを押して、 "マテリアルライブラリ」を開きます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_941.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> インストールされて「マテリアルプリセット」のいずれかを選択します。<br>
+    <strong>(2)</strong> プリセットの「<strong>Shader Asset</strong>」が認識されないことを見ることができます。<br>
+    ユーザーがマテリアルセット（Material Set）を作成した場合、Shaderは認識がされるが、プリセットは静的ルートを利用するので、ここで認識されません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_942.jpg"/>
+    <br>
+    
+    <p>
+    Unityエディタに戻って、「プリセットがインストールされてフォルダ」をご確認しましょう。<br>
+    「マテリアルプリセット」は、変更されたパスではなく、「<strong>元のパス（Assets/AnyPortrait）</strong>」にインストールされます。<br>
+    このファイルを「変更されたパッケージのパス」に合わせて移動させなければします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_943.jpg"/>
+    <br>
+    
+    <p>
+    マテリアルプリセットは「<strong>Assets/AnyPortrait/Assets/Shaders</strong>」の下位にプリセット名と同様のフォルダが作成され、インストールされます。<br>
+    もし「Advanced Presets」をインストールした場合、移動させるべきフォルダの名前は「<strong>Advanced</strong>」です。<br>
+    このフォルダを「<strong>Assets/〜（変更されたルートフォルダ）/AnyPortrait/Assets/Shaders</strong>」に移動します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_944.jpg"/>
+    <br>
+    
+    <p>
+    ファイルを移動させると、不必要なフォルダが残ります。<br>
+    このフォルダを削除します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_945.jpg"/>
+    <br>
+    
+    <p>
+    マテリアルプリセットのShader Assetが正常にロードされていることを見ることができます。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

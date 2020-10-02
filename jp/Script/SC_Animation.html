@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/Script/SC_Animation.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/Script/SC_Animation.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/Script/SC_Animation.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -66,8 +68,577 @@
     <h1 class="display-5">アニメーション</h1>
     <br>
     
-    <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <p>
+    アニメーションをスクリプトとして再生できます。<br>
+    パラメーターとしてアニメーションクリップ名を入力すると、それに対応する「Root Unit」に自動的に切り替わります。<br>
+    複数のアニメーションクリップをレイヤーして同時に再生することができます。<br>
+    アニメーションを切り替えるときにフェード効果を与えることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>Play</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">animClipName,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayManager</span><span class="text-muted">.</span><span class="text-success">PLAY_OPTION</span> <span class="text-muted">playOption,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>Play</strong> <span class="text-muted">( </span><span class="text-success">apAnimPlayData</span> <span class="text-muted">animPlayData,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayManager</span><span class="text-muted">.</span><span class="text-success">PLAY_OPTION</span> <span class="text-muted">playOption,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>PlayAt</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">animClipName,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">frame,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayManager</span><span class="text-muted">.</span><span class="text-success">PLAY_OPTION</span> <span class="text-muted">playOption,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>PlayAt</strong> <span class="text-muted">( </span><span class="text-success">apAnimPlayData</span> <span class="text-muted">animPlayData,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">frame,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayManager</span><span class="text-muted">.</span><span class="text-success">PLAY_OPTION</span> <span class="text-muted">playOption,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.6</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;すぐにアニメーションクリップを再生します。<br>
+    &nbsp;&nbsp;&nbsp;時間やフェード効果を待たずに再生が始まります。<br>
+    &nbsp;&nbsp;&nbsp;PlayAt<strong>()</strong>関数を使用すると、特定のフレームで再生を開始することができます。 <br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> animClipName : アニメーションクリップの名前<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayData</span> animPlayData : 対象となるアニメーションデータ<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> frame : PlayAt関数で開始したいフレーム<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> layer : アニメーションが再生されるレイヤー(デフォルトは0)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> blendMethod : レイヤードアニメーションブレンドメソッド (デフォルトは BLEND_METHOD.Interpolation)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayManager</span><span class="text-muted">.</span><span class="text-success">PLAY_OPTION</span> playOption : 再生中の他のアニメーションを終了する方法 (デフォルトは PLAY_OPTION.StopSameLayer)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isAutoEndIfNotloop : アニメーションクリップにループオプションがない場合に自動的に終了するかどうか (デフォルトは false)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayData</span> : 再生中のアニメーションクリップのデータ (アニメーションクリップが要求されていない場合は null)
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>PlayQueued</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">animClipName,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>PlayQueued</strong> <span class="text-muted">( </span><span class="text-success">apAnimPlayData</span> <span class="text-muted">animPlayData,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>PlayQueuedAt</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">animClipName,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">frame,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>PlayQueuedAt</strong> <span class="text-muted">( </span><span class="text-success">apAnimPlayData</span> <span class="text-muted">animPlayData,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">frame,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.6</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;現在要求されているレイヤーで再生されたアニメーションクリップが終了すると、すぐに再生されます。<br>
+    &nbsp;&nbsp;&nbsp;レイヤー上でアニメーションが再生されていない場合、再生がすぐに開始されます。<br>
+    &nbsp;&nbsp;&nbsp;再生中のアニメーションクリップが「Loop」オプションで終わらない場合、その機能は処理されず、無視されます。<br>
+    &nbsp;&nbsp;&nbsp;PlayQueuedAt<strong>()</strong>関数を使用すると、特定のフレームで再生を開始することができます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;(「PLAY_OPTION playOption」以外の「Play(), PlayAt()」と同じ)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayData</span> : 再生中のアニメーションクリップのデータ (要求されたアニメーションクリップが存在しないか、または 「Loop」の場合は「null」が返されます)
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>CrossFade</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">animClipName,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">fadeTime,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayManager</span><span class="text-muted">.</span><span class="text-success">PLAY_OPTION</span> <span class="text-muted">playOption,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>CrossFade</strong> <span class="text-muted">( </span><span class="text-success">apAnimPlayData</span> <span class="text-muted">animPlayData,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">fadeTime,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayManager</span><span class="text-muted">.</span><span class="text-success">PLAY_OPTION</span> <span class="text-muted">playOption,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>CrossFadeAt</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">animClipName,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">frame,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">fadeTime,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayManager</span><span class="text-muted">.</span><span class="text-success">PLAY_OPTION</span> <span class="text-muted">playOption,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>CrossFadeAt</strong> <span class="text-muted">( </span><span class="text-success">apAnimPlayData</span> <span class="text-muted">animPlayData,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">frame,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">fadeTime,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayManager</span><span class="text-muted">.</span><span class="text-success">PLAY_OPTION</span> <span class="text-muted">playOption,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.6</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;アニメーションは、フェード効果を含むクリップを再生します。<br>
+    &nbsp;&nbsp;&nbsp;これは 「Play<strong>()</strong>」機能に似ていますが、フェード効果が「fadeTime」の場合、ゆっくりと自然に開始します。<br>
+    &nbsp;&nbsp;&nbsp;CrossFadeAt<strong>()</strong>関数を使用すると、特定のフレームで再生を開始することができます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> fadeTime : アニメーションされた滑らかに変化するフェード効果が適用される時間 (デフォルトは0.3f)<br>
+    &nbsp;&nbsp;&nbsp;(残りはPlay(), PlayAt()と同じです)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayData</span> : 再生中のアニメーションクリップのデータ (アニメーションクリップが要求されていない場合は null)
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>CrossFadeQueued</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">animClipName,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">fadeTime,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>CrossFadeQueued</strong> <span class="text-muted">( </span><span class="text-success">apAnimPlayData</span> <span class="text-muted">animPlayData,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">fadeTime,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>CrossFadeQueuedAt</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">animClipName,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">frame,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">fadeTime,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>CrossFadeQueuedAt</strong> <span class="text-muted">( </span><span class="text-success">apAnimPlayData</span> <span class="text-muted">animPlayData,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">frame,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">fadeTime,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.6</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;「PlayQueued<strong>()</strong>」と同様に、再生中のアニメーションが終了すると、それは連続して再生されます。<br>
+    &nbsp;&nbsp;&nbsp;フェード効果は、終了時間に基づいて「fadeTime」によって追加され、再生が開始されます。<br>
+    &nbsp;&nbsp;&nbsp;CrossFadeQueuedAt<strong>()</strong>関数を使用すると、特定のフレームで再生を開始することができます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;(「PLAY_OPTION playOption」を除く「CrossFade(), CrossFadeAt()」と同じです)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayData</span> : 再生中のアニメーションクリップのデータ (要求されたアニメーションクリップが存在しないか、または 「Loop」の場合は「null」が返されます)
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>StopLayer</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">layer,</span> <span class="text-primary">float</span> <span class="text-muted">fadeTime )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;要求されたレイヤー上のすべてのアニメーションを停止します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> layer : 停止するレイヤー<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> fadeTime : フェードでアニメーションがスムーズに終了する時間 (デフォルトは0)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>StopAll</strong> <span class="text-muted">( </span><span class="text-primary">float</span> <span class="text-muted">fadeTime )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;すべてのアニメーションを停止します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> fadeTime : フェードでアニメーションがスムーズに終了する時間 (デフォルトは0)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>PauseLayer</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">layer )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;要求されたレイヤー内のすべてのアニメーションを一時停止します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> layer : 一時停止するレイヤー<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>PauseAll</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;すべてのアニメーションを一時停止する。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResumeLayer</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">layer )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;要求されたレイヤの一時停止したアニメーションをもう一度再生します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> layer : 再開されるレイヤー<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResumeAll</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;すべての一時停止したアニメーションを再生します。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>IsPlaying</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">animClipName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;要求したアニメーションクリップが再生中かどうかを問い合わせます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> animClipName : ターゲットアニメーションクリップ名<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : アニメーションが再生されている場合はtrue を返します (再生していないか、存在しない場合はfalseを返します)
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apAnimPlayManager</span> <strong>PlayManager</strong>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;アニメーションを再生するマネージャー。<br>
+    &nbsp;&nbsp;&nbsp;内部からの再生、停止などを制御します。<br>
+    &nbsp;&nbsp;&nbsp;「Bake」されたアニメーションクリップ情報を参照することができます。<br>
+    &nbsp;&nbsp;&nbsp;<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">public</span> <span class="text-success">List</span><<span class="text-success">apAnimPlayData</span>> <strong>PlayDataList</strong> : アニメーションクリップ情報を含むリスト<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>RegistAnimationEventListener</strong> <span class="text-muted">( </span><span class="text-success">MonoBehaviour</span> <span class="text-muted">listenerObject )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;アニメーションイベントを受け取るための「Listener」を登録します。<br>
+    &nbsp;&nbsp;&nbsp;アニメーションイベントを作成および呼び出す方法の詳細については、「<a href="../../jp/AdvancedManual/AD_AnimationEvents.html">関連ページ</a>」を参照してください。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">MonoBehaviour</span> listenerObject : アニメーションイベントが呼び出されるMonoBehaviourオブジェクト<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetAnimationSpeed</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">animClipName,</span> <span class="text-primary">float</span> <span class="text-muted">speed )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetAnimationSpeed</strong> <span class="text-muted">( </span><span class="text-primary">float</span> <span class="text-muted">speed )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;アニメーションの再生速度を設定します。<br>
+    &nbsp;&nbsp;&nbsp;デフォルト値は1.0fで、負の数を設定することもできます。<br>
+    &nbsp;&nbsp;&nbsp;他の関数と同様に、「Mecanim」を使用しても機能しません。<br>
+    &nbsp;&nbsp;&nbsp;「animClipName」を指定しない場合は、すべてのアニメーションの速度を設定します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> animClipName : 速度を設定するアニメーションクリップの名前。 設定されていない場合はすべてのアニメーションクリップを対象とする<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> speed : 再生速度比。 デフォルトは1.0fです<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetAnimationSpeed</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;すべてのアニメーションの再生速度をデフォルト値に戻します。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">List</span><span class="text-muted">&lt;</span><span class="text-success">apAnimPlayData</span><span class="text-muted">&gt;</span><span class="text-success"></span> <strong>AnimationPlayDataList</strong>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.2</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;アニメーションの再生情報のapAnimPlayDataのリストを返します。<br>
+    &nbsp;&nbsp;&nbsp;再生可能なアニメーション情報をすぐに知ることができます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">List</span><span class="text-muted">&lt;</span><span class="text-success">apAnimPlayData</span><span class="text-muted">&gt;</span><span class="text-success"></span> : 再生可能なapAnimPlayDataのリスト
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>GetAnimationPlayData</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">animClipName )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.2</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;アニメーションの再生情報のapAnimPlayDataオブジェクトを名前で参照します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> animClipName : ターゲットアニメーションクリップ名<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayData</span> : 再生可能なapAnimPlayDataオブジェクト。なければnull戻り
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span><span class="text-muted">.</span><span class="text-success">AnimationPlaybackStatus</span> <strong>GetAnimationPlaybackStatus</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">animClipName )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.2</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;名前を通し、アニメーションの再生状態を照会します。<br>
+    &nbsp;&nbsp;&nbsp;「再生されていない状態（None）、再生中（Playing）、一時停止されて（Paused）、最後のフレームに到達する（Ended）」の結果値がEnum型に返されます。<br>
+    &nbsp;&nbsp;&nbsp;IsPlaying<strong>()</strong>関数よりも細分化された状態の値を提供しています。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> animClipName : ターゲットアニメーションクリップ名<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayData</span><span class="text-muted">.</span><span class="text-success">AnimationPlaybackStatus</span> : アニメーションの再生状態
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    
+    <br><br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>「Blend Method」と「Play Option」</h4>
+    <br>
+    
+    <p>
+    再生機能に含まれる「Blend Method」および「Play Option」変数の値は、以下の意味を有する。<br>
+    <span class="text-success"><strong>apAnimPlayUnit.BLEND_METHOD</strong></span> <strong>blendMethod</strong> : レイヤードアニメーションブレンドメソッド<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-success"><strong>BLEND_METHOD</strong></span><strong>.Interpolation</strong> : 下位レイヤのアニメーションと比較して上書き補間でマージします。<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-success"><strong>BLEND_METHOD</strong></span><strong>.Additive</strong> : 値を下位層のアニメーションに追加してマージします。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-success"><strong>apAnimPlayManager.PLAY_OPTION</strong></span> <strong>playOption</strong> : 再生中の別のアニメーションを終了する方法<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-success"><strong>PLAY_OPTION</strong></span><strong>.StopSameLayer</strong> : 要求されたレイヤのアニメーションのみを停止します。<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-success"><strong>PLAY_OPTION</strong></span><strong>.StopAllLayers</strong> : 他のレイヤーを含め、すべてのアニメーションを停止します。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>apAnimPlayData</h4>
+    <br>
+    
+    <p>
+    アニメーション再生機能が呼び出されたときに返されるクラス。<br>
+    「apAnimPlayData」は、アニメーション再生情報を有する。<br>
+    返される 「apAnimPlayData」インスタンスの関数を使用して速度を制御できます。<br>
+    Ex) portrait.Play("Idle").SetSpeed<strong>(2)</strong>;<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary"><strong>public void</strong></span> <strong>SetSpeed</strong>(float speed)<br>
+    : 速度は「speed」によって制御されます。 デフォルト値は1.0fで、負の値にすることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary"><strong>public</strong></span> <span class="text-success"><strong>AnimationPlaybackStatus</strong></span> <strong>PlaybackStatus</strong><br>
+    : 現在の再生状態を返します。再生状態は次の値があります。<br>
+    - <span class="text-success"><strong>AnimationPlaybackStatus</strong></span>.<strong>None</strong> : 現在再生中はありません。無効なデータの場合もあります。<br>
+    - <span class="text-success"><strong>AnimationPlaybackStatus</strong></span>.<strong>Playing</strong> : 再生中です。<br>
+    - <span class="text-success"><strong>AnimationPlaybackStatus</strong></span>.<strong>Paused</strong> : 再生がされたが、現在一時的に停止された状態です。<br>
+    - <span class="text-success"><strong>AnimationPlaybackStatus</strong></span>.<strong>Ended</strong> : Loopアニメーションがないときは、最後のフレームに到達した状態です。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary"><strong>public string</strong></span> <strong>Name</strong><br>
+    : アニメーションクリップの名前です。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary"><strong>using</strong></span> <strong>AnyPortrait</strong>;<br>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">AnimationTest</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// Target AnyPortrait Object<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success">apPortrait</span> portrait;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// CrossFade "Idle" Animation Clip<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.I))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<strong>portrait.CrossFade(</strong><span class="text-danger"><strong>"Idle"</strong></span>, 0.4f) == <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.LogError(<span class="text-danger">"Faild &#91;Idle&#93;"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"CrossFade &#91;Idle&#93;"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Play "Action" Animation Clip<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<strong>portrait.Play(</strong><span class="text-danger"><strong>"Action"</strong></span>) == <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.LogError(<span class="text-danger">"Faild &#91;Action&#93;"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Play &#91;Action&#93;"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Pause Animations in All Layers<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.P))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.PauseAll();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Pause All"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Stop Animations in All Layers<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.StopAll(0.3f);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Stop All"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Resume Animations in All Layers<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.R))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.ResumeAll();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Resume All"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

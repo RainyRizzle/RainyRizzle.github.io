@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_EditingPrefabs.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_EditingPrefabs.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_EditingPrefabs.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,304 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.5</span></h4>
+    
+    <p>
+    Prefab is very important in creating games with Unity.<br>
+    This is a required feature because you can make game objects as resources.<br>
+    There were some problems when saving the characters created by AnyPortrait up to the previous version as prefabs.<br>
+    As of v1.0.3, the processing method for Prefab has been changed, so we will give you guidance on this page.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_198.jpg"/>
+    <br>
+    
+    <p>
+    This is a screen where the character created by AnyPortrait is saved as a prefab.<br>
+    You can see the blue text in the hierarchy.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_199.jpg"/>
+    <br>
+    
+    <p>
+    When you try to edit a character saved with prefab, a dialog box appears.<br>
+    AnyPortrait is basically developed by editing the GameObject located in the scene, which can cause problems if the target is prefab.<br>
+    Pressing the OK button disconnects the prefab and converts it to a regular GameObject.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_200.jpg"/>
+    <br>
+    
+    <p>
+    If you check Hierarchy again, you can see that it is changed to the default color instead of blue color.<br>
+    This state is "disconnected" from the prefab, and the prefab information is not completely lost.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_201.jpg"/>
+    <br>
+    
+    <p>
+    When you have finished all your edits, you can save them back to Prefab by pressing the Apply button.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Caution</strong></span><br>
+    If you force conversion to prefab during editing with AnyPortrait, you may not be able to save the data properly in the editor.<br>
+    As noted above, the target must not be in prefab state during editing.<br>
+    And, after converting it back to prefab, you have to save it.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3> Prefab Status UI (v1.2.5)</h3>
+    <br>
+    
+    <p>
+    We have received feedback from several users about the inconvenience of handling prefabs in the Unity editor,<br>
+    In addition, there was a problem that the new prefab system added in <strong>Unity 2018.3</strong> was not normally compatible with AnyPortrait's prefab management method.<br>
+    For this reason, the functions to <strong>Apply</strong> or <strong>Disconnect</strong> by directly controlling the prefab from AnyPortrait's UI was added in v1.2.5.<br>
+    (The basic prefab management method is as described above.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_978.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> The character is saved in the form of <strong>Prefab Asset</strong>.<br>
+    <strong>(2)</strong> Place the Prefab asset in the scene as <strong>Prefab Instance</strong>.<br>
+    (You cannot edit in the state of a prefab asset, so always place it in the scene before editing.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_979.jpg"/>
+    <br>
+    
+    <p>
+    As with the previous method, let's edit the Prefab instance by opening the AnyPortrait editor.<br>
+    <strong>(1)</strong> If you select a character that is a prefab instance, <br>
+    <strong>(2)</strong> a message appears indicating that it is automatically <strong>Disconnect</strong> because it cannot be edited in the prefab state.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_980.jpg"/>
+    <br>
+    
+    <p>
+    Edit the character, run Bake, and return to the Unity scene.<br>
+    <strong>(1)</strong> Select the character that was the prefab instance. In the Hierarchy, you can see that the name of the character GameObject has changed to <strong>Black</strong> instead of <strong>Blue</strong>. This is either because it is not the current Prefab instance or it is in a Disconnected state.<br>
+    <strong>(2)</strong> <span class="text-primary"><strong>Prefab Status UI</strong></span> added in v1.2.5 can be viewed in the Inspector.<br>
+    <strong>(3)</strong> Click the <strong>Apply</strong> button in the <strong>Prefab Status UI</strong> to make it <strong>Connected to the source Prefab asset</strong>.<br>
+    (If the version is earlier than Unity 2018.3, you can press the Apply button at the top of the Inspector as in <strong>(4)</strong>.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_981.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> The names of GameObjects in Hierarchy have been changed to <strong>Blue</strong> again. Now these have changed to the "Connected prefab instance state".<br>
+    <strong>(2)</strong> This can also be checked in AnyPortrait's <strong>Prefab Status UI</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_982.jpg"/>
+    <br>
+    
+    <p>
+    This is the <strong>Prefab Status UI</strong> added in v1.2.5.<br>
+    This UI only appears in the Inspector for Prefab instances.<br>
+    If this is synchronized with the original <strong>Prefab Asset</strong> (Connected), the UI will appear in blue as in the image above.<br>
+    Conversely, if this is not synchronized with <strong>Prefab Asset</strong> (Disconnected or Missing), a red UI will appear as shown in the image below.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Source Prefab</strong> : This is the original Prefab Asset. If it is out of sync with the target, a label indicates what it is currently in.<br>
+    <strong>2. Root GameObject</strong> : This is the root of this Prefab Instance. You can synchronize based on the root GameObject as well as GameObjects made with AnyPortrait.<br>
+    <strong>3. Apply</strong> : Synchronize by applying the changes of the Prefab Instance to the Prefab Asset. If you want to revert, use Unity's UI or delete the instance.<br>
+    <strong>4. Refresh</strong> : Refresh the sync state with the Prefab Asset.<br>
+    <strong>5. Disconnect</strong> : Turn off synchronization with the Prefab Asset.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>New prefab system introduced in Unity 2018.3</h3>
+    <br>
+    
+    <p>
+    In Unity 2018.3, the "New Prefab System" was introduced.<br>
+    Starting with this version, you can manage and edit Prefabs in more ways than ever before.<br>
+    - <a href="https://docs.unity3d.com/2019.3/Documentation/Manual/Prefabs.html" target="_sub">Prefab Manual (Unity Official Manual)</a><br>
+    </p>
+    <br>
+    
+    <p>
+    Unfortunately, the new Prefab system is so different internally from the previous Prefab system that AnyPortrait could not be compatible with the new Prefab system.<br>
+    It was not possible to edit with the AnyPortrait editor while keeping the prefab instance state, only "overwriting the edited character with the prefab asset" was valid.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, using the <strong>Prefab Status UI</strong> introduced above, it is possible to synchronize while maintaining the connection information with the Prefab assets as much as possible.<br>
+    Check out the explanation below on how v1.2.5 has improved from the previous method.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_983.jpg"/>
+    <br>
+    
+    <p>
+    This is the screen from the new prefab system.<br>
+    <strong>(1)</strong> This is the original <strong>Prefab Asset</strong>.<br>
+    <strong>(2)</strong> This is the <strong>Prefab Instance</strong> where the Prefab asset is placed in the scene.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_984.jpg"/>
+    <br>
+    
+    <p>
+    When you select a prefab instance and try to edit it with the AnyPortrait editor, you will see a message that the connection to the Prefab Asset is lost.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_985.jpg"/>
+    <br>
+    
+    <p>
+    Execute Bake and return to the Unity scene.<br>
+    You can see that the link to the <strong>Prefab Asset</strong> is disconnected, and it is not in the <strong>Prefab Instance state</strong>.<br>
+    Since this state is <strong>there is no connection data to the source Prefab</strong>, in the previous way, you had to create or overwrite the Prefab Asset again.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_986.jpg"/>
+    <br>
+    
+    <p>
+    However, if you select the AnyPortrait character and check the Inspector, you can see that "<strong>Prefab Status UI</strong>" appears.<br>
+    In AnyPortrait, the last "<strong>Prefab Connection Data</strong>" is recorded, providing prefab synchronization functions to users.<br>
+    (Actually, in Unity, all the <strong>Prefab Connection Data</strong> has been lost, so it has returned to a normal GameObject.)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> In <strong>Prefab Status UI</strong>, click <strong>(2)</strong> <strong>Apply Button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_987.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> GameObjects have been restored to Prefab Instances again, and you can see that the edited character is applied as a Prefab Asset and synchronization is complete.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_988.jpg"/>
+    <br>
+    
+    <p>
+    In Unity 2018.3 and later versions, prefab connection data is not maintained internally for characters edited with AnyPortrait.<br>
+    AnyPortrait itself can record and synchronize the prefab connection data separately.<br>
+    Conversely, you can also release the prefab connection data, there are two ways:<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Clicking the <strong>Disconnect</strong> button cancels synchronization with the Prefab asset. However, the connection data is not deleted, so you can click the Apply button again to perform synchronization.<br>
+    <strong>(2)</strong> Clicking the <strong>Clear</strong> button completely deletes the connection data while canceling synchronization with the Prefab asset. Now this GameObject completely loses its role as a Prefab instance.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Notes</strong></span><br>
+    <strong>1.</strong> This method is a function of AnyPortrait itself, not a function provided by Unity, so if there is a change in the original prefab, it may not work properly.<br>
+    <strong>2.</strong> As connection information is recorded in a separate way, it may not be possible to recover to a Prefab instance immediately after updating to AnyPortrait v1.2.5. In this case, create a Prefab instance after synchronizing by recreating or overwriting the Prefab asset.<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <p>
+    One of the biggest features of the <strong>New Prefab System</strong> is the ability to "<strong>edit the original prefab directly</strong>".<br>
+    However, some features of this system were not stabilized, so our team couldn't make it be compatible perfectly.<br>
+    Therefore, editing in the AnyPortrait editor is currently limited to the original prefab.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_989.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select <strong>Original Prefab Asset</strong> and switch to the state where you can edit the original prefab.<br>
+    <strong>(2)</strong> Select the AnyPortrait character inside the Prefab.<br>
+    <strong>(3)</strong> The <strong>Editor cannot be opened</strong> message appears because it is the original prefab asset.<br>
+    </p>
+    <br>
+    
+    <p>
+    The above message appears from Unity 2020.1, and does not appear in versions between Unity 2018.3 and Unity 2020.1.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, this only appears to be editable with AnyPortrait in the version "<span class="text-danger"><strong>Because it is not possible to distinguish whether it is a Prefab asset or a Prefab instance</strong></span>", and editing the original prefab may cause various problems. .<br>
+    Therefore, please always edit the prefab in the following way.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_990.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the <strong>Prefab Asset</strong> you want to edit and place it into the scene.<br>
+    <strong>(2)</strong> If you select <strong>Prefab Instance</strong> placed in the scene, you can edit or Bake it with the editor.<br>
+    <strong>(3)</strong> Run <strong>Bake</strong> or click the <strong>Refresh Meshes</strong> button to check the rendered character, and then execute re-sync.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_ModifierLock.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ModifierLock.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ModifierLock.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,170 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.2</span></h4>
+    
+    <p>
+    Registering and editing multiple modifiers is a feature of AnyPortrait.<br>
+    However, modifying multiple modifiers at the same time can cause many problems.<br>
+    Therefore, when you work, you are limited to modifying only one modifier.<br>
+    In some cases, however, you can run multiple modifiers during editing.<br>
+    The way to control this is called the <strong>Modifier Lock</strong>.<br>
+    This page provides more information about the modifier locking feature.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_161.jpg"/>
+    <br>
+    
+    <p>
+    As an example, we added the <strong>Transform (Controller) modifier</strong> to the existing tutorial.<br>
+    This modifier moves the Head Bone and Neck Bone according to the control parameter.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_162.jpg"/>
+    <br>
+    
+    <p>
+    Added control parameter timeline to animation.<br>
+    Using the control parameter, we made the character look up as shown on the right.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_163.jpg"/>
+    <br>
+    
+    <p>
+    Now let's edit the animation as usual.<br>
+    <strong>(1)</strong> <strong>Turn on the edit mode</strong>, and <strong>(2)</strong> <strong>select the keyframe of Transform (Animation)</strong>.<br>
+    At this time, <strong>(3)</strong> <strong>the process of turning the head</strong> as shown in is <span class="text-danger"><strong>ignored</strong></span>, and only the <strong>Transform (Animation) modifier</strong> is processed.<br>
+    According to the modifier lock rule, other modifiers do not execute in edit mode.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Modifier Lock Rules</h3>
+    <br>
+    
+    <p>
+    <strong>1. Lock Mode</strong><br>
+    - All modifiers other than the selected modifier will not be executed.<br>
+    - The Rigging modifier is executed.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Unlock Mode</strong><br>
+    - The modifiers will be executed unless they are the same as the selected modifier or can not be edited at the same time.<br>
+    - This is the case if it is a modifier of the same Transform series, or if it is a modifier of the same Morph series.<br>
+    - If you select a modifier in the Transform series, the Physics modifier will be executed.<br>
+    - The Rigging modifier is executed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_164.jpg"/>
+    <br>
+    
+    <p>
+    Let's open the advanced setting window of modifier lock.<br>
+    <strong>(1)</strong> <strong>While holding down the </strong> <kbd>Ctrl</kbd> , <strong>click the Modifier Lock button</strong>. (On Mac OSX, this is the  <kbd>Command</kbd> .)<br>
+    <strong>(2)</strong> <strong>An advanced setting window</strong> for setting the modifier lock / unlock status appears.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_165.jpg"/>
+    <br>
+    
+    <p>
+    Advanced settings of the modifier.<br>
+    <strong>1. Lock Mode</strong> : This is the mode that the modifier is locked.<br>
+    <strong>2. Unlock Mode</strong> : This is the mode with the modifier unlocked.<br>
+    <strong>3. Calculating transformations of unregistered objects</strong> :<br>
+    Objects that are not currently registered in the modifier you are editing do not need to be subject to the "modifier lock rule".<br>
+    If you turn on this setting, all modifier calculations will proceed only for objects that are not registered.<br>
+    <strong>4. Render Calculated Colors</strong> : Do not apply Modifier Lock rules to the Color property.<br>
+    <strong>5. Preview Calculated Bones</strong> : Preview bones with all modifiers applied.<br>
+    <strong>6. Show Modifier List</strong> :<br>
+    The modifier list currently being processed is displayed on the left of the screen.<br>
+    You can check the calculation status of the modifier.<br>
+    <strong>7. Bone Preview Color</strong> : The color of the output when the "Preview Calculated Bones" property is on.<br>
+    <strong>8. Restore Settings</strong> : Restores all settings to their default values.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_166.jpg"/>
+    <br>
+    
+    <p>
+    Modifier lock setting changed.<br>
+    You can set it up in a convenient way.<br>
+    The settings are saved automatically.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_167.jpg"/>
+    <br>
+    
+    <p>
+    If you activate the <strong>"Preview Calculated Bones"</strong> setting, this outline will be displayed additionally.<br>
+    Since <strong>(1)</strong> <strong>the outline of the Head bone appears</strong>,<br>
+    You can work out the final result that will appear as shown in the image on the right.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_168.jpg"/>
+    <br>
+    
+    <p>
+    When you activate the <strong>"Show Modifier List"</strong> setting, a modifier list appears on the left of the screen.<br>
+    The output is in the order of the modifier stack.<br>
+    <strong>(1)</strong> <strong>The icon and name of the modifier</strong>. The modifier you are editing is printed in yellow on the left with a small cursor.<br>
+    <strong>(2)</strong> <strong>The calculation state of the modifier</strong>.<br>
+    If the modifier is running and is being applied to the operation of the object, the icon for the <strong>"lighted light bulb"</strong> appears.<br>
+    If it is not running and locked, the <strong>"light bulb with no light"</strong> icon appears.<br>
+    If it is only applied to some objects, a <strong>"slightly light bulb"</strong> icon appears.<br>
+    <strong>(3)</strong> When the modifier determines the <strong>mesh color</strong>, it shows as an icon whether to operate the color property.<br>
+    When locked, a black icon appears.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_169.jpg"/>
+    <br>
+    
+    <p>
+    This is the list of modifiers after pressing the <span class="text-danger"><strong>Modifier Lock button</strong></span> or pressing the  <kbd>D</kbd>  to switch the modifier lock state.<br>
+    You can see that the modifiers do not run except for the Transform (Animation) modifier you are selecting.<br>
+    (The Rigging modifier is running at the same time, and may differ slightly from the above screen depending on the Modifier Lock setting.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_170.jpg"/>
+    <br>
+    
+    <p>
+    You can call the setup window by clicking the same button <strong>(1)</strong> <strong>while holding down the</strong>  <kbd>Ctrl</kbd>  while editing the modifier of the mesh group as well as the animation.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_RenderTexture.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_RenderTexture.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_RenderTexture.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,13 +69,333 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.0</span></h4>
+    
+    <p>
+    ゲーム画面を別々のテクスチャに保存する手法を利用すれば、ゲーム内で看板や鏡などを表現することができます。<br>
+    キャラクターをゲームのHUDに出力することも可能であり、その他の多くの活用方法があります。<br>
+    この手法は、カメラの「<strong>Target Texture</strong>」プロパティでレンダリングテクスチャ（Render Texture）を指定することで簡単に実装できます。<br>
+    AnyPortraitはUnityのレンダリングコンポーネントである「Mesh Renderer」を使用するので、一般的には、問題なく、この手法が適用される場合があります。<br>
+    しかしながら、ユーザーの方々からのフィードバックに基づいて、特殊な状況で発生する問題点についてv1.2.0での改善された。<br>
+    このページでは、レンダリング、テクスチャにレンダリングする方法を含んで、いくつかの問題点と解決方法を紹介します。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>レンダリングテクスチャを利用して描画</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_816.jpg"/>
+    <br>
+    
+    <p>
+    レンダリングテクスチャを利用したレンダリングを試みるシーンを構成しました。<br>
+    上記シーンは、2つのカメラが配置されており、「AnyPortraitで製作されたキャラクター」、 「Sphereメッシュ」、「レンダリングテクスチャが適用されたQuadメッシュ」が配置されました。<br>
+    </p>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_817.jpg"/>
+    <br>
+    
+    <p>
+    一般的に、レンダリングテクスチャを利用する方法は、上記になります。<br>
+    最初のカメラでレンダリングテクスチャを対象にオブジェクトをレンダリングします。<br>
+    第二カメラは画面を対象にレンダリングテクスチャを含む他のオブジェクトをレンダリングします。<br>
+    この方法でレンダリングするように設定してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_818.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 最初のカメラを選択します。<br>
+    <strong>(2)</strong> 「<strong>Culling Mask</strong>」を「Everything」から「<strong>Default</strong>」に変更します。今では「<strong>Defaultレイヤ</strong>」のオブジェクトだけがカメラでレンダリングされます。<br>
+    <strong>(3)</strong> 「<strong>Depth</strong>」を「<strong>-1</strong>」に設定した状態で、「<strong>Target Texture</strong>」に「<strong>Render Texture</strong>」アセットを指定します。<br>
+    レンダリングテクスチョウンあらかじめアセットフォルダに作成しておく必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_819.jpg"/>
+    <br>
+    
+    <p>
+    レンダリングテクスチャアセットのプロパティです。<br>
+    プラットフォームごとに多少の違いがある場合があります。<br>
+    解像度を適切に調節することをお勧めします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_820.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 最初のカメラに表示されるオブジェクトを選択して、<strong>(2)</strong> 「<strong>Layer</strong>」が「<strong>Default</strong>」であることを確認します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_821.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 第二カメラを選択します。<br>
+    <strong>(2)</strong> 「<strong>Culling Mask</strong>」を「<strong>UI</strong>」に変更します。<br>
+    今の層がUIであるオブジェクトのみをレンダリングされ、ここで「レンダリングテクスチャが適用されたQuadメッシュ」がこれに該当します。<br>
+    <strong>(3)</strong> 「<strong>Depth</strong>」を「-1よりも大きい値」に指定します。ここでは「<strong>1</strong>」に設定しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_822.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 第二カメラによってレンダリングされる「<strong>Quadメッシュ</strong>」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Layer</strong>」を「<strong>UI</strong>」に変更します。<br>
+    <strong>(3)</strong> マテリアルのテクスチャを「<strong>レンダリングテクスチャ</strong>」に変更します。<br>
+    この時のレンダリングテクスチャは最初のカメラに適用されたものと同じです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_823.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、AnyPortraitで製作されたキャラクターを含むレンダリングテクスチャが正常に作成されて表示されるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>半透明、透明な背景のレンダリングテクスチャを対象にレンダリングする</h3>
+    <br>
+    
+    <p>
+    レンダリングテクスチャを半透明、または透明にすることができます。<br>
+    カメラの背景のプロパティを透明に作れば、レンダリングテクスチャの背景も同様に透明になります。<br>
+    これを利用すると、背景を除いてキャラクターのみをレンダリングすることが可能です。<br>
+    しかしAnyPortraitの基本マテリアルを使用すると、レンダリングの問題が発生します。<br>
+    下の説明を通し発生されるレンダリングの問題とその解決方法を確認してみてください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_824.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 最初のカメラを選択して、「<strong>Clear Flags</strong>」を「<strong>Solid Color</strong>」に設定した状態で、「<strong>Background</strong>」の色を選択します。<br>
+    <strong>(2)</strong> 背景色の「<strong>Alpha</strong>」チャンネルを変更します。<br>
+    <strong>(3)</strong> レンダリングテクスチャの背景がますます透明になることを見ることができます。<br>
+    この状態でレンダリングテクスチャにレンダリングされるAnyPortraitのキャラクターも同様に透明になる問題を見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_825.jpg"/>
+    <br>
+    
+    <p>
+    背景色に応じてAnyPortraitのキャラクターがどのようにレンダリングされるか比較してみましょう。<br>
+    背景が透明になったらAnyPortraitのキャラクターも同様に透明になるのに対し、横に配置された緑色Sphereは何の変化がありません。<br>
+    通常の場合には、背景の透明度に関係なく、レンダリングがなければならないでしょう。<br>
+    これはUnityのShaderの属性に関連する問題であり、特に「<strong>Surface Shader</strong>」で作成された場合に発生する可能性のある現象です。<br>
+    したがって、この問題は、他のShaderを使用するマテリアルを適用するものとして解決することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_826.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitエディタを開きます。<br>
+    <strong>(1)</strong> 「<strong>Material Library</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>KeepAlpha Presets</strong>」を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_827.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Unpack Preset</strong>」ボタンを押します。<br>
+    新しいマテリアルプリセットがインストールされマテリアルライブラリが終了します。<br>
+    マテリアルライブラリを再起動します。<br>
+    <strong>(2)</strong> 2つのマテリアルプリセット（<strong>KeepAlpha Unlit、KeepAlpha Lit</strong>）が追加されました。<br>
+    「<strong>Keep Alpha</strong>」プリセットは、一般的な「Surface Shader」に既存の「alpha」パラメータの代わりに 「<strong>keepalpha</strong>」パラメータを追加したシェーダで構成されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_828.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Make Material Set</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_829.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> 「<strong>KeepAlpha Unlit</strong>」や「<strong>KeepAlpha Lit</strong>」を選択します。<br>
+    このシーンには、光がないため、「KeepAlpha Unlit」プリセットを選択します。<br>
+    <strong>(3)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_830.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 新たに作成されたマテリアルのセットを選択します。<br>
+    <strong>(2)</strong> 「<strong>Default Material</strong>」ボタンを押して、デフォルトマテリアルに登録します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_831.jpg"/>
+    <br>
+    
+    <p>
+    すべてのプロセスが完了したら、Bakeを実行します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_832.jpg"/>
+    <br>
+    
+    <p>
+    今の背景が透明になってもキャラクターは正常に表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>レンダリングテクスチャを含む同時にレンダリングする</h3>
+    <br>
+    
+    <p>
+    画面に描画する際に、レンダリングテクスチャはもちろんのこと、キャラクターオリジナルも一緒にレンダリングする必要がある場合もあります。<br>
+    基本的には、この方法は、「多数のカメラでレンダリングする」と同じです。<br>
+    したがってVRレンダリングで発生する問題と同様の問題がここでも発生します。<br>
+    いくつかの問題が発生するか、そしてどのように解決するかを、以下の説明を通し確認してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_833.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 画面にレンダリングをする第二のカメラを選択します。<br>
+    <strong>(2)</strong> 「<strong>Culling Mask</strong>」オプションを変更します。<br>
+    <strong>(3)</strong> 従来の「<strong>UIレイヤ</strong>」を設定した状態で、さらに「<strong>Defaultレイヤ</strong>」を選択します。<br>
+    今では「<strong>Defaultレイヤ</strong>」のオブジェクトも画面に表示されるでしょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_834.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、レンダリング、テクスチャもレンダリングがされ、<br>
+    同時に画面に元のキャラクターと他のオブジェクトが同時にレンダリングされたことを見ることができます。<br>
+    しかし、この場合に、「クリッピングマスク」の部分が異常にレンダリングされたことを見ることができます。<br>
+    （これはレンダリングテクスチャの変見られることもあり、逆にソースが変見られることがあります。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_835.jpg"/>
+    <br>
+    
+    <p>
+    この問題は、「VRレンダリング」で見ることができる問題と似ているので、解決方法も同じです。 （<a href="../../jp/AdvancedManual/AD_VR.html">関連ページ</a>）<br>
+    <strong>(1)</strong> AnyPortraitエディタを開いて、「<strong>Bake</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブをクリックします。<br>
+    <strong>(3)</strong> 「<strong>VR Option</strong>」の値を「<strong>Multiple Cameras</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_836.jpg"/>
+    <br>
+    
+    <p>
+    レンダリングテクスチャとキャラクターのソースがすべて正常に表示されるのを見ることができます。<br>
+    しかし、複数のカメラを利用してレンダリングをする場合には、<br>
+    「クリッピングマスクの品質補正」ができない場合がありますので、<br>
+    上の画面のようにクリッピングがされている領域が異常に見られることができます。 （<a href="../../jp/AdvancedManual/AD_VR.html">関連ページ</a>）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_837.jpg"/>
+    <br>
+    
+    <p>
+    クリッピングマスクの解像度を増加させて、この問題を解決することができます。<br>
+    <strong>(1)</strong> 「メッシュグループ」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「クリッピングマスクがされているメッシュ」を選択します。 <br>
+    <strong>(4)</strong> 「<strong>Mask Texture Size</strong>」の値を増加させます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_838.jpg"/>
+    <br>
+    
+    <p>
+    Bakeをしてゲームを実行すると、クリッピングマスクの問題まで解決されたことを見ることができます。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
         <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_VR.html">< VRにビルド</a>
-        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_CharacterCostume.html">キャラクターの衣装を交換 ></a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_UnityRecorder.html">「Unity Recorder」を使用 ></a>
     </nav>
     
     <!-- 페이지 내용 끝! -->

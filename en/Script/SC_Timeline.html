@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/Script/SC_Timeline.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/Script/SC_Timeline.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/Script/SC_Timeline.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,8 +69,118 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.6</span></h4>
     
+    <p>
+    The following are the functions to work with Unity's Timeline function.<br>
+    These functions are available in AnyPortrait version 1.1.6.<br>
+    For more information on how to work with the timeline, see the <a href="../../en/AdvancedManual/AD_Timeline.html">related page</a>.<br>
+    </p>
+    <br>
+    
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>AddTimelineTrack</strong> <span class="text-muted">( </span><span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Playables</span><span class="text-muted">.</span><span class="text-success">PlayableDirector</span> <span class="text-muted">playableDirector,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">string</span> <span class="text-muted">trackName,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;To link the timeline, register the name of "Playable Director" and the track as "Track Data".<br>
+    &nbsp;&nbsp;&nbsp;You can register two or more Playable Director or tracks.<br>
+    &nbsp;&nbsp;&nbsp;When multiple tracks are registered for a common Playable Director, they are processed in the same way as multi-layer animation.<br>
+    &nbsp;&nbsp;&nbsp;At this time, you can input the order of layers and blending method as arguments.<br>
+    &nbsp;&nbsp;&nbsp;If you register different Playable Directors, it will only be controlled by one of the Playable Director currently playing.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Playables</span><span class="text-muted">.</span><span class="text-success">PlayableDirector</span> playableDirector : Playable Director you want to register<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> trackName : The name of the track to be associated with the timeline of the Playable Director.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> layer : The order of layers when playing in multiple layers (default is 0)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> blendMethod : The blend method when played in multiple layers (default is BLEND_METHOD.Additive)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : Returns true if the Playable Director exists and the name of the track is valid; false otherwise.
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>RemoveInvalidTimelineTracks</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Remove all track data that is not currently valid.<br>
+    &nbsp;&nbsp;&nbsp;This is the case when Playable Director, Timeline Asset, or Track can not be linked for reasons such as not being present in the scene.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>RemoveAllTimelineTracks</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Remove all registered track data.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>UnlinkTimelinePlayableDirector</strong> <span class="text-muted">( </span><span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Playables</span><span class="text-muted">.</span><span class="text-success">PlayableDirector</span> <span class="text-muted">playableDirector )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Removes all track data associated with the entered Playable Director.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Playables</span><span class="text-muted">.</span><span class="text-success">PlayableDirector</span> playableDirector : Playable Director of the track you want to remove<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetTimelineEnable</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">isEnabled )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Set whether animations are played by the timeline.<br>
+    &nbsp;&nbsp;&nbsp;If true, the animation will play according to the Playable Director, but if it is false, it will not be controlled by the Playable Director.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isEnabled : Whether to play by the timeline<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
     <!-- 5. 바닥 네비바 -->
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">

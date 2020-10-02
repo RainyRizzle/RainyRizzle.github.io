@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_ReduceDrawCalls.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ReduceDrawCalls.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ReduceDrawCalls.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,550 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.7</span></h4>
+    
+    <p>
+    One of the most effective ways to optimize your game's performance is to reduce <strong>Draw calls</strong>.<br>
+    Draw calls are the number of times objects or other elements are rendered.<br>
+    Shortly, the more objects is located, the more draw calls will be.<br>
+    However, depending on the rendering settings and the properties of the material, draw calls may decreases than the actual number of objects.<br>
+    We recommend you to refer the Unity, Community, and Forum articles on how to reduce draw calls.<br>
+    This page contains scripts to compare AnyPortrait's ability to reduce draw calls.<br>
+    It also describes settings that increase draw calls in certain situations.<br>
+    If you're using a script, see the <a href="../../en/Script/SC_Mesh.html">Related page</a>.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note that.</strong></span><br>
+    In Unity, the draw call count is indicated as <strong>Batch Count</strong>.<br>
+    Although the two concepts have some processing differences, they are usually about the same value, and two words are often treated as the same.<br>
+    Please note that these two words are also used as the same words on this page.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>How AnyPortrait manages Draw Calls</h3>
+    <br>
+    
+    <p>
+    AnyPortrait's systems offer a variety of features and optimization techniques to reduce draw calls.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. The cases that the draw call is optimized or not increase</strong><br>
+    - Draw calls are optimized when the character's meshes are rendered with the same textures and materials.<br>
+    - Draw calls are reduced when multiple characters are placed in the scene that share a common texture and material.<br>
+    - Draw calls do not increase even if the character's scale is negative.<br>
+    - In script functions that change the color or texture of a mesh, if the target is "Image", the draw call is prevented from increasing within the character. However, sharing draw calls with "other characters" will be turned off.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. The cases that the draw call increases</strong><br>
+    - Draw calls will increase if meshes have different textures or different materials.<br>
+    - Draw calls increase if color animation is applied or if you randomly change the color of a particular mesh with a script function.<br>
+    - Draw calls may increase depending on depth from camera. (Draw calls are reduced only when meshes of the same material are placed in succession.)<br>
+    - When the clipping mesh is rendered draw calls increases, because is uses the Render Texture.<br>
+    - If you use a property other than the Shader property used by AnyPortrait, draw calls will increase.<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortait has three draw call optimization steps.<br>
+    <strong>1. Multiple characters are rendered with the minimum draw call</strong><br>
+    - It is that draw calls are the most optimized stage, and characters sharing the same material are rendered in the same draw call<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Meshes of a single character are rendered with the minimum draw call</strong><br>
+    - Draw calls are optimized within a single character. Draw calls are not shared with other characters, but draw calls can be reduced a lot at this stage.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. A mesh that does not share draw calls exists</strong><br>
+    - Draw calls increase because some of the meshes of a single character are rendered in the different draw call.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Settings to optimize Draw Calls</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_901.jpg"/>
+    <br>
+    
+    <p>
+    The simplest way to check draw calls in Unity is as above.<br>
+    <strong>(1)</strong> Select <strong>Game screen</strong>.<br>
+    <strong>(2)</strong> Press the <strong>Stats button</strong>.<br>
+    <strong>(3)</strong> <strong>The value of the Batches</strong> is the number of draw calls.<br>
+    </p>
+    <br>
+    
+    <p>
+    The scene above shows a scene where only one character is placed, and the draw call is <strong>6</strong>.<br>
+    There is no <strong>Draw call Batching</strong>, so all elements are being rendered on each draw call.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_902.jpg"/>
+    <br>
+    
+    <p>
+    Open the <strong>Player Settings</strong>.<br>
+    - Open "<strong>Edit &gt; Project Settings"</strong> in the Unity menu and select the "<strong>Player</strong>", or<br>
+    - Select <strong>Player Settings</strong> from "<strong>File &gt; Build Settings</strong>" in the Unity menu.<br>
+    If <strong>Dynamic Batching</strong> is disabled among the items in <strong>Other Settings</strong>, draw calls are not optimized.<br>
+    Turn on <strong>Dynamic Batching</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_903.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, draw calls are reduced from 6 to <strong>2</strong>.<br>
+    (Draw calls are the sum by one background and one character with optimized meshes.)<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Comparison of Draw Call changes according to how to set the mesh color</h3>
+    <br>
+    
+    <p>
+    When changing the color of the mesh, the draw calls depend on which method you use.<br>
+    This is related to AnyPortrait's draw call management.<br>
+    See the example below to optimize.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_904.jpg"/>
+    <br>
+    
+    <p>
+    The color of a mesh has been changed by a modifier or the "<strong>SetMeshColor</strong>(<span class="text-primary">string </span>transformName, <span class="text-success">Color </span>color2X)" function.<br>
+    In this case, this optimization phase is "lowest stages" that the draw calls are not shared with each meshes.<br>
+    Draw calls increase to <strong>4</strong> because the color-changed mesh is rendered in separate the draw call.<br>
+    Using the color animation is a comfortable way to do this, but watch out for increased draw calls.<br>
+    If the mesh's color returns to the default value as (0.5, 0.5, 0.5, 1.0), draw calls are reduced,<br>
+    and you can also optimize draw calls by using a function that restores the material settings,<br>
+    such as "<strong>ResetMeshMaterialToBatch</strong>(<span class="text-primary">string </span>transformName)".<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's see what happens if the colors of the all meshes are changed in a batch.<br>
+    Script functions that changes all the colors of meshes will mainly use two things:<br>
+    </p>
+    <br>
+    
+    <p>
+    - <strong>SetMeshColorAll</strong>(<span class="text-success">Color </span>color2X) : Changes the colors of all meshes regardless of material.<br>
+    - <strong>SetMeshColorAll</strong>(<span class="text-primary">string </span>optTextureName, <span class="text-success">Color </span>color2X) : Changes the colors of the meshes, which are use the common texture, which is the argument.<br>
+    </p>
+    <br>
+    
+    <p>
+    These functions look almost identical, but there are differences in draw calls depending on how they are handled.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_905.jpg"/>
+    <br>
+    
+    <p>
+    This is the result of using the <strong>SetMeshColorAll</strong>(<span class="text-success">Color </span>color2X) function.<br>
+    This function is same that the "SetMeshColor" function is applied to all meshes in bulk.<br>
+    Since the SetMeshColor function is a function of the "<strong>lowest optimization phase</strong>", the mesh no longer shares the material, regardless of color.<br>
+    Therefore, the value the draw call is <strong>6</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_906.jpg"/>
+    <br>
+    
+    <p>
+    This is the result of using <strong>SetMeshColorAll</strong>(<span class="text-primary">string </span>optTextureName, <span class="text-success">Color </span>color2X) function.<br>
+    Since we have given the name of the image as an argument, this function does not target "mesh", but "image".<br>
+    Since this function directly change the color of material shared by meshes, all meshes continue to share the same material.<br>
+    Therefore, this function performs "Draw call optimization in single character" as "<strong>intermediate optimization phase</strong>".<br>
+    As a result, the draw calls will remain at the optimized value of <strong>2</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Comparison of Draw Call when multiple characters are placed</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_907.jpg"/>
+    <br>
+    
+    <p>
+    Draw calls increase when multiple characters are placed.<br>
+    When various kinds of objects are placed, the draw calls generally increase by the number of objects.<br>
+    However, if only characters made with AnyPortrait are placed, the draw calls are greatly reduced if those characters share the same texture and material.<br>
+    (If conditions are met, the original character does not necessarily need to be duplicated for optimization.)<br>
+    </p>
+    <br>
+    
+    <p>
+    In the above case, six characters are placed in the scene.<br>
+    However, with AnyPortrait's "<strong>highest optimization phase</strong>", you can see that the draw calls are reduced significantly to 2.<br>
+    If you do not change the color, use the default material properties and use the common texture, the characters created by AnyPortrait recognize each other and optimize draw calls without any extra work.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_908.jpg"/>
+    <br>
+    
+    <p>
+    The screen above shows that <strong>one of the six characters</strong> is selected and the function <strong>SetMeshColorAll</strong>(<span class="text-primary">string </span>optTextureName, <span class="text-success">Color </span>color2X) is applied.<br>
+    As this function was used earlier, the "<strong>intermediate optimization phase</strong>", this character no longer shares the material with other characters.<br>
+    Therefore, the draw calls increase from 2 to <strong>12</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    Of course, this value is pretty much less than expected maximum draw call of 31, which is the sum of the total number of meshes<strong>(30)</strong> and one background<strong>(1)</strong>.<br>
+    However, it seems to have increased significantly compared to the most optimized value of 2.<br>
+    </p>
+    <br>
+    
+    <p>
+    This result is due to the "continuous rendering order", one of the conditions under which draw calls are batched and reduced.<br>
+    See additional explanation below.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_909.jpg"/>
+    <br>
+    
+    <p>
+    Let's see how the characters are placed in the current scene.<br>
+    The characters above are a bit behind, and characters in the same row have the same Z position.<br>
+    Since the color has the same Z position as the changed character, the rendering order of the meshes of the different materials is mixed.<br>
+    As a result, there are many situations where materials are switched while rendering is performed sequentially.<br>
+    This situation does not effectively reduce draw calls even if several groups of objects share material.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_910.jpg"/>
+    <br>
+    
+    <p>
+    Let's see how the draw calls change by changing the Z position of the characters.<br>
+    For simplicity, we tried to make sure that the Z positions are not equal but placed back and forth sequentially.<br>
+    When rendering sequentially according to the Z position, this method prevents the rendering order of the "color-changed characters" meshes and the rendering order of other meshes from being mixed.<br>
+    The number of draw calls has been greatly reduced from 12 to <strong>4</strong> again.<br>
+    </p>
+    <br>
+    
+    <p>
+    If you know this principle, you can do a little more optimization.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_911.jpg"/>
+    <br>
+    
+    <p>
+    This time, the "color-changed character" is placed first.<br>
+    The draw calls are now 3, which is the minimum expected value, because other characters are intentionally placed so that they can be bundled and rendered at once.<br>
+    This is the most optimized state, but in practice it is difficult to reposition objects to reduce draw calls in the game.<br>
+    Instead, we recommend organizing your scene in such a way that draw calls are likely to be reduced.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_912_2.jpg"/>
+    <br>
+    
+    <p>
+    What happens if you apply <strong>SetMeshColorAll</strong>(<span class="text-primary">string </span>optTextureName, <span class="text-success">Color </span>color2X) to all characters?<br>
+    Since this function is a "<strong>intermidiate optimization phase</strong>", once called, "Draw call optimization is a single character" is retained, but "Draw call optimization with other characters" is no longer performed.<br>
+    Regardless of the color, the draw calls increase slightly to 7.<br>
+    </p>
+    <br>
+    
+    <p>
+    A value of 7 means that the Z positions of the characters are properly distributed (background 1 + character 6), <br>
+    as explained above, if the Z positions are the same and the rendering order overlaps, the worst case draw call may not be optimized.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_912.jpg"/>
+    <br>
+    
+    <p>
+    The screen above shows the characters are placed in the same <strong>Z position</strong> with other same conditions.<br>
+    There are no draw call optimizations, reaching 31, which is a maximum.<br>
+    </p>
+    <br>
+    
+    <p>
+    Draw calls are internal calculation of the Unity engine, so there are many other causes of increase and decrease in addition to the Z position.<br>
+    Try other ways to optimize drawcalls.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Cases that can increase draw calls</h3>
+    <br>
+    
+    <p>
+    There are many conditions under which draw calls can be increased.<br>
+    Below we introduce some features of AnyPortrait that increase the draw calls other than the above functions or color modifiers.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_913.jpg"/>
+    <br>
+    
+    <p>
+    If <strong>multiple images</strong> are used for one character, the draw calls will increase.<br>
+    It may be effective to use one large image rather than several smaller ones.<br>
+    (Please check in advance since it may vary depending on the build environment and devices.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_914.jpg"/>
+    <br>
+    
+    <p>
+    Clipping meshes use the <strong>Render Texture</strong> technique.<br>
+    Due to the feature of the render texture technique, the clipping meshes does not share draw calls with other meshes.<br>
+    Draw calls are increased for both clipping mask meshes and meshes being clipped.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_915.jpg"/>
+    <br>
+    
+    <p>
+    If you set the mesh's <strong>Shader Settings</strong> to something other than the default, this mesh will not be able to share the material with other meshes.<br>
+    This mesh is changed to be the "<strong>lowest optimization phase</strong>".<br>
+    This is the case if you set the <strong>Blend method</strong> to a value <strong>other than Alpha Blend</strong>, or use a <strong>Material Set</strong> that is different from the default.<br>
+    Using the custom properties of the material using script functions (such as the SetMeshCustomFloatAll function) or the Add Custom Property function on this screen also causes an increase in draw calls.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_916.jpg"/>
+    <br>
+    
+    <p>
+    If you check in the game, you can see that the draw calls are increased by some meshes.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Reducing Draw Calls using the Sorting Group</h3>
+    <br>
+    
+    <p>
+    Despite the above explanation, draw calls often increase.<br>
+    In particular, it is difficult to reduce draw calls when many different characters or objects are placed.<br>
+    If a large number of objects composed of <strong>Mesh Renderers</strong> appear like AnyPortrait, the draw call can increase significantly.<br>
+    </p>
+    <br>
+    
+    <p>
+    At this time, draw calls can be effectively reduced by using <strong>Sorting Group</strong>. (<a href="../../en/AdvancedManual/AD_SortingLayer.html">related page</a>)<br>
+    In particular, this time, we will use Unity's <strong>Frame Debugger</strong> to examine the rendering process in detail.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1037.jpg"/>
+    <br>
+    
+    <p>
+    This is a scene where two types of characters are placed.<br>
+    Both characters were created with AnyPortrait.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1038.jpg"/>
+    <br>
+    
+    <p>
+    At the start of the game, a simple script was written that duplicated 10 more of the two characters.<br>
+    This script makes the duplicated characters positioned within a range.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1039.jpg"/>
+    <br>
+    
+    <p>
+    Let's run the game.<br>
+    <strong>(1)</strong> The characters are duplicated while the script is running.<br>
+    <strong>(2)</strong> Draw call appeared as <strong>27</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    Since it is duplicated to a random location, the result is slightly different each time the game is launched,<br>
+    It is very regrettable that as the character increases, the draw call is also increased almost in proportion.<br>
+    The duplicated characters are of the same material as the original, so it is good to share draw calls if possible.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1040.jpg"/>
+    <br>
+    
+    <p>
+    Let's run the frame debugger and check the rendering history.<br>
+    Run <strong>Window &gt; Analysis &gt; Frame Debugger</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1041.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Run the game and <strong>(2)</strong> click the <strong>Enable</strong> button.<br>
+    <strong>(3)</strong> It shows how the rendering has progressed in the current frame.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1042.jpg"/>
+    <br>
+    
+    <p>
+    Since you need to check the mesh with translucent material, check "<strong>Drawing &gt; Render.TransparentGeometry &gt; RenderForwardAlpha.Render &gt; RenderForward.RenderLoopJob</strong>".<br>
+    <strong>(1)</strong> The order in which the meshes were rendered appears. <strong>Draw Dynamic</strong> means that several meshes are rendered together in one draw call, so it is somewhat optimized.<br>
+    The problem is that <strong>respective meshes are rendered one by one</strong> as shown in <strong>(2)</strong>.<br>
+    If you see the above result, it means that meshes with different materials were rendered in order during the rendering process.<br>
+    </p>
+    <br>
+    
+    <p>
+    This is especially the case with AnyPortrait characters that consist of multiple meshes.<br>
+    While each of the meshes is being rendered, the meshes of other characters with similar Z values ​​are mixed and rendered.<br>
+    </p>
+    <br>
+    
+    <p>
+    If you use <strong>Sorting Group</strong>, you can prevent "rendering mixed with other character's meshes" as above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1043.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select each AnyPortrait character.<br>
+    <strong>(2)</strong> Change the value of "<strong>Sorting Order Option</strong>" to "<strong>Depth To Order</strong>".<br>
+    <strong>(3)</strong> Add the "<strong>Sorting Group</strong>" component.<br>
+    (You can also add the Sorting Group component to the AnyPortrait character's parent GameObject.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1044.jpg"/>
+    <br>
+    
+    <p>
+    Run the game again and click the <strong>Enable</strong> button of the frame debugger to check the result.<br>
+    <strong>(1)</strong> You can see that all rendering steps are shown as <span class="text-success"><strong>Draw Dynamic</strong></span>.<br>
+    Also, you can see that the draw call is greatly reduced because the rendering is performed in units of <strong>Sorting Group</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    Draw calls have been reduced considerably, and the current optimization results are in good status for general game projects.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, it would be nice if we could reduce draw calls a little more here.<br>
+    This is because the current step is "Rendering per Character", but the most optimized step is "<span class="text-primary"><strong>Rendering per Material</strong></span>".<br>
+    This optimization strategy can be difficult depending on the game, but it would be a good idea to give it a try if possible.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1045.jpg"/>
+    <br>
+    
+    <p>
+    This method has <strong>the point that meshes with the same material can have the same draw call</strong> if they have their own rendering order <strong>for each character of the same type</strong>.<br>
+    <strong>(1)</strong> Select one of the two characters. In this example, the "Slime" character is selected.<br>
+    <strong>(2)</strong> In <strong>Sorting Group</strong>, change the value of <strong>(3)</strong> <strong>Order in Layer</strong> to "<span class="text-danger"><strong>1</strong></span>" instead of the default value of 0.<br>
+    If more characters are added, set each character type to have a different <strong>Sorting Order</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1046.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> When you run the game and check the results in the frame debugger, you can see that draw calls have occurred as many as <strong>character type</strong>, not the number of characters.<br>
+    <strong>(2)</strong> When the background is included, only draw call count of "<span class="text-danger"><strong>3</strong></span>" occurred.<br>
+    </p>
+    <br>
+    
+    <p>
+    In this method, there is a problem that the rendering order is fixed depending on the character type.<br>
+    (In the image above, all Slimes are in front of all Dragons.)<br>
+    However, if the rendering order is not important, and if there are a lot of characters, it is a good idea to try this optimization strategy.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

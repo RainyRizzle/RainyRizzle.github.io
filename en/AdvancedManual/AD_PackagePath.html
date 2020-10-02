@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_PackagePath.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_PackagePath.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_PackagePath.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,201 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.3</span></h4>
+    
+    <p>
+    When the AnyPortrait package is installed, the files in the package are installed in "<strong>Assets/AnyPortrait</strong>" and the sub-path.<br>
+    The AnyPortrait editor uses a lot of resources, and it loads from the path where the package is installed.<br>
+    Depending on the user, it is necessary to move the path where AnyPortrait is installed to another location for collaboration.<br>
+    However, if you move the folder where AnyPortrait is installed to a different path, the editor does not open.<br>
+    This page explains how to change the path of the AnyPortrait package.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_931.jpg"/>
+    <br>
+    
+    <p>
+    When AnyPortrait is installed, all files are located in "<strong>Assets/AnyPortrait</strong>" as above.<br>
+    Let's move the <strong>AnyPortrait folder</strong> to another location.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_932.jpg"/>
+    <br>
+    
+    <p>
+    Here, we created a new folder called "<strong>CustomFolder</strong>" and moved the AnyPortrait folder under it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_933.jpg"/>
+    <br>
+    
+    <p>
+    When we run the editor, the editor does not open and the above warning message appears.<br>
+    The above message informs you that the contents of the package are corrupted or the path has been changed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_934.jpg"/>
+    <br>
+    
+    <p>
+    Let's make the AnyPortrait editor run by entering the changed path.<br>
+    Return to the Unity Editor and select "<strong>Window &gt; AnyPortrait &gt; Change Installation Path</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_935.jpg"/>
+    <br>
+    
+    <p>
+    A dialog for setting the path to the AnyPortrait package appears.<br>
+    <strong>(1)</strong> Click the "<strong>Change Path</strong>" button.<br>
+    <strong>(2)</strong> <strong>Select the AnyPortrait folder</strong> in the changed location.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Caution</strong></span><br>
+    You should not rename the folder, nor should it be located outside the Assets folder.<br>
+    Modifying the path of resources inside the AnyPortrait folder can also cause problems.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_936.jpg"/>
+    <br>
+    
+    <p>
+    The package installation path setting has been changed as the above.<br>
+    If you want to return to the defaults, press the "<strong>Use Default Path</strong>" button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_937.jpg"/>
+    <br>
+    
+    <p>
+    Before opening the editor, you may need to reset it, as the editor may still try to load resources from the wrong path.<br>
+    Run "<strong>Window &gt; AnyPortrait &gt; Reset Editor</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_938.jpg"/>
+    <br>
+    
+    <p>
+    The AnyPortrait editor now runs normally.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Installing Material Presets to the changed path</h3>
+    <br>
+    
+    <p>
+    Most resources of AnyPortrait are loaded from the changed path according to the setting.<br>
+    But there is one exception.<br>
+    "<strong>Material Preset</strong>" in "<strong>Material Library</strong>" (<a href="../../en/AdvancedManual/AD_MaterialLibrary.html">Related page</a>) will be installed in the original default path.<br>
+    In this case, you can solve the problem in the following way.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_939.jpg"/>
+    <br>
+    
+    <p>
+    Let's open the Material Library and install a Material Preset.<br>
+    Press the <strong>Material Library</strong> button to open it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_940.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the <strong>Material Preset</strong> and press the <strong>Unpack Preset</strong> button to install.<br>
+    <strong>(2)</strong> After installation, a message is shown to restart the material library. Press the Okay button and open the material library again.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_941.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select one of the installed Material Presets.<br>
+    <strong>(2)</strong> You can see that Shader assets of the preset are not recognized.<br>
+    If the user creates a Material Set, shaders are recognized, but the preset is not recognized because it uses a fixed path.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_942.jpg"/>
+    <br>
+    
+    <p>
+    Let's go back to Unity Editor and check the folder where the presets are installed.<br>
+    Material Presets are installed under <strong>the Original path (Assets/AnyPortrait)</strong>, not the changed path.<br>
+    You need to move these files to match the changed package path.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_943.jpg"/>
+    <br>
+    
+    <p>
+    Material Presets are created and installed in a folder similar to the preset name under "<strong>Assets/AnyPortrait/Assets/Shaders</strong>".<br>
+    If you have Advanced Presets installed, the folder you should move to is named "<strong>Advanced</strong>".<br>
+    Move this folder to "<strong>Assets/~(changed root folder)/AnyPortrait/Assets/Shaders</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_944.jpg"/>
+    <br>
+    
+    <p>
+    When you move files, unnecessary folders remain.<br>
+    Delete these folders.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_945.jpg"/>
+    <br>
+    
+    <p>
+    You can now see that the Shader assets in the Material Preset are loaded normally.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

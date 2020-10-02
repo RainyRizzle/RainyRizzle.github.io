@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_BoneIK.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_BoneIK.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_BoneIK.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,236 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_66.jpg"/>
+    <br>
+    
+    <p>
+    When controlling the bones, basically you control by rotating the bones.<br>
+    Sometimes, on the other hand, the user moves one bone and the other is automatically rotated.<br>
+    This method is called <strong>IK (Inverse Kinematics)</strong>.<br>
+    IK allows intuitive control.<br>
+    AnyPortrait provides both <strong>(1)</strong> <strong>IK control functions for editor editing</strong> and <strong>(2)</strong> <strong>IK functions that can be called from the game</strong>.<br>
+    This page describes the settings for using IK and how to use it in the editor.<br>
+    Bones with IK enabled Scripts used in this game can be found on the <a href="../../en/Script/SC_Bone.html">related page</a>.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Bone Details UI</h3>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_67.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    Bone details UI is structured as follows.<br>
+    <strong>1. Name</strong> : Bone name<br>
+    <strong>2. Base Pose Transformation</strong> : Default position, rotation, scale<br>
+    <strong>3. Socket</strong>: Whether to set the socket<br>
+    <strong>4. IK Mode</strong> : Current status of four IK modes (Single, Head, Chain, Disabled)<br>
+    <strong>5. IK chain information </strong>: IK chain connection information<br>
+    <strong>6. Constraint</strong> : IK angle limit setting<br>
+    <strong>7. Hierarchy</strong> : Bone parent, child connection information<br>
+    <strong>8. Shape</strong> :  Shape and color rendered to the editor. Render position only when Helper is checked<br>
+    <strong>9. Remove Bone</strong><br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
+    <br><br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Create an IK chain</h3>
+    <br>
+    
+    <p>
+    When you deal with this IK setting professionally, you need a lot of options and it can be difficult.<br>
+    To make IK fast and easy, AnyPortrait provides <strong>"IK Chain"</strong> and <strong>"IK Mode"</strong> methods.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_78.jpg"/>
+    <br>
+    
+    <p>
+    Concept illustration of IK chain.<br>
+    The IK chain consists of <strong>Head, Chain, and Target</strong>.<br>
+    IK is calculated from the position of the <strong>Target bone</strong> with the <strong>Head bone</strong> as the starting point.<br>
+    </p>
+    <br>
+    
+    <p>
+    For IK chains, the bone has one of four IK modes.<br>
+    <strong>1. Single</strong> : The state of the Head with the target directly attached without a chain. This is the default for all bones with child bones.<br>
+    <strong>2. Head</strong> : The starting point of the IK chain.<br>
+    <strong>3. Chain</strong> : The state of the intermediate bones in the IK chain. All bones between Head and Target are in Chain mode, which is forced.<br>
+    <strong>4. Disabled</strong> : Not in the IK chain. There is no child bone or is arbitrarily specified.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_68.jpg"/>
+    <br>
+    
+    <p>
+    To create an IK chain,<br>
+    <strong>(1)</strong> <strong>select the bone</strong> to be the Head of the IK chain,<br>
+    <strong>(2)</strong> <strong>change the IK mode to Head</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_69.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> <strong>Press the Change IK Target button</strong> to <strong>(4)</strong> <strong>select the child to be targeted</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_70.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_71.jpg"/>
+    <br>
+    
+    <p>
+    When the IK chain is created, the middle bones are automatically changed to Chain mode.<br>
+    The target bone is not affected by the IK chain itself.<br>
+    (Currently, there is no child bone, which is Disabled mode, but you can also configure a new IK chain.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_72.jpg"/>
+    <br>
+    
+    <p>
+    With the IK chain in place, you can see that the bones in the chain rotate automatically as you move the bone.<br>
+    (You can also check in bone editing, modifiers, and animations.)<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>IK Angle Constraint</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_73.jpg"/>
+    <br>
+    
+    <p>
+    IK calculation, you may want to limit the angle depending on the joint.<br>
+    </p>
+    <br>
+    
+    <p>
+    Here's how to use the ability to limit the angle of rotation.<br>
+    <strong>(1)</strong> <strong>Select the bone in the IK chain</strong> to limit the rotation angle.<br>
+    <strong>(2)</strong> <strong>Press the Constraint button</strong> to enter the <strong>Constraint On</strong> state.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_74.jpg"/>
+    <br>
+    
+    <p>
+    Sets the rotation limit range.<br>
+    You can set the limit range with <strong>Min and Max values</strong>.<br>
+    <strong>The Preferred value</strong> is the angle that is the basis of the IK calculation expression.<br>
+    Bones with angle constraint can be viewed intuitively on the screen.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_75.jpg"/>
+    <br>
+    
+    <p>
+    IK angle constraints can be found in the modifier or animation.<br>
+    (Note : Since it is a function of limiting the rotation deformation value, it is <strong>not possible to check</strong> on the <strong>mesh group-Bone tab</strong>.)<br>
+    When you work on a modifier or animation, you can see that the angle-limited IK is executed as in the above screen.<br>
+    </p>
+    <br>
+    
+    <p>
+    This setting also applies to games.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Bone without IK</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_76.jpg"/>
+    <br>
+    
+    <p>
+    There are cases where IK should not be applied.<br>
+    In the following cases, the parent bone is not related to the IK chain relationship.<br>
+    </p>
+    <br>
+    
+    <p>
+    - If there is no parent bone<br>
+    - If the parent bone is in Disabled mode<br>
+    - If the parent bone has an IK chain but is targeted to another child bone<br>
+    </p>
+    <br>
+    
+    <p>
+    The above picture shows that the parent bone has an IK chain but the IK chain is not formed because the IK chain is formed for the other child bone.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_77.jpg"/>
+    <br>
+    
+    <p>
+    If IK is not set, the parent bone will not rotate.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

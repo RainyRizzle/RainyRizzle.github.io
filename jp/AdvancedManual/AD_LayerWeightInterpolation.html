@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_LayerWeightInterpolation.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_LayerWeightInterpolation.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_LayerWeightInterpolation.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,155 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_88.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitが提供する様々な機能を利用するためには、モディファイアを追加する必要があります。<br>
+    同じモディファイアを複数回登録することもできます。また、1つのメッシュに複数の制御パラメータを登録することもできます。<br>
+    ただし、モディファイアは特定の順序で処理されるため、各プロセスの結果をマージする方法を選択する必要があります。<br>
+    このページでは、複数のモディファイアと「キーセット」の処理について説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>モディファイア(Modifier), キーセット(Set of Keys), キー(Key)</h3>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_89.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    これは、モディファイアの詳細設定画面の一例です。<br>
+    モディファイア情報を表示します。 このUIは3つの主な領域で構成されています。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. 「モディファイア」情報</strong><br>
+    処理順序とマージされる方法のオプションがあります。<br>
+    <strong>Color Option On/Off</strong> : モディファイアが色処理を実行するかどうかを決定します。<br>
+    <strong>Blend Method</strong> : 以前のモディファイアの情報とマージする方法です。<br>
+    <strong>Blend Weight</strong> : 以前のモディファイアとマージされる重みです。<br>
+    <strong>Layer Up/Down</strong> : モディファイアの処理順序を変更します。下位レイヤが最初に計算されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. 「キーのセット」情報</strong><br>
+    これは モディファイアを制御する主体です。<br>
+    それぞれに複数のキーがあります。<br>
+    キーセット間のマージプロセスは、モディファイアと同じです。<br>
+    <strong>Blend Method, Weight</strong> : キーセット間の重み付けとマージ処理ます。<br>
+    <strong>Color Option On/Off</strong> : キーセットがカラー処理を実行するかどうかを決定します。<br>
+    <strong>Layer Up/Down</strong> : キーセットをマージするシーケンス。 最初に下位レイヤが計算されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. キー</strong><br>
+    モディファイアの実際のデータはキーに格納されます。<br>
+    複数のキーをキーセットに格納することができます。<br>
+    <strong>Clipboard, Copy, Paste</strong> : キー情報をコピーまたは貼り付けます。<br>
+    <strong>Reset Value</strong> : 選択したキーの情報をリセットします。<br>
+    <strong>Key List</strong> : これが生成されたキーリストです。これらの項目は、<strong>「マージの重み」、「キーの位置」、「Select」ボタン、「Remove」ボタン</strong>です。<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
+    <br><br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_90.jpg"/>
+    <br>
+    
+    <p>
+    これはモディファイアの計算順序です。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1.</strong> 各キーの情報が補間される。 これには、アニメーション内のキーイング制御パラメータまたはキーフレームが含まれます。<br>
+    <strong>2.</strong> 補間されたキー情報を持つキーセット間のレイヤー順に従ってマージされます。 これには、制御パラメータまたはアニメーションクリップが含まれます。<br>
+    <strong>3.</strong>レイヤー順にキー情報のセットでマージされたモディファイアです。 最終的にメッシュグループに反映されます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>モディファイアの優先順位</h3>
+    <br>
+    
+    <p>
+    モディファイアは原則としてレイヤの順に処理されます。<br>
+    ただし、モディファイアの性質によっては、必ずしもレイヤー順に処理されるとは限りません。<br>
+    同じモディファイアは、優先順位を除いて、レイヤー順に処理されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>処理順序 1</strong> : Morph (Controller), Morph (Animation)<br>
+    <strong>処理順序 2</strong> : Rigging<br>
+    <strong>処理順序 3</strong> : Transform (Controller), Transform (Animation)<br>
+    <strong>処理順序 4</strong> : Physic<br>
+    </p>
+    <br>
+    
+    <p>
+    注意 : 「Rigging」モディファイアは1つだけ適用する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>重みと補間方式</h3>
+    <br>
+    
+    <p>
+    「<strong>ブレンドメソッド (Blend Method)</strong>」と「<strong>ブレンドウェイト (Blend Weight)</strong>」は、マージ処理の重要な設定です。<br>
+    補間方法と重みは、以下の2つの方法で異なって扱われます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Interpolation(補間)</strong> : 上書き処理メソッド。 ウェイトが1の場合、下位層のモディファイアは無視され、現在のモディファイアの100％のみが適用されます。<br>
+    <span class="text-danger"><strong>"以前の処理結果" x (1 - Weight) + "現在のモディファイア" x (Weight)</strong></span><br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Additive(添加)</strong> : 追加する方法で処理されます。最も一般的に使用される方法は、重みが1である場合は、「以前の層の処理」の結果に100％の値を追加することです。<br>
+    <span class="text-danger"><strong>"以前の処理結果" + "現在の</strong></span><span class="text-danger"><strong>モディファイア" x (Weight)</strong></span><br>
+    </p>
+    <br>
+    
+    <p>
+    但し、色情報が加算的である場合には、加算の代わりに「2X Multiply」法により補間が行われる。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

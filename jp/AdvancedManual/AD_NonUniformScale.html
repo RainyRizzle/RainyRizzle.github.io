@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>「Non-Uniform Scale」オプション</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_NonUniformScale.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_NonUniformScale.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_NonUniformScale.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 「Non-Uniform Scale」オプション</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">「Non-Uniform Scale」オプション</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.2.5</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_960.jpg"/>
+    <br>
+    
+    <p>
+    上の画像のようにキャラクターのサイズをXやY軸に増やすことをするのは簡単に見えるが、意外にもこれAnyPortraitでサポートされていない機能です。<br>
+    AnyPortraitのシステムで位置、回転、サイズ変換はUnityのそれと異なって設計した。<br>
+    この方式は、一連のボーンのサイズが歪みされず、変更される利点がありますが、逆に上記のように、非均一サイズ変換をすることは制限が設けられています。<br>
+    </p>
+    <br>
+    
+    <p>
+    しかし、AnyPortrait v1.2.5に追加されたオプションにより制限たとえ均一でないサイズの変換が可能になりました。<br>
+    このページでは、このオプションを含め、「ボーンにリギングされたキャラクター全体の大きさ」を変更する方法を説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Unityでサイズを制御</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_961.jpg"/>
+    <br>
+    
+    <p>
+    これは、最も推奨される方法です。<br>
+    <strong>(1)</strong> 「親になる空の<strong>GameObject</strong>」を作成します。<br>
+    <strong>(2)</strong> AnyPortraitで製作されたキャラクターを <strong>(1)</strong> で作成した「<strong>GameObjectの子</strong>」に登録します。<br>
+    後に「<strong>親になったGameObject</strong>」の<strong>Transformを制御</strong>して、位置、回転、サイズを変更します。<br>
+    </p>
+    <br>
+    
+    <p>
+    この方法は、最も信頼性が高く、特に「Mecanim」や「Timeline」と連動した場合に不可欠で適用する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>AnyPortrait内部でキャラクターのサイズを制御</h3>
+    <br>
+    
+    <p>
+    次に、AnyPortraitを利用してキャラクターのサイズを変更する方法を学びましょう。<br>
+    リギングが適用された場合には、全体のサイズを制御するために、「<strong>ルートボーン（Root Bone）</strong>」のサイズを調節することと思います。<br>
+    この方法は、AnyPortraitではなく、他のエンジンやツールのほとんどに有効です。<br>
+    「ルートボーン」の大きさを変えてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_962.jpg"/>
+    <br>
+    
+    <p>
+    上記キャラクターは1つの「<strong>ルートボーン</strong>」があります。<br>
+    「<strong>ルートボーン</strong>」のXサイズを増加させてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_963.jpg"/>
+    <br>
+    
+    <p>
+    「ルートボーン」の<strong>X</strong>を増やすと、一般的に<strong>(1)</strong>の画像のような結果が出ることを期待します。<br>
+    しかし、AnyPortraitは、基本的に次の理由<strong>(2)</strong>のような結果や、まったく異なる結果が表示されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>結果が予想と異なる理由</strong></span><br>
+    <strong>1.</strong> ボーンのサイズは、「ローカル座標系」のみ動作します。<br>
+    <strong>2.</strong> 子ボーンのサイズも「ローカル座標系」のみ変化がAnyPortraitの特徴です。したがって、親ボーンのサイズ増減方向と子ボーンの大きさの増減方向は、互いに独立しています。<br>
+    </p>
+    <br>
+    
+    <p>
+    特に、<strong>2</strong>の特徴は、親ボーンの大きさが不均一になっても、子ボーンの大きさが歪曲される現象を低減する利点があります。<br>
+    しかし、一方で、上記のように、全体のサイズに歪みを与えようと場合には、問題になります。<br>
+    </p>
+    <br>
+    
+    <p>
+    「ルートボーン」の大きさを制御する方法が有効でない場合は、「<strong>子メッシュグループ</strong>」を別々に作って、この問題を解決を試みることができます。<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_964.jpg"/>
+    <br>
+    
+    <p>
+    既存のキャラクターが「<strong>子メッシュグループ</strong>」に含まれるように作られてみましょう。<br>
+    <strong>(1)</strong> 「<strong>Add Mesh Group</strong>ボタン」を押して<strong>(2)</strong> 「<strong>新しい親メッシュグループ</strong>」を作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_965.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 新たに作成された<strong>親メッシュグループ</strong>を選択します。<br>
+    <strong>(2)</strong> 「<strong>ルートユニット</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_966.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「前のキャラクターのルートユニット」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Unregist Root Unit</strong>ボタン」を押して、ルートユニットをオフにします。<br>
+    新しく作成された空のメッシュグループのみ1つのルートユニットとして登録された状態になります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_967.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 再度「親メッシュグループ」を選択します。<br>
+    現在、このメッシュグループは、空の状態です。<br>
+    既存のキャラクターを、このメッシュグループの子として登録してみましょう。<br>
+    <strong>(2)</strong> 「<strong>+</strong>ボタン」を押します。<br>
+    <strong>(3)</strong> 「<strong>Mesh Group</strong>タブ」を選択します。<br>
+    <strong>(4)</strong> 既存のキャラクターメッシュグループを選択します。<br>
+    <strong>(5)</strong> 「<strong>Add</strong>ボタン」を押して <strong>(6)</strong> 案内メッセージの「<strong>Okay</strong>ボタン」を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_968.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 上の画像のように、従来のキャラクターが子メッシュグループに含まれていました。<br>
+    既存のデータはほとんど正常に動作しますが、アニメは唯一の「ルートユニットとして登録されたメッシュグループ」のみ正常に動作します。<br>
+    したがって、アニメーションに接続されたメッシュグループを変更する必要があります。<br>
+    <strong>(2)</strong> アニメーションクリップを選択して、「<strong>Change</strong>ボタン」を押した後に、新しい親メッシュグループに接続情報を変更します。<br>
+    （このプロセスの詳細説明は、関連ページを参照してください。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_969.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターをメッシュグループの状態に制御することができるようになりました。<br>
+    「<strong>Transform</strong>」または「<strong>Morph</strong>」タイプの「タイムラインのレイヤー」を選択した状態では、<br>
+    <strong>(1)</strong> 既存のキャラクターである「子メッシュグループ」を選択します。<br>
+    <strong>(2)</strong> 「タイムラインのレイヤー」に登録します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_970.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「キーフレーム」を追加します。<br>
+    <strong>(2)</strong> 「子メッシュグループ」の大きさをX軸に増加させてみましょう。<br>
+    <strong>(3)</strong>のような結果が出てくることが予想したが、残念ながらやや奇妙な形で大きさが変わってしまいました。<br>
+    さらに、上記のテストした 「<strong>ルートボーン</strong>」のサイズを変更していたこととも異なる結果です。<br>
+    「<strong>子メッシュグループ</strong>」と「<strong>ルートボーン</strong>」の間でのサイズ変換方式がAnyPortraitのシステムがユーザの意図とは異なる動作するからです。<br>
+    </p>
+    <br>
+    
+    <p>
+    しかし、v1.2.5に追加されたオプションを使用して、この問題を解決することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_971.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>設定ダイアログ</strong>」を開き、<br>
+    <strong>(2)</strong> 「<strong>Portrait</strong>タブ」で、「<strong>Scale of Root Bone</strong>」の値を「<strong>Non-Uniform Scale</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_972.jpg"/>
+    <br>
+    
+    <p>
+    または、上記の方法でもオプションを変更することができます。<br>
+    <strong>(1)</strong> 「<strong>Bakeダイアログ</strong>」を開き、<strong>(2)</strong> 「<strong>Setting</strong>タブ」を選択します。<br>
+    <strong>(3)</strong> 同様に、「<strong>Scale of Root Bone</strong>」オプションを「<strong>Non-Uniform Scale</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_973.jpg"/>
+    <br>
+    
+    <p>
+    再度編集画面に戻ると、キャラクターのサイズが正常に動作することを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_974.jpg"/>
+    <br>
+    
+    <p>
+    Bakeを実行して、ゲームで確認しても同じようにサイズが意図したとおりに変更されることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意</strong></span><br>
+    この説明では、既存のキャラクターを子メッシュグループに変換するプロセスを込めたが、<br>
+    モディファイヤが親メッシュグループではなく、子メッシュグループに作成された状態はそのままなので、実際にこの方法は推奨されません。<br>
+    代わりに、最初から「子メッシュグループ」をあらかじめ作成し、「親メッシュグループ」に「モディファイヤ」を生成して編集することが最も推奨される作業方法です。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>「Non-Uniform Scale」オプションについて</h3>
+    <br>
+    
+    <p>
+    上で紹介した「Non-Uniform Scale」オプションは、「子メッシュグループ」と「サブのルートボーン」との関係のみに適用されるオプションです。<br>
+    このオプションは、既存のAnyPortraitのシステムとは異なり、非均一なサイズの変換を限定的に許可します。<br>
+    その他の場合、すなわち、「ルートメッシュグループのルートパターン」や「ボーンがない子メッシュグループ」、または「リギングがされていないメッシュに」には適用されません。<br>
+    </p>
+    <br>
+    
+    <p>
+    従来の方式と「Non-Uniform Scale」方式の違いを以下のように比較してみました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_975.jpg"/>
+    <br>
+    
+    <p>
+    従来の方式です。<br>
+    上の画像は、「ルートボーン」にサイズ変換を適用した状態です。<br>
+    「ルートボーン」のX軸サイズが増加すると、全体的にX軸にサイズが増加するのではなく、ボーンの「<strong>厚さ</strong>」が増加します。<br>
+    同じように、「ルートボーン」のY軸サイズが増加すると、ボーンの「<strong>長さ</strong>」が増加することが、このシステムの特徴です。<br>
+    X軸やY軸にサイズを反転させると、「ルートボーン」の方向を基準に全体の大きさが反転します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_976.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Non-Uniform Scale</strong>」オプションをオンにして、ボーンがある「子メッシュグループ」のサイズを変更してみました。<br>
+    「子メッシュグループ」のX軸サイズが増加すると、全体的にボーンとメッシュが「<strong>左右</strong>」で増え、<br>
+    「子メッシュグループ」のY軸サイズが増加すると、全体的にボーンとメッシュが「<strong>上下</strong>」に増加します。<br>
+    サイズを反転すると、「子メッシュグループ」に基づいて、X軸またはY軸にサイズが反転されて、意図した結果のとおり、レンダリングがされることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>Non-Uniform Scale</strong>」オプションは、既存のサイズ変換に関するすべての問題を解決することができると思われるが、いくつかの問題点を持っているので、必要な場合にのみ、このオプションを使用する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>「Non-Uniform Scale」オプションの問題</h4>
+    <br>
+    
+    <p>
+    AnyPortraitのシステムは、ゲームではボーンやメッシュをスクリプトやIKで直接制御する容易なように、これらのサイズの変化に大きく影響を受けないように設計されました。<br>
+    逆に言えば、「Non-Uniform Scale」オプションは、次の機能と一緒に使用する場合に問題が発生します。<br>
+    </p>
+    <br>
+    
+    <p>
+    - 「スクリプト」で骨を制御する場合、通常、結果が演算されないことがあります。<br>
+    - 「IK、Jiggle Bone」が予想と異なる結果を示すことができます。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_ReversedRiggedMesh.html">< リギングが適用されたメッシュの反転サイズ</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_PSD.html">PSDファイルの読み込み ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

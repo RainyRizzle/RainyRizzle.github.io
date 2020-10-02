@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_BoneIK.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_BoneIK.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_BoneIK.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,236 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_66.jpg"/>
+    <br>
+    
+    <p>
+    骨をコントロールするときは、基本的に骨を回転させてコントロールします。<br>
+    一方、ユーザが1つの骨を動かすと、他の骨が自動的に回転することがあります。<br>
+    この方法は「<strong>IK(Inverse Kinematics)」</strong>と呼ばれています。<br>
+    IKは、直感的なコントロールを可能にします。<br>
+    AnyPortraitは <strong>(1)</strong> 「エディタでの編集のためのIKを制御する機能」と <strong>(2)</strong> 「ゲームで呼び出すことができるIK機能」を提供しています。<br>
+    このページでは、IK有効とエディタで使用する方法について説明します。<br>
+    IKが有効になって骨をゲームで使用するスクリプトは、<a href="../../jp/Script/SC_Bone.html">関連ページ</a>で見つけることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>骨の詳細UI</h3>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_67.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    骨の詳細UIは次のように構成されています。<br>
+    <strong>1. Name</strong> : 骨の名前<br>
+    <strong>2. Base Pose Transformation</strong> : デフォルトの位置、回転、スケール<br>
+    <strong>3. Socket</strong>: ソケットを設定するかどうか<br>
+    <strong>4. IK Mode</strong> : 4つのIKモード(Single, Head, Chain, Disabled)の現在のステータス<br>
+    <strong>5. IKチェーン情報</strong>: 「IKチェーン」接続情報<br>
+    <strong>6. Constraint</strong> : IK角度の限界設定<br>
+    <strong>7. Hierarchy</strong> : 骨の親子の接続情報<br>
+    <strong>8. Shape</strong> :  シェイプとカラーをエディタにレンダリングします。 位置は「Helper」がチェックされているときにのみ表示されます。<br>
+    <strong>9. Remove Bone</strong><br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
+    <br><br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>「IKチェーン」を作成</h3>
+    <br>
+    
+    <p>
+    このIKの設定を専門的に扱うときは、多くのオプションが必要となり、難しい場合があります。<br>
+    AnyPortraitはIKを迅速かつ簡単に行うために、「<strong>IKチェーン(IK Chain)</strong>」と「<strong>IKモード(IK Mode)</strong>」の方法を提供しています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_78.jpg"/>
+    <br>
+    
+    <p>
+    IKチェーンの概念図です。<br>
+    IKチェーンは「<strong>Head、Chain,、Target</strong>」で構成されます。<br>
+    IKは「<strong>Head</strong>」の骨を出発点とし、「<strong>Target</strong>」の骨の位置まで計算されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    IKチェーンの場合、骨は4つのIKモードのうちの1つを有する。<br>
+    <strong>1. Single</strong> : これは「Chain」なく「Target」のみの「Head」の状態です。これは、子の骨があるすべての骨のデフォルト値です。<br>
+    <strong>2. Head</strong> : これはIKチェーンの出発点です。<br>
+    <strong>3. Chain</strong> : IKチェーンの中間骨の状態です。「Head」と「Target」の間のすべての骨は、「Chain」モードに強制されます。<br>
+    <strong>4. Disabled</strong> : IKチェーンがありません。子の骨が存在しないか、ランダム指定された場合に、このモードが設定されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_68.jpg"/>
+    <br>
+    
+    <p>
+    IKチェーンを作成するには、<br>
+    <strong>(1)</strong> 骨を選択して、<br>
+    <strong>(2)</strong> IKモードを「<strong>Head</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_69.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> <strong>「Change IK Target」</strong>ボタンを押して、<strong>(4)</strong> 対象となる骨を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_70.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_71.jpg"/>
+    <br>
+    
+    <p>
+    IKチェーンが作成されると、中間の骨は、自動的に「Chain」モードに変更されます。<br>
+    ターゲットの骨は、IKチェーンの影響を受けません。<br>
+    (現在選択されて、骨は、子がないので、「Disabled」モードであり、他の新しいIKチェーンを構成することもできます。)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_72.jpg"/>
+    <br>
+    
+    <p>
+    IKチェーンを使用すると、骨を移動したとき、チェーンの骨が自動的に回転することを見ることができます。<br>
+    (骨の編集、モディファイヤとアニメーションで確認することもできます。)<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>IK Angle Constraint(角度制約)</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_73.jpg"/>
+    <br>
+    
+    <p>
+    IK計算では、ジョイントに応じて角度を制限することができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    回転角度を制限する機能を使用する方法は次のとおりです。<br>
+    <strong>(1)</strong> 骨を選択します。<br>
+    <strong>(2)</strong> 「<strong>Constraint</strong>」ボタンを押して 「<strong>Constraint On</strong>」状態にします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_74.jpg"/>
+    <br>
+    
+    <p>
+    回転限度の範囲を設定します。<br>
+    「<strong>Min</strong>」と「<strong>Max</strong>」の値を使用して限界範囲を設定することができます。<br>
+    「<strong>Preferred</strong>」の値は、IKの計算式の基礎となる角度です。<br>
+    角度制限がある骨を画面上で直感的に見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_75.jpg"/>
+    <br>
+    
+    <p>
+    IK角度の制約が動作するのはモディファイヤやアニメーションで見ることができます。<br>
+    (注：回転変形値を制限する機能であるため、<strong>メッシュグループの「Bone」タブ</strong>の画面では、テストすることができません。)<br>
+    モディファイヤやアニメで作業するとき、上記の画面のように角度制限IKが実行されることを確認することができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    この設定は、ゲームにも適用されます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>IKなしの骨</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_76.jpg"/>
+    <br>
+    
+    <p>
+    IKを適用しない場合があります。<br>
+    以下の場合、親骨はIK連鎖関係には関係しません。<br>
+    </p>
+    <br>
+    
+    <p>
+    - 親の骨がない場合<br>
+    - 親骨が「Disabled」モードにある場合<br>
+    - 親骨がIK鎖を有するが、別の子骨に標的化されている場合<br>
+    </p>
+    <br>
+    
+    <p>
+    上の写真は、親骨がIK鎖を有するが、IK鎖が他の子供骨のために形成されるため、IK鎖が形成されないことを示している。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_77.jpg"/>
+    <br>
+    
+    <p>
+    IKが設定されていない場合、親の骨は回転しません。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

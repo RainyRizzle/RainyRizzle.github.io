@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Non-Uniform 크기 옵션</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_NonUniformScale.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_NonUniformScale.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_NonUniformScale.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > Non-Uniform 크기 옵션</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Non-Uniform 크기 옵션</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.2.5</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_960.jpg"/>
+    <br>
+    
+    <p>
+    위 이미지와 같이 캐릭터들의 크기를 X나 Y축으로 늘리는 것을 만드는 것은 간단해보이지만,<br>
+    의외로 이것은 AnyPortrait에서 지원되지 않는 기능입니다.<br>
+    AnyPortrait의 시스템에서 위치, 회전, 크기는 Unity의 그것과 다르게 설계되었습니다.<br>
+    이 방식은 일련의 본들의 스케일이 왜곡되지 않고 변경되는 장점이 있습니다만, 반대로 위와 같이 <strong>비정형의 크기 변환</strong>을 만드는 것에는 제한점이 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    하지만, AnyPortrait v1.2.5에 추가된 옵션을 통해서 제한적으로나마 비정형의 크기 변환이 가능해졌습니다.<br>
+    이 페이지에서는 이 옵션과 더불어서 "<strong>본으로 리깅된 캐릭터 전체의 크기</strong>"를 비정형으로 변경하는 방법을 다룹니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>유니티에서 크기를 제어하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_961.jpg"/>
+    <br>
+    
+    <p>
+    이것은 가장 권장되는 방법입니다.<br>
+    <strong>(1)</strong> 부모가 될 비어있는 <strong>GameObject</strong>를 새로 만듭니다.<br>
+    <strong>(2)</strong> AnyPortrait로 제작된 캐릭터를 <strong>(1)</strong>에서 만든 GameObject의 <strong>자식으로 등록</strong>합니다.<br>
+    이후에 <strong>부모가 된 GameObject</strong>의 <strong>Transform을 제어</strong>하여 위치, 회전, 크기를 변경하면 됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이 방법은 가장 안정적이며, 특히 메카님이나 타임라인과 연동되었다면 필수적으로 적용해야합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>AnyPortrait 내부에서 캐릭터 크기를 제어하기</h3>
+    <br>
+    
+    <p>
+    다음으로, AnyPortrait 내부에서 캐릭터의 크기를 전체적으로 제어하는 방법을 알아봅시다.<br>
+    리깅이 된 경우에, 전체의 크기를 제어하는 방법으로 가장 먼저 생각이 나는 방법은 "<strong>루트 본(Root Bone)</strong>"의 크기를 조절하는 것입니다.<br>
+    이 방법은 AnyPortrait가 아닌 다른 엔진이나 툴에서 대부분 유효합니다.<br>
+    한번 "루트 본"의 크기를 바꾸어봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_962.jpg"/>
+    <br>
+    
+    <p>
+    위 캐릭터는 1개의 <strong>루트 본</strong>을 가집니다.<br>
+    <strong>루트 본</strong>의 X 크기를 증가시켜봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_963.jpg"/>
+    <br>
+    
+    <p>
+    <strong>루트 본</strong>의 X를 늘린다면 일반적으로 <strong>(1)</strong>의 이미지와 같은 결과가 나올 것이라고 기대합니다.<br>
+    하지만 AnyPortrait에서는 기본적으로 다음의 이유로 <strong>(2)</strong>와 같은 결과 또는 전혀 다른 결과가 나타날 것입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>결과가 예상과 다르게 나타나는 이유</strong></span><br>
+    <strong>1.</strong> 본의 크기는 "<strong>로컬 좌표계</strong>"로만 동작합니다.<br>
+    <strong>2.</strong> 자식 본의 크기의 증감도 "<strong>로컬 좌표계</strong>"로만 동작하는 것이 AnyPortrait의 특징입니다. 따라서 부모 본의 크기 증감 방향과 자식 본의 크기 증감 방향은 서로 독립적입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    특히, <strong>2</strong>는 AnyPortrait 시스템의 특징인데, 이 방식은 부모 본의 크기가 비정형으로 바뀌더라도 자식 본들의 크기가 왜곡되는 현상을 줄여주는 장점이 있습니다.<br>
+    하지만 반면에 위와 같이 "전체적인 크기 왜곡"을 주려는 경우에는 문제가 됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    "루트 본"의 크기를 제어하는 방법이 유효하지 않다면, "<strong>자식 메시 그룹</strong>"을 별도로 만들어서 이 문제를 해결해볼 수 있을 것입니다.<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_964.jpg"/>
+    <br>
+    
+    <p>
+    기존의 캐릭터가 "<strong>자식 메시 그룹</strong>"에 포함되도록 만들어봅시다.<br>
+    <strong>(1)</strong> <strong>Add Mesh Group</strong> 버튼을 눌러서 <strong>(2)</strong> <strong>새로운 부모 메시 그룹</strong>을 만듭니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_965.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 새로 생성된 <strong>부모 메시 그룹</strong>을 선택합니다.<br>
+    <strong>(2)</strong> <strong>루트 유닛</strong>으로 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_966.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>기존의 캐릭터 루트 유닛</strong>을 선택합니다.<br>
+    <strong>(2)</strong> <strong>Unregist Root Unit</strong> 버튼을 눌러서 루트 유닛을 해제합니다.<br>
+    이제 새로 생성된 비어있는 메시 그룹만 1개의 루트 유닛으로 등록된 상태가 됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_967.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 다시 <strong>부모 메시 그룹</strong>을 선택합니다.<br>
+    현재, 이 메시 그룹은 비어있는 상태입니다.<br>
+    기존의 캐릭터를 이 메시 그룹의 자식으로 등록해봅시다.<br>
+    <strong>(2)</strong> "<strong>+</strong>" 버튼을 누릅니다.<br>
+    <strong>(3)</strong> <strong>Mesh Group</strong> 탭을 선택합니다.<br>
+    <strong>(4)</strong> 기존의 캐릭터 메시 그룹을 선택합니다.<br>
+    <strong>(5)</strong> <strong>Add</strong> 버튼을 누르고 <strong>(6)</strong> 안내 메시지의 확인 버튼을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_968.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 위 이미지와 같이, 기존의 캐릭터가 자식 메시 그룹으로 포함되었습니다.<br>
+    기존의 데이터는 대부분 정상적으로 동작하지만, 애니메이션은 오직 "루트 유닛으로 등록된 메시 그룹"에서만 정상적으로 동작합니다.<br>
+    따라서 애니메이션에 연결된 메시 그룹을 변경해야합니다.<br>
+    <strong>(2)</strong> 애니메이션 클립을 선택하고 <strong>Change</strong> 버튼을 누른 뒤, 새로운 부모 메시 그룹으로 연결 정보를 변경합니다.<br>
+    (이 과정에 대한 자세한 설명은 <a href="../../kr/AdvancedManual/AD_AnimationIssueChild.html">관련 페이지</a>를 참고해주세요.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_969.jpg"/>
+    <br>
+    
+    <p>
+    이제 캐릭터를 메시 그룹 상태로 위치, 회전, 크기를 제어할 수 있게 되었습니다.<br>
+    <strong>Transform</strong> 또는 <strong>Morph</strong> 타임라인 레이어를 선택한 상태에서,<br>
+    <strong>(1)</strong> 기존의 캐릭터인 자식 메시 그룹을 선택합니다.<br>
+    <strong>(2)</strong> 타임라인 레이어로 등록합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_970.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 키프레임을 추가하고,<br>
+    <strong>(2)</strong> 자식 메시 그룹의 크기를 X축으로 증가시켜봅시다.<br>
+    <strong>(3)</strong>과 같은 결과가 나올 것으로 예상을 했지만 안타깝게도 다소 이상한 형태로 크기가 변하고 말았습니다.<br>
+    심지어, 위에서 테스트했던 "<strong>루트 본</strong>"의 크기를 변경했던 것과도 다른 결과입니다.<br>
+    "<strong>자식 메시 그룹</strong>"과 "<strong>루트 본</strong>" 사이에서의 크기 변환 방식이 AnyPortrait의 시스템이 사용자의 의도와 다르게 동작하기 때문입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    하지만, v1.2.5에 추가된 옵션을 이용해서 이 문제를 해결할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_971.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>설정 다이얼로그</strong>를 열고<br>
+    <strong>(2)</strong> <strong>Portrait 탭</strong>에서 <strong>Scale of Root Bone</strong>의 값을 <strong>Non-Uniform Scale</strong>로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_972.jpg"/>
+    <br>
+    
+    <p>
+    또는 위 방법으로도 옵션을 변경할 수 있습니다.<br>
+    <strong>(1)</strong> <strong>Bake 다이얼로그</strong>를 열고 <strong>(2)</strong> <strong>Setting 탭</strong>을 선택합니다.<br>
+    <strong>(3)</strong> 마찬가지로, <strong>Scale of Root Bone</strong> 옵션을 <strong>Non-Uniform Scale</strong>로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_973.jpg"/>
+    <br>
+    
+    <p>
+    다시 편집 화면으로 돌아오면, 이제 캐릭터의 크기가 정상적으로 동작하는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_974.jpg"/>
+    <br>
+    
+    <p>
+    Bake를 실행하고 게임에서 확인해도 동일하게 크기가 의도한대로 변경되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>주의</strong></span><br>
+    이 설명에서는 기존의 캐릭터를 자식 메시 그룹으로 변환하는 과정을 담았지만,<br>
+    모디파이어들이 부모 메시 그룹이 아닌 자식 메시 그룹에 생성된 상태는 그대로이므로, 실제로 이 방식은 권장되지 않습니다.<br>
+    대신, 처음부터 <strong>자식 메시 그룹</strong>을 미리 만들고 <strong>부모 메시 그룹</strong>에 <strong>모디파이어</strong>들을 생성하여 편집하는 것이 가장 권장되는 작업 방식입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Non-Uniform Scale 옵션에 대해서</h3>
+    <br>
+    
+    <p>
+    위에서 소개된 <span class="text-primary"><strong>Non-Uniform Scale</strong></span> 옵션은 오직 "<strong>자식 메시 그룹</strong>"과 "<strong>하위의 루트 본</strong>"과의 관계에만 적용되는 옵션입니다.<br>
+    이 옵션은 기존의 AnyPortrait의 시스템과 달리, 비정형의 크기 변환을 제한적으로 허용합니다.<br>
+    그외의 경우, 즉 <span class="text-danger"><strong>루트 메시 그룹의 루트 본</strong></span>이나 <span class="text-danger"><strong>본이 없는 자식 메시 그룹</strong></span>, 또는 <span class="text-danger"><strong>리깅이 되지 않은 메시들</strong></span>에는 적용되지 않습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    기존의 방식과 Non-Uniform Scale 방식의 차이를 아래와 같이 비교해보았습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_975.jpg"/>
+    <br>
+    
+    <p>
+    기존의 방식입니다.<br>
+    위 이미지는 "<strong>루트 본</strong>"에 크기 변환을 적용한 상태입니다.<br>
+    <strong>루트 본</strong>의 X축 크기가 증가하면, 전체적으로 X축으로 크기가 증가하는 것이 아니라, 본들의 "<strong>두께</strong>"가 증가합니다.<br>
+    같은 방식으로, <strong>루트 본</strong>의 Y축 크기가 증가하면, 본들의 "<strong>길이</strong>"가 증가하는 것이 이 시스템의 특징입니다.<br>
+    X축이나 Y축으로 크기를 반전시키면, <strong>루트 본</strong>의 방향을 기준으로 전체의 크기가 반전됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_976.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Non-Uniform Scale</strong> 옵션을 켜고, 본들이 있는 "<strong>자식 메시 그룹</strong>"에 크기 변환을 적용해보았습니다.<br>
+    <strong>자식 메시 그룹</strong>의 X축 크기가 증가하면, 전체적으로 본과 메시들이 <strong>좌우</strong>로 늘어나며,<br>
+    <strong>자식 메시 그룹</strong>의 Y축 크기가 증가하면, 전체적으로 본과 메시들이 <strong>상하</strong>로 늘어납니다.<br>
+    크기를 반전하면 <strong>자식 메시 그룹</strong>을 기준으로 X축 또는 Y축으로 크기가 반전되어, 의도한 결과대로 렌더링이 되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>Non-Uniform Scale</strong> 옵션은 얼핏 기존의 크기 변환에 관한 모든 문제를 해결할 수 있을 것으로 보이지만,<br>
+    몇가지 문제점을 가지고 있으므로, 꼭 필요한 경우에만 이 옵션을 사용하셔야 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Non-Uniform Scale 옵션의 문제점</h4>
+    <br>
+    
+    <p>
+    AnyPortrait 시스템은 게임에서 본이나 메시들을 스크립트나 IK로 직접 제어하기 좋도록 크기 변화에 덜 민감하게 설계되었습니다.<br>
+    반대로 말하면, <strong>Non-Uniform Scale</strong> 옵션은 해당 기능들과 같이 사용할 경우 문제가 발생합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    - <strong>스크립트</strong>로 본의 위치, 회전, 크기를 제어할 경우 정상적으로 결과가 연산되지 않을 수 있습니다.<br>
+    - <strong>IK, 지글본</strong>이 예상과 다른 결과를 보여줄 수 있습니다.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_ReversedRiggedMesh.html">< 리깅된 메시의 크기가 반전된 경우</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_PSD.html">PSD 파일 가져오기 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

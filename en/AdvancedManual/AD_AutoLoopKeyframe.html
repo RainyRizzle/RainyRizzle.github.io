@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_AutoLoopKeyframe.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_AutoLoopKeyframe.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_AutoLoopKeyframe.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,82 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    When you create a loop animation, the start and end frames must be the same in most cases.<br>
+    This is because the boundaries between the beginning and end are ambiguous, resulting in a natural loop animation.<br>
+    For that reason, when working with many other programs, you need to copy the start frame, paste it into the end frame, and smooth it.<br>
+    AnyPortrait provides a feature called <strong>"Auto Loop Keyframe"</strong> to reduce these tasks.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_142.jpg"/>
+    <br>
+    
+    <p>
+    The structure of a typical loop animation.<br>
+    There are keyframes with the same pose in the start and end frames.<br>
+    Now try to <strong>delete the "Last keyframe"</strong> that was duplicated unnecessarily here.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_143.jpg"/>
+    <br>
+    
+    <p>
+    When you delete the last keyframe, keyframes that appear as icons of other features appear in the end frame.<br>
+    These translucent keyframes are a <strong>"Dummy keyframe of the starting keyframe"</strong>.<br>
+    For loop animation, the start keyframe is automatically duplicated.<br>
+    This dummy keyframe is called the <span class="text-danger"><strong>"Auto Loop Keyframe"</strong></span>.<br>
+    When this happens, <strong>an arrow icon</strong> appears in the keyframe, pointing to the keyframe to which it is connected.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_144.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_145.jpg"/>
+    <br>
+    
+    <p>
+    When you move the start keyframe, the <strong>Auto Loop Keyframe automatically moves</strong>.<br>
+    Loop animation is still possible in this state.<br>
+    This is because the start keyframe is tied to the actual keyframe on the other side of the loop.<br>
+    In fact, you can see the animation curves connected to the screen above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_146.jpg"/>
+    <br>
+    
+    <p>
+    If you navigate to a frame that is ahead of the start keyframe and play it,<br>
+    it should not be animated in general.<br>
+    However, you can see that the animation plays because it is virtually looped.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_147.jpg"/>
+    <br>
+    
+    <p>
+    Using Auto Loop Keyframes, it is possible to create a loop animation with empty start and end frames.<br>
+    This makes the loop boundaries obscure and creates a much more natural motion.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

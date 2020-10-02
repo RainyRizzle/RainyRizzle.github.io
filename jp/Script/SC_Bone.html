@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/Script/SC_Bone.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/Script/SC_Bone.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/Script/SC_Bone.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -66,8 +68,351 @@
     <h1 class="display-5">骨</h1>
     <br>
     
-    <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <p>
+    骨を参照または制御する関数。<br>
+    ソケットを参照したり、IKで制御する関数が含まれています。<br>
+    </p>
+    <br>
+    
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apOptBone</span> <strong>GetBone</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apOptBone</span> <strong>GetBone</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;名前で骨を見つけて返します。<br>
+    &nbsp;&nbsp;&nbsp;「Root Unit」インデックスを指定しない場合は、まずレンダリングされている「Root Unit」から完全な検索を実行します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : 参照する骨の名前<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> : 検索した骨。 そうでない場合はnullを返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetBoneSocket</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone )</span>
+<br><span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetBoneSocket</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName )</span>
+<br><span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetBoneSocket</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;骨のソケットを参照します。<br>
+    &nbsp;&nbsp;&nbsp;ソケットについては、<a href="../../jp/AdvancedManual/AD_Socket.html">関連ページ</a>を参照してください。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : ソケットが含まれている骨<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : 参照する骨の名前<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Transform</span> : ソケットの骨の「Transform」 そうでない場合はnullを返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePosition</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePosition</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePosition</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;骨の位置を制御します。<br>
+    &nbsp;&nbsp;&nbsp;重みを使って補間できます。<br>
+    &nbsp;&nbsp;&nbsp;IKは機能しません。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : コントロールする骨<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : コントロールする骨の名前<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> position : 移動する位置<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 「World」はシーンの座標系を指し、「Self」はapPortraitの座標系を指す。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : アニメーションされる骨の値との補間での重み<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> :  存在しない骨を参照する場合はfalseを返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneRotation</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneRotation</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneRotation</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;骨の回転角度を制御します。<br>
+    &nbsp;&nbsp;&nbsp;重みを使用して補間することができます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : コントロールする骨<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : コントロールする骨の名前<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> angle : 回転する角度 (Degree)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 「World」はシーンの座標系を指し、「Self」はapPortraitの座標系を指す。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : アニメーションされる骨の値との補間での重み<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 存在しない骨を参照する場合はfalseを返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneScale</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneScale</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneScale</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;骨のサイズを制御します。<br>
+    &nbsp;&nbsp;&nbsp;重みを使用して補間することができます。<br>
+    &nbsp;&nbsp;&nbsp;​<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : コントロールする骨<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : コントロールする骨の名前<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> scale : スケール値<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 「World」はシーンの座標系を指し、「Self」はapPortraitの座標系を指す。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : アニメーションされる骨の値との補間での重み<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 存在しない骨を参照する場合はfalseを返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneIK</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f,</span> <span class="text-primary">bool</span> <span class="text-muted">isContinuous</span> <span class="text-muted">=</span> <span class="text-muted">true )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneIK</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f,</span> <span class="text-primary">bool</span> <span class="text-muted">isContinuous</span> <span class="text-muted">=</span> <span class="text-muted">true )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneIK</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f,</span> <span class="text-primary">bool</span> <span class="text-muted">isContinuous</span> <span class="text-muted">=</span> <span class="text-muted">true )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;IKを使用して骨を動かします。<br>
+    &nbsp;&nbsp;&nbsp;骨のIKを設定する方法については、<a href="../../jp/AdvancedManual/AD_BoneIK.html">関連ページ</a>を参照してください。<br>
+    &nbsp;&nbsp;&nbsp;重みを使用して補間することができます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : コントロールする骨<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : コントロールする骨の名前<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> position : 移動する位置。 IKによっては、場所に届かない場合があります。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 「World」はシーンの座標系を指し、「Self」はapPortraitの座標系を指す。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : アニメーションされる骨の値との補間での重み<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isContiuous : trueの場合、前のフレームのIK結果が参照され、自然な結果が得られます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 存在しない骨を参照する場合はfalseを返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneLookAt</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneLookAt</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneLookAt</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;IK方式と同様に骨を回転させて、骨が要求された位置を見る作成します。<br>
+    &nbsp;&nbsp;&nbsp;「SetBoneIK<strong>()</strong>」とは異なり、一つの骨を回転させます。<br>
+    &nbsp;&nbsp;&nbsp;IKの設定には影響を与えません。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : コントロールする骨<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : コントロールする骨の名前<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> position : 見る位置<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 「World」はシーンの座標系を指し、「Self」はapPortraitの座標系を指す。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : アニメーションされる骨の値との補間での重み<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 存在しない骨を参照する場合はfalseを返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraint</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-primary">float</span> <span class="text-muted">positionValue,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintBound</span> <span class="text-muted">constraintBound,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraint</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-primary">float</span> <span class="text-muted">positionValue,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintBound</span> <span class="text-muted">constraintBound,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraint</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-primary">float</span> <span class="text-muted">positionValue,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintBound</span> <span class="text-muted">constraintBound,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;骨の位置を制限する。<br>
+    &nbsp;&nbsp;&nbsp;各軸の範囲を設定できます。<br>
+    &nbsp;&nbsp;&nbsp;更新ごとに新しいリクエストを呼び出すと、異なる「ConstraintBound」タイプのコールを重複させることができます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : 標的骨<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : 対象の骨の名前<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> positionValue : あなたが制限したい位置の値<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">ConstraintBound</span> constraintBound : これは、それぞれX軸およびY軸に対して「Min、Max、Preferred」のタイプを持っています。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 「World」はシーンの座標系を指し、「Self」はapPortraitの座標系を指す。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 存在しない骨を参照する場合はfalseを返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraintBySurface</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">defaultSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">currentSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">minSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">maxSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintSurface</span> <span class="text-muted">constraintSurface,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraintBySurface</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">defaultSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">currentSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">minSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">maxSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintSurface</span> <span class="text-muted">constraintSurface,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraintBySurface</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">defaultSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">currentSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">minSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">maxSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintSurface</span> <span class="text-muted">constraintSurface,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;X軸とY軸の基本表面の位置を設定し、現在の表面の位置を入力すると、骨の位置が違い値に補正されます。<br>
+    &nbsp;&nbsp;&nbsp;安定した位置補正のために最小値と最大範囲を指定してください。<br>
+    &nbsp;&nbsp;&nbsp;骨を直接制御していないので、FKで作られたアニメーションを維持する効果があります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : コントロールする骨<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : コントロールする骨の名前<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> defaultSurfacePosition : 基本的な面の位置は、一般的に一定の値である必要があります。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> currentSurfacePosition : 現在の表面の位置<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> minSurfacePosition : 表面位置の最小値<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> maxSurfacePosition : 表面位置の最大値<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">ConstraintSurface</span> constraintSurface : 表面軸 (X、Y)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 「World」はシーンの座標系を指し、「Self」はapPortraitの座標系を指す。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 存在しない骨を参照する場合はfalseを返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    
+    <br><br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary"><strong>using</strong></span> <strong>AnyPortrait</strong>;<br>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">BoneTest </span>: <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">public </span><span class="text-success">apPortrait </span>portrait;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetMouseButtonDown(0))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3 </span>touchPosWorld = <span class="text-success">Camera</span>.main.ScreenToWorldPoint(<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">new </span><span class="text-success">Vector3</span>(<span class="text-success">Input</span>.mousePosition.x, <span class="text-success">Input</span>.mousePosition.y, 0));<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetBoneIK</strong>(0, <span class="text-danger">"Bone Hand R"</span>, touchPosWorld, <span class="text-success">Space</span>.World, 1.0f, <span class="text-primary">true</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

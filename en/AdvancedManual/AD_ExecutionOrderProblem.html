@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_ExecutionOrderProblem.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ExecutionOrderProblem.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ExecutionOrderProblem.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,125 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    When using AnyPortrait with other assets to create games, etc., there may be a problem that is not fully compatible.<br>
+    Because assets have unique characteristics, not all assets and AnyPortrait are compatible with each other.<br>
+    However, because our team develops with compatibility in mind for assets that use Unity's basic functions, <br>
+    compatibility issues maybe resolved with appropriate solutions for some situations.<br>
+    This page describes how to troubleshoot problems with "<strong>Script Execution Order</strong>".<br>
+    This page describes an asset named <strong>Cinemachine</strong> provided by Unity as an example.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_465.jpg"/>
+    <br>
+    
+    <p>
+    It is the screen that Cinemachine is connected to the demonstration of AnyPortrait.<br>
+    You can control the camera with Cinemachine.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_466.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, the eyes of the character created by AnyPortrait are rendered strangely.<br>
+    It is that AnyPortrait's <strong>Clipping Mask</strong> function is not working properly.<br>
+    AnyPortrait calculates how to render according to the camera's position, orientation, and setting.<br>
+    This includes Clipping Masks, Billboards, and Perspective calculation.<br>
+    However, there is a conflict between the logic that controls the camera with Cinemachine and the camera computation logic of AnyPortrait, so it does not render properly.<br>
+    If similar logic conflicts with each other, the problem can usually be resolved by making the script in AnyPortrait run later.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_467.jpg"/>
+    <br>
+    
+    <p>
+    Execute Script Execution Order in <strong>Edit &gt; Project Settings</strong> in Unity's menu.<br>
+    Depending on the version of Unity Editor, it may be different from the above screen.<br>
+    However, if you run Project Settings, Script Execution Order menu will be same.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_468.jpg"/>
+    <br>
+    
+    <p>
+    If another asset has been installed, there may be additional execution orders for that asset in addition to <strong>Default Time</strong> in the <strong>Script Execution Order</strong> screen.<br>
+    You can see in the above screen that Cinemachine's script is set to run later than Default Time.<br>
+    AnyPortrait needs to run scripts later than Cinemachine.<br>
+    <strong>(1)</strong> Press the <strong>+ button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_469.jpg"/>
+    <br>
+    
+    <p>
+    Select <strong>AnyPortrait.apPortrait.</strong><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_470.jpg"/>
+    <br>
+    
+    <p>
+    Makes AnyPortrait run later than other assets.<br>
+    <strong>(1)</strong> Enter <strong>an execution order</strong> that is <strong>larger than the other assets</strong>.<br>
+    <strong>(2)</strong> Click the <strong>Apply</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_471.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, the problem is resolved and it will render normally.<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Compatibility with other assets</h4>
+    <br>
+    
+    <p>
+    Since AnyPortrait is an asset using Mesh Renderer of Unity, <br>
+    it has some compatibility with Unity's basic functions or general assets.<br>
+    However, Unity's latest features and various assets become increasingly diverse and specialized, <br>
+    so this tool may not guarantee compatibility.<br>
+    If you would like to contact our team for compatibility with the feature or asset, we will check and guide you.<br>
+    If necessary, our team will update the issue for updates.<br>
+    - <a href="https://www.rainyrizzle.com/anyportrait-report-eng">Report Page</a><br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

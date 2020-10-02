@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_ShaderGraph.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ShaderGraph.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ShaderGraph.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,437 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.2</span></h4>
+    
+    <p>
+    "<strong>Shader Graph</strong>" is a feature that allows you to create shaders using the node-based tool.<br>
+    This feature, introduced in Unity 2018, has the advantage that it works with "LWRP" and "HDRP" because it is highly compatible.<br>
+    <strong>Custom shaders</strong> can be created using the "Shader Graph" <strong>according to the rules</strong> to create materials compatible with AnyPortrait.<br>
+    This page explains how to use the "Shader Graph" to create a custom shader and apply it as a material.<br>
+    It is recommended to refer to the following pages for additional information.<br>
+    - <a href="../../en/Script/SC_CustomShader.html"><strong>Custom Shader</strong></a><br>
+    - <a href="https://blogs.unity3d.com/2018/02/27/introduction-to-shader-graph-build-your-shaders-with-a-visual-editor/" target="_sub"><strong>Shader Graph</strong></a> (Unity official page)<br>
+    - <a href="../../en/AdvancedManual/AD_MaterialLibrary.html"><strong>Material Library</strong></a><br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note that.</strong></span><br>
+    The shaders described on this page are graphs of the basic shader code.<br>
+    By following the basic rules, you are free to create shaders to suit your needs.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_738.jpg"/>
+    <br>
+    
+    <p>
+    Let's create a Shader Graph asset.<br>
+    In "<strong>Create &gt; Shader &gt; 2D Renderer</strong>", you can create two types of "Shader Graph Assets".<br>
+    In this example, we will use the "<strong>Sprite Lit Graph (Experimental)</strong>".<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note that.</strong></span><br>
+    In this example, we created a shader that is compatible with "LWRP 2D".<br>
+    It is also possible to create other kinds of graphs.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_739.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Double-click</strong> on the Shader Graph asset you created to open the graph tool.<br>
+    Currently, there is the <strong>Sprite Lit Master node </strong>only that is an output node.<br>
+    <strong>(1)</strong> Press the <strong>"+" button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_740.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> Select the <strong>type of property</strong>. First, select <strong>Texture2D</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_741.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>A new property</strong> is added.<br>
+    <strong>(2)</strong> Set the <strong>property name</strong> to "<strong>MainTex</strong>". The property names do not have to be the same as this example. (Not important.)<br>
+    <strong>(3)</strong> Set the <strong>name of the </strong><span class="text-danger"><strong>Reference</strong></span> to "<span class="text-danger"><strong>_MainTex</strong></span>". This value will be the same as this example because it will be the property name on the shader.<br>
+    </p>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_742.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> In the same way, add a <strong>Vector4 type property</strong> and a <strong>Color type property</strong> as above.<br>
+    <strong>(2)</strong> Set the second property as follows.<br>
+    - <strong>Reference</strong> : <span class="text-danger"><strong>_MainTex_ST</strong></span><br>
+    - <strong>Type</strong> : <strong>Vector4</strong><br>
+    - <strong>Default</strong> : <strong>(1, 1, 0, 0)</strong><br>
+    <strong>(3)</strong> Set the third property as follows.<br>
+    - <strong>Reference</strong> : <span class="text-danger"><strong>_Color</strong></span><br>
+    - <strong>Type</strong> : <strong>Color</strong><br>
+    - <strong>Default</strong> : <strong>(0.5, 0.5, 0.5, 1)</strong><br>
+    </p>
+    <br>
+    
+    <!-- 10-2. 외부 이미지+외부 링크 (가운데 정렬+새탭열기) -->
+    <a href="https://drive.google.com/file/d/1Q2zQwWDvHIOtYCn6DBvQt39kBKUk7lPS/view?usp=sharing" target="_sub">
+        <img class="img-fluid rounded-sm mx-auto d-block" style="max-width: 90%;" src="../../Images/Advanced/AdManual_744.jpg"/>
+    </a>
+    <br>
+    
+    <p>
+    We have written a basic shader to match <strong>AnyPortrait's custom shader rules</strong>.<br>
+    (Click the image to enlarge.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_745.jpg"/>
+    <br>
+    
+    <p>
+    These are the nodes that sample the texture to create color.<br>
+    You can also use the default UVs, but with <strong>MainTex ST</strong> you can set additional tiling of UVs and more.<br>
+    If the value of MainTex ST is not <span class="text-danger"><strong>(1, 1, 0, 0)</strong></span>, it may not render normally.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_746.jpg"/>
+    <br>
+    
+    <p>
+    These nodes combine the <strong>color of the texture</strong> with the color of the <strong>_Color</strong> property.<br>
+    AnyPortrait uses the "<strong>2X Multiply</strong>" method for color computation.<br>
+    So in this graph, the RGB value of _Color is multiplied by 2 and then by the color of the texture.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_747.jpg"/>
+    <br>
+    
+    <p>
+    The value of the alpha channel is made by multiplying the <strong>alpha value of the texture</strong> by the <strong>alpha value of _Color.</strong><br>
+    The finished color is linked to the "<strong>Color</strong>" of the <strong>Sprite Lit Master</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_748.jpg"/>
+    <br>
+    
+    <p>
+    Now let's apply this Shader Graph to AnyPortrait.<br>
+    Open the AnyPortrait Editor and select a character.<br>
+    <strong>(1)</strong> Select <strong>Root Unit</strong>.<br>
+    <strong>(2)</strong> Press the <strong>Material Library button</strong>.<br>
+    <strong>(3)</strong> Press the <strong>Make Material Set button</strong>.<br>
+    <strong>(4)</strong> The new Material Set will not use preset, so select "<strong>(None)</strong>".<br>
+    <strong>(5)</strong> Press the <strong>Select button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_749.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the created <strong>Material Set</strong>.<br>
+    <strong>(2)</strong> Set the <strong>Name</strong> and <strong>Icon</strong> of the Material Set, and click the <strong>Default Material button</strong> to set it as the default material.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_750.jpg"/>
+    <br>
+    
+    <p>
+    Assign the shader you created with the Shader Graph.<br>
+    <strong>(3)</strong> Assign the shader you created earlier to "<strong>Color Space : Gamma &gt; Basic Rendering &gt; Alpha Blend</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_751.jpg"/>
+    <br>
+    
+    <p>
+    Bake it and check it out in the Unity scene.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_752.jpg"/>
+    <br>
+    
+    <p>
+    You can see that the material created by the Shader Graph is applied.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Creating Shader Graph for Clipping Mesh</h3>
+    <br>
+    
+    <p>
+    Two more shaders are needed to render the clipping mesh.<br>
+    <strong>- Clipped Shader</strong><br>
+    <strong>- Alpha Mask Shader</strong><br>
+    Creating these shaders with the Shader Graph allows clipped meshes to be rendered properly.<br>
+    </p>
+    <br>
+    
+    <p>
+    First, let's create a clipped shader.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_753.jpg"/>
+    <br>
+    
+    <p>
+    Duplicate the shader created before.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_754.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Add the <strong>Texture2D</strong> type and <strong>Vector4</strong> type <strong>properties</strong> for clipping rendering as follows.<br>
+    <strong>(2)</strong> Set the properties to receive the mask texture input as follows.<br>
+    - <strong>Reference</strong> : <span class="text-danger"><strong>_MaskTex</strong></span><br>
+    - <strong>Type</strong> : <strong>Texture2D</strong><br>
+    <strong>(3)</strong> Set the properties related to the position and size of the mask texture as follows.<br>
+    - <strong>Reference</strong> : <span class="text-danger"><strong>_MaskScreenSpaceOffset</strong></span><br>
+    - <strong>Type</strong> : <strong>Vector4</strong><br>
+    - <strong>Default</strong> : <strong>(0, 0, 0, 1)</strong><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_755.jpg"/>
+    <br>
+    
+    <p>
+    Since we duplicated the Shader Graph created above, the graph for basic rendering has already finished.<br>
+    Let's add a node for clipping.<br>
+    First, add three nodes:<br>
+    <strong>(1)</strong> <strong>MaskTex Property</strong><br>
+    <strong>(2)</strong> <strong>Screen Position Node (Default Mode)</strong><br>
+    <strong>(3)</strong> <strong>MaskScreenSpaceOffset Property</strong><br>
+    </p>
+    <br>
+    
+    <!-- 10-2. 외부 이미지+외부 링크 (가운데 정렬+새탭열기) -->
+    <a href="https://drive.google.com/file/d/17onlHNxif2EeI20u44JtsZB8Lqjf_W9v/view?usp=sharing" target="_sub">
+        <img class="img-fluid rounded-sm mx-auto d-block" style="max-width: 90%;" src="../../Images/Advanced/AdManual_756.jpg"/>
+    </a>
+    <br>
+    
+    <p>
+    Complete the Shader Graph by adding clipping related nodes to the existing graph.<br>
+    The nodes at the bottom of the graph and the nodes related to alpha calculation have been added and modified.<br>
+    (Click the image to enlarge.)<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's look at the nodes involved in clipping.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_757.jpg"/>
+    <br>
+    
+    <p>
+    This is the graph to calculate the UV for the mask texture using the <strong>Screen Position</strong> node and <strong>MaskScreenSpaceOffset</strong> properties.<br>
+    It's quite complicated because it is related to the optimization of AnyPortrait's clipping calculation.<br>
+    Do not modify this part, just make it the same as the image above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_758.jpg"/>
+    <br>
+    
+    <p>
+    These are nodes that modify alpha values using the <strong>mask texture</strong> and UVs created using <strong>Screen Position</strong> and <strong>MaskScreenSpaceOffset</strong>.<br>
+    You need to add these nodes to make the image transparent by the mask texture.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_759.jpg"/>
+    <br>
+    
+    <p>
+    Let's create an <strong>Alpha Mask shader</strong> that creates a mask texture for clipping rendering.<br>
+    AnyPortrait uses <strong>R channel</strong> as mask data.<br>
+    Due to the nature of the R channel, the color may be affected by light.<br>
+    So choose a <strong>Sprite Unlit Graph</strong> that is not affected by light to create a new Shader Graph.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_760.jpg"/>
+    <br>
+    
+    <p>
+    Double click the Shader Graph you created to open the graph tool.<br>
+    Add <strong>3 properties</strong> as above.<br>
+    These properties are identical to the properties described previously.<br>
+    </p>
+    <br>
+    
+    <!-- 10-2. 외부 이미지+외부 링크 (가운데 정렬+새탭열기) -->
+    <a href="https://drive.google.com/file/d/1WAtEBjKwqrjmheefjPhTAJJ6QuvnD3Fe/view?usp=sharing" target="_sub">
+        <img class="img-fluid rounded-sm mx-auto d-block" style="max-width: 90%;" src="../../Images/Advanced/AdManual_761.jpg"/>
+    </a>
+    <br>
+    
+    <p>
+    Let's write a Shader Graph that creates a mask texture.<br>
+    Very similar to the Shader Graphs above, you can see that <strong>only the nodes related to the alpha values </strong>are different.<br>
+    (Click the image to enlarge.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_762.jpg"/>
+    <br>
+    
+    <p>
+    The mask texture of AnyPortrait stores alpha data in the <strong>R channel</strong>.<br>
+    In the image above, you can see that the value of <strong>A channel</strong> of <strong>_MainTex</strong> color and <strong>_Color</strong> color is transferred to <strong>R channel</strong>.<br>
+    Other parts of the graph are the same as before.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_765.jpg"/>
+    <br>
+    
+    <p>
+    Let's create a material for clipping rendering.<br>
+    Reopen the Material Library and set up the shaders you created as shown in the image above.<br>
+    <strong>(1)</strong> <strong>Basic Shader</strong> : <strong>Color Space : Gamma &gt; Basic Rendering &gt; Alpha Blend</strong><br>
+    <strong>(2)</strong> <strong>Clipped Shader</strong> : <strong>Color Space : Gamma &gt; Clipped Rendering &gt; Alpha Blend</strong><br>
+    <strong>(3)</strong> <strong>Alpha Mask Shader</strong> : <strong>Alpha Mask</strong><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_766.jpg"/>
+    <br>
+    
+    <p>
+    If you want to render in an <strong>LWRP</strong> or <strong>LWRP 2D</strong> environment, the clipping mesh will not render properly by default.<br>
+    This is not a shader problem, but a difference in how Unity cameras are handled.<br>
+    So creating a general-purpose shader with the Shader Graph does not solve the problem.<br>
+    Try the following methods:<br>
+    <strong>(1)</strong> Open the <strong>Bake dialog</strong>.<br>
+    <strong>(2)</strong> Select the <strong>Setting tab</strong>.<br>
+    <strong>(3)</strong> Change the value of the <strong>Render Pipeline</strong> option to match the current graphics option. <br>
+    If your graphics settings are in <strong>LWRP</strong> or <strong>LWRP 2D</strong>, change to the <strong>Scriptable Render Pipeline</strong>. (If not, set to <strong>Default</strong>.)<br>
+    </p>
+    <br>
+    
+    <p>
+    (This option is supported since Unity 2019.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_768.jpg"/>
+    <br>
+    
+    <p>
+    You can now Bake and check in the Unity scene to see your character render properly.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>About Shader Graph</h4>
+    <br>
+    
+    <p>
+    Shaders created with Shader Graph have the advantage of being compatible with both old and new rendering methods.<br>
+    So if you are using <span class="text-danger"><strong>SRP (Scriptable Render Pipeline)</strong></span> method like LWRP, you should use Shader Graph.<br>
+    AnyPortrait also supports Shader Graph, but has the following issues.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. When using Shader Graph, </strong><span class="text-danger"><strong>Blend modes</strong></span><strong> other than Alpha Blend are not supported.</strong><br>
+    : This is an issue where the Shader Graph should be improved or AnyPortrait should be improved.<br>
+    Currently, to solve this problem, you need to manually <strong>modify the code of the shader</strong> written in the Shader Graph.<br>
+    Our team has modified the shaders of AnyPortrait's LWRP 2D preset package (<a href="../../en/AdvancedManual/AD_LWRP.html">Related page</a>) is written in Shader Graph to support optimization and blend modes.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. If you do not use LWRP, </strong><span class="text-danger"><strong>Surface Shader</strong></span><strong> is recommended.</strong><br>
+    : AnyPortrait has been developed for use with Unity 5.5.<br>
+    It is therefore written to render with Surface Shader based on that version.<br>
+    As Unity's rendering process continues to change from version to version, Surface Shader is recommended to avoid rendering issues.<br>
+    However, these policies may change as the Unity engine is updated, and AnyPortrait will support the latest technology available.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

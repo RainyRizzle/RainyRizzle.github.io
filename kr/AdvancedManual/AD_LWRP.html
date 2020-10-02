@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_LWRP.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_LWRP.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_LWRP.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -67,22 +69,318 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.8</span></h4>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    <strong>Lightweight Render Pipeline (경량 렌더 파이프라인)</strong>은 유니티 2018에서 소개되고 유니티 2019에서 정식으로 채용된 새로운 렌더링 방식입니다.<br>
+    C# 스크립트로 렌더링을 제어할 수 있으며, 고품질과 최적화를 위한 기능들을 제공합니다.<br>
+    <strong>Lightweight Render Pipeline</strong>, 줄여서 <strong>LWRP</strong>는 완전히 새로운 방식의 렌더링 파이프라인이기 때문에 기존의 쉐이더들이 대부분 호환되지 않는다는 단점이 있습니다.<br>
+    그리고 안타깝게도 AnyPortrait에서 제공하는 기본 재질들도 LWRP와 호환되지 않습니다.<br>
+    이 문제를 해결하기 위하여 AnyPortrait v1.1.7에 추가된 기능인 "<strong>재질 라이브러리</strong>"에서 LWRP를 위한 재질을 제공하며, v1.1.8에서는 아래에서 설명할 LWRP 2D도 지원합니다.<br>
+    이 페이지에서는 LWRP를 지원하는 재질을 설치하고 설정하는 과정을 다룹니다.<br>
+    추가적인 설명에 대해서는 다음의 페이지를 참고해보시는 것을 권장합니다.<br>
     </p>
     <br>
     
+    <p>
+    - <a href="../../kr/AdvancedManual/AD_MaterialLibrary.html"><strong>재질 라이브러리</strong></a><br>
+    - <a href="../../kr/AdvancedManual/AD_ShaderGraph.html"><strong>Shader Graph로 재질 작성하기</strong></a><br>
+    - <a href="../../kr/Script/SC_CustomShader.html"><strong>커스텀 쉐이더</strong></a><br>
+    - <a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.lightweight@6.9/manual/index.html" target="_sub"><strong>About the Lightweight Render Pipeline Manual</strong></a> (유니티 공식 페이지 / 영어)<br>
+    </p>
+    <br>
     
-    <br><br>
-    
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_714.jpg"/>
     <br>
     
     <p>
-    본문 입력<br>
+    먼저 유니티 에디터의 <strong>Package Manager</strong>를 열어서 <strong>Lightweight RP</strong> 항목을 선택합니다.<br>
+    <strong>Lightweight RP 패키지</strong>가 설치되지 않았다면 Package Manager 창의 <strong>우측 하단에 설치 버튼</strong>이 나타납니다.<br>
+    이 패키지를 설치하면 <strong>LWRP</strong>를 사용할 수 있습니다.<br>
+    (유니티 버전에 따라 UI나 설치 방법이 다를 수 있습니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_715.jpg"/>
+    <br>
+    
+    <p>
+    메뉴의 <strong>Assets &gt; Create &gt; Rendering &gt; Lightweight Render Pipeline &gt; Pipeline Asset</strong>을 선택하여 <strong>LWRP 에셋</strong>을 생성합니다.<br>
+    생성된 LWRP 에셋을 위의 이미지와 같이 <strong>Project Settings &gt; Graphics에서 Scriptable Render Pipeline Settings</strong>에 할당합니다.<br>
+    이제 렌더링 방식이 LWRP 방식으로 변경됩니다.<br>
+    (자세한 설명은 <a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.lightweight@6.9/manual/configuring-lwrp-for-use.html" target="_sub">관련 페이지</a>를 참고하세요. 이 방법은 유니티 버전마다 다를 수 있습니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_716.jpg"/>
+    <br>
+    
+    <p>
+    LWRP는 기존의 쉐이더들을 지원하지 않기 때문에 재질이 정상적으로 렌더링되지 않습니다.<br>
+    이 문제는 AnyPortrait 뿐만 아니라 대부분의 유니티 에셋과 재질들도 마찬가지입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_717.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait 에디터를 엽니다.<br>
+    <strong>(1)</strong> <strong>Root Unit</strong>을 선택합니다.<br>
+    <strong>(2)</strong> <strong>Material Library 버튼</strong>을 누릅니다.<br>
+    <strong>(3)</strong> <strong>재질 라이브러리</strong> 창이 나타난 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_718.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 재질 라이브러리의 좌측 하단에서 <strong>Advanced Presets</strong>을 <span class="text-danger"><strong>LWRP Unlit Preset</strong></span>으로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_719.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> <strong>Unpack Preset 버튼</strong>을 누르면 선택된 재질 패키지가 설치됩니다.<br>
+    <strong>(3)</strong> 설치 과정이 끝나면 <strong>안내 메시지의 확인 버튼</strong>을 누르고 재질 라이브러리를 다시 열어야 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_720.jpg"/>
+    <br>
+    
+    <p>
+    <strong>LWRP Unlit 프리셋</strong>이 추가되었습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_721.jpg"/>
+    <br>
+    
+    <p>
+    새로운 <strong>재질 세트</strong>를 만들어봅시다.<br>
+    <strong>(1)</strong> <strong>Make Material Set 버튼</strong>을 누릅니다.<br>
+    <strong>(2)</strong> 방금 추가했던 <strong>LWRP Unlit 프리셋</strong>을 선택합니다.<br>
+    <strong>(3)</strong> <strong>Select 버튼</strong>을 누르면 재질 세트가 생성됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_722.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> 생성된 <strong>LWRP Unlit 재질 세트</strong>를 선택합니다.<br>
+    <strong>(5)</strong> <strong>Default Material 버튼</strong>을 눌러서 기본 재질로 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_723.jpg"/>
+    <br>
+    
+    <p>
+    이 과정도 매우 중요합니다.<br>
+    LWRP와 같은 <strong>Scriptable Render Pipeline (SRP)</strong>에서는 <strong>클리핑 메시</strong>가 정상적으로 출력되지 않는 문제가 있습니다.<br>
+    유니티의 카메라에서의 렌더링 처리 방식이 기존과 다르기 때문입니다.<br>
+    v1.1.8에서 이 문제를 해결하기 위한 옵션을 제공합니다.<br>
+    <strong>(1)</strong> <strong>Bake 버튼</strong>을 눌러서 다이얼로그를 엽니다.<br>
+    <strong>(2)</strong> <strong>Setting 탭</strong>을 누릅니다.<br>
+    <strong>(3)</strong> <strong>Render Pipeline</strong>의 항목의 값을 <span class="text-danger"><strong>Scriptable Render Pipeline</strong></span>으로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>참고.</strong></span><br>
+    이 옵션은 <strong>Unity 2019.1</strong>부터 지원됩니다.<br>
+    Unity 2018에서는 SRP를 사용할 수 있지만, 제공되는 기능의 제약으로 클리핑 메시를 정상적으로 출력할 수 없습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_724.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake 탭</strong>을 선택하고 <strong>Bake 버튼</strong>을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_725.jpg"/>
+    <br>
+    
+    <p>
+    유니티 씬을 열면 캐릭터가 정상적으로 렌더링되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Lightweight Render Pipeline 2D와 연동하기</h3>
+    <br>
+    
+    <p>
+    유니티 2019에서 LWRP를 2D 게임에 적용하는 기능이 추가되었습니다.<br>
+    기본적으로 LWRP와 유사한 방식이지만, LWRP 2D는 기존의 LWRP와 다른 쉐이더를 이용합니다.<br>
+    따라서 LWRP 2D를 이용하기 위해서는 또다른 재질을 만들어서 적용해야합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_726.jpg"/>
+    <br>
+    
+    <p>
+    <strong>LWRP 2D</strong>를 설정하는 방법입니다.<br>
+    LWRP가 설정된 상태에서, LWRP 에셋의 <strong>Renderer Type</strong>을 <strong>Custom</strong>으로 변경합니다.<br>
+    <strong>2D Renderer Data 에셋</strong>을 생성한 후, <strong>LWRP 에셋</strong>의 <strong>Data</strong>에 할당하면 LWRP 2D 방식으로 전환됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_727.jpg"/>
+    <br>
+    
+    <p>
+    LWRP 2D 재질을 설정하는 방법은 거의 동일합니다.<br>
+    <strong>(1)</strong> <strong>Root Unit</strong>을 선택합니다.<br>
+    <strong>(2)</strong> <strong>Material Library 버튼</strong>을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_728.jpg"/>
+    <br>
+    
+    <p>
+    설치할 재질 프리셋을 선택해야합니다.<br>
+    <strong>(1)</strong> <strong>LWRP 2D Lit Preset (Experimental)</strong>을 선택합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_729.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> <strong>Unpack Preset 버튼</strong>을 눌러서 프리셋 패키지를 설치합니다.<br>
+    <strong>(3)</strong> <strong>안내 메시지의 확인 버튼</strong>을 누르고 <strong>재질 라이브러리</strong>를 <strong>재시작</strong>합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_730.jpg"/>
+    <br>
+    
+    <p>
+    <strong>LWRP 2D Lit 프리셋</strong>이 설치되어 추가되었습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_731.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Make Material Set 버튼</strong>을 누릅니다.<br>
+    <strong>(2)</strong> <strong>LWRP 2D Lit 프리셋</strong>을 선택합니다.<br>
+    <strong>(3)</strong> <strong>Select 버튼</strong>을 눌러서 재질 세트를 생성합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_732.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> 새로 생성된 <strong>LWRP 2D Lit 재질 세트</strong>를 선택합니다.<br>
+    <strong>(5)</strong> <strong>Default Material 버튼</strong>을 눌러서 기본 재질로 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_733.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Bake 버튼</strong>을 누릅니다.<br>
+    <strong>(2)</strong> Bake 다이얼로그의 <strong>Setting 탭</strong>에서 <strong>Render Pipeline</strong> 항목을 <strong>Scriptable Render Pipeline</strong>으로 설정합니다.<br>
+    <strong>(3)</strong> <strong>Bake 탭</strong>에서 <strong>Bake 버튼</strong>을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_734.jpg"/>
+    <br>
+    
+    <p>
+    유니티 씬에서 확인해보면 검은색 또는 어두운 색으로 보일 것입니다.<br>
+    설치된 프리셋이 라이팅이 되는 재질이기 때문에, 빛이 없는 경우 어둡게 나타나기 때문입니다.<br>
+    씬에 빛을 추가해야하는데, LWRP 2D에서 제공하는 기능을 이용해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_735.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Hierarchy에서 마우스 우클릭</strong>을 합니다.<br>
+    <strong>(2)</strong> <strong>Light &gt; 2D</strong>를 선택하면 LWRP 2D를 위한 다양한 종류의 <strong>Light 2D</strong>들을 선택할 수 있습니다.<br>
+    이 페이지에서는 <strong>Freeform Light 2D</strong>를 선택해보았습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_736.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Edit Shape 버튼</strong>을 눌러서 빛의 형태를 편집합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_737.jpg"/>
+    <br>
+    
+    <p>
+    캐릭터가 <strong>LWRP 2D</strong>에서 예쁘게 렌더링되는 것을 볼 수 있습니다.<br>
     </p>
     <br>
     

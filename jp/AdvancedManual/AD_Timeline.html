@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_Timeline.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_Timeline.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_Timeline.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,364 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.6</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_490.jpg"/>
+    <br>
+    
+    <p>
+    Unityの「Timeline」は、ゲーム中に再生されるシネマティックシーンを作成する機能です。<br>
+    シーケンスツールを利用して、アニメーションを組み合わせて制御することができます。<br>
+    UnityのホームページでTimelineの説明を見ることができます。 （<a href="https://docs.unity3d.com/Manual/TimelineSection.html" target="_sub">関連ページ</a>）<br>
+    AnyPortrait v1.1.6からUnityのTimelineを利用することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Playable DirectorとTimeline Asset作成Track接続</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_491.jpg"/>
+    <br>
+    
+    <p>
+    Timelineは「<strong>Mecanim</strong>」と関連がある機能です。<br>
+    したがってAnyPortraitのMecanimオプションをオンにします。<br>
+    <strong>(1)</strong> <strong>Bakeボタン</strong>を押します。<br>
+    <strong>(2)</strong> <strong>Settingタブ</strong>を選択します。<br>
+    <strong>(3)</strong> <strong>Mecanim</strong>オプションをオンにして、アニメーションクリップが保存されるパスを設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_492.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> <strong>Bakeタブ</strong>を選択します。<br>
+    <strong>(5)</strong> <strong>Bakeボタン</strong>を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_493.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターに「<strong>Animator</strong>」が追加されたことを見ることができます。<br>
+    また、アニメーションクリップが作成された状態です。<br>
+    このアニメーションクリップを利用して、Timelineを構成することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_494.jpg"/>
+    <br>
+    
+    <p>
+    Timelineを作成しましょう。<br>
+    <strong>(1)</strong> <strong>新しいGameObject</strong>を作成します。ここで、「Director」という名前で作成しました。<br>
+    <strong>(2)</strong> 生成されたGameObjectに「<strong>Playable Director</strong>」コンポーネントを追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_495.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Window &gt; Sequencing &gt; Timeline</strong>」メニューからTimelineエディタを開きます。<br>
+    （Unityのバージョンに応じてメニューが異なる場合があります。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_496.jpg"/>
+    <br>
+    
+    <p>
+    Timelineエディタが開かれました。<br>
+    <strong>(1)</strong> Playable Directorコンポーネントが追加された<strong>Director</strong>を選択します。<br>
+    <strong>(2)</strong> Timelineエディタで「<strong>Createボタン</strong>」を押して「<strong>Timeline Asset</strong>」を作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_497.jpg"/>
+    <br>
+    
+    <p>
+    Timeline Assetが生成され、これでTimelineを編集する準備ができました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_498.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitで製作された文字（Runner）が、他のGameObject（Player）の子オブジェクトになるように作成します。<br>
+    Mecanimを連動する場合は、ローカル座標が（0、0、0）に強制されるので、<br>
+    このように、別のGameObjectを作成することをお勧め。<br>
+    Timelineを連動するときにも、別の親GameObjectを作り、親GameObjectのTransformを制御することをお勧めします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_499.jpg"/>
+    <br>
+    
+    <p>
+    Timelineエディタで「<strong>Addボタン</strong>」を押して「<strong>Animation Track</strong>」を追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_500.jpg"/>
+    <br>
+    
+    <p>
+    追加された「トラック（Track）」をAnyPortraitと連動してみましょう。<br>
+    <strong>(1)</strong> AnyPortraitのキャラクターと連動されるトラックを選択します。<br>
+    <strong>(2)</strong> トラックの名前を指定します。ここでは「<strong>Runner Anim Track</strong>」に設定しました。<br>
+    AnyPortraitは「トラックの名前」で連動さトラックを区分するので、この時に設定した名前を覚えておきましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_501.jpg"/>
+    <br>
+    
+    <p>
+    今度はキャラクターの位置を制御するトラックを作ってみましょう。<br>
+    <strong>(1)</strong> 先に作成されたキャラクターの親である「Player」を <strong>(2)</strong> Timelineのトラックリストにドラッグ＆ドロップします。<br>
+    <strong>(3)</strong> Playerのトラックが追加されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_502.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> AnyPortraitキャラクターを選択します。<br>
+    <strong>(2)</strong> Inspector画面でTimeline Settings項目の「<strong>Track Data</strong>」のSizeを1に設定します。<br>
+    <strong>(3)</strong> 「<strong>Director</strong>」項目にPlayable DirectorがあるDirectorを接続します。<br>
+    <strong>(4)</strong> 「<strong>Track Name</strong>」項目に、作成したトラックの名前（「Runner Anim Track」）を指定します。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>トラックと連動する設定について</h4>
+    <br>
+    
+    <p>
+    Inspectorの画面で、トラックと連動することができ、その際、以下の特徴があります。<br>
+    <strong>1) 複数のレイヤ</strong><br>
+    同じ「Playable Director」に2つ以上の「トラック」を接続すれば、複数のアニメーションレイヤが指定されたものと同じです。<br>
+    「Layer」と「Blend」の値を変更して、複数の層の「処理順序」と「混合方式」を設定することができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2) 多数のPlayable Director指定</strong><br>
+    シーンに複数の「Playable Director」がある場合は、「Track Data」の両方に追加します。<br>
+    再生されるPlayable Directorの制御のみを受け取ります。<br>
+    もしすべてのPlayable Directorの再生が完了した場合、AnyPortraitのキャラクターはTimeline代わり「MecanimのAnimator」の制御を受けます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3) スクリプトでTrack Data追加または削除する</strong><br>
+    スクリプトを利用してゲームが実行される中Playable Directorと接続することができます。<br>
+    v1.1.6から提供されている次の関数を利用してみてください。<br>
+    （詳細については、「<a href="../../jp/Script/SC_Timeline.html">関連ページ</a>」を参照してください。）<br>
+    </p>
+    <br>
+    
+    <p>
+    public bool <strong>AddTimelineTrack</strong>(  UnityEngine.Playables.PlayableDirector playableDirector, string trackName, int layer, apAnimPlayUnit.BLEND_METHOD blendMethod)<br>
+    : Playable Directorのトラックと接続します。<br>
+    トラックの名前とレイヤー情報を入力する必要があり、有効なトラックがない場合はfalseを返します。<br>
+    </p>
+    <br>
+    
+    <p>
+    public void <strong>RemoveInvalidTimelineTracks</strong><strong>()</strong><br>
+    : 無効なすべてのトラックの情報を削除します。<br>
+    </p>
+    <br>
+    
+    <p>
+    public void <strong>RemoveAllTimelineTracks</strong><strong>()</strong><br>
+    : すべてのトラックの情報を削除します。<br>
+    </p>
+    <br>
+    
+    <p>
+    public void <strong>UnlinkTimelinePlayableDirector</strong>(UnityEngine.Playables.PlayableDirector playableDirector)<br>
+    : 入力されたPlayable Directorとの接続を解除します。<br>
+    </p>
+    <br>
+    
+    <p>
+    public void <strong>SetTimelineEnable</strong>(bool isEnabled)<br>
+    : Timelineの制御を受け取るかどうかを設定します。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>アニメーションクリップを配置し、キャラクターの位置を編集</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_503.jpg"/>
+    <br>
+    
+    <p>
+    トラックと連動になったら、もうアニメーションクリップをTimeline上に配置してみましょう。<br>
+    Mecanim設定をオンにしてBakeをした場合は、アニメーションが「Animation Clip Asset」の形で保存されます。<br>
+    トラックには、アニメーションクリップをドラッグして配置します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_504.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、Timelineが再生され、キャラクターのアニメーションも一緒に順番に再生されるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_505.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターを実際に動かしてたい場合は、「親GameObject」が登録されている別のトラックでアニメーションを作成します。<br>
+    <strong>(1)</strong> トラックの「録画ボタン」を押します。<br>
+    <strong>(2)</strong> 親GameObjectの「Player」を選択します。<br>
+    <strong>(3)</strong> キーフレームにおいてキャラクターの位置を指定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_506.jpg"/>
+    <br>
+    
+    <p>
+    再度ゲームを実行すると、キャラクターが前方に移動しながら、アニメーションが実行されます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>エディタでTimelineプレビュー</h3>
+    <br>
+    
+    <p>
+    この段階まで完了したら、ゲーム中にTimelineによってアニメーションが実行されているのを見ることができます。<br>
+    しかしながら、ゲームが実行されてないときにはTimelineが再生されてもAnyPortraitのキャラクターのアニメーションが再生されません。<br>
+    AnyPortraitはエディタで自動的に更新がされず、別の入力がある場合にのみ更新されるからです。<br>
+    そのため、ゲームが実行されてないときにもTimelineによって再生されるように、別のスクリプトがv1.1.6から提供されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_507.jpg"/>
+    <br>
+    
+    <p>
+    apPortraitがあるAnyPortraitのキャラクターを選択し、「<strong>Add Componentボタン</strong>」を押します。<br>
+    「<strong>AnyPortrait &gt; Timeline Simulator</strong>」を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_508.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Timeline Simulator（apAnimPlayTimelineSimulator）</strong>がコンポーネントに追加されました。<br>
+    <strong>(1)</strong> 作業中のPlayable Directorを接続します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_509.jpg"/>
+    <br>
+    
+    <p>
+    Timelineを編集中にもキャラクターのアニメーションが正しく実行されることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>「Timeline Simulator」の属性および注意点</strong></span><br>
+    - 「<strong>Simulate</strong>」をオンにするとTimelineが再生されるように連動されて再生され、逆に「<strong>Simulate</strong>」をオフにするとTimelineの制御を受けません。<br>
+    - アニメーションクリップを追加したり、削除するときに、「<span class="text-primary"><strong>Refresh Tracksボタン</strong></span>」を押して更新されたトラック情報が正常に認識されます。<br>
+    - 「<strong>Timeline Simulator</strong>」は、編集中にのみ動作し、ゲームが実行されると、動作しません。<br>
+    - Timelineが完成したら、「<span class="text-primary"><strong>Timeline Simulator</strong></span>」コンポーネントを削除することをお勧めします。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>トラックでのアニメーションクリップ情報と完成されたシネマティックシーン</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_510.jpg"/>
+    <br>
+    
+    <p>
+    トラックに配置されたアニメーションクリップの属性をInspector画面で変更することができます。<br>
+    AnyPortraitは「<strong>Clip In</strong>」、「<strong>Speed Multiplier</strong>」属性の値をアニメーションの再生に反映されます。<br>
+    - 「<strong>Clip In</strong>」を変更して、アニメーションの開始時点を変更することができます。<br>
+    - 「<strong>Speed Multiplier</strong>」を変更して、アニメーションの再生速度を制御することができます。<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/IiWsuaY2R0A" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    
+    <br><br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

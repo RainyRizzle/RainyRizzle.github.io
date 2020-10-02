@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ExtraOption.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_ExtraOption.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ExtraOption.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -67,22 +69,475 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.4</span></h4>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    애니메이션이 재생되거나 게임이 실행되는 도중에 메시의 렌더링 순서를 전환해야하는 경우가 있습니다.<br>
+    또는, 이미지를 스크립트 없이 전환해야하는 경우도 있습니다.<br>
+    이 기능들의 특징은 다른 모디파이어와 달리 "연속성이 없다"라는 것입니다.<br>
+    그래서 이 2개의 기능은 다른 모디파이어와 다른 방식으로 설정을 해야합니다.<br>
+    AnyPortrait에서는 이것을 <strong>"Extra 설정"</strong>이라고 부릅니다.<br>
     </p>
     <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>컨트롤 파라미터로 렌더링 순서 제어하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_417.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>컨트롤 파라미터</strong>를 추가합니다. 여기서는 "ExtraOption"이라고 이름을 지정했습니다.<br>
+    <strong>(2)</strong> <strong>메시 그룹</strong>을 선택합니다.<br>
+    <strong>(3)</strong> <strong>Modifier 탭</strong>을 선택하고 <strong>Add Modifier 버튼</strong>을 누릅니다.<br>
+    <strong>(4)</strong> <strong>"Morph (Controller)"</strong> 모디파이어나 <strong>"Transform (Controller)"</strong> 모디파이어를 선택하여 추가합니다.<br>
+    렌더링 순서와 이미지를 교체할 수 있는 모디파이어는 다음의 4 종류 입니다.<br>
+    <strong>- Transform (Controller)</strong><br>
+    <strong>- Transform (Animation)</strong><br>
+    <strong>- Morph (Controller)</strong><br>
+    <strong>- Morph (Animation)</strong><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_418.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>렌더링 순서를 바꾸고자하는 메시</strong>를 선택합니다.<br>
+    <strong>(2)</strong> <strong>컨트롤 파라미터의 키 생성 버튼</strong>을 눌러서, 모디파이어에 메시와 컨트롤 파라미터를 등록합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_419.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>컨트롤 파라미터의 슬라이더</strong>를 움직이고, <strong>(2)</strong> <strong>두번째 키를 생성</strong>합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_420.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 모디파이어 설정 화면에서 <strong>Extra Option 버튼</strong>을 눌러서 Extra 설정을 활성화합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_421.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>편집 모드</strong>를 켭니다. (단축키 :  <kbd>A</kbd> )<br>
+    <strong>(2)</strong> 화면 상단에서 <strong>Extra 설정</strong>의 <strong>Set 버튼</strong>을 눌러서 <strong>Extra 속성 다이얼로그</strong>를 엽니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_422.jpg"/>
+    <br>
+    
+    <p>
+    Extra 설정을 활성화하기 위해서는 총 3단계의 옵션 활성화 단계를 거쳐야 합니다.<br>
+    - <strong>1단계</strong> : 모디파이어의 Extra 옵션 활성화<br>
+    - <strong>2단계</strong> : 선택된 메시에 대한 컨트롤 파라미터의 키 또는 키프레임에서의 Extra 옵션 활성화<br>
+    - <strong>3단계</strong> : 렌더링 순서(Depth) 변경 또는 이미지 변경에 대한 활성화<br>
+    </p>
+    <br>
+    
+    <p>
+    위에서 1단계는 활성화되었으므로, 다음의 2, 3단계를 수행해야합니다.<br>
+    <strong>(1)</strong> <strong>Extra Option Off 버튼</strong>을 눌러서 <strong>Extra Option On 상태</strong>로 전환합니다. (2단계)<br>
+    <strong>(2)</strong> <strong>Depth Option Off 버튼</strong>을 눌러서 <strong>Depth Option On 상태</strong>로 전환합니다. (3단계)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_423.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>"+" 버튼</strong>이나 <strong>"-" 버튼</strong>을 눌러서 렌더링 순서에 해당하는 Depth를 변경할 수 있습니다.<br>
+    또는 <strong>Delta Depth</strong>의 값을 변경하여 렌더링 순서를 변경할 수 있습니다.<br>
+    <strong>(2)</strong> 여기서는 <strong>Depth 값을 -2 만큼 이동</strong>하여 <strong>다리가 몸 뒤로 이동하여 렌더링</strong>됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    리스트에서는 모든 메시나 메시 그룹이 나타나지 않고, 렌더링 순서를 바꿀 수 있는 대상만 나타납니다.<br>
+    메시 뿐만 아니라 하위 메시 그룹도 렌더링 순서를 바꿀 수 있습니다.<br>
+    단, <span class="text-danger"><strong>클리핑되는 메시</strong></span>들은 이동이 불가능합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    Extra Properties 다이얼로그 중 기본 화면 구성은 다음과 같습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Extra Option 버튼</strong> : 현재 키에 대한 Extra 설정을 켜거나 끕니다.<br>
+    <strong>2. Offset</strong> : Extra 설정이 적용되는 범위를 설정합니다. 값이 1에 가까울 수록 넓은 범위에서 Extra 설정이 적용됩니다.<br>
+    <strong>3. Depth, Image 탭</strong> : 렌더링 순서를 전환할 지, 이미지를 교체할지에 대해서 각각 설정할 수 있습니다. 동시에 지정하는 것도 가능합니다.<br>
+    <strong>4. Depth Option 버튼</strong> : Depth 탭이 켜진 경우, 렌더링 순서 전환(Depth Option)을 켜거나 끕니다.<br>
+    <strong>5. Depth 변경 버튼과 입력 상자</strong> : 렌더링 순서를 변경할 수 있습니다.<br>
+    <strong>6. 렌더링 순서 변경 대상 리스트</strong> : 렌더링 순서를 바꿀수 있는 메시, 메시 그룹들의 리스트와 함께 현재의 Depth를 화살표로 확인할 수 있습니다.<br>
+    <strong>7. Close 버튼</strong> : 다이얼로그를 닫습니다.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_424.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
+    <br><br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_425.jpg"/>
+    <br>
+    
+    <p>
+    이제 컨트롤 파라미터의 슬라이더를 움직이면 다리의 렌더링 순서가 바뀌는 것을 확인하실 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>컨트롤 파라미터로 이미지 전환하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_426.jpg"/>
+    <br>
+    
+    <p>
+    테스트를 위해서 새로운 이미지를 추가합니다.<br>
+    기본적인 Atlas의 구조가 비슷해야합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_427.jpg"/>
+    <br>
+    
+    <p>
+    이번에는 머리의 이미지를 바꾸어봅시다.<br>
+    <strong>(1)</strong> <strong>머리(Head) 메시</strong>를 선택합니다.<br>
+    <strong>(2)</strong> <strong>Add to Keys 버튼</strong>을 눌러서 이 모디파이어와 컨트롤 파라미터에 메시를 추가합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_428.jpg"/>
+    <br>
+    
+    <p>
+    메시를 선택하고 편집 모드를 켠 상태에서 다음의 과정을 수행합니다.<br>
+    <strong>(1)</strong> 화면 상단의 <strong>Extra의 Set 버튼</strong>을 누릅니다.<br>
+    <strong>(2)</strong> <strong>Extra Option 버튼</strong>을 눌러서 <strong>On 상태</strong>로 바꿉니다.<br>
+    <strong>(3)</strong> <strong>Image 탭</strong>을 선택합니다.<br>
+    <strong>(4)</strong> <strong>Image Option 버튼</strong>을 눌러서 <strong>On 상태</strong>로 바꿉니다.<br>
+    <strong>(5)</strong> <strong>Select Image 버튼</strong>을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_429.jpg"/>
+    <br>
+    
+    <p>
+    변경하고자 하는 <strong>이미지를 선택</strong>하고 <strong>Select 버튼</strong>을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_430.jpg"/>
+    <br>
+    
+    <p>
+    이미지가 선택되면 "Changed" 슬롯에 이미지가 등록되며, 실제로도 머리 메시의 이미지가 변경된 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    Extra Properties 다이얼로그 중 이미지 교체에 대한 화면 구성은 다음과 같습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Image Option 버튼</strong> : Image 탭이 켜진 경우, 이미지를 전환하는 설정을 켜거나 끕니다.<br>
+    <strong>2. Original / Changed Slot</strong> : 변경 전, 후의 이미지가 나타납니다.<br>
+    <strong>3. Select Image 버튼</strong> : 어떤 이미지로 전환될 지 선택할 수 있습니다.<br>
+    <strong>4. Reset Image 버튼</strong> : 선택된 이미지를 해제합니다.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_431.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
+    <br><br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_432.jpg"/>
+    <br>
+    
+    <p>
+    컨트롤 파라미터의 슬라이더를 움직이면 머리 메시의 이미지가 변경됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>애니메이션에 Extra 설정 적용하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_433.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Morph (Animation)</strong>이나 <strong>Transform (Animation)</strong> 모디파이어를 이용하면, 애니메이션에서도 Extra 설정을 적용하여 렌더링 순서를 바꾸거나 이미지를 바꾸는 것이 가능합니다.<br>
+    애니메이션을 만들기 전에, 모디파이어 설정에서 <strong>Extra Option</strong>을 켭니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_434.jpg"/>
+    <br>
+    
+    <p>
+    또는 애니메이션 작업 화면에서 <strong>(1)</strong> <strong>타임라인 레이어</strong>을 선택하고 <strong>(2)</strong> <strong>Extra Option 버튼</strong>을 눌러서 활성화할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_435.jpg"/>
+    <br>
+    
+    <p>
+    <strong>애니메이션 편집 모드</strong>를 켠 상태에서, <strong>(1)</strong> <strong>키프레임</strong>을 선택합니다.<br>
+    <strong>(2)</strong> <strong>Extra 설정의 Set 버튼</strong>을 누릅니다.<br>
+    (편집 모드가 켜져 있지 않다면 Set 버튼을 누를 수 없습니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_436.jpg"/>
+    <br>
+    
+    <p>
+    나머지 과정은 컨트롤 파라미터를 이용한 설정 방법과 동일합니다.<br>
+    여기서는 예시로 이미지를 바꾸는 과정을 복습해봅시다.<br>
+    <strong>(1)</strong> <strong>Extra Option 버튼</strong>을 눌러서 On 상태로 만듭니다.<br>
+    <strong>(2)</strong> <strong>Image 탭</strong>을 선택합니다.<br>
+    <strong>(3)</strong> <strong>Image Option 버튼</strong>을 눌러서 On 상태로 만듭니다.<br>
+    <strong>(4)</strong> <strong>Select Image 버튼</strong>을 눌러서 전환될 이미지를 선택합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이제 애니메이션이 재생되면 이미지가 실시간으로 바뀌는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    애니메이션에서의 Extra Properties 다이얼로그의 화면 구성은 조금 다릅니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Target Frame</strong><br>
+    : 현재 선택된 키프레임의 위치가 버튼으로 표시됩니다.<br>
+    좌, 우 버튼을 누르면 이전, 다음 키프레임으로 이동되며, 숫자 버튼을 누르면 애니메이션 슬라이더를 선택된 키프레임으로 이동시킵니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Offset</strong> :<br>
+    Extra 설정이 적용되는 오프셋 범위가 이전, 다음 키프레임에 대해서 각각 적용할 수 있습니다.<br>
+    (다음 키프레임에 대한 오프셋이 기본값이 0.5가 아닌 0.6인 이유는 다음 키프레임의 Extra 설정 범위와 겹치게 만들기 위함입니다.)<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_437.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
     
     
     <br><br>
     
     <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <h3>Extra 설정의 오프셋(Offset)에 대해서</h3>
     <br>
     
     <p>
-    본문 입력<br>
+    Extra 설정에서 <strong>오프셋(Offset)</strong>은 Extra 설정이 적용되는 범위를 의미합니다.<br>
+    위치나 회전, 크기, 색상같은 <strong>"연속적인"</strong> 변화에는 오프셋이 필요하지 않습니다.<br>
+    그러나 Extra 설정은 <strong>"연속적이지 않은"</strong> 변화이기 때문에 어느 시점에서 적용이 되어야 하는지를 설정해야 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_438.jpg"/>
+    <br>
+    
+    <p>
+    설명을 위해서 Extra 설정이 없는 <span class="text-danger"><strong>Key A</strong></span>와 <strong>Extra 설정이 적용된 </strong><span class="text-success"><strong>Key B</strong></span>가 있다고 가정해봅시다.<br>
+    컨트롤 파라미터나 애니메이션 키프레임 등의 키 값이 바뀌면 렌더링되는 결과도 바뀔 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_439.jpg"/>
+    <br>
+    
+    <p>
+    오프셋은 Extra 설정이 적용된 <span class="text-success"><strong>Key B</strong></span>로부터의 거리입니다.<br>
+    숫자가 커질 수록 영역이 커져서, 최대값인 <strong>1</strong>이 되면 <span class="text-danger"><strong>Key A</strong></span>까지 범위가 확장됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_440.jpg"/>
+    <br>
+    
+    <p>
+    오프셋 값은 기본적으로 <strong>0.5</strong>입니다.<br>
+    이 때는 <span class="text-danger"><strong>Key A</strong></span>와 <span class="text-success"><strong>Key B</strong></span>의 <strong>중간 지점</strong>에서 이미지가 전환됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_441.jpg"/>
+    <br>
+    
+    <p>
+    오프셋 값을 줄여서 <strong>0.2</strong>로 설정한다면,<br>
+    <strong>컨트롤 파라미터</strong>나 <strong>애니메이션 프레임</strong>의 값이 <span class="text-success"><strong>Key B</strong></span>에 더 가까워야 이미지가 전환됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_442.jpg"/>
+    <br>
+    
+    <p>
+    오프셋 값을 <strong>0.8</strong>로 증가시킨다면,<br>
+    <strong>컨트롤 파라미터</strong>나 <strong>애니메이션 프레임</strong>의 값이 <span class="text-danger"><strong>Key A</strong></span>에서 조금만 바뀌어도 바로 이미지가 전환될 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_443.jpg"/>
+    <br>
+    
+    <p>
+    애니메이션의 경우 오프셋 값이 2개입니다.<br>
+    <strong>"이전 키프레임"</strong>과 <strong>"다음 키프레임"</strong>과의 비교를 위한 오프셋을 각각 설정할 수 있습니다.<br>
+    2개의 오프셋 값은 적용되는 방향은 달라도 값이 클 수록 범위가 증가하는 것은 동일합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_444.jpg"/>
+    <br>
+    
+    <p>
+    단, 여기서 주의해야할 점이 있습니다.<br>
+    애니메이션은 <strong>"애니메이션 커브"</strong>에 의해서 보간 가중치가 결정됩니다.<br>
+    따라서 오프셋도 애니메이션 커브의 형태에 영향을 받습니다.<br>
+    단순히 재생되는 프레임의 위치가 아니라, <strong>커브에 의한 보간 가중치</strong>를 기준으로 Extra 설정의 적용 여부가 결정됩니다.<br>
+    <strong>(1)</strong> 애니메이션 커브의 보간 가중치를 대상으로 오프셋의 범위를 결정합니다.<br>
+    <strong>(2)</strong> 애니메이션 커브의 형태에 따라서 어느 프레임부터 Extra 설정이 적용될지 결정됩니다.<br>
     </p>
     <br>
     

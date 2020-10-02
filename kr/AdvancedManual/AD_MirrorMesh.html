@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_MirrorMesh.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_MirrorMesh.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_MirrorMesh.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -67,22 +69,160 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.0</span></h4>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    메시 미러 툴은 메시를 만들 때, 좌우 대칭인 이미지를 대상으로 빠르게 작업할 수 있도록 도와주는 기능입니다.<br>
+    이 기능을 이용하면 대칭된 위치에 버텍스를 같이 생성하거나 위치를 수정할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>이미지 영역 설정하고 미러 축 위치시키기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_351.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>메시를 선택</strong>합니다.<br>
+    <strong>(2)</strong> <strong>Setting 탭</strong>을 선택합니다.<br>
+    <strong>(3)</strong> <strong>Area Disabled 버튼</strong>을 눌러서 <strong>Area Enabled 상태</strong>로 변경합니다.<br>
+    <strong>(4)</strong> <strong>영역의 크기를 설정</strong>합니다. <strong>증가/감소 버튼</strong>을 누르거나 직접 값을 입력하여 설정할 수 있습니다.<br>
+    <strong>(5)</strong> <strong>사각형의 영역</strong>이 작업 공간에 나타납니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_352.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Make Mesh 탭을 선택</strong>합니다.<br>
+    <strong>(2)</strong> <strong>Add 탭</strong>을 선택합니다.<br>
+    <strong>(3)</strong> <strong>Mirror를 활성화</strong>합니다.<br>
+    <strong>(4)</strong> <strong>미러 축의 위치</strong>를 설정합니다.<br>
+    위치 값을 입력하거나 증감 버튼을 눌러서 위치를 직접 설정할 수 있습니다.<br>
+    앞의 과정에 따라 영역이 만들어져 있다면 <strong>Move to Center</strong> 버튼을 눌러서 바로 중심으로 이동시킬 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    미러 툴은 작업 보조 기능이기 때문에, 메시 편집이 종료되면 미러 기능은 비활성화됩니다.<br>
+    미러 축의 위치나 설정 값은 유지됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>미러 툴 UI</h3>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_353.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    <strong>1.</strong> <strong>미러 툴을 켜거나 끕니다.</strong><br>
+    <strong>2.</strong> <strong>미러 축의 방향</strong>을 수직 또는 수평으로 설정합니다.<br>
+    <strong>3.</strong> <strong>미러 축의 위치</strong>를 설정합니다.<br>
+    이미지 영역(Area)이 설정되어 있다면 <strong>Move To Center</strong> 버튼을 눌러서 중심으로 바로 이동시킬 수 있습니다.<br>
+    <strong>4.</strong> 미러 축 상에 버텍스를 위치시킬 때, <strong>Offset 만큼의 거리 내에서의 버텍스는 축에 있는 것으로 간주</strong>합니다.<br>
+    <strong>5.</strong> 미러 축 상에 <strong>버텍스를 스냅하여 위치</strong>시킵니다.<br>
+    <strong>6.</strong> 버텍스를 삭제할 때, <strong>맞은편의 버텍스도 같이 삭제</strong>합니다.<br>
     </p>
     <br>
     
     
-    <br><br>
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
     
     <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <h3>미러 툴을 이용하여 메시 만들기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_354.jpg"/>
     <br>
     
     <p>
-    본문 입력<br>
+    버텍스를 추가할 때, 대칭됭 위치에서 동일하게 버텍스가 추가됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_355.jpg"/>
+    <br>
+    
+    <p>
+    미러 축 상에 버텍스를 추가하면, 미러 축에 합쳐진 1개의 버텍스가 생성됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_356.jpg"/>
+    <br>
+    
+    <p>
+     <kbd>Shift</kbd> 를 누르고 축에서 교차하여 선을 만들면, <strong>교차 되는 위치</strong>에 버텍스가 생성됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_357.jpg"/>
+    <br>
+    
+    <p>
+    버텍스를 이동시키면 맞은편 버텍스도 같이 이동합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_358.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Remove Symmetrically 옵션</strong>이 켜져 있다면, 버텍스를 삭제할 때 맞은편도 같이 삭제됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>여러 개의 버텍스를 한번에 미러 복사하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_359_2.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Make Mesh 탭</strong>을 선택합니다.<br>
+    <strong>(2)</strong> <strong>Edit 탭</strong>을 선택합니다.<br>
+    <strong>(3)</strong> <strong>미러 툴</strong>을 켭니다.<br>
+    <strong>(4)</strong> <strong>복사하고자 하는 버텍스들을 선택</strong>합니다. 복사될 버텍스들을 미리 볼 수 있습니다. (초록색 버텍스와 점선)<br>
+    <strong>(5)</strong> <strong>Copy Symmetrically 버튼</strong>을 눌러서 복사합니다.<br>
     </p>
     <br>
     

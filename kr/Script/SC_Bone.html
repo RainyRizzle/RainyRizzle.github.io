@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/Script/SC_Bone.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/Script/SC_Bone.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/Script/SC_Bone.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -60,30 +62,355 @@
 
     <!-- 여기서부터 페이지 내용이 작성됩니다. -->
     <!-- 1. 페이지 진입 경로 -->
-    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/Script.html"><span class="text-dark">Script</span></a> > 본</p>
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/Script.html"><span class="text-dark">스크립트</span></a> > 본</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
     <h1 class="display-5">본</h1>
     <br>
     
-    <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
-    
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    본을 직접 참조하거나 제어하는 함수들입니다.<br>
+    ​본의 소켓을 참조하거나 IK로 제어하는 함수들을 포함합니다.<br>
     </p>
     <br>
     
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apOptBone</span> <strong>GetBone</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apOptBone</span> <strong>GetBone</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;이름으로 본을 찾아서 리턴합니다.<br>
+    &nbsp;&nbsp;&nbsp;​루트 유닛 인덱스를 지정하지 않는다면 먼저 현재 렌더링되는 루트 유닛부터 전체 검색을 합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : 참조하고자 하는 본의 이름<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> : 검색된 본. 없을 경우 null 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetBoneSocket</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone )</span>
+<br><span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetBoneSocket</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName )</span>
+<br><span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetBoneSocket</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;본의 소켓을 참조합니다.<br>
+    &nbsp;&nbsp;&nbsp;소켓에 대해서는 <a href="../../kr/AdvancedManual/AD_Socket.html">관련 페이지</a>를 참고하시길 바랍니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : 소켓을 포함하는 본<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : 참조하고자 하는 본의 이름<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Transform</span> : 본의 소켓 트랜스 폼. 없을 경우 null 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePosition</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePosition</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePosition</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;본의 위치를 제어합니다.<br>
+    &nbsp;&nbsp;&nbsp;​가중치를 이용하여 보간할 수 있습니다.<br>
+    &nbsp;&nbsp;&nbsp;​IK는 동작하지 않습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : 제어하고자 하는 본<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : 제어하고자 하는 본의 이름<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> position : 옮기고자 하는 위치<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 위치 매개변수의 좌표계. World는 씬의 좌표계를 의미하며, Self는 apPortrait의 좌표계를 의미합니다.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : 애니메이션되는 본의 위치와의 보간 가중치<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 존재하지 않는 본을 참조하고자 했다면 false 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneRotation</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneRotation</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneRotation</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;본의 회전 각도를 제어합니다.<br>
+    &nbsp;&nbsp;&nbsp;​가중치를 이용하여 보간할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : 제어하고자 하는 본<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : 제어하고자 하는 본의 이름<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> angle : 회전하고자 하는 각도 (Degree)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 회전 매개변수의 좌표계. World는 씬의 좌표계를 의미하며, Self는 apPortrait의 좌표계를 의미합니다.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : 애니메이션되는 본의 각도와의 보간 가중치<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 존재하지 않는 본을 참조하고자 했다면 false 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneScale</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneScale</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneScale</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;본의 크기를 제어합니다.<br>
+    &nbsp;&nbsp;&nbsp;​가중치를 이용하여 보간할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : 제어하고자 하는 본<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : 제어하고자 하는 본의 이름<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> scale : 크기 값<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 크기 매개변수의 좌표계. World는 씬의 좌표계를 의미하며, Self는 apPortrait의 좌표계를 의미합니다.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : 애니메이션되는 본의 크기와의 보간 가중치<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 존재하지 않는 본을 참조하고자 했다면 false 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneIK</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f,</span> <span class="text-primary">bool</span> <span class="text-muted">isContinuous</span> <span class="text-muted">=</span> <span class="text-muted">true )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneIK</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f,</span> <span class="text-primary">bool</span> <span class="text-muted">isContinuous</span> <span class="text-muted">=</span> <span class="text-muted">true )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneIK</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f,</span> <span class="text-primary">bool</span> <span class="text-muted">isContinuous</span> <span class="text-muted">=</span> <span class="text-muted">true )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;IK 방식으로 본을 이동합니다.<br>
+    &nbsp;&nbsp;&nbsp;본의 IK 설정을 하는 방법은 <a href="../../kr/AdvancedManual/AD_BoneIK.html">관련 페이지</a>를 참고하세요.<br>
+    &nbsp;&nbsp;&nbsp;​가중치를 이용하여 보간할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : 제어하고자 하는 본<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : 제어하고자 하는 본의 이름<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> position : 이동하고자 하는 위치. IK에 따라 해당 위치에 도달하지 못할 수 있습니다.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 위치 매개변수의 좌표계. World는 씬의 좌표계를 의미하며, Self는 apPortrait의 좌표계를 의미합니다.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : 애니메이션되는 본의 위치와의 보간 가중치<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isContiuous : true라면 이전 프레임의 IK 결과를 참고하여 자연스러운 결과가 되도록 합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 존재하지 않는 본을 참조하고자 했다면 false 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneLookAt</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneLookAt</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBoneLookAt</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;IK 방식과 유사하게 본을 회전하여 요청한 위치를 바라보게 합니다.<br>
+    &nbsp;&nbsp;&nbsp;SetBoneIK<strong>()</strong>와 다르게 1개의 본을 회전시킵니다.<br>
+    &nbsp;&nbsp;&nbsp;IK 설정의 영향을 받지 않습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : 제어하고자 하는 본<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : 제어하고자 하는 본의 이름<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> position : 바라보고자 하는 위치<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 위치 매개변수의 좌표계. World는 씬의 좌표계를 의미하며, Self는 apPortrait의 좌표계를 의미합니다.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : 애니메이션되는 본의 회전값과의 보간 가중치<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 존재하지 않는 본을 참조하고자 했다면 false 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraint</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <span class="text-primary">float</span> <span class="text-muted">positionValue,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintBound</span> <span class="text-muted">constraintBound,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraint</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-primary">float</span> <span class="text-muted">positionValue,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintBound</span> <span class="text-muted">constraintBound,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraint</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <span class="text-primary">float</span> <span class="text-muted">positionValue,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintBound</span> <span class="text-muted">constraintBound,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;본의 위치를 제한합니다.<br>
+    &nbsp;&nbsp;&nbsp;각각의 축에 대해서 범위를 설정할 수 있습니다.<br>
+    &nbsp;&nbsp;&nbsp;매 업데이트마다 새로 호출해야하며, ConstraintBound 타입을 다르게하여 중복되어 호출할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : 대상이 되는 본<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : 대상이 되는 본의 이름<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> positionValue : 제한하고자 하는 위치의 값<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">ConstraintBound</span> constraintBound : X, Y 축에 대해서 각각 "최소, 최대, 권장"의 타입을 가집니다.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 위치 매개변수의 좌표계. World는 씬의 좌표계를 의미하며, Self는 apPortrait의 좌표계를 의미합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 존재하지 않는 본을 참조하고자 했다면 false 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraintBySurface</strong> <span class="text-muted">( </span><span class="text-success">apOptBone</span> <span class="text-muted">optBone,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">defaultSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">currentSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">minSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">maxSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintSurface</span> <span class="text-muted">constraintSurface,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraintBySurface</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">boneName,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">defaultSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">currentSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">minSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">maxSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintSurface</span> <span class="text-muted">constraintSurface,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetBonePositionConstraintBySurface</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">boneName,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">defaultSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">currentSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">minSurfacePosition,</span> <span class="text-primary">float</span> <span class="text-muted">maxSurfacePosition,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintSurface</span> <span class="text-muted">constraintSurface,</span> <span class="text-success">Space</span> <span class="text-muted">space )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;X, Y축에 대해서 기준 표면 위치를 설정하고, 현재 표면 위치를 입력하면 그 차이만큼 본의 위치가 보정됩니다.<br>
+    &nbsp;&nbsp;&nbsp;​최소, 최대 범위를 지정하여 위치 보정이 안정적으로 수행되도록 합니다.<br>
+    &nbsp;&nbsp;&nbsp;본을 직접 제어하는 것이 아니므로 FK로 작성된 애니메이션이 유지되는 효과가 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptBone</span> optBone : 제어하고자 하는 본<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> boneName : 제어하고자 하는 본의 이름<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> defaultSurfacePosition : 기준이 되는 표면 위치로, 대체로 일정한 값이 입력되어야 합니다.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> currentSurfacePosition : 현재 표면의 위치<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> minSurfacePosition : 표면 위치의 최소 값<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> maxSurfacePosition : 표면 위치의 최대 값<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">ConstraintSurface</span> constraintSurface : 표면의 축 (X, Y)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 위치 매개변수의 좌표계. World는 씬의 좌표계를 의미하며, Self는 apPortrait의 좌표계를 의미합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 존재하지 않는 본을 참조하고자 했다면 false 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
     
     <br><br>
     
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
-    <br>
-    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
     <p>
-    본문 입력<br>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary"><strong>using</strong></span> <strong>AnyPortrait</strong>;<br>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">BoneTest </span>: <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">public </span><span class="text-success">apPortrait </span>portrait;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetMouseButtonDown(0))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3 </span>touchPosWorld = <span class="text-success">Camera</span>.main.ScreenToWorldPoint(<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">new </span><span class="text-success">Vector3</span>(<span class="text-success">Input</span>.mousePosition.x, <span class="text-success">Input</span>.mousePosition.y, 0));<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetBoneIK</strong>(0, <span class="text-danger">"Bone Hand R"</span>, touchPosWorld, <span class="text-success">Space</span>.World, 1.0f, <span class="text-primary">true</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
     </p>
+    </div>
     <br>
     
     <!-- 5. 바닥 네비바 -->

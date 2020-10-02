@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_Mecanim.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_Mecanim.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_Mecanim.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,152 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.4</span></h4>
+    
+    <p>
+    ゲームを作成するとき、多くのゲームプロデューサはステートマシンを使用してアニメーションを作成します。<br>
+    Unityで「<strong>Mecanim</strong>」がこのような開発プロセスで使用されます。<br>
+    スクリプトの伝統的なアニメーションの制御とは異なり、状態マシンによってアニメーションが切り替わります。<br>
+    バージョン1.0.4からAnyPortraitはUnityの「Mecanim」がアニメーションを制御する機能をサポートします。<br>
+    「Animator」コンポーネントを使用する「Mecanim」システムは、基本的にはUnityのHumanoid3Dのモデルに最も適しています。<br>
+    したがってAnyPortraitは「Mecanim」のすべての機能と互換性がありませんので、この点に注意してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_224.jpg"/>
+    <br>
+    
+    <p>
+    まず、AnyPortraitでアニメーションを作成します。<br>
+    従来の方法と同様に作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_225.jpg"/>
+    <br>
+    
+    <p>
+    Bakeダイアログボックスで 「<strong>Is Mecanim Animation</strong>」をチェックしてください。<br>
+    AnyPortraitはアニメーションを「<strong>Animation Clip</strong>」に変換して保存するので、それらのアセットを保存するパスを設定する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_226.jpg"/>
+    <br>
+    
+    <p>
+    「Mecanim」を使用する方法で保存すると、自動的に「<strong>Animator</strong>」コンポーネントが追加されます。<br>
+    「<strong>Animator</strong>」コンポーネントが初めて追加されると、「<strong>Animation Controller</strong>」が自動的に作成されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_227.jpg"/>
+    <br>
+    
+    <p>
+    「Animator」エディタを開くと、<strong>(1)</strong> 「<strong>State</strong>」が自動的に作成されます。<br>
+    <strong>(2)</strong> 各「<strong>State</strong>」の「<strong>Motion</strong>」のソースである「<strong>Animation Clip</strong>」が作成され、設定されたパスに保存されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_228.jpg"/>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意すべき点があります。</strong></span><br>
+    AnyPortraitは 「Mecanim」の 「Empty State」を認識しません。<br>
+    したがって、 「<strong>Empty</strong>」という名前の生成された 「<strong>Animation Clip</strong>」を含む状態を使用する必要があります。<br>
+    「<strong>Empty state</strong>」を使用する場合は、必ず「<strong>Empty</strong>」という名前の「<strong>Animation Clip</strong>」を「<strong>Motion</strong>」として使用してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_229.jpg"/>
+    <br>
+    
+    <p>
+    「Animator」エディタで 「Transition」などを設定して 「Animator」を編集します。<br>
+    (「<strong>Sub-State Machine</strong>」と「<strong>Blend Tree</strong>」は正式にサポートされていません。)<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Animatorにレイヤーを追加する</h3>
+    <br>
+    
+    <p>
+    複数のアニメーションをレイヤーとしてセットアップして同時に実行できます。<br>
+    「走ったりジャンプ中に銃を撃つ」のようなアニメーションを作成することができます。<br>
+    AnyPortraitの既存のアニメーションスクリプトは、レイヤー機能をサポートし、「Mecanim」もでもそれをサポートします。<br>
+    次のような方法でレイヤーを追加して構成することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_230.jpg"/>
+    <br>
+    
+    <p>
+    「Animator」では、レイヤーを追加してステートマシンを構成します。<br>
+    基本的には、「マージしていないレイヤの状態」に対して「Empty state」を作成することをお勧めします。<br>
+    上記のように、 「Empty」という名前の 「Animation Clip」を使用して 「State」を作成します。<br>
+    また、 「Blending」と 「Weight」を設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_231.jpg"/>
+    <br>
+    
+    <p>
+    apPortraitインスペクタの「Mecanim」設定項目を確認してください。<br>
+    ここで "Mecanim"情報を変更する必要があります。<br>
+    <strong>(1)</strong> <strong>「Refresh Layers」ボタン</strong>を押します。<br>
+    <strong>(2)</strong> 作成したレイヤーが追加されていることがわかります。<br>
+    レイヤーの追加、削除、または「Blending」モードが変更された場合は、常に「Refresh Layers」ボタンを押してください。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Mecanimを使用する際の注意点</h4>
+    <br>
+    
+    <p>
+    AnyPortraitを Mecanimで接続するときは注意が必要です。<br>
+    ここでは、上述した内容も含まれます。<br>
+    </p>
+    <br>
+    
+    <p>
+     - あなたは 「Mecanim」の 「Empty State」を使うことはできません。 必要に応じて、「Motion」として作成された「Empty」の「Animation Clip」を「State」として使用する必要があります。<br>
+     - 「Sub-State Machine」と「Blend Tree」はサポートされていません。<br>
+    - 「Mecanim」とリンクした後、AnyPortraitが提供するアニメーションスクリプト機能は使用できません。 「Animator」を参照し、その機能を呼び出します。<br>
+     - アニメーションレイヤーを追加または変更した場合は、インスペクタの「Refresh Layers」ボタンを押してレイヤー情報を更新します。<br>
+     - 既存のアニメーションにマージして別のアニメーションをレイヤーとして追加する場合は、マージしないオブジェクトのタイムラインレイヤーを作成しないでください。<br>
+    (たとえば、モーションが「別の上体モーションで実行中」の場合、「上体モーション」アニメーションにはレッグオブジェクト用のタイムラインレイヤーはありません。)<br>
+     - 「Mecanim」でアニメーションを制御する場合、apPortraitの位置は（0、0、0）に固定されます。 新しい「GameObject」を作成し、「Transform」を制御するためにその上に配置することをお勧めします。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

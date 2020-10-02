@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ColorModifier.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ColorModifier.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_ColorModifier.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,106 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_91.jpg"/>
+    <br>
+    
+    <p>
+    モディファイアを使用すると、カラーエフェクトを適用してキャラクタに色効果を与えることができます。<br>
+    次のモディファイアは、カラー効果を適用できます。<br>
+    <strong>Transform (Controller)</strong><br>
+    <strong>Transform (Animation)</strong><br>
+    <strong>Morph (Controller)</strong><br>
+    <strong>Morph (Animation)</strong><br>
+    </p>
+    <br>
+    
+    <p>
+    色効果については、TransformとMorphは同じ処理をしているので、必要に応じて使用します。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Transform (Controller), Morph (Controller)モディファイアから色を適用する</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_92.jpg"/>
+    <br>
+    
+    <p>
+    これは制御パラメータを使用してメッシュグループ に色の効果を指定する方法です。<br>
+    <strong>(1)</strong> メッシュグループ の設定の「<strong>Color Option</strong>」をオンに変更します。<br>
+    <strong>(2)</strong> 現在の制御パラメータの「<strong>キーセット</strong>」の「<strong>Color Option</strong>」を入れます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_93.jpg"/>
+    <br>
+    
+    <p>
+    <span class="text-danger">編集モードを有効にするには</span>、<strong>(1)</strong> 画面上部のカラープロパティを開き、<strong>(2)</strong> 色を指定します。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Transform (Animation), Morph (Animation)モディファイアから色を適用する</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_94.jpg"/>
+    <br>
+    
+    <p>
+    アニメーションの色効果を適用する方法です。<br>
+    <strong>(1)</strong> メッシュグループ の設定の「<strong>Color Option</strong>」をオンにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_95.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <span class="text-danger">アニメ編集モードをオンにし</span>、<strong>(2)</strong> 画面の上部または <strong>(3)</strong> キーフレームのUIでキーフレームの色属性を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>カラーエフェクトの適用方法</h4>
+    <br>
+    
+    <p>
+    AnyPortraitで使用される色処理式は、2X Multiplyです。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>"結果の色" = "Texture" x "色" x 2</strong><br>
+    </p>
+    <br>
+    
+    <p>
+    この方法は、最大2倍の明るさや暗さを持つことができるため、「Multiply」と「Additive」エフェクトを包括的に実装できます。<br>
+    したがって、デフォルトの色は白ではなく、<strong>グレー(0.5, 0.5, 0.5, 1)</strong>です。<br>
+    ただし、アルファチャンネルには「Multiply」メソッドが使用されているため、モディファイアが重なると透明になる機能があります。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

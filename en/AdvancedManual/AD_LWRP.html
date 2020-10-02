@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_LWRP.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_LWRP.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_LWRP.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,324 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.8</span></h4>
+    
+    <p>
+    "<strong>Lightweight Render Pipeline</strong>" is a new rendering method introduced in Unity 2018 and formally adopted in Unity 2019.<br>
+    It allows you to control rendering with C# scripts and provides features for high quality and optimization.<br>
+    <strong>Lightweight Render Pipeline</strong>, "<strong>LWRP</strong>" for short, is a completely new rendering pipeline, which means that most existing shaders are incompatible.<br>
+    Unfortunately, the basic materials provided by AnyPortrait are not compatible with LWRP.<br>
+    To solve this problem, the <strong>Material Library</strong>, a feature added to AnyPortrait v1.1.7, provides materials for LWRP, and v1.1.8 also supports LWRP 2D, described below.<br>
+    This page covers the process of installing and setting up materials that support LWRP.<br>
+    We recommend that you refer to the following pages for further explanation.<br>
+    </p>
+    <br>
+    
+    <p>
+    - <a href="../../en/AdvancedManual/AD_MaterialLibrary.html"><strong>Material Library</strong></a><br>
+    - <a href="../../en/AdvancedManual/AD_ShaderGraph.html"><strong>Creating Materials with Shader Graph</strong></a><br>
+    - <a href="../../en/Script/SC_CustomShader.html"><strong>Custom Shader</strong></a><br>
+    - <a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.lightweight@6.9/manual/index.html" target="_sub"><strong>About the Lightweight Render Pipeline Manual</strong></a> (Unity official page)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_714.jpg"/>
+    <br>
+    
+    <p>
+    First, open the Unity Editor's <strong>Package Manager</strong> and select the <strong>Lightweight RP</strong>.<br>
+    If the <strong>Lightweight RP package</strong> is not installed, an Install button appears in the <strong>lower right corner</strong> of the Package Manager window.<br>
+    Installing this package allows you to use <strong>LWRP</strong>.<br>
+    (Depending on the Unity version, the UI or installation method may be different.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_715.jpg"/>
+    <br>
+    
+    <p>
+    Create an "<strong>LWRP Asset</strong>" by selecting "<strong>Assets &gt; Create &gt; Rendering &gt; Lightweight Render Pipeline &gt; Pipeline Asset</strong>" from the menu.<br>
+    Assign the created "<strong>LWRP Asset</strong>" to "<strong>Scriptable Render Pipeline Settings</strong>" under "<strong>Project Settings &gt; Graphics</strong>" as shown in the image above.<br>
+    Now, the rendering method is changed to <strong>LWRP</strong>.<br>
+    (See the <a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.lightweight@6.9/manual/configuring-lwrp-for-use.html" target="_sub">related page</a> for details. This may vary by Unity version.)<br>
+    </p>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_716.jpg"/>
+    <br>
+    
+    <p>
+    LWRP does not support existing shaders, so the material will not render properly.<br>
+    This issue is not just for AnyPortrait, but also for most Unity assets and materials.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_717.jpg"/>
+    <br>
+    
+    <p>
+    Open the AnyPortrait Editor.<br>
+    <strong>(1)</strong> <strong>Select Root Unit</strong>.<br>
+    <strong>(2)</strong> Press the <strong>Material Library button</strong>.<br>
+    <strong>(3)</strong> The <strong>Material Library window</strong> is opened.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_718.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Change "<strong>Advanced Presets</strong>" to "<span class="text-danger"><strong>LWRP Unlit Preset</strong></span>" at the bottom left of the Material library.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_719.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> Press the <strong>Unpack Preset button</strong> to install the selected material package.<br>
+    <strong>(3)</strong> After the installation process, you need to click the Okay button in the message and open the Material Library again.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_720.jpg"/>
+    <br>
+    
+    <p>
+    <strong>"LWRP Unlit"</strong> Preset is added.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_721.jpg"/>
+    <br>
+    
+    <p>
+    Let's create a new <strong>Material Set</strong>.<br>
+    <strong>(1)</strong> Press the <strong>Make Material Set button</strong>.<br>
+    <strong>(2)</strong> Select the <strong>LWRP Unlit </strong>preset<strong>.</strong><br>
+    <strong>(3)</strong> Press the <strong>Select button</strong> to create the material set.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_722.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> Select the created <strong>LWRP Unlit</strong> material set.<br>
+    <strong>(5)</strong> Press the <strong>Default Material button</strong> to set as the default material.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_723.jpg"/>
+    <br>
+    
+    <p>
+    The following process is also very important.<br>
+    <strong>Clipping meshes</strong> do not work properly in "<strong>Scriptable Render Pipeline (SRP)</strong>" such as LWRP.<br>
+    This is because the rendering process in Unity's camera is different from the previous way.<br>
+    In v1.1.8, you have the option to resolve this issue.<br>
+    <strong>(1)</strong> Press the <strong>Bake button</strong> to open the dialog.<br>
+    <strong>(2)</strong> Press the <strong>Setting tab</strong>.<br>
+    <strong>(3)</strong> Change the value of the <strong>Render Pipeline</strong> option to "<span class="text-danger"><strong>Scriptable Render Pipeline</strong></span>".<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note that.</strong></span><br>
+    This option is available starting in <strong>Unity 2019.1</strong>.<br>
+    You can use SRP in Unity 2018, but due to the limitations of the features provided, clipped meshes cannot be rendered properly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_724.jpg"/>
+    <br>
+    
+    <p>
+    Select the <strong>Bake tab</strong> and press the <strong>Bake button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_725.jpg"/>
+    <br>
+    
+    <p>
+    When you open the Unity scene you will see the character render properly.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Rendering in Lightweight Render Pipeline 2D</h3>
+    <br>
+    
+    <p>
+    The new feature to apply LWRP to 2D games is added in Unity 2019.<br>
+    Basically, it is similar to LWRP, but LWRP 2D uses a different shader than original LWRP.<br>
+    Therefore, in order to use LWRP 2D, you need to create another material and apply it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_726.jpg"/>
+    <br>
+    
+    <p>
+    How to set up <strong>LWRP 2D</strong>.<br>
+    With LWRP enabled, change the <strong>Renderer Type</strong> of the LWRP asset to <strong>Custom</strong>.<br>
+    Create a <strong>2D Renderer Data asset</strong>, and then, assign it to the <strong>Data</strong> of the LWRP asset to switch the rendering method to the LWRP 2D.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_727.jpg"/>
+    <br>
+    
+    <p>
+    Setting up an LWRP 2D material is almost same.<br>
+    <strong>(1)</strong> <strong>Select Root Unit</strong>.<br>
+    <strong>(2)</strong> Press the <strong>Material Library button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_728.jpg"/>
+    <br>
+    
+    <p>
+    You need to select a Material Preset to install.<br>
+    <strong>(1)</strong> Select "<strong>LWRP 2D Lit Preset (Experimental)</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_729.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> Press <strong>Unpack Preset button</strong> to install preset package.<br>
+    <strong>(3)</strong> Press the <strong>Okay button</strong> in the message and <strong>restart the Material Library</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_730.jpg"/>
+    <br>
+    
+    <p>
+    The <strong>LWRP 2D Lit preset</strong> is installed and added.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_731.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Make Material Set button</strong>.<br>
+    <strong>(2)</strong> Select the <strong>LWRP 2D Lit preset</strong>.<br>
+    <strong>(3)</strong> Press the <strong>Select button</strong> to create the material set.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_732.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> Select the newly created <strong>LWRP 2D Lit material set</strong>.<br>
+    <strong>(5)</strong> Press the <strong>Default Material button</strong> to set it as the default material.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_733.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Bake button</strong>.<br>
+    <strong>(2)</strong> In the <strong>Setting tab</strong> of the Bake dialog, set the <strong>Render Pipeline</strong> option to "<span class="text-danger"><strong>Scriptable Render Pipeline</strong></span>".<br>
+    <strong>(3)</strong> Press the <strong>Bake butto</strong>n in the <strong>Bake tab</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_734.jpg"/>
+    <br>
+    
+    <p>
+    If you check it in Unity, it will look black or dark.<br>
+    This is because the installed preset is a lighted material, which appears dark when there is no light.<br>
+    We need to add light to the scene, especially, let's take advantage of the features provided by LWRP 2D.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_735.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Right-click on Hierarchy</strong>.<br>
+    <strong>(2)</strong> By selecting "<strong>Light &gt; 2D</strong>", you can select various types of "<strong>Light 2D</strong>" for LWRP 2D.<br>
+    <strong>Freeform Light 2D</strong> is selected on this page.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_736.jpg"/>
+    <br>
+    
+    <p>
+    Press the <strong>Edit Shape button</strong> to edit the shape of the light.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_737.jpg"/>
+    <br>
+    
+    <p>
+    You can see the character is rendered pretty in LWRP 2D.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>リギングが適用されたメッシュの反転サイズ</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ReversedRiggedMesh.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ReversedRiggedMesh.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_ReversedRiggedMesh.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > リギングが適用されたメッシュの反転サイズ</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">リギングが適用されたメッシュの反転サイズ</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.2.5</span></h4>
+    
+    <p>
+    AnyPortraitで製作されたキャラクターをUnityのシーンに移動すると、このキャラクターは「片面のMeshRenderer」の組み合わせで構成されます。<br>
+    メッシュのスケールを逆にするか、GameObjectを逆にすると、メッシュの裏側がレンダリングされます。<br>
+    ただし、両面レンダリングを設定していない場合、メッシュの裏側はゲームに表示されません。<br>
+    （<a href="../../jp/AdvancedManual/AD_2SidedMesh.html">両面レンダリングの設定方法</a>）<br>
+    </p>
+    <br>
+    
+    <p>
+    幸い、AnyPortraitには、メッシュのサイズが逆になっても適切にレンダリングする機能があります。 （<a href="../../jp/AdvancedManual/AD_InvertedScale.html">サイズが反転されたメッシュ</a>）<br>
+    しかし、この機能は、「<span class="text-danger"><strong>リギングが適用されていないメッシュ</strong></span>」に限定されます。<br>
+    リギングが適用されたメッシュに対して、接続されたボーンのサイズが反転されてからかどうかをすべて確認する必要がので、性能を低下させる恐れがあります。<br>
+    </p>
+    <br>
+    
+    <p>
+    しかし、リギングが適用されたメッシュのサイズを必ず反転させるべき場合もあるので、AnyPortrait v1.2.5に追加されたオプションを利用してみましょう。<br>
+    このページで紹介されたオプションを使用すると、「両面レンダリング」を適用しなくても、リギングが適用されたメッシュのサイズを反転させることが可能です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_953.jpg"/>
+    <br>
+    
+    <p>
+    説明のために、単純なメッシュとボーンを準備しました。<br>
+    これは3つのボーンが1つのメッシュに接続された状態です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_954.jpg"/>
+    <br>
+    
+    <p>
+    3つのボーンの中の親である「緑のボーン」の大きさを「制御パラメータ」に基づいて反転させてみましょう。<br>
+    左の画像は、<span class="text-primary"><strong>デフォルトの状態</strong></span>であり、右の画像は、<span class="text-success"><strong>サイズが反転された状態</strong></span>です。<br>
+    同様に、リギングが適用されたメッシュの大きさも反転しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_955.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>を実行した後、Unityシーンで実行してみましょう。<br>
+    <span class="text-primary"><strong>デフォルトの状態</strong></span>で、メッシは正常にレンダリングがされます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_956.jpg"/>
+    <br>
+    
+    <p>
+    「制御パラメータ」の値を変更して、「<span class="text-success"><strong>ボーンの大きさが反転された状態</strong></span>」にすると、メッシュはレンダリングされません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_957.jpg"/>
+    <br>
+    
+    <p>
+    実際には、メッシュはなくならず、サイズだけが変わって裏面が今後​​出てきた状態です。<br>
+    ただし、メッシュの背面には、基本的にレンダリングされていないため、メッシュが消えたかのように見受けられます。<br>
+    </p>
+    <br>
+    
+    <p>
+    従来は、この問題を解決するためにメッシュが両面でレンダリングされるように（<a href="../../jp/AdvancedManual/AD_2SidedMesh.html">関連ページ</a>）を設定する必要があります。<br>
+    しかし、v1.2.5で追加されたオプションを使用して、この問題を解決することもできます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_958.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitエディタを開いて、<br>
+    <strong>(1)</strong> <strong>Bake</strong>ボタンを押します。<br>
+    <strong>(2)</strong> <strong>Setting</strong>タブを選択します。<br>
+    <strong>(3)</strong> <strong>Flipped Mesh</strong>オプションの値が<strong>Check excluding Rigged Meshes</strong>になっていることを見ることができます。<br>
+    <strong>(4)</strong> オプションの値を<strong>Check All</strong>に変更します。<br>
+    </p>
+    <br>
+    
+    <p>
+    - <strong>Check excluding Rigged Meshes</strong> : リギングされたメッシュを除いて、大きさが反転されたメッシュが正常に描画されるよう作成されます。<br>
+    - <strong>Check All</strong> : 可能なすべての場合についてサイズが反転されたメッシュがレンダリングされるようになります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_959.jpg"/>
+    <br>
+    
+    <p>
+    再度Bakeを実行し、ゲームを実行すると、ボーンの大きさが反転されてメッシュがひっくり返っても、メッシが正常に表示されるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <p>
+    <span class="text-danger"><strong>注意事項</strong></span><br>
+    - <strong>Check All</strong>にオプションを変更すると、すべてのリギング値を毎フレームごとにチェックするので、パフォーマンスが低下することがあります。<br>
+     - メッシュのリギングされたすべてのボーンの中<strong>一部のボーンだけサイズが反転された場合</strong>、メッシは正常に表示されないことがあります。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_ImportantOption.html">< 「Important」と多数のオブジェクト</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_NonUniformScale.html">「Non-Uniform Scale」オプション ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/Script/SC_Physics.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/Script/SC_Physics.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/Script/SC_Physics.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -66,8 +68,477 @@
     <h1 class="display-5">物理効果</h1>
     <br>
     
-    <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <p>
+    「Physics」モディファイアの物理的効果はスクリプトで制御できます。<br>
+    物理的効果のオン/オフを切り替えることができ、外的な力をさらに制御して引っ張ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetPhysicEnabled</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">isPhysicEnabled )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;物理的効果をオンまたはオフにします。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isPhysicEnabled : 「Physics」モディファイアが処理されるかどうか<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>AddForce_Point</strong> <span class="text-muted">( </span><span class="text-success">Vector2</span> <span class="text-muted">pointPosW,</span> <span class="text-primary">float</span> <span class="text-muted">radius )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;その点に基づいて半径方向の力を加えます。<br>
+    &nbsp;&nbsp;&nbsp;それはapForceUnitを返します。それから、プロパティを追加する必要があります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> pointPosW : 力が加えられる位置 (「World」座標系)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> radius : 力の半径<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apForceUnit</span> : 生成された力
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>AddForce_Direction</strong> <span class="text-muted">( </span><span class="text-success">Vector2</span> <span class="text-muted">directionW )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;方向性の強さを追加します。<br>
+    &nbsp;&nbsp;&nbsp;apForceUnitを返す場合、属性を追加する必要があります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> directionW : 力が加えられる方向 (「World」座標系)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apForceUnit</span> : 生成された力
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>AddForce_Direction</strong> <span class="text-muted">( </span><span class="text-success">Vector2</span> <span class="text-muted">directionW,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">waveSizeX,</span> <span class="text-primary">float</span> <span class="text-muted">waveSizeY,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">waveTimeX,</span> <span class="text-primary">float</span> <span class="text-muted">waveTimeY )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;方向性の強さを追加します。<br>
+    &nbsp;&nbsp;&nbsp;X軸とY軸に対してsinカーブを描き、風のような表現に適した方向性を繰り返します。<br>
+    &nbsp;&nbsp;&nbsp;apForceUnitを返す場合、属性を追加する必要があります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> directionW : 力が加えられる方向 (「World」座標系)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> waveSizeX : 周期的に変化する方向の最大X値<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> waveSizeY : 周期的に変化する方向の最大Y値<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> waveTimeX : X軸方向が変わる時間単位<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> waveTime : Y軸方向が変わる時間単位<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apForceUnit</span> : 生成された力
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>IsAnyForceEvent</strong>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;現在追加された力があることを確認します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 追加された力があるかどうか
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">Vector2</span> <strong>GetForce</strong> <span class="text-muted">( </span><span class="text-success">Vector2</span> <span class="text-muted">targetPosW )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;計算された力は入力位置で測定されます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> targetPosW : 測定位置 (「World」座標系)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> : 測定された力ベクトル
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ClearForce</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;AddForce関数で追加したすべての力を取り除きます。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apPullTouch</span> <strong>AddTouch</strong> <span class="text-muted">( </span><span class="text-success">Vector2</span> <span class="text-muted">posW,</span> <span class="text-primary">float</span> <span class="text-muted">radius )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;タッチ入力に「引き」を開始します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> posW : タッチ位置 (「World」座標系)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> radius : 引っ張られる半径<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apPullTouch</span> : 「タッチして引っ張り」の一意のIDで識別されるオブジェクト
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetTouchPosition</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">touchID,</span> <span class="text-success">Vector2</span> <span class="text-muted">posW )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;AddTouch呼び出した後、返されたapPullTouchに対応するタッチ現在位置を更新します。<br>
+    &nbsp;&nbsp;&nbsp;apPullTouch.TouchIDを使用して選択します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">​int</span> touchID : AddTouchから返されたapPullTouchのTouchIDに対応するID<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> posW : 現在のタッチの位置<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetTouchPosition</strong> <span class="text-muted">( </span><span class="text-success">apPullTouch</span> <span class="text-muted">touch,</span> <span class="text-success">Vector2</span> <span class="text-muted">posW )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;AddTouch呼び出した後、返されたapPullTouchに対応するタッチ現在位置を更新します。<br>
+    &nbsp;&nbsp;&nbsp;パラメータを入力してapPullTouchを選択します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apPullTouch</span> touch : AddTouchから返されたapPullTouch<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> posW : 現在のタッチの位置<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>IsAnyTouchEvent</strong>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;現在追加されているタッチがある場合に返します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 追加された接触があるかどうか
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apPullTouch</span> <strong>GetTouch</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">touchID )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;touchIDに対応するIDを持つapPullTouchオブジェクトを返します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> touchID : 検索するタッチイベントのID<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apPullTouch</span> : 要求されたTouchIDに「タッチイベントを取得する」（存在しない場合は、nullを返します）
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>RemoveTouch</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">touchID )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;引きを計算するタッチイベントオブジェクトを削除します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">​int</span> touchID : AddTouchから返されたapPullTouchのTouchIDに対応するID<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ClearTouch</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;すべてのタッチイベントを削除します。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ClearForceAndTouch</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;全ての力とタッチイベントを取り除く。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    
+    <br><br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>apForceUnit</h4>
+    <br>
+    
+    <p>
+    AddForce関数を使用すると、強制は適用されません。<br>
+    AddForce関数apForceUnitの戻り値に追加情報を含める必要があります。<br>
+    「SetPower」関数の1つを呼び出し、「EmitLoop」または「EmitOnce」のいずれかを呼び出す必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>SetPower</strong>(float power)<br>
+    : 力の強さを設定します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>SetPower</strong>(float power, float waveSize, float waveTime)<br>
+    : 「waveTime」に「power」を基にした「waveSize」を掛けた量だけ周期的に変化する力を加えます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>EmitLoop</strong><strong>()</strong><br>
+    : 持続力として設定する。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>EmitOnce</strong>(float liveTime)<br>
+    : 「liveTime」の時間の後に消える力として設定します。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary"><strong>using</strong></span> <strong>AnyPortrait</strong>;<br>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">PhysicsTest</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// Target AnyPortrait Object<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success">apPortrait </span>portrait;<br>
+    &emsp;&emsp;// Touch ID<br>
+    &emsp;&emsp;<span class="text-primary"><strong>private int </strong></span>_touchID;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//----------------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;// Force Events<br>
+    &emsp;&emsp;&emsp;&emsp;//----------------------------------------<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Clear Force<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.C))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.ClearForce();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Clear Force"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Add Point Force<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.P))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Position : (0, 0)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Radius : 10<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Power : 2000<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Live Time : 10 Sec<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.AddForce_Point(</strong><span class="text-success"><strong>Vector2</strong></span>.zero, 10.0f)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.SetPower(2000)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.EmitOnce(10);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Add Point Force"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Add Waved Directional Force<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.D))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Direction : (1 +- 0.5, 0.5 +- 0.2)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Power : 4000 +- 1000<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Loop<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong> portrait.AddForce_Direction(</strong><span class="text-primary"><strong>new </strong></span><span class="text-success">Vector2</span>(1.0f, 0.5f), 0.5f, 0.2f, 5, 10)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.SetPower(4000, 1000, 25)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.EmitLoop();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Add Waved Directional Force"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//----------------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;// Touch Events<br>
+    &emsp;&emsp;&emsp;&emsp;//----------------------------------------<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3 </span>touchPosW = <span class="text-success">Camera</span>.main.ScreenToWorldPoint(<span class="text-primary">new </span><span class="text-success">Vector3</span>(<span class="text-success">Input</span>.mousePosition.x, <span class="text-success">Input</span>.mousePosition.y, 0));<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector2 </span>touchPosW2 = <span class="text-primary">new </span><span class="text-success">Vector2</span>(touchPosW.x, touchPosW.y);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Left Click -&gt; Touch<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetMouseButtonDown(0))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//Start Touch Event<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_touchID = portrait.AddTouch(touchPosW2, 2.0f).TouchID;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Add Touch ("</span> + _touchID + <span class="text-danger">")"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">else if</span>(<span class="text-success">Input</span>.GetMouseButton(0))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//Refresh Touch Position<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.SetTouchPosition(_touchID, touchPosW2);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">else if</span>(Input.GetMouseButtonUp(0))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//Release Touch Event<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.ClearTouch();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_touchID = -1;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

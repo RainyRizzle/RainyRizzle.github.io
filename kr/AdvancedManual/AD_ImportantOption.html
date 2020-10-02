@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ImportantOption.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_ImportantOption.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ImportantOption.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -67,22 +69,141 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.3</span></h4>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    게임을 만들다보면 한 화면에 수많은 캐릭터들이 등장하는 경우가 있습니다.<br>
+    1명의 플레이어와 다수의 몬스터들이 등장하는 경우가 주로 볼 수 있는 예시일 것입니다.<br>
+    하지만 많은 캐릭터들이 등장한다면 게임은 매우 느려져서 게임을 플레이할 수 없을 것입니다.<br>
+    AnyPortrait의 "<strong>Important 옵션</strong>"을 변경하면 성능을 향상시킬 수 있습니다.<br>
     </p>
     <br>
     
-    
-    <br><br>
-    
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <p>
+    - <span class="text-primary"><strong>Important 옵션이 켜진 상태</strong></span> : 매 프레임마다 업데이트가 되어 애니메이션이 부드럽습니다. (기본값)<br>
+    - <span class="text-danger"><strong>Important 옵션이 꺼진 상태</strong></span> : 업데이트 프레임이 제한되어 애니메이션의 품질은 조금 떨어지지만 성능이 향상됩니다.<br>
+    </p>
     <br>
     
     <p>
-    본문 입력<br>
+    일반적으로 <strong>플레이어 캐릭터</strong>처럼 중요한 객체는 Important 옵션을 켜는 것을 권장하며,<br>
+    다수로 등장하되 애니메이션의 품질이 낮아도 되는 <strong>몬스터</strong>들이나 <strong>배경의 오브젝트</strong>들은 Important 옵션을 끄는 것을 권장합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    아래의 프로파일링 결과에서 Important 옵션의 값에 따라서 성능의 차이를 볼 수 있습니다.<br>
+    (아래의 실험 결과는 캐릭터의 복잡도, 실행 환경, 씬의 구성에 따라서 다르게 측정될 수 있습니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_482.jpg"/>
+    <br>
+    
+    <p>
+    애니메이션이 재생되는 캐릭터를 50개 배치시킨 화면입니다.<br>
+    캐릭터의 Important 설정은 켜져 있으며, FPS (Frames Per Second)는 30 정도를 기록했습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_483.jpg"/>
+    <br>
+    
+    <p>
+    20개의 캐릭터를 더 생성하여 총 70개의 캐릭터들이 배치되었습니다.<br>
+    캐릭터가 추가된 만큼 FPS가 감소하여 약 22의 FPS를 기록했습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_484.jpg"/>
+    <br>
+    
+    <p>
+    100개의 캐릭터들이 배치되니 FPS가 15까지 감소되었습니다.<br>
+    이렇게 성능이 저하된 경우에는 정상적인 게임 플레이를 기대할 수 없을 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_485.jpg"/>
+    <br>
+    
+    <p>
+    이제 Important 옵션을 끄고 캐릭터를 배치해보았습니다.<br>
+    캐릭터의 Important 옵션에서의 "<strong>제한되는 FPS 설정</strong>"은 30입니다.<br>
+    캐릭터가 50개 배치되었을 때 Important 옵션이 켜진 경우와 동일하게 FPS는 30을 기록했습니다.<br>
+    이 상태에서는 애니메이션이 매 프레임마다 갱신되는 것이 아니기 때문에 프로파일러에서의 FPS가 다소 특이하게 기록되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_486.jpg"/>
+    <br>
+    
+    <p>
+    캐릭터를 70개 배치한 결과입니다.<br>
+    FPS는 30 또는 그보다 약간 더 이상을 기록하여 Important 옵션이 켜진 경우보다 높은 성능을 보여줍니다.<br>
+    AnyPortrait는 Important 옵션이 꺼진 동일한 캐릭터들의 업데이트를 일괄적으로 관리하는 작업을 수행합니다.<br>
+    그리고 이 과정에서 가능한 서로 다른 프레임에서 캐릭터들의 업데이트를 처리하고자 합니다.<br>
+    다만, 다른 요인에 의해서 FPS가 변동된 경우 AnyPortrait는 캐릭터들의 업데이트 시점을 조정하기 때문에 일시적인 <strong>프레임 저하 현상(Spike)</strong>이 발생할 수 있습니다.<br>
+    (유니티는 주기적으로 메모리 관리 등의 이유로 FPS가 변동됩니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_487.jpg"/>
+    <br>
+    
+    <p>
+    100개의 캐릭터를 배치한 결과입니다.<br>
+    FPS는 조금 줄어들었지만 Important 옵션이 켜진 경우보다 양호한 27 정도를 기록하였습니다.<br>
+    최대한 모든 프레임에 고르게 캐릭터들의 업데이트를 분산시킨 것을 프로파일러를 통해서 확인할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_488.jpg"/>
+    <br>
+    
+    <p>
+    Important 옵션을 변경하는 방법은 여러가지가 있습니다.<br>
+    먼저 <strong>Bake 다이얼로그</strong>에서 옵션을 변경해봅시다.<br>
+    <strong>(1)</strong> <strong>Bake 버튼</strong>을 누릅니다.<br>
+    <strong>(2)</strong> <strong>Setting 탭</strong>을 선택합니다.<br>
+    <strong>(3)</strong> "<strong>Is Important</strong>" 항목을 클릭하여 설정을 변경할 수 있습니다.<br>
+    "<strong>FPS</strong>" 항목은 Important 옵션이 꺼진 경우의 업데이트 빈도입니다.<br>
+    (일반적으로 15, 20, 30의 값을 권장합니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_489.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Inspector UI</strong>에서 "<strong>Is Important</strong>" 항목을 클릭하여 설정을 변경할 수도 있습니다.스크립트로도 Important 옵션을 변경하는 것도 가능합니다.<br>
+    <a href="../../kr/Script/SC_Init.html">관련 페이지</a>에서 "<strong>SetImportant(bool)</strong>" 함수를 확인해보시길 바랍니다.<br>
+    스크립트를 이용하는 경우, 실시간으로 옵션을 변경할 수 있으므로 게임의 최적화에 도움이 될 것입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger">참고</span><br>
+    v1.2.3에서 Important 옵션이 비활성된 상태에서 캐릭터가 고정 FPS로 실행될 때의 처리가 개선되었습니다.<br>
+    이제 간헐적인 <strong>프레임 저하 현상(Spike)</strong>이 가능한 발생되지 않도록 개선되었습니다.<br>
+    이 버전부터는 <strong>고정 FPS</strong>는 게임의 FPS의 절반 또는 그 이하로만 동작하도록 제한됩니다.<br>
+    만약 게임의 FPS가 저하되거나 너무 높은 고정 FPS값이 지정되었다면, 무조건 게임의 FPS의 절반 또는 그 이하로 실행되도록 강제됩니다.<br>
     </p>
     <br>
     
@@ -90,7 +211,7 @@
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
         <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_BillboardPers.html">< 빌보드와 Perspective 카메라</a>
-        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_PSD.html">PSD 파일 가져오기 ></a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_ReversedRiggedMesh.html">리깅된 메시의 크기가 반전된 경우 ></a>
     </nav>
     
     <!-- 페이지 내용 끝! -->

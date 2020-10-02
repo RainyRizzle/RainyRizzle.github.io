@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_PhysicsModifierSetting.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_PhysicsModifierSetting.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_PhysicsModifierSetting.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,191 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_96.jpg"/>
+    <br>
+    
+    <p>
+    <strong>「Physics」モディファイア</strong>は物理的な効果を与えるために使用することができます。<br>
+    各メッシュは、「<span class="text-primary">物理材質</span>」を持ち、物理材質が頂点に適用される重みを提供します。<br>
+    このページは、物理材質の各項目を説明します。<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_97.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    <strong>1. Important Vertex</strong><br>
+    物理的な効果は、バッチモード頂点に適用されません。<br>
+    いわゆる「物理的エラー」を回避するために、いくつかの頂点を除いて変更された物理的な式が適用されます。<br>
+    「重要頂点」は、物理的な効果が補正なし適用される頂点を表します。<br>
+    線や髪の先端、オブジェクトの重心または衣服の端のように効果が最大化されている点に頂点を指定してください。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Weight Tool</strong> :  物理材質の重みを適用します。<br>
+    <strong>3. Blend</strong> :  選択した頂点のウェイトを平滑化します。<br>
+    <strong>4. Grow / Shrink</strong> : 選択した頂点の範囲を拡大または縮小します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>5. Viscosity Group ID</strong><br>
+    粘度のグループID(Viscosity Group ID)を頂点に割り当てます。<br>
+    同じグループIDを持つ隣接頂点には粘性のあるパワーがあります。<br>
+    複数のIDを指定できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>6. Preset Name</strong> : 物理プリセットが適用されている場合、プリセットの名前が表示されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>7. Base Setting</strong> : 基本的な物性ます。<br>
+    <strong>Mass</strong> : 質量。デフォルトは1ます。<br>
+    <strong>Damping</strong> : 空気抵抗以外の内力で動くことへの耐性ます。<br>
+    <strong>Air Drag</strong> : 風などの外力に対する耐性ます。<br>
+    <strong>Move Range</strong> : 移動範囲をデフォルトの位置から制限します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>8. Stretchiness</strong><br>
+    これは、隣接する頂点の間で作用するプロパティです。 彼らが近づいているとき、彼らは離れて行きたい。 彼らが遠くにいるとき、彼らは近づきたい。<br>
+    <strong>K-Value</strong> : テンションのK値ですが、実際の公式とは異なり、K値は1以上です。 「薄い布」の引張強度は100の値を有する。<br>
+    <strong>Stretch Range</strong> : テンションによる伸び率を制限します。 1.0は±100％増減、0.5は±50％増減を意味する。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>9. Inertia</strong><br>
+    慣性特性。 現在の速度を維持しようとし、0と1の間の値を持ちます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>10. Restoring</strong><br>
+    状態を復元しようとする属性。<br>
+    この属性は、慣性または張力に移動する元の位置に戻ります。それは弾力性と似ています。<br>
+    デフォルト値は1であり、10以内であれば「薄い生地」の弱い回復力を意味します。<br>
+    弾性ゴムのように強く、20度以上であり、非常に弾力性がある場合に、100以上です。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>11. Viscosity</strong><br>
+    粘度特性。<br>
+    このプロパティは、指定された同じ粘度グループIDを持つ隣接する頂点間に適用されます。<br>
+    値は0と1の間の値を持ち、値が大きいほど、隣接する頂点が「一緒に動こうとする」という性質が強くなります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>12. Gravity</strong><br>
+    重力プロパティ。<br>
+    値は「Constant」に指定することも、「Control Parameter」にリンクすることもできます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>13. Wind</strong><br>
+    風プロパティ。<br>
+    重力とは異なり、力の方向は周期的に変化するという特徴がある。<br>
+    値は「Constant」に指定することも、「Control Parameter」にリンクすることもできます。<br>
+    「<strong>Wind Random Range Size</strong>」を使用すると、X、Y軸の力の周期的な変化を決定することができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>14. Physics Presets</strong> : 「物理材質プリセット」ダイアログボックスを開きます。<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
+    <br><br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>物理材質設定のヒント</h4>
+    <br>
+    
+    <p>
+    物理材質を設定するときは、意図したとおり作成することは容易ではありません。<br>
+    場合によっては、どのように設定する必要がありられる、以下を参照ください。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>1) 振れ幅が大きくない場合</strong></span><br>
+    - 「Move Range」のチェックを外すか、範囲を広げます。<br>
+    - 「Stretchiness Range」の比率を上げます。 「Stretchiness Range」のチェックを外すと、形状を維持することが困難です。<br>
+    - 「Inertia」の値を大きくする。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>2) 揺れが大きすぎて停止しない場合</strong></span><br>
+    - 「Air Drag」の値を大きくする。<br>
+    - 「Viscosity」の値を0.3以上にします。<br>
+    - 「Inertia」の値を0.8以下にします。<br>
+    - 「Stretchiness」の「K-Value」を減らす。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>3) 弾性が低い場合</strong></span><br>
+    - 慣性および「Restoring」値を増加させます。<br>
+    - 「Viscosity」値を下げます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>4) 過度に伸縮した場合</strong></span><br>
+    - 「Stretchiness Range」の比率を0.5未満に減らします。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>5) 歪みを減らしたいとき</strong></span><br>
+    - 「Move Range」にチェックを入れ、制限範囲を指定します。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

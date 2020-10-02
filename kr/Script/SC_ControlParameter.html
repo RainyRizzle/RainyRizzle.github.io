@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/Script/SC_ControlParameter.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/Script/SC_ControlParameter.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/Script/SC_ControlParameter.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -60,30 +62,248 @@
 
     <!-- 여기서부터 페이지 내용이 작성됩니다. -->
     <!-- 1. 페이지 진입 경로 -->
-    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/Script.html"><span class="text-dark">Script</span></a> > 컨트롤 파라미터</p>
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/Script.html"><span class="text-dark">스크립트</span></a> > 컨트롤 파라미터</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
     <h1 class="display-5">컨트롤 파라미터</h1>
     <br>
     
-    <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
-    
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    컨트롤 파라미터를 스크립트로 참조하거나 제어할 수 있습니다.<br>
+    컨트롤 파라미터를 제어하면 이와 연결된 모디파이어가 영향을 받습니다.<br>
     </p>
     <br>
     
-    
-    <br><br>
-    
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
-    <br>
-    
-    <p>
-    본문 입력<br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apControlParam</span> <strong>GetControlParam</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">controlParamName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;컨트롤 파라미터를 조회합니다.<br>
     </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> controlParamName : 컨트롤 파라미터 이름<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apControlParam</span> : 요청된 이름을 가지는 컨트롤 파라미터 (없을시 null 리턴)
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>IsControlParamExist</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">controlParamName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;해당 이름을 가진 컨트롤 파라미터가 존재하는지 확인합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> controlParamName : 컨트롤 파라미터 이름<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 요청된 이름을 가지는 컨트롤 파라미터가 존재하는지 여부
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetControlParamInt</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">controlParamName,</span> <span class="text-primary">int</span> <span class="text-muted">intValue )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetControlParamInt</strong> <span class="text-muted">( </span><span class="text-success">apControlParam</span> <span class="text-muted">controlParam,</span> <span class="text-primary">int</span> <span class="text-muted">intValue )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;정수형(int) 타입의 컨트롤 파라미터의 값을 지정합니다.<br>
+    &nbsp;&nbsp;&nbsp;컨트롤 파라미터의 범위를 벗어난다면 최소 또는 최대값으로 제한됩니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> controlParamName : 컨트롤 파라미터 이름<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apControlParam</span> controlParam : 값을 지정하고자 하는 컨트롤 파라미터<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">​int</span> intValue : 지정하려는 정수형(int) 값<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 값이 적용된 컨트롤 파라미터가 존재하여 처리가 성공했는지 여부
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetControlParamFloat</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">controlParamName,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetControlParamFloat</strong> <span class="text-muted">( </span><span class="text-success">apControlParam</span> <span class="text-muted">controlParam,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;실수형(float) 타입의 컨트롤 파라미터의 값을 지정합니다.<br>
+    &nbsp;&nbsp;&nbsp;컨트롤 파라미터의 범위를 벗어난다면 최소 또는 최대값으로 제한됩니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> controlParamName : 컨트롤 파라미터 이름<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apControlParam</span> controlParam : 값을 지정하고자 하는 컨트롤 파라미터<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">​float</span> floatValue : 지정하려는 실수형(float) 값<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 값이 적용된 컨트롤 파라미터가 존재하여 처리가 성공했는지 여부
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetControlParamVector2</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">controlParamName,</span> <span class="text-success">Vector2</span> <span class="text-muted">vec2Value )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetControlParamVector2</strong> <span class="text-muted">( </span><span class="text-success">apControlParam</span> <span class="text-muted">controlParam,</span> <span class="text-success">Vector2</span> <span class="text-muted">vec2Value )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;2차원 벡터(Vector2) 타입의 컨트롤 파라미터의 값을 지정합니다.<br>
+    &nbsp;&nbsp;&nbsp;X, Y축에 대해 각각 컨트롤 파라미터의 범위를 벗어난다면 최소 또는 최대값으로 제한됩니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> controlParamName : 컨트롤 파라미터 이름<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apControlParam</span> controlParam : 값을 지정하고자 하는 컨트롤 파라미터<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> vec2Value : 지정하려는 2차원 벡터(Vector2) 값<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 값이 적용된 컨트롤 파라미터가 존재하여 처리가 성공했는지 여부
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetControlParamDefaultValue</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">controlParamName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;컨트롤 파라미터의 값을 기본값으로 초기화합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> controlParamName : 컨트롤 파라미터 이름<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 값이 적용된 컨트롤 파라미터가 존재하여 처리가 성공했는지 여부
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using </span>UnityEngine;<br>
+    <span class="text-primary"><strong>using </strong></span><strong>AnyPortrait;</strong><br>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">ControlParamTest</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// Target AnyPortrait<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success">apPortrait </span>portrait;<br>
+    <br>
+    &emsp;&emsp;// Parameter Values<br>
+    &emsp;&emsp;<span class="text-primary">private int </span>_eyeShape = 0;<br>
+    &emsp;&emsp;<span class="text-primary">private int </span>_mouthShape = 0;<br>
+    &emsp;&emsp;<span class="text-primary">private float </span>_verticalPosition = 0.0f;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// "Eye Shape" (0, 1, 2, 3 int)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.E))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_eyeShape++;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(_eyeShape &gt; 3) { _eyeShape = 0; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.SetControlParamInt(</strong><span class="text-danger"><strong>"Eye Shape",</strong></span> _eyeShape);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// "Mouth Shape" (0, 1, 2, int)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.M))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_mouthShape++;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(_mouthShape &gt; 2) { _mouthShape = 0; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.SetControlParamInt(</strong><span class="text-danger"><strong>"Mouth Shape"</strong></span>, _mouthShape);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// "Vertical Position" (0 ~ 1 float)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKey(<span class="text-success">KeyCode</span>.UpArrow))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Move Upward<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_verticalPosition += 2 * <span class="text-success">Time</span>.deltaTime;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(_verticalPosition &gt; 1) { _verticalPosition = 1; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.SetControlParamFloat(</strong><span class="text-danger"><strong>"Vertical Position"</strong></span>, _verticalPosition);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">else if</span>(<span class="text-success">Input</span>.GetKey(<span class="text-success">KeyCode</span>.DownArrow))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Move Downward<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_verticalPosition -= 2 * <span class="text-success">Time</span>.deltaTime;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(_verticalPosition &lt; 0) { _verticalPosition = 0; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.SetControlParamFloat(</strong><span class="text-danger"><strong>"Vertical Position"</strong></span>, _verticalPosition);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
     <br>
     
     <!-- 5. 바닥 네비바 -->

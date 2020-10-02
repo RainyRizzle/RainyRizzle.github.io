@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_URP.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_URP.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_URP.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,429 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.2</span></h4>
+    
+    <p>
+    「<strong>Universal Render Pipeline（URP）</strong>」は、Unity 2019.3から導入された新しいレンダリング方法です。<br>
+    既存のLWRPを交換する「URP」は、より多くのプラットフォームとデバイスをサポートし2D、3D、VRとARなど、さまざまな種類のプロジェクトに適用することができます。<br>
+    追加の説明については、以下のページを参照してて見ることをお勧めします。<br>
+    </p>
+    <br>
+    
+    <p>
+    - <a href="../../jp/AdvancedManual/AD_MaterialLibrary.html"><strong>マテリアルライブラリ</strong></a><br>
+    - <a href="../../jp/AdvancedManual/AD_ShaderGraph.html"><strong>「Shader Graph」でマテリアルを作成</strong></a><br>
+    - <a href="../../jp/Script/SC_CustomShader.html"><strong>カスタムシェーダー</strong></a><br>
+    - <a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@7.1/manual/index.html" target="_sub"><strong>About the Universal Render Pipeline Manual</strong></a><br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Universal Render Pipeline設定しマテリアルを変更</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_870.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Window &gt; Package Manager</strong>」を実行します。<br>
+    （メニューの位置や名前はUnityのバージョンに応じて差があることがあります。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_871.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Universal RP</strong>」パッケージを選択します。<br>
+    リストにパッケージが見えない場合は、ロードに時間がかかりますので、少しアルゴされます。<br>
+    <strong>(2)</strong> 「<strong>Installボタン</strong>」を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_872.jpg"/>
+    <br>
+    
+    <p>
+    URPパッケージがインストールされている場合、「<strong>Pipeline Asset</strong>」を作成し、レンダリングに適用する必要があります。<br>
+    Assetsフォルダ内の右クリックをするか、Assetsメニューを選択して、「<strong>Create &gt; Rendering &gt; Universal Render Pipeline &gt; Pipeline Asset（Forward Renderer）</strong>」を追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_873.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>UniversalRenderPipelineAsset</strong>」が作成されました。<br>
+    また、URPのレンダリング方法を定義する「基本Rendererアセット」も一緒に生成されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_874.jpg"/>
+    <br>
+    
+    <p>
+    生成された「URP Asset」をプロジェクトに適用してみましょう。<br>
+    <strong>(2)</strong> エディタメニューの「<strong>Edit &gt; Project Settings</strong>」を開いて、「<strong>Graphics</strong>」の項目を選択します。<br>
+    <strong>(2)</strong> 「<strong>Scriptable Render Pipeline Settings</strong>」の項目に先立って生成された「<strong>UniversalRenderPipelineAsset</strong>」を割り当てます。<br>
+    URP方法でレンダリングが有効になったので、おそらくほとんどのマテリアルが正常にレンダリングされていないことです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_875.jpg"/>
+    <br>
+    
+    <p>
+    URPをサポートしているマテリアルをインストールして適用してみましょう。<br>
+    <strong>(1)</strong> AnyPortraitエディタを開いて、「<strong>Root Unit</strong>」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Material Libraryボタン</strong>」を押します。<br>
+    <strong>(3)</strong> インストールするパッケージを選択します。ここでは「<strong>URP Presets</strong>」パッケージを選択します。<br>
+    <strong>(4)</strong> 「<strong>URP Presets</strong>」が選択された状態で、「<strong>Unpack Presetボタン</strong>」を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_876.jpg"/>
+    <br>
+    
+    <p>
+    패키지가 설치되면 재질 라이브러리를 다시 실행해야합니다.<br>
+    パッケージがインストールされると、マテリアルライブラリを再実行する必要があります。<br>
+    확인 버튼을 누르고 Material Library 버튼을 눌러서 다시 엽니다.<br>
+    「OKボタン」を押して、「Material Libraryボタン」を押して再度開きます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_877.jpg"/>
+    <br>
+    
+    <p>
+    URPをサポートする3種のプリセットが追加されました。<br>
+    <strong>- URP Unlit</strong> : URP環境での光の影響を受けずに、元の色が表示されます。<br>
+    <strong>- URP Lit</strong> : URP環境での光の影響を受けます。<br>
+    <strong>- URP 2D Lit</strong> : 2D Rendererが適用されたURP環境で2D Lightの影響を受けます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_878.jpg"/>
+    <br>
+    
+    <p>
+    追加されたプリセットを使用して、マテリアルセットを作ってみましょう。<br>
+    <strong>(1)</strong> 「<strong>Make Material Setボタン</strong>」を押します。<br>
+    <strong>(2)</strong> URPプリセットのいずれかを選択します。ここでは「<strong>URP Unlit</strong>」プリセットを選択しました。<br>
+    <strong>(3)</strong> 「<strong>Selectボタン</strong>」を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_879.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 生成された「<strong>URP Unlit</strong>」マテリアルセットを選択します。<br>
+    <strong>(2)</strong> 「<strong>Default Materialボタン</strong>」を押して、デフォルト値に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_880.jpg"/>
+    <br>
+    
+    <p>
+    LWRPとURPの「クリッピングマスク」をレンダリングする方法が異なりますので、Bake設定で追加の作業をする必要があります。<br>
+    <strong>(1)</strong> 「<strong>Bakeボタン</strong>」を押します。<br>
+    <strong>(2)</strong> 「<strong>Settingタブ</strong>」を選択します。<br>
+    <strong>(3)</strong> 「<strong>Render Pipeline</strong>」の項目の値を「<strong>Scriptable Render Pipeline</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_881.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Bakeタブ</strong>」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Bakeボタン</strong>」を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_882.jpg"/>
+    <br>
+    
+    <p>
+    ユニティシーンでキャラクターを確認してみると、URP環境で正常に表示されるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>URP Litマテリアルを適用</h3>
+    <br>
+    
+    <p>
+    「URP Lit」マテリアルを適用して、光の影響を受けるようにすることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_883.jpg"/>
+    <br>
+    
+    <p>
+    マテリアルライブラリを開きます。<br>
+    <strong>(1)</strong> 「<strong>Make Material Setボタン</strong>」を押します。<br>
+    <strong>(2)</strong> 「<strong>URP Lit</strong>」プリセットを選択して <strong>(3)</strong> 「<strong>Selectボタン</strong>」を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_884.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 生成された「<strong>URP Lit</strong>」マテリアルセットを選択します。<br>
+    <strong>(2)</strong> 「<strong>Default Materialボタン</strong>」を押してデフォルト値に設定します。<br>
+    すべての作業が終了したら、マテリアルライブラリを閉じます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_885.jpg"/>
+    <br>
+    
+    <p>
+    Bakeを実行して、ユニティシーンで確認してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_886.jpg"/>
+    <br>
+    
+    <p>
+    Unlitマテリアルが適用されたのとは異なり、上の画像のように多少暗くしたり、あるいはまったく黒キャラクターが出力されます。<br>
+    Litマテリアルは、光がなければ暗くなるからです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_887.jpg"/>
+    <br>
+    
+    <p>
+    様々な種類のLightオブジェクトを追加してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_888.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、光が適用されたキャラクターを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>2D Rendererが適用されたURPでレンダリングする</h3>
+    <br>
+    
+    <p>
+    URPはLWRP 2Dの機能が含まれてする方式です。<br>
+    簡単に「<strong>2D Renderer</strong>」を適用して2D Lightを利用するレンダリング方法で切り替えることが可能です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_889.jpg"/>
+    <br>
+    
+    <p>
+    2D Rendererアセットを作成します。<br>
+    AssetsメニューやAssetsフォルダで右クリックをして、<br>
+    「<strong>Create &gt; Rendering &gt; Universal Renderer Pipeline &gt; 2D Renderer（Experimental）</strong>」を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_890.jpg"/>
+    <br>
+    
+    <p>
+    新しい「<strong>2D Rendererアセット（New 2D Renderer Data）</strong>」が作成されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_891.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 先に作成された「<strong>UniversalRenderPipelineAsset</strong>」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Renderer List</strong>」の項目に「<strong>2D Renderer（New 2D Renderer Data）</strong>」を割り当てます。<br>
+    <strong>(3)</strong> 2D Rendererのためのマテリアルがまだ適用される前なので、ユニティシーンではまだ光が適用されません。<br>
+    URP 2Dのためのマテリアルを作成しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_892.jpg"/>
+    <br>
+    
+    <p>
+    上記の方法とほぼ同じです。<br>
+    <strong>(1)</strong> マテリアルライブラリを開き、「<strong>Make Material Setボタン</strong>」を押します。<br>
+    <strong>(2)</strong> 今回は「<strong>URP 2D Lit</strong>」プリセットを選択して <strong>(3)</strong> 「<strong>Selectボタン</strong>」を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_893.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 生成された「<strong>URP 2D Lit</strong>」マテリアルセットを選択し、 <strong>(2)</strong> 「<strong>Default Materialボタン</strong>」を押してデフォルト値に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_894.jpg"/>
+    <br>
+    
+    <p>
+    Bakeを実行して、ユニティシーンで確認してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_895.jpg"/>
+    <br>
+    
+    <p>
+    Litマテリアルを使用したので、光のないシーンでは、キャラクターが暗く表示されます。<br>
+    現在、基本的なLightオブジェクトが配置された状態であるが、2D Rendererに合った別のLightオブジェクトが必要です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_896.jpg"/>
+    <br>
+    
+    <p>
+    2D Lightオブジェクトを追加します。<br>
+    「<strong>Light &gt; 2D</strong>」のカテゴリーに2D Rendererでサポートされている種類の「<strong>2D Light</strong>」があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_897.jpg"/>
+    <br>
+    
+    <p>
+    2D Lightを配置します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_898.jpg"/>
+    <br>
+    
+    <p>
+    URP 2D環境でキャラクターが明るく表示されるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>URPをサポートするShader Graphアセット</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_899.jpg"/>
+    <br>
+    
+    <p>
+    マテリアルライブラリからURP Presetsパッケージをインストールすれば、上記のようにURPのアセットが追加されます。<br>
+    （Assets &gt; AnyPortrait &gt; Assets &gt; Shaders &gt; Advancedフォルダ）<br>
+    このアセットは、Shader Graphで作成されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_900.jpg"/>
+    <br>
+    
+    <p>
+    このアセットを開くと、Shader Graphの内容を見ることができます。<br>
+    プリセットとして提供されているマテリアルは、基本的なライティングだけを実行します。<br>
+    このアセットに基づいてShader Graphを作成して、様々なレンダリング手法を適用してみてください。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>URPマテリアルの使用に関する注意事項</h4>
+    <br>
+    
+    <p>
+    「URP」は、最新のバージョンである「Unity 2019.3」に導入された新機能です。<br>
+    URPは利点が多いレンダリング方式であるが、以前のバージョンのアセットが互換性がないという大きな問題があります。<br>
+    したがってAnyPortraitも、従来とは異なるShader Graphの形で作成されたアセットを提供しています。<br>
+    ただし、Shader Graphの機能の制限により、次のような制約事項がありますので注意してください。<br>
+    </p>
+    <br>
+    
+    <p>
+    1) メッシュの「Blend」方式の「Soft Additive」方式がサポートされていません。代わりに、「Additive」のShaderが「Soft Additive」にも適用されます。<br>
+    2) メッシュの「Blend」方式の「Multiplicative」方式は、「2X Multiply」はなく「Multiply」方法で計算されます。<br>
+    3) 「URP 2D Lit」で「Additive（Soft Additive）、Multiplicative」方式のメッシュは、光の影響を受けません。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

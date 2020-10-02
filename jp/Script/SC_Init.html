@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/Script/SC_Init.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/Script/SC_Init.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/Script/SC_Init.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -66,8 +68,455 @@
     <h1 class="display-5">初期化、基本設定</h1>
     <br>
     
-    <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <p>
+    apPortraitでGameObjectを使用するときに呼び出される関数と、デフォルトで参照される関数を案内します。<br>
+    </p>
+    <br>
+    
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>Initialize</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;最初の更新の直前に自動的に実行される初期化機能。<br>
+    &nbsp;&nbsp;&nbsp;「Prefab」をロードしてリアルタイムで使用する場合は、 「Initialize<strong>()</strong>」または「AsyncInitialize<strong>()</strong>」関数を呼び出す必要があります。<br>
+    &nbsp;&nbsp;&nbsp;大量のデータがある場合に実行時間が長くかかる関数。 「AsyncInitialize（）」関数を使用することをお勧めします。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 初期化中またはすでに終了している場合はfalseを返し、初期化が成功した場合はtrueを返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>AsyncInitialize</strong> <span class="text-muted">()</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>AsyncInitialize</strong> <span class="text-muted">( </span><span class="text-success">apPortrait</span><span class="text-muted">.</span><span class="text-success">OnAsyncLinkCompleted</span> <span class="text-muted">onAsyncLinkCompleted )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>AsyncInitialize</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">timePerYield )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>AsyncInitialize</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">timePerYield,</span> <span class="text-success">apPortrait</span><span class="text-muted">.</span><span class="text-success">OnAsyncLinkCompleted</span> <span class="text-muted">onAsyncLinkCompleted )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;「Initialize<strong>()</strong>」と同じ機能を実行する初期化関数です。<br>
+    &nbsp;&nbsp;&nbsp;「Prefab」がリアルタイムでロードされている場合は、「Initialize<strong>()</strong>」または「AsyncInitialize<strong>()</strong>」関数を呼び出す必要があります。<br>
+    &nbsp;&nbsp;&nbsp;非同期処理を使用して、「Coroutine」を使用して実行時間の負荷を軽減します。<br>
+    &nbsp;&nbsp;&nbsp;「Callback」イベントはパラメータとして受け取られ、終了時に呼び出されます。<br>
+    &nbsp;&nbsp;&nbsp;<br>
+    &nbsp;&nbsp;&nbsp;ms単位の時間である「timePerYield」を引数として入れると、「Coroutine」の処理時間をタイマーで計算して、CPUにさらに負荷が少ないように動作します。<br>
+    &nbsp;&nbsp;&nbsp;代わりに、この場合に、初期化時間が多少かかることがあります。<br>
+    &nbsp;&nbsp;&nbsp;（「timePerYield」の処理時間をタイマーで計算して、CPUにさらにを利用した処理は、v1.1.7から適用されます。）<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apPortrait</span><span class="text-muted">.</span><span class="text-success">OnAsyncLinkCompleted</span> onAsyncLinkCompleted : 初期化が完了したときに呼び出される「Callback」イベント<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> timePerYield : 非同期処理時に「yield」が呼び出される制限時間（ms）<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 初期化中またはすでに終了している場合はfalseを返し、非同期初期化が開始された場合はtrueを返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ShowRootUnit</strong> <span class="text-muted">()</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ShowRootUnit</strong> <span class="text-muted">( </span><span class="text-success">apOptRootUnit</span> <span class="text-muted">targetOptRootUnit )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;「Root Unit」が表示されるように設定します。<br>
+    &nbsp;&nbsp;&nbsp;「自動的に開始されたアニメーションクリップ」またはインデックスが0である「Root Unit」を使用して、「Root Unit」を対象としています。<br>
+    &nbsp;&nbsp;&nbsp;他の「Root Unit」は、自動的に非表示になります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptRootUnit</span> targetOptRootUnit : レンダリングされる「Root Unit」<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>HideRootUnits</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;すべての「Root Unit」を非表示にします。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>Show</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;「Root Unit」が表示されるように設定します。<br>
+    &nbsp;&nbsp;&nbsp;「自動的に開始されたアニメーションクリップ」またはインデックスが0である「Root Unit」を使用して、「Root Unit」を対象としています。<br>
+    &nbsp;&nbsp;&nbsp;他の「Root Unit」は、自動的に非表示になります。<br>
+    &nbsp;&nbsp;&nbsp;「ShowRootUnit<strong>()</strong>」と同じです。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>Hide</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;すべての「Root Unit」を非表示にします。<br>
+    &nbsp;&nbsp;&nbsp;「HideRootUnits<strong>()</strong>」と同じです。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetImportant</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">isImportant )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;「Important」プロパティを設定します。<br>
+    &nbsp;&nbsp;&nbsp;「Important」プロパティがtrueの場合、このオブジェクトはフレームごとに更新されます。<br>
+    &nbsp;&nbsp;&nbsp;「Important」属性がfalseの場合、指定されたFPSに従ってエディタが更新されます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isImportant : 「Important」プロパティ<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetFPSForNotImportant</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">fps )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.2.3</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;「Important」プロパティがオフの場合、キャラクターは固定FPSで実行されます。 （ゲームのFPSによっては、より少ないFPSで実行される場合があります。）<br>
+    &nbsp;&nbsp;&nbsp;「Bake」で設定した固定FPSの値をスクリプトで変更できます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> fps : キャラクターのアニメーション実行時に適用される固定FPS値。 「Important」属性がオフの場合のみ有効です。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apOptRootUnit</span> <strong>GetOptRootUnit</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;要求されたインデックスの「Root Unit」を返します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (デフォルトは0)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptRootUnit</span> : 索引に対応する「Root Unit」。 そうでない場合はnullを返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>CleanUpMeshesCommandBuffers</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;クリッピングマスクが適用されたメッシュがある場合、自動的に1つのカメラでレンダリングを行います。<br>
+    &nbsp;&nbsp;&nbsp;この関数を呼び出すと、現在のカメラに関連付けられている情報が削除され、初期化されます。<br>
+    &nbsp;&nbsp;&nbsp;再レンダリングすると、自動的に再リンクを試みます。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshesCommandBuffers</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">isOnlyActiveRootUnit )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshCommandBuffer</strong> <span class="text-muted">( </span><span class="text-success">apOptRootUnit</span> <span class="text-muted">targetOptRootUnit,</span> <span class="text-primary">bool</span> <span class="text-muted">isRegistToCamera )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;クリッピングマスクを使用してメッシュのすべてまたは一部をカメラに再リンクします。<br>
+    &nbsp;&nbsp;&nbsp;引数に応じて、カメラを保持して「Render Texture」のみを再作成することもできます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isOnlyActiveRootUnit : trueを入力すると、現在の「Root Unit」のみがリセットされます。 falseの場合、 「Root Unit」全体を対象とします。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptRootUnit</span> targetOptRootUnit : リセットされる「Root Unit」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isRegistToCamera : trueの場合、カメラと再リンクします。 falseの場合は、 「Render Texure」を再作成し、次のフレームを待ちます。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingLayer</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">sortingLayerName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingLayer</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">string</span> <span class="text-muted">sortingLayerName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingLayer</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">string</span> <span class="text-muted">sortingLayerName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingLayer</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">string</span> <span class="text-muted">sortingLayerName )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.6</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;GameObjectsがレンダリングされる順序を計算するときに使用される「Sorting Layer」を設定します。<br>
+    &nbsp;&nbsp;&nbsp;レンダリングの順序は同じ層にゲームオブジェクトをグループ化して計算されます。<br>
+    &nbsp;&nbsp;&nbsp;「Sorting Layer」は、「Unity」の「Project Settings > Tags and Layers」で構成することができます。<br>
+    &nbsp;&nbsp;&nbsp;設定されていない名前を入力すると、処理が失敗し、エラーメッセージが表示されます。<br>
+    &nbsp;&nbsp;&nbsp;<br>
+    &nbsp;&nbsp;&nbsp;もし、いくつかの「apOptTransform」の「Sorting Layer」のみを変更しようとする場合には、<br>
+    &nbsp;&nbsp;&nbsp;そのオブジェクトを直接指定するか、オブジェクトの名前を引数として入力します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> sortingLayerName : 設定する「Sorting Layer」の名<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 「Sorting Layer」を変更しようとする対象<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「Sorting Layer」を変更しようとする「optTransformの名前」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">​int</span> rootUnitIndex : 「Sorting Layer」を変更しようとする「optTransform」が所属する「Root Unitのインデックス」<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingOrder</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">sortingOrder )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingOrder</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">int</span> <span class="text-muted">sortingOrder )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingOrder</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">int</span> <span class="text-muted">sortingOrder )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingOrder</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">int</span> <span class="text-muted">sortingOrder )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.6</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;「GameObject」が表示される順序を計算するときに使用される「Sorting Order」を設定します。<br>
+    &nbsp;&nbsp;&nbsp;同じ「Sorting Layer」に大きな値を持つ「GameObject」が画面の前に表示されます。<br>
+    &nbsp;&nbsp;&nbsp;<br>
+    &nbsp;&nbsp;&nbsp;もし、いくつかの「apOptTransform」の「Sorting Order」のみを変更しようとする場合には、<br>
+    &nbsp;&nbsp;&nbsp;そのオブジェクトを直接指定するか、オブジェクトの名前を引数として入力します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> sortingOrder : レンダリングオーダー。 大きな値は画面の前に表示されます。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 「Sorting Order」を変更しようとする対象<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「Sorting Order」を変更しようとする「optTransformの名前」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">​int</span> rootUnitIndex : 「Sorting Order」を変更しようとする「optTransform」が所属する「Root Unitのインデックス」<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">string</span> <strong>GetSortingLayerName</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.0.2</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;現在適用されている「Sorting Layer」の名前を返します。<br>
+    &nbsp;&nbsp;&nbsp;「Sorting Layer」の名前は、「Project Settings > Tags and Layers」に登録する必要があります。<br>
+    &nbsp;&nbsp;&nbsp;この関数が呼び出されるたびにプロジェクトの設定を照会するため、この関数を頻繁に呼び出すことはお勧めしません。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> : 適用された「Sorting Layer」の名前。 プロジェクト設定と一致しないソートレイヤー値がある場合は、「Unknown Layer」を返します。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">int</span> <strong>GetSortingOrder</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.0.2</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;現在適用されている「Sorting Order」値を返します。<br>
+    &nbsp;&nbsp;&nbsp;この値が大きいほど、画面の前面がより多くレンダリングされます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> : 現在の描画順序。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetSortingOrderChangedAutomatically</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">isEnabled )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.8</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apPortraitのSorting Order Optionが「Depth To Order」または「Reverse Depth To Order」である場合に使用される関数です。<br>
+    &nbsp;&nbsp;&nbsp;DepthによってメッシュのSorting Order値が自動的に変更されるかどうかを決定します。<br>
+    &nbsp;&nbsp;&nbsp;スクリプトでSorting Orderを制御しようとする場合には、Sorting Orderが自動的に変更されることを防がなければならなのでFalseを入力する必要があります。<br>
+    &nbsp;&nbsp;&nbsp;基本的にはTrueです。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isEnabled : trueの場合、Sorting Orderが自動的に変更されます。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>FindRenderingCamerasAutomatically</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.2.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;シーンに存在するカメラを自動的に認識するように設定しつつ、同時に、現在のカメラを確認してレンダリング方式を再決定します。<br>
+    &nbsp;&nbsp;&nbsp;この関数が呼び出されなくても、基本的にシーンのカメラをリアルタイムで認識するように設定されています<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">int</span> <strong>SetRenderingCameras</strong> <span class="text-muted">( </span><span class="text-primary">params</span> <span class="text-success">Camera</span><span class="text-muted">[]</span><span class="text-success"></span> <span class="text-muted">cameras )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.2.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;キャラクターをレンダリングする直接カメラを指定することができます。<br>
+    &nbsp;&nbsp;&nbsp;この関数が呼び出された以降、「FindRenderingCamerasAutomatically」関数が呼び出されるまで、自動的にシーンに存在するカメラをチェックしません。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">params</span> <span class="text-success">Camera</span><span class="text-muted">[]</span><span class="text-success"></span> cameras : 1つまたは複数のカメラを指定します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> : 実際にキャラクターをレンダリングすることができるカメラの数です。
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">PrefabTest</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    &emsp;&emsp;<span class="text-primary">void</span> Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyUp(<span class="text-success">KeyCode</span>.P))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject </span>swordGirl = <span class="text-success">Resources</span>.Load&lt;<span class="text-success">GameObject</span>&gt;(<span class="text-danger">"TestPrefab/SwordGirl"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;swordGirl = Instantiate&lt;<span class="text-success">GameObject</span>&gt;(swordGirl);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apPortrait</span> swordGirlPortrait = swordGirl.GetComponent&lt;<span class="text-success">apPortrait</span>&gt;();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;swordGirlPortrait.transform.parent = <span class="text-primary">this</span>.transform;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;swordGirlPortrait.transform.localPosition = <span class="text-success">Vector3</span>.zero;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;swordGirlPortrait.<strong>AsyncInitialize</strong>(OnPortraitLoadAsync);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>OnPortraitLoadAsync(<span class="text-success">apPortrait </span>portrait)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;portrait.Play(<span class="text-danger">"Idle"</span>);<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

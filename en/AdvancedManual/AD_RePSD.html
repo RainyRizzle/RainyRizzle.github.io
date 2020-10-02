@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_RePSD.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_RePSD.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_RePSD.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,856 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.6</span></h4>
+    
+    <p>
+    Sometimes you want to create a character from a PSD file and then later modify the original image.<br>
+    Until the previous version, there was no way to modify the picture in the PSD file and apply the changed picture to the already created character.<br>
+    (There was only one way to directly modify the baked Atlas.)<br>
+    With the features added in version 1.0.6, it is possible to modify the original and import it back to AnyPortrait.<br>
+    However, the process is very complicated, so please be sure to read the following guide.<br>
+    It is recommended that you make <strong>backups</strong> or <strong>copies</strong> in advance if necessary.<br>
+    This page covers how to import the PSD file again and points to note.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_284.jpg"/>
+    <br>
+    
+    <p>
+    This is a character illustration referenced on this page.<br>
+    </p>
+    <br>
+    
+    <p>
+    If you look at the girl in the first version of the image, there is no horn on her head, and the girl is holding a purple cube.<br>
+    The modified version of the image has a horn on the head of the girl, holding a robotic doll instead of a purple cube, and adding emotional effects.<br>
+    When a PSD file is modified, it must be handled differently in the following cases:<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. When the layer is changed</strong> : Since the image size and position of the layer have changed, you need to correct the position.<br>
+    <strong>2. When a layer is removed </strong>: The layer is deleted from the reopening PSD. It is not included when creating a new Atlas, and the mesh and mesh groups are maintained with reference to the previous Atlas. It is not automatically deleted, nor does the Atlas referenced by this layer.<br>
+    <strong>3. When a layer is added</strong> : a new mesh is created. However, newly added meshes are added at the top of the mesh group.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_282.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Click the Import PSD File button</strong>.<br>
+    <strong>(2)</strong> <strong>Press the Reload PSD File button</strong> on the first page.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_283.jpg"/>
+    <br>
+    
+    <p>
+    The default configuration of the screen to re-import the PSD file.<br>
+    <strong>1. Import process in step 5 </strong>: The current step is displayed at the top of the screen. There are tasks to be performed at each step.<br>
+    <strong>2. Background Color, Outline Color of PSD and Mesh </strong>: You can set background color, image outline color of PSD, outline color of mesh in preview screen.<br>
+    <strong>3. Next, Prev, Close, Complete buttons </strong>: Move or end each step.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_285.jpg"/>
+    <br>
+    
+    <p>
+    If there are characters created from PSD files, "PSD set" will be added.<br>
+    (If not, please refer to the following on this page.)<br>
+    <strong>(1)</strong> <strong>Select the PSD set</strong>.<br>
+    <strong>(2)</strong> If you want to change the PSD file, <strong>press the Change button</strong> to select the PSD file to import.<br>
+    <strong>(3)</strong> It shows the outline of <strong>"Previous Bake setting"</strong> and <strong>"Attributes of PSD file to import"</strong>.<br>
+    <strong>(4)</strong> <strong>Press the Next button</strong> to move to the next step.<br>
+    If the above process is not successful, the Next button is disabled.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_286.jpg"/>
+    <br>
+    
+    <p>
+    On the second page, you need to select and adjust <strong>"Mesh group and image to which PSD will be applied", "size and position of PSD file and mesh group"</strong>.<br>
+    Most of them are set automatically by default, but you have to manually correct them through the preview screen.<br>
+    This screen is structured as follows.<br>
+    <strong>1. Target Mesh Group </strong>: The mesh group that should be applied.<br>
+    <strong>2. Baked Images</strong> : Images that Atlas will overwrite or reference. You can add images that are referenced by the target mesh group.<br>
+    <strong>3. Bake Scale</strong> : The percentage of the size that the PSD should apply to the mesh group. PSD Sets the size ratio of the mesh group.<br>
+    <strong>4. Rendering Type</strong> : You can set which object is displayed in preview screen.<br>
+    <strong>5. Offset</strong> : You can correct the position difference between PSD and mesh group.<br>
+    <strong>6. Preview screen </strong>: Output the selected objects. Correct size and position while viewing this screen. You can use the mouse and keyboard to move or zoom the screen in the same way as AnyPortrait's main editor.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_287.jpg"/>
+    <br>
+    
+    <p>
+    The Rendering Type determines whether each of the following is rendered and how it is rendered.<br>
+    <strong>1. Image </strong>: You can preview the selected image in the Baked Image list on the left.<br>
+    <strong>2. Mesh Group </strong>: Determines whether to output the mesh group.<br>
+    <strong>3. PSD image </strong>: Determines the PSD image output method. Switch between the three modes of "Invisible", "Outline only" and "Visible".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_288.jpg"/>
+    <br>
+    
+    <p>
+    If you want to view an image, <strong>(1)</strong> <strong>select the image</strong>, <strong>(2)</strong> <strong>turn on the image button</strong> only, and turn off the rest.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_289.jpg"/>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>This is one of the most important steps.</strong></span><br>
+    On the preview screen, <strong>(1)</strong> <strong>modify the Offset value</strong> so that the <strong>image of the mesh group</strong> and the <strong>PSD</strong> are <span class="text-danger"><strong>exactly overlapped</strong></span>.<br>
+    You can input the position value directly. You can increase or decrease the X and Y values by using the buttons on the right.<br>
+    If the canvas size of the PSD file is modified, it may not overlap exactly with the position compensation value of the constants.<br>
+    Offset values can contain <strong>non-integer real numbers</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_290.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_291.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_292.jpg"/>
+    <br>
+    
+    <p>
+    You can check whether the images overlap exactly by changing the Rendering Type.<br>
+    After checking carefully, press the Next button to move to the next step.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_293.jpg"/>
+    <br>
+    
+    <p>
+    In the third step, you need to set <strong>"which mesh / mesh group the layer of the PSD file will be applied to"</strong>.<br>
+    All layers of the PSD file appear, and on the right are the sub-meshes and sub-mesh groups of the selected mesh group.<br>
+    This screen is structured as follows.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. PSD Layers</strong> : Layers of the PSD file. Thumbnails appear, so you can easily check them. You can set whether to bake or which object to overwrite.<br>
+    <strong>2. Objects to be applied</strong> : The child mesh and mesh groups of the target mesh group. If set to overwrite, the associated PSD layer name will be printed together.<br>
+    <strong>3. Auto Mapping</strong> : Connect automatically based on name and layer order. You have to confirm after use.<br>
+    <strong>4. Enable All / Disable All</strong> : Turns Bake on or off for all layers. Inactive layers also lose their connection information.<br>
+    <strong>5. Reset</strong> : Initialize all the connection information with the Bake check.<br>
+    <strong>6. Show connection status as color</strong> : It shows the connection status of both sides easily by color.<br>
+    <strong>7. Outline preview</strong> : When this function is on, it will be rendered as an outline on the preview screen.<br>
+    <strong>8. Preview screen</strong> : Output the mesh associated with the image of the selected PSD layer. If PSD layer of group type is selected, nothing is output.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_294.jpg"/>
+    <br>
+    
+    <p>
+    If you click the <strong>"Show connection status as color"</strong> button, the list background color will be different.<br>
+    Linked PSD layers and objects appear with the same background color.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_295.jpg"/>
+    <br>
+    
+    <p>
+    In the <strong>"preview with outline"</strong> button preview screen, the PSD layer and mesh appear as an outline of translucent color.<br>
+    The color can be changed at the bottom left of the screen.<br>
+    (Position and size may not match at this stage.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_296.jpg"/>
+    <br>
+    
+    <p>
+    A way to associate a PSD layer with a target object.<br>
+    <strong>(1)</strong> <strong>Press the Connect button on the PSD layer</strong>.<br>
+    <strong>(2)</strong> <strong>Press the Select button of the object</strong> to connect.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_297.jpg"/>
+    <br>
+    
+    <p>
+    You can prevent the PSD layer from bake by <strong>(1)</strong> <strong>pressing the Enable / Disable button</strong>.<br>
+    Press this button again to activate Bake.<br>
+    It is useful for initializing the connection information since the connection is initialized when this button is pressed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_298.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Pressing the Auto Mapping button</strong> automatically connects the objects to <strong>"all PSD layers that are active and not connected"</strong>.<br>
+    This function can be misconnected because it compares the name of the object with the name of the layer and connects the two, which are the same or the closest.<br>
+    Please make sure that it is connected properly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_299.jpg"/>
+    <br>
+    
+    <p>
+    In the fourth step, you need to correct <strong>"position and size" for all PSD layers and meshes</strong>.<br>
+    This screen is organized as follows:<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. PSD Layers</strong> : These are the PSD layers to be baked.<br>
+    <strong>2. Rendering / Order</strong> : Change the rendering method and output order in preview screen.<br>
+    <strong>3. Position Offset</strong> : These are the tools that correct the position of the PSD layer for the mesh to be applied.<br>
+    <strong>4. Prev. Atlas Scale </strong>: A tool for entering the size of a previously created Atlas. This value is the same for all layers<br>
+    <strong>5. Select Prev/Next Layer button</strong> : Select previous, next layer.<br>
+    <strong>6. Preview screen</strong> : Output the selected mesh and PSD layer. Outputs the shape of the mesh regardless of the output method.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_300.jpg"/>
+    <br>
+    
+    <p>
+    The method of outputting from preview screen is as follows.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Mesh Rendering Method </strong>: Switches the rendering method of the mesh to "Not visible", "Show only outline" and "Visible".<br>
+    <strong>2. Toggle Rendering Order </strong>: Toggles the order of rendering the mesh first or PSD layer image first.<br>
+    <strong>3. PSD Image Rendering Method </strong>: Switch the rendering method of PSD layer image to "Not visible", "Show only outline", "Visible".<br>
+    </p>
+    <br>
+    
+    <p>
+    Make it easy to see while adjusting your position and size.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_301.jpg"/>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>This is the most important step.</strong></span><br>
+    <strong>Select the PSD layer</strong> and <strong>correct its position</strong>.<br>
+    (The size is set properly by default, but if you need to fix it, please see the information at the bottom of this page.)<br>
+    <strong>(1)</strong> <strong>Modify using the tools of Position Offset</strong>. You can enter a real value.<br>
+    Make sure the location exactly overlaps through the preview screen.<br>
+    When you are finished, select the next layer. <strong>(2)</strong> <strong>Select Next button</strong> will help you improve your work efficiency.<br>
+    Check and correct the position for <strong>all layers</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_302.jpg"/>
+    <br>
+    
+    <p>
+    No additional position, size correction is required for newly added image layers.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_303.jpg"/>
+    <br>
+    
+    <p>
+    The final step is to create and apply the Atlas.<br>
+    This function is the same as the basic function of importing a PSD file.<br>
+    (The function of setting the size of the mesh group is excluded.)<br>
+    Since it is already Bake, it has basically the same value as the previous Atlas Bake setting.<br>
+    <strong>(1)</strong> <strong>Set the name and path to save</strong> of the Atlas texture asset.<br>
+    <strong>(2)</strong> <strong>Check the Atlas size, number, margin, and border correction</strong> settings, and change them if necessary.<br>
+    <strong>(3)</strong> <strong>Press the Bake button</strong> to create Atlas.<br>
+    <strong>(4)</strong> <strong>Press the Complete button</strong> to apply to the AnyPortrait editor.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_304.jpg"/>
+    <br>
+    
+    <p>
+    When you return to the main editor, you can see that the updated PSD images are applied.<br>
+    You can see that existing objects remain or new objects are added, and you may see meshes that need to modify vertices.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Mesh with layer image changed</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_305.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_306.jpg"/>
+    <br>
+    
+    <p>
+    As the image changes, you may need to modify the mesh.<br>
+    Select the mesh and add or remove vertices to modify them for the new image.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note.</strong></span><br>
+    If a modifier or animation is applied to the mesh, we recommend that you do not delete any existing vertices.<br>
+    If you add a new vertex or delete only some vertices, the modifier information for the remaining vertices is retained.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Mesh with layer removed</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_307.jpg"/>
+    <br>
+    
+    <p>
+    Existing meshes will not be deleted even if no layers exist in the newly imported PSD file.<br>
+    However, this mesh will continue to use the "old Atlas" because it no longer shares the new Atlas.<br>
+    In this case, the "old Atlas" will still be used without being deleted, so there might be an optimization problem.<br>
+    Please refer to the following for more details.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Mesh with layer added</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_308.jpg"/>
+    <br>
+    
+    <p>
+    Newly added meshes are created as square meshes by default.<br>
+    Modify the mesh by adding vertices as you did when you first imported the PSD file.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_309.jpg"/>
+    <br>
+    
+    <p>
+    After completing the above tasks, you will be able to see the characters with the new PSD illustrations.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>How Atlas texture assets are saved</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_310.jpg"/>
+    <br>
+    
+    <p>
+    If you look at the folder where Atlas images are stored as texture assets, you can see that they are saved as above.<br>
+    <strong>1. Preserved folder</strong> : Images that are still in use from existing Atlas images are saved.<br>
+    <strong>2. Unused folder </strong>: It saves deleted images that have been overwritten from existing Atlas images.<br>
+    <strong>3. Newly created Atlas texture assets </strong>: Newly created Atlas texture assets via PSD re-import.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_311.jpg"/>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>The Preserved folder</strong></span> is the folder where texture assets that are <strong>still used</strong> among existing Atlas images are stored.<br>
+    After bake, texture asset names may change slightly in some cases.<br>
+    If a PSD file already exists but a new PSD file contains a mesh for the deleted image layer, the mesh must continue to use the existing Atlas.<br>
+    In this case, Atlas images are moved to the Preserved folder and saved.<br>
+    This folder should not be deleted by default, but texture assets in this folder are not helpful for optimization.<br>
+    If the mesh and texture are no longer used, delete the mesh and image from the AnyPortrait editor and delete the texture in this folder.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_312.jpg"/>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>The Unused folder</strong></span> is the folder where the old Atlas images are <strong>overwritten</strong> and <strong>deleted from AnyPortrait</strong>, and their assets are stored.<br>
+    After the bake, the text <strong>"(Unused)"</strong> is appended to the name of each texture asset.<br>
+    If all meshes for the Atlas are updated with layers in the new PSD file, the existing Atlas is no longer used and should be deleted.<br>
+    In the AnyPortrait editor, the existing Atlas information is deleted, but the texture assets are moved to the Unused folder without being deleted.<br>
+    This is because it can be repaired and reused if necessary.<br>
+    However, by default, the assets in this folder will not be used, so it is recommended that users <strong>confirm and delete them manually</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Create and import PSD set information manually</h3>
+    <br>
+    
+    <p>
+    Re-importing PSD files is a feature supported since AnyPortrait v1.0.6.<br>
+    Sadly, "PSD set" information is not generated because the data used in this function is not stored for the character created <span class="text-danger"><strong>in the previous version</strong></span>.<br>
+    However, you can re-import the PSD file by creating your own "PSD set" information.<br>
+    There are a lot of things to do, but you can do it in the order shown below.<br>
+    (This includes all manual settings due to other issues.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_313.jpg"/>
+    <br>
+    
+    <p>
+    Open the PSD re-importing dialog.<br>
+    If the PSD set information is not stored, no information is displayed as shown in the above screen.<br>
+    <strong>(1)</strong> <strong>Press the Add New PSD Set button</strong> to create one PSD set.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_314.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> <strong>Select the newly created PSD set</strong>.<br>
+    (If you want to delete it, press the Remove PSD Set button.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_315.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> <strong>Press the Change button</strong> to <strong>select the PSD file</strong>.<br>
+    <strong>(4)</strong> <strong>Press the Next button </strong>to move to the next step.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_316.jpg"/>
+    <br>
+    
+    <p>
+    The target mesh group and images are not set.<br>
+    Notice that the mesh group does not appear on the preview screen, and the Next button is disabled.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_317.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Press the Change button</strong>.<br>
+    <strong>(2)</strong> <strong>Select the mesh group</strong> to which the PSD image is applied <strong>(3)</strong> <strong>Press the Select button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_318.jpg"/>
+    <br>
+    
+    <p>
+    Register Atlas images.<br>
+    <strong>(1)</strong> <strong>Press the Add Image button</strong>, <strong>(2)</strong> <strong>select and add an image</strong>.<br>
+    Or, if you click the <strong>Add Images Automatically button</strong>, all the images used by the mesh group are automatically registered.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_319.jpg"/>
+    <br>
+    
+    <p>
+    This is the screen where both the mesh group and the image are registered.<br>
+    Now, as well as the location, size does not fit.<br>
+    The above screen has a smaller mesh group than the PSD image.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_320.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Correct the value of the Bake Scale</strong> so that the mesh group and PSD image are the same size.<br>
+    You can change quickly with the size increment tool.<br>
+    Find and set the correct size value through the preview screen.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_321.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> <strong>Modify the value of Offset</strong> so that the mesh group overlaps the PSD image.<br>
+    (You can enter a real value.)<br>
+    When you are done calibrating the position and size of the mesh group and PSD file, click the Next button to go to the next step.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_322.jpg"/>
+    <br>
+    
+    <p>
+    The third step is mapping the PSD layers to the objects in the mesh group.<br>
+    Since you created a new PSD set, none are connected.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_323.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Press the Not Selected button</strong> on the PSD layer,<br>
+    <strong>(2)</strong> <strong>Click the Select button</strong> of the target object to make a connection.<br>
+    You can reconnect the same way if you are already connected.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_324.jpg"/>
+    <br>
+    
+    <p>
+    When the layer and target are connected, it appears as the above screen.<br>
+    The preview screen also renders the mesh associated with the PSD image layer.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_325.jpg"/>
+    <br>
+    
+    <p>
+    For newly added layers, leave them unconnected.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_326.jpg"/>
+    <br>
+    
+    <p>
+    If there are any layers you do not want to import, click the <strong>Enable/Disable button</strong> to disable them.<br>
+    This feature has a feature to disconnect, so if you only want to disconnect, disable it and then re-enable it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_327.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Auto Mapping function</strong> connects "enabled and not connected PSD layers" with objects automatically.<br>
+    Since it is a function to connect and compare by name and layer order, sometimes it may be connected incorrectly.<br>
+    After using this function, please check.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_328.jpg"/>
+    <br>
+    
+    <p>
+    You can easily see how colors are connected by clicking on the <strong>"Show Connection Status as Color"</strong> button.<br>
+    When you are finished with the connection, press the Next button to go to the next step.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_329.jpg"/>
+    <br>
+    
+    <p>
+    You must calibrate <strong>the position and size of all meshes and PSD layers</strong>.<br>
+    If you create a new PSD set, it will not fit into the position and size.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_330.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Correct the size by changing the <strong>"Prev. Atlas Scale" value</strong>.<br>
+    Since the preview screen modifies the relative size of the PSD layer, it appears as if the size of the mesh changes, as opposed to the value.<br>
+    This value is the same for all layers, so you only need to set it once.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_331.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> <strong>Modify the Position Offset</strong> so that the mesh and PSD image overlap exactly.<br>
+    If it is confirmed that they overlap exactly, select the next layer to do the same thing.<br>
+    <strong>(3)</strong> It is convenient to use <strong>Select Prev/Next Layer button.</strong><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_332.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_333.jpg"/>
+    <br>
+    
+    <p>
+    Corrects the position to overlap the mesh <strong>for all layers</strong>.<br>
+    You do not have to do anything about the newly added PSD layer.<br>
+    Press the Next button to move to the next step.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_334.jpg"/>
+    <br>
+    
+    <p>
+    The last step is to create Atlas and Bake it, then apply it to AnyPortrait.<br>
+    <strong>(1)</strong> <strong>Set the name of the texture asset</strong> and <strong>set the save path</strong>.<br>
+    You can set it equal to the name of an existing texture asset. (The name will change automatically.)<br>
+    <strong>(2)</strong> <strong>Set Atlas size, number, margin, and border correction</strong>.<br>
+    <strong>(3)</strong> <strong>Press the Bake button</strong> to create Atlas.<br>
+    <strong>(4)</strong> <strong>Press the Complete button</strong> to apply the updated information to AnyPortrait.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>How to troubleshoot the PSD file re-import feature</h3>
+    <br>
+    
+    <p>
+    The process of re-importing the PSD file is very complex and each step must be accurate.<br>
+    If some operations are inaccurate, the output may be strange.<br>
+    Here are some of the issues that may arise and how to resolve them.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Issue 1: Inaccurate positioning of mesh group</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_335.jpg"/>
+    <br>
+    
+    <p>
+    This is a problem that occurs when the default position of the mesh group and the PSD file do not overlap precisely.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_336.jpg"/>
+    <br>
+    
+    <p>
+    You can see that the generated mesh group has moved by the wrong correction value.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Solution</strong></span><br>
+    - Remember the set position compensation value and re-import the PSD file using the same size and opposite sign as the compensation value.<br>
+    If you do not know the position compensation value, you can change the compensation value and import the PSD file again.<br>
+    - You can fix this by modifying the default location of the mesh group, but in this case information such as bones and modifiers may be misinterpreted.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Issue 2: Incorrect position correction of mesh and PSD image layers</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_337.jpg"/>
+    <br>
+    
+    <p>
+    The position compensation of the image layers of the mesh and PSD may not be processed correctly.<br>
+    In particular, if a PSD file has many layers, you may inadvertently miss a job.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_338.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_339.jpg"/>
+    <br>
+    
+    <p>
+    You can see that the mesh's vertices are shifted by the wrong distance and that the misalignment is output incorrectly.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Solution</strong></span><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_340.jpg"/>
+    <br>
+    
+    <p>
+    Re-import the PSD file again.<br>
+    In the step of correcting the position of the layer, watch the preview screen and move the PSD image to overlap the mesh.<br>
+    Since the texture of the mesh has already been output incorrectly, <span class="text-danger"><strong>do not correct the position based on the mesh image</strong></span>.<br>
+    In this case, the position must be modified relative to <span class="text-danger"><strong>the wireframe of the mesh</strong></span>.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Issue 3: Changing the settings of Atlas</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_342.jpg"/>
+    <br>
+    
+    <p>
+    If you want to re-create the Atlas by changing its size or margins, you do not need to be the same as the previous Atlas settings.<br>
+    You can Bake after changing to the Atlas settings you need in the PSD file re-import dialog.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_343.jpg"/>
+    <br>
+    
+    <p>
+    Even if the resolution is greatly changed, it can be applied without any problem.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Issue 4: Adding a new layer</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_344.jpg"/>
+    <br>
+    
+    <p>
+    If you add a new layer and re-import the PSD file, the mesh will be at the top.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_345.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Use the layer reordering function</strong> to change the rendering order of the objects appropriately.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

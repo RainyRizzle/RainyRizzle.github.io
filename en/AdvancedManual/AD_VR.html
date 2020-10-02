@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_VR.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_VR.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_VR.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,477 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.0</span></h4>
+    
+    <p>
+    <strong>VR (Virtual Reality)</strong> is a technology that lets you play games realistically using a device called <strong>HMD (Head-Mounted Display)</strong>.<br>
+    (In a broad sense, VR encompasses all the techniques and concepts of enjoying virtual reality, but we'll only cover VR and HMD in the current market.)<br>
+    Unity supports VR like any other game engine, so you can build VR for mobile, PC and console.<br>
+    AnyPortrait is an editor that creates 2D characters, so it was a bit far from VR.<br>
+    However, at the request of many users, it supports the Unity VR function starting from v1.2.0.<br>
+    </p>
+    <br>
+    
+    <p>
+    Before explaining this feature, it is recommended that you read the description in the following links.<br>
+    <a href="https://docs.unity3d.com/2019.2/Documentation/Manual/VROverview.html" target="_sub"><strong>VR Overview page (Unity official page)</strong></a><br>
+    <a href="../../en/AdvancedManual/AD_MaterialLibrary.html"><strong>Material Library</strong></a><br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note that.</strong></span><br>
+    VR build methods are slightly different depending on the version of Unity, and depending on the target device,<br>
+    so AnyPortrait's VR feature may not be fully supported in some cases.<br>
+    Please let us know the problem you are experiencing, including the version of your Unity engine and your VR device.<br>
+    This page is based on <strong>Unity 2019.2</strong> and may vary slightly depending on the version.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Render by applying a VR material</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_788.jpg"/>
+    <br>
+    
+    <p>
+    We created a scene to build VR.<br>
+    A small room by placing 3D objects is created, and several Point Lights are placed.<br>
+    In this space, a character created by AnyPortrait is located.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_789.jpg"/>
+    <br>
+    
+    <p>
+    Select "<strong>Project Settings &gt; Player</strong>" or open "<strong>Build Settings &gt; Player Settings</strong>".<br>
+    <strong>(1)</strong> <strong>Turn on the Virtual Reality Supported</strong> property in the <strong>XR Settings</strong>.<br>
+    <strong>(2)</strong> Press the <strong>"+" button</strong> to add the VR environment to build and <strong>Mock HMD</strong> for the test.<br>
+    (The screenshot above is from a PC environment, with different build options on mobile or console platforms.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_790.jpg"/>
+    <br>
+    
+    <p>
+    Select <strong>Stereo Rendering Mode</strong>.<br>
+    <strong>Multi Pass</strong> and <strong>Single Pass</strong> have internal differences in VR rendering.<br>
+    AnyPortrait supports all of the above methods, but this difference requires testing on the device.<br>
+    In particular, check out the "Scale Offset" issue below.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_791.jpg"/>
+    <br>
+    
+    <p>
+    With <strong>Mock HMD</strong> registered, you can check the VR rendering in the editor.<br>
+    In the <strong>Game tab</strong>, select "<strong>Occlusion Mesh</strong>" as shown above to virtually see the simulated screen as seen in the HMD.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_792.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, it will usually render without any major problems,<br>
+    but you will see that the "<strong>clipping mesh</strong>" does not render properly.<br>
+    The biggest issue with AnyPortrait's VR support is "<strong>Does the clipping mesh look normal on the two screens of VR?</strong>"<br>
+    You can solve this problem by following these steps:<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_793.jpg"/>
+    <br>
+    
+    <p>
+    Open the AnyPortrait Editor.<br>
+    <strong>(1)</strong> Press the <strong>Material Library button</strong>.<br>
+    <strong>(2)</strong> Select "<strong>VR Presets</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_794.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Unpack Preset button</strong> to install the selected "<strong>VR Presets</strong>".<br>
+    At this point, the Material Library exits with the message that you have to restart the material library.<br>
+    <strong>(2)</strong> Restart the Material Library and you will see <strong>four material presets added for VR</strong>.<br>
+    These material presets are as follows:<br>
+    <strong>- VR Unlit</strong> : Material preset for VR that renders the colors of the original image in a scene without lights.<br>
+    <strong>- VR Lit</strong> : Material preset for VR rendered with lighting applied.<br>
+    <strong>- VR Unlit / VR Lit (with ScaleOffset)</strong> : Material preset for VR used in the Single Pass setting.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>There is an important point!</strong></span><br>
+    <strong>Materials with Scale Offset</strong> applied are the material presets that should be used in the <strong>Single Pass</strong> setting.<br>
+    The shaders of this material have an especial formula applied with a variable for Single Pass called "Scale Offset" based on Unity's reference.<br>
+    However, in our tests, "<strong>not using Scale Offset</strong>" was rendered properly even in the Single Pass setting.<br>
+    Therefore, please test first with <strong>these Materials that do not use the Scale Offset</strong>, and then, try to use the Material with the Scale Offset only if a problem occurs.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_795.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Make Material Set button</strong>.<br>
+    <strong>(2)</strong> Since the Point Lights are placed in the current scene, select the <strong>VR Lit preset</strong>.<br>
+    <strong>(3)</strong> Press the <strong>Select button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_796.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the newly created <strong>material set</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_797.jpg"/>
+    <br>
+    
+    <p>
+    If you look at the material set for VR, you'll see something different from the existing material set.<br>
+    Existing material sets use the _MaskTex property, whereas VR material sets use two properties: <strong>_MaskTex_L </strong>and <strong>_MaskTex_R</strong>.<br>
+    These are for the mask textures of two renderings, like eyes.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_798.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Default Material button</strong> to set it as the default material.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_799.jpg"/>
+    <br>
+    
+    <p>
+    A good way to position AnyPortrait characters in 3D space without discomfort is to use Billboard.<br>
+    (See the <a href="../../en/AdvancedManual/AD_BillboardPers.html">related page</a> for details.)<br>
+    <strong>(1)</strong> Press the <strong>Bake button</strong>.<br>
+    <strong>(2)</strong> Select the <strong>Setting tab</strong>.<br>
+    <strong>(3)</strong> Change the <strong>Billboard options</strong>. Select "<strong>Billboard</strong>" or "<strong>Billboard with fixed Up Vector</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_800.jpg"/>
+    <br>
+    
+    <p>
+    This is most important step in setting up VR.<br>
+    <strong>(1)</strong> Change the <strong>VR Option</strong> to "S<strong>ingle Camera and Eye Textures (Unity VR)</strong>".<br>
+    This option must be selected if you are using Unity's VR build.<br>
+    The contents of each of these options are as follows:<br>
+    <strong>- None</strong> : It is used when there is only one camera that renders the character without using VR build.<br>
+    <strong>- Single Camera and Eye Textures (Unity VR)</strong> : It must be set when using Unity's VR build.<br>
+    <strong>- Multiple Cameras</strong> : It is used when rendering with two or more cameras without using Unity's VR build.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_801.jpg"/>
+    <br>
+    
+    <p>
+    When you change the VR option, the "<strong>Mask Texture Size</strong>" option appears.<br>
+    This option is related to the quality of the clipping mask.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>- By Mesh Setting</strong><br>
+    : The clipping mask is created according to the "texture size of the clipping mask" of the mesh specified in the mesh group setting.<br>
+    The clipping mask can be scaled according to the size of the mesh to help optimize it.<br>
+    In the case of VR rendering than normal rendering, the clipping mask may be of poor quality, so you should use a relatively large mask texture size.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>- By Eye Texture Setting</strong><br>
+    : The size of the eye texture related to the image quality of VR is used as the size of the clipping mask.<br>
+    All clipping masks create a mask that is the same size as the screen, ensuring uniform picture quality.<br>
+    Depending on the VR build environment or the running device, the image quality may be very low when the Eye Texture size is slightly smaller.<br>
+    </p>
+    <br>
+    
+    <p>
+    You can use any option, but for further explanation, let's choose <strong>(2)</strong> <strong>By Mesh Setting</strong> here.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_802.jpg"/>
+    <br>
+    
+    <p>
+    If you selected <strong>By Mesh Setting</strong>, you will need to change the texture size of the clipping mask.<br>
+    In VR, the optimization of the clipping mask is not handled, so we need to increase the resolution of the texture.<br>
+    <strong>(1)</strong> Select the <strong>Mesh Group</strong>.<br>
+    <strong>(2)</strong> Select the <strong>Setting tab</strong>.<br>
+    <strong>(3)</strong> Select the <strong>mesh to be the clipping mask</strong>.<br>
+    <strong>(4)</strong> Change the <strong>Mask Texture Size</strong> value to <strong>a large value</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_803.jpg"/>
+    <br>
+    
+    <p>
+    Now let's run <strong>Bake </strong>and apply it to the scene.<br>
+    </p>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_804.jpg"/>
+    <br>
+    
+    <p>
+    You can see that it renders normally on the VR screen.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>To turn off Billboard options and Render</h3>
+    <br>
+    
+    <p>
+    In some cases, it may be necessary to place a character in VR space without using the billboard.<br>
+    The biggest problem at this time is the <strong>Z-Fighting</strong> problem.<br>
+    This is because AnyPortrait's structure, with many meshes placed back and forth at narrow intervals, does not render properly even if the camera's angle changes a little.<br>
+    In this case, you can solve this problem by using Sorting Group. (<a href="../../en/AdvancedManual/AD_SortingLayer.html">Related page</a>)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_805.jpg"/>
+    <br>
+    
+    <p>
+    First, let's turn off the Billboard option.<br>
+    <strong>(1)</strong> Press the <strong>Bake button</strong>.<br>
+    <strong>(2)</strong> Select the <strong>Setting tab</strong>.<br>
+    <strong>(3)</strong> Change the <strong>Billboard option</strong> to <strong>None</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_806.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> Change the <strong>Sorting Order Option</strong> to <strong>Depth To Order</strong>.<br>
+    Run <strong>Bake</strong> when you're done.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_807.jpg"/>
+    <br>
+    
+    <p>
+    After Bake, open Unity Editor.<br>
+    <strong>(1)</strong> Select the character.<br>
+    <strong>(2)</strong> Add a <strong>Sorting Group</strong> component.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_808.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you can see the character being rendered normally even when the billboard is not applied.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Create the VR screen without using Unity's VR settings</h3>
+    <br>
+    
+    <p>
+    Unity's VR feature is powerful, but there are other ways to create the VR screen.<br>
+    In the many alternatives, "<strong>Using two cameras</strong>" is probably the most useful.<br>
+    AnyPortrait gives you the option to make the rendering normally even when two or more cameras are placed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_809.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Turn off Virtual Reality Supported</strong> in <strong>Player Settings</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_810.jpg"/>
+    <br>
+    
+    <p>
+    Makes 1 existing camera into <strong>2 cameras</strong> corresponding to Left and Right.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_811.jpg"/>
+    <br>
+    
+    <p>
+    This is settings of the cameras.<br>
+    Modify the <strong>Viewport Rect</strong> as above to specify the render area.<br>
+    The other settings are the same.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_812.jpg"/>
+    <br>
+    
+    <p>
+    You will see two cameras render in the left and right areas respectively.<br>
+    By modifying the position and angle of the camera, you can achieve the same effect as the actual field of view.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_813.jpg"/>
+    <br>
+    
+    <p>
+    This approach does not require VR materials, unlike Unity's VR feature.<br>
+    Therefore, it must be returned to its original material.<br>
+    <strong>(1)</strong> Open the AnyPortrait Editor and press the <strong>Material Library button</strong>.<br>
+    <strong>(2)</strong> Select the <strong>Lit material set</strong>, which is the original material. (Or create a new or similar material.)<br>
+    <strong>(3)</strong> Press the <strong>Default Material button</strong> to select the default material.<br>
+    </p>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_814.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Bake button</strong>.<br>
+    <strong>(2)</strong> Select the <strong>Setting tab</strong>.<br>
+    <strong>(3)</strong> Change the <strong>VR Option</strong> value to <strong>Multiple Cameras</strong>.<br>
+    This option is effective in most cases when rendering with multiple cameras.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_815.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you will see that it renders normally even when you render with two cameras.<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>About Clipping Mask Resolution , VR and Multiple Cameras</h4>
+    <br>
+    
+    <p>
+    AnyPortrait implements the clipping mask technique using a <span class="text-danger"><strong>Render Texture</strong></span>.<br>
+    Increasing the resolution of the render texture improves quality, but decreases the game's performance.<br>
+    AnyPortrait uses a method of its own developed that results in fairly high-quality rendering even with low-resolution clipping masks.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, this quality compensation method is only valid in an environment of "one camera".<br>
+    So in all other cases, you need to create a clipping mask with a higher resolution than before.<br>
+    For this reason, in most cases, the clipping mask degrades in the VR rendering environment.<br>
+    Whether the clipping mask is corrected for high quality relative to resolution is:<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>1. When the correction method is applied</strong></span><br>
+    - Only 1 Orthographic Camera<br>
+    - When the Billboard is turned on when there is one Perspective camera<br>
+    - When multiple cameras are in the same location and in the same direction, all are orthographic, and the character's VR Option is Multiple Cameras<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>2. When the correction method is not applied</strong></span><br>
+    - Unity VR option is on<br>
+    - All cases that do not satisfy the condition of 1<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

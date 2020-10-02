@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_LayerWeightInterpolation.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_LayerWeightInterpolation.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_LayerWeightInterpolation.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -67,22 +69,149 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_88.jpg"/>
+    <br>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    AnyPortrait는 다양한 모디파이어를 등록해서 기능을 추가하는 방식을 사용합니다.<br>
+    동일한 모디파이어를 중복해서 등록하는 것도 가능하며, 하나의 메시에 여러개의 컨트롤 파라미터를 등록하는 것도 가능합니다.<br>
+    다만, 모디파이어를 처리하는 것은 특정한 순서가 있으며, 각각의 처리 결과를 병합하는 방식도 선택을 해야합니다.<br>
+    이 페이지는 다수의 모디파이어와 그 하위의 키의 처리 과정에 대해 설명합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>모디파이어, 키 세트, 키</h3>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_89.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    Morph 모디파이어의 상세 설정 화면입니다.<br>
+    모디파이어 정보를 표시하는데, 이 UI는 크게 3개의 구역으로 나뉘어 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. 모디파이어 정보</strong><br>
+    다른 모디파이어와 병합되는 순서와 방식에 대한 설정입니다.<br>
+    <strong>Color Option On/Off</strong> : 모디파이어가 색상 처리를 할지 여부를 결정합니다.<br>
+    <strong>Blend Method</strong> : 이전의 모디파이어의 정보와 병합되는 방식입니다.<br>
+    <strong>Blend Weight</strong> : 이전의 모디파이어와 병합되는 가중치입니다.<br>
+    <strong>Layer Up/Down</strong> : 모디파이어 처리 순서를 바꿉니다. 낮은 레이어가 먼저 계산됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. 키 세트 정보</strong><br>
+    모디파이어를 제어하는 주체입니다.<br>
+    각각 다수의 키(Key)를 가지고 있습니다.<br>
+    키 세트간 병합 처리도 모디파이어의 병합 과정과 동일합니다.<br>
+    <strong>Blend Method, Weight</strong> : 키 세트간의 병합 처리 방식과 가중치입니다.<br>
+    <strong>Color Option On/Off</strong> : 키 세트가 색상 처리를 할지 여부를 결정합니다.<br>
+    <strong>Layer Up/Down</strong> : 키 세트 병합 처리 순서입니다. 낮은 레이어가 먼저 계산됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. 키</strong><br>
+    모디파이어의 실제 데이터는 키(Key)에 저장됩니다.<br>
+    한개의 키 세트에 다수의 키가 저장될 수 있습니다.<br>
+    <strong>Clipboard, Copy, Paste</strong> : 키 정보를 복사할 수 잇습니다.<br>
+    <strong>Reset Value</strong> : 선택한 키의 정보를 초기화합니다.<br>
+    <strong>키 리스트</strong> : 생성된 키 리스트 입니다. 각 항목은 왼쪽부터 순서대로 <strong>병합시 가중치, 키 위치, 선택(Select) 버튼, 삭제 버튼</strong>입니다.<br>
     </p>
     <br>
     
     
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
     <br><br>
     
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_90.jpg"/>
     <br>
     
     <p>
-    본문 입력<br>
+    모디파이어의 계산 순서입니다.<br>
+    <strong>1.</strong> 각각의 <strong>키의 정보들이 보간 병합</strong>을 합니다. 컨트롤 파라미터의 키나 애니메이션의 키프레임 등이 여기에 해당합니다.<br>
+    <strong>2.</strong> 보간된 키 정보를 가진 <strong>키 세트간의 레이어 순서에 따른 병합 처리</strong>를 합니다. 컨트롤 파라미터나 애니메이션 클립이 여기에 해당합니다.<br>
+    <strong>3.</strong> 키 세트의 병합 처리 정보를 가진 <strong>모디파이어간의 레이어 순서에 따른 병합 처리</strong>를 합니다. 최종적으로 메시 그룹에 반영됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>모디파이어의 처리 우선 순위</h3>
+    <br>
+    
+    <p>
+    모디파이어는 레이어 순서대로 처리하는 것이 원칙입니다.<br>
+    그렇지만 모디파이어의 특성상 항상 레이어 순서대로 처리되지는 않습니다.<br>
+    동일한 모디파이어 간에는 레이어 순서대로 처리되며 그 외에는 우선 순위 처리 순서를 우선시 합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>우선 순위 1</strong> : Morph (Controller), Morph (Animation)<br>
+    <strong>우선 순위 2</strong> : Rigging<br>
+    <strong>우선 순위 3</strong> : Transform (Controller), Transform (Animation)<br>
+    <strong>우선 순위 4</strong> : Physic<br>
+    </p>
+    <br>
+    
+    <p>
+    참고 : Rigging 모디파이어는 최대 1개만 적용해야합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>가중치와 보간 방식</h3>
+    <br>
+    
+    <p>
+    보간 방식(Blend Method)과 가중치(Blend Weight)는 병합 처리를 위한 중요한 설정입니다.<br>
+    보간 방식과 가중치는 다음의 2가지로 다르게 처리됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Interpolation</strong> : 덮어쓰기 처리 방식입니다. 가중치가 1인 경우 하위 레이어의 모디파이어를 무시하고 100% 현재 모디파이어만 적용됩니다.<br>
+    <span class="text-danger"><strong>"이전 처리 결과" x (1 - 가중치) + "현재 모디파이어" x (가중치)</strong></span><br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Additive</strong> : 더하기 처리 방식입니다. 가장 일반적으로 사용되는 방식으로 가중치가 1일 경우 "이전 레이어의 처리 결과"에 100%의 값을 더합니다.<br>
+    <span class="text-danger"><strong>"이전 처리 결과" + "현재 모디파이어" x (가중치)</strong></span><br>
+    </p>
+    <br>
+    
+    <p>
+    다만, 색상 정보는 Additive 방식일때 더하기가 아닌 2X Multiply 방식으로 보간을 합니다.<br>
     </p>
     <br>
     

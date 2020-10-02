@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_RotateWOLimit.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_RotateWOLimit.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_RotateWOLimit.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,111 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.2</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_863.jpg"/>
+    <br>
+    
+    <p>
+    このページは、アニメーションでオブジェクトの回転角度が制限される特性とその解決方法について説明します。<br>
+    前ページの説明と一緒にご覧ことをお勧めします。 <a href="../../jp/AdvancedManual/AD_Rotate360.html"><strong>（関連ページ）</strong></a><br>
+    回転アニメーションを作成するときに、どのような制約事項があるか確認してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_864.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターを反時計方向に回転してみましょう。<br>
+    「<strong>Onion Skin</strong>」機能を利用して、どのようにアニメーションになるか容易に確認することができます。 <a href="../../jp/AdvancedManual/AD_Onion.html"><strong>（関連ページ）</strong></a><br>
+    キーフレームの回転値は、現在、約<strong>25</strong>度です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_865.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターを反時計回りに少し回してみました。<br>
+    回転角度が増加し、約<strong>139</strong>度しました。<br>
+    （AnyPortraitで角度が増加すると反時計回りに回転します。）<br>
+    Onion Skinをみるとまだアニメーションに問題がありません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_866.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターをより多く回転させてみました。<br>
+    <strong>(1)</strong> 角度が増加している途中、<strong>180</strong>度を越えるなんて、むしろ負の値になってしまいました。<br>
+    <strong>(2)</strong> Onion Skinに見えるキャラクターも後方回転するのではなく、むしろこれから転がる形になってしまいます。<br>
+    </p>
+    <br>
+    
+    <p>
+    多くのアニメーションプログラムやシステムの回転角度は、「<strong>0〜360</strong>」、または「<strong>-180〜180</strong>」に制限されたりします。<br>
+    AnyPortraitは、基本的に「<strong>-180〜180</strong>」以内の値を持つように開発されました。<br>
+    この方式は、編集中に誤った入力にオブジェクトが過度に多く回転することを防止し、IKなどの計算が容易になる利点があります。<br>
+    しかし、上記のように、多くの変化量を持つ回転アニメーションを作ろうとするときに問題が発生する可能性があります。<br>
+    したがって、上記のような問題が発生した場合、キーフレームは、-180度より小さいか180度以上の値を持つように制限を解除する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_867.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> キーフレームを選択して、キーフレームのプロパティのUIを確認します。 （「Transformタブ」を選択します。）<br>
+    <strong>(2)</strong> 「<strong>180</strong>度に制限ボタン」を押して <strong>(3)</strong> 回転角度制限を解除します。<br>
+    </p>
+    <br>
+    
+    <p>
+    再びキャラクターを回転させてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_868.jpg"/>
+    <br>
+    
+    <p>
+    上記のような方法でキャラクターを反時計回りに回転します。<br>
+    まだ問題がありません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_869.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> より回転してみると、今度は角度が負の値にならず180度より大きな値の角度で回転されます。<br>
+    <strong>(2)</strong> アニメも正常になることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意</strong></span><br>
+    回転角度の制限は、キーフレームの属性ではなく、エディタの一時的な設定です。<br>
+    直接回転角度の制限を解除しない限り、基本的に角度は常に制限されます。<br>
+    したがって、上記のような問題が発生した場合にのみ、一時的に制限を解除願います。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

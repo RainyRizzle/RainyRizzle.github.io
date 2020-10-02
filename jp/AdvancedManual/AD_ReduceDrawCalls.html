@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ReduceDrawCalls.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ReduceDrawCalls.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_ReduceDrawCalls.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,545 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.7</span></h4>
+    
+    <p>
+    ゲームのパフォーマンスを最適化するための最も効果的な方法の一つは、 「<strong>ドローコール（Draw call）</strong>」を減らすことです。<br>
+    「ドローコール」は、オブジェクトや要素をレンダリングする回数を意味します。<br>
+    簡単に考えると、オブジェクトが多いほどドローコールが増加します。<br>
+    しかし、レンダリング設定とマテリアルの属性によっては、ドローコールが実際のオブジェクトの数よりも減少することができます。<br>
+    ドローコールを減らす方法については、Unityとコミュニティとフォーラムの記事を参照していただくことをお勧めします。<br>
+    このページは、ドローコールを減らすことができるAnyPortraitの機能をスクリプトを介して比較して確認する内容を含んでいます。<br>
+    また、ドローコールが増加する設定にに関しても説明します。<br>
+    スクリプトを利用する場合は、「<a href="../../jp/Script/SC_Mesh.html">関連ページ</a>」を参照してみてください。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意</strong></span><br>
+    Unityは「ドローコール」を「<strong>Batch Count</strong>」と表記します。<br>
+    両方の概念は、処理上の若干の違いがありますが、だいたいの値がほぼ同じで、二つの言葉は同じものとして扱われたりします。<br>
+    このページでは二つの言葉は混用され、同じ意味で使用することを参照して願います。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>AnyPortraitのドローコール管理方式</h3>
+    <br>
+    
+    <p>
+    AnyPortraitのシステムは、ドローコールを減らすことができるさまざまな機能と最適化手法を提供しています。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. ドローコールが増加しないように最適化されている場合</strong><br>
+    - キャラクターのメッシュが同じテクスチャとマテリアルにレンダリングされると、ドローコールが最適化されます。<br>
+    - 共通のテクスチャとマテリアルを共有する複数のキャラクターがゲームに配置されると、ドローコールが減少します。<br>
+    - キャラクターのTransformの「Scale」の値が負になってもドローコールは増加しません。<br>
+    - メッシュの色やテクスチャを変えるスクリプト関数の中では、その対象が「Image」である場合、該当のキャラクター内ではドローコールが増加されることが防止されます。しかし、「他のキャラクター」とのドローコールの共有は解除されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. ドローコールが増加した場合</strong><br>
+    - テクスチャが違ったり、他のマテリアルを使用している場合、ドローコールは増加します。<br>
+    - 色のアニメーションが適用されたか、スクリプト関数で、特定のメッシュの色を任意に変更した場合ドローコールが増加します。<br>
+    - 「カメラからのDepth」によってドローコールが増加することができます。 （同じマテリアルを持つメッシュが連続して配置された場合にのみ、ドローコールが減少します。）<br>
+    - 「クリッピングメッシュ（Clipping Mesh）」は、「レンダリングテクスチャ（RenderTexture）」を利用するため、ドローコールが増加します。<br>
+    - AnyPortraitで使用していない別のShaderプロパティを使用する場合はドローコールが増加します。<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortaitのドローコール最適化の手順は、3つです。<br>
+    <strong>1. 多数のキャラクターが最小のドローコールでレンダリング</strong><br>
+    - ドローコールが最も最適化されている段階であり、同じマテリアルを共有するキャラクターが同じドローコール内でレンダリングがされます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. 単一キャラクターのメッシュが最小のドローコールレンダリング</strong><br>
+    - 単一キャラクター内でドローコールが最適化されている段階です。他のキャラクターとドローコールが共有されないが、この段階でもドローコールの多くを減らすことができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. ドローコールが共有されていないメッシュが存在</strong><br>
+    - 単一キャラクターのメッセージの中で一部が他のドローコールでレンダリングがされるので、ドローコールが増加します。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>ドローコールを最適化するための設定</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_901.jpg"/>
+    <br>
+    
+    <p>
+    Unityエディタでドローコールを確認する最も簡単な方法は、上記になります。<br>
+    <strong>(1)</strong> 「<strong>Game画面</strong>」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Statsボタン</strong>」を押します。<br>
+    <strong>(3)</strong> 「<strong>Batches</strong>」の値が「ドローコール数」です。<br>
+    上画面は、1つのキャラクターだけ配置たのにドローコールが「<strong>6</strong>」やされます。<br>
+    「<strong>ドローコール計量（Draw call batching）</strong>」がされていなくて、すべての要素が、それぞれのドローコールでレンダリングがされています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_902.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Player Settings</strong>」を開きます。<br>
+    - Unityエディタのメニューの「<strong>Edit &gt; Project Settings</strong>」を開き、「<strong>Player</strong>」の項目を選択するか、<br>
+    - Unityエディタのメニューの「<strong>File &gt; Build Settings</strong>」から「<strong>Player Settings</strong>」を選択します。<br>
+    「<strong>Other Settings</strong>」から「<strong>Dynamic Batching</strong>」が無効になっている場合はドローコールが最適化されません。<br>
+    「<strong>Dynamic Batching</strong>」をオンにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_903.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、ドローコールが6で、「<strong>2</strong>」に減少します。<br>
+    （背景が1つカウントされ、キャラクターのメッシュが1つカウントされます。）<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>メッシュの色を変更する方法によるドローコールの変化の比較</h3>
+    <br>
+    
+    <p>
+    メッシュの色を変更するときは、どのような方法を利用しているかに応じてドローコールが異なります。<br>
+    これAnyPortraitのドローコール方式と関連があります。<br>
+    下の例を見て最適化を行う際に活用しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_904.jpg"/>
+    <br>
+    
+    <p>
+    モディファイヤを利用したり、「<strong>SetMeshColor</strong>(<span class="text-primary">string </span>transformName, <span class="text-success">Color </span>color2X)」などの関数を利用して、1つのメッシュの色を変えました。<br>
+    この場合は、「最も低い最適化レベル」であり、それぞれのメッシュのドローコールが互いに共有されていない状態です。<br>
+    色が変わったメッシュが、他のドローコールでレンダリングがされ、ドローコールが「<strong>4</strong>」に増加しました。<br>
+    色のアニメーションは、便利な方法であるが、ドローコールが増加することができますので、注意が必要です。<br>
+    もしメッシュの色がデフォルトの（0.5、0.5、0.5、1.0）に復元されると、ドローコールが減少し、<br>
+    「<strong>ResetMeshMaterialToBatch</strong>(<span class="text-primary">string </span>transformName)」のように材質の設定を復元する関数を使ってドローコールを最適化することもできます。<br>
+    </p>
+    <br>
+    
+    <p>
+    メッシュの色を一括的にすべて変更した場合どうなるのかを確認してみましょう。<br>
+    メッシュの色をすべて変えるスクリプト関数は次の二つを主に利用されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    - <strong>SetMeshColorAll</strong>(<span class="text-success">Color </span>color2X) : すべてのメッシュの色をマテリアルに関係なく変更します。<br>
+    - <strong>SetMeshColorAll</strong>(<span class="text-primary">string </span>optTextureName, <span class="text-success">Color </span>color2X) : 関数の引数として入力された画像を使用しているメッシュを対象に、色を変更します。<br>
+    </p>
+    <br>
+    
+    <p>
+    ほぼ同じに見える関数であるが、処理方法に応じてドローコールの違いがあります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_905.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>SetMeshColorAll</strong>(<span class="text-success">Color </span>color2X)」関数を利用した結果です。<br>
+    この関数は、「<strong>SetMeshColor</strong>」関数は、すべてのメッシュに一つずつ一括して適用されたものです。<br>
+    SetMeshColor関数が「最も低い最適化レベル」の関数であるため、色に関係なく、メッシュはマテリアルをもう共有しません。<br>
+    したがってドローコールが最適化される前の値である「<strong>6</strong>」となった。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_906.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>SetMeshColorAll</strong>(<span class="text-primary">string </span>optTextureName, <span class="text-success">Color </span>color2X)」関数を利用した結果です。<br>
+    引数として画像の名前を入れたので、この関数は、「メッシュ」を対象とするのではなく、 "イメージ"を対象としています。<br>
+    メッシュが互いに共有するマテリアルの色を直接変更するため、メッシュは継続して、互いに同じマテリアルを共有します。<br>
+    したがって、この関数は、「中間の最適化レベル」として「単一キャラクター内でのドローコールの最適化」を実行します。<br>
+    結果的にドローコールは、最適化された状態である「<strong>2</strong>」の値を保持します。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>多数のキャラクターが配置されたときのドローコール比較</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_907.jpg"/>
+    <br>
+    
+    <p>
+    多数のキャラクターが配置されると、ドローコールは増加します。<br>
+    様々な種類のオブジェクトが配置されるとドローコールも一緒に増加します。<br>
+    しかし、もしAnyPortraitで製作された文字だけ配置された状態で、そのキャラクターが同じテクスチャとマテリアルを共有する場合ドローコールは、大幅に減少します。<br>
+    （条件のみ正しければ、ぜひオリジナルのキャラクターが複製された場合でなくてもマテリアルを共有します。）<br>
+    </p>
+    <br>
+    
+    <p>
+    上記の場合には、6つのキャラクターが配置されています。<br>
+    しかし、AnyPortraitの「最も高い最適化レベル」を維持した状態では、ドローコールが大幅に減少して「<strong>2</strong>」に減少したことを見ることができます。<br>
+    色を変更せずに、基本的なマテリアルの属性だけを使用して、同じテクスチャを利用する場合は、別の操作がなくても、AnyPortraitで製作された文字は、お互いを認識してマテリアルを共有し、ドローコールを減らします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_908.jpg"/>
+    <br>
+    
+    <p>
+    一つのキャラクターを選択し、「<strong>SetMeshColorAll</strong>(<span class="text-primary">string </span>optTextureName, <span class="text-success">Color </span>color2X)」関数を呼び出しました。<br>
+    先に「中間の最適化レベル」であるこの関数を適用すると、そのキャラクターはもう他のキャラクターとマテリアルを共有しません。<br>
+    したがってドローコールが2で「<strong>12</strong>」に増加します。<br>
+    </p>
+    <br>
+    
+    <p>
+    もちろん、これは全体の30個のメッシュと1つの背景を合わせた31という値（予想される最大値）よりかなり少ない値です。<br>
+    しかし、最も最適化された値である2に比べて多く増加した。<br>
+    </p>
+    <br>
+    
+    <p>
+    この結果は、ドローコールが「Batching」されている条件の一つである、「連続したレンダリング順序」によるものです。<br>
+    下の追加の説明を確認してみてください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_909.jpg"/>
+    <br>
+    
+    <p>
+    現在シーンにキャラクターがどのように配置されているかどうかを確認してみましょう。<br>
+    上記のキャラクターは少し後ろにあり、同じ行のキャラクターは同じZ位置を持っています。<br>
+    色が変更されたキャラクターとの「ようなZ位置」を持つため、異なるマテリアルを使用しているメッシュのレンダリング順序が互いに入り乱れてしまいました。<br>
+    したがって、レンダリングを順次ながらレンダリングがされているマテリアルが転換される状況が多く発生することです。<br>
+    このような状況は、いくつかのグループのオブジェクトがマテリアルを互いに共有しても、効果的にドローコールを減らさない。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_910.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターのZ位置を変更して、ドローコールがどのように変化するかを確認してみましょう。<br>
+    単純にZ位置が同じでなく、「順次前後配置」されるように作られました。<br>
+    Z位置に応じて順次レンダリングをするときに、「色が変わったキャラクター」のメッシュが他のキャラクターと入り混じってのようにレンダリングをされている状況を回避しました。<br>
+    したがってドローコールの数が12から再び「<strong>4</strong>」へと大きく減りました。<br>
+    </p>
+    <br>
+    
+    <p>
+    この原理を理解すれば、もう少し最適化を行うことができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_911.jpg"/>
+    <br>
+    
+    <p>
+    「色が変わったキャラクター」が最も前に出てくるように配置しました。<br>
+    その他の他のキャラクターたちが共にレンダリングされるように意図的に配置したので、<br>
+    ドローコールは、最小値である「<strong>3</strong>」になりました。<br>
+    この場合は、最も完全に最適化された状態であるが、実際にゲームでドローコールを減らすために、オブジェクトの位置を変えることは困難である。<br>
+    代わりに、ドローコールが最適化されやすい状況が多く発生するように構成されることをお勧めします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_912_2.jpg"/>
+    <br>
+    
+    <p>
+    すべてのキャラクターに「<strong>SetMeshColorAll</strong>(<span class="text-primary">string </span>optTextureName, <span class="text-success">Color </span>color2X)」関数を適用すると、どうなるでしょう？<br>
+    この関数は、「中間の最適化レベル」であるので、一旦呼び出しがされると、「キャラクターの中からのドローコールの最適化」は、保持され、「他のキャラクターとのドローコールの最適化」は、もう実行されません。<br>
+    色とは無関係に、ドローコールは「<strong>7</strong>」に増加しました。<br>
+    </p>
+    <br>
+    
+    <p>
+    現在の値は文字の「Z位置」が適切に分散された場合に見ることができ（背景1、キャラクター6）、<br>
+    上述のように、Z位置が同じでレンダリング順序が入り混じった場合ドローコールの最適化がされていない可能性があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_912.jpg"/>
+    <br>
+    
+    <p>
+    上画面は同じ状況でキャラクターのZ位置のみ同一にした状態です。<br>
+    ドローコールの最適化が全くされていなくて、ドローコールは最大値である「<strong>31</strong>」になりました。<br>
+    </p>
+    <br>
+    
+    <p>
+    ドローコールはUnityエンジンの内部的な処理なので、「Z位置」の他にも、様々な増減原因があります。<br>
+    他のドキュメントを介してドローコールを最適化することができる方法を適用しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>ドローコールが増加することができる属性</h3>
+    <br>
+    
+    <p>
+    ドローコールが増加することができる条件はあります。<br>
+    以下は、上記の関数や色モディファイヤを除き、AnyPortraitの機能の中でドローコールを増加させることを紹介します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_913.jpg"/>
+    <br>
+    
+    <p>
+    一つのキャラクターに「複数の画像」が使用される場合ドローコールは増加します。<br>
+    複数の小さな画像ではなく、「一つの大きな画像」を利用することが効果的であることがあります。<br>
+    （ビルド環境と機器に応じて異なる場合がありますので、事前に確認をしてください。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_914.jpg"/>
+    <br>
+    
+    <p>
+    「クリッピングメッシュ（Clipping Mesh）」は、「レンダリングテクスチャ（Render Texture）」技法を利用します。<br>
+    レンダリングテクスチャの特性上、クリッピングメッシュは、他のメッシュとドローコールを共有しません。<br>
+    クリッピングマスクメッシ、クリッピングされたメッシュの両方レンダリングされるときドローコールが増加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_915.jpg"/>
+    <br>
+    
+    <p>
+    メッシュの「Shader Setting」をデフォルトとは異なる設定すると、他のメッシュとマテリアルを共有することができません。<br>
+    設定が変更されたメッシュは、常に「最も低い最適化レベル」になります。<br>
+    Blend方式を「Alpha Blend以外の値」に設定するか、デフォルト値とは異なる「マテリアルセット（Material Set）」を使用している場合がこれに該当します。<br>
+    スクリプト関数（「SetMeshCustomFloatAll」関数など）や、この画面で「Add Custom Property」機能を利用して、マテリアルの「カスタム属性」を利用することもドローコールが増加する原因となります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_916.jpg"/>
+    <br>
+    
+    <p>
+    ゲームで確認してみると、いくつかのメッシュたちによってドローコールが多く増加したことを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>「Sorting Group」を利用してドローコールを減らす</h3>
+    <br>
+    
+    <p>
+    上記の説明にもかかわらず、ドローコールが増加する場合はあります。<br>
+    特に、異なるキャラクターやオブジェクトが多く配置された状態では、ドローコールを減らすことは困難です。<br>
+    AnyPortraitのように「<strong>Mesh Renderer</strong>」で構成されたオブジェクトが多数登場すれば、ドローコールが大幅に増加することができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    この時、「<strong>Sorting Group</strong>」を利用して、ドローコールを効果的に削減することができます。 （<a href="../../jp/AdvancedManual/AD_SortingLayer.html">関連ページ</a>）<br>
+    今回はUnityの「<strong>Frame Debugger</strong>」を利用して、レンダリングプロセスを詳細に説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1037.jpg"/>
+    <br>
+    
+    <p>
+    二種類のキャラクターが配置されたシーンです。<br>
+    二つのキャラクターの両方AnyPortraitで製作されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1038.jpg"/>
+    <br>
+    
+    <p>
+    ゲームが開始されると、二つのキャラクターが10個より多くのクローンされて生成されるように、簡単なスクリプトを作成してみました。<br>
+    複製されたキャラクターが範囲内でランダムに位置するように作成しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1039.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行してみましょう。<br>
+    <strong>(1)</strong> スクリプトが動作しキャラクターが複製されます。<br>
+    <strong>(2)</strong> ドローコールが「<strong>27</strong>」で示している。<br>
+    </p>
+    <br>
+    
+    <p>
+    任意の位置に複製されるため、ゲームを実行するたび結果は少しずつ異なりますが、キャラクターが増加し、ドローコールも一緒にほぼ比例するように増加された点が非常に残念です。<br>
+    複製されたキャラクターは、オリジナルと同じマテリアルであるため、可能であればドローコールを共有にすることをお勧め。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1040.jpg"/>
+    <br>
+    
+    <p>
+    「Frame Debugger」を実行して、レンダリングプロセスを確認してみましょう。<br>
+    <strong>Window &gt; Analysis &gt; Frame Debugger</strong>を実行します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1041.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ゲームを実行している <strong>(2)</strong> 「<strong>Enable</strong>ボタン」を押します。<br>
+    <strong>(3)</strong> 現在のフレームでレンダリングがどのように進行されたことを示します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1042.jpg"/>
+    <br>
+    
+    <p>
+    半透明の材質を有するメッシュを確認する必要がので、「<strong>Drawing &gt; Render.TransparentGeometry &gt; RenderForwardAlpha.Render &gt; RenderForward.RenderLoopJob</strong>」を確認します。<br>
+    <strong>(1)</strong> メッシュがレンダリングされた順序が表示されます。 「<strong>Draw Dynamic</strong>」は、複数のメッシュが1つのドローコールでのようにレンダリングされたことを意味するので、ある程度の最適化がされたわけです。<br>
+    問題は、<strong>(2)</strong> のように「それぞれのメッシュが一つずつ表示される現象」が発生するということです。<br>
+    上記のような結果が表示される場合、レンダリングの過程で異なるマテリアルを持つメッシュが順番にレンダリングがされています。<br>
+    </p>
+    <br>
+    
+    <p>
+    これは、特に複数のメッシュで構成されAnyPortraitのキャラクターで現れやすい現象です。<br>
+    メッシュがそれぞれ表示される途中で、似たようなZ値を持つ他のキャラクターのメッシュが混ざってレンダリングが行われたものです。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>Sorting Group</strong>」を利用すれば、上記のように、「他のキャラクターのメッシュと混じって表示されること」を防ぐことができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1043.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> AnyPortraitキャラクターをそれぞれ選択します。<br>
+    <strong>(2)</strong> 「<strong>Sorting Order Option</strong>」の値を「<strong>Depth To Order</strong>」に変更します。<br>
+    <strong>(3)</strong> 「<strong>Sorting Group</strong>」コンポーネントを追加します。<br>
+    （「Sorting Group」コンポーネントはAnyPortraitキャラクターの親GameObjectに追加してもされます。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1044.jpg"/>
+    <br>
+    
+    <p>
+    再度ゲームを実行し、「Frame Debugger」の「<strong>Enable</strong>ボタン」を押して、結果を確認してみましょう。<br>
+    <strong>(1)</strong> すべてのレンダリングの段階が「<span class="text-success"><strong>Draw Dynamic</strong></span>」と表記されていることを見ることができます。<br>
+    また、「<strong>Sorting Group</strong>」単位でレンダリングが行われるため、ドローコールがたくさん減ったことを見ることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    ドローコールをかなり減らし、現在の最適化の結果は、一般的なゲームのプロジェクトに適用される良好な状態です。<br>
+    </p>
+    <br>
+    
+    <p>
+    しかし、ここでもう少しドローコールを減らすことができれば素晴らしいことです。<br>
+    現在の段階では、「キャラクター単位でレンダリング」するのだが、最も最適化された手順は、「<span class="text-primary"><strong>マテリアル単位でレンダリング</strong></span>」するものだからです。<br>
+    この最適化戦略は、ゲームによっては困難な場合がありますが、可能であれば試してみるみるのもいいでしょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1045.jpg"/>
+    <br>
+    
+    <p>
+    この方法は、「同じ種類のキャラクターごとに」独自のレンダリング順序を持っていれば、「同じマテリアルを持つメッシュが同じドローコールを持つことができる点」を応用したものです。<br>
+    <strong>(1)</strong> 二つのキャラクターのいずれかを選択します。この例では、「スライム」のキャラクターを選択しました。<br>
+    <strong>(2)</strong> 「<strong>Sorting Group</strong>」で <strong>(3)</strong> 「<strong>Order in Layer</strong>」の値をデフォルト値の「0」ではなく、 「<span class="text-danger"><strong>1</strong></span>」に変更します。<br>
+    他のキャラクターが追加であれば、それぞれのキャラクターの種類ごとに異なる「<strong>Sorting Order</strong>」を持つように設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1046.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ゲームを実行し、「Frame Debugger」で結果を確認してみるの「キャラクターの数」ではなく「キャラクターの種類」だけドローコールが発生したことを見ることができます。<br>
+    <strong>(2)</strong> 背景を含めると、わずか「<span class="text-danger"><strong>3</strong></span>」のドローコールカウントのみ発生しました。<br>
+    </p>
+    <br>
+    
+    <p>
+    この方式では、キャラクターの種類に応じて、レンダリングの順序が固定されている問題があります。<br>
+    （上の画像では、すべて「スライム」は、すべての "ドラゴン"の前に位置します。）<br>
+    しかし、あなたが作るゲームで「レンダリングの順序」が重要でなくキャラクターがたくさん登場すれば、この最適化戦略を活用して見るのもいいでしょう。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_VariousRigging.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_VariousRigging.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_VariousRigging.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,840 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.2</span></h4>
+    
+    <p>
+    Rigging is a task that needs to be improved in quality through numerous tests and modifications.<br>
+    Because the work requires experience and know-how of experts, you can get information on rigging through various forums.<br>
+    This page covers how to rig in some cases for those who are having trouble rigging.<br>
+    It also explains in more detail how to use the functions of AnyPortrait for each case.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Differences in Position of Joints</h3>
+    <br>
+    
+    <p>
+    A joint, with two or more bones, is the most important part of the rigging.<br>
+    This is because the way the mesh is deformed depends on how the weight is set.<br>
+    In this point, what is as important as the distribution of weights is the position of the joint.<br>
+    Whether the bones are connected at the center of the image or the bones at the edges is a matter of importance.<br>
+    There isn't the exact right answer, and you'll have to decide for yourself case by case.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_653.jpg"/>
+    <br>
+    
+    <p>
+    First, the joint is located in <strong>the center of the image</strong>.<br>
+    This case is suitable when the joints move inward and outward.<br>
+    The inner and outer sides of the joints deform uniformly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_654.jpg"/>
+    <br>
+    
+    <p>
+    The second case is when the joint is located <strong>outside of the image</strong>.<br>
+    While the inside of the joint is quite largely deformed, the outside is relatively less deformed.<br>
+    Apparently this method is very deformable, but many joints in humans and animals (arms, knees, fingers, etc.) are actually this way.<br>
+    (Check your bone location by touching your finger and knee.)<br>
+    Constructing joints in this way allows you to represent the inflation and fold of flesh when the joint is folded.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_655.jpg"/>
+    <br>
+    
+    <p>
+    The last case is when the joint is located <strong>inside the image</strong>.<br>
+    The deformation of the inside of the joint is minimal, and the deformation of the outside is large.<br>
+    This is useful when you want to avoid reducing the volume of the image because the image is compressed in a small area.<br>
+    In the case of the image of the person in the side, this method may be used at the junction of the pelvis and legs.<br>
+    </p>
+    <br>
+    
+    <p>
+    In the three cases above, the distribution of weights was set to be smooth.<br>
+    However, in the image of humans or animals, the motion of the joints is complicated, requiring some more manually modification.<br>
+    You can modify the above cases as follows:<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_656.jpg"/>
+    <br>
+    
+    <p>
+    The weight has been modified like the image above.<br>
+    You can see that the weight of the inner part of the joint changes more rapidly.<br>
+    You can modify the above using fewer "Blend" function and increasing or decreasing the weight manually.<br>
+    When you modify these weights, you can see how the results look different in the image below.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_657.jpg"/>
+    <br>
+    
+    <p>
+    As in the previous description, let's compare how each one works based on the position of the joint.<br>
+    <strong>1) When the joint is located in the center</strong><br>
+    : The inner image of the joint appears slightly folded.<br>
+    This is good method for most joints of characters such as humans and animals.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2) When the joint is located outside</strong><br>
+    : The inside of the joint is so deformed that the image may look a bit strange.<br>
+    In the case of human or animal joints, this approach is quite effective when the joints are folded, when the skin is slightly swollen and folded (arms, knees, fingers, etc.).<br>
+    You need to modify the vertex Z-Depth to prevent the mesh from displaying strangely. (<a href="../../en/AdvancedManual/AD_ZdepthVert.html">Related page</a>)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3) When the joint is located inside</strong><br>
+    : The results do not change much even if the weight distribution method has changed.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>A series of bones</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_658.jpg"/>
+    <br>
+    
+    <p>
+    In some cases, such as ropes, shawls, or long hair, you may need to do the rigging several consecutive bones.<br>
+    In particular, it is not easy to assign weights unless the object's movement is so flexible that joints are not formed at specific locations.<br>
+    In this case, using the "<strong>Blend</strong>" function is quite effective.<br>
+    Let's do the rigging as follows.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_659.jpg"/>
+    <br>
+    
+    <p>
+    Select the first bone and vertices to start with.<br>
+    You can select enough vertices near the next bone.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_660.jpg"/>
+    <br>
+    
+    <p>
+    Select the next bone and vertices and set their weights.<br>
+    Assign “<strong>1</strong>” as the weight value in every step.<br>
+    It is very cumbersome if you assign weights manually from this step.<br>
+    And also it is hard to get good results.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_661.jpg"/>
+    <br>
+    
+    <p>
+    Let's check the rigging result using the "<strong>Pose Test</strong>" function.<br>
+    Naturally, the weight will look strange as above because only 1 is entered for each bone.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_662.jpg"/>
+    <br>
+    
+    <p>
+    Let's use the "<strong>Blend</strong>" feature.<br>
+    Modify the rigging sequentially from the first bone.<br>
+    <strong>(1)</strong> <strong>Select the vertices</strong>. This time, select a fairly wide range of vertices.<br>
+    <strong>(2)</strong> <strong>Select the first bone.</strong><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_663.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> <strong>Press the Blend button</strong> several times.<br>
+    The weights are evenly distributed as if you had applied a blur effect.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_664.jpg"/>
+    <br>
+    
+    <p>
+    Do the same for the second bone.<br>
+    <strong>(4)</strong> <strong>Select the vertices</strong>. Again, select a wide range of vertices.<br>
+    <strong>(5)</strong> <strong>Select the second bone</strong>.<br>
+    <strong>(6)</strong> <strong>Press the Blend button</strong> several times.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_665.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_666.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_667.jpg"/>
+    <br>
+    
+    <p>
+    Use the Blend function, in the same way, continuously to the last bone.<br>
+    When you do this, the weights appear to be fairly evenly distributed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_668.jpg"/>
+    <br>
+    
+    <p>
+    If you look at the weights, the weights on the bones at both ends are quite large, but the weights on the middle bones are small.<br>
+    Less weight on the middle bones gives a pretty flexible shape.<br>
+    If necessary, increase or decrease the weight or adjust the number of times the Blend is applied.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_669.jpg"/>
+    <br>
+    
+    <p>
+    Turn on the<strong> Pose test </strong>again and you will see the mesh deform naturally with complex joint movements.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Brush mode</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_670.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait's <strong>Brush mode</strong> lets you set weights with the mouse.<br>
+    This time, we will cover an example consisting of two large bones and two small ones.<br>
+    In this example, when both ears to two small bones are rigged, it is quite handy using <strong>Brush mode</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_671.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select all vertices.</strong><br>
+    <strong>(2)</strong> <strong>Select the basic bone</strong>.<br>
+    <strong>(3)</strong> Set the weight to <strong>1</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_672.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select <strong>Brush tab</strong> and brush tools appear.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_673.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    This is the UI in <strong>Brush mode</strong>.<br>
+    <strong>1. Numpad tab, Brush tab</strong><br>
+    : Switch the brush mode and the number pad mode.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. "Add", "Multiply", "Blur" brushes</strong><br>
+    : Brush that adds weights, Brush that multiplies weights, and Blur brush that smooths the surroundings and values.<br>
+    Each shortcut key is&nbsp;&nbsp;<kbd>J</kbd> ,&nbsp;&nbsp;<kbd>K</kbd> ,  <kbd>L</kbd>  keys.<br>
+    To exit brush mode just  <kbd>Right-click</kbd>  on it.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. Radius</strong><br>
+    : The radius of the brush. You can increase or decrease the size by using the shortcut key&nbsp;&nbsp;<kbd>[</kbd>&nbsp;&nbsp;and  <kbd>]</kbd> .<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>4. Intensity </strong><br>
+    : The intensity of the brush. You can increase or decrease the intensity with the shortcut keys&nbsp;&nbsp;<kbd>&lt;</kbd>&nbsp;&nbsp;and  <kbd>&gt;</kbd> .<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_674.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select the bone on the left</strong>. (Vertices must be selected.)<br>
+    <strong>(2)</strong> Select the "<strong>Add</strong>" brush. (Shortcut:  <kbd>J</kbd> )<br>
+    <strong>(3)</strong> <strong>A circular brush</strong> will appear around the mouse.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_675.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Increase the value of Radius</strong>. (Shortcut:  <kbd>]</kbd> )<br>
+    <strong>(2)</strong> You can see the size of the brush increased.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_676.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> If you <strong>rub with the mouse clicked</strong>, you can see the weight of the selected bone gradually increasing.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_677.jpg"/>
+    <br>
+    
+    <p>
+    Do the same for the opposite bone.<br>
+    <strong>(1)</strong> <strong>Right-click</strong> to turn off Brush mode, then <strong>select the small bone on the right</strong> with the <strong>vertex selected</strong>.<br>
+    <strong>(2)</strong> Select the "<strong>Add</strong>" brush.<br>
+    <strong>(3)</strong> <strong>Click and rub the mouse</strong> to increase the weight for the other ear.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_678.jpg"/>
+    <br>
+    
+    <p>
+    The "<strong>Multiply</strong>" brush allows you to edit the weight's value in detail.<br>
+    <strong>(1)</strong> With the bones and vertices selected, select the "<strong>Multiply</strong>" brush.<br>
+    <strong>(2)</strong> Rub the vertices with a brush and you will see the weight gradually increase or decrease by the ratio.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_679.jpg"/>
+    <br>
+    
+    <p>
+    Using the "<strong>Blur</strong>" brush helps to create a smooth distribution of the weight values.<br>
+    Similar to the function of Blend.<br>
+    <strong>(1)</strong> With the bones and vertices selected, select the "<strong>Blur</strong>" brush.<br>
+    <strong>(2)</strong> Rub the vertices with a brush and the weight will change smoothly with the surrounding vertices.<br>
+    As a result, you can see that the weights are softly distributed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_680.jpg"/>
+    <br>
+    
+    <p>
+    Let's check the rigging result through the pose test.<br>
+    With the brush tool you can easily rig.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Lock function to prevent weights from changing</h3>
+    <br>
+    
+    <p>
+    Rigging is very complicated in areas where more than two bones are connected.<br>
+    The hardest part is that the results will vary depending on which bone you are rigging first.<br>
+    Since the weight values are heavily influenced by the bones selected later, the results of the earlier work are likely to be distorted.<br>
+    The "<strong>Lock</strong> function" added in v1.1.8 help to avoid this problem a bit.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_681.jpg"/>
+    <br>
+    
+    <p>
+    This example shows three separate bones and a V-shaped image.<br>
+    This can be a bit complicated as the center of the image needs to be rigging for three bones.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_682.jpg"/>
+    <br>
+    
+    <p>
+    This is the result of a simple rigging.<br>
+    As you can see, the weights of the vertices in the middle are complicatedly assigned by three bones.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_683.jpg"/>
+    <br>
+    
+    <p>
+    This is the weight distribution of "<strong>Bone Root</strong>" located below.<br>
+    It is evenly distributed from left to right based on the lower part.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_684.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_685.jpg"/>
+    <br>
+    
+    <p>
+    The weights for the left and right bones were similarly distributed.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now let's increase the weight of "<strong>Bone R1</strong>".<br>
+    At the same time, let's <span class="text-danger"><strong>keep the weight</strong></span> of "<strong>Bone Root</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_686.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select bone</strong> <span class="text-danger"><strong>to lock</strong></span> rigging weight value.<br>
+    <strong>(2)</strong> Press <strong>the lock button</strong>.<br>
+    <strong>(3)</strong> The selected bones are limited in weight editing for <strong>all vertices</strong> and can be checked by <strong>the icon</strong> in the bone rigging information list.<br>
+    </p>
+    <br>
+    
+    <p>
+    The lock feature has the following features:<br>
+    <strong>1)</strong> When the edit mode is exited, all lock functions are released.<br>
+    <strong>2)</strong> The lock function prevents the weight of a bone locked by “<strong>other bones</strong>” from being changed.<br>
+    <strong>3)</strong> Even in the locked state, the weight is edited when its bone is selected for reason <strong>2)</strong>.<br>
+    <strong>4)</strong> There may be a slight change in value by <strong>Blend</strong> or <strong>Normalize</strong>, but the change is not large.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_687.jpg"/>
+    <br>
+    
+    <p>
+    Let's test the lock function.<br>
+    <strong>(1)</strong> <strong>Select the right bone</strong> and <strong>a fairly wide range of vertices</strong>.<br>
+    <strong>(2)</strong> The weight was increased by pressing the <strong>"+" button</strong> several.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_688.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_689.jpg"/>
+    <br>
+    
+    <p>
+    While the weight for the bone on the left is much reduced,<br>
+    you can see that the weights for "<strong>Bone Root</strong>" which is applied the "<strong>Lock</strong>" function <strong>remain the same as before</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Copy rigging weights to overlapped meshes</h3>
+    <br>
+    
+    <p>
+    Copying weight values is very useful when multiple meshes are overlapped.<br>
+    Copying the weight value reduces unnecessary task for duplicating rigging weights and prevents awkward synchronized movement of overlapping meshes.<br>
+    The previous "Copy" feature only supports copying and pasting the weight value of one vertex to another vertex.<br>
+    However, with "<strong>position-based copying (Pos-Copy / Paste)</strong>" added in v1.1.8, you can copy rigging information from multiple vertices in batches to other vertices.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_690.jpg"/>
+    <br>
+    
+    <p>
+    In this example, two meshes are overlapped.<br>
+    <strong>The mesh of (2)</strong> is attached to <strong>the mesh of (1)</strong> <strong>like clothes or armor</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_691.jpg"/>
+    <br>
+    
+    <p>
+    First, the vertices of the inner mesh are assigned weights.<br>
+    Because of the large number of vertices and the smooth distribution of weights, resetting these weights equally on other meshes can be a daunting task.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_693.jpg"/>
+    <br>
+    
+    <p>
+    Let's copy the weights for these vertices.<br>
+    <strong>(1)</strong> <strong>Select as many vertices as possible</strong>. In this example, all the vertices are selected.<br>
+    <strong>(2)</strong> Press the <strong>Pos-Copy button</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    Position-based copying interpolates and pastes the rigging weights of the target again based on the location of the saved vertices.<br>
+    So the more vertices you copy, the more accurately you can paste the weights.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_692.jpg"/>
+    <br>
+    
+    <p>
+    Now make the upper mesh visible.<br>
+    <strong>(1)</strong> <strong>Select the mesh</strong>.<br>
+    <strong>(2)</strong> Press the <strong>Add to Rigging button</strong> to add to the rigging modifier.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_694.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select all vertices</strong>.<br>
+    <strong>(2)</strong> Press the <strong>Pos-Paste button</strong> to paste the saved rigging weights.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_695.jpg"/>
+    <br>
+    
+    <p>
+    Rigging weights have been copied to all vertices.<br>
+    You can see that the weights are distributed almost identically to the source mesh.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_696.jpg"/>
+    <br>
+    
+    <p>
+    If you move the bone with the Pose Test feature, you will see the two meshes moving in sync.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Auto Rig</h3>
+    <br>
+    
+    <p>
+    The <strong>Auto Rig</strong> function allows you to <strong>automatically set rigging weights</strong> on selected vertices.<br>
+    This feature has been greatly improved in v1.1.8 and has been developed as a fairly convenient and powerful feature.<br>
+    </p>
+    <br>
+    
+    <p>
+    Auto Rig has the following features:<br>
+    - The weights are smoothly distributed between the jointed bones. In the other hands, the weights are distributed somewhat discretely among the bones that are not directly connected to each other.<br>
+    - Auto Rig is processed only for the selected vertices.<br>
+    - The range to which the bone's weight is applied is determined automatically according to the distribution of vertices, and the unselected vertices are also referred to the calculation.<br>
+    - If the selected vertices already have rigging weights, the bone's weighting range is changed and can be calculated more accurately.<br>
+    </p>
+    <br>
+    
+    <p>
+    The following example shows how to use the Auto Rig function.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_697.jpg"/>
+    <br>
+    
+    <p>
+    In the example above, let's use the Auto Rig function to easily rig.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_698.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select the vertices</strong>. In this example, all vertices are selected.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_699.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Auto Rig button</strong>.<br>
+    <strong>(2)</strong> The weight is <strong>automatically assigned</strong> to the selected vertices.<br>
+    </p>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_700.jpg"/>
+    <br>
+    
+    <p>
+    Let's use the <strong>Pose Test</strong> to see if the rigging is working.<br>
+    Although the bones are complex, they are overall well rigging.<br>
+    However, it seems that some vertices' rigging is set up strangely.<br>
+    Take advantage of the <strong>Auto Rig feature</strong> to reduce errors like the above image and to make the rigging task efficient.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_701.jpg"/>
+    <br>
+    
+    <p>
+    Return to the initial state and start rigging again.<br>
+    Let's use the following property among the Auto Rig characteristics described above.<br>
+    "- If the selected vertices <span class="text-danger"><strong>already have rigging weights</strong></span>, the bone's weighting range is changed and can be <strong>calculated more accurately</strong>."<br>
+    This property makes the results of Auto Rig more accurate.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select the vertices of the main part</strong> and the "<strong>nearest bone</strong>".<br>
+    <strong>(2)</strong> Assign the weight to <strong>"1"</strong>.<br>
+    You don't need to do this for all bones, just for the vertices and bones that will cause errors.<br>
+    These guided tasks do not have to be precise.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_702.jpg"/>
+    <br>
+    
+    <p>
+    Press the <strong>Auto Rig button</strong> again.<br>
+    Similar to the above, you can see that the rigging is done automatically.<br>
+    Let's see if the results really improved.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_703.jpg"/>
+    <br>
+    
+    <p>
+    Let's move the bones using the Pose Test to check the rigging results.<br>
+    You can see that the rigging is more natural and less awkward than before.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>Auto Rig</strong> function is used to increase the efficiency of rigging.<br>
+    Afterward, it is recommended to further improve the quality of the rigging with additional modification.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Selecting Bones as the target of Auto Rig</h3>
+    <br>
+    
+    <p>
+    <strong>The Auto Rig function</strong> calculates rigging <strong>for all bones</strong>.<br>
+    As a result, sometimes unnecessary bones are linked with vertices.<br>
+    <strong>By manually selecting the bones</strong> to which the Auto Rig function will be applied, you can avoid this problem and rigging more accurately and quickly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_703_2.jpg"/>
+    <br>
+    
+    <p>
+    The vertices of the mesh with the Rigging modifier are selected.<br>
+    <strong>(1)</strong> Hold down the&nbsp;&nbsp;<kbd>Ctrl</kbd>&nbsp;&nbsp;( <kbd>Command</kbd>&nbsp;&nbsp;in Mac OS) and press the <strong>Auto Rig button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_703_3.jpg"/>
+    <br>
+    
+    <p>
+    A dialog for selecting the bones appears.<br>
+    <strong>1. Search</strong> :  Search for a name to find a bone.<br>
+    <strong>2. Bone List</strong> : You can select the bone to be rigging. You can press the Shift key to select multiple bones.<br>
+    <strong>3. Star icon</strong> : Bones that are close to the selected vertices.<br>
+    <strong>4. Select All / Deselect All button</strong> : Selects or deselects all bones.<br>
+    <strong>5. Select All Near Bones button</strong> : Selects bones close to the selected vertices (bones with star icon).<br>
+    <strong>6. Apply button</strong> : Execute the Auto Rig function on the selected bone.<br>
+    <strong>7. Cancel button </strong>: Cancel the Auto Rig<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_703_4.jpg"/>
+    <br>
+    
+    <p>
+    Select and apply bones to run Auto Rig.<br>
+    <strong>(1)</strong> Press the <strong>Select All Near Bones button</strong>.<br>
+    Bones with star icons are selected.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_703_5.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> Hold down the&nbsp;&nbsp;<kbd>Shift</kbd>&nbsp;&nbsp;and <strong>Click</strong> to select bones to add or exclude.<br>
+    <strong>(3)</strong> Press the <strong>Apply button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_703_6.jpg"/>
+    <br>
+    
+    <p>
+    Auto Rig has been applied to the selected bones.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_703_7.jpg"/>
+    <br>
+    
+    <p>
+    You can see that the rigging is different from the result of running Auto Rig without selecting bones.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note that</strong></span><br>
+    When selecting bones and executing the Auto Rig function, the rigging is calculated according to the following features.<br>
+    - Selected bones are only target of Auto Rig calculation, so not all vertices are always weighted with all selected bones.<br>
+    - If the vertex is weighted to another bone, the Auto Rig function will be executed including this bone.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

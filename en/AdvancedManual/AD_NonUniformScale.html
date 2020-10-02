@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Non-Uniform Scale option</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_NonUniformScale.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_NonUniformScale.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_NonUniformScale.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Non-Uniform Scale option</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Non-Uniform Scale option</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.2.5</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_960.jpg"/>
+    <br>
+    
+    <p>
+    As in the image above, it seems simple to make the size of the characters increase in the X or Y axis, but surprisingly, this is a function not supported by AnyPortrait.<br>
+    Position, rotation and scaling in AnyPortrait's system are designed differently from that of Unity.<br>
+    This method has the advantage that the scale of a series of bones is not distorted and changes, but on the contrary, there is a limitation in making <strong>Non-Uniform Transformation</strong> as above.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, limited non-uniform scaling is possible through the option added in AnyPortrait v1.2.5.<br>
+    With this option, this page covers how to change the "<strong>scale of all rigged with bones of the character</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Scaling in Unity</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_961.jpg"/>
+    <br>
+    
+    <p>
+    This is the most recommended method.<br>
+    <strong>(1)</strong> Create a new empty <strong>GameObject</strong> that will be the parent.<br>
+    <strong>(2)</strong> <strong>Register as a child</strong> of the GameObject created in <strong>(1)</strong> with the character created with AnyPortrait.<br>
+    Afterwards, you can change the position, rotation, and size by controlling the <strong>Transform</strong> of the <strong>Parent GameObject</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    This method is the most reliable and should be applied, especially if it is linked to Mecanim or Timeline.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Controlling character scale inside AnyPortrait</h3>
+    <br>
+    
+    <p>
+    Next, let's look at how to control the size of a character entirely inside AnyPortrait.<br>
+    When rigged, the first thing that comes to mind as a way to control the overall size is to resize the "<strong>Root bone</strong>".<br>
+    This method is mostly valid in other engines or other tools.<br>
+    Let's change the size of the "Root bone" once.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_962.jpg"/>
+    <br>
+    
+    <p>
+    The character above has one <strong>Root bone</strong>.<br>
+    Let's increase the scale X of the <strong>Root bone</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_963.jpg"/>
+    <br>
+    
+    <p>
+    When you increase the X of <strong>Root bone</strong>, you would generally expect the same result as the image in <strong>(1)</strong>.<br>
+    However, in AnyPortrait, you will see results like <strong>(2)</strong> or completely different results for the following reasons.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Why the results are different than expected</strong></span><br>
+    <strong>1.</strong> The bone scale works only as the "<strong>Local coordinate system</strong>".<br>
+    <strong>2.</strong> The characteristic of AnyPortrait is that the increase or decrease of the child bone size is operated only in the "<strong>Local coordinate system</strong>". Therefore, the direction of increasing or decreasing the size of the parent bone and the direction of increasing or decreasing the size of the child bone are independent of each other.<br>
+    </p>
+    <br>
+    
+    <p>
+    In particular, <strong>2</strong> has the advantage of reducing the distortion of the child bones even if the scale of the parent bone is changed as non-uniform.<br>
+    But, on the other hand, it's a problem if you want to resize like above.<br>
+    </p>
+    <br>
+    
+    <p>
+    Since the way to control the size of the "root bone" was not valid, you could try to fix this by creating a separate "<strong>child mesh group</strong>".<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_964.jpg"/>
+    <br>
+    
+    <p>
+    Let's make an existing character included in "<strong>child mesh group</strong>".<br>
+    <strong>(1)</strong> Click the <strong>Add Mesh Group</strong> button and <strong>(2)</strong> create a <strong>New Parent Mesh Group</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_965.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the newly created <strong>Parent mesh group</strong>.<br>
+    <strong>(2)</strong> Set as <strong>Root Unit</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_966.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select "<strong>Previous character root unit</strong>".<br>
+    <strong>(2)</strong> Click the <strong>Unregist Root Unit</strong> button to release the root unit.<br>
+    Now only the newly created empty mesh group will be registered as 1 root unit.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_967.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select <strong>Parent mesh group</strong> again.<br>
+    Currently, this mesh group is empty.<br>
+    Let's register an existing character as a child of this mesh group.<br>
+    <strong>(2)</strong> Click the "<strong>+</strong>" button.<br>
+    <strong>(3)</strong> Select the <strong>Mesh Group</strong> tab.<br>
+    <strong>(4)</strong> Select an existing character mesh group.<br>
+    <strong>(5)</strong> Click the <strong>Add</strong> button and <strong>(6)</strong> click the OK button in the guidance message.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_968.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> As shown in the image above, the existing character has been included as a child mesh group.<br>
+    Most of the existing data works normally, but animation works only in "Mesh groups registered as Root units".<br>
+    So, you need to change the mesh group attached to the animation.<br>
+    <strong>(2)</strong> Select the animation clip and click the <strong>Change</strong> button, and then change the connection information to the new parent mesh group.<br>
+    (Refer to the <a href="../../en/AdvancedManual/AD_AnimationIssueChild.html">related page</a> for a detailed explanation of this process.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_969.jpg"/>
+    <br>
+    
+    <p>
+    You can now control the position, rotation, and scale of your character with the mesh group.<br>
+    With the <strong>Transform</strong> or <strong>Morph</strong> Timeline Layer selected,<br>
+    <strong>(1)</strong> Select the <strong>Child Mesh Group</strong> that is an existing character.<br>
+    <strong>(2)</strong> Register as a timeline layer.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_970.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Add a <strong>keyframe</strong>.<br>
+    <strong>(2)</strong> Increase the scale of the child mesh group <strong>along the X axis</strong>.<br>
+    It is expected that the same result as <strong>(3)</strong> will come out, but unfortunately, the size has changed to a somewhat strange shape.<br>
+    It's even different from changing the scale of the "Root bone" we tested above.<br>
+    This is because AnyPortrait's system behaves differently from the user's intention because the scailing method between "<strong>child mesh group</strong>" and "<strong>root bone</strong>".<br>
+    </p>
+    <br>
+    
+    <p>
+    However, you can solve this issue by using the option added in v1.2.5.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_971.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the <strong>Setting dialog</strong><br>
+    <strong>(2)</strong> In the <strong>Portrait tab</strong>, change the value of <strong>Scale of Root Bone</strong> to <strong>Non-Uniform Scale</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_972.jpg"/>
+    <br>
+    
+    <p>
+    Alternatively, you can change the option as well.<br>
+    <strong>(1)</strong> Open the <strong>Bake dialog</strong> and <strong>(2)</strong> select the <strong>Setting tab</strong>.<br>
+    <strong>(3)</strong> Likewise, change the <strong>Scale of Root Bone</strong> option to <strong>Non-Uniform Scale</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_973.jpg"/>
+    <br>
+    
+    <p>
+    When you come back to the workspace, you can see that the scale of the character is now working properly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_974.jpg"/>
+    <br>
+    
+    <p>
+    When you run Bake and check it in the game, you can also see the size change as you intended.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Caution</strong></span><br>
+    Although this description covers the process of converting an existing character to a child mesh group, this method is not recommended as the modifiers are created in the child mesh group rather than the parent mesh group.<br>
+    Instead, it is best to create and edit <strong>Modifiers</strong> in <strong>Parent Mesh Group</strong> while <strong>Child Mesh Group</strong> has been created from scratch.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>About Non-Uniform Scale Option</h3>
+    <br>
+    
+    <p>
+    The <span class="text-primary"><strong>Non-Uniform Scale</strong></span> option introduced above applies only to the relationship between the "<strong>Child Mesh Group</strong>" and its "<strong>Root bone</strong>".<br>
+    Unlike the existing AnyPortrait system, this option allows limited scaling.<br>
+    Otherwise, it does not apply to <span class="text-danger"><strong>Root bones of a Root Mesh Group</strong></span>, <span class="text-danger"><strong>Child Mesh Groups without bones</strong></span>, or <span class="text-danger"><strong>Non-rigged Meshes</strong></span>.<br>
+    </p>
+    <br>
+    
+    <p>
+    The difference between the default method and the Non-Uniform Scale method is compared as follows.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_975.jpg"/>
+    <br>
+    
+    <p>
+    This is the default method.<br>
+    The image above shows the scale applied to the "<strong>Root Bone</strong>".<br>
+    When the X-axis scale of the <strong>Root Bone</strong> increases, the size of the bone's "<strong>Thickness</strong>" increases, not the scale of the X-axis as a whole.<br>
+    In the same way, as the Y-axis scale of the <strong>Root bone</strong> increases, the "<strong>Length</strong>" of the bones increases, which is a feature of this system.<br>
+    If the scale is reversed along the X or Y axis, the entire scale is reversed based on the direction of the <strong>Root Bone</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_976.jpg"/>
+    <br>
+    
+    <p>
+    This is the result of turning on the <strong>Non-Uniform Scale</strong> option and scale to "<strong>Child Mesh Group</strong>" with bones.<br>
+    As the X-axis scale of the <strong>Child Mesh Group</strong> increases, the bones and meshes as a whole increase to <strong>Left and Right</strong>,<br>
+    When the Y-axis scale of the <strong>Child Mesh Group</strong> increases, the bones and meshes as a whole are stretched <strong>Up and Down</strong>.<br>
+    If you reverse the scale, you can see that the scale is reversed along the X or Y axis based on the <strong>Child Mesh Group</strong>, rendering the intended result.<br>
+    </p>
+    <br>
+    
+    <p>
+    At first glance, the <strong>Non-Uniform Scale</strong> option seems to be able to solve all the problems related to the existing scale method.<br>
+    There are some problems, so you should only use this option when absolutely necessary.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Problems with the Non-Uniform Scale option</h4>
+    <br>
+    
+    <p>
+    The AnyPortrait system is designed to be less sensitive to scale changes so that bones and meshes in the game can be controlled directly by scripts or IK function.<br>
+    Conversely, the <strong>Non-Uniform Scale</strong> option causes problems when used with the corresponding functions.<br>
+    </p>
+    <br>
+    
+    <p>
+    - If the position, rotation, and scale of bones are controlled with <strong>scripts</strong>, the result may not be calculated normally.<br>
+    - <strong>IK</strong>, <strong>Jiggle bone</strong> may show different results than expected.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ReversedRiggedMesh.html">< Reversed scale of the Rigged Mesh</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_PSD.html">Importing a PSD File ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

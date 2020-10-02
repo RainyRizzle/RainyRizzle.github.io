@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/Script/SC_Timeline.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/Script/SC_Timeline.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/Script/SC_Timeline.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,8 +69,118 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.6</span></h4>
     
+    <p>
+    以下はユニティのタイムライン（Timeline）機能と連動するための関数です。<br>
+    これらの関数をAnyPortrait 1.1.6バージョンから使用することができます。<br>
+    タイムラインと連動する方法については、「<a href="../../jp/AdvancedManual/AD_Timeline.html">関連ページ</a>」を参照してください。<br>
+    </p>
+    <br>
+    
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>AddTimelineTrack</strong> <span class="text-muted">( </span><span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Playables</span><span class="text-muted">.</span><span class="text-success">PlayableDirector</span> <span class="text-muted">playableDirector,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">string</span> <span class="text-muted">trackName,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;タイムラインを連動するために 「Playable Director」と「Trackの名前」を「Track情報」として登録します。<br>
+    &nbsp;&nbsp;&nbsp;2つ以上の「Playable Director」や「Track」を登録することができます。<br>
+    &nbsp;&nbsp;&nbsp;共通「Playable Director」に対して「複数のTrack」を登録した場合、「マルチレイヤのアニメーション」と同じように処理されます。<br>
+    &nbsp;&nbsp;&nbsp;この時の層の順序と混合方式を設定することができます。<br>
+    &nbsp;&nbsp;&nbsp;別の「Playable Director」を登録した場合、現在再生中の「Playable Director」のうち1つだけで制御を受け取ります。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Playables</span><span class="text-muted">.</span><span class="text-success">PlayableDirector</span> playableDirector : 登録しようとするPlayable Director<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> trackName : Playable Directorのタイムラインと連動されるTrackの名前<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> layer : マルチレイヤで再生される時の層の順（デフォルトは0）<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> blendMethod : マルチレイヤで再生される時にアニメーション混合方式 (デフォルトは BLEND_METHOD.Additive)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">リターン</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : Playable Directorが存在しTrackの名前が有効な場合、trueを返し、そうでない場合はfalseを返し
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>RemoveInvalidTimelineTracks</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;現在有効でないすべてのTrackの情報を削除します。<br>
+    &nbsp;&nbsp;&nbsp;Playable Director、Timeline Asset、Trackこのシーンに存在していないなどの理由で連動が不可能な場合がこれに該当します。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>RemoveAllTimelineTracks</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;登録されたすべてのTrackの情報を削除します。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>UnlinkTimelinePlayableDirector</strong> <span class="text-muted">( </span><span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Playables</span><span class="text-muted">.</span><span class="text-success">PlayableDirector</span> <span class="text-muted">playableDirector )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;入力されたPlayable Directorと連動したすべてのTrackの情報を削除します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Playables</span><span class="text-muted">.</span><span class="text-success">PlayableDirector</span> playableDirector : 削除しようとするPlayable Director<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetTimelineEnable</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">isEnabled )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;タイムラインに連動して再生するかどうかを設定します。<br>
+    &nbsp;&nbsp;&nbsp;trueに入力された場合Playable Directorによって、アニメーションが再生され、falseが入力された場合Playable Directorに連動しません。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isEnabled : タイムラインに連動して再生されるかどうか<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
     <!-- 5. 바닥 네비바 -->
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">

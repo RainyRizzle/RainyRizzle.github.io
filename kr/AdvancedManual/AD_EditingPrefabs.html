@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_EditingPrefabs.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_EditingPrefabs.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_EditingPrefabs.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -67,22 +69,302 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.5</span></h4>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    유니티로 게임을 만드는 과정에서 프리팹(Prefab)은 중요한 역할을 합니다.<br>
+    게임 오브젝트를 리소스로 만들 수 있기 때문에 필수적으로 사용되는 기능입니다.<br>
+    이전버전까지의 AnyPortrait로 만든 캐릭터를 프리팹으로 저장할 때 몇가지 문제점이 있었습니다.<br>
+    그래서 v1.0.3 부터 프리팹에 대한 처리 방식이 변경되어 이 페이지에서 안내를 드립니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_198.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait로 만든 캐릭터를 프리팹으로 저장한 화면입니다.<br>
+    Hierarchy에서 푸른색 글씨로 변한 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_199.jpg"/>
+    <br>
+    
+    <p>
+    프리팹으로 저장된 캐릭터를 편집하려고 하면 안내 메시지가 나타납니다.<br>
+    AnyPortrait는 기본적으로 씬에 위치한 GameObject를 편집하는 방식으로 개발되어, 프리팹 상태일 경우 문제가 발생할 수 있기 때문입니다.<br>
+    확인 버튼을 누르면 프리팹과 연결이 끊기며, 일반적인 GameObject로 변환됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_200.jpg"/>
+    <br>
+    
+    <p>
+    다시 Hierarchy를 확인하면 푸른색이 아닌 기본색으로 바뀌어 있음을 확인할 수 있습니다.<br>
+    이 상태는 프리팹과 "연결이 끊긴" 상태이며, 완전히 프리팹 정보가 사라진 것은 아닙니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_201.jpg"/>
+    <br>
+    
+    <p>
+    모든 편집이 끝나면 Apply 버튼을 눌러서 프리팹으로 다시 저장하면 됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>주의</strong></span><br>
+    AnyPortrait로 편집하는 도중에 프리팹으로 강제로 변환하는 경우, 에디터에서 제대로 데이터를 저장하지 못할 수 있습니다.<br>
+    위에서 안내한 것과 같이, 편집 도중에는 프리팹 상태가 아니어야 합니다.<br>
+    그리고, 프리팹으로 다시 변환한 이후에 꼭 저장을 하셔야 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>프리팹 상태 UI (v1.2.5)</h3>
+    <br>
+    
+    <p>
+    저희 팀은 여러 사용자로부터 유니티 에디터상에서 프리팹을 다루는 것에 대해서 많은 피드백을 받았습니다.<br>
+    또한 <strong>Unity 2018.3</strong>에 추가된 새로운 방식의 프리팹 시스템이 AnyPortrait의 프리팹 관리 방식과 정상적으로 호환되지 않는 문제가 있었습니다.<br>
+    이러한 이유로, 프리팹을 AnyPortrait의 UI에서 직접 제어하여 <strong>Apply</strong> 또는 <strong>Disconnect</strong>를 할 수 있는 기능이 v1.2.5에 추가되었습니다.<br>
+    (기본적인 프리팹 관리 방식은 위의 설명과 같습니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_978.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 캐릭터가 <strong>프리팹 에셋(Prefab Asset)</strong>의 형태로 저장된 상태입니다.<br>
+    <strong>(2)</strong> 프리팹 에셋을 <strong>프리팹 인스턴스(Prefab Instance)</strong>로서 씬에 배치합니다.<br>
+    (프리팹 에셋 상태에서 편집할 수 없으므로, 항상 씬에 배치한 후 편집해주세요.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_979.jpg"/>
+    <br>
+    
+    <p>
+    기존과 마찬가지로 프리팹 인스턴스 상태에서 AnyPortrait 에디터를 열어서 편집을 해봅시다.<br>
+    <strong>(1)</strong> 프리팹 인스턴스 상태의 캐릭터를 선택하면,<br>
+    <strong>(2)</strong> 프리팹 상태에서는 편집이 될 수 없어서 자동으로 <strong>Disconnect</strong> 된다는 메시지가 나타납니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_980.jpg"/>
+    <br>
+    
+    <p>
+    캐릭터를 편집하고 Bake를 한 후, 다시 유니티 씬으로 돌아옵니다.<br>
+    <strong>(1)</strong> 프리팹 인스턴스였던 캐릭터를 선택합니다. Hierarchy에서 해당 캐릭터 GameObject의 이름이 <strong>푸른색</strong>이 아닌 <strong>검은색</strong>으로 바뀐 것을 볼 수 있습니다. 이것은 현재 프리팹 인스턴스가 아니거나 Disconnected 상태가 되었기 때문입니다.<br>
+    <strong>(2)</strong> v1.2.5에서 추가된 <span class="text-primary"><strong>프리팹 상태 UI</strong></span>를 Inspector에서 볼 수 있습니다.<br>
+    <strong>(3)</strong> 프리팹 상태 UI에 있는 <strong>Apply</strong> 버튼을 눌러서 다시 <strong>프리팹 원본과 연결된 상태</strong>로 만들어봅시다.<br>
+    (Unity 2018.3보다 이전 버전이라면 <strong>(4)</strong>와 같이 Inspector 상단의 Apply 버튼을 눌러도 됩니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_981.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Hierarchy에서의 GameObject들의 이름이 다시 <strong>푸른색</strong>으로 바뀌었습니다. 이제 "연결된 프리팹 인스턴스 상태"로 바뀐 것입니다.<br>
+    <strong>(2)</strong> 이것은 AnyPortrait의 <strong>프리팹 상태 UI</strong>에서도 확인할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_982.jpg"/>
+    <br>
+    
+    <p>
+    v1.2.5에 추가된 <strong>프리팹 상태 UI</strong>입니다.<br>
+    프리팹 인스턴스인 경우에만 이 UI가 Inspector에 나타납니다.<br>
+    원본인 <strong>프리팹 에셋</strong>과 동기화가 된 경우(Connected)에서는 위 이미지와 같이 푸른색으로 UI가 나타납니다.<br>
+    반대로, <strong>프리팹 에셋</strong>과 동기화가 되지 않은 경우(Disconnected 또는 Missing)에서는 아래의 이미지와 같이 붉은색의 UI가 나타납니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Source Prefab</strong> : 원본이 되는 프리팹 에셋입니다. 동기화가 되지 않았다면 어떤 상태인지 나타납니다.<br>
+    <strong>2. Root GameObject</strong> : 이 프리팹 인스턴스의 루트입니다. AnyPortrait로 제작된 GameObject 뿐만 아니라, 루트 GameObject를 기준으로 동기화를 할 수 있습니다.<br>
+    <strong>3. Apply</strong> : 프리팹 인스턴스의 변경 내역을 프리팹 에셋에 적용하여 동기화를 합니다. Revert를 하고자 하는 경우엔 유니티의 UI를 활용하거나 인스턴스를 삭제해주세요.<br>
+    <strong>4. Refresh</strong> : 프리팹 에셋과의 동기화 상태를 다시 갱신합니다.<br>
+    <strong>5. Disconnect</strong> : 프리팹 에셋과의 동기화를 해제합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Unity 2018.3에 도입된 새로운 프리팹 시스템</h3>
+    <br>
+    
+    <p>
+    Unity 2018.3에서는 새로운 프리팹 시스템이 도입되었습니다.<br>
+    이 버전부터는 기존과 다르게 프리팹을 더 다양한 방식으로 관리하고 편집할 수 있습니다.<br>
+    - <a href="https://docs.unity3d.com/kr/current/Manual/Prefabs.html" target="_sub">프리팹 메뉴얼 (유니티 공식 메뉴얼)</a><br>
+    </p>
+    <br>
+    
+    <p>
+    안타깝게도, 새로운 프리팹 시스템은 기존의 프리팹 시스템과 내부적으로 너무 큰 차이를 가지고 있어서,<br>
+    AnyPortrait의 기존의 방식은 새로운 프리팹 시스템에 대해 호환성을 가질 수 없었습니다.<br>
+    프리팹 인스턴스 상태를 유지하면서 AnyPortrait 에디터로 편집하는 것은 불가능했으며, 오직 편집된 캐릭터를 프리팹 에셋으로 덮어쓰는 방법만 유효했습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    하지만 위에서 소개된 <strong>프리팹 상태 UI</strong>를 이용하여 프리팹 에셋과의 연결 정보를 가능한 유지한 상태에서 동기화를 하는 것이 가능해졌습니다.<br>
+    v1.2.5에서 기존의 방식과 다르게 어떻게 개선되었는지 아래의 설명을 확인해보세요.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_983.jpg"/>
+    <br>
+    
+    <p>
+    새로운 프리팹 시스템에서의 화면입니다.<br>
+    <strong>(1)</strong> 원본이 되는 <strong>프리팹 에셋</strong>입니다.<br>
+    <strong>(2)</strong> 프리팹 에셋을 씬에 배치한 <strong>프리팹 인스턴스</strong>입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_984.jpg"/>
+    <br>
+    
+    <p>
+    프리팹 인스턴스를 선택하고 AnyPortrait 에디터로 편집하려고 하면, 기존과 마찬가지로 프리팹 에셋과의 연결이 해제된다는 메시지가 나타납니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_985.jpg"/>
+    <br>
+    
+    <p>
+    Bake를 실행하고 유니티 씬으로 돌아오면 <strong>프리팹 에셋과의 연결</strong>이 해제되었으며, <strong>프리팹 인스턴스</strong> 상태가 아닌 것을 볼 수 있습니다.<br>
+    이 상태는 <strong>프리팹 원본과의 연결 정보가 없는 상태</strong>이기 때문에, 기존의 방식에서는 다시 프리팹 에셋을 만들거나 덮어씌워야 했습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_986.jpg"/>
+    <br>
+    
+    <p>
+    하지만 AnyPortrait 캐릭터를 선택하고 Inspector를 확인해보면 "<strong>프리팹 상태 UI</strong>"가 나타난 것을 볼 수 있습니다.<br>
+    AnyPortrait에서는 "<strong>마지막 프리팹 연결 정보</strong>"가 기록되어, 사용자들에게 프리팹 동기화 기능들을 제공합니다.<br>
+    (실제로는 유니티에서는 <strong>프리팹 연결 정보</strong>가 모두 없어져서 일반적인 GameObject로 돌아간 상태입니다.)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>프리팹 상태 UI</strong>에서 <strong>(2)</strong> <strong>Apply 버튼</strong>을 눌러봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_987.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> GameObject들이 다시 프리팹 인스턴스로 복구되었으며, 편집된 캐릭터가 프리팹 에셋으로 적용되어 동기화가 완료된 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_988.jpg"/>
+    <br>
+    
+    <p>
+    Unity 2018.3 및 이후 버전에서는 AnyPortrait로 편집된 캐릭터에 대해서 프리팹 연결 정보가 내부적으로 유지 되지 않지만,<br>
+    AnyPortrait 자체에서 프리팹 연결 정보를 별도로 기록하여 동기화를 할 수 있습니다.<br>
+    반대로, 프리팹 연결 정보를 해제할 수도 있는데, 다음의 두가지 방식이 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Disconnect</strong> 버튼을 누르면 프리팹 에셋과의 동기화를 해제합니다. 하지만 연결 정보는 삭제하지 않으므로 다시 Apply를 눌러서 동기화를 수행할 수 있습니다.<br>
+    <strong>(2)</strong> <strong>Clear</strong> 버튼을 누르면 프리팹 에셋과의 동기화를 해제하면서 연결 정보를 완전히 삭제합니다. 이제 이 GameObject는 프리팹 인스턴스로서의 역할을 완전히 상실합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>주의 사항</strong></span><br>
+    <strong>1.</strong> 이 방식은 유니티에서 제공하는 기능이 아닌 AnyPortrait 자체의 기능이므로, 프리팹 원본의 변경사항이 있을 경우 올바르게 동작하지 않을 수 있습니다.<br>
+    <strong>2.</strong> 별도의 방식으로 연결 정보를 기록하는 만큼, AnyPortrait v1.2.5로 업데이트 한 직후에는 프리팹 인스턴스로 복구할 수 없을 수 있습니다. 이 경우엔 프리팹 에셋을 다시 만들거나 덮어 씌워서 동기화를 한 이후에 프리팹 인스턴스를 만들어주세요.<br>
     </p>
     <br>
     
     
     <br><br>
     
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <p>
+    <strong>새로운 프리팹 시스템</strong>의 가장 큰 특징 중 하나는 "<strong>프리팹 원본을 직접 편집</strong>"할 수 있다는 것입니다.<br>
+    하지만, 이 시스템의 일부 기능들은 안정화되지 못한 부분이 있어서, 저희 팀이 완벽히 대응할 수 없었습니다.<br>
+    따라서 현재로는 프리팹 원본을 대상으로 AnyPortrait 에디터에서 편집하는 것은 제한됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_989.jpg"/>
     <br>
     
     <p>
-    본문 입력<br>
+    <strong>(1)</strong> <strong>프리팹 에셋 원본</strong>을 선택하고, 프리팹 원본을 편집할 수 있는 상태로 전환합니다.<br>
+    <strong>(2)</strong> 프리팹 내부의 AnyPortrait 캐릭터를 선택합니다.<br>
+    <strong>(3)</strong> 프리팹 에셋 원본이므로 <strong>에디터를 열 수 없다는 메시지</strong>가 나타납니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    위와 같은 메시지는 Unity 2020.1 부터 나타나며, Unity 2018.3부터 Unity 2020.1 사이의 버전에서는 해당 메시지가 나타나지 않습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    하지만 이것은 해당 버전에서 "<span class="text-danger"><strong>프리팹 에셋인지 프리팹 인스턴스인지 구분할 수 없기 때문</strong></span>"에 AnyPortrait로 편집할 수 있는 것처럼 보여질 뿐이며, 실제로 프리팹 원본을 편집하면 여러가지 문제들이 발생할 수 있습니다.<br>
+    따라서 항상 아래와 같은 방법으로만 프리팹을 편집하시길 바랍니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_990.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 편집하고자 하는 <strong>프리팹 에셋</strong>을 선택하고 씬으로 배치합니다.<br>
+    <strong>(2)</strong> 씬에 배치된 <strong>프리팹 인스턴스</strong>를 선택하면 에디터로 편집하거나 Bake를 할 수 있습니다.<br>
+    <strong>(3)</strong> <strong>Bake</strong>를 하거나 <strong>Refresh Meshes</strong> 버튼을 눌러서 렌더링된 캐릭터를 확인한 후, <strong>다시 동기화</strong>를 하시길 바랍니다.<br>
     </p>
     <br>
     

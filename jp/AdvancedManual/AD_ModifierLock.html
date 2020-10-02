@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ModifierLock.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ModifierLock.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_ModifierLock.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,174 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.2</span></h4>
+    
+    <p>
+    複数のモディファイアの登録と編集は、AnyPortraitの機能です。<br>
+    しかし、複数のモディファイアを同時に変更すると、多くの問題が発生する可能性があります。<br>
+    したがって、「編集モード」では、モディファイアを1つだけ変更することに制限されています。<br>
+    ただし、編集中に複数のモディファイアを実行することもできます。<br>
+    これを制御する方法を「<strong>モディファイアロック (Modifier Lock)</strong>」といいます。<br>
+    このページには、モディファイアロック機能の詳細が記載されています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_161.jpg"/>
+    <br>
+    
+    <p>
+    たとえば、既存のチュートリアルに「<strong>Transform (Controller)</strong>」のモディファイアを追加しました。<br>
+    このモディファイアは、制御パラメータに基づいて、「Head Bone」および「Neck Bone」を移動します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_162.jpg"/>
+    <br>
+    
+    <p>
+    アニメーションの制御パラメータのタイムラインを追加しました。<br>
+    制御パラメータを使用して、走るキャラクターが右図のように上を見てみましょました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_163.jpg"/>
+    <br>
+    
+    <p>
+    今度はいつものようにアニメーションを編集しましょう。<br>
+    <strong>(1)</strong> <strong>編集モード</strong>をオンにし、<strong>(2)</strong> 「<strong>Transform (Animation)</strong>」のキーフレームを選択します。<br>
+    <strong>(3)</strong> に示すように頭を回転させる処理は<span class="text-danger">無視</span>され、「<strong>Transform (Animation)</strong>」モディファイアのみが処理される。<br>
+    モディファイアロックルールによれば、他のモディファイアは編集モードでは実行されません。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>モディファイアロックのルール</h3>
+    <br>
+    
+    <p>
+    <strong>1. Lock Mode</strong><br>
+    - 選択したモディファイア以外のすべてのモディファイアは実行されません。<br>
+    - 「Rigging」モディファイアが実行されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Unlock Mode</strong><br>
+    - モディファイアは、選択したモディファイアと同じでないか、または同時に編集できない限り実行されます。<br>
+    - これは、同じ 「Transform」シリーズのモディファイアである場合、または同じ 「Morph」シリーズのモディファイアである場合に当てはまります。<br>
+    - 「Transform」シリーズでモディファイアを選択すると、 「Physics」モディファイアが実行されます<br>
+    - 「Rigging」モディファイアが実行されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_164.jpg"/>
+    <br>
+    
+    <p>
+    モディファイアロックの詳細設定ウィンドウを開きましょう。<br>
+    <strong>(1)</strong>&nbsp;&nbsp;<kbd>Ctrl</kbd> を押しながら「<strong>モディファイアロック (Modifier Lock)</strong>」ボタンをクリックします。 (Mac OSXでは、これが <kbd>Command</kbd> です。)<br>
+    <strong>(2)</strong> モディファイアのロック/アンロック状態を設定するための詳細設定ウィンドウが表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_165.jpg"/>
+    <br>
+    
+    <p>
+    モディファイアの詳細設定。<br>
+    <strong>1. Lock Mode</strong> : これはモディファイアがロックされているモードです。<br>
+    <strong>2. Unlock Mode</strong> : これはモディファイアがロック解除されているモードです。<br>
+    <strong>3. Calculating transformations of unregistered objects</strong> :<br>
+    現在修正中のモディファイアに登録されていないオブジェクトは、「修飾子ロックのルール」の影響を受けなくてもされます。<br>
+    この設定を使用すると、登録されていないオブジェクトにのみ、すべてのモディファイアの計算が行われます。<br>
+    <strong>4. Render Calculated Colors</strong> : 色属性に「モディファイヤロックルール」を適用していません。<br>
+    <strong>5. Preview Calculated Bones</strong> : すべてのモディファイヤが適用された骨をプレビューすることができます。<br>
+    <strong>6. Show Modifier List</strong> :<br>
+    現在処理中のモディファイアリストが画面の左側に表示されます。<br>
+    モディファイアの計算ステータスを確認することができます。<br>
+    <strong>7. Bone Preview Color</strong> : 「Preview Calculated Bones」プロパティがオンの場合の出力の色です。<br>
+    <strong>8. Restore Settings</strong> : すべての設定をデフォルト値に戻します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_166.jpg"/>
+    <br>
+    
+    <p>
+    「モディファイアロック」の設定が変更されました。<br>
+    あなたは便利な方法でそれを設定することができます。<br>
+    設定は自動的に保存されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_167.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Preview Calculated Bones</strong>」設定を有効にすると、このアウトラインが追加で表示されます。<br>
+    <strong>(1)</strong> 「<strong>Head Bone</strong>」の輪郭が表示されるので、<br>
+    右の画像のように表示される最終的な結果をプレビューすることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_168.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Show Modifier List</strong>」の設定を有効にすると、モディファイヤのリストが画面の左側に表示されます。<br>
+    モディファイヤスタックの処理順序で出力されます。<br>
+    <strong>(1)</strong> モディファイヤのアイコンと名前です。編集中のモディファイヤは、黄色の文字で出力され、左側に小さなアイコンが追加されます。<br>
+    <strong>(2)</strong> モディファイヤの計算状態です。<br>
+    モディファイヤが実行され、編集中に適用される場合は、「<strong>光る電球</strong>」アイコンが表示されます。<br>
+    モディファイヤが実行されてなくてロックされている場合、「<strong>光らない電球</strong>」アイコンが表示されます。<br>
+    いくつかのオブジェクトにのみ適用される場合は、「<strong>少し明るい電球</strong>」アイコンが表示されます。<br>
+    <strong>(3)</strong> モディファイアがメッシュの色を決定すると、色のプロパティを操作するかどうかをアイコンとして表示します。<br>
+    ロックされていると、黒色のアイコンが表示されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_169.jpg"/>
+    <br>
+    
+    <p>
+    これは、 「<span class="text-danger"><strong>Modifier Lock</strong></span>」ボタンを押すか、  <kbd>D</kbd> を押して 「モディファイアロック」の状態を切り替えた後の モディファイアのリストです。<br>
+    「Transform (Animation)」モディファイアを除いて、モディファイアが実行されないことがわかります。<br>
+    (「Rigging」モディファイアは同時に実行されており、「モディファイアロック」の設定によっては上記の画面と多少異なる場合があります。)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_170.jpg"/>
+    <br>
+    
+    <p>
+    メッシュグループの モディファイアとアニメーションを編集しながら <strong>(1)</strong>  <kbd>Ctrl</kbd> を押しながら同じボタンをクリックして設定ウィンドウを呼び出すことができます。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

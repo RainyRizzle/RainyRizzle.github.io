@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_JiggleBone.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_JiggleBone.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_JiggleBone.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -68,6 +70,131 @@
     
     <!-- 4. 버전 설명 -->
     <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_946.jpg"/>
+    <br>
+    
+    <p>
+    <strong>"Jiggle Bone"</strong> refers to a bone that moves as if it is in reality with the addition of a physics effect.<br>
+    In particular, AnyPortrait's Jiggle Bone supports physical effects by "inertia" and "air resistance".<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortrait's Jiggle Bone has the following characteristics:<br>
+    - Resistance and inertia are calculated by detecting the position of the end point of the bone in real time.<br>
+    - Jiggle bones do not work for "Helper" or zero length bones.<br>
+    - "The position change" includes both "position change in the Unity scene" and "position change by animation".<br>
+    - If you set the Jiggle bone with creating the basic shape with animation, the quality will be further improved.<br>
+    - Gravity is not applied. If you want to reproduce gravity, make an animation to express "shape when gravity is applied" and apply a Jiggle bone.<br>
+    - IK chain does not need to be activated, this feature can be applied to only one bone.<br>
+    - Jiggle bones will not work if the physics effect of apPortrait is disabled by script(SetPhysicEnabled(bool)), or if the Important option is off.<br>
+    - When Jiggle bones are applied to successive bones, they tend to shake more sensitively.<br>
+    - Depending on the performance of the AnyPortrait Editor, simulation results may be somewhat inaccurate. So, it is recommended to test in the Unity scene.<br>
+    - When recording video with the screen capture function, if you turn on the physics effect, the Jiggle bone is applied and recorded. However, there may be some differences from the simulation in the Unity scene.<br>
+    - Movement by physical collision is not supported.<br>
+    </p>
+    <br>
+    
+    <p>
+    This page covers how to make "<strong>long hair move naturally</strong>" and quickly with Jiggle Bone like the image above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_947.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the <strong>Mesh Group</strong>.<br>
+    <strong>(2)</strong> Select the <strong>Bone tab</strong>.<br>
+    <strong>(3)</strong> <strong>Select the bone</strong> you want to apply the Jiggle bone to.<br>
+    <strong>(4)</strong> Press the <strong>"Jiggle Bone" button</strong> to turn it <strong>ON</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_948.jpg"/>
+    <br>
+    
+    <p>
+    When the Jiggle bone setting is activated, the properties appear as above.<br>
+    <strong>1. Mass</strong> : The higher the value, the slower and heavier the movement.<br>
+    <strong>2. K-Value</strong> : This is the property to return to the original form. The larger the value, the faster and more elastically restored.<br>
+    <strong>3. Air Drag</strong> : It is the degree of receiving air resistance and has a value between 0 and 1. The larger the value, the more sensitive it is to external movements and the larger the movement. This value determines the overall degree of application of the JIggle bone effect.<br>
+    <strong>4. Damping</strong> : The larger this value, the shorter the shaking time and the faster it is restored to its original shape. Unlike K-Value, if this value is large, elasticity decreases.<br>
+    <strong>5. Constraint ON/OFF</strong> : You can limit the angle of swing. If not restricted, the bone rotates with a value between -180 and +180 degrees.<br>
+    <strong>6. Reset Value Button</strong> : Initialize property values.<br>
+    <strong>7. Test Button</strong> : Pressing this button exerts the same random force on all Jiggle bones. You can test the property values.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_949.jpg"/>
+    <br>
+    
+    <p>
+    Let's limit the rotation range.<br>
+    <strong>(1)</strong> Press the <strong>Constraint button</strong> to switch to the <strong>ON</strong> state and set the angle.<br>
+    <strong>(2)</strong> The rotation range of the bone in the work space is indicated by a yellow line.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now, the Jiggle bone will swing within the specified angle.<br>
+    However, this angle is the maximum range, and actually, the speed starts to decrease from about 70% of the range for natural movement.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_950.jpg"/>
+    <br>
+    
+    <p>
+    Let's apply the Jiggle bone attribute to other bones.<br>
+    You can select multiple bones and apply Jiggle bones at once.<br>
+    <strong>(1)</strong> Select all target bones. (You can select multiple bones by pressing Ctrl or Shift.)<br>
+    <strong>(2)</strong> You can set the Jiggle bone at once on the right UI.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_951.jpg"/>
+    <br>
+    
+    <p>
+    You can test the Jiggle bone right away.<br>
+    <strong>(1)</strong> Turn off <strong>Bone Edit Mode</strong>. (In Bone Edit Mode, the Jiggle bones are disabled and the Test button cannot be pressed.)<br>
+    <strong>(2)</strong> Press the <strong>Test button</strong>.<br>
+    <strong>(3)</strong> You can see all Jiggle bones moving.<br>
+    You can conveniently adjust the physical properties using the Test function.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_952.jpg"/>
+    <br>
+    
+    <p>
+    Now when you play the animation on the <strong>Root Unit</strong> or on the <strong>Animation</strong> editing screen, you can see the character moving with the Jiggle bone applied.<br>
+    If you <strong>turn off the Physics Effect</strong> as above in the workspace, Jiggle bones will not be applied.<br>
+    After Bake, test your character's Jiggle bone in the Unity scene!<br>
+    </p>
+    <br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/0NVUzoy-oDg" allowfullscreen></iframe>
+    </div>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

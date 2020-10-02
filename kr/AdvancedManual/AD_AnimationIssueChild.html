@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_AnimationIssueChild.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_AnimationIssueChild.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_AnimationIssueChild.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -67,22 +69,132 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.8</span></h4>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    메시 그룹은 다른 메시 그룹을 <strong>자식으로 등록</strong>하여 제어할 수 있습니다.<br>
+    이 기능은 매우 편리하지만, 간혹 몇가지 문제를 일으킬 수 있습니다.<br>
     </p>
     <br>
     
-    
-    <br><br>
-    
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <p>
+    대표적인 경우는 <strong>애니메이션이 제대로 실행되지 않는다는 것</strong>입니다.<br>
+    이 문제는 <span class="text-danger"><strong>애니메이션 클립이 자식 메시 그룹과 연결되어 있을 때</strong></span> 발생합니다.<br>
+    AnyPortrait의 애니메이션 클립은 그 대상이 <strong>루트 유닛(Root Unit)</strong>일 때에만 유효하며, 루트 유닛이 될 수 없는 자식 메시 그룹의 애니메이션은 Bake시 무시됩니다.<br>
+    그러므로 원칙적으로는 <strong>애니메이션 클립</strong>은 <strong>자식 메시 그룹</strong>을 대상으로 삼을 수 없습니다.<br>
+    하지만 다음의 순서로 "애니메이션 클립과 연결된 자식 메시 그룹"이 존재할 수 있습니다.<br>
+    <strong>1)</strong> 메시 그룹에 애니메이션 모디파이어를 추가하고 애니메이션 클립을 생성하여 연결합니다.<br>
+    <strong>2)</strong> 애니메이션이 작성된 메시 그룹을 다른 메시 그룹의 자식으로 등록합니다.<br>
+    </p>
     <br>
     
     <p>
-    본문 입력<br>
+    만약, 이미 애니메이션을 만든 상태에서 대상이 되는 메시 그룹을 다른 메시 그룹의 자식으로 등록한다면, <br>
+    열심히 제작한 애니메이션은 Bake 대상도 되지 않을 뿐더러 정상적으로 구동되지도 않을 것입니다.<br>
+    v1.1.8에서 <strong>애니메이션의 대상</strong>을 "<strong>부모 메시 그룹</strong>"으로 변경할 경우, 애니메이션 데이터가 유지되는 기능이 추가되었습니다.<br>
+    이 페이지에서는 문제가 발생하는 상황과 해결 방법에 대해서 다룹니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_780.jpg"/>
+    <br>
+    
+    <p>
+    애니메이션이 제작된 일반적인 예제입니다.<br>
+    메시 그룹에 <strong>Transform (Animation) 모디파이어</strong>가 등록되어 있으며, "<strong>Idle</strong>"라는 이름의 <strong>애니메이션</strong>이 제작된 상태입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_781.jpg"/>
+    <br>
+    
+    <p>
+    부모 메시 그룹을 만들어봅시다.<br>
+    <strong>(1)</strong> <strong>"Parent Mesh Group"</strong>이라는 이름의 <strong>새로운 메시 그룹</strong>을 만듭니다.<br>
+    <strong>(2)</strong> <strong>"+" 버튼</strong>을 누릅니다.<br>
+    <strong>(3)</strong> <strong>Mesh Group 탭</strong>을 선택합니다.<br>
+    <strong>(4)</strong> <strong>애니메이션이 제작된 원래의 메시 그룹</strong>을 선택합니다.<br>
+    <strong>(5)</strong> <strong>Add 버튼</strong>을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_782.jpg"/>
+    <br>
+    
+    <p>
+    자식 메시 그룹으로 추가할 때 <strong>경고 메시지</strong>가 나타납니다.<br>
+    위에서 언급된 "<strong>애니메이션이 있는 자식 메시 그룹</strong>"에 관련된 메시지 입니다.<br>
+    (만약 이 단계에서 자식 메시 그룹으로 등록하지 않으려면, <strong>Detach</strong>를 실행하여 자식 메시 그룹에서 제외시키면 됩니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_783.jpg"/>
+    <br>
+    
+    <p>
+    기존의 메시 그룹이 "Parent Mesh Group"의 <strong>자식 메시 그룹</strong>으로 등록되었습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_784.jpg"/>
+    <br>
+    
+    <p>
+    애니메이션 클립을 선택하면 <strong>Target Mesh Group의 항목</strong>이 "Invalid Mesh Group"라는 텍스트와 함께 붉은색으로 바뀌어있습니다.<br>
+    대상이 되는 메시 그룹이 "자식 메시 그룹"이기 때문입니다.<br>
+    이 애니메이션 클립은 Bake의 대상이 되지 않고, 편집이 정상적으로 되지 않을 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_785.jpg"/>
+    <br>
+    
+    <p>
+    이 애니메이션 데이터를 부모인 "Parent Mesh Group"으로 이전해봅시다.<br>
+    <strong>(1)</strong> <strong>Change 버튼</strong>을 누릅니다.<br>
+    <strong>(2)</strong> 메시 그룹 리스트 중에서 현재 메시 그룹의 "<strong>부모 메시 그룹</strong>"을 선택합니다. 여기서는 "<strong>Parent Mesh Group</strong>"이 되겠습니다.<br>
+    <strong>(3)</strong> <strong>Select 버튼</strong>을 누릅니다.<br>
+    <strong>(4)</strong> 애니메이션 데이터가 이전된다는 메시지가 나옵니다. <strong>Keep data 버튼</strong>을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_786.jpg"/>
+    <br>
+    
+    <p>
+    애니메이션의 대상 메시 그룹이 <strong>부모 메시 그룹으로 변경</strong>되었습니다.<br>
+    애니메이션 정보가 그대로 유지되며, 정상적으로 편집 및 재생이 됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>주의</strong></span><br>
+    자식 메시 그룹에서 부모 메시 그룹으로 전환 하는 경우를 제외하면, 대상 메시 그룹을 변경할 때 애니메이션은 <strong>초기화</strong>됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_787.jpg"/>
+    <br>
+    
+    <p>
+    부모 메시 그룹을 선택하면, <strong>Transform (Animation) 모디파이어</strong>가 자동으로 생성되었으며, <br>
+    <strong>"Idle" 애니메이션 클립</strong>이 등록되어있는 것을 볼 수 있습니다.<br>
     </p>
     <br>
     

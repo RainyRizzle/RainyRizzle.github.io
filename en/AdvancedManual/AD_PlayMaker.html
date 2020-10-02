@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_PlayMaker.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_PlayMaker.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_PlayMaker.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,262 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.6</span></h4>
+    
+    <p>
+    <strong>PlayMaker™</strong> is a Finite-State Machine (FSM) based Unity Editor asset created by <strong>Hutong Games™</strong>.<br>
+    You can quickly build your game using <strong>PlayMaker™</strong> without writing scripts.<br>
+    For those who create games using PlayMaker™, we create and distribute AnyPortrait scripting functions as "custom actions".<br>
+    This page does not cover how to use PlayMaker™, but briefly describes how to apply custom actions to interact with AnyPortrait and PlayMaker™.<br>
+    - <a href="https://www.hutonggames.com" target="_sub">Hutong Games™ Homepage</a><br>
+    - <a href="https://assetstore.unity.com/packages/tools/visual-scripting/playmaker-368" target="_sub">PlayMaker™ Asset Store Page</a><br>
+    </p>
+    <br>
+    
+    <p>
+    First, download the "AnyPortrait-PlayMaker Custom Action Package" from the following link and import it into the Unity project.<br>
+    <strong>Latest version (based on v1.1.6)</strong><br>
+    - <a href="https://docs.google.com/uc?id=1Z9ElyxVx524xU2FiRenXGZodWcYsmz9Z&amp;export=download" target="_sub">Download the AnyPortrait-PlayMaker Custom Action Package (build May 18, 2019)</a><br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>Previous version</strong><br>
+    - <a href="https://docs.google.com/uc?id=1dxjI1Xtgcd96DwljZL6A1rXI9NqdlW2U&amp;export=download" target="_sub">Download AnyPortrait-PlayMaker Custom Action Package (January 9, 2019 build)</a> <br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>Caution</strong><br>
+    - This package is not an official package made by Hutong Games™, it is a package made by the RainyRizzle team.<br>
+    - Optimized for "AnyPortrait v1.1.5" and "PlayMaker™ v1.9.0".<br>
+    - AnyPortrait and PlayMaker™ must be installed in the project first.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_445.jpg"/>
+    <br>
+    
+    <p>
+    Install <strong>(1)</strong> <strong>AnyPortrait</strong>, <strong>(2)</strong> <strong>PlayMaker™</strong>, and <strong>(3)</strong> <strong>AnyPortrait-PlayMaker Custom Action Package</strong>.<br>
+    Select the GameObject to which you want to add the FSM of PlayMaker™, then launch <strong>PlayMaker Editor</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_446.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Right-click</strong> in the empty space of PlayMaker Editor.<br>
+    <strong>(2)</strong> Click the <strong>Add FSM</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_447.jpg"/>
+    <br>
+    
+    <p>
+    FSM was created and "State 1" was added by default.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_448.jpg"/>
+    <br>
+    
+    <p>
+    Here, as an example, let's call the Initialize<strong>()</strong> function of AnyPortrait as a custom action.<br>
+    This function is automatically executed in the first frame that is updated, so you do not have to implement it except in special cases.<br>
+    However, in order to test custom actions in PlayMaker ™, let's call this function directly.<br>
+    <strong>(1)</strong> Click <strong>State 1</strong>.<br>
+    <strong>(2)</strong> Select the <strong>State tab</strong>.<br>
+    <strong>(3)</strong> Click the <strong>Action Browser</strong> button to open the Action list.<br>
+    <strong>(4)</strong> Select <strong>"Portrait Initialize"</strong> action by expanding <strong>"AnyPortrait"</strong> category among various actions of PlayMaker.<br>
+    <strong>(5)</strong> Press the <strong>Add Action To State</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_449.jpg"/>
+    <br>
+    
+    <p>
+    An error may occur if the FSM generated GameObject does not contain apPortrait.<br>
+    <strong>(1)</strong> Click the <strong>"Use Owner" drop-down menu</strong> of the Game Object item, and <strong>(2)</strong> select <strong> "Specify Game Object"</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_450.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Drag</strong> the <strong>GameObject containing apPortrait</strong> and move it to the <strong>"None (Game Object)"</strong> slot.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_451.jpg"/>
+    <br>
+    
+    <p>
+    Now the error disappears and apPortrait, which is controlled by PlayMaker ™, is connected.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_452.jpg"/>
+    <br>
+    
+    <p>
+    To test the PlayMaker™ event functions, turn on the Asynchronous Initialization setting.<br>
+    <strong>(1)</strong> Check the <strong>"Is Async"</strong> option to <strong>turn on</strong> the asynchronous function.<br>
+    <strong>(2)</strong> Click the <strong>Async Initialize Event</strong> item, and then click the <strong>New Event</strong> menu.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_453.jpg"/>
+    <br>
+    
+    <p>
+    Sets the name of the new event.<br>
+    I set it to <strong>OnAsyncInitialized</strong> here.<br>
+    Name it and press the <strong>Create Event</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_454.jpg"/>
+    <br>
+    
+    <p>
+    An error icon appears because an event has been created but the behavior of the event has not yet been defined in State 1.<br>
+    <strong>(1)</strong> <strong>Right-click State 1</strong>.<br>
+    <strong>(2)</strong> Select the <strong>Newly added event</strong> of <strong>Add Transition</strong> (<strong>OnAsyncInitialized</strong> in this example).<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_455.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> <strong>Right-click</strong> in the empty space of the editor and click <strong>Add State</strong> to create a new state.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_456.jpg"/>
+    <br>
+    
+    <p>
+    If you <strong>click the event</strong> and <strong>drag it to the newly added state</strong>, an arrow will appear and the connection will be made.<br>
+    Now, when the asynchronous initialization is complete, the OnAsyncInitialized event will be triggered, moving from State 1 to State 2.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_457.jpg"/>
+    <br>
+    
+    <p>
+    In State 2, let's apply one of the various functions of AnyPortrait, <strong>"Change the color of the mesh"</strong>.<br>
+    <strong>(1)</strong> Select <strong>State 2</strong>.<br>
+    <strong>(2)</strong> Press the <strong>Action Browser</strong> button.<br>
+    <strong>(3)</strong> In the <strong>AnyPortrait category</strong>, select the <strong>"Portrait Mesh Set Color"</strong> action.<br>
+    <strong>(4)</strong> Press the <strong>Add Action To State</strong> button.<br>
+    <strong>(5)</strong> <strong>"Portrait Mesh Set Color"</strong> action has been added to State 2.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_458.jpg"/>
+    <br>
+    
+    <p>
+    I changed the setting of the added "Portrait Mesh Set Color" action as follows.<br>
+    - <strong>Game Object</strong> has been changed to be <strong>an object (Runner) with apPortrait</strong>.<br>
+    - <strong>Color</strong> changed to <strong>Red</strong>.<br>
+    - Turn off <strong>Apply To All</strong> and set <strong>Transform Name</strong> to <strong>"Hair"</strong>, the name of the hair mesh.<br>
+    - No other settings have been changed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_459.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you see that the hair turns red after the asynchronous initialization is done.<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>About AnyPortrait-PlayMaker Custom Actions</h4>
+    <br>
+    
+    <p>
+    1. Relationship between Script Functions and Custom Action Package<br>
+    This custom action package contains most of AnyPortrait's scripting functions.<br>
+    When you select custom actions in the Action Browser, the description shows which functions are implemented, respectively.<br>
+    For the script functions of AnyPortrait, please refer to <a href="../../en/Script.html">Related page</a>.<br>
+    </p>
+    <br>
+    
+    <p>
+    2. When using Mecanim<br>
+    If you use animations with Mecanim, AnyPortrait's animation custom actions will not work.<br>
+    (Script functions also do not work when using Mecanim.)<br>
+    Please use the actions of the Animator category.<br>
+    </p>
+    <br>
+    
+    <p>
+    3. Issues that may arise when using custom actions<br>
+    If PlayMaker™ or AnyPortrait is updated, there may be a problem or a failure to include new features.<br>
+    As you build your game, you may need additional custom action features.<br>
+    Since this custom action package is produced and distributed by RainyRizzle, please contact RainyRizzle homepage.<br>
+    - <a href="https://www.rainyrizzle.com/anyportrait-report-eng">Go to the Report page</a><br>
+    </p>
+    <br>
+    
+    <p>
+    4. Copyright<br>
+    <strong>AnyPortrait</strong> is copyrighted by <strong>RainyRizzle</strong>.<br>
+    <strong>PlayMaker™</strong> is copyrighted by <strong>Hutong Games™</strong>.<br>
+    <strong>AnyPortrait-PlayMaker Custom Action Package</strong> is copyrighted <strong>RainyRizzle</strong> and can be modified and redistributed.<br>
+    However, distribution may be suspended or restricted at the request of <strong>Hutong Games™</strong>.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

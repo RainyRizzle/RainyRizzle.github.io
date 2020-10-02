@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_AnimationEvents.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_AnimationEvents.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_AnimationEvents.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,270 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    ゲームに応じて、アニメーションのある時点で、キャラクターは何らかの相互作用を必要とします。<br>
+    走るキャラクターがジャンプをしたときに土ぼこりが発生したり、キャラクターが振るう剣がモンスターを殴ることもできます。<br>
+    このページでは、「<strong>アニメーションイベント (Animation Event)</strong>」関数を使用して、スクリプトと対話する方法を学習します。<br>
+    (C＃スクリプトを含む。)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_122.jpg"/>
+    <br>
+    
+    <p>
+    アニメーションのプロパティUIで、「<strong>Animation Events」</strong>ボタンをクリックして、アニメーションイベントを登録するダイアログを開きます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>アニメーションイベントを追加し、それらをスクリプトに関連付け</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_123.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>「Add Event」ボタン</strong>をクリックして新しいイベントを追加します。<br>
+    <strong>(2)</strong> <strong>イベント名を設定し</strong>、呼び出すフレームを入力します。<br>
+    イベントの名前はスクリプトとリンクされているので、その時の名前を覚えておいてください。<br>
+    私はここで 「<span class="text-danger"><strong>SampleAnimEvent</strong></span>」として作成しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_124.jpg"/>
+    <br>
+    
+    <p>
+    アニメーションイベントが追加されると、タイムラインGUIに「<strong>イベントマーカー (Event Marker)</strong>」が追加されたことがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_125.jpg"/>
+    <br>
+    
+    <p>
+    「Bake」とシーンを開きます。<br>
+    イベントに関連付けるスクリプトを作成します。<br>
+    <strong>(1)</strong> スクリプトを格納する「<strong>GameObject</strong>」を作成します。 (それは新しいものである必要はなく、スクリプトを含む 「GameObject」のどれかでもかまいません。)<br>
+    <strong>(2)</strong> <strong>「MonoBehaviour」</strong>スクリプトを作成して追加します。<br>
+    </p>
+    <br>
+    
+    <p>
+    次のコードを記述します：<br>
+    上で作成したアニメーションイベントの名前は「<span class="text-danger"><strong>SampleAnimEvent</strong></span>」です。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using </span>UnityEngine;<br>
+    <span class="text-primary">public class </span><span class="text-success">AnimEventListener</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start() { }<br>
+    &emsp;&emsp;<span class="text-primary">void</span> SampleAnimEvent()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Sample Anim Event"</span>);<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    上のコードでわかるように、作成されたアニメーションイベントと同じ名前の関数を呼び出します。<br>
+    したがって、アニメーションイベントとスクリプトは同じ名前と同じ引数を持つ必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_126.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターを選択すると、InspectorにapPortraitプロパティが表示されます。<br>
+    スクリプトがイベントを受信させるには、作成したスクリプトが含まれている「GameObject」を「<strong>EventListener</strong>」に設定してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_128.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、イベントが発生し、コンソールウィンドウでスクリプトがそれを取得してログを出力することがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>アニメーションイベントにパラメータを追加</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_127.jpg"/>
+    <br>
+    
+    <p>
+    アニメーションイベントにパラメータを追加できます。<br>
+    このとき、パラメータは関数の引数として呼び出されます。<br>
+    <strong>(1)</strong> <strong>「Add Parameter」ボタン</strong>を押してパラメータを追加します。<br>
+    <strong>(2)</strong> <strong>「Parameter Type」</strong>を選択し、<strong>(3)</strong> で転送する値を入力します。<br>
+    (パラメータとして渡すことができる型は 「<span class="text-primary">Bool、Int、Float、Vector2、String</span>」です。)<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using </span>UnityEngine;<br>
+    <span class="text-primary">public class </span><span class="text-success">AnimEventListener</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start() { }<br>
+    &emsp;&emsp;<span class="text-primary">void</span> SampleAnimEvent(<span class="text-primary">float</span> floatValue)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Sample Anim Event - " </span>+ floatValue);<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    パラメータを受け取るように関数を変更します。<br>
+    変数型のパラメータを宣言します。<br>
+    </p>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_129.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、パラメータの値が渡されていることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>アニメーションイベントを複数のフレームで連続して呼び出</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_130.jpg"/>
+    <br>
+    
+    <p>
+    場合によっては、1つのフレームでイベントを発生させるのではなく、特定のフレームにわたってイベントを連続的に発生させる必要があります。<br>
+    <strong>(1)</strong> 「<strong>Call Method</strong>」を「<strong>Once</strong>」から「<span class="text-danger"><strong>Continuous</strong></span>」に変更します。<br>
+    <strong>(2)</strong> 「<strong>Start Frame</strong>」と「<strong>End Frame</strong>」をそれぞれ設定します。<br>
+    <strong>(3)</strong> 2つのパラメータ値を指定できます。<br>
+    各値は、「Start Frame」と「End Frame」によって呼び出されます。 その間に、直線的に補間された値がスクリプトに渡されます。<br>
+    (「String」型は補間されないので、この機能はサポートされていません。)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_131.jpg"/>
+    <br>
+    
+    <p>
+    「Continuous」タイプのアニメーションイベントは、異なる色のマーカーで表されます。<br>
+    開始点は青で終点は緑です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_132.jpg"/>
+    <br>
+    
+    <p>
+    「Bake」の後にゲームを実行すると、フレームごとに補間された値が呼び出されます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>2つ以上のパラメータを持つアニメーションイベントを作成</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_133.jpg"/>
+    <br>
+    
+    <p>
+    複数のパラメータを持つアニメーションイベントを作成することもできます。<br>
+    各パラメーターは異なるタイプを持つことができます。<br>
+    上記の画面は、それぞれ「<strong>Integer、Float、Vector2</strong>」という3つのパラメータを持つ画面です。<br>
+    (私は「<strong>MultipleParamAnimEvent</strong>」という名前の新しいアニメーションイベントを作成します。)<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using </span>UnityEngine;<br>
+    <span class="text-primary">public class </span><span class="text-success">AnimEventListener</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start() { }<br>
+    &emsp;&emsp;<span class="text-primary">void </span>MultipleParamAnimEvent(<span class="text-primary">object</span>&#91;&#93; multipleParams)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">int </span>intParam = (<span class="text-primary">int</span>)multipleParams&#91;0&#93;;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float </span>floatParam = (<span class="text-primary">float</span>)multipleParams&#91;1&#93;;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector2 </span>vector2Param = (<span class="text-success">Vector2</span>)multipleParams&#91;2&#93;;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Multiple Param Anim Event"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Param 1 : "</span> + intParam);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Param 2 : "</span> + floatParam);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Param 3 : "</span> + vector2Param);<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    「<strong>Object Array</strong>」タイプの1つの引数だけが、3つの引数ではなく、関数パラメータとして使用されます。<br>
+    この配列には、エディタで定義した順序でパラメータが格納されます。<br>
+    変数は型キャストによって参照できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_134.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、3つのパラメータがスクリプトに渡されることがわかります。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

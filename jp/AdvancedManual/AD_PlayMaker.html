@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_PlayMaker.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_PlayMaker.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_PlayMaker.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,262 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.6</span></h4>
+    
+    <p>
+    <strong>PlayMaker™</strong>は<strong>Hutong Games™</strong>で制作したFSM（Finite-State Machine）ベースのユニティエディタアセットです。<br>
+    スクリプトを作成しなくてもPlayMaker™を利用して、ゲームをすばやく作成できます。<br>
+    PlayMaker™を利用してゲームを制作する方のために、AnyPortraitのスクリプト機能を「Custom Actions (カスタムアクション)」で作成して配布します。<br>
+    このページでは、PlayMaker™の使用方法については説明しなかったし、AnyPortraitとPlayMaker™を連動するためのCustom Actionを適用する方法について簡単に説明します。<br>
+    - <a href="https://www.hutonggames.com" target="_sub">Hutong Games™ホームページ</a><br>
+    - <a href="https://assetstore.unity.com/packages/tools/visual-scripting/playmaker-368" target="_sub">PlayMaker™Asset Storeのページ</a><br>
+    </p>
+    <br>
+    
+    <p>
+    まず、下記のリンクから「AnyPortrait-PlayMaker Custom Actionパッケージ」をダウンロードして、ユニティプロジェクトにImportします。<br>
+    <strong>最新バージョン（v1.1.6基準）</strong><br>
+    - <a href="https://docs.google.com/uc?id=1Z9ElyxVx524xU2FiRenXGZodWcYsmz9Z&amp;export=download" target="_sub">AnyPortrait-PlayMaker Custom Actionパッケージをダウンロードする（2019年5月18日ビルド）</a><br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>以前のバージョン</strong><br>
+    - <a href="https://docs.google.com/uc?id=1dxjI1Xtgcd96DwljZL6A1rXI9NqdlW2U&amp;export=download" target="_sub">AnyPortrait-PlayMaker Custom Actionパッケージをダウンロードする（2019年1月9日ビルド）</a><br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>注意事項</strong><br>
+    - このパッケージには、Hutong Games™で製作した公式のパッケージではなく、RainyRizzleチームで製作したパッケージです。<br>
+    - 「AnyPortrait v1.1.5」と「PlayMaker™ v1.9.0」に合わせて開発されました。<br>
+    - AnyPortraitとPlayMaker™がプロジェクトに最初にインストールする必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_445.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>「AnyPortrait」</strong>と <strong>(2)</strong> <strong>「PlayMaker™」</strong>と <strong>(3)</strong> <strong>「AnyPortrait-PlayMaker Custom Actionパッケージ」</strong>をインストールします。<br>
+    PlayMaker™のFSMを追加するGameObjectを選択した後、<strong>PlayMaker Editor</strong>を実行します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_446.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> PlayMaker Editorの空きスペース上でマウスの右ボタンをクリックします。<br>
+    <strong>(2)</strong> <strong>「Add FSM</strong>」項目をクリックします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_447.jpg"/>
+    <br>
+    
+    <p>
+    FSMが作成され、同時に「State 1」も、基本的に追加されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_448.jpg"/>
+    <br>
+    
+    <p>
+    ここで例としてAnyPortraitの関数の「<strong>Initialize()</strong>」関数をCustom Actionに呼び出してみましょう。<br>
+    この関数は、更新される最初のフレームで自動的に実行されるので、ユーザーが特殊な場合を除いては、あえて実装しなくてもされます。<br>
+    しかし、PlayMaker™でCustom Actionをテストするために、ここでの初期化関数を直接呼び出してみましょう。<br>
+    <strong>(1)</strong> <strong>「State 1」</strong>をクリックします。<br>
+    <strong>(2)</strong> <strong>「State」タブ</strong>を選択します。<br>
+    <strong>(3)</strong> <strong>「Action Browser」ボタン</strong>を押してアクション（Action）のリストを開きます。<br>
+    <strong>(4)</strong> PlayMakerの様々なアクションの中で「<strong>AnyPortrait</strong>」カテゴリーを広げ、「<strong>Portrait Initialize</strong>」アクションを選択します。<br>
+    <strong>(5)</strong> <strong>「Add Action To State」ボタン</strong>を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_449.jpg"/>
+    <br>
+    
+    <p>
+    FSMが生成されたGameObjectがapPortraitが含まれていない場合、エラーが発生する可能性があります。<br>
+    <strong>(1)</strong> Game Object項目の「<strong>Use Owner</strong>」のドロップダウンメニューをクリックし、<strong>(2)</strong> <strong>「Specify Game Object」</strong>を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_450.jpg"/>
+    <br>
+    
+    <p>
+    <strong>apPortrait</strong>が含まれているGameObjectをドラッグして、「<strong>None（Game Object）</strong>」のスロットに移動します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_451.jpg"/>
+    <br>
+    
+    <p>
+    今エラーが消え、PlayMaker™の制御を受けるapPortraitが接続された。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_452.jpg"/>
+    <br>
+    
+    <p>
+    PlayMaker™の「<strong>Event（イベント）</strong>」機能をテストするために、非同期の初期設定をオンにしてみましょう。<br>
+    <strong>(1)</strong> 「<strong>Is Async</strong>」オプションをチェックして、「非同期機能」をオンにします。<br>
+    <strong>(2)</strong> 「<strong>Async Initialize Event</strong>」項目をクリックした後、「<strong>New Event</strong>」メニューをクリックします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_453.jpg"/>
+    <br>
+    
+    <p>
+    新しいイベントの名前を設定します。<br>
+    ここで名前を「<strong>OnAsyncInitialized</strong>」に設定しました。<br>
+    「<strong>Create Event</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_454.jpg"/>
+    <br>
+    
+    <p>
+    イベントが生成されましたが、まだ「State 1」にイベントの動作」が定義されていないので、エラーのアイコンが現れました。<br>
+    <strong>(1)</strong> 「<strong>State 1</strong>」を右クリックします。<br>
+    <strong>(2)</strong> 「<strong>Add Transition</strong>」の新しく追加されたイベント（この例では、 「<strong>OnAsyncInitialized</strong>」）を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_455.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> エディタの空のスペースでマウスの右ボタンをクリックした後、「<strong>Add State</strong>」を押して、新しいStateを作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_456.jpg"/>
+    <br>
+    
+    <p>
+    「イベントをクリックした状態」から「新しく追加されたStateにドラッグ」をすると、矢印が出接続されます。<br>
+    今、非同期初期化が完了されると、「OnAsyncInitialized」イベントが発生し、「State 1」から「State 2」に移動をするようになるでしょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_457.jpg"/>
+    <br>
+    
+    <p>
+    「State 2」にAnyPortraitの様々な機能の一つである「<span class="text-danger">メッシュの色を変更する</span>」を適用してみましょう。<br>
+    <strong>(1)</strong> 「<strong>State 2</strong>」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Action Browser</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> 「<strong>AnyPortrait</strong>」カテゴリで「<strong>Portrait Mesh Set Color</strong>」アクションを選択します。<br>
+    <strong>(4)</strong> 「<strong>Add Action To State</strong>」ボタンを押します。<br>
+    <strong>(5)</strong> 「<strong>Portrait Mesh Set Color</strong>」アクションが「State 2」に追加されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_458.jpg"/>
+    <br>
+    
+    <p>
+    追加された 「Portrait Mesh Set Color」アクションの設定を次のように変更みました。<br>
+    - 「<strong>Game Object</strong>」は「apPortraitが含まれているオブジェクト（Runner）」になるように変更しました。<br>
+    - 「<strong>Color</strong>」は「赤」に変更しました。<br>
+    - 「<strong>Apply To All</strong>」を「オフ」し、「<strong>Transform Name</strong>」は、「Hair」（髪メッシュの名前）に設定しました。<br>
+    - その他の設定は変更していない。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_459.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、非同期の初期化が実行された後、髪の色が赤に変更されることを見ることができます。<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>AnyPortrait-PlayMaker Custom Actionについて</h4>
+    <br>
+    
+    <p>
+    1. 「スクリプト関数」と「Custom Actionパッケージ」との関係<br>
+    この「Custom Actionパッケージ」は、AnyPortraitのスクリプト関数をほとんど含んでいます。<br>
+    「Action Browser」でCustom Actionを選択すると、出てくる説明にそれぞれどのような関数が実装されているか書かれています。<br>
+    AnyPortraitのスクリプト関数については、「<a href="../../jp/Script.html">関連ページ</a>」を参照してください。<br>
+    </p>
+    <br>
+    
+    <p>
+    2. 「Mecanim」を利用する場合<br>
+    Mecanimにアニメーションを制御する場合には、アニメーションに関するAnyPortraitのCustom Actionは動作しません。<br>
+    （スクリプトの関数も同様にMecanim使用時に動作しません。）<br>
+    代わりに、Animator項目のアクションを利用願います。<br>
+    </p>
+    <br>
+    
+    <p>
+    3. 「Custom Action "を使用して発生する可能性のある問題<br>
+    PlayMaker™やAnyPortraitが更新されると、問題が発生したり、新機能が含まれていない場合があります。<br>
+    ユーザーの方がゲームを製作するときに、「Custom Actionパッケージ」に機能が追加される必要が生じることがあります。<br>
+    この「Custom Actionパッケージ」は、「RainyRizzle」チームが製作し、配布するので、RainyRizzleホームページにお問い合わせを下さい。<br>
+    - <a href="https://www.rainyrizzle.com/anyportrait-report-jp">お問い合わせページへ</a><br>
+    </p>
+    <br>
+    
+    <p>
+    4. 著作権について<br>
+    「<strong>AnyPortrait</strong>」の著作権は、「<strong>RainyRizzle</strong>」が持っています。<br>
+    「<strong>PlayMaker™</strong>」の著作権は、「<strong>Hutong Games™</strong>」が持っています。<br>
+    「<strong>AnyPortrait-PlayMaker Custom Actionパッケージ</strong>」の著作権は、「<strong>RainyRizzle</strong>」が持っており、ユーザーは変更したり、および再配布を行うことができます。<br>
+    ただし、<strong>Hutong Games™</strong>の要求に応じて配布が中断されたり制限されることがあります。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

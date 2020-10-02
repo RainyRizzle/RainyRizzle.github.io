@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/Script/SC_Physics.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/Script/SC_Physics.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/Script/SC_Physics.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -60,30 +62,482 @@
 
     <!-- 여기서부터 페이지 내용이 작성됩니다. -->
     <!-- 1. 페이지 진입 경로 -->
-    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/Script.html"><span class="text-dark">Script</span></a> > 물리 효과</p>
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/Script.html"><span class="text-dark">스크립트</span></a> > 물리 효과</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
     <h1 class="display-5">물리 효과</h1>
     <br>
     
-    <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <p>
+    Physics 모디파이어로 등록된 물리 효과를 스크립트로 제어할 수 있습니다.<br>
+    ​물리 효과를 켜거나 끌 수 있고, 외부의 힘(척력)과 잡아당김(인력)을 추가로 제어할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetPhysicEnabled</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">isPhysicEnabled )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;물리 효과를 켜거나 끕니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isPhysicEnabled : 물리 효과 모디파이어 처리 여부<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>AddForce_Point</strong> <span class="text-muted">( </span><span class="text-success">Vector2</span> <span class="text-muted">pointPosW,</span> <span class="text-primary">float</span> <span class="text-muted">radius )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;​점을 기준으로 방사형의 힘을 추가합니다.<br>
+    &nbsp;&nbsp;&nbsp;apForceUnit를 리턴하므로 여기에 속성을 추가하여 힘 생성 요청을 완성합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> pointPosW : 힘이 가해지는 위치 (World 좌표계)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> radius : 방사형의 힘이 가해지는 반경<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apForceUnit</span> : 생성된 힘
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>AddForce_Direction</strong> <span class="text-muted">( </span><span class="text-success">Vector2</span> <span class="text-muted">directionW )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;직선형의 힘을 추가합니다.<br>
+    &nbsp;&nbsp;&nbsp;apForceUnit를 리턴하므로 여기에 속성을 추가하여 힘 생성 요청을 완성합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> directionW : 힘이 가해지는 방향 (World 좌표계)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apForceUnit</span> : 생성된 힘
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>AddForce_Direction</strong> <span class="text-muted">( </span><span class="text-success">Vector2</span> <span class="text-muted">directionW,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">waveSizeX,</span> <span class="text-primary">float</span> <span class="text-muted">waveSizeY,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">waveTimeX,</span> <span class="text-primary">float</span> <span class="text-muted">waveTimeY )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;직선형의 힘을 추가합니다.<br>
+    &nbsp;&nbsp;&nbsp;X, Y축에 대해 sin곡선을 그리는 반복적인 방향 변화가 있어서 바람과 같은 표현에 적합합니다.<br>
+    &nbsp;&nbsp;&nbsp;apForceUnit를 리턴하므로 여기에 속성을 추가하여 힘 생성 요청을 완성합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> directionW : 힘이 가해지는 방향 (World 좌표계)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> waveSizeX : 주기적으로 바뀌는 방향의 최대 X값<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> waveSizeY : 주기적으로 바뀌는 방향의 최대 Y값<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> waveTimeX : X축에 대해 방향이 바뀌는 주기<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> waveTime : Y축에 대해 방향이 바뀌는 주기<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apForceUnit</span> : 생성된 힘
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>IsAnyForceEvent</strong>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;현재 추가된 힘이 있는지 리턴합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 추가된 힘이 있는지 여부
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">Vector2</span> <strong>GetForce</strong> <span class="text-muted">( </span><span class="text-success">Vector2</span> <span class="text-muted">targetPosW )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;입력된 위치에서 계산된 힘을 측정합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> targetPosW : 측정하고자 하는 위치 (World 좌표계)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> : 측정된 힘 벡터
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ClearForce</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;​AddForce 함수로 추가했던 모든 힘을 없앱니다.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apPullTouch</span> <strong>AddTouch</strong> <span class="text-muted">( </span><span class="text-success">Vector2</span> <span class="text-muted">posW,</span> <span class="text-primary">float</span> <span class="text-muted">radius )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;터치 입력에 의한 "잡아당김"을 시작합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> posW : 터치 위치 (World 좌표계)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> radius : 잡아당겨지는 반경<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apPullTouch</span> : "터치에 의한 잡아당김"에 대한 정보를 가지고 고유한 ID로 구분된 객체
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetTouchPosition</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">touchID,</span> <span class="text-success">Vector2</span> <span class="text-muted">posW )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;AddTouch 호출 이후에 리턴되었던 apPullTouch에 해당하는 터치의 현재 위치를 갱신합니다.<br>
+    &nbsp;&nbsp;&nbsp;apPullTouch.TouchID를 파라미터에 넣어서 구분합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">​int</span> touchID : AddTouch에서 리턴되었던 apPullTouch의 TouchID에 해당하는 ID<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> posW : 현재 터치의 위치<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetTouchPosition</strong> <span class="text-muted">( </span><span class="text-success">apPullTouch</span> <span class="text-muted">touch,</span> <span class="text-success">Vector2</span> <span class="text-muted">posW )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;AddTouch 호출 이후에 리턴되었던 apPullTouch에 해당하는 터치의 현재 위치를 갱신합니다.<br>
+    &nbsp;&nbsp;&nbsp;apPullTouch를 직접파라미터에 넣어서 구분합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apPullTouch</span> touch, : AddTouch에서 리턴되었던 apPullTouch<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> posW : 현재 터치의 위치<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>IsAnyTouchEvent</strong>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;현재 추가된 터치가 있는지 리턴합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 추가된 터치가 있는지 여부
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apPullTouch</span> <strong>GetTouch</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">touchID )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;touchID에 해당하는 ID를 가진 apPullTouch 객체를 리턴합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> touchID : 찾고자 하는 터치 이벤트의 ID<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apPullTouch</span> : 요청한 TouchID를 가지고 있는 잡아당김 터치 이벤트 (없을시 null 리턴)
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>RemoveTouch</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">touchID )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;잡아당김을 계산 중인 터치 이벤트 객체를 제거합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">​int</span> touchID : AddTouch에서 리턴되었던 apPullTouch의 TouchID에 해당하는 ID<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ClearTouch</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;잡아당김을 계산 중인 모든 터치 이벤트 객체를 제거합니다.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ClearForceAndTouch</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;모든 힘과 터치 이벤트 객체를 제거합니다.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    
+    <br><br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>apForceUnit</h4>
+    <br>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    AddForce 함수를 그대로 사용하면 힘이 적용되지 않습니다.<br>
+    AddForce 함수의 리턴값인 apForceUnit에 추가적인 정보를 넣어야 합니다.<br>
+    SetPower 함수 중 하나를 호출하고, EmitLoop나 EmitOnce중 하나를 호출해야합니다.<br>
     </p>
+    <br>
+    
+    <p>
+    <span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>SetPower</strong>(float power)<br>
+    : power 만큼의 힘을 추가합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>SetPower</strong>(float power, float waveSize, float waveTime)<br>
+    : power를 기준으로 waveSize 만큼의 크기가 waveTime 시간만큼 주기적으로 변하는 힘을 추가합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>EmitLoop</strong><strong>()</strong><br>
+    : 지속되는 힘입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>EmitOnce</strong>(float liveTime)<br>
+    : liveTime의 시간 이후에는 사라지는 힘입니다.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
     <br>
     
     
     <br><br>
     
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
-    <br>
-    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
     <p>
-    본문 입력<br>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary"><strong>using</strong></span> <strong>AnyPortrait</strong>;<br>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">PhysicsTest</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// Target AnyPortrait Object<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success">apPortrait </span>portrait;<br>
+    &emsp;&emsp;// Touch ID<br>
+    &emsp;&emsp;<span class="text-primary"><strong>private int </strong></span>_touchID;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//----------------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;// Force Events<br>
+    &emsp;&emsp;&emsp;&emsp;//----------------------------------------<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Clear Force<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.C))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.ClearForce();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Clear Force"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Add Point Force<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.P))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Position : (0, 0)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Radius : 10<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Power : 2000<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Live Time : 10 Sec<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.AddForce_Point(</strong><span class="text-success"><strong>Vector2</strong></span>.zero, 10.0f)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.SetPower(2000)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.EmitOnce(10);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Add Point Force"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Add Waved Directional Force<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.D))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Direction : (1 +- 0.5, 0.5 +- 0.2)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Power : 4000 +- 1000<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Loop<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong> portrait.AddForce_Direction(</strong><span class="text-primary"><strong>new </strong></span><span class="text-success">Vector2</span>(1.0f, 0.5f), 0.5f, 0.2f, 5, 10)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.SetPower(4000, 1000, 25)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.EmitLoop();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Add Waved Directional Force"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//----------------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;// Touch Events<br>
+    &emsp;&emsp;&emsp;&emsp;//----------------------------------------<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3 </span>touchPosW = <span class="text-success">Camera</span>.main.ScreenToWorldPoint(<span class="text-primary">new </span><span class="text-success">Vector3</span>(<span class="text-success">Input</span>.mousePosition.x, <span class="text-success">Input</span>.mousePosition.y, 0));<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector2 </span>touchPosW2 = <span class="text-primary">new </span><span class="text-success">Vector2</span>(touchPosW.x, touchPosW.y);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Left Click -&gt; Touch<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetMouseButtonDown(0))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//Start Touch Event<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_touchID = portrait.AddTouch(touchPosW2, 2.0f).TouchID;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Add Touch ("</span> + _touchID + <span class="text-danger">")"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">else if</span>(<span class="text-success">Input</span>.GetMouseButton(0))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//Refresh Touch Position<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.SetTouchPosition(_touchID, touchPosW2);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">else if</span>(Input.GetMouseButtonUp(0))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//Release Touch Event<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.ClearTouch();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_touchID = -1;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
     </p>
+    </div>
     <br>
     
     <!-- 5. 바닥 네비바 -->

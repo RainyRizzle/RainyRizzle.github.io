@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ModifierLock.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_ModifierLock.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ModifierLock.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -67,22 +69,168 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.2</span></h4>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    동시에 다수의 모디파이어를 등록해서 편집하는 것은 AnyPortrait의 특징입니다.<br>
+    그렇지만 다수의 모디파이어를 동시에 수정하는 것은 많은 문제를 야기할 수 있습니다.<br>
+    따라서 사용자가 작업을 할 경우에는 "1개의 모디파이어"만 수정할 수 있도록 제한하고 있습니다.<br>
+    하지만 경우에 따라서 편집 도중에도 다수의 모디파이어를 실행할 수 있습니다.<br>
+    이것을 제어하는 기능을 <strong>모디파이어 잠금(Modifier Lock)</strong>이라고 합니다.<br>
+    이 페이지는 모디파이어 잠금 기능에 대해서 더 자세히 알아봅니다.<br>
     </p>
     <br>
     
-    
-    <br><br>
-    
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_161.jpg"/>
     <br>
     
     <p>
-    본문 입력<br>
+    설명을 위해서 기존의 튜토리얼에 <strong>Transform (Controller) 모디파이어</strong>를 추가하였습니다.<br>
+    이 모디파이어는 컨트롤 파라미터에 따라서 Head Bone과 Neck Bone을 움직입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_162.jpg"/>
+    <br>
+    
+    <p>
+    애니메이션에 컨트롤 파라미터 타임라인을 추가하였습니다.<br>
+    컨트롤 파라미터를 이용하여 오른쪽 그림과 같이 고개를 들 수 있도록 하였습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_163.jpg"/>
+    <br>
+    
+    <p>
+    이제 평소와 같이 애니메이션을 편집해봅시다.<br>
+    <strong>(1)</strong> <strong>편집모드</strong>를 켜고, <strong>(2)</strong> <strong>Transform (Animation)의 키프레임</strong>을 선택하여 수정을 하고자 합니다.<br>
+    이때 <strong>(3)</strong><strong>과 같이 고개를 드는 처리는 </strong><span class="text-danger"><strong>무시</strong></span>되고, <strong>Transform (Animation) 모디파이어만 처리</strong>가 되는 것을 알 수 있습니다.<br>
+    모디파이어 잠금 규칙에 따라서 편집 모드 상태에서는 다른 모디파이어들이 실행되지 않기 때문입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>모디파이어 잠금(Modifier Lock) 규칙</h3>
+    <br>
+    
+    <p>
+    <strong>1. 잠겨진 상태일 때</strong><br>
+    - 선택된 모디파이어 외의 모든 모디파이어는 실행되지 않습니다.<br>
+    - Rigging 모디파이어는 실행됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. 풀려진 상태일 때</strong><br>
+    - 선택된 모디파이어와 동일하거나 동시에 편집될 수 없는 모디파이어를 제외한 나머지 모디파이어는 실행이 됩니다.<br>
+    - 같은 Transform 계열의 모디파이어일 경우, 또는 같은 Morph 계열의 모디파이어인 경우가 이에 해당됩니다.<br>
+    - Transform 계열의 모디파이어를 선택한 경우 Physics 모디파이어가 실행됩니다.<br>
+    - Rigging 모디파이어는 실행됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_164.jpg"/>
+    <br>
+    
+    <p>
+    모디파이어 잠금의 고급 설정창을 열어봅시다.<br>
+    <strong>(1)</strong>&nbsp;&nbsp;<kbd>Ctrl</kbd> 을 누른 채로 <strong>모디파이어 잠금 버튼을 클릭</strong>합니다. (Mac OSX에서는  <kbd>Command</kbd> 입니다.)<br>
+    <strong>(2)</strong> 모디파이어의 잠금/해제 상태의 설정을 정할 수 있는 <strong>고급 설정창</strong>이 나타납니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_165.jpg"/>
+    <br>
+    
+    <p>
+    모디파이어의 고급 설정들입니다.<br>
+    <strong>1. Lock Mode</strong> : 모디파이어 잠금이 된 상태의 설정입니다.<br>
+    <strong>2. Unlock Mode</strong> : 모디파이어 잠금이 해제된 상태의 설정입니다.<br>
+    <strong>3. Calculating transformations of unregistered objects</strong> :<br>
+    현재 편집 중인 모디파이어에 등록되지 않은 객체는 "모디파이어 잠금 규칙"이 적용되지 않아도 됩니다.<br>
+    이 설정을 켠다면 등록되지 않는 객체에 한해서 정상적인 모디파이어 계산이 진행됩니다.<br>
+    <strong>4. Render Calculated Colors</strong> : 색상 속성에 한해서 "모디파이어 잠금 규칙"을 적용하지 않습니다.<br>
+    <strong>5. Preview Calculated Bones</strong> : "모디파이어 잠금 규칙"이 적용되지 않는 경우의 본의 모습을 미리볼 수 있습니다.<br>
+    <strong>6. Show Modifier List</strong> :<br>
+    현재 처리 중인 모디파이어 리스트를 화면 좌측에 보여줍니다.<br>
+    모디파이어의 계산 상태를 확인할 수 있습니다.<br>
+    <strong>7. Bone Preview Color</strong> : "Preview Calculated Bones" 속성이 켜진 경우의 출력 색상입니다.<br>
+    <strong>8. Restore Settings</strong> : 모든 설정값을 기본값으로 복원합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_166.jpg"/>
+    <br>
+    
+    <p>
+    모디파이어 잠금 설정을 변경했습니다.<br>
+    여러분이 편리한 방식으로 설정하시면 되겠습니다.<br>
+    설정은 자동으로 저장됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_167.jpg"/>
+    <br>
+    
+    <p>
+    <strong>"Preview Calculated Bones"</strong> 설정을 활성화하면 본 외곽선이 추가로 출력됩니다.<br>
+    컨트롤 파라미터의 제어를 받는 <strong>(1)</strong> <strong>Head Bone의 외곽선</strong>이 나타나므로,<br>
+    오른쪽 이미지와 같이 나타날 최종 결과물을 예상하면서 작업할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_168.jpg"/>
+    <br>
+    
+    <p>
+    <strong>"Show Modifier List"</strong> 설정을 활성화하면 화면 좌측에 모디파이어 리스트가 나타납니다.<br>
+    모디파이어 스택의 순서대로 출력이 됩니다.<br>
+    <strong>(1)</strong> <strong>모디파이어의 아이콘과 이름</strong>입니다. 편집 중인 모디파이어는 좌측에 <strong>작은 커서</strong>와 함께 <strong>노란색의 글씨</strong>로 출력됩니다.<br>
+    <strong>(2)</strong> <strong>모디파이어의 계산 상태</strong>입니다.<br>
+    모디파이어가 실행되어 객체의 연산에 적용되고 있다면 <strong>"불이 켜진 전구"</strong>의 아이콘이 나타납니다.<br>
+    실행되지 않고 잠겨 있다면 <strong>"불이 꺼진 전구"</strong> 아이콘이 나타납니다.<br>
+    일부의 객체에만 적용되고 있다면 <strong>"조금 밝은 전구"</strong> 아이콘이 나타납니다.<br>
+    <strong>(3)</strong> <strong>모디파이어가 메시 색상을 결정</strong>할 때, <strong>색상 속성을 연산하는지 여부</strong>를 아이콘으로 보여줍니다.<br>
+    잠겨진 경우엔 검은색 아이콘이 나타납니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_169.jpg"/>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>모디파이어 잠금 버튼</strong></span>을 누르거나  <kbd>D</kbd> 를 눌러서 모디파이어 잠금 상태로 전환한 뒤의 모디파이어 리스트의 모습입니다.<br>
+    선택 중인 Transform (Animation) 모디파이어를 제외한 나머지 모디파이어는 실행되지 않음을 볼 수 있습니다.<br>
+    (Rigging 모디파이어는 동시에 실행이 되며, 모디파이어 잠금 설정에 따라 위 화면과 조금 다를 수 있습니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_170.jpg"/>
+    <br>
+    
+    <p>
+    애니메이션 뿐만 아니라 메시 그룹의 모디파이어 편집 상태에서도 동일하게 <strong>(1)</strong>&nbsp;&nbsp;<kbd>Ctrl</kbd> 을 누른 상태에서 <strong>버튼을 클릭</strong>하여 설정창을 호출할 수 있습니다.<br>
     </p>
     <br>
     

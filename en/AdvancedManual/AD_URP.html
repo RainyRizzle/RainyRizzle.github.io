@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_URP.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_URP.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_URP.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,427 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.2</span></h4>
+    
+    <p>
+    <strong>Universal Render Pipeline (URP)</strong> is a new rendering method introduced in Unity 2019.3.<br>
+    URP replaces LWRP and supports more platforms and devices, and can be applied to various projects such as 2D, 3D, VR and AR.<br>
+    We recommend that you refer to the following pages for further explanation.<br>
+    </p>
+    <br>
+    
+    <p>
+    - <a href="../../en/AdvancedManual/AD_MaterialLibrary.html"><strong>Material Library</strong></a><br>
+    - <a href="../../en/AdvancedManual/AD_ShaderGraph.html"><strong>Creating Materials with Shader Graph</strong></a><br>
+    - <a href="../../en/Script/SC_CustomShader.html"><strong>Custom Shader</strong></a><br>
+    - <a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@7.1/manual/index.html" target="_sub"><strong>About the Universal Render Pipeline Manual</strong></a><br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Setting Up the Universal Render Pipeline and Changing Materials</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_870.jpg"/>
+    <br>
+    
+    <p>
+    Run "<strong>Window &gt; Package Manager</strong>".<br>
+    (The location or name of the menu may vary depending on your version of Unity.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_871.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the "<strong>Universal RP</strong>" package.<br>
+    If you don't see the package in the list, it may take a while to load, so wait a moment.<br>
+    <strong>(2)</strong> Press the <strong>Install button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_872.jpg"/>
+    <br>
+    
+    <p>
+    Once the <strong>URP package</strong> is installed, you need to create a <strong>Pipeline Asset</strong> and apply it to the rendering.<br>
+    Right-click within the Assets folder or select from the Assets menu, and select "<strong>Create &gt; Rendering &gt; Universal Render Pipeline &gt; Pipeline Asset (Forward Renderer)</strong>" .<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_873.jpg"/>
+    <br>
+    
+    <p>
+    "<strong>UniversalRenderPipelineAsset</strong>" is created.<br>
+    Also "<strong>Default Renderer Asset</strong>" is created that defines how to render in URP.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_874.jpg"/>
+    <br>
+    
+    <p>
+    Let's apply the generated URP Asset to the project.<br>
+    <strong>(1)</strong> Open "<strong>Edit &gt; Project Settings</strong>" in the Unity Editor Menu and select the <strong>Graphics </strong>item.<br>
+    <strong>(2)</strong> Assign the "<strong>UniversalRenderPipelineAsset</strong>" created above to the "<strong>Scriptable Render Pipeline Settings</strong>" item.<br>
+    Now it's rendered in URP, probably because most materials won't render properly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_875.jpg"/>
+    <br>
+    
+    <p>
+    Let's install and apply a material that supports URP.<br>
+    <strong>(1)</strong> Open AnyPortrait Editor and select one of the <strong>Root Units</strong>.<br>
+    <strong>(2)</strong> Press the <strong>Material Library button</strong>.<br>
+    <strong>(3)</strong> Select the package you want to install. In this case, select the <strong>URP Presets</strong> package.<br>
+    <strong>(4)</strong> With <strong>URP Presets</strong> selected, press the <strong>Unpack Preset button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_876.jpg"/>
+    <br>
+    
+    <p>
+    Once the package is installed, you need to run the Material Library again.<br>
+    Press the OK button and press the Material Library button to open it again.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_877.jpg"/>
+    <br>
+    
+    <p>
+    Three material presets with URP support have been added.<br>
+    <strong>- URP Unlit</strong> : This is the material that renders the original color without lighting in URP environment.<br>
+    <strong>- URP Lit</strong> : This is the material to which lighting is applied in URP environment.<br>
+    <strong>- URP 2D Lit</strong> : This material is applied by 2D Light in URP environment with 2D Renderer.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_878.jpg"/>
+    <br>
+    
+    <p>
+    Let's create a material set with the added material presets.<br>
+    <strong>(1)</strong> Press the <strong>Make Material Set button</strong>.<br>
+    <strong>(2)</strong> Select one of the URP presets. In this step, select the <strong>URP Unlit preset</strong>.<br>
+    <strong>(3)</strong> Press the <strong>Select button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_879.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the created <strong>URP Unlit material set</strong>.<br>
+    <strong>(2)</strong> Press the <strong>Default Material button</strong> to set it as the default material.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_880.jpg"/>
+    <br>
+    
+    <p>
+    Because clipping masks are rendered differently in LWRP and URP, you need to do additional work in Bake setup.<br>
+    <strong>(1)</strong> Press the <strong>Bake button</strong>.<br>
+    <strong>(2)</strong> Select the <strong>Setting tab</strong>.<br>
+    <strong>(3)</strong> Change the value of the <strong>Render Pipeline</strong> item to "<strong>Scriptable Render Pipeline</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_881.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the <strong>Bake tab</strong>.<br>
+    <strong>(2)</strong> Press the <strong>Bake button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_882.jpg"/>
+    <br>
+    
+    <p>
+    If you look at the character in the Unity scene, you can see that they now render correctly in the URP environment.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Applying URP Lit Material</h3>
+    <br>
+    
+    <p>
+    You can apply URP Lit materials to make the character be rendered with lights.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_883.jpg"/>
+    <br>
+    
+    <p>
+    Open the Material Library.<br>
+    <strong>(1)</strong> Press the <strong>Make Material Set button</strong>.<br>
+    <strong>(2)</strong> Select the "<strong>URP Lit" preset</strong> and <strong>(3)</strong> press the <strong>Select button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_884.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the created <strong>URP Lit material set</strong>.<br>
+    <strong>(2)</strong> Press the <strong>Default Material button </strong>to set it as the default material.<br>
+    When you're done, close the Material Library.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_885.jpg"/>
+    <br>
+    
+    <p>
+    Run Bake and see it in the Unity scene.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_886.jpg"/>
+    <br>
+    
+    <p>
+    Unlike the Unlit material, the character will be a bit darker than the image above, or it will be black.<br>
+    This is because Lit materials are dark without light.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_887.jpg"/>
+    <br>
+    
+    <p>
+    Let's add various kinds of Light objects.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_888.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you will see a lighted character.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Rendering in URP with the 2D Renderer</h3>
+    <br>
+    
+    <p>
+    URP is a way to include the features of LWRP 2D.<br>
+    You can simply apply the <strong>2D Renderer</strong> to switch to the rendering method using 2D Lights.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_889.jpg"/>
+    <br>
+    
+    <p>
+    Create a <strong>2D Renderer</strong> asset.<br>
+    Right click on the Assets menu or the Assets folder,<br>
+    Select "<strong>Create &gt; Rendering &gt; Universal Renderer Pipeline &gt; 2D Renderer (Experimental)</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_890.jpg"/>
+    <br>
+    
+    <p>
+    New <strong>2D Renderer Asset</strong> (New 2D Renderer Data) is created.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_891.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the "<strong>UniversalRenderPipelineAsset</strong>" created earlier.<br>
+    <strong>(2)</strong> Assign "<strong>2D Renderer (New 2D Renderer Data)</strong>" to the items of the <strong>Renderer List</strong>.<br>
+    <strong>(3)</strong> The lighting is not applied to the characters in the Unity scene since the material for the 2D Renderer has not yet been applied.<br>
+    Let's set up a material for URP 2D.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_892.jpg"/>
+    <br>
+    
+    <p>
+    It is almost same to the method described above.<br>
+    <strong>(1)</strong> Open the <strong>Material Library</strong> and press the <strong>Make Material Set button</strong>.<br>
+    <strong>(2)</strong> This time, select "<strong>URP 2D Lit</strong>" preset and <strong>(3)</strong> press <strong>Select button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_893.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the created <strong>URP 2D Lit material set</strong> and <strong>(2)</strong> press the <strong>Default Material button</strong> to set it as the default material.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_894.jpg"/>
+    <br>
+    
+    <p>
+    Run <strong>Bake</strong> and see it in the Unity scene.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_895.jpg"/>
+    <br>
+    
+    <p>
+    As it is a Lit material, the character looks dark in a scene without light.<br>
+    Currently basic Light objects are placed, but separate Light objects for the 2D Renderer are needed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_896.jpg"/>
+    <br>
+    
+    <p>
+    Add a 2D Light object.<br>
+    In the "<strong>Light &gt; 2D</strong>" category, there are 2D lights of the kind supported by the 2D Renderer.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_897.jpg"/>
+    <br>
+    
+    <p>
+    Place 2D Lights to the scene.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_898.jpg"/>
+    <br>
+    
+    <p>
+    You can see the beautifully rendered character in the URP 2D environment.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Shader Graph assets with URP support</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_899.jpg"/>
+    <br>
+    
+    <p>
+    When the URP Presets package is installed from the Material Library, shader assets that support URP are added as shown above.<br>
+    (Assets &gt; AnyPortrait &gt; Assets &gt; Shaders &gt; Advanced folder)<br>
+    These assets are created by Shader Graph.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_900.jpg"/>
+    <br>
+    
+    <p>
+    Open these assets to see the contents of the Shader Graph.<br>
+    Materials provided as presets only perform basic lighting.<br>
+    Create your Shader Graph based on this asset and apply various rendering techniques.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Cautions for using URP materials</h4>
+    <br>
+    
+    <p>
+    URP is a new feature introduced in the latest version of Unity 2019.3.<br>
+    URP has many advantages in rendering, but there is a big problem with incompatibility.<br>
+    Therefore, unlike the previous version of AnyPortrait, URP materials are provided in the form of Shader Graph.<br>
+    However, please note the following limitations due to the limitation of the function of Shader Graph.<br>
+    </p>
+    <br>
+    
+    <p>
+    1) Soft Additive is not supported. Instead, Additive's Shader also applies to Soft Additives.<br>
+    2) Multiplicative method of mesh blend method is calculated as Multiply method, not 2X Multiply.<br>
+    3) In URP 2D Lit, Additive (Soft Additive) and Multiplicative materials are not affected by light.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

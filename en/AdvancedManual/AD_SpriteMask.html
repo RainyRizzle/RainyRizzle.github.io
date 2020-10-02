@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Applying Sprite Mask</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_SpriteMask.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_SpriteMask.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_SpriteMask.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Applying Sprite Mask</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Applying Sprite Mask</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.2.5</span></h4>
+    
+    <p>
+    Unity's "<strong>Sprite Mask</strong>" allows you to render while hiding a part of another <strong>Sprite Renderer</strong>.<br>
+    - <a href="https://docs.unity3d.com/2020.2/Documentation/Manual/class-SpriteMask.html" target="_sub">Sprite Mask (Unity Official Manual)</a><br>
+    </p>
+    <br>
+    
+    <p>
+    Characters created in AnyPortrait are composed of <strong>Mesh Renderers</strong> instead of <strong>Sprite Renderer</strong>, so they are not affected by sprite masks by default.<br>
+    However, you can simply write shaders and make the character be rendered through a sprite mask.<br>
+    We recommend that you read the following tutorials as well.<br>
+    - <a href="../../en/AdvancedManual/AD_MaterialLibrary.html">Material Library</a><br>
+    - <a href="../../en/AdvancedManual/AD_MeshShader.html">Shader for meshes</a><br>
+    - <a href="../../en/Script/SC_CustomShader.html">Custom Shader</a><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1016.jpg"/>
+    <br>
+    
+    <p>
+    Let's create a <strong>Sprite Mask</strong>.<br>
+    <strong>(1)</strong> Prepare an image to be used as a sprite mask and set it to the <strong>Sprite</strong> type.<br>
+    <strong>(2)</strong> Right-click on the Hierarchy and select <strong>Sprite Mask</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1017.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> A new sprite mask has been created.<br>
+    <strong>(2)</strong> Apply the prepared image to the sprite mask.<br>
+    By default, sprite masks are not visible in the Scene View.<br>
+    <strong>(3)</strong> Make the <strong>Sprite Mask</strong> included among the information displayed in the scene view.<br>
+    <strong>(4)</strong> The sprite mask now appears in the scene view.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1018.jpg"/>
+    <br>
+    
+    <p>
+    Let's write new shaders.<br>
+    AnyPortrait's <strong>1 Material Set</strong> includes several shaders, but here we will only modify the two shaders that are most used.<br>
+    (There are a total of 9 shaders included in one <strong>Color Space</strong> in one <strong>Material Set</strong>, so all 9 shader files need to be modified to get it right.)<br>
+    <strong>(1)</strong> In the <strong>Assets &gt; AnyPortrait &gt; Assets &gt; Shaders</strong> folder where the basic shader is located, duplicate the following two shader assets.<br>
+    - apShader_Transparent : Default shader with alpha blending (gamma color space)<br>
+    - apShader_ClippedWithMask : Default shader with alpha blending applied to the clipped mesh (gamma color space)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1019.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> I changed the names of the duplicated shader assets as follows.<br>
+    - apShader_Transparent &gt; <strong>Stencil_Transparent</strong><br>
+    - apShader_ClippedWithMask &gt; <strong>Stencil_Clipped</strong><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1020.jpg"/>
+    <br>
+    
+    <p>
+    First, let's open the <strong>Stencil_Transparent</strong> shader asset.<br>
+    (Check the <a href="../../en/Script/SC_CustomShader.html">related page</a> for how to write a custom shader.)<br>
+    <strong>(1)</strong> Change <strong>Shader Name</strong>. Set a name that is easy to identify.<br>
+    <strong>(2)</strong> Add <strong>Stencil Code</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Stencil<br>
+    {<br>
+    &emsp;&emsp;Ref 1<br>
+    &emsp;&emsp;Comp LEqual<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Since the sprite mask uses <strong>Stencil</strong>, masking is possible even if it is not a Sprite Renderer.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1021.jpg"/>
+    <br>
+    
+    <p>
+    Edit the <strong>Stencil_Clipped</strong> shader asset in the same way.<br>
+    Change the name and add the Stencil code.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1022.jpg"/>
+    <br>
+    
+    <p>
+    Let's apply the created shader assets to the character.<br>
+    <strong>(1)</strong> Open the AnyPortrait editor and click the <strong>Material Library</strong> button to open the "Material Library".<br>
+    <strong>(2)</strong> If you select the currently applied <strong>Material Set</strong>,<br>
+    <strong>(3)</strong> You can see the shaders used in this material set.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1023.jpg"/>
+    <br>
+    
+    <p>
+    Let's replace it with the modified Stencil shader asset.<br>
+    First, replace the shader of <strong>(1)</strong> "<strong>Color Space: Gamma &gt; Basic Rendering &gt; Alpha Blend</strong>" with <strong>(2)</strong> "<strong>Stencil_Transparent</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1024.jpg"/>
+    <br>
+    
+    <p>
+    Replace the clipping shader in the same way.<br>
+    Replace the shader of <strong>(1)</strong> "<strong>Color Space: Gamma &gt; Clipped Rendering &gt; Alpha Blend</strong>" with <strong>(2)</strong> "<strong>Stencil_Clipped</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1025.jpg"/>
+    <br>
+    
+    <p>
+    Close the material library and run Bake.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1026.jpg"/>
+    <br>
+    
+    <p>
+    When viewed in a Unity scene, only the sprite mask may be visible and the character may not be visible.<br>
+    Let's run the game.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1027.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you can see that the character is rendered only as much as the image of the sprite mask.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Rendering except sprite mask area</h3>
+    <br>
+    
+    <p>
+    Conversely, this step, let's make the sprite mask area hidden and only the rest of the area visible.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1028.jpg"/>
+    <br>
+    
+    <p>
+    Open the "<strong>Stencil_Transparent</strong>" and "<strong>Stencil_Clipped</strong>" assets we created earlier and edit the code.<br>
+    Change Stencil's comparison operator to "<strong>Comp Greater</strong>", the opposite of "<strong>Comp LEqual</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1029.jpg"/>
+    <br>
+    
+    <p>
+    If you run the game again, you can see that the rest of the sprite mask is rendered, contrary to the previous result.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Using the Custom Range of the sprite mask</h3>
+    <br>
+    
+    <p>
+    By using the property of "<strong>Custom Range</strong>" of the sprite mask, only targets with the specified <strong>Sorting Layer</strong> or <strong>Sorting Order</strong> can be made to be applied.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1030.jpg"/>
+    <br>
+    
+    <p>
+    For testing, I created a new sprite mask.<br>
+    You can see the two sprite masks are applied.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1031.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select <strong>First Sprite Mask</strong>.<br>
+    <strong>(2)</strong> After checking "<strong>Custom Range</strong>", set "<strong>Order in Layer</strong>" of <strong>Front</strong> to <span class="text-primary"><strong>5</strong></span> and <strong>Order in Layer</strong> of <strong>Back</strong> to <span class="text-success"><strong>0</strong></span>. .<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1032.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> Select <strong>Second Sprite Mask</strong>.<br>
+    <strong>(4)</strong> After checking "<strong>Custom Range</strong>", set "<strong>Order in Layer</strong>" of <strong>Front</strong> to <span class="text-primary"><strong>15</strong></span> and <strong>Order in Layer</strong> of <strong>Back</strong> to <span class="text-success"><strong>10</strong></span>. .<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1033.jpg"/>
+    <br>
+    
+    <p>
+    Let's use <strong>Sorting Group</strong> to control <strong>Sorting Order</strong> of characters created with AnyPortrait.<br>
+    <strong>(1)</strong> Select a character created with AnyPortrait or a parent GameObject.<br>
+    <strong>(2)</strong> Click the "<strong>Add Component</strong>" button and add <strong>Sorting Group</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1034.jpg"/>
+    <br>
+    
+    <p>
+    Change <strong>Sorting Order Option</strong> to "<strong>Depth To Order</strong>".<br>
+    Now you can use the Sorting Group to set which sprite mask will be applied.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1035.jpg"/>
+    <br>
+    
+    <p>
+    If the value of <strong>Order in Layer</strong> of Sorting Group is set to <span class="text-danger"><strong>3</strong></span>, only the first mask is affected.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1036.jpg"/>
+    <br>
+    
+    <p>
+    If the value of <strong>Order in Layer</strong> of Sorting Group is set to <span class="text-danger"><strong>13</strong></span>, only the second mask is affected.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note.</strong></span><br>
+    You can perform this operation in the same way even when the <strong>Sorting Order Option</strong> of AnyPortrait is set to "<strong>Set Order</strong>" mode without using Sorting Group.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_UnityRecorder.html">< Using the Unity Recorder</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_CharacterCostume.html">Replace a character's costume ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_BoneIKController.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_BoneIKController.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_BoneIKController.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,366 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.8</span></h4>
+    
+    <p>
+    With "Bone IK chain" set, you can control IK with an external bone.<br>
+    With this function, you can give various animation effects.<br>
+    Depending on the terrain, you can create a more realistic walking animation by changing the height of feet.<br>
+    Or, in real time, the character can hold onto the weapon towards the "player-aimed position".<br>
+    This page covers how to set up a Bone IK controller, and how it can actually be applied in the game.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_236.jpg"/>
+    <br>
+    
+    <p>
+    This is the screen for configuring the <strong>Bone IK chain</strong> as described on the previous page.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_237.jpg"/>
+    <br>
+    
+    <p>
+    Create a Bone to control IK.<br>
+    <strong>(1)</strong> <strong>Create an additional bone</strong>,<br>
+    <strong>(2)</strong> Set it as <strong>Helper</strong>.<br>
+    There is no difference in function of Helper Bone.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Setting and Testing the Position Controller</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_238.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select Target Bone of IK Chain</strong>.<br>
+    <strong>(2)</strong> <strong>Change IK Controller Settings</strong> to <strong>Position</strong>.<br>
+    <strong>(3)</strong> <strong>Press the Change button</strong> to <strong>select the Helper Bone</strong> you just created as the Effector Bone.<br>
+    <strong>(4)</strong> <strong>Change Default FK/IK Weight</strong> from 0 to <strong>1</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>Position Controller</strong> is a mode in which IK operates so that the position of the IK's Target Bone is as close as possible to the Effector Bone.<br>
+    <strong>Look At Controller</strong> is a mode in which IK operates so that the direction pointed by the IK's Target Bone points to the Effector Bone.<br>
+    <strong>Default FK/IK Weight</strong> is the default weight value applied if there is no other weight setting.<br>
+    If the value is 1, the IK controller is 100% applied. If the value is 0.5, only 50% is applied.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_239.jpg"/>
+    <br>
+    
+    <p>
+    Now let's test whether the IK controller is working.<br>
+    <strong>(1)</strong> <strong>Add "Transform (Animation)" Modifier</strong>.<br>
+    <strong>(2)</strong> <strong>Create an animation</strong>, select a mesh group, and add a <strong>"Transform (Animation)" timeline</strong>.<br>
+    <strong>(3)</strong> <strong>Select Helper Bone</strong> and register it as a <strong>timeline layer</strong>.<br>
+    <strong>(4)</strong> <strong>Create a keyframe</strong> and <strong>modify its position</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_240.jpg"/>
+    <br>
+    
+    <p>
+    When you exit edit mode, you will see the IK chain moving to reach the Helper Bone.<br>
+    (The above image appears to be in edit mode, but <span class="text-danger"><strong>the IK controller does not work in edit mode.</strong></span>)<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Setting and Testing the Look At Controller</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_241.jpg"/>
+    <br>
+    
+    <p>
+    Select the Target Bone in the IK chain and change the IK controller type to <strong>"Look At"</strong>.<br>
+    "Look At" method works so that each bone moves slightly and looks at the target without changing the shape of the IK chain.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_242.jpg"/>
+    <br>
+    
+    <p>
+    If you select the animation you created above, you will see that the IK chain does not reach the Helper Bone, unlike the Position method.<br>
+    Instead, the Target Bone points to the Helper Bone, which means that the Bone does not rotate a lot.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Applying the Look At Controller [without an IK Chain</h4>
+    <br>
+    
+    <p>
+    Unlike the Position Controller, the Look At Controller works even without an IK chain.<br>
+    If you set the Look At Controller to a bone that has no child bones or the IK chain is in the Disabled state, the IK is processed for a single bone.<br>
+    The function without IK chain is applied from v1.1.8.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Preview IK controller results in Edit mode</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_243.jpg"/>
+    <br>
+    
+    <p>
+    In Edit mode, the IK controller does not work because of the complexity of processing modifiers.<br>
+    But you can see the results in advance.<br>
+    <strong>(1)</strong> If you hold down the&nbsp;&nbsp;<kbd>Ctrl</kbd>&nbsp;&nbsp;and <strong>press the Modifier Lock button</strong>, the <strong>Modifier Lock setting dialog box appears</strong>.<br>
+    For the modifier lock setting dialogue, please check <a href="../../en/AdvancedManual/AD_ModifierLock.html">the relevant page</a>.<br>
+    <strong>(2)</strong> <strong>When "Preview Calculated Bones" is turned on</strong>, the shape of the finally calculated bones will be displayed when the lock is on.<br>
+    The IK controller result is reflected in the bones in the preview state at this time.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Adjusting IK controller weight with a control parameter</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_244.jpg"/>
+    <br>
+    
+    <p>
+    <strong>"Animated FK method"</strong> and <strong>"IK controller controlled IK method"</strong> can be mixed and used simultaneously by <strong>weight</strong>.<br>
+    While the game is running, you may need the animations produced, or you may need IK, so the two need to switch naturally.<br>
+    At this time, the control parameters are used to easily change the weight value at any time.<br>
+    <strong>(1)</strong> <strong>Create a Control Parameter</strong>. I created it under the name "IK Weight".<br>
+    <strong>(2)</strong> <strong>Set the Type </strong>to <strong>Float</strong>.<br>
+    <strong>(3)</strong> <strong>Set the Range to "0 for minimum value, 1 for maximum value".</strong><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_245.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select Target Bone</strong>.<br>
+    <strong>(2)</strong> <strong>Check "Controller Parameter"</strong> in the properties of IK Controller Settings and <strong>press the Change button</strong>.<br>
+    <strong>(3)</strong> <strong>Select the control parameter</strong> that you created.<br>
+    The IK controller results are now reflected according to the control parameter values (0 to 1).<br>
+    Animation or script can be used to control the value of control parameters.<br>
+    (In this state, "Default FK/IK Weight" is not used.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_246.jpg"/>
+    <br>
+    
+    <p>
+    Now let's see how the animation changes depending on the value of the control parameter.<br>
+    <strong>(1)</strong> <strong>Select the animation</strong> you created earlier.<br>
+    <strong>(2)</strong> <strong>Press the Add Timeline button</strong> to <strong>(3)</strong> <strong>add the Control Parameters timeline</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_247.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select the control parameter</strong> you created and <strong>register it as a timeline layer</strong>.<br>
+    <strong>(2)</strong> <strong>create a keyframe</strong>, and <strong>(3)</strong> <strong>set the value of the control parameter to 0</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_248.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> <strong>Create and select the next keyframe</strong>.<br>
+    <strong>(5)</strong> <strong>Set the value of the control parameter</strong> to <strong>1</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_249.jpg"/>
+    <br>
+    
+    <p>
+    You can see that the rate at which IK is applied changes depending on the value of the control parameter.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Example how to apply IK Controller to game</h3>
+    <br>
+    
+    <p>
+    The 7th demo scene is a sample game with an IK controller. (<a href="https://www.rainyrizzle.com/ap-sample7-eng">Try the demo sample game</a>)<br>
+    Here is a brief explanation of how IK works in this game.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_250.jpg"/>
+    <br>
+    
+    <p>
+    It is a quadruped robot that appears in the sample game.<br>
+    This robot follows the player and helps in launching bombs.<br>
+    The robot fires a bomb with a robotic arm above the head.<br>
+    The robot walks to the left and right with four legs.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_251.jpg"/>
+    <br>
+    
+    <p>
+    The four legs are made of individual <strong>IK chains</strong>.<br>
+    <strong>Helper Bones</strong> are created <strong>where the feet touch the ground</strong>.<br>
+    These Helper Bones are connected to the <strong>Effector Bone</strong> of the IK controller and set to <strong>"Position"</strong> type.<br>
+    Helper Bones are named <strong>"Helper Foot Front R"</strong>, <strong>"Helper Foot Front L"</strong>, <strong>"Helper Foot Back R"</strong> and <strong>"Helper Foot Back L"</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_252.jpg"/>
+    <br>
+    
+    <p>
+    The robot arm that fires the bomb is also made of <strong>IK chain</strong>.<br>
+    The last bone that does not belong to the IK chain is a socket.<br>
+    I added a Bone named <strong>"Helper Aim"</strong> to the bomb-targeting animation and connected it to the <strong>IK controller</strong>.<br>
+    The IK controller type is <strong>"Look At"</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_253.jpg"/>
+    <br>
+    
+    <p>
+    It is a rough way to use the IK controller in the game.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>1. Recognizing the terrain and adjusting the height of the foot</h3>
+    <br>
+    
+    <p>
+    <strong>Try Raycast downwards</strong> in real time, slightly above the foot position.<br>
+    If the Raycast process is successful, <strong>move the Helper Bone to the position</strong> where <strong>the ray reached the ground</strong>.<br>
+    At this time, if you forcefully move the Helper Bone, robot's feet will not fall from the ground throughout the walking animation.<br>
+    By using the <strong>"SetBonePositionConstraintBySurface" function</strong> of apPortrait, the height of the foot is corrected according to the terrain, and the walking animation can work normally.<br>
+    The <strong>"Default surface position"</strong>, <strong>"Current surface position"</strong>, and <strong>"Min/Max surface position"</strong> required for the SetBonePositionConstraintBySurface function are set using different Transforms in the scene, and then the height value is obtained.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_256.jpg"/>
+    <br>
+    
+    <p>
+    To get the position value to use as a parameter in the unity scene, create GameObjects and reference the Transform information.<br>
+    <strong>1. The starting point for trying Raycast</strong><br>
+    <strong>2. "Max Surface Position"</strong> as a parameter of the SetBonePositionConstraintBySurface function<br>
+    <strong>3. "Default Surface Position"</strong> as a parameter of the SetBonePositionConstraintBySurface function<br>
+    <strong>4. "Min Surface Position"</strong> as a parameter of the SetBonePositionConstraintBySurface function<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-success">RaycastHit2D </span>RaycastHit_RobotFootR = <span class="text-success">Physics2D</span>.Raycast(FootRaycast_R.position, <span class="text-primary">new </span><span class="text-success">Vector2</span>(0.0f, -1.0f), 30);<br>
+    <span class="text-primary">if</span> (RaycastHit_RobotFootR && RaycastHit_RobotFootR.collider != <span class="text-primary">null</span>)<br>
+    {<br>
+    &emsp;&emsp;robot.<strong>SetBonePositionConstraintBySurface</strong>(&nbsp;&nbsp;<span class="text-danger">"Helper Foot Front R"</span>,<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;FootPosY_Default.position.y,<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;RaycastHit_RobotFootR.point.y,<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;FootPosY_Min.position.y,<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;FootPosY_Max.position.y, <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">ConstraintSurface</span>.Ysurface, <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span>.World);<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_254.jpg"/>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>2. Naturally aiming with a robotic arm</h3>
+    <br>
+    
+    <p>
+    <strong>Move</strong> the <strong>"Helper Aim" Bone</strong> to the location of the aiming point used in the game.<br>
+    Since the Look At IK controller is activated, no further processing is required.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    robot.<strong>SetBonePosition</strong>(<span class="text-danger">"Helper Aim"</span>, aimPosition, <span class="text-success">Space</span>.World);<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_255.jpg"/>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

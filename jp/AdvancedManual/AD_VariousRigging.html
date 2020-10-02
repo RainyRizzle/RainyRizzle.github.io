@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_VariousRigging.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_VariousRigging.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_VariousRigging.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,836 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.2</span></h4>
+    
+    <p>
+    リギング作業は、多くのテストと修正作業を通しクオリティを向上させなければならな作業です。<br>
+    専門家の経験とノウハウが要求される作業であるため、様々なフォーラムを通じてリギングに関する情報を得ることができます。<br>
+    このページは、リギング作業に困難を経験する方のために、いくつかの場合について、どのようリギングをすべきかを説明します。<br>
+    また、それぞれの場合についてAnyPortraitの機能をどのように使用するか、より詳細に説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>関節の位置による違い</h3>
+    <br>
+    
+    <p>
+    2つまたはそれ以上の骨が接続された関節は、リギングにおいて最も重要な部位です。<br>
+    どのように重みを設定するかによって、メッシュが変形されている様子が大きく異なるためです。<br>
+    ここで重みの分布ほど重要なのが、「関節の位置」です。<br>
+    「イメージの中心から骨が接続か」、または「端から骨が接続されて、関節を構成するか」は、非常に重要な問題です。<br>
+    これは正解がなく、どのようなイメージに関節を作るかによって、皆さんが直接比較して決定すれば良いです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_653.jpg"/>
+    <br>
+    
+    <p>
+    まず、関節が画像の中心に位置する場合です。<br>
+    この場合は、関節が内側、外側に動く場合に適しています。<br>
+    関節の内側と外側の方が均一に変形されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_654.jpg"/>
+    <br>
+    
+    <p>
+    第二の場合は、関節が画像の外側に位置している場合です。<br>
+    関節の内側が変形がかなり大きく発生するのに対し、外側は比較的少なく変形されます。<br>
+    一見この方式は、変形が激しいが、人と動物の多くの関節に（腕、膝、指など）は、実際にこのようになっています。<br>
+    （直接自分の指と膝に触れて、骨の位置を確認してみましょう。）<br>
+    この方法で、関節を構成する関節が折られたとき、皮膚が少し膨らんだながら折ること描写することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_655.jpg"/>
+    <br>
+    
+    <p>
+    最後の場合は、関節が画像の内側に位置している場合です。<br>
+    関節の内側の変形が佳作少なく、外側の変形が大きくなる特性があります。<br>
+    画像が圧縮されている部位が少ないため、画像の大きさが減少することを防止するのに役立ちます。<br>
+    横顔の人のイメージの場合には、骨盤と足の連結部位で、この方法が使用されることがあります。<br>
+    </p>
+    <br>
+    
+    <p>
+    上記の3つの場合は、重みの分布が緩やかになっている場合です。<br>
+    しかし、人や動物の画像では、関節の動作が複雑なので、もう少し手作業で設定された重みが求められます。<br>
+    上記の場合を修正して、次のようにリギングすることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_656.jpg"/>
+    <br>
+    
+    <p>
+    重みを、上記の画像のように修正しました。<br>
+    関節の内側部位の重みがより急激に変化するのを見ることができます。<br>
+    「Blend」機能を少なく使用して、直接重みを増減して、上記のように修正することができます。<br>
+    このように重みを変更した場合の結果を、以下の画像で確認することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_657.jpg"/>
+    <br>
+    
+    <p>
+    前の説明と同様に、関節の位置に応じて、それぞれどのように適用されるか比較してみましょう。<br>
+    <strong>1) 関節が「中心」に位置する場合</strong><br>
+    : 関節の内側の画像が少し折ることを示します。<br>
+    人や動物のようなキャラクターのほとんどの関節に適用するお勧めします。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2) 関節が「外側」に位置する場合</strong><br>
+    : 関節の内側が非常に多く変形されながら画像が多少奇妙に思えることができます。<br>
+    人や動物の関節のうち、関節が折られたとき、皮膚が膨らんで折る場合（腕、膝、指など）、この方法はかなり効果的です。<br>
+    メッシュが異常に出力されることを防ぐために、頂点の「Z-Depth」を変更する必要があります。 （<a href="../../jp/AdvancedManual/AD_ZdepthVert.html">関連ページ</a>）<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3) 関節が「内側」に位置する場合</strong><br>
+    : 重み分布方式が変わっても結果は大きく変わりません。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>連続した複数の骨で構成された場合</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_658.jpg"/>
+    <br>
+    
+    <p>
+    ロープやスカーフ、長い髪のように複数の連続した骨を対象にリギングをする必要がある場合があります。<br>
+    特に、対象の動きが非常に柔軟で、特定の場所に関節が形成されることがない場合は重みを割り当てすることは容易ではありません。<br>
+    この場合、「Blend」機能を利用することが非常に効果的です。<br>
+    次の方法でリギングをみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_659.jpg"/>
+    <br>
+    
+    <p>
+    開始がされている最初の骨と頂点を選択します。<br>
+    頂点を選択すると、次のの骨の頂点にまで十分に多く選択することもされます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_660.jpg"/>
+    <br>
+    
+    <p>
+    続いて、次の骨と頂点を選択して、重みを設定します。<br>
+    このとき、すべての場合に重み値に「1」を割り当てます。<br>
+    この段階から、頂点ごとに1つの重みを複雑に割り当てることは非常に面倒で、良い結果にもすることができません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_661.jpg"/>
+    <br>
+    
+    <p>
+    「ポーズテスト」機能を利用して、リギング結果を確認してみましょう。<br>
+    当然のことながら重み値は、それぞれの骨に「1」を入力されているので、上記のように不思議見られることです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_662.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Blend</strong>」機能を使ってみましょう。<br>
+    最初の骨から順次リギングを変更します。<br>
+    <strong>(1)</strong> 頂点を選択します。今回はかなり広い範囲の頂点を選択します。<br>
+    <strong>(2)</strong> 最初の骨を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_663.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> <strong>「Blend」ボタン</strong>を数回繰り返して押します。<br>
+    まるでブラー効果を適用したかのように重みが均等に分布されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_664.jpg"/>
+    <br>
+    
+    <p>
+    第二の骨にも同じように作業をします。<br>
+    <strong>(4)</strong> 頂点を選択します。今回もかなり広い範囲の頂点を選択します。<br>
+    <strong>(5)</strong> 第二の骨を選択します。<br>
+    <strong>(6)</strong> <strong>「Blend」ボタン</strong>を数回押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_665.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_666.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_667.jpg"/>
+    <br>
+    
+    <p>
+    同じように、最後の骨まで継続して「Blend」機能を実行します。<br>
+    この作業をすると、重みが均等に分布したかのように見えます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_668.jpg"/>
+    <br>
+    
+    <p>
+    重みを確認してみる、両端に位置する骨の重みはかなり大きいが、中間の骨の重みは少ない方です。<br>
+    中間の骨の重みが少なく適用されると、かなり柔軟な動きをすることができます。<br>
+    必要に応じて重みを増減するか、「Blend」の適用回数を調節してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_669.jpg"/>
+    <br>
+    
+    <p>
+    再び「ポーズテスト」をオンにして、複雑な関節の動きにメッシュがかなり自然に変形されることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>ブラシモード</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_670.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitの「<strong>ブラシモード</strong>」がオンの状態で、マウスを利用して、重みを設定することができます。<br>
+    今回は上記のように、大きな骨と小さな骨二つに構成された例を対象に説明します。<br>
+    小さな二つの骨に画像の両耳の部分を接続するためには、この場合は、「ブラシモード」で作業をすると、かなり便利です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_671.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> すべての頂点を選択します。<br>
+    <strong>(2)</strong> 基本となる骨を選択します。<br>
+    <strong>(3)</strong> 「1」の重みを割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_672.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Brush</strong>」タブを選択すると、ブラシツールが表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_673.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    ブラシモードのUIです。<br>
+    <strong>1. Numpadタブ、Brushタブ</strong><br>
+    : 既存のテンキースタイルの重みツールとブラシモードを切り替えます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. 「Add」、「Multiply」、「Blur」ブラシ</strong><br>
+    : 加算演算がされているブラシ、乗算演算がされているブラシ、周辺との値を緩やかにするブラーブラシツールです。<br>
+    それぞれのショートカットキーは「 <kbd>J</kbd> 、 <kbd>K</kbd> 、 <kbd>L</kbd> 」です。<br>
+    ブラシモードを終了するには、マウスの右クリックをします。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. Radius</strong><br>
+    : ブラシの半径です。ショートカット「 <kbd>[</kbd>&nbsp;&nbsp;、  <kbd>]</kbd> 」サイズを増減することができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>4. Intensity </strong><br>
+    : ブラシの強度です。ショートカットキー「 <kbd>&lt;</kbd> 、  <kbd>&gt;</kbd> 」で強度を増減することができます。<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_674.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 左の骨を選択します。 （頂点が選択された状態である必要があります。）<br>
+    <strong>(2)</strong> 「<strong>Add</strong>」ブラシを選択します。 （ <kbd>J</kbd> ）<br>
+    <strong>(3)</strong> マウスの周りに円形のブラシが表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_675.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Radius</strong>」の値を増加させます。 （ <kbd>]</kbd> ）<br>
+    <strong>(2)</strong> ブラシのサイズが大きくなったことを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_676.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> マウスをクリックした状態でこすると、頂点の重みのうち、現在の骨の値が徐々に増加することを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_677.jpg"/>
+    <br>
+    
+    <p>
+    反対側の骨にも同じことをしてみましょう。<br>
+    <strong>(1)</strong> マウス右クリックをして、ブラシモードをオフにして頂点が選択された状態で、右の骨を選択します。<br>
+    <strong>(2)</strong> 「<strong>Add</strong>」ブラシを選択します。<br>
+    <strong>(3)</strong> マウスをクリックしてムンジルロジュ反対側の耳も重みが増加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_678.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Multiply</strong>」ブラシを使用すると、重みの値を細かく編集することが可能です。<br>
+    <strong>(1)</strong> 骨と頂点が選択された状態で、「<strong>Multiply</strong>」ブラシを選択します。<br>
+    <strong>(2)</strong> ブラシで頂点をこする重みが率によって徐々に増減することがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_679.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Blur</strong>」ブラシを使用すると、重みの値が緩やかに分布するようにすることができます。<br>
+    「<strong>Blend</strong>」の機能と似ています。<br>
+    <strong>(1)</strong> 骨と頂点が選択された状態で、「<strong>Blur</strong>」ブラシを選択します。<br>
+    <strong>(2)</strong> ブラシで頂点をこする重みが周辺の頂点の重みと徐々に同様になります。<br>
+    結果的に重みが緩やかに分布されていることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_680.jpg"/>
+    <br>
+    
+    <p>
+    ポーズテストを通じてリギング結果を確認してみましょう。<br>
+    このように、ブラシツールを利用して簡単にリギング作業を行うことができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>「ロック機能」を利用して、重みが変わることを防止</h3>
+    <br>
+    
+    <p>
+    骨が3つ以上の接続された部位では、リギング作業が非常に複雑になります。<br>
+    特にいくつかの骨に対して、まずリギングをするかによって結果が異なることがあることが最も困難な点です。<br>
+    重みの値は、後で選択された骨の影響を受けるため、まず作業した結果が歪みやすいです。<br>
+    v1.1.8で追加された「ロック機能」を利用すれば、これらの問題を少しでも防ぐことができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_681.jpg"/>
+    <br>
+    
+    <p>
+    今回の例の形態は、3つの骨とV字型のイメージです。<br>
+    画像の中央には、3つの骨を対象にリギングする必要がありますので、作業が多少複雑になることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_682.jpg"/>
+    <br>
+    
+    <p>
+    簡単にリギングをしてみました。<br>
+    予想通りのうちの3つの骨で頂点の重みが複雑に割り当てられたことを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_683.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bone Root</strong>」に関する重み分布です。<br>
+    下の部分を基準に左右に均一に分布した状態です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_684.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_685.jpg"/>
+    <br>
+    
+    <p>
+    左右の骨の重みも互いに同様の分布された。<br>
+    </p>
+    <br>
+    
+    <p>
+    今ここの右側に位置する「<strong>Bone R1</strong>」の重みを増加させてみましょう。<br>
+    ただし、下にある「<strong>Bone Root</strong>」の重みはそのまま維持するようにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_686.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 重みを編集を制限する骨を選択します。<br>
+    <strong>(2)</strong> 「<strong>ロックボタン</strong>」を押します。<br>
+    <strong>(3)</strong> 選択された骨は、すべての頂点に対して重みを編集することが制限され、これはリギング情報リストの「アイコン」で確認することができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    ロック機能は、次のような特徴があります。<br>
+    <strong>1)</strong> 編集モードが終了すると、すべてのロック機能は解除されます。<br>
+    <strong>2)</strong> ロック機能は、「他の骨」によってロックされ、骨の重みが変わることを防止する機能です。<br>
+    <strong>3)</strong> ロック状態であっても、<strong>2)</strong>の理由から、該当の骨選択された状態では、重みが編集になります。<br>
+    <strong>4)</strong> 「<strong>Blend</strong>」や「<strong>Normalize</strong>」によって値の変化が少しあります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_687.jpg"/>
+    <br>
+    
+    <p>
+    ロック機能をテストしてみましょう。<br>
+    <strong>(1)</strong> 右の骨を選択して、かなり広い範囲の頂点を選択します。<br>
+    <strong>(2)</strong> 「<strong>+</strong>」ボタンを押して重みを増加させました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_688.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_689.jpg"/>
+    <br>
+    
+    <p>
+    左側の骨の重みは大幅に減ったのに対し、<br>
+    ロック機能がオンになって下の骨の重みはそのまま維持されることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>重なったメッシュにリギング重みをコピー</h3>
+    <br>
+    
+    <p>
+    複数のメッシュがネストされた場合、重み値をコピーする機能は非常に重宝します。<br>
+    重みの値をコピーすると、不必要な作業を減らすことができます。<br>
+    また、重ねているメッシュの動きがぎこちなくなることを防止することができます。<br>
+    既存の重みコピー機能は、1つの頂点の重み値を、他の1つの頂点にコピーして貼り付けるだけサポートします。<br>
+    しかし、v1.1.8に追加された「<strong>位置ベースのコピー（Pos-Copy / Paste）</strong>」を利用すれば、複数の頂点のリギング情報を、他の多数の頂点に一括してコピーすることが可能です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_690.jpg"/>
+    <br>
+    
+    <p>
+    この例では、二つのメッシュが重なっています。<br>
+    <strong>(1)</strong>のメッシュに<strong>(2)</strong>のメッシュが服や鎧のように装着された状態です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_691.jpg"/>
+    <br>
+    
+    <p>
+    一度内側のメッシュに対してリギング作業を実行します。<br>
+    多くの頂点があり、重みが緩やかに分布しているので、すべての重みの値を他のメッシュに同じようにリセットすることは非常に難しい作業である。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_693.jpg"/>
+    <br>
+    
+    <p>
+    この頂点の重みの値をコピーしてみましょう。<br>
+    <strong>(1)</strong> 可能な限り多くの頂点を選択します。ここのすべての頂点を選択しました。<br>
+    <strong>(2)</strong> 「<strong>Pos-Copy</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <p>
+    ロケーションベースのコピー機能は、保存された頂点の位置に基づいて、対象の重みを再補間して貼り付ける方法です。<br>
+    したがって、多くの数の頂点を格納するほど、より正確に重みを貼り付けることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_692.jpg"/>
+    <br>
+    
+    <p>
+    上部のメッシュを見えるようにします。<br>
+    <strong>(1)</strong> メッシュを選択します。<br>
+    <strong>(2)</strong> 「<strong>Add to Rigging</strong>」ボタンを押してリギングモディファイヤに追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_694.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> すべての頂点を選択します。<br>
+    <strong>(2)</strong> 「<strong>Pos-Paste</strong>」ボタンを押して保存された重みを貼り付けます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_695.jpg"/>
+    <br>
+    
+    <p>
+    重みがすべての頂点にコピーされました。<br>
+    既存のメッシュとほぼ同じように重みが分布されたことを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_696.jpg"/>
+    <br>
+    
+    <p>
+    「ポーズテスト」機能で骨を動かしてみると、二つのメッシュが同期されて動くのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Auto Rig</h3>
+    <br>
+    
+    <p>
+    「<strong>Auto Rig</strong>」機能を使用すると、選択された頂点に自動的に重みを設定することが可能です。<br>
+    この機能は、v1.1.8で大幅に改善され、非常に便利で強力な機能として開発されました。<br>
+    </p>
+    <br>
+    
+    <p>
+    「Auto Rig」機能は、次のような特徴があります。<br>
+    - 関節に接続された骨と骨の間の重みは、緩やかに分布されているが、互いに直接接続されていない骨には多少急激に重みが分布するように設定されます。<br>
+    - 選択された頂点にのみ「Auto Rig」機能が実行されます。<br>
+    - 骨の重みが適用される範囲は、頂点の分布に応じて自動的に決定され、選択されていない頂点も演算に参考になります。<br>
+    - 選択された頂点に既に重みがある場合には、骨の重み範囲が変わり、より正確に演算することができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    次の例を通した「Auto Rig」機能を使用する方法を確認してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_697.jpg"/>
+    <br>
+    
+    <p>
+    上記のような例では、「Auto Rig」機能を利用して、簡単にリギングをみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_698.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 頂点を選択します。ここのすべての頂点を対象に適用してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_699.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>「Auto Rig」ボタン</strong>を押します。<br>
+    <strong>(2)</strong> 選択された頂点に重みが自動的に割り当てられます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_700.jpg"/>
+    <br>
+    
+    <p>
+    「ポーズテスト」機能を利用して、結果を確認してみましょう。<br>
+    多くの骨が複雑に構成されても、全体的にリギングの結果がお勧めです。<br>
+    しかし、いくつかの頂点が異常に設定されたかのように見えます。<br>
+    「Auto Rig」の特性を活用すれば、上記のようなエラーをさらに減らして全体の作業の効率をより高めることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_701.jpg"/>
+    <br>
+    
+    <p>
+    「Auto Rig」機能を使用する前の状態に復元します。<br>
+    上記の「Auto Rigの特性」の中で次の項目を使用することです。<br>
+    「<span class="text-danger">- 選択された頂点に既に重みがある場合には、骨の重み範囲が変わり、より正確に演算することができます。</span>」<br>
+    この特性を利用すれば、Auto Rigの結果がより正確に作成されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 主要部位の頂点と、「最も近い骨」を選択します。<br>
+    <strong>(2)</strong> 「<strong>1</strong>」の値の重みを割り当てます。<br>
+    この作業をすべての骨に対して実行する必要がなく、エラーが発生しな頂点と骨だけとなります。<br>
+    これらの操作は、正確には不要です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_702.jpg"/>
+    <br>
+    
+    <p>
+    再び「<strong>Auto Rig</strong>」ボタンを押してみましょう。<br>
+    上記同様に、自動的にリギングが完了したことを見ることができます。<br>
+    実際の結果が向上していることを確認してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_703.jpg"/>
+    <br>
+    
+    <p>
+    「ポーズテスト」機能を利用して骨を動かし、結果を確認してみましょう。<br>
+    以前より奇妙な部分が減って、かなり良い結果を見ることができます。<br>
+    「<strong>Auto Rig</strong>」機能は、作業の効率を高める目的で使用されます。<br>
+    後に、追加の補正作業を通しリギングの品質をさらに向上させることをお勧めします。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>骨を選択して、Auto Rig機能利用</h3>
+    <br>
+    
+    <p>
+    Auto Rig機能は、すべての骨を対象にリギングを演算します。<br>
+    したがって、たまに不必要な骨が頂点と接続されている場合に発生します。<br>
+    Auto Rig機能が適用される骨を選択して、これらの問題を防ぎ、より正確かつ迅速にリギングを行うことができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_703_2.jpg"/>
+    <br>
+    
+    <p>
+    Riggingモディファイヤが適用されたメッシュの頂点を選択した状態です。<br>
+    <strong>(1)</strong> 「 <kbd>Ctrl</kbd> （Mac OSでは <kbd>Command</kbd> ）」を押しながら「<strong>Auto Rigボタン」</strong>を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_703_3.jpg"/>
+    <br>
+    
+    <p>
+    骨を選択できるダイアログが表示されます。<br>
+    <strong>1. Search</strong> : 名前を検索して、骨を検索します。<br>
+    <strong>2. 骨リスト</strong> : リギングの対象となる骨を選択することができます。 「<strong>Shiftキー</strong>」を押して複数の骨を選択することができます。<br>
+    <strong>3. 星形のアイコン</strong> : 選択された頂点と近くにいる骨です。<br>
+    <strong>4. Select All / Deselect Allボタン</strong> : すべての骨を選択するか、選択を解除します。<br>
+    <strong>5. Select All Near Bonesボタン</strong> : 選択された頂点と近い骨（星形のアイコンがある骨）を選択します。<br>
+    <strong>6. Applyボタン</strong> : 選択された骨を対象にAuto Rig機能を実行します。<br>
+    <strong>7. Cancelボタン</strong> : 操作をキャンセルします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_703_4.jpg"/>
+    <br>
+    
+    <p>
+    「Auto Rig」をするために、骨を選択して適用してみましょう。<br>
+    <strong>(1)</strong> <strong>「Select All Near Bonesボタン」</strong>を押します。<br>
+    星形のアイコンがある骨が選択されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_703_5.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong>  <kbd>Shift</kbd> を押しながらクリックして追加したり、除外する骨を選択します。<br>
+    <strong>(3)</strong> <strong>「Applyボタン」</strong>を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_703_6.jpg"/>
+    <br>
+    
+    <p>
+    選択された骨を対象にAuto Rig機能が適用されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_703_7.jpg"/>
+    <br>
+    
+    <p>
+    骨を選択せずにAuto Rigを実行した結果と比較すると、リギングが異なって適用されたことを見ることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意</strong></span><br>
+    骨を選択して、Auto Rig機能を実行すると、次のの特徴に応じてリギングが計算されます。<br>
+    - 選択された骨はAuto Rigの対象となるだけなので、選択されたすべての骨がすべての頂点に接続されているわけではない。<br>
+    - もし、その頂点に選択されていない他の骨の重みが適用された状態であれば、その骨を含むAuto Rig機能が実行されます。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

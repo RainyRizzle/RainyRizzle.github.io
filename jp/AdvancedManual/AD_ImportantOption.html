@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ImportantOption.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ImportantOption.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_ImportantOption.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,13 +69,150 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.3</span></h4>
+    
+    <p>
+    ゲームで画面に数多くのキャラクターが登場する場合があります。<br>
+    主に見ることができる例は、「1人のプレイヤーと多数のモンスターが登場する場合は」である。<br>
+    しかし、多くのキャラクターが登場すれば、ゲームは非常に遅くなり、スムーズにゲームをプレイすることができません。<br>
+    AnyPortraitの「<strong>Importantオプション</strong>」を変更すると、パフォーマンスを向上させることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    - <span class="text-primary"><strong>Important ON</strong></span>：毎フレームごとに更新されて、アニメーションがスムーズです。 （デフォルト）<br>
+    - <span class="text-danger"><strong>Important OFF</strong></span>：更新フレームが制限されて、アニメーションの品質は少し落ちますが、パフォーマンスが向上します。<br>
+    </p>
+    <br>
+    
+    <p>
+    一般的に、プレイヤーキャラクターのように重要なオブジェクトは、Importantオプションをつけることをお勧めします、<br>
+    多数で登場するが、アニメーションの品質が低くてもされているモンスターや背景のオブジェクトは、<br>
+    Importantオプションを引くことをお勧めします。<br>
+    </p>
+    <br>
+    
+    <p>
+    下のプロファイリング結果からImportantオプションの値に応じて性能の違いを見ることができます。<br>
+    （下の実験結果は、オブジェクトの複雑さ、実行環境、シーンの構成に応じて別の方法で測定することができます。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_482.jpg"/>
+    <br>
+    
+    <p>
+    アニメーションが再生されているキャラクターを50個配置した画面です。<br>
+    キャラクターのImportant設定はオンになっており、FPS（Frames Per Second）は、約30を記録した。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_483.jpg"/>
+    <br>
+    
+    <p>
+    20つのキャラクターをより作成して、合計70個のキャラクターが配置されました。<br>
+    キャラクターが追加されただけFPSが減少し、約22のFPSを記録しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_484.jpg"/>
+    <br>
+    
+    <p>
+    100つのキャラクターが配置されるのでFPSが15まで減少しました。<br>
+    このように性能が低下した場合には、通常のゲームプレイを期待することができないでしょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_485.jpg"/>
+    <br>
+    
+    <p>
+    Importantオプションをオフにしてキャラクターを配置してみました。<br>
+    キャラクターのImportantオプションでの「制限されたFPSの設定」は、30です。<br>
+    キャラクターが50個配置されたときImportantオプションがオンの場合と同様にFPSは30を記録した。<br>
+    この状態では、アニメーションが毎フレームごとに更新されることがないので、プロファイラでのFPSが多少特異な記録されていることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_486.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターを70個配置した結果です。<br>
+    FPSは30またはそれよりわずかにそれ以上を記録してImportantオプションがオンの場合よりも高い性能を示しています。<br>
+    AnyPortraitはImportantオプションがオフになって、同じキャラクターのアップデートを一括して管理するタスクを実行します。<br>
+    そして、この過程で、可能な別のフレームでキャラクターの更新を処理しようとします。<br>
+    ただし、他の要因によってFPSが変動した場合AnyPortraitはキャラクターの更新のタイミングを調整するため、一時的なフレームの低下現象（Spike）が発生することがあります。<br>
+    （Unityで定期的にメモリ管理などの理由でFPSが変動します。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_487.jpg"/>
+    <br>
+    
+    <p>
+    100つのキャラクターを配置した結果です。<br>
+    FPSは少し減ったがImportantオプションがオンの場合よりも良好な約27を記録しました。<br>
+    可能な限り、すべてのフレームに均等にキャラクターのアップデートを分散させたことをプロファイラを介して確認することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_488.jpg"/>
+    <br>
+    
+    <p>
+    Importantオプションを変更する方法はいくつかあります。<br>
+    まず、「<strong>Bakeダイアログ</strong>」のオプションを変更してみましょう。<br>
+    <strong>(1)</strong> <strong>Bakeボタン</strong>を押します。<br>
+    <strong>(2)</strong> <strong>Settingタブ</strong>を選択します。<br>
+    <strong>(3)</strong> 「<strong>Is Important</strong>」の項目をクリックして設定を変更することができます。<br>
+    「<strong>FPS</strong>」の項目は、Importantオプションがオフの場合の更新頻度です。<br>
+    （一般的には15、20、30の値を推奨します。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_489.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Inspector UI</strong>」で「<strong>Is Important</strong>」の項目をクリックして設定を変更することもできます。スクリプトでもImportantオプションを変更することも可能です。<br>
+    <a href="../../jp/Script/SC_Init.html">関連ページ</a>から「SetImportant（bool）」関数を確認してみてください。<br>
+    スクリプトを利用する場合、リアルタイムでのオプションを変更することができますので、ゲームの最適化に役立つでしょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger">参考</span><br>
+    v1.2.3から、「Importantオプション」が無効にされた状態で、キャラクターが「固定FPS」で実行するとの処理が改善されました。<br>
+    今断続的なフレームの低下現象（Spike）が可能な発生しないように改善しました。<br>
+    このバージョンからは、固定FPSはゲームのFPSの半分またはそれ以下のみ動作するように制限されます。<br>
+    もしゲームのFPSが低いか高すぎる固定FPS値が指定された場合、無条件にゲームのFPSの半分またはそれ以下で実行されるように強制的にされます。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
         <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_BillboardPers.html">< ビルボードと「Perspective」カメラ</a>
-        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_PSD.html">PSDファイルの読み込み ></a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_ReversedRiggedMesh.html">リギングが適用されたメッシュの反転サイズ ></a>
     </nav>
     
     <!-- 페이지 내용 끝! -->

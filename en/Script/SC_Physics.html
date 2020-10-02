@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/Script/SC_Physics.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/Script/SC_Physics.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/Script/SC_Physics.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -66,8 +68,476 @@
     <h1 class="display-5">Physic Effect</h1>
     <br>
     
-    <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <p>
+    Physics Modifier's physics effects can be controlled by script.<br>
+    You can turn physical effects on or off, and you can further control external force and pull.<br>
+    </p>
+    <br>
+    
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetPhysicEnabled</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">isPhysicEnabled )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Turn physical effects on or off.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isPhysicEnabled : Whether the physics modifier is processed<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>AddForce_Point</strong> <span class="text-muted">( </span><span class="text-success">Vector2</span> <span class="text-muted">pointPosW,</span> <span class="text-primary">float</span> <span class="text-muted">radius )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Add a radial force based on the point.<br>
+    &nbsp;&nbsp;&nbsp;It returns apForceUnit, then you have to add properties.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> pointPosW : The position where the force is applied (World coordinate system)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> radius : Radius of radial force<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apForceUnit</span> : Generated force
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>AddForce_Direction</strong> <span class="text-muted">( </span><span class="text-success">Vector2</span> <span class="text-muted">directionW )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Adds a directional force.<br>
+    &nbsp;&nbsp;&nbsp;It returns apForceUnit, then you have to add properties.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> directionW : The direction in which the force is applied (World coordinate system)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apForceUnit</span> : Generated force
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>AddForce_Direction</strong> <span class="text-muted">( </span><span class="text-success">Vector2</span> <span class="text-muted">directionW,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">waveSizeX,</span> <span class="text-primary">float</span> <span class="text-muted">waveSizeY,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> <span class="text-muted">waveTimeX,</span> <span class="text-primary">float</span> <span class="text-muted">waveTimeY )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Adds a directional force.<br>
+    &nbsp;&nbsp;&nbsp;It has a repetitive directional change that draws a sin curve with respect to the X and Y axes, making it suitable for expressions like wind.<br>
+    &nbsp;&nbsp;&nbsp;It returns apForceUnit, then you have to add properties.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> directionW : The direction in which the force is applied (World coordinate system)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> waveSizeX : The maximum X value in the periodically changing direction<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> waveSizeY : The maximum Y value in the periodically changing direction<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> waveTimeX : The cycle in which the direction changes about the X axis<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> waveTime : The cycle in which the direction changes about the Y axis<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apForceUnit</span> : Generated force
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>IsAnyForceEvent</strong>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Make sure that there is currently added force.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : Whether there is added forces
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">Vector2</span> <strong>GetForce</strong> <span class="text-muted">( </span><span class="text-success">Vector2</span> <span class="text-muted">targetPosW )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;The calculated force is measured at the input position.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> targetPosW : Position to be measured (World coordinate system)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> : Measured force vector
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ClearForce</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Eliminate all the forces you have added with the AddForce function.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apPullTouch</span> <strong>AddTouch</strong> <span class="text-muted">( </span><span class="text-success">Vector2</span> <span class="text-muted">posW,</span> <span class="text-primary">float</span> <span class="text-muted">radius )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Start "pull" by touch input.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> posW : Touch position (World coordinate system)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> radius : Radius to be pulled<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apPullTouch</span> : Objects distinguished by unique IDs with information about "pull by touch"
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetTouchPosition</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">touchID,</span> <span class="text-success">Vector2</span> <span class="text-muted">posW )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Updates the current position of the touch corresponding to the apPullTouch returned after the call to AddTouch.<br>
+    &nbsp;&nbsp;&nbsp;Select using apPullTouch.TouchID.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">​int</span> touchID : ID corresponding to the TouchID of apPullTouch returned from AddTouch<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> posW : The position of the current touch​<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetTouchPosition</strong> <span class="text-muted">( </span><span class="text-success">apPullTouch</span> <span class="text-muted">touch,</span> <span class="text-success">Vector2</span> <span class="text-muted">posW )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Updates the current position of the touch corresponding to the apPullTouch returned after the call to AddTouch.<br>
+    &nbsp;&nbsp;&nbsp;Select apPullTouch by entering parameters.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apPullTouch</span> touch, : The apPullTouch returned from AddTouch<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> posW : The position of the current touch<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>IsAnyTouchEvent</strong>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Returns if there is a touch currently added.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : Whether there is an added touch
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apPullTouch</span> <strong>GetTouch</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">touchID )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Returns an apPullTouch object with an ID corresponding to touchID.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> touchID : ID of touch event to find<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>RemoveTouch</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">touchID )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Removes the touch event object that is calculating the pulling.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">​int</span> touchID : ID corresponding to the TouchID of apPullTouch returned from AddTouch<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ClearTouch</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Remove all touch events.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ClearForceAndTouch</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Remove all forces and touch events.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    
+    <br><br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>apForceUnit</h4>
+    <br>
+    
+    <p>
+    If you use the AddForce function, the force is not applied.<br>
+    You need to include additional information in the return value of the AddForce function, apForceUnit.<br>
+    You must call one of the SetPower functions and call either EmitLoop or EmitOnce.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>SetPower</strong>(float power)<br>
+    : Add power.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>SetPower</strong>(float power, float waveSize, float waveTime)<br>
+    : Adds a force that changes periodically by the amount of waveTime times the size of waveSize based on power.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>EmitLoop</strong><strong>()</strong><br>
+    : Set as a sustained force.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary">public</span> <span class="text-success">apForceUnit</span> <strong>EmitOnce</strong>(float liveTime)<br>
+    : Set as a power to disappear after the time of liveTime.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary"><strong>using</strong></span> <strong>AnyPortrait</strong>;<br>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">PhysicsTest</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// Target AnyPortrait Object<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success">apPortrait </span>portrait;<br>
+    &emsp;&emsp;// Touch ID<br>
+    &emsp;&emsp;<span class="text-primary"><strong>private int </strong></span>_touchID;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//----------------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;// Force Events<br>
+    &emsp;&emsp;&emsp;&emsp;//----------------------------------------<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Clear Force<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.C))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.ClearForce();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Clear Force"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Add Point Force<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.P))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Position : (0, 0)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Radius : 10<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Power : 2000<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Live Time : 10 Sec<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.AddForce_Point(</strong><span class="text-success"><strong>Vector2</strong></span>.zero, 10.0f)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.SetPower(2000)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.EmitOnce(10);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Add Point Force"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Add Waved Directional Force<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.D))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Direction : (1 +- 0.5, 0.5 +- 0.2)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Power : 4000 +- 1000<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Loop<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong> portrait.AddForce_Direction(</strong><span class="text-primary"><strong>new </strong></span><span class="text-success">Vector2</span>(1.0f, 0.5f), 0.5f, 0.2f, 5, 10)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.SetPower(4000, 1000, 25)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;.EmitLoop();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Add Waved Directional Force"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//----------------------------------------<br>
+    &emsp;&emsp;&emsp;&emsp;// Touch Events<br>
+    &emsp;&emsp;&emsp;&emsp;//----------------------------------------<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3 </span>touchPosW = <span class="text-success">Camera</span>.main.ScreenToWorldPoint(<span class="text-primary">new </span><span class="text-success">Vector3</span>(<span class="text-success">Input</span>.mousePosition.x, <span class="text-success">Input</span>.mousePosition.y, 0));<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector2 </span>touchPosW2 = <span class="text-primary">new </span><span class="text-success">Vector2</span>(touchPosW.x, touchPosW.y);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Left Click -&gt; Touch<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span>(<span class="text-success">Input</span>.GetMouseButtonDown(0))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//Start Touch Event<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_touchID = portrait.AddTouch(touchPosW2, 2.0f).TouchID;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Add Touch ("</span> + _touchID + <span class="text-danger">")"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">else if</span>(<span class="text-success">Input</span>.GetMouseButton(0))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//Refresh Touch Position<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.SetTouchPosition(_touchID, touchPosW2);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">else if</span>(Input.GetMouseButtonUp(0))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//Release Touch Event<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.ClearTouch();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_touchID = -1;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

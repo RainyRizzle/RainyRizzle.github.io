@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_AutoLoopKeyframe.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_AutoLoopKeyframe.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_AutoLoopKeyframe.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,82 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    ループアニメーションを作成する場合、ほとんどの場合、開始フレームと終了フレームは同じでなければなりません。<br>
+    これは、開始点と終了点の境界があいまいで、自然なループアニメーションが発生するためです。<br>
+    このため、他の多くのプログラムで作業する場合は、開始フレームをコピーして終了フレームに貼り付け、スムーズに処理する必要があります。<br>
+    AnyPortraitには、これらのタスクを減らすための「<strong>Auto Loop Keyframe</strong>」という機能があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_142.jpg"/>
+    <br>
+    
+    <p>
+    これは典型的なループアニメーションの構造です。<br>
+    開始フレームと終了フレームに同じポーズのキーフレームがあります。<br>
+    ここで不必要に複製された「<strong>最後のキーフレーム</strong>」を削除しようとします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_143.jpg"/>
+    <br>
+    
+    <p>
+    最後のキーフレームを削除すると、他のフィーチャのアイコンとして表示されるキーフレームが終了フレームに表示されます。<br>
+    これらの半透明キーフレームは、「<strong>開始キーフレームのダミーキーフレーム</strong>」です。<br>
+    ループアニメーションの場合、開始キーフレームは自動的に複製されます。<br>
+    このダミーのキーフレームを「<span class="text-danger"><strong>Auto Loop Keyframe (自動ループキーフレーム)</strong></span>」と呼びます。<br>
+    これが起こると、キーフレームに矢印アイコンが表示され、キーフレームが接続されていることを示します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_144.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_145.jpg"/>
+    <br>
+    
+    <p>
+    開始キーフレームを移動すると、「<strong>Auto Loop Keyframe</strong>」が自動的に移動します。<br>
+    この状態でもループアニメーションは可能です。<br>
+    これは、開始キーフレームがループの反対側の実際のキーフレームに結び付けられているためです。<br>
+    実際には、上記の画面に接続されたアニメーションカーブを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_146.jpg"/>
+    <br>
+    
+    <p>
+    開始キーフレームよりも前のフレームに移動して再生すると、<br>
+    それは一般的にアニメ化されるべきではありません。<br>
+    しかし、アニメーションは実質的にループしているので再生されていることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_147.jpg"/>
+    <br>
+    
+    <p>
+    「Auto Loop Keyframes」を使用すると、開始フレームと終了フレームが空のループアニメーションを作成することができます。<br>
+    これにより、ループ境界が不明瞭になり、より自然な動作が生成されます。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

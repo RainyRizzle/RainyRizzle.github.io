@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ExtraOption.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ExtraOption.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_ExtraOption.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,477 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.4</span></h4>
+    
+    <p>
+    アニメーションが再生されたり、ゲームが実行される途中でメッシュのレンダリング順序を切り替える必要がある場合があります。<br>
+    または、画像をスクリプトなしで切り替える必要がある場合もあります。<br>
+    この機能の特徴は、他のモディファイヤとは異なり、「連続性がない」とのことです。<br>
+    従ってこの2つの機能は、他のモディファイヤとは異なる方法で設定する必要があります。<br>
+    AnyPortraitではこれを「<strong>Extra（エクストラ）設定</strong>」と呼びます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>制御パラメータでレンダリングの順序を制御</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_417.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 制御パラメータを追加します。ここで「ExtraOption」と名前を指定しました。<br>
+    <strong>(2)</strong> メッシュグループを選択します。<br>
+    <strong>(3)</strong> 「<strong>Modifier</strong>」タブを選択し、「<strong>Add Modifier</strong>」ボタンを押します。<br>
+    <strong>(4)</strong> 「<strong>Morph（Controller）</strong>」モディファイヤや「<strong>Transform（Controller）</strong>」モディファイヤを選択して追加します。<br>
+    レンダリングの順序と画像を交換することができるモディファイヤは、次の4種類です。<br>
+    <strong>- Transform (Controller)</strong><br>
+    <strong>- Transform (Animation)</strong><br>
+    <strong>- Morph (Controller)</strong><br>
+    <strong>- Morph (Animation)</strong><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_418.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> レンダリング順序を変更したいメッシュを選択します。<br>
+    <strong>(2)</strong> 制御パラメータのキー生成ボタンを押して、モディファイヤにメッシュを登録します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_419.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 制御パラメータのスライダーを動かして、<strong>(2)</strong> 第二のキーを生成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_420.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> モディファイヤの設定画面で、「<strong>Extra Option</strong>」ボタンを押して「Extra設定」を有効にします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_421.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 編集モードをオンにします。 （ショートカットキー： <kbd>A</kbd> ）<br>
+    <strong>(2)</strong> 画面上部の「Extra設定」の「<strong>Set</strong>」ボタンを押して、「<strong>Extra Properties</strong>」ダイアログを開きます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_422.jpg"/>
+    <br>
+    
+    <p>
+    「Extra設定」を有効にするためには、合計3つのステップを必要です。<br>
+    - <strong>ステップ1</strong>：モディファイヤの「<strong>Extra Option</strong>」オン<br>
+     - <strong>ステップ2</strong>：選択されたメッシュの制御パラメータのキーまたはキーフレームでの「<strong>Extra Option</strong>」オン<br>
+     - <strong>ステップ3</strong>：レンダリングの順序（Depth）の変更または画像の変更をオン<br>
+    </p>
+    <br>
+    
+    <p>
+    上記のステップ1は活性化されたので、次の2、3の手順を実行する必要があります。<br>
+    <strong>(1)</strong> 「<strong>Extra Option Off</strong>」ボタンを押して、「<strong>Extra Option On</strong>」の状態にします。 （2段階）<br>
+    <strong>(2)</strong> 「<strong>Depth Option Off</strong>」ボタンを押して、「<strong>Depth Option On</strong>」の状態にします。 （3段階）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_423.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>「+」ボタン</strong>や<strong>「-」ボタン</strong>を押してレンダリング順序に対応するDepthを変更することができます。<br>
+    または「<strong>Delta Depth</strong>」の値を変更して、レンダリングの順序を変更することができます。<br>
+    <strong>(2)</strong> ここで「<strong>Depth</strong>」の値を「<strong>-2</strong>」だけ移動して、足が体の後ろに移動してレンダリングされます。<br>
+    </p>
+    <br>
+    
+    <p>
+    リストでは、すべてのメッシーナのメッシュグループが表示されず、レンダリングの順序を変えることができる対象のみが表示されます。<br>
+    メッシュだけでなく、サブのメッシュグループもレンダリング順序を変更することができます。<br>
+    ただし、クリッピングされたメッシュは、移動が不可能です。<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    「Extra Properties」ダイアログのメイン画面構成は次のとおりです。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Extra Optionボタン</strong> : 現在のキーの「Extra Option」を切り替えます。<br>
+    <strong>2. Offset</strong> : Extra設定が適用される範囲を設定します。値が1に近いほど広い範囲でExtra設定が適用されます。<br>
+    <strong>3. Depthは、Imageタブ</strong> : レンダリング順序を切り替えることか、イメージを交換するかについて、それぞれ設定することができます。同時に指定することも可能です。<br>
+    <strong>4. Depth Optionボタン</strong> : Depthタブが入っている場合、レンダリングの順序の切り替え（Depth Option）を切り替えます。<br>
+    <strong>5. Depth変更ボタンと、入力ボックス</strong> : レンダリング順序を変更することができます。<br>
+    <strong>6.オブジェクトリスト</strong> : レンダリング順序を変えているメッシ、メッシグループのリストと一緒に、現在のDepthを矢印で確認することができます。<br>
+    <strong>7. Closeボタン</strong> : ダイアログを閉じます。<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_424.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
+    <br><br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_425.jpg"/>
+    <br>
+    
+    <p>
+    今制御パラメータのスライダーを動かすと、足メッシュがレンダリングされる順序が変わることを確認することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>制御パラメータで画像切り替え</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_426.jpg"/>
+    <br>
+    
+    <p>
+    テストのために新しいイメージを追加します。<br>
+    基本的なAtlasの構造が似ていてください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_427.jpg"/>
+    <br>
+    
+    <p>
+    今回は頭メッシュの画像を変えてみましょう。<br>
+    <strong>(1)</strong> の頭部（Head）メッシュを選択します。<br>
+    <strong>(2)</strong> 「<strong>Add to Keys</strong>」ボタンを押して、このモディファイヤと制御パラメータにメッシュを追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_428.jpg"/>
+    <br>
+    
+    <p>
+    メッシュを選択し、「編集モード」をオンにし、次の手順を実行します。<br>
+    <strong>(1)</strong> 画面上部のExtraの「<strong>Set</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Extra Option</strong>」ボタンを押して「<strong>On</strong>」状態に変更します。<br>
+    <strong>(3)</strong> 「<strong>Image</strong>」タブを選択します。<br>
+    <strong>(4)</strong> 「<strong>Image Option</strong>」ボタンを押して「<strong>On</strong>」状態に変更します。<br>
+    <strong>(5)</strong> 「<strong>Select Image</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_429.jpg"/>
+    <br>
+    
+    <p>
+    変更したい画像を選択し、「Select」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_430.jpg"/>
+    <br>
+    
+    <p>
+    画像が選択されると、「Changed」スロットに画像が登録されており、実際の髪メッシュの画像が変更されたことを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    「Extra Properties」ダイアログのイメージの交換の画面構成は次のとおりです。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Image Optionボタン</strong> : Imageタブがオンの場合、イメージを転換する設定を切り替えます。<br>
+    <strong>2. Original / Changed Slot</strong> : 変更前、後の画像が表示されます。<br>
+    <strong>3. Select Imageボタン</strong> : どのような画像に変換されるかを選択することができます。<br>
+    <strong>4. Reset Imageボタン</strong> : 選択した画像を解除します。<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_431.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
+    <br><br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_432.jpg"/>
+    <br>
+    
+    <p>
+    制御パラメータのスライダーを動かすと頭メッシュの画像が変更されます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>アニメーションExtra設定を適用</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_433.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Morph（Animation）</strong>」や「<strong>Transform（Animation）</strong>」モディファイヤを利用すれば、アニメーションでもExtra設定を適用して、レンダリングの順序を変更したり、イメージを変えることが可能です。<br>
+    アニメーションを作成する前に、モディファイヤの設定画面で、「<strong>Extra Option</strong>」をオンにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_434.jpg"/>
+    <br>
+    
+    <p>
+    またはアニメーション作業画面で <strong>(1)</strong> 「<strong>タイムラインのレイヤー</strong>」を選択し、<strong>(2)</strong> 「<strong>Extra Option</strong>」ボタンを押して有効にすることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_435.jpg"/>
+    <br>
+    
+    <p>
+    アニメの「編集モード」をオンにし、<strong>(1)</strong> キーフレームを選択します。<br>
+    <strong>(2)</strong> Extra設定の「<strong>Set</strong>」ボタンを押します。<br>
+    （編集モードがオンになっていない場合Setボタンを押すことができません。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_436.jpg"/>
+    <br>
+    
+    <p>
+    残りのプロセスは、制御パラメータを用いた設定方法と同じです。<br>
+    ここで例として、画像を変える過程を復習してみましょう。<br>
+    <strong>(1)</strong> 「<strong>Extra Option</strong>」ボタンを押して「On」にします。<br>
+    <strong>(2)</strong> 「<strong>Image</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>Image Option</strong>」ボタンを押して「On」にします。<br>
+    <strong>(4)</strong> 「<strong>Select Image</strong>」ボタンを押して切り替えされるイメージを選択します。<br>
+    </p>
+    <br>
+    
+    <p>
+    今、アニメーションが再生されると、画像がリアルタイムで変わるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    アニメーションでの「Extra Properties」ダイアログの画面構成は少し異なります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Target Frame</strong><br>
+    : 現在選択されてキーフレームの位置がボタンに表示されます。<br>
+    左、右ボタンを押すと、前、次のキーフレームに移動され、数字ボタンを押すと、アニメーションスライダーを選択したキーフレームに移動します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Offset</strong> :<br>
+    Extra設定が適用されるオフセットの範囲は、以前、次のキーフレームに対してそれぞれ適用することができます。<br>
+    （次のキーフレームのオフセットがデフォルトが0.5ではない0.6である理由は、次のキーフレームのExtra設定範囲と重なる作成ためです。）<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_437.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    
+    <br><br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Extra設定の「Offset」について</h3>
+    <br>
+    
+    <p>
+    Extra設定で「<strong>Offset</strong>」は、Extra設定が適用される範囲を意味します。<br>
+    位置や回転、サイズ、色などの「連続」の変化は、Offsetは必要ありません。<br>
+    しかし、Extra設定は「連続していない」の変化であるため、ある時点から適用する必要がありかどうかを設定する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_438.jpg"/>
+    <br>
+    
+    <p>
+    Extra設定がない「<span class="text-danger"><strong>Key A</strong></span>」とExtra設定が適用された「<span class="text-success"><strong>Key B</strong></span>」があるとしましょう。<br>
+    制御パラメータやアニメーションのフレームなどのキー値が変わると表示される結果も変わるでしょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_439.jpg"/>
+    <br>
+    
+    <p>
+    「Offset」はExtra設定が適用された「<span class="text-success"><strong>Key B</strong></span>」からの距離です。<br>
+    数字が大きくなるほど領域が大きくなり、「Offset」が（最大値である）<strong>1</strong>になると、「<span class="text-danger"><strong>Key A</strong></span>」までの範囲が拡大されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_440.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Offset</strong>」値は、基本的に「<strong>0.5」</strong>です。<br>
+    このとき「<span class="text-danger"><strong>Key A</strong></span>」と「<span class="text-success"><strong>Key B</strong></span>」の中間地点で画像が切り替わります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_441.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Offset</strong>」値を減らし「<strong>0.2」</strong>に設定すれば、<br>
+    制御パラメータやアニメーションのフレームの値が「<span class="text-success"><strong>Key B</strong></span>」により近くなければ、画像が切り替わります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_442.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Offset</strong>」値を「<strong>0.8</strong>」に増加させると、<br>
+    制御パラメータやアニメーションのフレームの値が「<span class="text-danger"><strong>Key A</strong></span>」から少し変わってもすぐにイメージが転換されることです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_443.jpg"/>
+    <br>
+    
+    <p>
+    アニメーションの場合は、「Offset」の値が2つあります。<br>
+    「<strong>前のキーフレーム</strong>」と「<strong>次のキーフレーム</strong>」との比較のためのOffsetをそれぞれ設定することができます。<br>
+    2つのOffset値は適用される方向は違っても値が大きいほど範囲が増加することは同じです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_444.jpg"/>
+    <br>
+    
+    <p>
+    ただし、ここで注意すべき点があります。<br>
+    アニメーションは、「<strong>アニメーションカーブ</strong>」によって補間重みが決定されます。<br>
+    したがってOffsetもアニメーションカーブの形に影響を受けます。<br>
+    単に再生されるフレームの位置ではなく、カーブによって補間された重みに基づいてExtra設定の適用するかどうかが決定されます。<br>
+    <strong>(1)</strong> アニメーションカーブの補間された重みを対象に、Offsetの範囲を決定します。<br>
+    <strong>(2)</strong> アニメーションカーブの形に応じて、どのフレームからExtra設定が適用されるかを決定します。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

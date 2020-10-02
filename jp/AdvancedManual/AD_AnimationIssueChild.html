@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_AnimationIssueChild.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_AnimationIssueChild.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_AnimationIssueChild.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,132 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.8</span></h4>
+    
+    <p>
+    この機能は非常に便利ですが、たまにいくつかの問題を引き起こす可能性があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    代表的な場合は、アニメーションが正しく実行されないということです。<br>
+    この問題は、「<span class="text-danger">アニメーションクリップが子メッシュグループと接続されているときに</span>」発生します。<br>
+    AnyPortraitのアニメーションクリップは、その対象が「<strong>ルートユニット（Root Unit）</strong>」のときのみ有効で、ルートユニットになることがない子メッシュグループのアニメーションは、Bake時には無視されます。<br>
+    したがって、原則的には、アニメーションクリップは、子メッシュグループを対象とすることができません。<br>
+    しかし、次の順序で「アニメーションクリップと関連付けられた子メッシュグループ」が存在することができます。<br>
+    <strong>1)</strong> メッシュグループにアニメーションモディファイヤを追加して、アニメーションクリップを作成して接続します。<br>
+    <strong>2)</strong> アニメーションが作成されたメッシュグループを他のメッシュグループの子として登録します。<br>
+    </p>
+    <br>
+    
+    <p>
+    既にアニメーションを作った状態で対象となるメッシュグループを他のメッシュグループの子として登録すれば、あなたが一生懸命制作したアニメーションは、Bake対象もされず、正常に実行されないでしょう。<br>
+    v1.1.8から「<span class="text-danger">アニメーションの対象</span>」を「<span class="text-danger">親メッシュグループ</span>」に変更する場合は、アニメーションデータが維持される機能が追加されました。<br>
+    このページでは、問題が発生する状況とその解決方法について説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_780.jpg"/>
+    <br>
+    
+    <p>
+    アニメーションが製作された典型的な例です。<br>
+    メッシュグループに「<strong>Transform（Animation）モディファイヤ</strong>」が登録されており、「<strong>Idle</strong>」という名前のアニメーションが制作された状態です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_781.jpg"/>
+    <br>
+    
+    <p>
+    親メッシュグループを作成してみましょう。<br>
+    <strong>(1)</strong> 「<strong>Parent Mesh Group</strong>」という名前の新しいメッシュグループを作成します。<br>
+    <strong>(2)</strong> <strong>「+」ボタン</strong>を押します。<br>
+    <strong>(3)</strong> 「<strong>Mesh Group</strong>」タブを選択します。<br>
+    <strong>(4)</strong> アニメーションが制作されたオリジナルのメッシュグループを選択します。<br>
+    <strong>(5)</strong> <strong>「Add」ボタン</strong>を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_782.jpg"/>
+    <br>
+    
+    <p>
+    子メッシュグループに追加すると、警告メッセージが表示されます。<br>
+    上記された「<strong>アニメがある子メッシュグループ</strong>」に関連するメッセージです。<br>
+    （もしこの段階では、子メッシュグループに登録しない場合は、「<strong>Detach</strong>」を実行して、子メッシュグループから除外されます。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_783.jpg"/>
+    <br>
+    
+    <p>
+    既存のメッシュグループが「Parent Mesh Group」の子メッシュグループに登録されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_784.jpg"/>
+    <br>
+    
+    <p>
+    「アニメーションクリップ」を選択すると、「T<strong>arget Mesh Group</strong>」の項目が「Invalid Mesh Group」というテキストと一緒に赤い色のUIで変わっています。<br>
+    対象となるメッシュグループが「子メッシュグループ」であるからです。<br>
+    このアニメーションクリップは、Bakeの対象にされておらず、また、編集が正常にできない場合があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_785.jpg"/>
+    <br>
+    
+    <p>
+    このアニメーションデータを親である「Parent Mesh Group」に移転してみましょう。<br>
+    <strong>(1)</strong> 「<strong>Change</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> メッシュグループリストの中から、現在のメッシュグループの「<strong>親メッシュグループ</strong>」を選択します。この例では、「<strong>Parent Mesh Group</strong>」を選択します。<br>
+    <strong>(3)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    <strong>(4)</strong> アニメーションデータが古いというメッセージが出ます。 「<strong>Keep data</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_786.jpg"/>
+    <br>
+    
+    <p>
+    アニメーションの対象メッシュグループが親メッシュグループに変更されました。<br>
+    アニメ情報がそのまま維持されて、正常に編集することができ、再生することができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意</strong></span><br>
+    子メッシュグループで親メッシュグループに切り替える場合を除けば、対象メッシュグループを変更するときに、アニメーションのデータはすべて初期化されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_787.jpg"/>
+    <br>
+    
+    <p>
+    親メッシュグループを選択すると、「<strong>Transform（Animation）モディファイヤ</strong>」が自動的に生成され、<br>
+    「<strong>Idle</strong>」のアニメーションクリップが登録されているのを見ることができます。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

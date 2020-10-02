@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_2SidedMesh.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_2SidedMesh.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_2SidedMesh.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,91 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.4</span></h4>
+    
+    <p>
+    Most of the 3D rendering engines render only the front side by default.<br>
+    Likewise, the Unity engine does not render the back side by default, which is the same with AnyPortrait.<br>
+    However, you may need to render both front and back.<br>
+    This page covers examples and solutions that require two-sided rendering.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_232.jpg"/>
+    <br>
+    
+    <p>
+    The 7th demo scene has a pirate girl character.<br>
+    In the "Run" animation of this character, you can see that the X scale value of the right leg bone is -1.<br>
+    Since the bone is inverted, the mesh should also appear naturally reversed on the X axis.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_233.jpg"/>
+    <br>
+    
+    <p>
+    However, if you check in the game scene, you will see the right leg disappear when the character takes a motion that runs according to the "Run" animation.<br>
+    This is because the mesh is inverted to the X axis and the back side is rendered rather than the front side.<br>
+    So in this case, the right leg needs to always be rendered both on the front and on the back.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_234.jpg"/>
+    <br>
+    
+    <p>
+    A way to make both sides of the mesh always render.<br>
+    <strong>(1)</strong> <strong>Select the mesh group</strong>.<br>
+    <strong>(2)</strong> <strong>Select the Setting tab</strong>.<br>
+    <strong>(3)</strong> <strong>Select the target mesh</strong>.<br>
+    <strong>(4)</strong> <strong>Check 2-Sides</strong> in the mesh settings.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_235.jpg"/>
+    <br>
+    
+    <p>
+    Now you can see that it is rendering normally.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Cases that require 2-sided rendering, and Points to note</h4>
+    <br>
+    
+    <p>
+    Basically, when a part of the mesh is inverted by <strong>Morph</strong>, <strong>Rigging</strong>, or <strong>Physics</strong> modifiers, two-sided rendering is required.<br>
+    However, if you directly invert the size of the mesh with Transform, you do not have to do 2-sided rendering.<br>
+    Setting 2-sided rendering can be a bit slower because it renders vertices twice.<br>
+    If the customized Shader is set to "Cull Off", it can be rendered a total of four times.<br>
+    Alpha calculations may not be performed properly at this time.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note.</strong></span><br>
+    An option has been added in v1.2.5 to allow rigged meshes to render properly without setting them as 2-sided meshes even when the scale is inverted.<br>
+    This option is not applicable in all cases, so it is recommended to read the pages below along with the 2-sided mesh feature introduced on this page.<br>
+    - <a href="../../en/AdvancedManual/AD_ReversedRiggedMesh.html">Reversed scale of the Rigged Mesh</a><br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

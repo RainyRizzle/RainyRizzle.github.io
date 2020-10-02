@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/Script/SC_Mesh.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/Script/SC_Mesh.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/Script/SC_Mesh.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -60,32 +62,705 @@
 
     <!-- 여기서부터 페이지 내용이 작성됩니다. -->
     <!-- 1. 페이지 진입 경로 -->
-    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/Script.html"><span class="text-dark">Script</span></a> > 메시, 메시 그룹 트랜스폼</p>
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/Script.html"><span class="text-dark">스크립트</span></a> > 메시, 메시 그룹 트랜스폼</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
     <h1 class="display-5">메시, 메시 그룹 트랜스폼</h1>
     <br>
     
-    <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
-    
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    메시의 색상이나 텍스쳐를 교체하거나 위치를 제어하는 등의 함수를 안내합니다.<br>
+    에디터에서 메시와 메시 그룹의 데이터는 Bake후 <strong>apOptTransform</strong>으로 변환됩니다.<br>
+    ​씬에서 apOptTransform을 참조하는 것은 메시나 메시 그룹을 참조하는 것과 동일합니다.<br>
+    ​텍스쳐를 일괄적으로 변환하고 드로우콜 배치(Draw Call Batching)를 위한 함수도 제공됩니다.<br>
     </p>
     <br>
     
-    
-    <br><br>
-    
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
-    <br>
-    
-    <p>
-    본문 입력<br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apOptTransform</span> <strong>GetOptTransform</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apOptTransform</span> <strong>GetOptTransform</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;이름으로 apOptTransform을 찾아서 리턴합니다.<br>
+    &nbsp;&nbsp;&nbsp;apOptTransform의 이름은 메시나 메시 그룹의 이름입니다.<br>
+    &nbsp;&nbsp;&nbsp;​루트 유닛 인덱스를 지정하지 않는다면 먼저 현재 렌더링되는 루트 유닛부터 전체 검색을 합니다.<br>
     </p>
-    <br>
     
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 참조하고자 하는 apOptTransform의 이름 (에디터 상의 메시, 메시 그룹 이름)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> : 검색된 apOptTransform. 없을 경우 null 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetOptTransformSocket</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform )</span>
+<br><span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetOptTransformSocket</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+<br><span class="text-primary">public</span> <span class="text-success">Transform</span> <strong>GetOptTransformSocket</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 소켓을 참조합니다.<br>
+    &nbsp;&nbsp;&nbsp;소켓에 대해서는 <a href="../../kr/AdvancedManual/AD_Socket.html">관련 페이지</a>를 참고하시길 바랍니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 소켓을 포함하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 참조하고자 하는 apOptTransform의 이름 (에디터 상의 메시, 메시 그룹 이름)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Transform</span> : apOptTransform의 소켓 트랜스 폼. 없을 경우 null 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformPosition</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformPosition</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformPosition</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector3</span> <span class="text-muted">position,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 위치를 제어합니다.<br>
+    &nbsp;&nbsp;&nbsp;​가중치를 이용하여 보간할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 제어하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 제어하고자 하는 apOptTransform의 이름 (에디터 상의 메시, 메시 그룹 이름)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> position : 옮기고자 하는 위치<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 위치 매개변수의 좌표계. World는 씬의 좌표계를 의미하며, Self는 apPortrait의 좌표계를 의미합니다.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : 원래 위치와의 보간 가중치<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 존재하지 않는 apOptTransform을 참조하고자 했다면 false 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformRotation</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformRotation</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformRotation</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">angle,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 회전 각도를 제어합니다.<br>
+    &nbsp;&nbsp;&nbsp;​가중치를 이용하여 보간할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 제어하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 제어하고자 하는 apOptTransform의 이름 (에디터 상의 메시, 메시 그룹 이름)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> angle : 회전 각도 (Degree)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 회전 매개변수의 좌표계. World는 씬의 좌표계를 의미하며, Self는 apPortrait의 좌표계를 의미합니다.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : 원래 회전 각도와의 보간 가중치<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 존재하지 않는 apOptTransform을 참조하고자 했다면 false 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformScale</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformScale</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>SetOptTransformScale</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector3</span> <span class="text-muted">scale,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Space</span> <span class="text-muted">space,</span> <span class="text-primary">float</span> <span class="text-muted">weight</span> <span class="text-muted">=</span> <span class="text-muted">1.0f )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 크기를 제어합니다.<br>
+    &nbsp;&nbsp;&nbsp;​가중치를 이용하여 보간할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 제어하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 제어하고자 하는 apOptTransform의 이름 (에디터 상의 메시, 메시 그룹 이름)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector3</span> scale : 크기 값<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Space</span> space : 크기 매개변수의 좌표계. World는 씬의 좌표계를 의미하며, Self는 apPortrait의 좌표계를 의미합니다.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> weight : 원래 크기와의 보간 가중치<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> : 존재하지 않는 apOptTransform을 참조하고자 했다면 false 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">string</span> <span class="text-muted">imageName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">string</span> <span class="text-muted">imageName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImage</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">string</span> <span class="text-muted">imageName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 텍스쳐를 교체합니다.<br>
+    &nbsp;&nbsp;&nbsp;텍스쳐가 교체된 경우 드로우콜이 증가할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 참조 하는 apOptTransform의 이름 (에디터 상의 메시 이름)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Texture2D</span> texture : 새로 지정될 텍스쳐<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> imageName : AnyPortrait 에디터에 저장된 이미지로 교체할 경우, 해당 이미지의 이름<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshColor</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Color</span> <span class="text-muted">color2X )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshColor</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Color</span> <span class="text-muted">color2X )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshColor</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Color</span> <span class="text-muted">color2X )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 색상을 설정합니다.<br>
+    &nbsp;&nbsp;&nbsp;색상은 2X Multiply 식으로 계산되므로 기본값은 회색(0.5, 0.5, 0.5, 1)입니다.<br>
+    &nbsp;&nbsp;&nbsp;색상이 기본값이 아닌 경우 드로우콜이 증가할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 참조 하는 apOptTransform의 이름 (에디터 상의 메시 이름)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> color2X : 새로 지정될 색상 (2X Multiply)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshAlpha</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">alpha )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshAlpha</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshAlpha</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 색상 중 알파(투명도)를 설정합니다.<br>
+    &nbsp;&nbsp;&nbsp;기본값은 1이며, 그 외의 값을 지정한 경우 드로우콜이 증가할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 참조 하는 apOptTransform의 이름 (에디터 상의 메시 이름)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> alpha : 새로 지정될 투명도<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 텍스쳐를 교체합니다.<br>
+    &nbsp;&nbsp;&nbsp;텍스쳐가 교체된 경우 드로우콜이 증가할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Texture2D</span> texture : 새로 지정될 텍스쳐<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : 텍스쳐가 적용될 쉐이더 속성 이름<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Color</span> <span class="text-muted">color2X,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 색상을 설정합니다.<br>
+    &nbsp;&nbsp;&nbsp;색상은 2X Multiply 식으로 계산되므로 기본값은 회색(0.5, 0.5, 0.5, 1)입니다.<br>
+    &nbsp;&nbsp;&nbsp;색상이 기본값이 아닌 경우 드로우콜이 증가할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> color2X : 새로 지정될 색상 (2X Multiply)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : 색상이 적용될 쉐이더 속성 이름<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlpha</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 색상 중 알파(투명도)를 설정합니다.<br>
+    &nbsp;&nbsp;&nbsp;기본값은 1이며, 그 외의 값을 지정한 경우 드로우콜이 증가할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> alpha : 새로 지정될 투명도<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : 색상이 적용될 쉐이더 속성 이름<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloat</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 재질의 Float 속성의 값을 설정합니다.<br>
+    &nbsp;&nbsp;&nbsp;이 함수가 호출 되면 드로우콜이 증가할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> floatValue : Float 값<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Float값이 적용될 쉐이더 속성 이름<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomInt</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 재질의 Int 속성의 값을 설정합니다.<br>
+    &nbsp;&nbsp;&nbsp;이 함수가 호출 되면 드로우콜이 증가할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> intValue : Int 값<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Int값이 적용될 쉐이더 속성 이름<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 재질의 Vector4 속성의 값을 설정합니다.<br>
+    &nbsp;&nbsp;&nbsp;이 함수가 호출 되면 드로우콜이 증가할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector4</span> vector4Value : Vector4 값<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Vector4 값이 적용될 쉐이더 속성 이름<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomTextureOffset</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector2</span> <span class="text-muted">textureOffsetValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.4</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 재질의 텍스쳐의 Offset 속성의 값을 설정합니다.<br>
+    &nbsp;&nbsp;&nbsp;이 함수가 호출 되면 드로우콜이 증가할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> textureOffsetValue : 텍스쳐 오프셋(Offset) 값<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : 대상이 되는 텍스쳐의 쉐이더 속성 이름<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomTextureScale</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector2</span> <span class="text-muted">textureScaleValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.4</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 재질의 텍스쳐의 Scale 속성의 값을 설정합니다.<br>
+    &nbsp;&nbsp;&nbsp;이 함수가 호출 되면 드로우콜이 증가할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> textureScaleValue : 텍스쳐 스케일(Scale) 값<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : 대상이 되는 텍스쳐의 쉐이더 속성 이름<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ShowMesh</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ShowMesh</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ShowMesh</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;메시가 포함된 apOptTransform이 렌더링되도록 합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 보이고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 참조 하는 apOptTransform의 이름 (에디터 상의 메시 이름)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>HideMesh</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>HideMesh</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>HideMesh</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;메시가 포함된 apOptTransform이 렌더링 되지 않도록 숨깁니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 숨기고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 참조 하는 apOptTransform의 이름 (에디터 상의 메시 이름)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apOptTextureData</span> <strong>GetOptTextureData</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 메시들이 동일한 텍스쳐를 사용한다면 apOptTextureData에서 일괄적으로 제어하는 것이 가능합니다.<br>
+    &nbsp;&nbsp;&nbsp;apOptTextureData의 함수들을 이용하여 텍스쳐, 색상 등의 재질 프로퍼티를 수정하면,<br>
+    &nbsp;&nbsp;&nbsp;자동으로 이 텍스쳐를 이용하는 모든 메시가 변경이 됩니다.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary"><strong>일괄 변경 함수들</strong></span><br>
+    &nbsp;&nbsp;&nbsp;- SetMeshTextureAll(Texture2D texture)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomImageAll(Texture2D texture, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetMeshColorAll(Color color)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomColorAll(Color color, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomFloatAll(float floatValue, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomIntAll(int intValue, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomVector4All(Vector4 vector4Value, string propertyName)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 참조할 apOptTexture의 이름. 에디터의 이미지(Image)의 이름입니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTextureData</span> : 참조한 apOptTextureData. 없다면 null 리턴
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImageAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImageAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTextureData를 사용하는 모든 메시의 텍스쳐를 일괄적으로 교체합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 대상이 되는 apOptTextureData의 이름. (에디터 상의 이미지 이름)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Texture2D</span> texture : 교체할 텍스쳐<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : 적용하고자 하는 재질의 프로퍼티 이름<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshColorAll</strong> <span class="text-muted">( </span><span class="text-success">Color</span> <span class="text-muted">color2X )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshColorAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Color</span> <span class="text-muted">color2X )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColorAll</strong> <span class="text-muted">( </span><span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColorAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;모든 메시의 색상을 일괄적으로 교체합니다.<br>
+    &nbsp;&nbsp;&nbsp;optTextureName을 입력하면 해당 apOptTextureData를 사용하는 메시들을 대상으로 색상을 설정합니다.<br>
+    &nbsp;&nbsp;&nbsp;mainColor를 수정하는 경우 기본적으로 2X Multiply 방식의 색상을 사용합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 대상이 되는 apOptTextureData의 이름. (에디터 상의 이미지 이름)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> <span class="text-success">color2X</span> <span class="text-success">/</span> color : 설정할 색상<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : 적용하고자 하는 재질의 프로퍼티 이름<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">float</span> <span class="text-muted">alpha )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;모든 메시의 알파(투명도)를 일괄적으로 교체합니다.<br>
+    &nbsp;&nbsp;&nbsp;optTextureName을 입력하면 해당 apOptTextureData를 사용하는 메시들을 대상으로 알파를 설정합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 대상이 되는 apOptTextureData의 이름. (에디터 상의 이미지 이름)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> alpha : 설정할 투명도<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : 적용하고자 하는 재질의 프로퍼티 이름<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloatAll</strong> <span class="text-muted">( </span><span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloatAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomIntAll</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomIntAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4All</strong> <span class="text-muted">( </span><span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4All</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;모든 메시의 프로퍼티 값을 일괄적으로 변경합니다.<br>
+    &nbsp;&nbsp;&nbsp;optTextureName을 입력하면 해당 apOptTextureData를 사용하는 메시들을 대상으로 프로퍼티의 값을 설정합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 대상이 되는 apOptTextureData의 이름. (에디터 상의 이미지 이름)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> floatValue : Float 값<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> intValue : Int 값<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector4</span> vector4Value : Vector4 값<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : 적용하고자 하는 재질의 프로퍼티 이름<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatch</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatch</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatch</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName )</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 재질 속성을 Bake 상태의 값으로 돌려놓습니다.<br>
+    &nbsp;&nbsp;&nbsp;드로우콜이 줄어들 수 있으므로 성능이 좋아질 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 대상 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 참조 하는 apOptTransform의 이름 (에디터 상의 메시 이름)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatchAll</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;모든 apOptTransform의 재질 속성을 Bake 상태의 값으로 돌려놓습니다.<br>
+    &nbsp;&nbsp;&nbsp;드로우콜이 줄어들 수 있으므로 성능이 좋아질 수 있습니다.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatchByTextureName</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.1.4</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;요청된 텍스쳐를 사용하는 모든 재질 속성을 Bake 상태의 값으로 돌려놓습니다.<br>
+    &nbsp;&nbsp;&nbsp;드로우콜이 줄어들 수 있으므로 성능이 좋아질 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 참조할 apOptTexture의 이름. 에디터의 이미지(Image)의 이름입니다.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
     <!-- 5. 바닥 네비바 -->
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">

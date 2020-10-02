@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_VR.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_VR.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_VR.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,468 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.0</span></h4>
+    
+    <p>
+    「<strong>VR（Virtual Reality）</strong>」とは、主に「<strong>HMD（Head-Mounted Display）</strong>」と呼ばれる機器を利用して、実感できるようにゲームを楽しむ技術です。<br>
+    （広い意味でVRは、仮想現実を楽しむすべての技法と概念を含みますが、ここで、現在の市場のVRとHMDにのみ説明します。）<br>
+    Unityも他のゲームエンジンと同様にVRをサポートするので、皆さんは、モバイル、PC、コンソールを対象にVRビルドを行うことができます。<br>
+    AnyPortraitは2Dキャラクターを作成するエディタであるため、VRと多少距離があったことは事実です。<br>
+    しかし、多くのユーザーの要望に応じてUnityのVRと連動する機能をv1.2.0からサポートします。<br>
+    この機能を説明するに先立って、以下のリンクの説明を先にご覧ことをお勧めします。<br>
+    <a href="https://docs.unity3d.com/ja/2018.3/Manual/VROverview.html" target="_sub"><strong>VR機能説明ページ（ユニティ公式ページ）</strong></a><br>
+    <a href="../../jp/AdvancedManual/AD_MaterialLibrary.html"><strong>マテリアルライブラリ</strong></a><br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意。</strong></span><br>
+    VRビルド方式は、Unityのバージョンによって少しずつ差があり、対象機器によっても違いがあるので、<br>
+    開発環境に応じてAnyPortraitのVR機能が完全にサポートされないことがあります。<br>
+    その場合は、ご使用になるUnityエンジンのバージョンとVR機器を含む発生した問題をお知らせいただければ助けをいたします。<br>
+    このページは、「<strong>Unity 2019.2</strong>」を基準に作成され、バージョンによって多少の違いがある場合があります。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>「VR材質」を適用して描画</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_788.jpg"/>
+    <br>
+    
+    <p>
+    VRのためのテストシーンを作成しました。<br>
+    3Dオブジェクトを配置して、小さな部屋を作ったし、複数のPoint Lightを配置した状態です。<br>
+    この空間にAnyPortraitで制作したキャラクターを中央位置しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_789.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Project Settings &gt; Player</strong>」を選択するか、「<strong>Build Settings &gt; Player Settings</strong>」を開きます。<br>
+    <strong>(1)</strong> 「<strong>XR Settings</strong>」の「<strong>Virtual Reality Supported</strong>」属性を入れます。<br>
+    <strong>(2)</strong> <strong>「+」ボタン</strong>を押して「VR環境」を追加して、テストのために「<strong>Mock HMD</strong>」も追加します。<br>
+    （上のスクリーンショットは、PC環境での画面であり、モバイルやコンソールプラットフォームでは、他のビルドオプションが表示されます。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_790.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Stereo Rendering Mode</strong>」を選択します。<br>
+    「<strong>Multi Pass</strong>」と「<strong>Single Pass</strong>」はVRレンダリング方式の内部的な違いがあります。<br>
+    AnyPortraitは、上記の方法をすべてサポートしますが、この違いに応じて、実際に実行機器でテストをする必要があります。<br>
+    特に、下の説明の中で<strong>「Scale Offset</strong>」問題について確認してみてください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_791.jpg"/>
+    <br>
+    
+    <p>
+    「Mock HMD」が登録されている状態では、VRレンダリング結果をエディタでプレビューすることができます。<br>
+    「<strong>Gameタブ</strong>」で上記のように「<strong>Occlusion Mesh</strong>」を選択すると、仮想的にHMDに示すように、シミュレーションされた画面が表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_792.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、概ね大きな問題なくレンダリングになるが、「<strong>クリッピングメッシュ</strong>」が正常に表示されていないことを見ることができます。<br>
+    AnyPortraitがVRと関連して持つ最大の問題は、「クリッピングメッシュがVRの二つの画面で正常に出力される」です。<br>
+    次の方法でこの問題を解決することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_793.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitエディタを開きます。<br>
+    <strong>(1)</strong> 「<strong>Material Library</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>VR Presets</strong>」を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_794.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Unpack Preset</strong>」ボタンを押すと、選択された「<strong>VR Presets</strong>」がインストールされます。<br>
+    このとき、「マテリアルライブラリを再起動しなければならない」というメッセージと一緒にマテリアルライブラリが終了します。<br>
+    <strong>(2)</strong> 「<strong>マテリアルライブラリ</strong>」を再起動すると、4つの "VR用材料のプリセット」が追加されたことを見ることができます。<br>
+    この「材質プリセット」は、次のとおりです。<br>
+    <strong>- VR Unlit</strong> : 光のない環境で、元の画像の色をレンダリングするVRの材質プリセット<br>
+    <strong>- VR Lit</strong> : 光がある環境では明暗が描画されるVRの材質プリセット<br>
+    <strong>- VR Unlit / VR Lit (with ScaleOffset)</strong> : 「Single Pass」の環境で使用されるVRの材質プリセット<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>ここで注意する点があります。</strong></span><br>
+    「<strong>Scale Offset</strong>」が適用され材質は「<strong>Single Pass</strong>」環境で使用する必要がある材質プリセットです。<br>
+    この材質のシェーダは、Unityのリファレンスに基づいて、「<strong>Scale Offset</strong>」という「<strong>Single Pass</strong>」の変数と一緒に、別の式が適用されました。<br>
+    しかしながら、私達のテストでは、「<strong>Single Pass</strong>」の環境でも「<strong>Scale Offsetを使用していないこと</strong>」がむしろ正常レンダリングされました。<br>
+    したがって、一度「Scale Offsetを使用していない材料」を利用してテストをして見て、もし問題が生じた場合に限り、「Scale Offsetが適用された材料」を利用してみてください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_795.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Make Material Set</strong>」ボタンを押します<br>
+    <strong>(2)</strong> 現在のシーンにPoint Lightが配置されているので、「<strong>VR Litプリセット</strong>」を選択します。<br>
+    <strong>(3)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_796.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 新たに生成された材料セットを選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_797.jpg"/>
+    <br>
+    
+    <p>
+    VRのマテリアルのセットを確認してみると、従来のマテリアルセットと他のものを見ることができます。<br>
+    既存のマテリアルのセットは、「<strong>_MaskTex</strong>」プロパティを使用しているのに対し、VRのマテリアルのセットは、「<strong>_MaskTex_L</strong>」と 「<strong>_MaskTex_R</strong>」の2つのプロパティを使用します。<br>
+    これは、それぞれ両眼に対応する二度のレンダリングのためにマスクテクスチャです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_798.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Default Material</strong>」ボタンを押して、デフォルトマテリアルに設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_799.jpg"/>
+    <br>
+    
+    <p>
+    3D空間にAnyPortraitで製作されたキャラクターを違和感なく配置させる良い方法は、ビルボードを使用することです。<br>
+    （詳細については、「<a href="../../jp/AdvancedManual/AD_BillboardPers.html">関連ページ</a>」を参照してください。）<br>
+    <strong>(1)</strong> 「<strong>Bake</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>Billboard</strong>」オプションを変更します。 「<strong>Billboard</strong>」または「<strong>Billboard with fixed Up Vector</strong>」を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_800.jpg"/>
+    <br>
+    
+    <p>
+    VRを設定するための最も重要なステップです。<br>
+    <strong>(1)</strong> 「<strong>VR Option</strong>」を「<strong>Single Camera and Eye Textures（Unity VR）</strong>」に変更します。<br>
+    このオプションは、UnityのVRビルドを利用する場合、必ず選択する必要があります。<br>
+    このオプションの内容は、次のとおりです。<br>
+    <strong>- None</strong> : VRビルドを使用せずに、キャラクターをレンダリングするカメラが1ある場合に使用されます。<br>
+    <strong>- Single Camera and Eye Textures (Unity VR)</strong> : UnityのVRビルドを使用している場合は、設定する必要があります。<br>
+    <strong>- Multiple Cameras</strong> : UnityのVRビルドを使用せずに、2つ以上のカメラを利用してレンダリングすると、利用されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_801.jpg"/>
+    <br>
+    
+    <p>
+    VRオプションを変更すると、「<strong>Mask Texture Size</strong>」オプションが表示されます。<br>
+    このオプションは、クリッピングマスクの画質と関連しています。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>- By Mesh Setting</strong><br>
+    : メッシュグループの設定で指定されたメッシュの「クリッピングマスクのテクスチャサイズ "に応じてクリッピングマスクが作成されます。<br>
+    メッシュの大きさに応じてクリッピングマスクのサイズを変更することができますので、最適化に役立ちます。<br>
+    一般的なレンダリングよりもVRレンダリングの場合クリッピングマスクの画質が低下することがありますので、比較的大きな値のマスクテクスチャのサイズを利用します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>- By Eye Texture Setting</strong><br>
+    : VRの画質に関連する「Eye Textureのサイズ」をそのままクリッピングマスクのサイズとして使用します。<br>
+    すべてのクリッピングマスクが画面サイズと同じようにマスクを生成するので、均一な画質が保証されます。<br>
+    VRビルド環境、または実行機器によってEye Textureのサイズが多少小さく生成される場合には、画質が非常に低くなることがあります。<br>
+    </p>
+    <br>
+    
+    <p>
+    いくつかのオプションを使用してもしますが、追加の説明のために <strong>(2)</strong> ここで「<strong>By Mesh Setting</strong>」を選択しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_802.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>By Mesh Setting</strong>」を選択した場合、クリッピングマスクのテクスチャサイズを変更する必要があります。<br>
+    VRは「クリッピングマスクの最適化」が処理されないため、テクスチャの解像度を増加させなければします。<br>
+    <strong>(1)</strong> メッシュグループを選択します。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(3)</strong> クリッピングマスクとなるメッシュを選択します。<br>
+    <strong>(4)</strong> 「<strong>Mask Texture Size</strong>」の値を大きな値に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_803.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>を実行します。<br>
+    </p>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_804.jpg"/>
+    <br>
+    
+    <p>
+    VR画面でも正常にレンダリングがされていることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>「Billboard」オプションを無効にしてレンダリング</h3>
+    <br>
+    
+    <p>
+    場合によってビルボードを利用していない状態でVR空間にキャラクターを配置させる必要があります。<br>
+    この時、最も問題となるのは「<strong>Z-Fighting</strong>」問題です。<br>
+    多数のメッシュが狭い間隔で前後に配置されたAnyPortraitの構造上、カメラの角度が少し変わっても正常にレンダリングされていないからです。<br>
+    この時「Sorting Group」を利用して、この問題を解決することができます。 （<a href="../../jp/AdvancedManual/AD_SortingLayer.html">関連ページ</a>）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_805.jpg"/>
+    <br>
+    
+    <p>
+    まず、ビルボードのオプションをオフにしてみましょう。<br>
+    <strong>(1)</strong> 「<strong>Bake</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>Billboard</strong>」オプションを「<strong>None</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_806.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> 「<strong>Sorting Order Option</strong>」を「<strong>Depth To Order</strong>」に変更します。<br>
+    すべてのプロセスが完了したら、「<strong>Bake</strong>」を実行します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_807.jpg"/>
+    <br>
+    
+    <p>
+    Bakeをした後、Unityエディタを開きます。<br>
+    <strong>(1)</strong> キャラクターを選択します。<br>
+    <strong>(2)</strong> 「<strong>Sorting Group</strong>」コンポーネントを追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_808.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、ビルボードが適用されていない状態でも正常にレンダリングがされているキャラクターを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>UnityのVR設定を使用せずにVR画面の作成</h3>
+    <br>
+    
+    <p>
+    UnityのVR機能は強力ですが、他の方法でも、VR画面を作成することができます。<br>
+    様々な代替方法の中で、「2つのカメラを利用する方法」が最も有用であると思われます。<br>
+    2つ、またはそれ以上のカメラが配置されたときにもAnyPortraitは正常にレンダリングになるようにするオプションを提供しています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_809.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Player Settings</strong>」から「<strong>Virtual Reality Supported</strong>」を解除します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_810.jpg"/>
+    <br>
+    
+    <p>
+    既存の1つのカメラを「Left、Rightに対応する2つのカメラ」にコピーして作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_811.jpg"/>
+    <br>
+    
+    <p>
+    カメラの設定です。<br>
+    「<strong>Viewport Rect</strong>」を上記のように変更して、描画領域を指定することができます。<br>
+    その他の設定は同じです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_812.jpg"/>
+    <br>
+    
+    <p>
+    2つのカメラがそれぞれ左と右の領域にレンダリングをすることを見ることができます。<br>
+    カメラの位置と角度を変更すると、実際の視野と同じ効果を出すことができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_813.jpg"/>
+    <br>
+    
+    <p>
+    この方式は、UnityのVR機能とは異なるVRマテリアルを必要としません。<br>
+    したがって、元のマテリアルに戻って戻す必要があります。<br>
+    <strong>(1)</strong> AnyPortraitエディタを開いて、「<strong>Material Library</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 元の「<strong>Litマテリアルセット</strong>」を選択します。 （または新たに作成したり、同じような他のマテリアルを選択します。）<br>
+    <strong>(3)</strong> 「<strong>Default Material</strong>」ボタンを押して、デフォルトマテリアルに選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_814.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Bake</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>VR Option</strong>」の値を「<strong>Multiple Cameras</strong>」に変更します。<br>
+    このオプションは、多数のカメラでレンダリングをするほとんどの場合に効果的です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_815.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、2つのカメラでレンダリングをする場合にも、通常のレンダリングがされていることを見ることができます。<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>クリッピングマスクの解像度とVRと多数のカメラについて</h4>
+    <br>
+    
+    <p>
+    AnyPortraitは「<span class="text-danger"><strong>レンダリングテクスチャ（Render Texture）</strong></span>」を利用して、クリッピングマスク技法を実装します。<br>
+    「レンダリングテクスチャの解像度」を上げると、品質が良くなりますが、ゲームの性能が低下します。<br>
+    AnyPortraitは自主的に設計された方式を利用して、低解像度のクリッピングマスクもかなり高品質のレンダリング結果を示しています。<br>
+    </p>
+    <br>
+    
+    <p>
+    しかし、この品質の補正方法は、「1つのカメラ」の環境でのみ有効です。<br>
+    したがって、その他のすべての場合には、従来よりも高解像度のクリッピングマスクを作成する必要があります。<br>
+    これらの理由から、VRレンダリング環境では、ほとんどの場合、クリッピングマスクの品質が低下します。<br>
+    クリッピングマスクが解像度に比べて高品質で補正されているかどうかは、次のとおりです。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>1. 高品質で補正されている場合</strong></span><br>
+    - 1つのOrthographic方式のカメラのみ存在<br>
+    - 1つのPerspective方式のカメラがある場合、ビルボードがオンの場合<br>
+    - 多数のカメラが同じ位置、同じ方向を向いて、みんなOrthographicであり、キャラクターのVR OptionがMultiple Camerasである場合<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>2. 補正がされていない場合</strong></span><br>
+    - ユニティVRオプションがオンの状態<br>
+    - 1の条件を満たしていないすべての場合<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

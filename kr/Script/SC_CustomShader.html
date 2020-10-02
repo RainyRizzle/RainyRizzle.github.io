@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/Script/SC_CustomShader.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/Script/SC_CustomShader.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/Script/SC_CustomShader.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -60,29 +62,223 @@
 
     <!-- 여기서부터 페이지 내용이 작성됩니다. -->
     <!-- 1. 페이지 진입 경로 -->
-    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/Script.html"><span class="text-dark">Script</span></a> > 커스텀 쉐이더</p>
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/Script.html"><span class="text-dark">스크립트</span></a> > 커스텀 쉐이더</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
     <h1 class="display-5">커스텀 쉐이더</h1>
     <br>
     
-    <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
-    
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    AnyPortrait에서 제공하는 쉐이더가 아닌, 사용자가 직접 쉐이더를 작성해서 사용하는 방법입니다.<br>
+    커스텀 쉐이더를 적용하고 Bake하는 방법은 <a href="../../kr/AdvancedManual/AD_MeshShader.html">관련 페이지</a>를 참고하세요.<br>
+    <strong>클리핑 마스크</strong> 유무에 따라 2가지 종류의 쉐이더 코드 작성 요령이 있습니다.<br>
     </p>
     <br>
     
-    
-    <br><br>
-    
     <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <h3>기본 쉐이더 작성 방법</h3>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Custom Shader/Sample Transparent"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_Color</strong>(<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MainTex</strong>(<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType"</span> = <span class="text-danger">"Transparent" "Queue" </span>= <span class="text-danger">"Transparent" "PreviewType"</span> = <span class="text-danger">"Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>Blend SrcAlpha OneMinusSrcAlpha</strong><br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;#pragma surface surf SimpleColor alpha<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma target 3.0<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>LightingSimpleColor(SurfaceOutput s, <span class="text-primary">half3 </span>lightDir, <span class="text-primary">half </span>atten)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> c;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb = s.Albedo;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a = s.Alpha;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">return</span> c;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span><strong>_Color</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D </span><strong>_MainTex</strong>;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct </span>Input<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2 </span>uv_MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4 </span>color : COLOR;<br>
+    &emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">void </span>surf(Input IN, <span class="text-primary">inout</span> SurfaceOutput o)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>c = <strong>tex2D</strong>(_MainTex, IN.uv_MainTex);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>c.rgb *= _Color.rgb * 2.0f;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.Alpha = c.a * _Color.a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.Albedo = c.rgb;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
     <br>
     
     <p>
-    본문 입력<br>
+    <strong>1. 프로퍼티</strong><br>
+    <strong>_Color</strong>(<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    <strong>_MainTex</strong>(<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}: <br>
+    : 기본적으로 AnyPortrait는 2개의 프로퍼티만 사용을 합니다.<br>
+    색상 애니메이션을 위한 <strong>_Color </strong>프로퍼티와 텍스쳐가 적용될 <strong>_MainTex </strong>프로퍼티를 선언해주면 연동이 됩니다.<br>
+    이 두개의 프로퍼티를 외부에서 제어하면 AnyPortrait의 로직과 충돌될 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. 블렌딩</strong><br>
+    <strong>Blend SrcAlpha OneMinusSrcAlpha</strong><span class="text-danger"> : Alpha Blend</span><br>
+    <strong>Blend One One</strong><span class="text-danger"> : Additive</span><br>
+    <strong>Blend OneMinusDstColor One</strong><span class="text-danger"> : Soft Additive</span><br>
+    <strong>Blend DstColor SrcColor</strong><span class="text-danger"> : Multiplicative</span><br>
+    : AnyPortrait에서 사용되는 4개의 블렌딩 방식입니다.<br>
+    위와 같이 작성하시거나 필요에 따라 다른 블렌딩 선언을 하셔도 상관없습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. Albedo, Alpha 계산</strong><br>
+    <span class="text-primary">half4 </span>c = <strong>tex2D</strong>(_MainTex, IN.uv_MainTex);<br>
+    <strong>c.rgb *= _Color.rgb * 2.0f;</strong><br>
+    <strong>o.Alpha = c.a * _Color.a;</strong><br>
+    <strong>o.Albedo = c.rgb;</strong><br>
+    : 색상 계산식은 기본적으로 2X Multiply를 적용합니다.<br>
+    RGB는 2배로 하며, Alpha는 그대로 곱하여 적용하는 것이 기본입니다.<br>
+    필요에 따라 변경할 수 있지만 에디터의 렌더링 결과와 다르게 나타날 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>클리핑 마스크 쉐이더 작성 방법</h3>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Custom Shader/Sample Clipping Transparent"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color(<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex(<span class="text-danger">"Base Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MaskTex</strong>(<span class="text-danger">"Mask Texture (A)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MaskScreenSpaceOffset</strong>(<span class="text-danger">"Mask Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags{ <span class="text-danger">"RenderType"</span> = <span class="text-danger">"Transparent" "Queue"</span> = <span class="text-danger">"Transparent" "PreviewType"</span> = <span class="text-danger">"Plane"</span>}<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;#pragma surface surf SimpleColor alpha<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma target 3.0<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>LightingSimpleColor(SurfaceOutput s, <span class="text-primary">half3 </span>lightDir, <span class="text-primary">half </span>atten)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>c;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb = s.Albedo;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a = s.Alpha;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">return </span>c;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>_Color;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D </span>_MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> <strong>_MaskTex</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4 </span><strong>_MaskScreenSpaceOffset</strong>;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> Input<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv_MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4 </span><strong>screenPos</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4 </span>color : COLOR;<br>
+    &emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">void </span>surf(Input IN, <span class="text-primary">inout </span>SurfaceOutput o)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>c = tex2D(_MainTex, IN.uv_MainTex);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb *= _Color.rgb * 2.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2 </span><strong>screenUV </strong>= IN.screenPos.xy / IN.screenPos.w;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV </strong>-= <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x</strong> *= _MaskScreenSpaceOffset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.y</strong> *= _MaskScreenSpaceOffset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x</strong> += _MaskScreenSpaceOffset.x * _MaskScreenSpaceOffset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.y</strong> += _MaskScreenSpaceOffset.y * _MaskScreenSpaceOffset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV </strong>+= <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float </span><strong>mask </strong>= tex2D(_MaskTex, screenUV).r;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>c.a *= mask;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Alpha = c.a * _Color.a;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Albedo = c.rgb;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    <strong>1. 프로퍼티</strong><br>
+    <strong>_MaskTex</strong>(<span class="text-danger">"Mask Texture (A)"</span>, 2D) = "white" {}<br>
+    <strong>_MaskScreenSpaceOffset</strong>(<span class="text-danger">"Mask Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
+    : 클리핑 마스크 처리를 위해서 마스크 텍스쳐를 프로퍼티에 추가합니다.<br>
+    위와 같이 프로퍼티를 추가하면 AnyPortrait에서 자동으로 클리핑 렌더링을 처리합니다.<br>
+    <strong>_MaskScreenSpaceOffset</strong>은 클리핑 마스크를 화면 좌표계(Screen Space)를 기준으로 적용하기 위한 프로퍼티입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Screen Space Semantic</strong><br>
+    <span class="text-primary">struct</span> Input<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="text-primary">float2</span> uv_MainTex;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="text-primary">float4 </span><strong>screenPos</strong>;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="text-primary">float4 </span>color : COLOR;<br>
+    };<br>
+    : 클리핑 마스크는 화면 좌표계(Screen Space)에서 처리됩니다.<br>
+    따라서 유니티에서 사용하는 screenPos 변수를 프래그먼트 쉐이더(Fragment Shader),<br>
+    또는 서피스 쉐이더(Surface Shader)에 전달해야합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. Mask 계산</strong><br>
+    <span class="text-primary">float2 </span><strong>screenUV </strong>= IN.screenPos.xy / IN.screenPos.w;<br>
+    <strong>screenUV </strong>-= <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
+    <strong>screenUV.x</strong> *= _MaskScreenSpaceOffset.z;<br>
+    <strong>screenUV.y</strong> *= _MaskScreenSpaceOffset.w;<br>
+    <strong>screenUV.x</strong> += _MaskScreenSpaceOffset.x * _MaskScreenSpaceOffset.z;<br>
+    <strong>screenUV.y</strong> += _MaskScreenSpaceOffset.y * _MaskScreenSpaceOffset.w;<br>
+    <strong>screenUV </strong>+= <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
+    <span class="text-primary">float </span><strong>mask </strong>= tex2D(_MaskTex, screenUV).r;<br>
+    <strong>c.a *= mask;</strong><br>
+    : 클리핑 마스크를 계산하여 알파채널에 적용하는 식입니다.<br>
+    이 식은 동일하게 작성해야 정상적으로 처리 됩니다.<br>
     </p>
     <br>
     

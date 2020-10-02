@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_AnimationEvents.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_AnimationEvents.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_AnimationEvents.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -67,22 +69,263 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    게임에 따라서는 애니메이션의 특정 시점에서 어떤 상호 작용을 해야할 필요가 있습니다.<br>
+    달리는 캐릭터가 점프를 할 때 흙먼지가 날릴 수도 있고, 휘두르는 검에 몬스터가 맞을 수도 있어야 합니다.<br>
+    이 페이지에서는 애니메이션 이벤트 기능을 이용해서 스크립트와 연동하는 방법을 알아봅니다.<br>
+    (C# 스크립트가 포함되어 있습니다.)<br>
     </p>
     <br>
     
-    
-    <br><br>
-    
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_122.jpg"/>
     <br>
     
     <p>
-    본문 입력<br>
+    애니메이션 속성 UI에서 <strong>Animation Events 버튼</strong>을 눌러 애니메이션 이벤트를 등록하는 다이얼로그를 호출할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>애니메이션 이벤트 추가하고 스크립트와 연동하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_123.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Add Event 버튼</strong>을 눌러서 이벤트를 새로 추가합니다.<br>
+    <strong>(2)</strong> <strong>이벤트의 이름</strong>을 지정하고, 호출될 프레임을 입력합니다.<br>
+    이벤트의 이름으로 스크립트와 연동이 되므로, 이때의 이름을 기억해둡니다.<br>
+    여기서는 <span class="text-danger"><strong>SampleAnimEvent</strong></span> 이라는 이름으로 만들었습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_124.jpg"/>
+    <br>
+    
+    <p>
+    애니메이션 이벤트가 추가되면 타임라인 GUI에 해당 위치에 <strong>이벤트 마커</strong>가 추가된 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_125.jpg"/>
+    <br>
+    
+    <p>
+    Bake를 하고 씬으로 나갑니다.<br>
+    이벤트와 연동될 스크립트를 만듭니다.<br>
+    <strong>(1)</strong> <strong>스크립트가 포함될 GameObject</strong>를 만듭니다. (꼭 새로 만들 필요는 없으며, 스크립트가 포함되는 GameObject면 아무거나 됩니다.)<br>
+    <strong>(2)</strong> <strong>MonoBehaviour 스크립트</strong>를 생성하여 추가합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    다음의 코드를 작성합니다.<br>
+    위에서 작성한 애니메이션 이벤트의 이름이 <span class="text-danger"><strong>SampleAnimEvent</strong></span>인 점을 기억합시다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using </span>UnityEngine;<br>
+    <span class="text-primary">public class </span><span class="text-success">AnimEventListener</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start() { }<br>
+    &emsp;&emsp;<span class="text-primary">void</span> SampleAnimEvent()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Sample Anim Event"</span>);<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    위 코드에서 알 수 있듯이, 작성된 애니메이션 이벤트와 동일한 이름의 함수를 호출하는 방식입니다.<br>
+    따라서 애니메이션 이벤트와 스크립트는 동일한 이름, 동일한 인자를 가지고 있어야 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_126.jpg"/>
+    <br>
+    
+    <p>
+    <strong>캐릭터를 선택</strong>하면 apPortrait 속성이 Inspector에 표시됩니다.<br>
+    여기서 <strong>Event Listener</strong> 항목에 방금 만든 스크립트가 포함된 GameObject를 넣어서 이벤트를 받을 수 있게 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_128.jpg"/>
+    <br>
+    
+    <p>
+    게임을 실행하면 이벤트가 발생하고, 스크립트에서 이를 받아서 로그를 출력하는 것을 콘솔창에서 확인할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>애니메이션 이벤트에 파라미터 추가하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_127.jpg"/>
+    <br>
+    
+    <p>
+    애니메이션 이벤트에 파라미터를 추가하여 스크립트와 연동할 수 있습니다.<br>
+    이때 파라미터는 함수의 매개변수로 입력이 됩니다.<br>
+    <strong>(1)</strong> <strong>Add Parameter 버튼</strong>을 눌러서 파라미터를 추가합니다.<br>
+    <strong>(2)</strong> <strong>파라미터의 변수 타입</strong>을 선택하고 <strong>(3)</strong> <strong>전달될 값</strong>을 입력합니다.<br>
+    (파라미터로 전달할 수 있는 타입은 Bool, Int, Float, Vector2, String 입니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using </span>UnityEngine;<br>
+    <span class="text-primary">public class </span><span class="text-success">AnimEventListener</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start() { }<br>
+    &emsp;&emsp;<span class="text-primary">void</span> SampleAnimEvent(<span class="text-primary">float</span> floatValue)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Sample Anim Event - " </span>+ floatValue);<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    파라미터를 받을 수 있도록 함수를 수정합니다.<br>
+    변수 타입에 맞게 매개 변수를 만들어줍니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_129.jpg"/>
+    <br>
+    
+    <p>
+    게임을 실행하면 파라미터의 값이 전달되는 것을 확인할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>여러 프레임에서 지속적으로 발생하는 애니메이션 이벤트 만들기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_130.jpg"/>
+    <br>
+    
+    <p>
+    프레임 1개에서 이벤트를 발생시키는 것이 아닌, 일정 프레임동안 지속적으로 이벤트를 발생시켜야 하는 경우도 있습니다.<br>
+    <strong>(1)</strong> <strong>Call Method</strong>를 Once에서 <strong>Continuous</strong>로 바꿉니다.<br>
+    <strong>(2)</strong> <strong>Start Frame</strong>과 <strong>End Frame</strong>을 각각 지정해줍니다.<br>
+    <strong>(3)</strong> <strong>파라미터의 값 2개</strong>를 지정할 수 있습니다.<br>
+    각각 Start Frame과 End Frame에서 호출되는 값이며, 그 사이에서는 선형으로 보간된 값을 스크립트로 전달합니다.<br>
+    (String 타입의 파라미터는 보간이 되지 않으므로 이 기능이 지원되지 않습니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_131.jpg"/>
+    <br>
+    
+    <p>
+    Continuous 타입의 애니메이션 이벤트는 다른 색상의 마커로 표시됩니다. 시작점은 파란색, 끝점은 녹색입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_132.jpg"/>
+    <br>
+    
+    <p>
+    Bake 후 게임을 실행하면 매 프레임마다 보간되는 값이 호출되는 것을 확인할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>2개 이상의 파라미터를 가지는 애니메이션 이벤트 만들기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_133.jpg"/>
+    <br>
+    
+    <p>
+    여러 개의 파라미터를 가지는 애니메이션 이벤트를 만들 수도 있습니다.<br>
+    파라미터마다 다른 타입을 가질 수도 있습니다.<br>
+    위 화면은 3개의 파라미터를 각각 <strong>Integer, Float, Vector2</strong> 타입으로 만든 화면입니다.<br>
+    (구별하기 위해 애니메이션 이벤트를 새로 생성하고 이름을 <strong>MultipleParamAnimEvent</strong>로 하였습니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using </span>UnityEngine;<br>
+    <span class="text-primary">public class </span><span class="text-success">AnimEventListener</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start() { }<br>
+    &emsp;&emsp;<span class="text-primary">void </span>MultipleParamAnimEvent(<span class="text-primary">object</span>&#91;&#93; multipleParams)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">int </span>intParam = (<span class="text-primary">int</span>)multipleParams&#91;0&#93;;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float </span>floatParam = (<span class="text-primary">float</span>)multipleParams&#91;1&#93;;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector2 </span>vector2Param = (<span class="text-success">Vector2</span>)multipleParams&#91;2&#93;;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Multiple Param Anim Event"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Param 1 : "</span> + intParam);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Param 2 : "</span> + floatParam);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Param 3 : "</span> + vector2Param);<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    함수 매개 변수로 3개의 변수가 아닌 <strong>object 배열</strong> 타입의 1개의 매개 변수만 사용됩니다.<br>
+    이 배열에는 에디터에서 정의했던 순서대로 파라미터가 포함되어 있습니다.<br>
+    변수를 형변환을 통해 참조할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_134.jpg"/>
+    <br>
+    
+    <p>
+    게임을 실행하면 3개의 파라미터가 스크립트로 전달되는 것을 확인할 수 있습니다.<br>
     </p>
     <br>
     

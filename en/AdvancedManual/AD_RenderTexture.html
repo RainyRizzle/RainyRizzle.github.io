@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_RenderTexture.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_RenderTexture.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_RenderTexture.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,13 +69,335 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.2.0</span></h4>
+    
+    <p>
+    Using a technique to store the game screen as a texture, you can express the signboard or mirror in the game.<br>
+    You can also draw your character to the game's HUD, and there are many other ways to use it.<br>
+    This technique can be implemented simply by specifying a <strong>Render Texture</strong> to the <strong>Camera's Target Texture</strong> property.<br>
+    AnyPortrait uses Unity's basic rendering component, <strong>Mesh Renderer</strong>, so this technique can usually be applied without any problems.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, based on some users' feedback, we have improved in v1.2.0 about problems that occur in special situations.<br>
+    This page introduces how to render to a Render Textures, as well as some problems and solutions.<br>
+    </p>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Render Using Render Textures</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_816.jpg"/>
+    <br>
+    
+    <p>
+    A scene is organized that renders using the Render Texture.<br>
+    The scene has "<strong>Two cameras</strong>", "<strong>Character created by AnyPortrait</strong>", "<strong>Sphere Mesh</strong>" and "<strong>Quad Mesh with Render Texture</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_817.jpg"/>
+    <br>
+    
+    <p>
+    In general, the way to use the render texture is as above.<br>
+    <strong>The first camera</strong> renders the objects <span class="text-danger"><strong>to the Render Texture</strong></span>.<br>
+    <strong>The second camera</strong> renders other objects <span class="text-danger"><strong>to the screen</strong></span>, including the Render Texture.<br>
+    Let's set it up to render this way.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_818.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select <strong>the first camera</strong>.<br>
+    <strong>(2)</strong> Change the <strong>Culling Mask</strong> from Everything to <strong>Default</strong>. Now only objects in the <strong>Default layer</strong> are rendered on this camera.<br>
+    <strong>(3)</strong> With the <strong>Depth</strong> set to <strong>-1</strong>, assign the <strong>Render Texture asset</strong> to the <strong>Target Texture</strong>.<br>
+    The Render texture asset must be created in the Assets folder beforehand.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_819.jpg"/>
+    <br>
+    
+    <p>
+    It is the properties of the Render Texture asset.<br>
+    There may be some differences between platforms.<br>
+    It is recommended to adjust the resolution accordingly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_820.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select the objects</strong> to be rendered on the first camera, and <strong>(2)</strong> Check if the <strong>Layer is Default</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_821.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select <strong>the second camera</strong>.<br>
+    <strong>(2)</strong> Change the <strong>Culling Mask</strong> to <strong>UI</strong>.<br>
+    Now only objects whose layer is a UI are rendered, which is the "<strong>Quad Mesh with Render Texture</strong>".<br>
+    <strong>(3)</strong> Specify <strong>Depth</strong> as a value <strong>greater than -1</strong>. Here we set it to <strong>1</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_822.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the <strong>Quad mesh</strong> to be rendered by the second camera.<br>
+    <strong>(2)</strong> Change <strong>Layer</strong> to <strong>UI</strong>.<br>
+    <strong>(3)</strong> Change the <strong>texture of the material</strong> to the <strong>Render Texture</strong>. The render texture at this time should be the same as applied to the first camera.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_823.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you will see that the Render Texture was successfully created and rendered, including the character created with AnyPortrait.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Render the Render Textures with a translucent or transparent background</h3>
+    <br>
+    
+    <p>
+    Render textures can be made translucent or transparent.<br>
+    If you make the camera's background property transparent, the background of the Render Texture will be transparent as well.<br>
+    This makes it possible to render only characters without the background.<br>
+    However, using AnyPortrait's default material will cause rendering issues.<br>
+    Check out the descriptions below to learn about rendering issues and solutions.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_824.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select <strong>the first camera</strong> and select <strong>Background color</strong> with <strong>Clear Flags</strong> set to <strong>Solid Color</strong>.<br>
+    <strong>(2)</strong> Change the <strong>Alpha channel of background color</strong>.<br>
+    <strong>(3)</strong> You can see the background of the <strong>Render Texture becoming more transparent</strong>.<br>
+    In this state, you can see that <span class="text-danger"><strong>the AnyPortrait character rendered in the Render Texture is also transparent</strong></span>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_825.jpg"/>
+    <br>
+    
+    <p>
+    Let's compare how the characters of AnyPortrait are rendered based on the background color.<br>
+    If the background becomes transparent, the character created with AnyPortrait will be transparent as well, while the green sphere will not change.<br>
+    In normal cases, it should be rendered regardless of the transparency of the background.<br>
+    This is an issue with Unity's shader properties, especially if it's written in <strong>Surface Shader</strong>.<br>
+    Therefore, this problem can be solved by applying a material that uses a different shader.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_826.jpg"/>
+    <br>
+    
+    <p>
+    Open the AnyPortrait Editor.<br>
+    <strong>(1)</strong> Press the <strong>Material Library button</strong>.<br>
+    <strong>(2)</strong> Select <strong>KeepAlpha Presets</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_827.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Unpack Preset button</strong>.<br>
+    The Material Library closes with the new material preset installed.<br>
+    Reopen the Material Library.<br>
+    <strong>(2)</strong> <strong>Two material presets (KeepAlpha Unlit, KeepAlpha Lit)</strong> have been added.<br>
+    <strong>Keep Alpha presets</strong> consist of shaders that add a "<strong>keepalpha</strong>" parameter to the regular Surface Shader instead of the existing "alpha" parameter.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_828.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Make Material Set button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_829.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> Select <strong>KeepAlpha Unlit</strong> or <strong>KeepAlpha Lit</strong> preset.<br>
+    Since there is no light in this scene, select the KeepAlpha Unlit preset.<br>
+    <strong>(3)</strong> Press the <strong>Select button</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_830.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the newly created <strong>material set</strong>.<br>
+    <strong>(2)</strong> Press the <strong>Default Material button</strong> to select the default material.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_831.jpg"/>
+    <br>
+    
+    <p>
+    Run the <strong>Bake</strong> process.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_832.jpg"/>
+    <br>
+    
+    <p>
+    The character now is rendered properly even if the background is transparent.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Rendering simultaneously including Render Textures</h3>
+    <br>
+    
+    <p>
+    When rendering to the screen, you may need to render not only the Render Texture but also the original character.<br>
+    Basically, this is the same as "Rendering with multiple cameras."<br>
+    Therefore, a similar problem occurs here as with VR rendering.<br>
+    Let's see what happens and how to fix it below.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_833.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select <strong>the second camera</strong> to render on the screen.<br>
+    <strong>(2)</strong> Change the <strong>Culling Mask</strong> option.<br>
+    <strong>(3)</strong> Select the <strong>Default</strong> layer additionally with the existing <strong>UI</strong> layer selected.<br>
+    Now objects in the <strong>Default layer</strong> will also be rendered to the screen.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_834.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you'll also be rendered in the Render Texture,<br>
+    and at the same time, you'll see the original character and other objects rendered on the screen at the same time.<br>
+    However, in this case, you can see that <strong>the clipping mask</strong> has been rendered strangely.<br>
+    (This may look strange in the Render Texture, and vice versa.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_835.jpg"/>
+    <br>
+    
+    <p>
+    This problem is similar to the problem seen in VR rendering, so the solution is the same. (<a href="../../en/AdvancedManual/AD_VR.html">Related page</a>)<br>
+    <strong>(1)</strong> Open the AnyPortrait Editor and press the <strong>Bake button</strong>.<br>
+    <strong>(2)</strong> Press the <strong>Setting tab</strong>.<br>
+    <strong>(3)</strong> Change the <strong>VR Option</strong> value to <strong>Multiple Cameras</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_836.jpg"/>
+    <br>
+    
+    <p>
+    Now, you can see that both the Render Texture and the original character render properly.<br>
+    However, when <strong>rendering with multiple cameras</strong>, <strong>the quality of the clipping mask</strong> may not be corrected,<br>
+    so the clipped area may not be rendered neatly as shown above. (<a href="../../en/AdvancedManual/AD_VR.html">Related page</a>)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_837.jpg"/>
+    <br>
+    
+    <p>
+    You can solve this problem by increasing the resolution of the clipping mask.<br>
+    <strong>(1)</strong> Select the <strong>Mesh Group</strong>.<br>
+    <strong>(2)</strong> Select the <strong>Setting tab</strong>.<br>
+    <strong>(3)</strong> Select <strong>the mesh to be the clipping mask</strong>. (Not the mesh being clipped.)<br>
+    <strong>(4)</strong> Increase the value of <strong>Mask Texture Size</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_838.jpg"/>
+    <br>
+    
+    <p>
+    When you play Bake and run the game, you will see that the problem with the problem of clipping mask has been solved.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
         <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_VR.html">< Build to VR</a>
-        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_CharacterCostume.html">Replace a character's costume ></a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_UnityRecorder.html">Using the Unity Recorder ></a>
     </nav>
     
     <!-- 페이지 내용 끝! -->

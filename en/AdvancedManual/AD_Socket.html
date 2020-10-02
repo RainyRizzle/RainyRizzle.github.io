@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_Socket.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_Socket.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_Socket.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,104 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    Adding a knife to the character's hand or adding a particle effect to the head is common in other games.<br>
+    In Unity, you can do this simply by adding it as a child of the GameObject in the Hierarchy.<br>
+    Unfortunately, AnyPortrait's system does not follow Unity's Hierarchy calculation.<br>
+    Since AnyPortrait's system uses an improved calculation formula, it is impossible to refer to the GameObject of the mesh.<br>
+    (That's why AnyPortrait's the local coordinates of GameObjects always have 0, 0.)<br>
+    Instead, a feature called <strong>Socket</strong> can solve this problem.<br>
+    This page explains how to attach an external GameObject to a character using Socket.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Socket of meshes</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_59.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select the Setting tab</strong> of the mesh group.<br>
+    <strong>(2)</strong> <strong>Select the mesh</strong> to which you want to attach the socket.<br>
+    <strong>(3)</strong> Press the Socket Disabled button on the right UI to change to <strong>Socket Enabled</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_60.jpg"/>
+    <br>
+    
+    <p>
+    When you bake and go to the scene, you can see that a GameObject with the name <strong>"(mesh name) Socket"</strong> has been added to the selected mesh.<br>
+    The socket is created and ready to attach another object.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_61.jpg"/>
+    <br>
+    
+    <p>
+    I tried adding a Sphere object as a test.<br>
+    The position is slightly upwards.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_62.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you can see the moving sphere above your head.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Socket of bones</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_63.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Select the Bone tab</strong>.<br>
+    <strong>(2)</strong> <strong>Select the bone</strong> to set the socket.<br>
+    <strong>(3)</strong> Press Socket Disabled button to make <strong>Socket Enabled</strong> status.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_64.jpg"/>
+    <br>
+    
+    <p>
+    Bake and go back to the scene to check.<br>
+    As in the case of meshes, a socket has been created with the name <strong>"(bone name) Socket"</strong>.<br>
+    I added particle effect this time.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_65.jpg"/>
+    <br>
+    
+    <p>
+    When you start the game, you can see the effects of particles following the position of the bone.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

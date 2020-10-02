@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Reversed scale of the Rigged Mesh</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_ReversedRiggedMesh.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ReversedRiggedMesh.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ReversedRiggedMesh.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Reversed scale of the Rigged Mesh</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Reversed scale of the Rigged Mesh</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.2.5</span></h4>
+    
+    <p>
+    When a character created with AnyPortrait is delivered to the Unity scene, the character is composed of a combination of <strong>Single-sided MeshRenderers</strong>.<br>
+    If the scale of the mesh is reversed or the GameObject is reversed, the backside of the mesh will be rendered.<br>
+    However, if you haven't set up 2-sided rendering, the backside of the mesh will not be shown in the game.<br>
+    (Reference: <a href="../../en/AdvancedManual/AD_2SidedMesh.html">How to set up 2-sided rendering</a>)<br>
+    </p>
+    <br>
+    
+    <p>
+    Luckily, AnyPortrait has a function to render properly even if the size of the mesh is reversed. (Reference: <a href="../../en/AdvancedManual/AD_InvertedScale.html">Reversed Mesh</a>)<br>
+    However, this feature is limited to <span class="text-danger"><strong>not rigged meshes</strong></span>.<br>
+    For meshes with rigging applied, you need to check whether the scale of the connected bones is all reversed, so there is a risk of performance degradation.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, in some cases, it is necessary to invert the scale of the rigged meshes, so an option to check the reversed scale in AnyPortrait v1.2.5 has been added.<br>
+    Using the option introduced on this page, it is possible to reverse the scale of the rigged meshes normally without applying 2-sided rendering.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_953.jpg"/>
+    <br>
+    
+    <p>
+    We have prepared a simple mesh and bones to illustrate.<br>
+    3 bones are connected to 1 mesh.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_954.jpg"/>
+    <br>
+    
+    <p>
+    Among the three bones, let's invert the scale of the parent, which is the green bone, according to a control parameter.<br>
+    The image on the left is <span class="text-primary"><strong>the default state</strong></span>, and the image on the right is <span class="text-success"><strong>the state of the reversed scale</strong></span>.<br>
+    Similarly, the scale of the rigged mesh has also been reversed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_955.jpg"/>
+    <br>
+    
+    <p>
+    Let's run it in the Unity scene after running <strong>Bake</strong>.<br>
+    In <span class="text-primary"><strong>the default state</strong></span>, the mesh will render normally.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_956.jpg"/>
+    <br>
+    
+    <p>
+    If you change the value of the control parameter to make <span class="text-success"><strong>the state of the reversed bone scale</strong></span>, the mesh will not be rendered.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_957.jpg"/>
+    <br>
+    
+    <p>
+    In fact, the mesh hasn't disappeared, it's rescaled so the backside is rendered.<br>
+    However, the backside of the mesh is not shown by default, so the mesh appears to have disappeared.<br>
+    </p>
+    <br>
+    
+    <p>
+    Previously, to solve this problem, you need to set the mesh to be rendered on both sides (<a href="../../en/AdvancedManual/AD_2SidedMesh.html">related page</a>).<br>
+    However, you can also use the option added in v1.2.5 to fix this problem.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_958.jpg"/>
+    <br>
+    
+    <p>
+    Open AnyPortrait editor,<br>
+    <strong>(1)</strong> Press the <strong>Bake</strong> button.<br>
+    <strong>(2)</strong> Select the <strong>Setting</strong> tab.<br>
+    <strong>(3)</strong> You can see that the value of the <strong>Flipped Mesh</strong> option is set to <strong>Check excluding Rigged Meshes</strong>.<br>
+    <strong>(4)</strong> Change the option value to <strong>Check All</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    - <strong>Check excluding Rigged Meshes</strong> : Reversed meshes are rendered normally, excluding rigged meshes.<br>
+    - <strong>Check All</strong> : In all possible cases, reversed meshes will be normally rendered.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_959.jpg"/>
+    <br>
+    
+    <p>
+    When you run <strong>Bake</strong> again and run the game, you can see the flipped mesh is rendered normally, even if bones are reversed<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <p>
+    <span class="text-danger"><strong>Precautions</strong></span><br>
+    -If you change the option to <strong>Check All</strong>, all rigging values ​​are checked every frame, so performance may decrease.<br>
+    -If only some of the bones rigged to the mesh are resized, the mesh may not render properly.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ImportantOption.html">< "Important" option and many objects</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_NonUniformScale.html">Non-Uniform Scale option ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

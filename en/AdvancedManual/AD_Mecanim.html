@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_Mecanim.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_Mecanim.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_Mecanim.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,152 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.4</span></h4>
+    
+    <p>
+    When creating games, many game producers use state machines to create animations.<br>
+    In Unity, the <strong>Mecanim</strong> is responsible for the development process.<br>
+    Unlike the traditional control of animation in a script, animation switching works as a state machine.<br>
+    From version 1.0.4, AnyPortrait also supports animation control with Unity Mecanim.<br>
+    The Mecanim system using Animator components is basically the best for Unity's Humanoid 3D model.<br>
+    Therefore, AnyPortrait is not compatible with all features of Mecanim, so you should refer to this point.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_224.jpg"/>
+    <br>
+    
+    <p>
+    First, create animations in AnyPortrait.<br>
+    You can make it the same as the existing method.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_225.jpg"/>
+    <br>
+    
+    <p>
+    Check <strong>"Is Mecanim Animation"</strong> in the Bake dialog box.<br>
+    Because AnyPortrait converts animations into <strong>Animation Clips</strong> and saves them, you need to <strong>Set the Path</strong> where those assets will be stored.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_226.jpg"/>
+    <br>
+    
+    <p>
+    Saving in a way that uses Mecanim automatically adds an <strong>Animator component</strong>.<br>
+    When an Animator component is added for the first time, an <strong>Animation Controller</strong> is automatically created.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_227.jpg"/>
+    <br>
+    
+    <p>
+    When you open the Animator editor, you can see that <strong>(1)</strong> <strong>the states are created automatically</strong>.<br>
+    <strong>(2)</strong> <strong>Animation clips</strong> that are motion of each state are created and <strong>saved in the set </strong>path.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_228.jpg"/>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>At this time, there is something you should be aware of.</strong></span><br>
+    AnyPortrait does not recognize Mecanim's <strong>"Empty State"</strong>.<br>
+    Therefore, you must use <strong>a state that contains a generated Animation Clip named "Empty"</strong>.<br>
+    When you want to use "Empty State", make sure to use state Animation Clip named Empty as Motion.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_229.jpg"/>
+    <br>
+    
+    <p>
+    Edit the Animator by setting the Transition etc. in the Animator editor.<br>
+    (<strong>Sub-State Machine</strong> and <strong>Blend Tree</strong> are not officially supported.)<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Adding layers to Animator</h3>
+    <br>
+    
+    <p>
+    Multiple animations can be set up as layers and run simultaneously.<br>
+    It is possible to animate such as shooting while running or jumping.<br>
+    AnyPortrait's existing animation script also supports layer functionality, and so is Mecanim.<br>
+    You can add and configure layers in the following ways:<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_230.jpg"/>
+    <br>
+    
+    <p>
+    In Animator, add layers and configure the state machine.<br>
+    Basically, it's a good idea to create an Empty state for "the state of the layer not merging".<br>
+    As mentioned above, create a state using an Animation Clip named Empty.<br>
+    Also set Blending and Weight.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_231.jpg"/>
+    <br>
+    
+    <p>
+    Check the Mecanim Settings items in the apPortrait Inspector.<br>
+    You need to modify the Mecanim information here.<br>
+    <strong>(1)</strong> <strong>Press the Refresh Layers button</strong>.<br>
+    <strong>(2)</strong> You can see that <strong>the layer you just created is added</strong>.<br>
+    The Refresh Layers button should always be pressed if a layer is added, deleted, or changed in Blending mode.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Points to note when using Mecanim</h4>
+    <br>
+    
+    <p>
+    There are precautions when connecting AnyPortrait with Mecanim.<br>
+    This includes the above.<br>
+    </p>
+    <br>
+    
+    <p>
+    - You can not use Mecanim's Empty State. If necessary, you should use "Empty" Animation Clip, which is created as Motion, as state.<br>
+    - Sub-State Machine and Blend Tree are not supported.<br>
+    - After linking with Mecanim, you can not use the animation script function provided by AnyPortrait. Refer to Animator and call its functions.<br>
+    - If you have added or changed an animation layer, press the Refresh Layers button in the Inspector to refresh the layer information.<br>
+    - When you want to merge and add another animation to an existing animation as a layer, there should not be a timeline layer for objects that should not be merged.<br>
+    (For example, if the motion is running + upper body motion, the "upper body motion" animation should not have a timeline layer for leg objects.)<br>
+    - When controlling animation with Mecanim, the position of apPortrait is fixed to (0, 0, 0). We recommend that you create a new GameObject and place it on top to control the Transform.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

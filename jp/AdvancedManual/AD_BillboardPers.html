@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_BillboardPers.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_BillboardPers.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_BillboardPers.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,101 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_397.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitは基本的に2Dゲームのエディタです。<br>
+    しかし、3Dの背景に2Dキャラクターを導入するなどの様々なゲームメソッドにも対応しています。<br>
+    このページでは、3Dゲームで使用されるPerspectiveのカメラでAnyPortraitで作成されたキャラクターをレンダリングする方法と、3Dゲームでビルボードを設定する方法について説明します。<br>
+    この機能を使用して開発された「<strong>Pirate Game3D</strong>」のデモを確認してください。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>「Perspective」カメラ</strong> : 遠近感のあるカメラです。その逆は「Orthographic」方式です。<br>
+    <strong>ビルボード(Billboard)</strong> : オブジェクトがカメラを正面に続け眺めるレンダリング方式では、主にエフェクトに使用されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_400.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>「Bake」</strong>ダイアログボックスを開きます。<br>
+    <strong>(2)</strong> <strong>「Setting」</strong>タブで、<strong>「Billboard」</strong>の設定を変更します。<br>
+    - <strong>None </strong>: ビルボードを使用していません。Perspectiveカメラはサポートされていません。<br>
+    - <strong>Billboard</strong> : ビルボード方式でレンダリングをします。<br>
+    - <strong>Billboard with fixed Up Vector</strong> : ビルボードとしてレンダリングされ、ワールド座標系のUp(+Y)方向を維持します。<br>
+    </p>
+    <br>
+    
+    <p>
+    「Perspective」カメラのオプションは、個別に存在しません。<br>
+    「Billboard」の設定が「None」ではない場合、カメラがレンダリングされる方法を認識して、「Perspective」カメラが自動的にサポートされます。<br>
+    (「Orthographic 」カメラはビルボードオプションに関係なくサポートされています)<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意。</strong></span><br>
+    ビルボード方式を使用すると、カメラの「<strong>Camera.transparencySortMode」</strong>プロパティが「<strong>TransparencySortMode.Orthographic</strong>」に自動的に変更されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_401.jpg"/>
+    <br>
+    
+    <p>
+    掲示板の設定がオンになっているときに、ゲームが開始されると、自動的に「<strong>レンダリングするカメラ</strong>」を検索し、その方向を見続けます。<br>
+    カメラが「Orthographic」か「Perspective」かを認識した後、形状はカメラに合うように修正されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_402.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Billboard setting: None</strong><br>
+    カメラを見ず、順番に正しく表示されません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_403.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Billboard setting: Billboard</strong><br>
+    常にカメラを見る。<br>
+    カメラに遠近感があっても正常に表示されます。<br>
+    カメラが傾いても、常にまっすぐにレンダリングされます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_404.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Billboard setup: Billboard with fixed Up Vector</strong><br>
+    常にカメラを見る。<br>
+    カメラに遠近感があっても正常に表示されます。<br>
+    「Billboard」の方法とは異なり、ワールド座標系のY方向は、固定されているので、カメラは傾いたかのように表示されます。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_JiggleBone.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_JiggleBone.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_JiggleBone.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -69,21 +71,129 @@
     <!-- 4. 버전 설명 -->
     <h4><span class="badge badge-secondary">1.2.4</span></h4>
     
-    <p>
-    텍스트를 입력하세요 (한국어)<br>
-    </p>
+    <!-- 8. 이미지 (가운데 정렬) -->
     <br>
-    
-    
-    <br><br>
-    
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_946.jpg"/>
     <br>
     
     <p>
-    본문 입력<br>
+    <strong>"지글 본 (Jiggle Bone)"</strong>은 물리 효과가 추가되어 실제와 같이 움직이는 본을 말합니다.<br>
+    특히, AnyPortrait에서는 <strong>"관성"</strong>과 <strong>"공기 저항"</strong>에 의한 물리 효과가 적용된 지글 본을 지원합니다.<br>
     </p>
+    <br>
+    
+    <p>
+    AnyPortrait의 지글 본은 다음과 같은 특성이 있습니다.<br>
+    - 실시간으로 본의 끝점의 위치를 감지하여 저항력과 관성을 계산합니다.<br>
+    - "헬퍼 본(Helper)"이나 길이가 0인 본은 지글 본이 동작하지 않습니다.<br>
+    - 위치 변화는 "유니티 씬에서의 위치 변화"와 "애니메이션에 의한 위치 변화"를 모두 포함합니다.<br>
+    - 애니메이션으로 기본 형태를 만들고 지글 본을 설정하면 더욱 퀄리티가 향상됩니다.<br>
+    - 중력은 적용되지 않습니다. 중력을 재현하고자 한다면 "중력이 적용된 경우의 모양"을 애니메이션으로 만들고 지글 본을 적용하세요.<br>
+    - IK 체인이 설정될 필요는 없으며, 1개의 본에도 적용될 수 있습니다.<br>
+    - 스크립트로 apPortrait의 물리 동작을 비활성화 하거나(SetPhysicEnabled(bool)), Important 옵션이 꺼진 경우에는 동작하지 않습니다.<br>
+    - 연속된 본들을 대상으로 지글 본을 적용하면 상대적으로 더 민감하게 흔들리는 경향이 있습니다.<br>
+    - AnyPortrait 에디터의 성능에 따라 시뮬레이션 결과가 다소 부정확할 수 있습니다. 실제로 유니티 씬에서 테스트를 해볼 것을 권장합니다.<br>
+    - 화면 캡쳐 기능으로 영상을 녹화할 때 물리 효과를 켜면 지글 본이 적용된 상태로 녹화가 됩니다. 다만, 유니티 씬에서의 동작과 다소 차이가 있을 수 있습니다.<br>
+    - 물리 충돌에 의한 움직임은 지원하지 않습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이 페이지는 위 이미지와 같이 <strong>"긴 머리카락이 자연스럽게 움직이는 것"</strong>을 지글 본을 이용하여 쉽고 빠르게 만드는 방법을 다룹니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_947.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>메시 그룹</strong>을 선택합니다.<br>
+    <strong>(2)</strong> <strong>Bone 탭</strong>을 선택합니다.<br>
+    <strong>(3)</strong> 지글 본을 적용하고자 하는 본을 선택합니다.<br>
+    <strong>(4)</strong> <strong>"Jiggle Bone" 버튼</strong>을 눌러서 ON 상태로 전환합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_948.jpg"/>
+    <br>
+    
+    <p>
+    지글 본 설정을 활성화 하면 위와 같이 속성들이 나타납니다.<br>
+    <strong>1. Mass</strong> : 질량입니다. 값이 커질 수록 움직임이 둔하고 무거워집니다.<br>
+    <strong>2. K-Value</strong> : 원래의 형태로 돌아오려는 속성입니다. 값이 커질 수록 빠르고 탄력적으로 복원됩니다.<br>
+    <strong>3. Air Drag</strong> : 공기 저항을 받는 정도이며 0에서 1 사이의 값을 가집니다. 값이 클 수록 외부의 움직임에 더 민감하고 크게 움직입니다. 이 값에 따라 지글 본 효과의 전체적인 적용 정도가 결정됩니다.<br>
+    <strong>4. Damping</strong> : 감쇠력입니다. 이 값이 클 수록 흔들리는 시간이 짧아지고 빠르게 원래 형태로 복원됩니다. K-Value와 달리 이 값이 크면 탄성이 감소합니다.<br>
+    <strong>5. Constraint ON/OFF</strong> : 흔들리는 각도를 제한할 수 있습니다. 제한하지 않을 경우 -180~+180도 사이의 값으로 지글 본이 적용됩니다.<br>
+    <strong>6. Reset Value 버튼</strong> : 지글 본의 속성값을 초기화합니다.<br>
+    <strong>7. Test 버튼</strong> : 이 버튼을 누르면 모든 지글 본들에 동일한 임의의 힘이 가해집니다. 속성값을 테스트해볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_949.jpg"/>
+    <br>
+    
+    <p>
+    회전 범위를 제한해봅시다.<br>
+    <strong>(1)</strong> <strong>Constraint 버튼</strong>을 눌러서 ON 상태로 전환하고 각도를 설정할 수 있습니다.<br>
+    <strong>(2)</strong> 작업 공간에서 본의 회전 범위가 노란색 선으로 나타납니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이제, 지글 본은 지정된 각도 이내에서 흔들리게 됩니다.<br>
+    단, 이 각도는 최대 범위이며, 실제로는 자연스러운 움직임을 위해 범위의 약 70% 정도부터 속도가 감소되기 시작합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_950.jpg"/>
+    <br>
+    
+    <p>
+    다른 본에도 지글 본을 적용합니다.<br>
+    여러 개의 본들을 선택하여 한번에 지글 본을 적용할 수 있습니다.<br>
+    <strong>(1)</strong> 대상이 되는 본들을 모두 선택합니다. (Ctrl 키 또는 Shift 키를 눌러서 다수의 본을 선택할 수 있습니다.)<br>
+    <strong>(2)</strong> 오른쪽 UI에서 지글 본을 동시에 설정할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_951.jpg"/>
+    <br>
+    
+    <p>
+    지글 본을 바로 테스트해볼 수 있습니다.<br>
+    <strong>(1)</strong> <strong>본 편집 모드</strong>를 해제합니다. (본 편집 모드에서는 지글 본이 비활성화 되며 테스트 버튼을 누를 수 없습니다.)<br>
+    <strong>(2)</strong> <strong>Test 버튼</strong>을 누릅니다.<br>
+    <strong>(3)</strong> 지글 본이 적용된 모든 본들이 움직이는 것을 볼 수 있습니다.<br>
+    테스트 기능을 이용하여 물리 속성을 편리하게 조절할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_952.jpg"/>
+    <br>
+    
+    <p>
+    이제 <strong>루트 유닛</strong>이나 <strong>애니메이션</strong> 편집 화면에서 애니메이션을 재생하면 지글 본이 적용된 상태로 움직이는 캐릭터를 볼 수 있습니다.<br>
+    작업 공간에서 위와 같이 물리 효과를 보지 않도록 설정하면 지글 본은 적용되지 않습니다.<br>
+    Bake를 한 후 유니티 씬에서도 지글 본을 테스트해보세요!<br>
+    </p>
+    <br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/0NVUzoy-oDg" allowfullscreen></iframe>
+    </div>
     <br>
     
     <!-- 5. 바닥 네비바 -->

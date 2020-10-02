@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_CharacterCostume.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_CharacterCostume.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_CharacterCostume.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -67,29 +69,687 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.1.0</span></h4>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    게임에서 아이템을 획득하면 캐릭터가 옷이나 장비를 바꾸는 것은 기본적인 기능일 것입니다.<br>
+    캐릭터의 의상을 교체하는 기능을 구현하는 것은 여러가지 방법이 있습니다.<br>
+    모든 옷이나 장비의 애니메이션들을 일일이 만들고 교체하는 방법도 있고, 간단히 색상이나 텍스쳐만 바꾸는 방법도 있습니다.<br>
+    이 페이지에서는 AnyPortrait를 이용하여 캐릭터의 의상 교체를 <strong>"텍스쳐 교체"</strong>를 통해서 간단히 구현하는 방법을 다룹니다.<br>
+    또한 <strong>"소켓(Socket)"</strong>을 이용하여 무기와 방패를 착용하는 기능을 스크립트와 함께 구현하는 내용도 다룹니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>공통된 방식으로 구성된 Atlas 준비하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_533.jpg"/>
+    <br>
+    
+    <p>
+    캐릭터의 의상을 교체하는 예제를 위해서 위와 같은 이미지들을 준비했습니다.<br>
+    <strong>첫번째 그림</strong>은 캐릭터가 어떠한 옷도 입지 않는 가장 기본적인 상태입니다.<br>
+    <strong>두번째 그림</strong>의 캐릭터는 캐주얼한 복장을 하고 있으며, 주황색의 단발 머리를 가지고 있습니다.<br>
+    <strong>세번째 그림</strong>의 캐릭터는 강철로 된 장비의 기사 복장을 하고 있으며, 검과 방패를 들고 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    위와 같이 캐릭터가 의상을 교체하여 다양한 외형을 가지도록 하고자 합니다.<br>
+    이 페이지에서는 각각의 메시들의 텍스쳐를 실시간으로 변경하는 기능을 구현하여 외형을 바꿀 수 있도록 하고자 합니다.<br>
+    이 방법은 간단하지만 다음의 주의사항들이 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    - 모든 텍스쳐의 <strong>Atlas의 구성</strong>은 동일해야 합니다.<br>
+    - <strong>"PSD 파일 가져오기"</strong> 기능은 Atlas를 자동으로 생성하므로 여기서는 이용할 수 없습니다.<br>
+    - 이미지의 크기와 형태가 다양하므로 메시를 만들 때 꽤 크게 만들어야 합니다.<br>
+    - 동일한 본과 물리 재질을 공유하는 의상이 아니라면 미리 그에 맞는 다른 메시를 만들어야 합니다.<br>
+    - 기본 의상에는 적용되지 않더라도, 다양한 의상들을 위해서 본들을 더 추가할 필요가 있습니다.<br>
+    - 텍스쳐를 교체하면 드로우콜이 증가할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    위와 같은 주의 사항에 따라서 <strong>네번째 그림</strong>과 같이 <span class="text-danger"><strong>"레퍼런스 캐릭터"</strong></span>를 만들었습니다.<br>
+    레퍼런스 캐릭터는 "기본 외형"과 함께 "이후에 교체될 수 있는 의상의 이미지의 크기"를 같이 표시한게 특징입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_534.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_535.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_536.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_537.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <p>
+    위 주의사항에 따라 완성된 4개의 캐릭터 텍스쳐 Atlas 입니다.<br>
+    머리(Head)와 머리카락(Hair)의 영역을 분리하였으며, 몸통, 팔과 다리를 각각 분리했습니다.<br>
+    검과 방패는 Atlas에 포함시키지 않았습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>레퍼런스 캐릭터 텍스쳐를 이용하여 메시 만들기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_538.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait 에디터를 열고 새로운 캐릭터를 만듭니다.<br>
+    준비된 텍스쳐 중에서 <strong>"레퍼런스 캐릭터"</strong> 텍스쳐를 선택하여 이미지로 추가합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_539.jpg"/>
+    <br>
+    
+    <p>
+    이제 메시들을 하나씩 만듭니다.<br>
+    일반적인 메시 만들기 과정과 달리 레퍼런스 캐릭터의 메시는 다음과 같이 구성됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_540.jpg"/>
+    <br>
+    
+    <p>
+    일반적으로는 <span class="text-danger"><strong>붉은색 영역 (Basic Area)</strong></span>과 같이 이미지의 형태에 맞게 메시를 만들 것입니다.<br>
+    그러나 변경될 이미지의 크기를 모르므로, <span class="text-success"><strong>녹색 영역 (Maximum Area)</strong></span>과 같이 적당히 더 크게 메시를 만듭니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_541.jpg"/>
+    <br>
+    
+    <p>
+    같은 방식으로 다른 메시들도 만듭니다.<br>
+    관절이 있는 부위에서 버텍스들이 많이 추가된 것을 볼 수 있습니다.<br>
+    버텍스들이 많은 경우 이미지와 움직임에 따라서 버텍스의 Z-Depth 값을 수정할 필요가 있습니다. (<a href="../../kr/AdvancedManual/AD_ZdepthVert.html">관련 페이지</a>)<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>레퍼런스 캐릭터 만들기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_542.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>메시 그룹</strong>을 <strong>생성</strong>합니다.<br>
+    <strong>(2)</strong> <strong>메시 그룹의 이름</strong>을 정하고 <strong>루트 유닛</strong>으로 설정합니다.<br>
+    <strong>(3)</strong> <strong>"+" 버튼</strong>을 누르고, <strong>(4)</strong> <strong>메시들을 추가</strong>합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_543.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Edit Default Transform 버튼</strong>을 누릅니다.<br>
+    <strong>(2)</strong> <strong>각각의 메시들의 위치</strong>를 수정합니다.<br>
+    <strong>(3)</strong> <strong>메시의 순서</strong>를 적절히 변경합니다.<br>
+    모든 작업이 끝나면 다시 <strong>Edit Default Transform 버튼(또는 Editing.. 버튼)</strong>을 눌러서 편집을 종료합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_544.jpg"/>
+    <br>
+    
+    <p>
+    레퍼런스 캐릭터가 잘 만들어졌는지 테스트해볼 수 있습니다.<br>
+    <strong>(1)</strong> <strong>이미지를 선택</strong>합니다.<br>
+    <strong>(2)</strong> <strong>Select Image 버튼</strong>을 누릅니다.<br>
+    <strong>(3)</strong> 레퍼런스 텍스쳐가 아닌 <strong>다른 캐릭터 텍스쳐</strong>를 선택합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_545.jpg"/>
+    <br>
+    
+    <p>
+    현재의 이미지가 레퍼런스가 아닌 기본 캐릭터 텍스쳐로 변경되었습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_546.jpg"/>
+    <br>
+    
+    <p>
+    메시 그룹을 다시 선택하면, 텍스쳐를 교체하였을 뿐인데 캐릭터의 외형이 바뀐 것을 볼 수 있습니다.<br>
+    Atlas가 동일한 방식으로 구성되어 있다면, 위와 같이 텍스쳐만 교체해서 외형을 바꿀 수 있습니다.<br>
+    이 과정은 테스트를 위한 것이므로 다시 레퍼런스 캐릭터 텍스쳐로 변경합니다.<br>
+    (이후에 이 기본 캐릭터 텍스쳐를 사용할 것이지만, 현재 단계에서는 레퍼런스 텍스쳐를 이용하는 것이 편리합니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_547.jpg"/>
+    <br>
+    
+    <p>
+    본을 추가합니다.<br>
+    만약 교체될 의상에 따라 본을 추가할 필요가 있다면, 이 단계에서 미리 본을 추가하는 것이 좋습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_548.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Modifier 탭</strong>을 선택하고 <strong>Add Modifier 버튼</strong>을 누릅니다.<br>
+    <strong>(2)</strong> <strong>Rigging 모디파이어</strong>를 선택하고 추가합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_549.jpg"/>
+    <br>
+    
+    <p>
+    Rigging 모디파이어를 선택한 상태에서 모든 메시들을 각각 선택하여 본에 대한 가중치를 설정합니다.<br>
+    이미지로 보이는 것보다 메시의 크기가 더 크므로 주의하여 가중치를 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_550.jpg"/>
+    <br>
+    
+    <p>
+    Rigging 모디파이어에 대한 작업이 모두 끝났다면, 다음은 본을 이용하여 애니메이션을 만들 차례입니다.<br>
+    <strong>(1)</strong> <strong>Add Modifier 버튼</strong>을 누릅니다.<br>
+    <strong>(2)</strong> <strong>Transform (Animation) 모디파이어</strong>를 선택하고 추가합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_551.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>새로운 애니메이션 클립을 생성</strong>합니다.<br>
+    <strong>(2)</strong> <strong>애니메이션의 이름과 대상이 되는 메시 그룹</strong>을 설정하고 <strong>Add Timeline 버튼</strong>을 누릅니다.<br>
+    <strong>(3)</strong> <strong>Transform (Animation) 모디파이어</strong>를 타임라인으로 등록합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_552.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Bones 탭</strong>을 선택합니다.<br>
+    <strong>(2)</strong> <strong>All Bones to Layers 버튼</strong>을 눌러서 모든 본들을 타임라인 레이어로 등록합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_553.jpg"/>
+    <br>
+    
+    <p>
+    본들을 하나씩 선택하여 캐릭터 애니메이션을 만듭니다.<br>
+    (꼭 본으로만 애니메이션을 만들 필요는 없습니다. 자유롭게 애니메이션을 만들어보세요.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_554.jpg"/>
+    <br>
+    
+    <p>
+    이제 완성된 캐릭터 애니메이션을 유니티 씬으로 옮길 차례입니다.<br>
+    <strong>(1)</strong> <strong>루트 유닛</strong>을 선택합니다.<br>
+    <strong>(2)</strong> 기본이 되는 <strong>애니메이션 클립</strong>을 <strong>선택</strong>합니다.<br>
+    <strong>(3)</strong> <strong>Auto Play 설정</strong>을 켭니다.<br>
+    <strong>(4)</strong> <strong>Bake 버튼</strong>을 눌러서 Bake 다이얼로그를 엽니다.<br>
+    <strong>(5)</strong> Bake 다이얼로그의 <strong>Bake 버튼</strong>을 누르고 AnyPortrait 에디터를 종료합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_555.jpg"/>
+    <br>
+    
+    <p>
+    유니티에서 게임을 실행하면, 레퍼런스 캐릭터의 애니메이션이 재생되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>캐릭터의 의상을 교체하는 스크립트 작성하기</h3>
+    <br>
+    
+    <p>
+    다음 단계는 스크립트를 작성하여 캐릭터의 의상을 교체하는 기능을 구현해보는 것입니다.<br>
+    <strong>키보드 입력</strong>을 이용하여 <strong>"옷을 입지 않은 상태"</strong>, <strong>"캐주얼한 옷을 입은 상태"</strong>, <strong>"기사 장비를 착용한 상태"</strong>를 전환하는 것을 구현해보겠습니다.<br>
+    특히, 머리(Hair) 부분과 그 외의 메시들을 구분하여 의상을 교체하도록 작성해보겠습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_556.jpg"/>
+    <br>
+    
+    <p>
+    레퍼런스 캐릭터로 애니메이션을 모두 만들었다는 가정 하에, 이제 텍스쳐를 기본 캐릭터의 것으로 변경해보겠습니다.<br>
+    <strong>(1)</strong> <strong>이미지를 선택</strong>하고 <strong>(2)</strong> <strong>Select Image 버튼</strong>을 눌러서 <strong>"기본 캐릭터 텍스쳐"</strong>로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_557.jpg"/>
+    <br>
+    
+    <p>
+    텍스쳐가 변경되었습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_558.jpg"/>
+    <br>
+    
+    <p>
+    다시 Bake를 하여 유니티 씬에 적용합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_559.jpg"/>
+    <br>
+    
+    <p>
+    "옷을 입지 않은 상태"의 캐릭터로 변경되었습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이제 새로운 C# 스크립트를 새로 생성하고 아래와 같이 작성합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">CustomSample</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// 대상이 되는 apPortrait<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>apPortrait </strong></span><strong>portrait</strong>;<br>
+    &emsp;&emsp;// 3종의 캐릭터 텍스쳐<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>Texture2D </strong></span><span class="text-primary"><strong>image_Basic</strong></span>;<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>Texture2D </strong></span><span class="text-warning"><strong>image_Casual</strong></span>;<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>Texture2D </strong></span><span class="text-danger"><strong>image_Knight</strong></span>;<br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start () { }<br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Q, A, Z 키를 누르면 "Hair" 메시의 텍스쳐가 바뀝니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.Q) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Hair"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.A) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Hair"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.Z) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Hair"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;// W, S, X 키를 누르면 "Hair", "Head" 외의 다른 메시들의 텍스쳐가 바뀝니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.W) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Body"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftArm"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightArm"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightHand"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftLeg"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightLeg"</strong></span>, <span class="text-primary"><strong>image_Basic </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.S) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Body"</strong></span>, <span class="text-warning"><strong>image_Casual</strong></span>) ;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftArm"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightArm"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightHand"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftLeg"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightLeg"</strong></span>, <span class="text-warning"><strong>image_Casual </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.X) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"Body"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftArm"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightArm"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightHand"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"LeftLeg"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetMeshImage</strong>( <span class="text-danger"><strong>"RightLeg"</strong></span>, <span class="text-danger"><strong>image_Knight </strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    
+    <br><br>
+    
+    <p>
+    apPortrait의 <strong>"SetMeshImage"</strong> 함수를 이용한 간단한 코드입니다. (<a href="../../kr/Script/SC_Mesh.html">관련 페이지</a>)<br>
+    텍스쳐를 변경하고자 하는 메시의 이름과 텍스쳐 에셋을 입력하여 캐릭터의 외형을 변경할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_560.jpg"/>
+    <br>
+    
+    <p>
+    새로운 GameObject를 만들고 작성한 스크립트를 컴포넌트로 추가합니다.<br>
+    이제 Public 멤버 변수들(<strong>apPortrait</strong>와 <strong>3개의 Texture2D</strong>)을 각각 연결합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_561.jpg"/>
+    <br>
+    
+    <p>
+    게임을 실행하면, 키 입력에 따라서 캐릭터의 옷이나 머리카락이 바뀌는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>소켓을 이용하여 무기나 장비 교체하기</h3>
+    <br>
+    
+    <p>
+    캐릭터가 사용하는 무기나 장비들 중에는 형태가 바뀌지 않아서 본에 영향을 받지 않는 것들이 있습니다.<br>
+    검, 방패, 총과 같은 무기들이 대표적입니다.<br>
+    또한 머리 위에 얹는 모자, 작은 장신구, 안경 등도 크게 형태가 바뀌지 않는 장비들입니다.<br>
+    이러한 종류의 아이템을 장착하고자 할 때에는 <strong>소켓(Socket)</strong>을 이용하는 것이 더 효과적입니다.<br>
+    소켓에 관한 자세한 설명은 <a href="../../kr/AdvancedManual/AD_Socket.html">관련 페이지</a>에서 보실 수 있습니다.<br>
+    이 페이지는 캐릭터의 오른손에 검을 장착하고, 왼팔에 방패를 장착하는 과정을 설명합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_562.jpg"/>
+    <br>
+    
+    <p>
+    검과 방패에 관한 이미지와 재질(Material)을 준비하고, <strong>Quad 메시</strong>를 이용하여 <strong>별도의 GameObject</strong>로 각각 만듭니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_563.jpg"/>
+    <br>
+    
+    <p>
+    그런데 여기서 한가지 문제가 있습니다.<br>
+    검, 방패의 이미지의 중심이 "캐릭터에 장착되는 부분"이 아닙니다.<br>
+    따라서 "<strong>캐릭터에 장착이 되는 기준점</strong>"을 만들어야 합니다.<br>
+    <strong>(1)</strong> <strong>새로운 GameObject</strong>를 각각 만듭니다. 여기서는 <strong>"Weapon_Shield"</strong>와 <strong>"Weapon_Sword"</strong>로 이름을 지었습니다.<br>
+    그리고 기존의 검, 방패 메시가 있는 GameObject들을 새로운 GameObject들의 자식으로 지정합니다.<br>
+    (반대로 만들지 않도록 주의하세요.)<br>
+    <strong>(2)</strong> <strong>부모 GameObject의 위치</strong>가 <strong>"기준점"</strong>이 되도록 각각의 <strong>메시의 위치를 수정</strong>합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_564.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> AnyPortrait 에디터를 열고 <strong>메시 그룹을 선택</strong>합니다.<br>
+    <strong>(2)</strong> <strong>검과 방패가 장착될 위치</strong>에 <strong>본을 추가</strong>합니다.<br>
+    여기서는 오른손과 왼팔에 각각 추가했으며 이름은 각각 "Bone Weapon R"과 "Bone Weapon L"입니다.<br>
+    <strong>(3)</strong> <strong>Socket Disabled 버튼</strong>을 눌러서 소켓 옵션을 켭니다.<br>
+    그리고 <strong>Bake</strong>를 다시 합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이제 다음의 코드를 기존에 작성한 스크립트에 추가로 작성합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">public class </span><span class="text-success">CustomSample</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// 대상이 되는 apPortrait<br>
+    &emsp;&emsp;<span class="text-primary">public </span><span class="text-success">apPortrait </span>portrait;<br>
+    &emsp;&emsp;// 3종의 캐릭터 텍스쳐<br>
+    &emsp;&emsp;<span class="text-primary">public </span><span class="text-success">Texture2D </span>image_Basic;<br>
+    &emsp;&emsp;<span class="text-primary">public </span><span class="text-success">Texture2D </span>image_Casual;<br>
+    &emsp;&emsp;<span class="text-primary">public </span><span class="text-success">Texture2D </span>image_Knight;<br>
+    &emsp;&emsp;// &lt;추가&gt; 검과 방패의 부모 Transform을 멤버로 추가합니다.<br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>Transform </strong></span><span class="text-danger"><strong>sword;</strong></span><br>
+    &emsp;&emsp;<span class="text-primary"><strong>public </strong></span><span class="text-success"><strong>Transform </strong></span><span class="text-danger"><strong>shield;</strong></span><br>
+    &emsp;&emsp;<span class="text-primary">void </span>Update ()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;(생략됨...)<br>
+    &emsp;&emsp;&emsp;&emsp;// &lt;추가&gt; E 키를 누르면 검과 방패를 장착합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.E) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 앞서 만든 두개의 본의 소켓을 가져옵니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform </span><strong>socketR </strong>= portrait.<strong>GetBoneSocket</strong>( <span class="text-danger"><strong>"Bone Weapon R"</strong></span> );<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform </span><strong>socketL</strong> = portrait.<strong>GetBoneSocket</strong>( <span class="text-danger"><strong>"Bone Weapon L"</strong></span> );<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 검 (Weapon_Sword)을 오른손 본의 소켓의 자식으로 등록합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sword</strong>.<strong>parent </strong>= <strong>socketR</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sword.localPosition = <span class="text-success">Vector3</span>.zero;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sword.localRotation = <span class="text-success">Quaternion</span>.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 방패 (Weapon_Shield)를 왼팔 본의 소켓의 자식으로 등록합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>shield</strong>.<strong>parent </strong>= <strong>socketL</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;shield.localPosition = <span class="text-success">Vector3</span>.zero;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;shield.localRotation = <span class="text-success">Quaternion</span>.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;// &lt;추가&gt; R 키를 누르면 검과 방패의 장착을 해제합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.R) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sword</strong>.<strong>parent </strong>= <span class="text-primary"><strong>null</strong></span>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sword.localPosition = <span class="text-primary">new </span><span class="text-success">Vector3</span>(5, 0, 0);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sword.localRotation = <span class="text-success">Quaternion</span>.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>shield</strong>.<strong>parent </strong>= <span class="text-primary"><strong>null</strong></span>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;shield.localPosition = <span class="text-primary">new </span><span class="text-success">Vector3</span>(3, 0, 0);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;shield.localRotation = <span class="text-success">Quaternion</span>.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    
+    <br><br>
+    
+    <p>
+    스크립트를 작성한 후, 추가된 멤버인 <strong>sword</strong>에는 <strong>Weapon_Sword</strong>를 할당하고 <strong>shield</strong>에는 <strong>Weapon_Shield</strong>를 할당합니다.<br>
+    게임을 실행해봅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_565.jpg"/>
+    <br>
+    
+    <p>
+    키를 입력하면 캐릭터의 오른손과 왼팔에 검과 방패가 장착되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_566.jpg"/>
+    <br>
+    
+    <p>
+    그런데, 장착된 검과 방패가 캐릭터보다 항상 뒤에서 렌더링되는 것을 볼 수 있습니다.<br>
+    위치의 Z 값을 적절히 수정하여 장비가 적절한 위치에서 장착되도록 만들어야 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_567.jpg"/>
+    <br>
+    
+    <p>
+    다시 AnyPortrait 에디터를 엽니다.<br>
+    <strong>(1)</strong> <strong>Bake 버튼</strong>을 눌러서 <strong>Bake 다이얼로그</strong>를 엽니다.<br>
+    <strong>(2)</strong> <strong>Z Per Depth 항목의 값</strong>을 <strong>증가</strong>시킵니다. 여기서는 <strong>10</strong>을 입력하였습니다.<br>
+    <strong>(3)</strong> <strong>Bake 버튼</strong>을 눌러서 유니티 씬에 적용합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_568.jpg"/>
+    <br>
+    
+    <p>
+    이제 유니티 씬에서 각각의 메시들이 Z 축으로 조금 더 멀리 떨어져서 배치된 것을 볼 수 있습니다.<br>
+    검과 방패를 이전과 마찬가지로 위치시키면 캐릭터 메시보다 항상 뒤에 있게 됩니다.<br>
+    검과 방패의 <strong>메시</strong>가 있는 <strong>GameObject</strong>를 선택합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_569.jpg"/>
+    <br>
+    
+    <p>
+    적절한 순서로 렌더링이 되도록 Z 축으로 이동시킵니다.<br>
+    아마도 로컬 좌표의 Z 축의 값이 음수의 값을 가질 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_570.jpg"/>
+    <br>
+    
+    <p>
+    게임을 실행하면 캐릭터의 의상을 바꾸는 것은 물론이고,<br>
+    검과 방패를 장착했다가 해제하는 것이 가능해졌습니다.<br>
     </p>
     <br>
     
     
     <br><br>
     
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
-    <br>
-    
-    <p>
-    본문 입력<br>
-    </p>
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/oOfEv8vAwQQ" allowfullscreen></iframe>
+    </div>
     <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
-        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_RenderTexture.html">< 렌더 텍스쳐로 렌더링하기</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_SpriteMask.html">< Sprite Mask 적용하기</a>
         <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_InitializeScript.html">스크립트로 초기화하기 ></a>
     </nav>
     

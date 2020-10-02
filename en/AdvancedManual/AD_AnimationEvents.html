@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_AnimationEvents.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_AnimationEvents.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_AnimationEvents.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
                 </form>
@@ -67,7 +69,265 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    Depending on the game, at some point in the animation, the character needs some interaction.<br>
+    When a running character makes a jump, it may get dirty or a swinging sword may hit a monster.<br>
+    In this page, you will learn how to use the animation event function to interact with the script.<br>
+    (C # script included.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_122.jpg"/>
+    <br>
+    
+    <p>
+    In the Animation Properties UI, <strong>click the Animation Events button</strong> to open a dialog that registers an animation event.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Adding an Animation Event and associating them with a Script</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_123.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Click the Add Event button</strong> to add a new event.<br>
+    <strong>(2)</strong> <strong>Set the name</strong> of the event and <strong>enter the frame</strong> to be called.<br>
+    The name of the event is linked with the script, so remember the name at that time.<br>
+    I created it here as <span class="text-danger"><strong>SampleAnimEvent</strong></span>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_124.jpg"/>
+    <br>
+    
+    <p>
+    When an animation event is added, you can see that <strong>an event marker</strong> has been added to that location in the timeline GUI.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_125.jpg"/>
+    <br>
+    
+    <p>
+    Bake and go to the scene.<br>
+    Create a script to be associated with the event.<br>
+    <strong>(1)</strong> <strong>Create a GameObject to contain the script</strong>. (It does not have to be a new one; it can be anything GameObject that contains the script.)<br>
+    <strong>(2)</strong> <strong>Create and add a MonoBehaviour script</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    Write the following code:<br>
+    Remember that the animation event you created above is named <span class="text-danger"><strong>SampleAnimEvent</strong></span>.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using </span>UnityEngine;<br>
+    <span class="text-primary">public class </span><span class="text-success">AnimEventListener</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start() { }<br>
+    &emsp;&emsp;<span class="text-primary">void</span> SampleAnimEvent()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Sample Anim Event"</span>);<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    As you can see in the code above, we call a function with the same name as the created animation event.<br>
+    Therefore, animation events and scripts must have the same name and the same arguments.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_126.jpg"/>
+    <br>
+    
+    <p>
+    When you select a character, the <strong>apPortrait properties</strong> are displayed in the Inspector.<br>
+    To allow the script to receive events, set <strong>the GameObject that contains the script</strong> you just created into the <strong>Event Listener</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_128.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, an event occurs, and you can see in the console window that the script takes it and prints the log.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Adding a Parameter to an animation event</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_127.jpg"/>
+    <br>
+    
+    <p>
+    You can add a parameter to an animation event.<br>
+    At this time, the parameter is called as an argument of the function.<br>
+    <strong>(1)</strong> <strong>Press the Add Parameter button</strong> to add the parameter.<br>
+    <strong>(2)</strong> <strong>Select the parameter type</strong> and <strong>(3)</strong> <strong>enter the value</strong> to be transferred.<br>
+    (The types that can be passed as parameters are Bool, Int, Float, Vector2, String.)<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using </span>UnityEngine;<br>
+    <span class="text-primary">public class </span><span class="text-success">AnimEventListener</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start() { }<br>
+    &emsp;&emsp;<span class="text-primary">void</span> SampleAnimEvent(<span class="text-primary">float</span> floatValue)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Sample Anim Event - " </span>+ floatValue);<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Modify the function to receive the parameters.<br>
+    Declare a parameter for the variable type.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_129.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you can see that the value of the parameter is passed.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Making Animation Events call continuously on multiple frames</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_130.jpg"/>
+    <br>
+    
+    <p>
+    Sometimes you need to fire an event continuously over a certain frame instead of raising an event in one frame.<br>
+    <strong>(1)</strong> <strong>Change the Call Method</strong> from Once to <strong>Continuous</strong>.<br>
+    <strong>(2)</strong> <strong>Set Start Frame</strong> and <strong>End Frame</strong> respectively.<br>
+    <strong>(3)</strong> <strong>Two parameter values</strong> can be specified.<br>
+    Each value is called by the Start Frame and the End Frame. In between, the value interpolated linearly is passed to the script.<br>
+    (String type is not interpolated, so this function is not supported.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_131.jpg"/>
+    <br>
+    
+    <p>
+    Continuous type animation events are represented by markers of different colors. The starting point is blue and the ending point is green.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_132.jpg"/>
+    <br>
+    
+    <p>
+    If you run the game after bake, you will see that the interpolated value is called every frame.<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Create an animation event with two or more parameters</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_133.jpg"/>
+    <br>
+    
+    <p>
+    You can also create animation events with multiple parameters.<br>
+    Each parameter can have a different type.<br>
+    The above screen is a screen with three parameters, <strong>Integer, Float</strong>, and <strong>Vector2</strong> respectively.<br>
+    (I create a new animation event, named <strong>MultipleParamAnimEvent</strong>.)<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using </span>UnityEngine;<br>
+    <span class="text-primary">public class </span><span class="text-success">AnimEventListener</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">void </span>Start() { }<br>
+    &emsp;&emsp;<span class="text-primary">void </span>MultipleParamAnimEvent(<span class="text-primary">object</span>&#91;&#93; multipleParams)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">int </span>intParam = (<span class="text-primary">int</span>)multipleParams&#91;0&#93;;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float </span>floatParam = (<span class="text-primary">float</span>)multipleParams&#91;1&#93;;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector2 </span>vector2Param = (<span class="text-success">Vector2</span>)multipleParams&#91;2&#93;;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Multiple Param Anim Event"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Param 1 : "</span> + intParam);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Param 2 : "</span> + floatParam);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Debug</span>.Log(<span class="text-danger">"Param 3 : "</span> + vector2Param);<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Only one argument of the <strong>object array type</strong> is used as a function parameter, not three arguments.<br>
+    This array contains the parameters in the order you defined them in the editor.<br>
+    Variables can be referenced via type casting.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_134.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you will see that three parameters are passed to the script.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

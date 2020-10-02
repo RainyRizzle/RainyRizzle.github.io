@@ -33,20 +33,22 @@
                     <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../kr/Script.html">Script</a>
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
 
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_AutoLoopKeyframe.html">EN</a>
                     <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_AutoLoopKeyframe.html">KR</a>
                     <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_AutoLoopKeyframe.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
                 </form>
@@ -67,22 +69,79 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
     
     <p>
-    텍스트를 입력하세요 (한국어)<br>
+    루프 애니메이션을 만들면 대부분 시작 프레임과 끝 프레임은 같아야 합니다.<br>
+    시작과 끝의 경계가 모호해야 자연스러운 루프 애니메이션이 나오기 때문입니다.<br>
+    그런 이유에서 많은 프로그램에서는 시작 프레임을 복사하여 끝 프레임에 붙여넣고 부드럽게 만드는 작업을 해야합니다.<br>
+    AnyPortrait는 특별히 이러한 작업을 없애기 위해 <strong>"자동 루프 키프레임"</strong>이라는 기능을 제공합니다.<br>
     </p>
     <br>
     
-    
-    <br><br>
-    
-    <!-- 3. 서브 타이틀 -->
-    <h3>중간 제목</h3>
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_142.jpg"/>
     <br>
     
     <p>
-    본문 입력<br>
+    일반적인 루프 애니메이션의 구조입니다.<br>
+    시작 프레임과 끝 프레임에 동일한 내용을 가지는 키프레임이 존재합니다.<br>
+    이제 여기서 불필요하게 복제된 <strong>"마지막 키프레임"</strong>을 삭제해봅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_143.jpg"/>
+    <br>
+    
+    <p>
+    마지막 키프레임을 삭제하면 생김새가 다른 키프레임이 끝 프레임에 나타납니다.<br>
+    반투명한 키프레임은 <strong>"시작 키프레임의 더미 키프레임"</strong>입니다.<br>
+    루프 애니메이션을 위해서 자동으로 시작 키프레임이 가상으로 복제되는 것입니다.<br>
+    이 더미 키프레임을 <span class="text-danger"><strong>"자동 루프 키프레임"</strong></span>이라고 부릅니다.<br>
+    이 상태가 되면 키프레임에 <strong>화살표 아이콘</strong>이 나타나며, 연결된 맞은편 키프레임을 가리키게 됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_144.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_145.jpg"/>
+    <br>
+    
+    <p>
+    시작 키프레임을 이동하면 자동으로 자동 루프 키프레임도 이동합니다.<br>
+    이 상태가 되어도 여전히 루프 애니메이션이 가능합니다.<br>
+    시작 키프레임이 루프 반대편의 실제 키프레임과 연결된 상태이기 때문입니다.<br>
+    실제로 위 화면에서도 애니메이션 커브로 연결된 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_146.jpg"/>
+    <br>
+    
+    <p>
+    시작 키프레임보다 앞의 프레임으로 이동하여 재생하면 일반적으로는 애니메이션이 되지 않아야 하지만,<br>
+    여기서는 가상으로 루프 연결이 된 상태이므로 애니메이션이 재생되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_147.jpg"/>
+    <br>
+    
+    <p>
+    자동 루프 키프레임을 이용하면 위와 같이 시작 프레임과 끝 프레임을 비워둔 루프 애니메이션 제작이 가능해집니다.<br>
+    덕분에 루프 경계가 모호해져서 훨씬 자연스러운 모션을 만들 수 있게 됩니다.<br>
     </p>
     <br>
     

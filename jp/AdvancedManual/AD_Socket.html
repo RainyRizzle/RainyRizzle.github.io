@@ -39,14 +39,16 @@
                 </ul>
 
                 <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
                     <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_Socket.html">EN</a>
                     <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_Socket.html">KR</a>
                     <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_Socket.html">JP</a>
                 </div>
 
+                <!-- 여백 -->
                 <p></p>
 
+                <!-- 검색버튼 -->
                 <form class="form-inline">
                     <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
                 </form>
@@ -67,7 +69,104 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    キャラクターの手にナイフを追加したり、頭に「Particle Effect」を追加することはゲームで一般的に見ることができる演出です。<br>
+    Unityは階層構造では、これらのものをGameObjectの子として追加して簡単に実装することができます。<br>
+    残念ながら、AnyPortraitのシステムは、Unityの階層計算に従わない。<br>
+    AnyPortraitのシステムは、改良された計算式を使用するため、メッシュのGameObjectを参照することはできません。<br>
+    (だからAnyPortraitのGameObjectsローカル座標は常に(0、0)です。)<br>
+    代わりに「<strong>ソケット(Socket)」</strong>と呼ばれる機能を使用して、この問題を解決することができます。<br>
+    このページには、「<strong>ソケット</strong>」を使用して、キャラクターの外部のGameObjectを付着する方法を説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>メッシュのソケット</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_59.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> メッシュグループの<strong>「Setting」</strong>タブを選択します。<br>
+    <strong>(2)</strong> ソケットを取り付けるメッシュを選択します。<br>
+    <strong>(3)</strong> 右のUIの「<strong>Socket Disabled</strong>」ボタンを押して、「<strong>Socket Enabled</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_60.jpg"/>
+    <br>
+    
+    <p>
+    シーンをBakeしてシーンに行くと、選択したメッシュに「<strong>(メッシュ名)Socket</strong>」という名前のGameObjectが追加されていることがわかります。<br>
+    ソケットが作成され、別のオブジェクトをアタッチできる状態になります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_61.jpg"/>
+    <br>
+    
+    <p>
+    私はテストとして 「Sphere」オブジェクトを追加しようとしました。<br>
+    位置はやや上向きです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_62.jpg"/>
+    <br>
+    
+    <p>
+    あなたがゲームを実行すると、あなたの頭の上に移動「Sphere」を見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>骨のソケット</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_63.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>「Bone」</strong>タブを選択します。<br>
+    <strong>(2)</strong> ソケットを設定骨を選択してください。<br>
+    <strong>(3)</strong> 「<strong>Socket Disabled</strong>」ボタンを押して、「<strong>Socket Enabled</strong>」にします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_64.jpg"/>
+    <br>
+    
+    <p>
+    Bakeとチェックしてシーンに戻ります。<br>
+    メッシュの場合と同様に、ソケットは 「<strong>(骨の名前) Socket</strong>」という名前で作成されています。<br>
+    私はこのサンプルでは、「Particle Effect」を追加しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_65.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを開始すると、骨の位置に従った効果を見ることができます。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>
