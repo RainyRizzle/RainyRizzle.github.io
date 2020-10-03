@@ -14,7 +14,7 @@
 
     <body>
         <p>
-            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
             <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
             <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
                 <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
@@ -58,6 +58,8 @@
 
     <!-- 실제 바디 부분 -->
     <div class="container">
+    <br>
+    <br>
     <!-- 여기에 내용을 적어주세요 -->
 
     <!-- 여기서부터 페이지 내용이 작성됩니다. -->
@@ -81,6 +83,8 @@
     </p>
     <br>
     
+    <br>
+    <br>
     <!-- 3. 서브 타이틀 -->
     <h3>マテリアルライブラリからマテリアルセットを作成して適用</h3>
     <br>
@@ -274,6 +278,8 @@
     </p>
     <br>
     
+    <br>
+    <br>
     <!-- 3. 서브 타이틀 -->
     <h3>マテリアルプリセットを利用した様々なレンダリング</h3>
     <br>
@@ -425,6 +431,8 @@
     </p>
     <br>
     
+    <br>
+    <br>
     <!-- 3. 서브 타이틀 -->
     <h3>「Custom Shader」が適用されたマテリアルセットを作成</h3>
     <br>
@@ -497,10 +505,10 @@
     &emsp;&emsp;{<br>
     &emsp;&emsp;&emsp;&emsp;Tags{ "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
     &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
-    &emsp;&emsp;&emsp;&emsp;LOD 200&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;<br>
     &emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
     &emsp;&emsp;&emsp;&emsp;#pragma surface surf SimpleColor alpha<br>
-    &emsp;&emsp;&emsp;&emsp;#pragma target 3.0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <br>
+    &emsp;&emsp;&emsp;&emsp;#pragma target 3.0&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;<br>
     &emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
     &emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
     &emsp;&emsp;&emsp;&emsp;sampler2D _BumpMap;<br>
@@ -657,22 +665,22 @@
     ​<br>
     <span class="text-primary">public class </span><span class="text-success">CharacterFadeTester </span>: <span class="text-success">MonoBehaviour</span><br>
     {<br>
-    &emsp;&emsp;&emsp;&emsp;   <span class="text-primary">public </span><span class="text-success">apPortrait </span><strong>portrait</strong>;<br>
-    &emsp;&emsp;&emsp;&emsp;   <span class="text-primary">public float </span><strong>fadeValue </strong>= 0.5f;<br>
+    &emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;<span class="text-primary">public </span><span class="text-success">apPortrait </span><strong>portrait</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;<span class="text-primary">public float </span><strong>fadeValue </strong>= 0.5f;<br>
     ​<br>
-    &emsp;&emsp;&emsp;&emsp;   <span class="text-primary">void</span> Update ()<br>
-    &emsp;&emsp;&emsp;&emsp;   {<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKey(<span class="text-success">KeyCode</span>.A) )<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  {<br>
+    &emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;<span class="text-primary">void</span> Update ()<br>
+    &emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKey(<span class="text-success">KeyCode</span>.A) )<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;{<br>
     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <strong>fadeValue </strong>-= <span class="text-success">Time</span>.deltaTime * 0.5f;<br>
     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <strong>portrait</strong>.<span class="text-danger"><strong>SetMeshCustomFloatAll</strong></span>(<strong>fadeValue</strong>, <span class="text-danger"><strong>"_FadeValue"</strong></span>);<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  }<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKey(<span class="text-success">KeyCode</span>.S) )<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  {<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;<span class="text-primary">if </span>( <span class="text-success">Input</span>.GetKey(<span class="text-success">KeyCode</span>.S) )<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;{<br>
     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <strong>fadeValue </strong>+= <span class="text-success">Time</span>.deltaTime * 0.5f;<br>
     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <strong>portrait</strong>.<span class="text-danger"><strong>SetMeshCustomFloatAll</strong></span>(<strong>fadeValue</strong>, <span class="text-danger"><strong>"_FadeValue"</strong></span>);<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  }<br>
-    &emsp;&emsp;&emsp;&emsp;   }<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;}<br>
     }<br>
     <br>
     </p>
@@ -703,6 +711,8 @@
     
     <br><br>
     
+    <br>
+    <br>
     <!-- 3. 서브 타이틀 -->
     <h3>プリセットとして保存</h3>
     <br>
@@ -721,6 +731,8 @@
     </p>
     <br>
     
+    <br>
+    <br>
     <!-- 3. 서브 타이틀 -->
     <h3>一部のメッシュに他のマテリアルのセットを適用</h3>
     <br>
@@ -821,6 +833,8 @@
     </p>
     <br>
     
+    <br>
+    <br>
     <!-- 3. 서브 타이틀 -->
     <h3>マテリアルライブラリのインターフェイス</h3>
     <br>
@@ -906,6 +920,9 @@
     <!-- 가로 배치 종료 -->
     
     <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
         <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_CameraScene.html">< シーンのカメラ設定</a>
