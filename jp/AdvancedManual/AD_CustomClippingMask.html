@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>カスタムクリッピングマスク</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_CustomClippingMask.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_CustomClippingMask.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_CustomClippingMask.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > カスタムクリッピングマスク</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">カスタムクリッピングマスク</h1>
+    <br>
+    
+    <p>
+    「<strong>クリッピングマスク（Clipping Mask）</strong>」を使用すると、メッシュの一部のみをレンダリングするようにすることができます。<br>
+    この機能は、便利ですが、場合によっては他の方法で活用する必要があります。<br>
+    クリッピングマスクを処理するシェーダー（Shader）を直接作成して、既存とは異なるマスキングをするように作成するプロセスをこのページで説明します。<br>
+    - <a href="../../jp/GettingStarted/GS_2_3.html">クリッピングマスクの説明</a><br>
+    - <a href="../../jp/AdvancedManual/AD_MeshShader.html">メッシュのシェーダを変更する方法</a><br>
+    - <a href="../../jp/Script/SC_CustomShader.html">カスタムシェーダーを作成する方法</a><br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>透明マスクの作成</h3>
+    <br>
+    
+    <p>
+    「クリッピングマスク」の特徴は、マスクがレンダリングされると同時に、クリッピング、レンダリングが実行されることです。<br>
+    従来の方式とは異なり、「マスクメッシュが隠された状態」にクリッピングレンダリングになるように作られてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1047.jpg"/>
+    <br>
+    
+    <p>
+    説明のために上記のようなサンプルを作ってみました。<br>
+    「制御パラメータ」に応じて「矢印（Arrow）メッシュ」が上下に移動します。<br>
+    このサンプルでは、​​「矢印メッシュ（Arrow）」、「マスクメッシュ（Mask）」、そして「背景メッシュ（BG）」が存在します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1048.jpg"/>
+    <br>
+    
+    <p>
+    「クリッピングマスク」を設定してみましょう。<br>
+    <strong>(1)</strong> メッシュグループを選択した状態で、「Settingタブ」を選択します。<br>
+    <strong>(2)</strong> 「矢印メッシュ（Arrow）」を選択します。<br>
+    <strong>(3)</strong> 「クリッピングボタン」を押すと、<br>
+    <strong>(4)</strong> 「マスクメッシュ（Mask）」を基準にクリッピングがされて表示されるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1049.jpg"/>
+    <br>
+    
+    <p>
+    「Bake」をして、ゲームを実行してみると、上記のように「矢印メッシュ」が「マスクメッシュ」の内部で動くように見えます。<br>
+    ここまではクリッピングメッシュの基本的な使い方です。<br>
+    </p>
+    <br>
+    
+    <p>
+    「カスタムシェーダー」を作成して、「マスクメッシュが隠された状態」に「矢印メッシュ」が表示されるようにしましょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    新しい「シェーダーアセット」を作成し、以下のようにコードを記述します。<br>
+    もし「<strong>シェーダーグラフ（Shader Graph）</strong>」を利用すれば、下の説明をご覧になり、同じように動作するようにグラフを作成します。<br>
+    「カスタムシェーダーコードの記述方式」は、「<a href="../../jp/Script/SC_CustomShader.html">関連ページ</a>」でご覧いただけます。<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom/Ghost Clipping Shader"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags{ "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma surface surf SimpleColor alpha<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma target 3.0<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;half4 LightingSimpleColor(SurfaceOutput s, half3 lightDir, half atten)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 c;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb = s.Albedo;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a = s.Alpha;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return c;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;struct Input<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv_MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 color : COLOR;<br>
+    &emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;void surf(Input IN, inout SurfaceOutput o)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>o.Alpha = 0;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>o.Albedo = half3(0, 0, 0);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    「シェーダーコード」を見ると、基本的な「<strong>Alpha Blend</strong>方式のシェーダー」とほぼ同じです。<br>
+    ただし、「<strong>surf</strong>」関数内のコードが変更されました。<br>
+    コードからわかるように、「<strong>Alpha</strong>」の値を「<span class="text-primary"><strong>0</strong></span>」​​に設定したため、このコードは、メッシュをレンダリングしていません。<br>
+    （シェーダーの名前は自由に指定ください。）<br>
+    </p>
+    <br>
+    
+    <p>
+    これで、このシェーダーを適用してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1050.jpg"/>
+    <br>
+    
+    <p>
+    「メッシュグループ」の「Settingタブ」を選択した状態では、<br>
+    <strong>(1)</strong> 「マスクメッシュ（Mask）」を選択します。<br>
+    <strong>(2)</strong> 「シェーダの設定」を「<strong>Material Set</strong>」から「<strong>Custom Shader</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1051.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「カスタムシェーダーアセット」の項目にの上に作成した <strong>(2)</strong> 「シェーダーアセット」を割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1052.jpg"/>
+    <br>
+    
+    <p>
+    「カスタムシェーダー」はAnyPortraitエディタでは適用されません。<br>
+    Unityシーンで見るために、<strong>Bake</strong>を実行します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1053.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、上記のように、「マスクメッシュ」は、隠された状態で「矢印メッシュ」がマスクの影響を受けてレンダリングされることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>マスク領域を反転</h3>
+    <br>
+    
+    <p>
+    現在「矢印メッシュ」は、マスクの領域の内側でのみ表示されます。<br>
+    カスタムシェーダーを利用すれば、マスクの領域外でのみ表示されるようすることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    新しい「シェーダーアセット」を作成し、以下のように作成してみましょう。<br>
+    「クリッピングシェーダー」の作成要領は、「<a href="../../jp/Script/SC_CustomShader.html">関連ページ</a>」で見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom/Invert Clipped Shader"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Base Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_MaskTex("Mask Texture (A)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_MaskScreenSpaceOffset("Mask Screen Space Offset (XY_Scale)", Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags{ "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"}<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma surface surf SimpleColor alpha<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma target 3.0<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;half4 LightingSimpleColor(SurfaceOutput s, half3 lightDir, half atten)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 c;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb = s.Albedo;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a = s.Alpha;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return c;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _MaskTex;<br>
+    &emsp;&emsp;&emsp;&emsp;float4 _MaskScreenSpaceOffset;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;struct Input<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv_MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 screenPos;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 color : COLOR;<br>
+    &emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;void surf(Input IN, inout SurfaceOutput o)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 c = tex2D(_MainTex, IN.uv_MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb *= _Color.rgb * 2.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 screenUV = IN.screenPos.xy / max(IN.screenPos.w, 0.0001f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV -= float2(0.5f, 0.5f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV.x *= _MaskScreenSpaceOffset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV.y *= _MaskScreenSpaceOffset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV.x += _MaskScreenSpaceOffset.x * _MaskScreenSpaceOffset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV.y += _MaskScreenSpaceOffset.y * _MaskScreenSpaceOffset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV += float2(0.5f, 0.5f);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float mask = tex2D(_MaskTex, screenUV).r;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>mask = 1 - mask;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a *= mask;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Alpha = c.a * _Color.a;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Albedo = c.rgb;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    基本的な「Alpha Blend」方式の「クリッピングシェーダーコード」とほぼ類似しており、次のの1行のみが、追加されました。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary"><strong>mask = 1 - mask;</strong></span><br>
+    </p>
+    <br>
+    
+    <p>
+    このコードは、マスキングされている変数の値を反転する役割をします。<br>
+    マスクの値は、「0~1」の範囲を持つので、上記のよう作成すると、レンダリングされる領域が反転します。<br>
+    </p>
+    <br>
+    
+    <p>
+    「カスタムシェーダーアセット」を適用してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1054.jpg"/>
+    <br>
+    
+    <p>
+    上では「マスクメッシュ」にカスタムシェーダーを適用した場合は、この段階では、クリッピングされている 「<strong>矢印メッシュ（Arrow）</strong>」に適用しましょう。<br>
+    <strong>(1)</strong> 「矢印メッシュ（Arrow）」を選択します。<br>
+    <strong>(2)</strong> メッシュのシェーダーのプロパティを「<strong>Material Set</strong>」で「<strong>Custom Shader</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1055.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「カスタムシェーダーアセット」の項目にの上に作成した <strong>(2)</strong> 「シェーダーアセット」を割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1056.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bake</strong>」をした後、ゲームを実行して、レンダリング結果をみましょう。<br>
+    以前のレンダリング結果と異なり、「矢印メッシュ」が「マスク領域の外」で表示されるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    カスタムシェーダーを使用すると、このページでお見せした例のように、別の様々な演出が可能です。<br>
+    これを活用して素敵なキャラクターアニメーションを作成しよう！<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_ReduceDrawCalls.html">< ドローコールを減</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_BuildiOSPlatforms.html">iOSと他のプラットフォーム ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

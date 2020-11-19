@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Custom Clipping Mask</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_CustomClippingMask.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_CustomClippingMask.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_CustomClippingMask.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Custom Clipping Mask</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Custom Clipping Mask</h1>
+    <br>
+    
+    <p>
+    By using <strong>Clipping Mask</strong>, you can make only part of the mesh rendered.<br>
+    While this feature is useful, you may need to utilize it in other ways.<br>
+    This page covers the process of creating your own shader that handles clipping masks and masking them differently than before.<br>
+    It is recommended to read the description of clipping masks and custom shaders in advance.<br>
+    - <a href="../../en/GettingStarted/GS_2_3.html">Clipping Mask</a><br>
+    - <a href="../../en/AdvancedManual/AD_MeshShader.html">How to change the shader of the mesh</a><br>
+    - <a href="../../en/Script/SC_CustomShader.html">How to write a Custom Shader</a><br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Creating a Transparent Mask</h3>
+    <br>
+    
+    <p>
+    A feature of clipping masks is that clipping processing is performed <strong>while the mask is being rendered</strong>.<br>
+    Unlike the previous method, let's make the clipping process performed with <span class="text-danger"><strong>mask mesh not rendered</strong></span>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1047.jpg"/>
+    <br>
+    
+    <p>
+    For detailed explanation, we made the sample above.<br>
+    The "Arrow mesh" moves up depending on the control parameter.<br>
+    In this sample, there are "Arrow mesh", "Mask mesh", and "Background mesh".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1048.jpg"/>
+    <br>
+    
+    <p>
+    Let's set a Clipping mask.<br>
+    <strong>(1)</strong> Select the <strong>Setting tab</strong> with the mesh group selected.<br>
+    <strong>(2)</strong> Select <strong>Arrow</strong> mesh.<br>
+    <strong>(3)</strong> Click the <strong>Clipping button</strong>, and <strong>(4)</strong> you can see that it is clipped based on the mask mesh and rendered.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1049.jpg"/>
+    <br>
+    
+    <p>
+    If you run the game after executing Bake, the Arrow moves inside the mask mesh as above.<br>
+    This is the basic usage of the clipping mask mesh.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now let's write a custom shader so that the Arrow is rendered with the mask mesh hidden.<br>
+    </p>
+    <br>
+    
+    <p>
+    Create a new <strong>Shader Asset</strong> and write the code below.<br>
+    If you are using <strong>Shader Graph</strong>, see the explanation below, and create a graph to work the same.<br>
+    You can see how to write a custom shader in the <a href="../../en/Script/SC_CustomShader.html">related page</a>.<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom/Ghost Clipping Shader"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags{ "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma surface surf SimpleColor alpha<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma target 3.0<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;half4 LightingSimpleColor(SurfaceOutput s, half3 lightDir, half atten)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 c;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb = s.Albedo;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a = s.Alpha;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return c;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;struct Input<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv_MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 color : COLOR;<br>
+    &emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;void surf(Input IN, inout SurfaceOutput o)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>o.Alpha = 0;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>o.Albedo = half3(0, 0, 0);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    The code above is almost the same as the basic <strong>Alpha Blend</strong> shader.<br>
+    However, the code in the <strong>surf</strong> function has been modified.<br>
+    As you can see in the code, this shader does not render anything because we set the value of <strong>Alpha</strong> to <span class="text-primary"><strong>0</strong></span>.<br>
+    (You can freely set the shader name.)<br>
+    </p>
+    <br>
+    
+    <p>
+    Now let's apply this shader.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1050.jpg"/>
+    <br>
+    
+    <p>
+    With the mesh group's Setting tab selected,<br>
+    <strong>(1)</strong> Select the <strong>Mask</strong> mesh.<br>
+    <strong>(2)</strong> Change the shader setting from <strong>Material Set</strong> to <strong>Custom Shader</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1051.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> To the Custom Shader Asset item, <strong>(2)</strong> assign the Shader Asset written above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1052.jpg"/>
+    <br>
+    
+    <p>
+    Custom shaders are not applied in AnyPortrait editor.<br>
+    To see it in the Unity scene, run <strong>Bake</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1053.jpg"/>
+    <br>
+    
+    <p>
+    When the game runs, you can see that "<strong>Mask Mesh</strong>" is not visible as above, and only "<strong>Arrow Mesh</strong>" is affected by the mask and rendered.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Inverting the Mask Area</h3>
+    <br>
+    
+    <p>
+    Currently, the "Arrow" mesh is only rendered inside the area of ​​the mask.<br>
+    Using a custom shader, you can make it only render <strong>outside the area of ​​the mask</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's create a new shader asset and write it like this:<br>
+    You can see how to write a clipping shader in the <a href="../../en/Script/SC_CustomShader.html">related page</a>.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom/Invert Clipped Shader"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Base Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_MaskTex("Mask Texture (A)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_MaskScreenSpaceOffset("Mask Screen Space Offset (XY_Scale)", Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags{ "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"}<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma surface surf SimpleColor alpha<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma target 3.0<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;half4 LightingSimpleColor(SurfaceOutput s, half3 lightDir, half atten)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 c;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb = s.Albedo;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a = s.Alpha;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return c;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _MaskTex;<br>
+    &emsp;&emsp;&emsp;&emsp;float4 _MaskScreenSpaceOffset;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;struct Input<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv_MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 screenPos;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 color : COLOR;<br>
+    &emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;void surf(Input IN, inout SurfaceOutput o)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 c = tex2D(_MainTex, IN.uv_MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb *= _Color.rgb * 2.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 screenUV = IN.screenPos.xy / max(IN.screenPos.w, 0.0001f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV -= float2(0.5f, 0.5f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV.x *= _MaskScreenSpaceOffset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV.y *= _MaskScreenSpaceOffset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV.x += _MaskScreenSpaceOffset.x * _MaskScreenSpaceOffset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV.y += _MaskScreenSpaceOffset.y * _MaskScreenSpaceOffset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV += float2(0.5f, 0.5f);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float mask = tex2D(_MaskTex, screenUV).r;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>mask = 1 - mask;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a *= mask;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Alpha = c.a * _Color.a;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Albedo = c.rgb;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    The code above is also very similar to the basic "Alpha Blend Clipped Shader Code", with only one more line added.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary"><strong>mask = 1 - mask;</strong></span><br>
+    </p>
+    <br>
+    
+    <p>
+    This code is responsible for inverting the value of the masking.<br>
+    Mask values ​​range from 0 to 1, so if you write as above, the rendered area is inverted.<br>
+    Now let's apply this custom shader asset.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1054.jpg"/>
+    <br>
+    
+    <p>
+    Above we applied a custom shader to the Mask mesh, but in this step, we apply it to the clipped "<strong>Arrow</strong>" mesh.<br>
+    <strong>(1)</strong> Select the <strong>Arrow</strong> mesh.<br>
+    <strong>(2)</strong> Change the mesh shader property from <strong>Material Set</strong> to <strong>Custom Shader</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1055.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> To the Custom Shader Asset item, <strong>(2)</strong> assign the Clipped Shader Asset created above <br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1056.jpg"/>
+    <br>
+    
+    <p>
+    Now run <strong>Bake</strong> and run the game to see the rendering result.<br>
+    Unlike the previous rendering results, you can see that the Arrow Mesh is only rendered <strong>outside the Mask Area</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    Using custom shaders, you can create a variety of different rendering results, like the examples shown on this page.<br>
+    Use it to create cool character animations!<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ReduceDrawCalls.html">< Reduce Draw Calls</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_BuildiOSPlatforms.html">Build on iOS and other platforms ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

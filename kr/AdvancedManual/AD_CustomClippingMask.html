@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>커스텀 클리핑 마스크</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_CustomClippingMask.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_CustomClippingMask.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_CustomClippingMask.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > 커스텀 클리핑 마스크</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">커스텀 클리핑 마스크</h1>
+    <br>
+    
+    <p>
+    <strong>클리핑 마스크(Clipping Mask)</strong>를 이용하면 메시의 일부분만 렌더링되도록 만들 수 있습니다.<br>
+    이 기능은 유용하지만, 다른 방식으로 활용할 필요가 있을 수 있습니다.<br>
+    클리핑 마스크를 처리하는 쉐이더를 직접 작성하여 기존과 다르게 마스킹을 하도록 만드는 과정을 이 페이지에서 다룹니다.<br>
+    클리핑 마스크 및 커스텀 쉐이더와 관련된 설명을 미리 읽어보시는 것을 권장합니다.<br>
+    - <a href="../../kr/GettingStarted/GS_2_3.html">클리핑 마스크에 관한 설명</a><br>
+    - <a href="../../kr/AdvancedManual/AD_MeshShader.html">메시의 쉐이더 변경하는 방법</a><br>
+    - <a href="../../kr/Script/SC_CustomShader.html">커스텀 쉐이더를 작성하는 방법</a><br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>투명한 마스크 만들기</h3>
+    <br>
+    
+    <p>
+    클리핑 마스크의 특징은 <strong>마스크가 렌더링 되면서</strong> 클리핑 처리가 수행된다는 것입니다.<br>
+    기존 방식과는 다르게 <span class="text-danger"><strong>마스크 메시가 렌더링되지 않은 상태</strong></span>로 클리핑이 처리되도록 만들어봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1047.jpg"/>
+    <br>
+    
+    <p>
+    설명을 위해서 위와 같은 샘플을 만들어보았습니다.<br>
+    컨트롤 파라미터에 따라서 "화살표 메시"가 위로 이동합니다.<br>
+    이 샘플에는 "화살표 메시(Arrow)", "마스크 메시(Mask)", 그리고 "배경 메시(BG)"가 존재합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1048.jpg"/>
+    <br>
+    
+    <p>
+    클리핑 마스크를 설정해봅시다.<br>
+    <strong>(1)</strong> 메시 그룹을 선택한 상태에서 <strong>Setting 탭</strong>을 선택하세요.<br>
+    <strong>(2)</strong> <strong>화살표 메시(Arrow)</strong>를 선택합니다.<br>
+    <strong>(3)</strong> <strong>클리핑 버튼</strong>을 누르면 <strong>(4)</strong> 마스크 메시(Mask)를 기준으로 클리핑이 되어 렌더링되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1049.jpg"/>
+    <br>
+    
+    <p>
+    Bake를 하고 게임을 실행해보면, 위와 같이 화살표가 마스크 메시의 내부에서 움직이는 것처럼 보입니다.<br>
+    여기까지는 클리핑 메시의 기본적인 사용법입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이제 커스텀 쉐이더를 작성해서 마스크 메시가 숨겨진 상태로 화살표가 렌더링되도록 만들어봅시다.<br>
+    </p>
+    <br>
+    
+    <p>
+    새로운 쉐이더 에셋을 생성하고, 아래와 같이 코드를 작성합니다.<br>
+    만약 <strong>쉐이더 그래프 (Shader Graph)</strong>를 이용한다면, 아래의 설명을 보시고 동일하게 동작하도록 그래프를 작성하면 됩니다.<br>
+    커스텀 쉐이더 코드 작성 방식은 <a href="../../kr/Script/SC_CustomShader.html">관련 페이지</a>에서 보실 수 있습니다.<br>
+    </p>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom/Ghost Clipping Shader"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags{ "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma surface surf SimpleColor alpha<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma target 3.0<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;half4 LightingSimpleColor(SurfaceOutput s, half3 lightDir, half atten)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 c;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb = s.Albedo;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a = s.Alpha;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return c;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;struct Input<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv_MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 color : COLOR;<br>
+    &emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;void surf(Input IN, inout SurfaceOutput o)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>o.Alpha = 0;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>o.Albedo = half3(0, 0, 0);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    쉐이더 코드를 보시면 기본적인 <strong>Alpha Blend</strong> 방식의 쉐이더와 거의 같습니다.<br>
+    다만, <strong>surf</strong> 함수 내의 코드가 변경되었습니다.<br>
+    코드에서 볼 수 있듯이, <strong>Alpha</strong>의 값을 <span class="text-primary"><strong>0</strong></span>으로 설정했기 때문에 이 쉐이더는 아무것도 렌더링하지 않습니다.<br>
+    (쉐이더의 이름은 자유롭게 정하시면 됩니다.)<br>
+    </p>
+    <br>
+    
+    <p>
+    이제 이 쉐이더를 적용해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1050.jpg"/>
+    <br>
+    
+    <p>
+    메시 그룹의 Setting 탭을 선택한 상태에서,<br>
+    <strong>(1)</strong> <strong>마스크 메시(Mask)</strong>를 선택합니다.<br>
+    <strong>(2)</strong> 쉐이더 설정을 <strong>Material Set</strong>에서 <strong>Custom Shader</strong>로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1051.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 커스텀 쉐이더 에셋 항목에 <strong>(2)</strong> 위에서 작성한 쉐이더 에셋을 할당합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1052.jpg"/>
+    <br>
+    
+    <p>
+    커스텀 쉐이더는 AnyPortrait 에디터에서는 적용되지 않습니다.<br>
+    유니티 씬에서 보기 위해, <strong>Bake</strong>를 실행합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1053.jpg"/>
+    <br>
+    
+    <p>
+    게임을 실행하면 위와 같이 "<strong>마스크 메시</strong>"는 보이지 않은 상태로 "<strong>화살표 메시</strong>"만 마스크의 영향을 받아서 렌더링되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>마스크 영역 반전하기</h3>
+    <br>
+    
+    <p>
+    현재 "화살표 메시"는 마스크의 영역 안쪽에서만 렌더링됩니다.<br>
+    커스텀 쉐이더를 이용하면, <strong>마스크의 영역 밖</strong>에서만 렌더링되도록 만들 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    새로운 쉐이더 에셋을 생성하고 아래와 같이 작성해봅시다.<br>
+    클리핑 쉐이더 작성 요령은 <a href="../../kr/Script/SC_CustomShader.html">관련 페이지</a>에서 보실 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom/Invert Clipped Shader"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Base Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_MaskTex("Mask Texture (A)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_MaskScreenSpaceOffset("Mask Screen Space Offset (XY_Scale)", Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags{ "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"}<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma surface surf SimpleColor alpha<br>
+    &emsp;&emsp;&emsp;&emsp;#pragma target 3.0<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;half4 LightingSimpleColor(SurfaceOutput s, half3 lightDir, half atten)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 c;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb = s.Albedo;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a = s.Alpha;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return c;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;sampler2D _MaskTex;<br>
+    &emsp;&emsp;&emsp;&emsp;float4 _MaskScreenSpaceOffset;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;struct Input<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv_MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 screenPos;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 color : COLOR;<br>
+    &emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;void surf(Input IN, inout SurfaceOutput o)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 c = tex2D(_MainTex, IN.uv_MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb *= _Color.rgb * 2.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 screenUV = IN.screenPos.xy / max(IN.screenPos.w, 0.0001f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV -= float2(0.5f, 0.5f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV.x *= _MaskScreenSpaceOffset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV.y *= _MaskScreenSpaceOffset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV.x += _MaskScreenSpaceOffset.x * _MaskScreenSpaceOffset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV.y += _MaskScreenSpaceOffset.y * _MaskScreenSpaceOffset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;screenUV += float2(0.5f, 0.5f);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float mask = tex2D(_MaskTex, screenUV).r;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>mask = 1 - mask;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a *= mask;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Alpha = c.a * _Color.a;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Albedo = c.rgb;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    위 코드도 기본적인 Alpha Blend 방식의 "클리핑 쉐이더 코드"와 거의 유사하며, 다음의 단 한줄만 더 추가되었습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary"><strong>mask = 1 - mask;</strong></span><br>
+    </p>
+    <br>
+    
+    <p>
+    이 코드는 마스킹되는 변수의 값을 반전하는 역할을 합니다.<br>
+    마스크 값은 0~1의 범위를 가지므로 위와 같이 작성하면 렌더링 되는 영역이 반전됩니다.<br>
+    이제 이 커스텀 쉐이더 에셋을 적용해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1054.jpg"/>
+    <br>
+    
+    <p>
+    위에서는 마스크 메시에 커스텀 쉐이더를 적용했다면, 이번엔 클리핑되는 "<strong>화살표 메시(Arrow)</strong>"에 적용을 합니다.<br>
+    <strong>(1)</strong> <strong>화살표 메시(Arrow)</strong>를 선택합니다.<br>
+    <strong>(2)</strong> 메시의 쉐이더 속성을 <strong>Material Set</strong>에서 <strong>Custom Shader</strong>로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1055.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 커스텀 쉐이더 에셋 항목에 <strong>(2)</strong> 위에서 작성한 클리핑 쉐이더 에셋을 할당합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1056.jpg"/>
+    <br>
+    
+    <p>
+    이제 <strong>Bake</strong>를 하고 게임을 실행해서 렌더링 결과를 봅시다.<br>
+    이전 렌더링 결과와 다르게, <strong>화살표 메시</strong>가 <strong>마스크 영역의 밖</strong>에서만 렌더링되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    커스텀 쉐이더를 이용하면 이 페이지에서 보여드린 예제처럼, 또다른 다양한 연출이 가능합니다.<br>
+    이를 활용하여 멋진 캐릭터 애니메이션을 만들어보세요!<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_ReduceDrawCalls.html">< 드로우콜 줄이기</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_BuildiOSPlatforms.html">iOS 및 다른 플랫폼으로 빌드하기 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>
