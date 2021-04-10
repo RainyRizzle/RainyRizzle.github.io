@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Copy/paste using slots</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_CopyAndPasteWithSlots.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_CopyAndPasteWithSlots.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_CopyAndPasteWithSlots.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Copy/paste using slots</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Copy/paste using slots</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.0</span></h4>
+    
+    <p>
+    When using modifiers that use control parameters, it may be necessary to create the result of combining the values of two or more keys.<br>
+    For example, if you combine <strong>the face toward left</strong> and <strong>the face toward up</strong> to create <strong>the face toward up-left</strong>.<br>
+    This page covers how to use <strong>Slots</strong> to copy two or more key values.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    This function is only supported for modifiers using control parameters.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1165.jpg"/>
+    <br>
+    
+    <p>
+    A simple example using the <strong>Transform (Controller)</strong> modifier is configured as above.<br>
+    <strong>(1)</strong> The mesh is located in <strong>Down-Left</strong>.<br>
+    <strong>(2)</strong> The position of the mesh is controlled by a control parameter with the "Vector2" type.<br>
+    The control parameter is also based on the <strong>Down-Left</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1166.jpg"/>
+    <br>
+    
+    <p>
+    The mesh is positioned in <strong>Up-Left</strong> and <strong>Down-Right</strong> to match the control parameters.<br>
+    In other words, the mesh moves <strong>Up (+Y)</strong> or <strong>Right (+X)</strong> depending on the control parameter.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1167.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Let's combine the position values of the <strong>Up-Left (+Y)</strong> and <strong>Down-Right (+X)</strong> meshes so that <strong>(2)</strong> the mesh is positioned at <strong>Up-Right (+XY)</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1168.jpg"/>
+    <br>
+    
+    <p>
+    Before copy/paste, add a new key.<br>
+    <strong>(1)</strong> Place the control parameter slider on the Up-Right.<br>
+    <strong>(2)</strong> Create a key.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1169.jpg"/>
+    <br>
+    
+    <p>
+    Let's copy and paste the two key values (+Y and +X).<br>
+    <strong>(1)</strong> First, move the control parameter to <strong>Up-Left (+Y)</strong>.<br>
+    <strong>(2)</strong> With this key, the mesh moves up (+Y) from the base position.<br>
+    <strong>(3)</strong> Select <strong>the first slot</strong>.<br>
+    <strong>(4)</strong> Click the <strong>Copy</strong> button to save the position of the mesh to the corresponding slot.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1170.jpg"/>
+    <br>
+    
+    <p>
+    When saving to the slot, the button changes from <strong>Empty Circle</strong> to <strong>Filled Circle</strong> as above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1171.jpg"/>
+    <br>
+    
+    <p>
+    Let's copy the second value in the same way.<br>
+    <strong>(1)</strong> Move the control parameter to <strong>Down-Right (+X)</strong>.<br>
+    <strong>(2)</strong> Select <strong>the second slot</strong>.<br>
+    <strong>(3)</strong> Click the <strong>Copy</strong> button to save the value to the slot.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1172.jpg"/>
+    <br>
+    
+    <p>
+    Then, let's paste the two saved values together.<br>
+    <strong>(1)</strong> Select the newly created key.<br>
+    <strong>(2)</strong> Select <strong>the first slot</strong> ( <kbd>Click</kbd>  ).<br>
+    <strong>(3)</strong> Select <strong>the second slot</strong> in addition( <kbd>Ctrl+Click</kbd>  ).<br>
+    (In Mac, you can select by  <kbd>Command+Click</kbd> .)<br>
+    <strong>(4)</strong> Two slots are selected.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    - Blue slot: When&nbsp;&nbsp;<kbd>Click</kbd> , the selection of other slots is released, and only the clicked slot is selected. Pressing the <strong>Copy</strong> button saves the value to this slot.<br>
+    - Purple slot: When  <kbd>Ctrl+Click</kbd> , the corresponding slot is additionally selected, and the color of the button becomes purple.<br>
+    - You can select up to 4 slots.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1173.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(5)</strong> You can choose how to combine the values. First, let's choose the <strong>Sum</strong> method.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1174.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(6)</strong> Press the <strong>Paste</strong> button.<br>
+    <strong>(7)</strong> The two values are combined and you can see the mesh moved to <strong>Up-Right</strong>.<br>
+    In other words, it is the result of <strong>"+X"</strong> and <strong>"+Y"</strong> being combined and moving the mesh to the location of <strong>"+XY"</strong><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1175.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> In this step, select the <strong>Average</strong> method and <strong>(2)</strong> Press the <strong>Paste</strong> button.<br>
+    <strong>(3)</strong> You can see the mesh is located in the center.<br>
+    Moved to the average position of <strong>"+X"</strong> and <strong>"+Y"</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ExtraOption.html">< Switching Rendering Order and Images</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ExportImportAnimation.html">Export / Import Animation ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

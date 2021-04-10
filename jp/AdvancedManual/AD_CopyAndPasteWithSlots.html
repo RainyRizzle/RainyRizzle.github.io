@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>スロットを使用してコピー/貼り付け</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_CopyAndPasteWithSlots.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_CopyAndPasteWithSlots.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_CopyAndPasteWithSlots.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > スロットを使用してコピー/貼り付け</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">スロットを使用してコピー/貼り付け</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.0</span></h4>
+    
+    <p>
+    制御パラメータを利用するモディファイヤを使用するとき、2つ以上のキー（Key）での値を合わせた結果を作成する場合があります。<br>
+    例えば、「左に向かう姿」と「上に向かう姿」を合わせ、「左上に向かう姿」を作成する場合です。<br>
+    このページでは、2つ以上のキー値をコピーするために、「<strong>スロット（Slot）</strong>」を利用する方法を説明します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>参考</strong></span><br>
+    この機能は、制御パラメータを利用するモディファイヤのみサポートされます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1165.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Transform（Controller）</strong>」モディファイヤを使用した簡単な例を構成してみました。<br>
+    <strong>(1)</strong> メッシュが「<strong>左下</strong>」にあります。<br>
+    <strong>(2)</strong> 「Vector2」タイプの制御パラメータでメッシュの位置を制御します。<br>
+    コントロールパラメータも「<strong>左下</strong>」を基準にします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1166.jpg"/>
+    <br>
+    
+    <p>
+    制御パラメータに合わせてメッシュが「<strong>左上</strong>」と「<strong>右下</strong>」に位置するようにしました。<br>
+    つまり、メッシュは、制御パラメータに基づいて、「<strong>上（+Y）</strong>」で動かしたり、「<strong>右（+X）</strong>」に移動します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1167.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>左上（+Y）</strong>」、「<strong>右下（+X）</strong>」の位置の値を合成して、 <strong>(2)</strong> 「<strong>右上（+XY）</strong>」にメッシュが位置するように作られてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1168.jpg"/>
+    <br>
+    
+    <p>
+    コピー/貼り付けをする前に、一度新しいキー（Key）を追加します。<br>
+    <strong>(1)</strong> 右上部に制御パラメータのスライダーを配置します。<br>
+    <strong>(2)</strong> キーを生成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1169.jpg"/>
+    <br>
+    
+    <p>
+    二つのキー値（+Yと+X）をコピーして貼り付けてみましょう。<br>
+    <strong>(1)</strong> まず、「<strong>左上（+Y）</strong>」で制御パラメータを移動します。<br>
+    <strong>(2)</strong> このキーでは、メッシュが基準位置から「<strong>上（+Y）</strong>」に移動します。<br>
+    <strong>(3)</strong> 「最初のスロット」を選択します。<br>
+    <strong>(4)</strong> 「<strong>Copy</strong>」ボタンを押して、メッシュの位置をスロットに格納します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1170.jpg"/>
+    <br>
+    
+    <p>
+    スロットに保存する上記のようにボタンの形が「空のワン」で「塗られたワン」に変わります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1171.jpg"/>
+    <br>
+    
+    <p>
+    同じ方法で第二の値もコピーしましょう。<br>
+    <strong>(1)</strong> 制御パラメータを「<strong>右下（+X）</strong>」に移動します。<br>
+    <strong>(2)</strong> 「第二のスロット」を選択します。<br>
+    <strong>(3)</strong> 「<strong>Copy</strong>」ボタンを押して値をスロットに保存します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1172.jpg"/>
+    <br>
+    
+    <p>
+    今保存された二つの値を合わせて貼り付けます。<br>
+    <strong>(1)</strong> 先に新たに作成したキーを選択します。<br>
+    <strong>(2)</strong> 「最初のスロット」を選択します。（ <kbd>クリック</kbd> ）<br>
+    <strong>(3)</strong> 「第二スロット」を追加で選択します。（ <kbd> Ctrl+クリック</kbd> ）<br>
+    （Macでは <kbd> Command+クリック</kbd> ）<br>
+    <strong>(4)</strong> 二つのスロットが選択された。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    - 青スロット : 「クリック」と、他のスロットの選択が解除され、クリックしたスロットのみを選択します。「<strong>Copy</strong>」ボタンを押すと、このスロットに格納されます。<br>
+    - 紫スロット : 「Ctrl +クリック」すれば、さらにスロットが選択され、この時のボタンの色は紫色になります。<br>
+    - 最大4つのスロットを選択することができます。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1173.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(5)</strong> 値をどのように合成するかを選択することができます。まず、「<strong>Sum</strong>」方式を選択してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1174.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(6)</strong> 「<strong>Paste</strong>」ボタンを押します。<br>
+    <strong>(7)</strong> 二つの値が合わさって、「<strong>右上</strong>」に移動し、メッシュを見ることができます。<br>
+    つまり、「<strong>+X</strong>」と「<strong>+Y</strong>」が合わさって、「<strong>+XY</strong>」の位置にメッシュが移動した結果です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1175.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 今回は、「<strong>Average</strong>」方式を選択し、 <strong>(2)</strong> 「<strong>Paste</strong>」ボタンを押してみましょう。<br>
+    <strong>(3)</strong> メッシュが中に位置することを見ることができます。<br>
+    「<strong>+X</strong>」と「<strong>+Y</strong>」の平均位置に移動したものです。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_ExtraOption.html">< レンダリング順序と画像の切り替え</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_ExportImportAnimation.html">アニメーションをエクスポート/インポート ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

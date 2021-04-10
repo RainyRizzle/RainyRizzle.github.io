@@ -334,6 +334,7 @@
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransformのテクスチャを置き換えます。<br>
     &nbsp;&nbsp;&nbsp;テクスチャが置き換えられると、「Draw Call」が増加することがあります。<br>
+    &nbsp;&nbsp;&nbsp;「_MainTex」を対象とする場合は、「SetMeshImage」関数を使用してください。<br>
     </p>
     
     <br>
@@ -358,6 +359,7 @@
     &nbsp;&nbsp;&nbsp;apOptTransformの色を設定します。<br>
     &nbsp;&nbsp;&nbsp;色は 「2X Multiply」として計算されるので、デフォルトはグレー（0.5、0.5、0.5、1）です。<br>
     &nbsp;&nbsp;&nbsp;色がデフォルトでない場合、「Draw Call」が増加することがあります。<br>
+    &nbsp;&nbsp;&nbsp;「_Color」を対象とする場合は、「SetMeshColor」関数を使用してください。<br>
     </p>
     
     <br>
@@ -381,6 +383,7 @@
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransformの色のアルファ(透明度)を設定します。<br>
     &nbsp;&nbsp;&nbsp;デフォルト値は1です。 それ以外の場合は、「Draw Call」が増加することがあります。<br>
+    &nbsp;&nbsp;&nbsp;「_Color」を対象とする場合は、「SetMeshAlpha」関数を使用してください。<br>
     </p>
     
     <br>
@@ -604,6 +607,7 @@
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTextureDataを使用するすべてのメッシュのテクスチャを一括して置き換えます。<br>
+    &nbsp;&nbsp;&nbsp;「_MainTex」を対象とする場合は、「SetMeshCustomImageAll」関数の代わりに「 SetMeshImageAll」関数を使用してください。<br>
     </p>
     
     <br>
@@ -631,6 +635,7 @@
     &nbsp;&nbsp;&nbsp;すべてのメッシュの色を一括的に交換します。<br>
     &nbsp;&nbsp;&nbsp;optTextureNameを入力すると、そのapOptTextureDataを使用するメッシュを対象に色を設定します。<br>
     &nbsp;&nbsp;&nbsp;「mainColor」を変更すると、デフォルトで 「2X Multiply」カラーが使用されます。<br>
+    &nbsp;&nbsp;&nbsp;「_Color」を修正する場合は、「SetMeshCustomColorAll」関数の代わりに「SetMeshColorAll」関数を使用してください。<br>
     </p>
     
     <br>
@@ -657,6 +662,7 @@
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;すべてのメッシュのアルファ（透明度）を一括して交換します。<br>
     &nbsp;&nbsp;&nbsp;optTextureNameを入力すると、そのapOptTextureDataを使用するメッシュを対象にアルファを設定します。<br>
+    &nbsp;&nbsp;&nbsp;「_Color」を変更する場合「SetMeshCustomAlphaAll」関数の代わりに「SetMeshAlphaAll」関数を利用してください。<br>
     </p>
     
     <br>

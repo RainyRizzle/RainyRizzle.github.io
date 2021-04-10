@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Visibility Preset</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_VisibilityPreset.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_VisibilityPreset.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_VisibilityPreset.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Visibility Preset</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Visibility Preset</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.0</span></h4>
+    
+    <p>
+    When there are many objects while creating animation, it is difficult to do efficient work.<br>
+    So users need to hide or show some objects while working on them.<br>
+    If you do this repeatedly, it will be convenient to use it after saving whether objects are shown or not.<br>
+    This page explains the <strong>Visibility Preset</strong>, which improves the efficiency of your work.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1074.jpg"/>
+    <br>
+    
+    <p>
+    We have set up a simple character for explanation.<br>
+    This is a sample of two child mesh groups in one mesh group.<br>
+    Each child mesh group has meshes and bones.<br>
+    If you want to hide objects you don't need,<br>
+    <strong>(1)</strong> Click the black or green eye icon on the right Hierarchy screen.<br>
+    <strong>(2)</strong> Objects are temporarily hidden.<br>
+    </p>
+    <br>
+    
+    <p>
+    This method is easy and convenient, but it's a bit cumbersome to do it over and over again.<br>
+    Let's use <strong>Visibility Preset</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1075.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the <strong>View Menu</strong>.<br>
+    <strong>(2)</strong> Select <strong>Visibility Preset > Settings</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1076.jpg"/>
+    <br>
+    
+    <p>
+    This is the Visibility Preset Setting screen.<br>
+    <strong>1. Rule List</strong> : Rules of the Visibility preset are displayed.<br>
+    <strong>2. Add New Rule</strong> : Create a new rule.<br>
+    <strong>3. Rule properties</strong> : These are properties of the selected rule.<br>
+    <strong>4. Order, Duplicate, Remove</strong> : These are functions to change the order in the list, duplicate and remove the rule.<br>
+    <strong>5. Mesh Group</strong> : This is the target mesh group.<br>
+    <strong>6. Object list</strong> : In case of Custom rule, it is a screen to decide whether to display objects.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Create a new rule</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1077.jpg"/>
+    <br>
+    
+    <p>
+    Let's add a new rule.<br>
+    <strong>(1)</strong> Click the <strong>Add New Rule</strong> button.<br>
+    <strong>(2)</strong> A new rule has been created. Select the created rule.<br>
+    <strong>(3)</strong> Set the name of the rule.<br>
+    <strong>(4)</strong> Let's select <strong>Custom</strong> as the rule method.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1078.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(5)</strong> You can assign shortcuts if necessary. You can select one of 5 shortcuts ( <kbd>1~5</kbd> ).<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1079.jpg"/>
+    <br>
+    
+    <p>
+    In the "Custom" type rule, you can directly set whether to display objects.<br>
+    <strong>(1)</strong> Select the target mesh group.<br>
+    <strong>(2)</strong> Select the <strong>Meshes</strong> tab to set whether to display meshes and child mesh groups.<br>
+    <strong>(3)</strong> It sets whether to display objects.<br>
+    <strong>(4)</strong> Visibility of object, which is calculated by modifiers is maintained as it is.<br>
+    <strong>(5)</strong> Make the object be shown.<br>
+    <strong>(6)</strong> Make the object be hidden.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1080.jpg"/>
+    <br>
+    
+    <p>
+    You can also set whether to be visible bones by clicking the <strong>Bones</strong> tab.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1081.jpg"/>
+    <br>
+    
+    <p>
+    Now let's apply this visibility preset rule.<br>
+    <strong>(1)</strong> Open the <strong>View Menu</strong>.<br>
+    <strong>(2)</strong> Press <strong>Visibility Preset > Enable Preset</strong> (shortcut key  <kbd>I</kbd> ) to activate view preset.<br>
+    <strong>(3)</strong> The created rules are displayed in the View menu. You can change the rules.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1082.jpg"/>
+    <br>
+    
+    <p>
+    You can see that the visibility preset rule you created has been applied.<br>
+    In the Hierarchy on the right, a "white eye icon" indicates that the visibility is changed or not.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Make only the modifier's target visible</h3>
+    <br>
+    
+    <p>
+    If you want to make only the objects you are editing visible in the workspace, and hide other objects, let's use a special rule method.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1083.jpg"/>
+    <br>
+    
+    <p>
+    This is a screen made to move only the bones of the right child group among the child mesh groups.<br>
+    Only the bones on the right are registered in the modifier, and other objects are not registered in the modifier.<br>
+    Let's make only the right bones being edited be visible.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1084.jpg"/>
+    <br>
+    
+    <p>
+    Opens the Visibility Preset Settings screen.<br>
+    <strong>(1)</strong> Click the <strong>Add New Rule</strong> button to create a new rule.<br>
+    <strong>(2)</strong> Set the name, and this time, set the Method as <strong>Show Only Modified</strong>.<br>
+    In this method, the visibility of the object is determined according to the modifier, so the screen on the right where you manually set whether to display objects is deactivated.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1085.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the View menu and select <strong>Second Rule</strong>. Selecting a rule automatically activates the visibility preset.<br>
+    (If the visibility preset is not activated, press <strong>Enable Preset</strong>.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1086.jpg"/>
+    <br>
+    
+    <p>
+    You can see only the bones currently being edited in the modifier appear on the screen.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Synchronizing the visibility of bones with the parent mesh group</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1088.jpg"/>
+    <br>
+    
+    <p>
+    The bones on the left and right of this sample belong to each child mesh group.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1087.jpg"/>
+    <br>
+    
+    <p>
+    If the child mesh group is not visible by the modifier as above, the meshes will not be rendered together.<br>
+    However, bones always appear in the workspace regardless of whether the child mesh group is visible or not.<br>
+    In some cases, these bones do not need to be shown on the screen.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1089.jpg"/>
+    <br>
+    
+    <p>
+    Opens the Visibility Preset Settings screen.<br>
+    <strong>(1)</strong> Click the <strong>Add New Rule</strong> button to create a new rule.<br>
+    <strong>(2)</strong> Set the name, and set the Method as <strong>Show Bones If Mesh Group Visible</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1090.jpg"/>
+    <br>
+    
+    <p>
+    Let's apply the created visibility preset rule.<br>
+    Bones are now shown or hidden depending on the visibility of the mesh group.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ViewMenu.html">< View menu and Status icons</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_Rotoscoping.html">Rotoscoping ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

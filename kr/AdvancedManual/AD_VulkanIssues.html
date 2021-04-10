@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Vulkan 빌드시 성능 저하 문제</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_VulkanIssues.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_VulkanIssues.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_VulkanIssues.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > Vulkan 빌드시 성능 저하 문제</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Vulkan 빌드시 성능 저하 문제</h1>
+    <br>
+    
+    <p>
+    이 페이지에서는 그래픽스 API 중 하나인 <strong>Vulkan</strong>을 이용해서 안드로이드 플랫폼으로 빌드를 했을 경우, 일부 기기에서 성능이 크게 떨어지는 이슈에 대해서 다룹니다.<br>
+    이 이슈는 사용자로부터 제보를 받고 저희가 테스트를 진행한 결과에 따른 것이며, Unity나 안드로이드 업데이트, 기기에 따라서 차이가 있을 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    저희는 안드로이드 기기인 "Galaxy S8"에서 FPS가 절반 정도로 줄어들 정도로 성능이 좋지 않다는 사용자의 제보를 받았습니다.<br>
+    실제로 해당 기기에서 테스트를 했으며, 저희는 이 문제가 <strong>Vulkan</strong>에 의한 것임을 확인하였습니다.<br>
+    기본 API인 OpenGLES와 Vulkan을 사용하여 각각 빌드했을 때의 성능 차이는 다음과 같았습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1176.jpg"/>
+    <br>
+    
+    <p>
+    먼저, AnyPortrait 데모 씬을 Galaxy S8에서 실행하고 프로파일러를 이용하여 성능을 확인한 결과입니다.<br>
+    스크립트와 렌더링에 대해서는 60 FPS를 상회하는 결과를 볼 수 있습니다.<br>
+    하지만 VSync가 이상하게 동작하여 Vulkan의 경우에 성능이 크게 저하되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortrait는 기본적인 Surface Shader와 Mesh Renderer를 이용하기 때문에, Unity의 기본 요소들을 렌더링하는 것과 큰 차이가 없습니다.<br>
+    따라서 저희 팀은 Transparent 재질의 메시들을 배치한 단순한 씬으로도 테스트를 했습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1177.jpg"/>
+    <br>
+    
+    <p>
+    위 테스트 결과에서 볼 수 있듯이, Vulkan을 이용할 경우 VSync에 의한 성능 저하 문제는 AnyPortrait의 사용 여부에 관계없이 공통적으로 발생합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    저희는 이 문제가 기기에 따라서 발생하지 않을 수도 있음을 확인하였습니다.<br>
+    이 문제를 해결하기 위해서는 현재로는 Vulkan을 사용하지 않도록 설정하는 방법 밖에는 없습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1178.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Project Settings > Player</strong>를 선택합니다.<br>
+    <strong>(2)</strong> <strong>Vulkan</strong>을 선택하고 <strong>(3)</strong> 삭제합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1179.jpg"/>
+    <br>
+    
+    <p>
+    이제 OpenGLES로만 렌더링이 되도록 설정되었습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_PackagePath.html">< 패키지 경로 변경하기</a>
+        <a class="btn btn-light" role="button" href="#"></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

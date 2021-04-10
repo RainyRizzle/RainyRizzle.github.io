@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>ロトスコーピング</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_Rotoscoping.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_Rotoscoping.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_Rotoscoping.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > ロトスコーピング</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">ロトスコーピング</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.0</span></h4>
+    
+    <p>
+    「ロトスコーピング（Rotoscoping）」は、写真や映像をフレーム単位で参照してアニメーションを作成する手法を指します。<br>
+    これを利用すれば、実際のと同じ動きをより効果的に行うことができます。<br>
+    同様に、あなたが参照してすべき写真や画像を見ながらアニメーションを作成することができる機能があれば良いでしょう。<br>
+    このページでは、ロトスコーピング手法のアイデアに着眼された機能を紹介します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1091.jpg"/>
+    <br>
+    
+    <p>
+    走るキャラクターが描かれた4つの画像を用意しました。<br>
+    ここで簡単に描かれた画像の説明をするが、実際の写真を利用するのも良い方法です。<br>
+    これで、この画像をワークスペースにロードしてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1092.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「表示メニュー」を開きます。<br>
+    <strong>(2)</strong> 「<strong>Rotoscoping</strong>」メニューを選択します。<br>
+    <strong>(3)</strong> まだイメージをロードするかどうか設定していないので、「Rotoscoping > Settings」を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1093.jpg"/>
+    <br>
+    
+    <p>
+    ロトスコーピング設定画面です。<br>
+    <strong>1. Display Options</strong> : 外部の画像がワークスペースにどのように表示されるかを設定します。<br>
+    <strong>2. Restore Editor Default Setting</strong> : 「Display Options」を初期化します。<br>
+    <strong>3. Rotoscoping Data List</strong> : 作成されたロトスコーピングデータが表示されるリストです。<br>
+    <strong>4. Add New Rotoscoping Data</strong> : 新しいロトスコーピングデータを作成します。<br>
+    <strong>5. Name</strong> : ロトスコーピングのデータの名前を指定することができます。<br>
+    <strong>6. Animation プロパティ</strong> : アニメーションのフレームと同期して自動的に画像が切り替わるようにすることができます。<br>
+    <strong>7. Remove Rotoscoping Data</strong> : 選択されたロトスコーピングデータを削除します。<br>
+    <strong>8. Images</strong> : 選択されたロトスコーピングデータに含まれているイメージです。<br>
+    <strong>9. Add Image File</strong> : 外部の画像ファイルを選択したロトスコーピングデータに追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1094.jpg"/>
+    <br>
+    
+    <p>
+    新しいロトスコーピングデータを作成し、イメージをロードしてみましょう。<br>
+    <strong>(1)</strong> 「<strong>Add New Rotoscoping Data</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 新しいロトスコーピングデータが生成されました。ロトスコーピングのデータを選択します。<br>
+    <strong>(3)</strong> ロトスコーピングデータの名前を設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1095.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Add Image File</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 準備した画像ファイルのものを選択してロードします。<br>
+    これで、このロトスコーピングデータを使用すると、イメージファイルをワークスペースに表示することができます。<br>
+    ロトスコーピング設定画面を閉じます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1096.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 再度「表示メニュー」を開きます。<br>
+    <strong>(2)</strong> 「<strong>Rotoscoping</strong>」メニューを開くと、生成されたロトスコーピングデータが追加されたことを見ることができます。<br>
+    <strong>(3)</strong> 「<strong>Enable Rotoscoping</strong>」（ショートカット <kbd>Alt+ O</kbd> ）を押します。<br>
+    <strong>(4)</strong> ロトスコーピングデータが選択されていない場合は、「表示メニュー」からロトスコーピングのデータを選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1097.jpg"/>
+    <br>
+    
+    <p>
+    設定した画像がワークスペースに表示されるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1098.jpg"/>
+    <br>
+    
+    <p>
+    あなたの作業方法に合わせて、画像の位置や大きさ、不透明度を変更することも可能です。<br>
+    <strong>(1)</strong> ロトスコーピングの設定を開いて、「<strong>Display Options</strong>」の項目を適切に変更します。<br>
+    <strong>(2)</strong> 画像の位置、不透明度、サイズが変化するのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>複数の画像ファイルをロード</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1099.jpg"/>
+    <br>
+    
+    <p>
+    複数の画像ファイルを開いて参照することも可能です。<br>
+    新しいロトスコーピングデータを作成複数の画像ファイルをロードしてみましょう。<br>
+    <strong>(1)</strong> ロトスコーピングの設定を開いて、「<strong>Add New Rotoscoping Data</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 新しいロトスコーピングデータが生成されました。<br>
+    <strong>(3)</strong> ロトスコーピングデータの名前を設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1100.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Add Image File</strong>」ボタンを押して <strong>(2)</strong> 画像ファイルをロードします。<br>
+    この作業を繰り返して、用意された4つの画像ファイルをすべて開きます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1101.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 4つのファイルがロトスコーピングデータに追加されました。<br>
+    </p>
+    <br>
+    
+    <p>
+    イメージファイルのロード情報を修正したい場合は、以下のUIをご利用下さい。<br>
+    <strong>(2)</strong> 順を変えたい場合、上下ボタンを押します。<br>
+    <strong>(3)</strong> ファイルの名前とパスです。<br>
+    <strong>(4)</strong> Setボタンを押して、他のイメージファイルをロードすることができます。<br>
+    <strong>(5)</strong> 削除ボタンです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1102.jpg"/>
+    <br>
+    
+    <p>
+    上記のような方法でロトスコーピングデータを適用してみましょう。<br>
+    ロトスコーピングの設定をオフにして表示メニューを開きます。<br>
+    <strong>(1)</strong> 作成したロトスコーピングデータを選択します。<br>
+    <strong>(2)</strong> 「<strong>Rotoscoping > Enable Rotoscoping</strong>」をクリックします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1103.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 表示メニューから「<strong>Previous Image</strong>、<strong>Next Image</strong>」（ショートカット <kbd>数字キー9、0</kbd> ）を押して画像を切り替えることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1104.jpg"/>
+    <br>
+    
+    <p>
+    ワークスペースからの4つの画像ファイルを一つずつ見てアニメーションを作成することができます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>アニメーションと同期して自動的に画像の切り替え</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1106.jpg"/>
+    <br>
+    
+    <p>
+    アニメーションが再生され、自動的に画像が切り替えたら、より効率的な作業が可能になります。<br>
+    <strong>(1)</strong> 対象となるアニメーションは、合計「24フレーム」であり、「4つのキーポーズ（Key-Pose）」があります。つまり、「6フレーム」間隔でキーポーズが変わることです。（「6フレーム」を覚えておきましょう。）<br>
+    <strong>(2)</strong> このアニメーションと、作成したロトスコーピングデータが同期されるように作られてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1105.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ロトスコーピングの設定を開いて、先ほど作成したロトスコーピングデータを選択します。<br>
+    <strong>(2)</strong> 「<strong>Sync to Animation</strong>」ボタンを押して同期機能を有効にします。<br>
+    <strong>(3)</strong> 「<strong>Frame</strong>」を「6」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1107.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1108.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1109.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1110.jpg"/>
+    <br>
+    
+    <p>
+    ロトスコーピングをオンにして、アニメーションを再生してみると、上記のように、自動的にロトスコーピング画像が切り替わるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1111.jpg"/>
+    <br>
+    
+    <p>
+    もしアニメーションの最初のキーポーズのフレームが「0」でない場合は、開始位置を変更する必要があります。<br>
+    ロトスコーピングの設定を開いて、「<strong>Offset</strong>」を適切に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1112.jpg"/>
+    <br>
+    
+    <p>
+    さて、最初ロトスコーピング画像の基準フレームが「<strong>Offset</strong>」に合わせて変更されたことを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_VisibilityPreset.html">< 可視性プリセット</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_RootUnit.html">「ルートユニット」の登録と解放 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>
