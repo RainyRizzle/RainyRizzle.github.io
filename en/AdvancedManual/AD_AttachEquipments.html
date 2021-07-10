@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Attach Equipments</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_AttachEquipments.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_AttachEquipments.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_AttachEquipments.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Attach Equipments</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Attach Equipments</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.2</span></h4>
+    
+    <p>
+    There is a function called <strong>Socket</strong> (<a href="../../en/AdvancedManual/AD_Socket.html">Related page</a>) to attach an external object to a character created with AnyPortrait.<br>
+    This page explains how to use this feature to attach external objects, especially items such as weapons or equipment.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1242.jpg"/>
+    <br>
+    
+    <p>
+    These are "Pirate girl character" of the demo scene and "the Gun" made as a 3D model.<br>
+    Let's delete the existing gun that the character is currently holding, and make the girl character hold the 3D Gun instead.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Caution</strong></span><br>
+    On this page, we prepared a 3D model to show the difference, but it is better to have a Quad mesh or Sprite to which the 2D image is applied.<br>
+    This is because there is a rendering issue that will be discussed below.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1243.jpg"/>
+    <br>
+    
+    <p>
+    The first thing we need to do is set up <strong>socket</strong>.<br>
+    <strong>(1)</strong> Select the bone of the right hand to which the weapon will be attached.<br>
+    <strong>(2)</strong> Remember the bone's <strong>name</strong>, as you need to call that bone with a script.<br>
+    <strong>(3)</strong> Activate the <strong>Socket</strong> property.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1244.jpg"/>
+    <br>
+    
+    <p>
+    We will hide the existing gun mesh.<br>
+    (This process is for creating this example, so you can be ignored.)<br>
+    <strong>(1)</strong> In the <strong>Setting tab</strong> of the mesh group, <strong>(2)</strong> select the gun mesh and <strong>(3)</strong> turn off <strong>Visible</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1245.jpg"/>
+    <br>
+    
+    <p>
+    Now prepare the weapon to be equipped.<br>
+    We configured the weapon by setting the 3D mesh as a child of an empty GameObject.<br>
+    The reason for this preparation is that the origin of the object must be the <strong>gun handle</strong>.<br>
+    Also, since the bone is pointing in the Y-axis, make the gun look forward the Y direction.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now let's write the script as below.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class WeaponEquipScript : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    &emsp;&emsp;public Transform gunTransform;&emsp;&emsp;<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//Set the character's right hand bone as the weapon's parent<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>Transform handBone = portrait.GetBoneSocket("Bone Hand R");</strong><br>
+    &emsp;&emsp;&emsp;&emsp;gunTransform.parent = handBone;<br>
+    &emsp;&emsp;&emsp;&emsp;gunTransform.localPosition = Vector3.zero;<br>
+    &emsp;&emsp;&emsp;&emsp;gunTransform.localRotation = Quaternion.identity;<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    You can get the Transform of the right-hand bone by using the <strong>GetBoneSocket</strong> function.<br>
+    If you change the weapon's GameObject to be a child of the right hand bone's Transform and reset its local position, the weapon mesh will move with the movement of the right hand.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1246.jpg"/>
+    <br>
+    
+    <p>
+    Apply the above script to the scene.<br>
+    <strong>(1)</strong> Create a new <strong>GameObject</strong>.<br>
+    <strong>(2)</strong> Add the created script to the added GameObject, and specify the Transforms of character and weapon respectively.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1247.jpg"/>
+    <br>
+    
+    <p>
+    Let's run the game.<br>
+    You can see the gun attached to the character's right hand and moving.<br>
+    However, the rendering order of the guns is strange.<br>
+    The gun should be in the character's hand, but now it's at the back of the character.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1248.jpg"/>
+    <br>
+    
+    <p>
+    In order to specify the rendering order of the gun, we need to know the rendering order of the mesh, i.e. <strong>Sorting Order</strong>.<br>
+    Open the AnyPortrait editor again.<br>
+    <strong>(1)</strong> This character's right hand has <strong>palm</strong> mesh and <strong>finger</strong> mesh, and the gun positioned between them.<br>
+    <strong>(2)</strong> Select <strong>the finger mesh of the right hand</strong> and <strong>(3)</strong> remember the <strong>Name</strong> of the mesh ("Hand R Finger").<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1249.jpg"/>
+    <br>
+    
+    <p>
+    Makes different <strong>Sorting Order</strong> be assigned according to the rendering order of the meshes.<br>
+    <strong>(1)</strong> Press the <strong>Bake</strong> button.<br>
+    <strong>(2)</strong> Click <strong>Settings tab</strong>.<br>
+    <strong>(3)</strong> Change <strong>Sorting Order Option</strong> to <strong>Depth To Order</strong>, and increase <strong>Order Per Depth</strong> to <strong>2</strong>.<br>
+    Since we want the script to make the gun mesh's Sorting Order less than 1 for the <strong>finger mesh</strong>, the Sorting Order should be assigned at intervals of 2 or more to avoid duplicating the rendering order with other meshes.<br>
+    </p>
+    <br>
+    
+    <p>
+    Modify the script as below to set the Sorting Order.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class WeaponEquipScript : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    &emsp;&emsp;public Transform gunTransform;<br>
+    &emsp;&emsp;<span class="text-danger"><strong>public MeshRenderer gunMeshRenderer;</strong></span><br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//Set the character's right hand bone as the weapon's parent<br>
+    &emsp;&emsp;&emsp;&emsp;Transform handBone = portrait.GetBoneSocket("Bone Hand R");<br>
+    &emsp;&emsp;&emsp;&emsp;gunTransform.parent = handBone;<br>
+    &emsp;&emsp;&emsp;&emsp;gunTransform.localPosition = Vector3.zero;<br>
+    &emsp;&emsp;&emsp;&emsp;gunTransform.localRotation = Quaternion.identity;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Set to render directly behind the finger mesh<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>int fingerSortingOrder = portrait.GetSortingOrder("Hand R Finger");</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>gunMeshRenderer.sortingOrder = fingerSortingOrder - 1;</strong></span><br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    This is a script that sets the <strong>Sorting Order</strong> of the MeshRenderer of the gun model to 1 smaller than the <strong>Hand R Finger</strong> of the character.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1250.jpg"/>
+    <br>
+    
+    <p>
+    Added a <strong>MeshRenderer gunMeshRenderer</strong> variable to the script, so we assign the MeshRenderer of the gun mesh in the Unity editor.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1251.jpg"/>
+    <br>
+    
+    <p>
+    Here's something to note.<br>
+    By default, opaque materials with volume cannot control the rendering order with Sorting Order.<br>
+    So, in this example, we need to change the rendering method of the 3D modeled gun to "<strong>Transparent</strong>".<br>
+    The rendering of this model on a "<strong>Transparent</strong>" type of material can be a bit odd.<br>
+    Therefore, it is recommended to create items with Quad meshes or Sprites using 2D images as-is.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1252.jpg"/>
+    <br>
+    
+    <p>
+    When the game is executed, the rendering order is modified so that the character properly holds the gun properly.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ImprovePerformance.html">< Improve Performance</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_WindEffect.html">Wind effect ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

@@ -399,6 +399,135 @@
     </p>
     <br>
     
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>「Keep Alpha」材質の色の問題を解決</h3>
+    <br>
+    
+    <p>
+    背景が透明なレンダリングテクスチャを作るために「Keep Alpha」材質を使用すると、色が変に表示される場合があります。<br>
+    画像が半透明な場合は、この問題を見ることができます。<br>
+    もし半透明なイメージが不透明な画像の上に位置する場合、この問題を、以下の方法で解決することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1217.jpg"/>
+    <br>
+    
+    <p>
+    説明のために不透明な紫色のメッシュと半透明の青いメッシュが上記のように準備された。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1218.jpg"/>
+    <br>
+    
+    <p>
+    透明な背景のレンダリングテクスチャを作成ので、上記の説明のように、「<strong>KeepAlpha Unlit</strong>」材質を適用した。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1219.jpg"/>
+    <br>
+    
+    <p>
+    上記のようにシーンを構成しました。<br>
+    <strong>(1)</strong> 左はAnyPortraitで製作したオリジナルです。<br>
+    <strong>(2)</strong> 右は、レンダリングテクスチャが適用された正方形メッシュです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1220.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> レンダリングテクスチャを作成するカメラを選択します。<br>
+    <strong>(2)</strong> Backgroundプロパティを選択し、 <strong>(3)</strong> 背景色をますます透明に変更します。<br>
+    <strong>(4)</strong> レンダリングテクスチャの背景色が透明に変わるのを見ることができ、現在はオリジナルと大きく変わらないに見えます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1221.jpg"/>
+    <br>
+    
+    <p>
+    問題は、レンダリングテクスチャの背景ではなく、画面を描画するカメラの背景色がグレーではない場合です。<br>
+    <strong>(1)</strong> 画面を描画するカメラを選択します。<br>
+    <strong>(2)</strong> 背景色をグレーではなく、色に変更しましょう。<br>
+    <strong>(3)</strong> レンダリングテクスチャ上でメッシュの半透明な部分の色が異常に変わるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1222.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> もし背景色を白に変えると、<br>
+    <strong>(2)</strong> レンダリングテクスチャ上でメッシュの半透明な部分が過度に明るくなるのを見ることができます。<br>
+    不透明なメッシュが後ろにいるにもかかわらこの問題は発生します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1223.jpg"/>
+    <br>
+    
+    <p>
+    前の3つの場合を集めてみました。<br>
+    レンダリングテクスチャ上でメッシュの色が歪曲されることが確実に見えます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1224.jpg"/>
+    <br>
+    
+    <p>
+    この問題は、「Keep Alpha」材質の問題なので、そのメッシュの材質を元の材質に変更する必要があります。<br>
+    AnyPortraitエディタを開いて、メッシュグループの「<strong>Setting</strong>タブ」が選択された状態で、そのメッシュの材質を変更します。<br>
+    <strong>(1)</strong> 半透明のメッシュを選択します。<br>
+    <strong>(2)</strong> 材質の設定で「<strong>Use Default Material Set</strong>」ボタンを押して、「<strong>OFF</strong>」の状態に変更し<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1225.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Change</strong>ボタン」を押します。<br>
+    <strong>(2)</strong> 基材である「<strong>Unlit（Default）</strong>」を選択します。<br>
+    <strong>(3)</strong> 「<strong>Select</strong>ボタン」を押して適用します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1226.jpg"/>
+    <br>
+    
+    <p>
+    Bakeをして、再度ユニティでレンダリングをすると、上記のような問題が解決されたことを見ることができます。<br>
+    この解決法は、「不透明なメッシュが後ろにある場合」、レンダリングテクスチャの背景を透明にしたときに有効です。<br>
+    </p>
+    <br>
+    
     <!-- 5. 바닥 네비바 -->
     <br>
     <br>

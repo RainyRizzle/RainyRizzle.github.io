@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>パフォーマンスを向上</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ImprovePerformance.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ImprovePerformance.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_ImprovePerformance.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > パフォーマンスを向上</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">パフォーマンスを向上</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.2</span></h4>
+    
+    <p>
+    ゲームを作成するときに実行パフォーマンスを向上させる作業は非常に重要ですが、その分は難しいことです。<br>
+    同様に、AnyPortraitを利用してゲームを作成する際にも、パフォーマンスに関する問題は、慎重に管理する必要があります。<br>
+    このページで説明しているいくつかの要素は、パフォーマンスの最適化に大きな助けになるでしょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>参考</strong></span><br>
+    - このページでのパフォーマンステストは、実行環境によって結果が異なる場合があります。<br>
+    - GPUの最適化には、<a href="../../jp/AdvancedManual/AD_ReduceDrawCalls.html">関連ページ</a>を参照してください。<br>
+    - 高いFPSを確認するためにVSyncオプションを無効にして構築しました。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>最新バージョンのAnyPortrait利用</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1276.jpg"/>
+    <br>
+    
+    <p>
+    私たちのチームは、継続的にAnyPortraitの基本的な性能を向上させようと努力しています。<br>
+    以前のバージョンのv1.3.0/v1.3.1からかなりのアニメーションとリギングについてのパフォーマンスが向上しました。<br>
+    v1.3.2では、リギングと頂点処理のパフォーマンスが向上しており、また、メモリ割り当ての問題を解決しました。<br>
+    最新バージョンのAnyPortraitに更新することは、皆さんのゲームのパフォーマンスの向上に役立つでしょう。<br>
+    （上記のプロファイリング結果は、以下に説明する例をUnityエディタ上でテストした結果です。）<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>頂点数と性能</h3>
+    <br>
+    
+    <p>
+    AnyPortraitは、CPUベースの頂点処理をするので、頂点数が増えるほど、パフォーマンスが低下します。<br>
+    メッシュに頂点が多くなるとそれだけ精密に表現することができますが、高い性能を期待することは困難です。<br>
+    逆に頂点が少なすぎる場合は、アニメーションで見た目がぎこちないなることがあります。<br>
+    したがって、適切な数の頂点にメッシュを構成することが非常に重要です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1227.jpg"/>
+    <br>
+    
+    <p>
+    頂点による性能比較のために簡単な例を用意しました。<br>
+    1つのメッシュと2つのボーンで構成された関節アニメーションのサンプルを上記のように作成しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1228.jpg"/>
+    <br>
+    
+    <p>
+    同じアニメーションが、頂点の数が異なるように、サンプルを3つに分けて準備しました。<br>
+    同じ画像に対して12、42、86個の頂点をそれぞれのメッシュを作成しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1229.jpg"/>
+    <br>
+    
+    <p>
+    少ない数の頂点にリギングを適用した画面です。<br>
+    関節部分で多少ラフ折る姿が見えますが、大きくおかしくはないに見えます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1230.jpg"/>
+    <br>
+    
+    <p>
+    メッシュに頂点が、多くの場合のリギングを適用した画面です。<br>
+    リギング重みを細かく適用することができ、相対的に関節部分の表現が自然です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1231.jpg"/>
+    <br>
+    
+    <p>
+    関節が折ったが広がるシンプルなアニメーションを作成しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1232.jpg"/>
+    <br>
+    
+    <p>
+    同じアニメーションを3つのサンプルに適用したときの様子です。<br>
+    頂点が多いほど、関節部分の表現が正確なことを見ることができます。<br>
+    この結果だけ見れば頂点が多いほど、アニメーションの品質が良く見えます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1233.jpg"/>
+    <br>
+    
+    <p>
+    現在の性能をテストしてみましょう。<br>
+    このサンプルは、上記のように100個配置されるようにスクリプトを作成しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1234.jpg"/>
+    <br>
+    
+    <p>
+    リアルタイムで「FPS（Frames Per Second）」の「平均、最小、最大」を見ることができるスクリプトを作成しました。<br>
+    このシーンをWindows用PCアプリで作成した後、テストして、以下のような結果を確認しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1235.jpg"/>
+    <br>
+    
+    <p>
+    上記のグラフは、頂点の数に応じてFPSがどのように変わるのかを示します。<br>
+    少ない数の頂点にメッシュを設定した場合（Low）円平均650 FPSという高い実行性能が記録された。<br>
+    逆に、多くの頂点にメッシュがある場合（High）円270 FPSの低い実行性能が記録された。<br>
+    （FPSが高いほど性能が良いことを意味します。）<br>
+    </p>
+    <br>
+    
+    <p>
+    つまり、頂点数に応じてパフォーマンスが減るのを見ることができます。<br>
+    アニメーション品質と実行性能の両方を考慮して、適切なレベルの頂点密度を維持しながら、キャラクターを作成することをお勧め。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>物理的な効果と性能</h3>
+    <br>
+    
+    <p>
+    物理的な効果は、ゲームエンジンの性能に大きく影響を与える要素です。<br>
+    AnyPortraitも物理的な効果を実装する二つの方法があります。<br>
+    「<strong>物理モディファイヤ（Physics Modifier）</strong>」と「<strong>ジグルボーン（Jiggle Bone）</strong>」がそれです。<br>
+    この二つの機能がパフォーマンスに与える影響を確認してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1236.jpg"/>
+    <br>
+    
+    <p>
+    デモに登場するキャラクターにそれぞれ「物理モディファイヤ」、「ジグルボーン」は、何も適用していない3つのサンプルを用意しました。<br>
+    「物理モディファイヤ」は、上記の画像のように、いくつかのメッシュに適用されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1237.jpg"/>
+    <br>
+    
+    <p>
+    他のサンプルでは、「ジグルボーン」を適用して同様の物理動きを示すように設定しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1238.jpg"/>
+    <br>
+    
+    <p>
+    上記と同様に30個のキャラクターが登場して、アニメーション中にFPSを記録するようにスクリプトを作成した後、PCアプリで作成して、パフォーマンステストを実施しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1239.jpg"/>
+    <br>
+    
+    <p>
+    物理的な効果を適用していない場合には、100以上の高いFPSを記録し、これを基準に他の物理的な効果の性能記録を比較してみましょう。<br>
+    「ジグルボーン」を適用した場合は、物理的な効果を適用していない場合よりも10程度のFPSの低下がありました。<br>
+    「物理モディファイヤ」を適用した場合には、なんと30のFPSの低下が記録されました。<br>
+    特に、「物理モディファイヤ」を適用した場合の最小FPSは非常に低いことを見ることができました。<br>
+    </p>
+    <br>
+    
+    <p>
+    「物理モディファイヤ」は頂点ごとに物理材質による演算をするため、パフォーマンスの低下が大きな特徴です。<br>
+    したがって、「物理モディファイヤ」は、固定フレームで動作するように開発されました。<br>
+    「物理モディファイヤ」が動作するフレームと、そうでないフレームの格差がかなり大きいです。<br>
+    </p>
+    <br>
+    
+    <p>
+    一方、「ジグルボーン」は、比較的頂点数よりも少ないボーンを対象とし、演算量が非常に少ない機能です。<br>
+    実際に「ジグルボーン」は、すべてのフレームで動作も関わら相対的に高い実行性能を示しています。<br>
+    </p>
+    <br>
+    
+    <p>
+    「ジグルボーン」と「物理モディファイヤ「が表現する対象は多少の違いがあります。<br>
+    しかし、もし二つの方式を交換することができる場合には、「ジグルボーン」を利用してみることが、パフォーマンスの向上に役立つでしょう。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>MonoとIL2CPP</h3>
+    <br>
+    
+    <p>
+    Unityは、「C#」で作成され、このスクリプトを動作させるために、基本的に「<strong>Mono</strong>」を利用して、ビルドをします。<br>
+    しかし、Unityが更新され「<strong>IL2CPP</strong>」というビルド方式をサポートします。<br>
+    この方式は、「C#」スクリプトを比較的高速な「C++」コードに変更して実行するので、既存の「Mono」ビルドよりも高い実行性能を持ちます。<br>
+    </p>
+    <br>
+    
+    <p>
+    ビルドしようとするターゲットプラットフォームが「IL2CPP」をサポートする場合は、この説明が大きく役立つでしょう。<br>
+    「IL2CPP」の詳細な説明は、「<a href="https://docs.unity3d.com/2021.2/Documentation/Manual/IL2CPP.html">公式マニュアル</a>」を参照してみてください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1240.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Unityエディタの「<strong>Project Settings</strong>」ウィンドウを開き、「<strong>Player</strong>」メニューを選択します。<br>
+    <strong>(2)</strong> 「<strong>Scripting Backend</strong>」のオプションを「Mono」で「<strong>IL2CPP</strong>」に設定します。<br>
+    この状態でゲームを構築して実行してみましょう。<br>
+    （もし「Mono」で構築されたパスにそのままビルドすると、ビルドが失敗することがあります。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1241.jpg"/>
+    <br>
+    
+    <p>
+    上記のキャラクターの例を「Mono」と「IL2CPP」方式で、それぞれビルドしてテストした結果です。<br>
+    「Mono」方式で「96 FPS」を記録した結果と比較して、「IL2CPP」方法で構築した場合、50％以上増加した「148 FPS」を記録しました。<br>
+    「IL2CPP」はUnityアプリのCPU実行性能を大幅に向上させる、AnyPortraitはほとんどCPUリソースを利用して動作をするので、最適化の効果が非常に大きく表示されます。<br>
+    「IL2CPP」ビルドオプションがあなたのプロジェクトに適用されることができるか、まず確認した後、これを積極的に活用ヘボシルことをお勧めします。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_CustomClippingMask.html">< カスタムクリッピングマスク</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_AttachEquipments.html">キャラクターにアイテム装備 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

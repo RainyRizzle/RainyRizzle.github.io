@@ -401,6 +401,135 @@
     </p>
     <br>
     
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Troubleshooting Color Issues with Keep Alpha Materials</h3>
+    <br>
+    
+    <p>
+    If you use the Keep Alpha material to create a render texture with a transparent background, the colors may appear strange.<br>
+    You can see this problem if the image is translucent.<br>
+    If the translucent image is placed on top of the opaque image, you can solve this problem by the following method.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1217.jpg"/>
+    <br>
+    
+    <p>
+    We prepared an opaque purple mesh and a translucent blue mesh as above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1218.jpg"/>
+    <br>
+    
+    <p>
+    Since we are going to create a render texture with a transparent background, we applied the <strong>KeepAlpha Unlit</strong> material as described above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1219.jpg"/>
+    <br>
+    
+    <p>
+    The scene is set up as above.<br>
+    <strong>(1)</strong> The left is the original created with AnyPortrait.<br>
+    <strong>(2)</strong> On the right is a quad mesh with a render texture applied.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1220.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the camera that creates the render texture.<br>
+    <strong>(2)</strong> Select the Background property, and <strong>(3)</strong> change the background color to gradually become transparent.<br>
+    <strong>(4)</strong> You can see that the background color of the render texture changes to transparent, and it doesn't look much different from the original.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1221.jpg"/>
+    <br>
+    
+    <p>
+    The problem is that the background color of the final rendered camera is not gray, not the background of the render texture.<br>
+    <strong>(1)</strong> Select the camera that renders the screen.<br>
+    <strong>(2)</strong> Let's change the background color to a color other than gray.<br>
+    <strong>(3)</strong> On the render texture, you can see that the color of the translucent part of the mesh changes strangely.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1222.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> If you change the background color to white,<br>
+    <strong>(2)</strong> on the render texture, you can see that the translucent parts of the mesh are too bright.<br>
+    This problem is occurred even if there is an opaque mesh behind it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1223.jpg"/>
+    <br>
+    
+    <p>
+    There are three cases.<br>
+    The color distortion of the mesh is clearly visible in the render texture.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1224.jpg"/>
+    <br>
+    
+    <p>
+    Since this is an issue with the Keep Alpha material, we need to change the material of that mesh to the original material.<br>
+    Open AnyPortrait editor and change the material of the mesh with <strong>Setting tab</strong> selected in the mesh group.<br>
+    <strong>(1)</strong> Select the translucent mesh.<br>
+    <strong>(2)</strong> In the material setting, click the <strong>Use Default Material Set</strong> button to change it to <strong>OFF</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1225.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Change</strong> button.<br>
+    <strong>(2)</strong> Select the default material <strong>Unlit (Default)</strong>.<br>
+    <strong>(3)</strong> Click the <strong>Select</strong> button to apply.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1226.jpg"/>
+    <br>
+    
+    <p>
+    After executing bake and rendering again in Unity, you can see that the above problem is solved.<br>
+    This solution is effective when you want to make the background of the render texture transparent <strong>when there is an opaque mesh behind it</strong>.<br>
+    </p>
+    <br>
+    
     <!-- 5. 바닥 네비바 -->
     <br>
     <br>

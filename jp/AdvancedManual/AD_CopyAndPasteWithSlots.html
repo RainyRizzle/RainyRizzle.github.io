@@ -232,6 +232,109 @@
     </p>
     <br>
     
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>複数のオブジェクトの値を同時にコピーする</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.2</span></h4>
+    
+    <p>
+    AnyPortrait v1.3.2では、複数のオブジェクトを選択した後、それぞれに対応するモディファイヤの値を同時にスロットに保存してコピーすることができます。<br>
+    ただし、この機能は、「一つのオブジェクトを選択」するときとは別に動作するので、以下の説明を読むことをお勧めします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1204.jpg"/>
+    <br>
+    
+    <p>
+    説明のために上記のような例を用意しました。<br>
+    「1つの青色のメッシュ」と「3つのオレンジ色のメッシュ」があります。<br>
+    「<strong>Transform（Controller）</strong>」モディファイヤが登録されており、「制御パラメータ」に3つのキー（Key）が生成された状態です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1205.jpg"/>
+    <br>
+    
+    <p>
+    モディファイヤに登録された「制御パラメータ」の3つのキー（Key）の二つのキーでメッシュは、それぞれ左、右に移動します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1206.jpg"/>
+    <br>
+    
+    <p>
+    スロットに値を保存して、コピーする機能は、「1つのオブジェクト」を対象にしたときと、「複数のオブジェクト」を対象にしたときに、それぞれ独立して動作します。<br>
+    まず、「1つのオブジェクト」を対象に値を保存してみましょう。<br>
+    <strong>(1)</strong> メッシュが「左」に移動するように制御パラメータの値を変更します。<br>
+    <strong>(2)</strong> 「青メッシュ」のみを選択します。<br>
+    <strong>(3)</strong> 「最初のスロット」を選択します。<br>
+    <strong>(4)</strong> 「<strong>Copy</strong>ボタン」を押して、「メッシュが左に移動する状態」を保存します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1207.jpg"/>
+    <br>
+    
+    <p>
+    今度は逆に「複数のオブジェクト」を対象に値を保存してみましょう。<br>
+    <strong>(1)</strong> メッシュが「右」に移動するように制御パラメータの値を変更します。<br>
+    <strong>(2)</strong> 今回は青メッシュを含めて「すべてのメッシュに」を選択します。<br>
+    <strong>(3)</strong> 「最初のスロット」を選択します。<br>
+    <strong>(4)</strong> 「<strong>Copy</strong>ボタン」を押して、「メッシュが右に移動する状態」を保存します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1208.jpg"/>
+    <br>
+    
+    <p>
+    保存された値を適用してみ違いを確認してみましょう。<br>
+    <strong>(1)</strong> コピーされた値を適用するために、制御パラメータの値を変更します。<br>
+    <strong>(2)</strong> 「すべてのメッシュに」を選択します。<br>
+    <strong>(3)</strong> 「最初のスロット」が選択された状態で、 <strong>(4)</strong> 「<strong>Paste</strong>ボタン」を押します。<br>
+    <strong>(5)</strong> メッシュが「右」に移動することを見ることができます。<br>
+    複数のメッシュが選択された状態で、「<strong>Paste</strong>ボタン」を押すと、「複数のメッシュが選択された状態で、保存された値」が適用されるからです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1209.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 逆に「青メッシュ」だけ選んでみましょう。<br>
+    <strong>(2)</strong> 同様に、「最初のスロット」を選択し、 <strong>(3)</strong> 「<strong>Paste</strong>ボタン」を押します。<br>
+    <strong>(4)</strong> 今回は青メッシュが「左」に移動することを見ることができます。<br>
+    一つのオブジェクトが選択された状態では、「一つのメッシュが選択された状態で、保存された値」が適用されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    上記の内容を整理すると、次のとおりです。<br>
+    - 「一つのオブジェクトを選択した場合」と「複数のオブジェクトを選択した場合」のどちらの場合に区分して、値が格納されます。<br>
+    - 「一つのオブジェクトを選択した場合」に保存された値は、他のオブジェクトにも可能な適用できます。<br>
+    - 「複数のオブジェクトを選択した場合」は、保存された値は、そのオブジェクトにのみ適用されます。<br>
+    - 「複数のオブジェクトを選択した場合」にもスロットの値をマージして適用することが可能です。<br>
+    </p>
+    <br>
+    
     <!-- 5. 바닥 네비바 -->
     <br>
     <br>

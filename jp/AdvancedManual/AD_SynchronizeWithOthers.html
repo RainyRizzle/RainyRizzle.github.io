@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>他のキャラクターとの同期</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_SynchronizeWithOthers.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_SynchronizeWithOthers.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_SynchronizeWithOthers.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 他のキャラクターとの同期</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">他のキャラクターとの同期</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.2</span></h4>
+    
+    <p>
+    ゲームでキャラクターの衣装や見た目を変える<strong>カスタマイズ</strong>機能は、重要な要素です。<br>
+    私たちは、画像を交換する方式（<a href="../../jp/AdvancedManual/AD_CharacterCostume.html">関連ページ</a>）を紹介し、その後に多くのユーザーの方々に私達に多くのフィードバックをいただきました。<br>
+    このページで扱う「同期」機能は、「他のキャラクターとの接続されてアニメーションを再生すること」です。<br>
+    しかし、私たちのチームは、この機能のコンセプトが「カスタマイズ」に活用されることを期待しています。<br>
+    このページは、「カスタマイズ」機能に適用されることに基づいて、「同期（Synchronize）」関数を使用する方法を説明します。<br>
+    この機能についてのフィードバックをいただければ私たちは、このコンセプトをさらに拡張してさらに開発していくことです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1263.jpg"/>
+    <br>
+    
+    <p>
+    デモのキャラクターで、「ヘアバンドとリボン」（以下「ヘアバンド」）のみ別に分離したシーンを準備しました。<br>
+    「キャラクター」のみアニメーションが動作するように作成し、「ヘアバンド」は「キャラクター」に同期するように作られてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1264.jpg"/>
+    <br>
+    
+    <p>
+    同期のためには、「アニメーション」と「制御パラメータ」が同じです。<br>
+    「キャラクター」を開くと、制御パラメータがモディファイヤに登録されている状態です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1265.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「キャラクター」は、「<strong>Idle、Smile、Angry</strong>」の3つのアニメーションを持っています。<br>
+    <strong>(2)</strong> アニメクリップのFPSと長さを記憶してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1266.jpg"/>
+    <br>
+    
+    <p>
+    「ヘアバンド」をエディタで開くと、同期される対象の「制御パラメータ」と同じ「制御パラメータ」が存在します。<br>
+    また、制御パラメータに基づいてモディファイヤに移動できるように実装されている。<br>
+    （ただし、ボーンは、同期対象ではないので、ボーンまで同じにする必要はありません。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1267.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> アニメも同じように「<strong>Idle、Smile、Angry</strong>」の3つです。名前が異なる場合は同期されません。<br>
+    <strong>(2)</strong> それぞれのアニメーションの長さとFPSも同期対象のそれと同じになります。<br>
+    </p>
+    <br>
+    
+    <p>
+    以下のスクリプトを作成して、「ヘアバンド」が「キャラクター」に同期するように作られてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class SyncPlaySample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait character;<br>
+    &emsp;&emsp;public apPortrait hairband;<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//Aキーを押すと、hairbandがcharacterに同期します。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>hairband.Synchronize(character, true, true);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;hairband.transform.position = character.transform.position;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Sキーを押すと、hairbandの同期が解除されます。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>hairband.Unsynchronize();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;hairband.StopAll();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;hairband.transform.position = new Vector3(10.0f, 0.0f, 0.0f);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    「<strong>Synchronize</strong>」関数と「<strong>Unsynchronize</strong>」関数を使用して同期を有効または無効にすることができます。<br>
+    「<strong>Synchronize</strong>」関数で「」アニメーション」や「制御パラメータ」を選択して同期することができます。<br>
+    ここ2つの「true」を入れて、すべての同期を行うようにしました。<br>
+    関数の詳細説明は、「<a href="../../jp/Script/SC_Init.html">関連ページ</a>」を参照してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1268.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 新しい「GameObject」を作成します。<br>
+    <strong>(2)</strong> 作成したスクリプトを追加し、「キャラクター」と「ヘアバンド」をそれぞれ割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1269.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行し、Aキーを押すと、「ヘアバンド」が「キャラクター」に付着し、アニメーションや制御パラメータが同期されて動くのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1270.jpg"/>
+    <br>
+    
+    <p>
+    しかし、「ヘアバンド」のメッシュのレンダリング順序が適切でないことを見ることができます。<br>
+    スクリプトで「ヘアバンド」のメッシュのレンダリング順序を手動で設定する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1271.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「キャラクター」を開き、「ヘアバンド」のメッシュがどこに位置すべきかを確認します。<br>
+    「ヘアバンド」のメッシュがレンダリングされるべき順序よりも「すぐ後ろに位置するメッシュ」の名前を覚えてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1272.jpg"/>
+    <br>
+    
+    <p>
+    「キャラクター」のメッシュの「<strong>Sorting Order</strong>」が表示さ順によって異なる割り当てられるようにする必要があります。<br>
+    <strong>(1)</strong> 「<strong>Bake</strong>ボタン」を押します。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>タブ」を選択します。<br>
+    <strong>(3)</strong> 「<strong>Sorting Order Option</strong>」を「<strong>Depth To Order</strong>」に変更し、「<strong>Order Per Depth</strong>」を「<strong>2</strong>」に設定します。<br>
+    「<strong>Order Per Depth</strong>」が2以上でなければ、既存のメッシュの間に新たなメッシュを入れることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    設定が終わったら、Bakeを実行します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1273.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「ヘアバンド」を開き、メッシュの名前をすべて覚えてみましょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    先に記憶しておいたメッシュの名前を利用して、「Sorting Order」を指定するコードをスクリプトに以下のように追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class SyncPlaySample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait character;<br>
+    &emsp;&emsp;public apPortrait hairband;<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//Aキーを押すと、hairbandがcharacterに同期します。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;hairband.Synchronize(character, true, true);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;hairband.transform.position = character.transform.position;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//「Flower Pin」メッシは「Front Hair」メッシュよりも前にあります。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hairband.SetSortingOrder("Flower Pin", character.GetSortingOrder("Front Hair") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//「Ribbon」メッシは「Body」メッシュよりも前にあります。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hairband.SetSortingOrder("Ribbon", character.GetSortingOrder("Body") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//「Hairband」メッシは「Back Hair」メッシュよりも前にあります。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hairband.SetSortingOrder("Hairband", character.GetSortingOrder("Back Hair") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Sキーを押すと、hairbandの同期が解除されます。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;hairband.Unsynchronize();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;hairband.StopAll();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;hairband.transform.position = new Vector3(10.0f, 0.0f, 0.0f);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1274.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを再実行して、Aキーを押すと、現在「ヘアバンド」のメッシュが正常な位置に表示されていることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1275.jpg"/>
+    <br>
+    
+    <p>
+    Sキーを押すと、「Unsynchronize」関数によって同期が解除されるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_WindEffect.html">< 風の効果を実装</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_BuildiOSPlatforms.html">iOSと他のプラットフォーム ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

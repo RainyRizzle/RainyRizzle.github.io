@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>風の効果を実装</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_WindEffect.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_WindEffect.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_WindEffect.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 風の効果を実装</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">風の効果を実装</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.2</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1253.jpg"/>
+    <br>
+    
+    <p>
+    簡単なスクリプトで物理モディファイヤやジグルボーンが適用されたキャラクターに物理的な効果を加えることができます。<br>
+    このページでは、キャラクターが特定の領域に入ると、風が吹く効果を実装する方法を説明します。<br>
+    このページの説明に基づいて、皆さんのプロジェクトでは、より多様な方法で物理的効果を作成しよう！<br>
+    </p>
+    <br>
+    
+    <p>
+    下のページを一緒に参照してくださいに役立ちます。<br>
+    - <a href="../../jp/Script/SC_Physics.html">物理効果</a><br>
+    - <a href="../../jp/GettingStarted/GS_1_9.html">Getting Started 1.9. 物理効果の追加</a><br>
+    - <a href="../../jp/AdvancedManual/AD_PhysicsModifierSetting.html">物理モディファイヤ</a><br>
+    - <a href="../../jp/AdvancedManual/AD_JiggleBone.html">ジグルボーン</a><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1254.jpg"/>
+    <br>
+    
+    <p>
+    上記のようにシーンを設定します。<br>
+    キャラクターと二つの領域で構成されています。<br>
+    <strong>(1)</strong> 二つの領域の名前は、「<strong>WindArea_Left</strong>」と「<strong>WindArea_Up</strong>」です。<br>
+    キャラクターがこの領域に入ると、それぞれ左と上に風が吹くことです。<br>
+    <strong>(2)</strong> 領域のいずれかを選択します。<br>
+    <strong>(3)</strong> 「<strong>Box Collider 2D</strong>」コンポーネントを追加します。<br>
+    <strong>(4)</strong> 「<strong>Is Trigger</strong>」属性を有効にします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1255.jpg"/>
+    <br>
+    
+    <p>
+    他の領域も同様に、コンポーネントを追加して設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1256.jpg"/>
+    <br>
+    
+    <p>
+    物理的な効果は、「物理モディファイア」や「ジグルボーン」に適用されます。<br>
+    「物理モディファイヤ」を追加して、物理材質をメッシュに適用します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1257.jpg"/>
+    <br>
+    
+    <p>
+    「ジグルボーン」を利用して、物理的な効果を持つように作成することもできます。<br>
+    </p>
+    <br>
+    
+    <p>
+    下のスクリプトを作成して、キャラクターが「Trigger」の中に入ると、風が適用されるように実装してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class WindSampleScript : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;private apPortrait portrait;<br>
+    &emsp;&emsp;private apForceUnit forceLeft = null;<br>
+    &emsp;&emsp;private apForceUnit forceUp = null;<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;portrait = GetComponent<apPortrait>();<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;private void OnTriggerEnter2D(Collider2D collision)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//キャラクターが「Left」との文字が名前に含まれている領域に入った場合<br>
+    &emsp;&emsp;&emsp;&emsp;if(collision.gameObject.name.Contains("Left"))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//すでに力が生成されている場合削除します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;if (forceLeft != null)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.RemoveForce(forceLeft);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//左（-1、0）方向に継続して（Loop）力が適用されます。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;forceLeft = portrait.AddForce_Direction(new Vector2(-1, 0)).SetPower(5000.0f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;forceLeft.EmitLoop();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//キャラクターが「Up」との文字が名前に含まれている領域に入った場合<br>
+    &emsp;&emsp;&emsp;&emsp;if(collision.gameObject.name.Contains("Up"))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//すでに力が生成されている場合削除します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;if(forceUp != null)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.RemoveForce(forceUp);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//上部（0、1）の方向に継続して（Loop）力が適用されます。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;forceUp = portrait.AddForce_Direction(new Vector2(0, 1)).SetPower(5000.0f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;forceUp.EmitLoop();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;private void OnTriggerExit2D(Collider2D collision)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (collision.gameObject.name.Contains("Left"))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;if (forceLeft != null)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.RemoveForce(forceLeft);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;forceLeft = null;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;if (collision.gameObject.name.Contains("Up"))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;if (forceUp != null)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.RemoveForce(forceUp);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;forceUp = null;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    - 「OnTriggerEnter2D」、「OnTriggerExit2D」イベントは「Is Trigger」が設定されたColliderに文字が入ったり出る呼び出されます。この時、Colliderの名前を利用して、「Left」領域なのか「Up」領域なのか区分しました。<br>
+    - 「<strong>AddForce_Direction</strong>」関数は、直線方向の力を加える関数です。この関数は、「<strong>SetPower</strong>」と「<strong>EmitLoop</strong>」または「<strong>EmitOnce</strong>」関数と一緒に呼び出す必要があり動作します。<br>
+    - 「<strong>AddForce_Direction</strong>」で生成される「<strong>apForceUnit</strong>」を利用して、「左の風」と「上の風」を区分し、「<strong>RemoveForce</strong>」関数呼び出し時に利用しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1258.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> キャラクターを選択します。<br>
+    <strong>(2)</strong> キャラクターの上に作成したスクリプトを追加します。<br>
+    キャラクターが「<strong>Box Collider2D</strong>」の中に入ることを認識するColliderと「Rigidbody 2D」コンポーネントが必要です。<br>
+    <strong>(3)</strong> ここでキャラクターの形に合わせて、「<strong>Capsule Collider 2D</strong>」を追加し、サイズと位置を設定します。<br>
+    <strong>(4)</strong> 「<strong>Rigidbody 2D</strong>」を追加します。<br>
+    この状態では、物理エンジンによってキャラクターが下に落ちることです。<br>
+    「<strong>Rigidbody2D</strong>」のプロパティの、「<strong>Constraint > Freeze Position > Y</strong>」をチェックして落ちるのを防ぐことができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1259.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行してみましょう。<br>
+    領域外にある場合キャラクターに風が吹かない。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1260.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターが最初の領域に入ると、風が左に吹くことを見ることができます。<br>
+    「<strong>OnTriggerEnter2D</strong>」イベントが発生して、「<strong>AddForce_Direction</strong>」関数が呼び出されたためです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1261.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターが第2の領域に入ると、風が上向きに吹くことを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1262.jpg"/>
+    <br>
+    
+    <p>
+    またキャラクターが領域外に出ると、すべての力が消えます。<br>
+    「<strong>OnTriggerExit2D</strong>」イベントが発生して、「<strong>RemoveForce</strong>」関数が呼び出されたためです。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_AttachEquipments.html">< キャラクターにアイテム装備</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_SynchronizeWithOthers.html">他のキャラクターとの同期 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Improve Performance</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_ImprovePerformance.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ImprovePerformance.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ImprovePerformance.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Improve Performance</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Improve Performance</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.2</span></h4>
+    
+    <p>
+    When creating a game, improving execution performance is very important, but just as difficult.<br>
+    Similarly, when making a game using AnyPortrait, performance issues must be carefully managed.<br>
+    Some factors described on this page will be of great help in optimizing performance.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    - Performance tests on this page may have different results depending on the execution environment.<br>
+    - For GPU optimization, please refer to the <a href="../../en/AdvancedManual/AD_ReduceDrawCalls.html">related page</a>.<br>
+    - Built with VSync option disabled to check high FPS.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Using the latest version of AnyPortrait</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1276.jpg"/>
+    <br>
+    
+    <p>
+    Our team is constantly working to improve the overall performance of AnyPortrait.<br>
+    The previous version v1.3.0/v1.3.1 recorded significant performance improvements for animation and rigging.<br>
+    In v1.3.2, performance for rigging and vertex handling is improved, and memory allocation issues are resolved.<br>
+    Updating to the latest version of AnyPortrait will help improve your game's performance.<br>
+    (The above profiling result is the result of testing the example described below on the Unity editor.)<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Vertices and Performance</h3>
+    <br>
+    
+    <p>
+    Because AnyPortrait performs CPU-based vertex processing, the performance is worse as the number of vertices increases.<br>
+    The more vertices the mesh has, the more precise it can be expressed, but it is difficult to expect high performance.<br>
+    Conversely, having too few vertices can make your animation look awkward.<br>
+    Therefore, it is very important to construct the mesh with the right number of vertices.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1227.jpg"/>
+    <br>
+    
+    <p>
+    We have prepared a simple example to compare performance according to vertices.<br>
+    We created a sample joint animation with 1 mesh and 2 bones as above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1228.jpg"/>
+    <br>
+    
+    <p>
+    And, we prepared the same animation by dividing the sample into three so that the number of vertices was different.<br>
+    There are meshes that have 12, 42 and 86 vertices respectively for the same image.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1229.jpg"/>
+    <br>
+    
+    <p>
+    Above is how rigging is applied with a few vertices.<br>
+    There is a slightly rough fold at the joint, but it doesn't look too strange.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1230.jpg"/>
+    <br>
+    
+    <p>
+    Above is a result with rigging applied when the mesh has more vertices.<br>
+    Because the rigging weight can be applied in detail, the expression of the joint part is relatively precise.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1231.jpg"/>
+    <br>
+    
+    <p>
+    We've created a simple animation of the joints folding and unfolding.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1232.jpg"/>
+    <br>
+    
+    <p>
+    This is what it looks like when the same animation is applied to 3 samples.<br>
+    You can see that the more vertices there are, the more precise the expression of the joint part.<br>
+    From this result alone, the animation quality looks better when there are many vertices.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1233.jpg"/>
+    <br>
+    
+    <p>
+    Now let's test the performance.<br>
+    We wrote a script so that 100 of these samples are placed as above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1234.jpg"/>
+    <br>
+    
+    <p>
+    Also, we wrote a script so that the average, minimum, and maximum values of FPS (Frames Per Second) are displayed in real time.<br>
+    After building this scene as a PC app for Windows, we tested it and got the results below.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1235.jpg"/>
+    <br>
+    
+    <p>
+    The graph above shows how the FPS changes with the number of vertices.<br>
+    When meshing with a few vertices (Low), a good performance of 650 FPS was recorded on average.<br>
+    Conversely, when there are meshes with many vertices (High), the average execution performance is 270 FPS.<br>
+    (Higher FPS means better performance.)<br>
+    </p>
+    <br>
+    
+    <p>
+    In other words, you can see that the performance decreases with the number of vertices.<br>
+    We recommend that create your character with an appropriate level of vertex density, considering both animation quality and execution performance.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Physics effect and Performance</h3>
+    <br>
+    
+    <p>
+    Physics effects are the factors that greatly affect performance in game engines.<br>
+    There are two ways to implement physics effects in AnyPortrait.<br>
+    These are <strong>Physics Modifier</strong> and <strong>Jiggle Bones</strong>.<br>
+    Let's see how these two features affect to the execution performance.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1236.jpg"/>
+    <br>
+    
+    <p>
+    We prepared three samples with <strong>Physics Modifier</strong>, <strong>Jiggle Bones</strong>, and <strong>Nothing</strong> applied to the characters in the demo.<br>
+    <strong>Physics Modifier</strong> has been applied to some meshes as shown in the image above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1237.jpg"/>
+    <br>
+    
+    <p>
+    For the other samples, we applied a <strong>Jiggle Bones</strong> to set it up to show similar physics movement.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1238.jpg"/>
+    <br>
+    
+    <p>
+    As above, after writing a script to show the FPS while 30 characters placed and animated, we built it as a PC app and tested its performance.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1239.jpg"/>
+    <br>
+    
+    <p>
+    In the case where no physics effect was applied, a high FPS of over 100 was recorded, and based on this, let's compare the performance records of other physics effects.<br>
+    When <strong>Jiggle Bones</strong> were applied, there was a decrease of about 10 FPS compared to the case where no physics effect was applied.<br>
+    When <strong>Physics Modifier</strong> was applied, a whopping 30 FPS drop was recorded.<br>
+    In particular, it can be seen that the minimum FPS when <strong>Physics Modifier</strong> is applied is very low.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>Physics Modifier</strong> is a function that greatly degrades performance because it calculates each vertex according to the physical material.<br>
+    Therefore, <strong>Physics Modifier</strong> was developed to operate as <strong>Fixed Frame</strong>.<br>
+    The gap between the frame in which <strong>Physics Modifier</strong> works and the frame in which it does not work quite large.<br>
+    </p>
+    <br>
+    
+    <p>
+    On the other hand, <strong>Jiggle Bones</strong> targets relatively fewer bones than the number of vertices, and is a function that requires very little computation.<br>
+    In fact, <strong>Jiggle Bones</strong> shows relatively high execution performance even when it operates in all frames.<br>
+    </p>
+    <br>
+    
+    <p>
+    The goal expressed by <strong>Jiggle Bones</strong> and <strong>Physics Modifier</strong> are slightly different.<br>
+    However, if the two methods can be substituted, using <strong>Jiggle Bones</strong> will help improve performance.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Mono and IL2CPP</h3>
+    <br>
+    
+    <p>
+    Unity Game is written in C#, and in order to run this script, it is basically built using Mono.<br>
+    However, as Unity Engine is updated, it supports a build method called <strong>IL2CPP</strong>.<br>
+    This method converts a C# script into a relatively fast C++ code, so it has better execution performance than the Mono build.<br>
+    </p>
+    <br>
+    
+    <p>
+    If the target platform you are building on supports IL2CPP, this explanation will be of great help.<br>
+    For more information about IL2CPP, please refer to <a href="https://docs.unity3d.com/2021.2/Documentation/Manual/IL2CPP.html">Official Manual</a>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1240.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the <strong>Project Settings</strong> window of the Unity editor and select the <strong>Player</strong> menu.<br>
+    <strong>(2)</strong> Set the option of <strong>Scripting Backend</strong> from <strong>Mono</strong> to <strong>IL2CPP</strong>.<br>
+    Let's build and run the game in this state.<br>
+    (If you build directly to the path built in Mono, the build may fail.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1241.jpg"/>
+    <br>
+    
+    <p>
+    These are the results of testing by building the above character example in the <strong>Mono</strong> and <strong>IL2CPP</strong>.<br>
+    Compared to the result of recording 96 FPS in the Mono, it recorded 148 FPS, an increase of 50% or more when built in the IL2CPP.<br>
+    IL2CPP greatly improves the CPU execution performance of Unity apps, and AnyPortrait operates using CPU resources most of the time, so the optimization effect is very splendid.<br>
+    We recommend that you first check whether the IL2CPP build option can be applied to your project and then actively use it.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_CustomClippingMask.html">< Custom Clipping Mask</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_AttachEquipments.html">Attach Equipments ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

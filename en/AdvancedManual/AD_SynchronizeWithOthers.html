@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Synchronize with other characters</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_SynchronizeWithOthers.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_SynchronizeWithOthers.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_SynchronizeWithOthers.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Synchronize with other characters</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Synchronize with other characters</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.2</span></h4>
+    
+    <p>
+    The <strong>Customize</strong> function to change the character's outfit or appearance in the game is an important factor.<br>
+    We introduced the image replacement method (<a href="../../en/AdvancedManual/AD_CharacterCostume.html">Related page</a>), but many users gave us a lot of feedback after that.<br>
+    The <strong>Synchronize</strong> function covered on this page is basically to connect with other characters and play the animation in the same way.<br>
+    However, our team expects the concept of this function to be utilized for <strong>Customization</strong>.<br>
+    This page covers how to utilize the <strong>Synchronize</strong> function based on what will be applied as the <strong>Customize</strong> function.<br>
+    If you give us your feedback on this feature, we will further expand and further develop this concept.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1263.jpg"/>
+    <br>
+    
+    <p>
+    We prepared a scene in which only the <strong>Hairband and ribbon</strong> (hereafter called "Hairband") was separated from the character of the demo.<br>
+    Let's make the animation work only for <strong>Character</strong> and synchronize <strong>Hairband</strong> to <strong>Character</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1264.jpg"/>
+    <br>
+    
+    <p>
+    For <strong>Synchronize</strong>, <strong>Animation</strong> and <strong>Control Parameter</strong> must be the same.<br>
+    When you open <strong>Character</strong>, the control parameters are registered in the modifier.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1265.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Character</strong> has 3 animations of "<strong>Idle, Smile, Angry</strong>".<br>
+    <strong>(2)</strong> Remember the <strong>FPS</strong> and <strong>Length</strong> of this animations.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1266.jpg"/>
+    <br>
+    
+    <p>
+    Opening <strong>Hairband</strong> with the editor, <strong>Control parameters</strong> must be same with the synchronization target.<br>
+    Also, it must be implemented so that it can move as a modifier according to the control parameter.<br>
+    (However, since bones are not synchronized, there is no need to make them identical.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1267.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> The animation is also three of "<strong>Idle, Smile, Angry</strong>". If the names are different, they will not be synced.<br>
+    <strong>(2)</strong> Each animation length and FPS must also be the same as the sync target.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now, let's write the script below so that <strong>Hairband</strong> is synchronized with <strong>Character</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class SyncPlaySample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait character;<br>
+    &emsp;&emsp;public apPortrait hairband;<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//Press the A key and the Hairband will sync to the Character.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>hairband.Synchronize(character, true, true);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;hairband.transform.position = character.transform.position;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Press S to unsynchronize the Hairband.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>hairband.Unsynchronize();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;hairband.StopAll();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;hairband.transform.position = new Vector3(10.0f, 0.0f, 0.0f);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Synchronization can be turned on or off using the <strong>Synchronize</strong> and <strong>Unsynchronize</strong> functions.<br>
+    <strong>Synchronize</strong> function allows you to selectively synchronize <strong>Animation</strong> or <strong>Control parameter</strong>.<br>
+    Here, I put two true values so that they all synchronize.<br>
+    For detailed description of the function, refer to the <a href="../../en/Script/SC_Init.html">related page</a>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1268.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Create a new GameObject.<br>
+    <strong>(2)</strong> Add the created script and assign <strong>Character</strong> and <strong>Hairband</strong> respectively.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1269.jpg"/>
+    <br>
+    
+    <p>
+    Launch the game and press A key to see the Hairband attach to the Character and the animation and control parameters move in sync.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1270.jpg"/>
+    <br>
+    
+    <p>
+    However, you can see that the rendering order of the meshes in <strong>Hairband</strong> is not correct.<br>
+    You need to manually set the rendering order of the meshes of <strong>Hairband</strong> with a script.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1271.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open <strong>Character</strong> and check where the meshes of <strong>Hairband</strong> should be placed.<br>
+    Let's remember the names of the "meshes just behind" the order in which the meshes in the <strong>Hairband</strong> should be rendered.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1272.jpg"/>
+    <br>
+    
+    <p>
+    Let's make the <strong>Sorting Order</strong> of the <strong>Character</strong>'s meshes be assigned differently according to the rendering order.<br>
+    <strong>(1)</strong> Press the <strong>Bake</strong> button.<br>
+    <strong>(2)</strong> Select <strong>Settings tab</strong>.<br>
+    <strong>(3)</strong> Change <strong>Sorting Order Option</strong> to <strong>Depth To Order</strong>, and set <strong>Order Per Depth</strong> to <strong>2</strong>.<br>
+    <strong>Order Per Depth</strong> must be at least 2 to be able to put new meshes between existing meshes.<br>
+    </p>
+    <br>
+    
+    <p>
+    After setup, execute Bake.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1273.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open <strong>Hairband</strong> and remember all the mesh names.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now, add the code for specifying <strong>Sorting Order</strong> to the script as shown below using the names of the meshes you remembered earlier.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class SyncPlaySample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait character;<br>
+    &emsp;&emsp;public apPortrait hairband;<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//Press the A key and the Hairband will sync to the Character.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;hairband.Synchronize(character, true, true);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;hairband.transform.position = character.transform.position;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//"Flower Pin" is in front of "Front Hair".<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hairband.SetSortingOrder("Flower Pin", character.GetSortingOrder("Front Hair") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//"Ribbon" placed in front of "Body".<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hairband.SetSortingOrder("Ribbon", character.GetSortingOrder("Body") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;//"Hairband" placed in front of "Back Hair".<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hairband.SetSortingOrder("Hairband", character.GetSortingOrder("Back Hair") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Press S to unsynchronize the Hairband.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;hairband.Unsynchronize();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;hairband.StopAll();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;hairband.transform.position = new Vector3(10.0f, 0.0f, 0.0f);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1274.jpg"/>
+    <br>
+    
+    <p>
+    Relaunch the game and press A key and you can see the meshes in the <strong>Hairband</strong> rendered in their proper positions.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1275.jpg"/>
+    <br>
+    
+    <p>
+    If you press the S key, you can see that the synchronization is canceled by the <strong>Unsynchronize</strong> function.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_WindEffect.html">< Wind effect</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_BuildiOSPlatforms.html">Build on iOS and other platforms ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

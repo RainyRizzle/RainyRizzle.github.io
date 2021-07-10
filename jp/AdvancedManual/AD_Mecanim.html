@@ -220,6 +220,97 @@
     <br>
     <br>
     
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Animator Override Controller</h3>
+    <br>
+    
+    <p>
+    「<strong>Animator Override Controller</strong>」はメカさんの「Animator Controller」をそのまま使用しながらアニメーションクリップだけ交換することができる機能を提供します。<br>
+    AnyPortraitで自動的に生成されたアニメーションクリップを利用して「Animator Override Controller」を適用する方法を、以下の説明で確認してみてください。<br>
+    （「<strong>Animator Override Controller</strong>」には、「<a href="https://docs.unity3d.com/Manual/AnimatorOverrideController.html">公式マニュアル</a>」で詳細な説明を見ることができます。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1210.jpg"/>
+    <br>
+    
+    <p>
+    「Mecanim」が適用された二つのキャラクターがいます。<br>
+    <strong>(1)</strong> スライムキャラクターには、 <strong>(2)</strong> 上記のようなステートを持つ「Mecanim」が作成された状態です。<br>
+    <strong>(3)</strong> ドラゴンのキャラクターにはステートと同じように動作する「Mecanim」を「<strong>Animator Override Controller</strong>」を利用して実装してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1211.jpg"/>
+    <br>
+    
+    <p>
+    基準となるキャラクターのアニメーションと同じように、アニメーションクリップが用意されている必要があります。<br>
+    アニメーションの長さなどは同じしなくてもかまいません。<br>
+    「Mecanim」を使用するように設定して、それぞれ「Bake」をした場合は、アニメーションクリップが作成されていることです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1212.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Project</strong>」ウィンドウから右クリックをして「<strong>Create > Animator Override Controller</strong>」を押して、新しい「<strong>Animator Override Controller</strong>」アセットを作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1213.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 生成されたアセットを選択します。<br>
+    <strong>(2)</strong> 「<strong>Controller</strong>」属性に基準となる「スライムキャラクターのAnimator Controller」を適用します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1214.jpg"/>
+    <br>
+    
+    <p>
+    スライムキャラクターのアニメーションに対応するドラゴンのキャラクターのアニメーションクリップをそれぞれ指定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1215.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ドラゴンのキャラクターを選択します。<br>
+    「Mecanim」オプションをオンにして「Bake」をしたら、「<strong>Animator</strong>」コンポーネントが作成されていることです。<br>
+    （そうでなければ「Animator」コンポーネントを直接追加したり、Bakeを再する必要があります。）<br>
+    <strong>(2)</strong> 「<strong>Controller</strong>」属性に、既存の「Animator Controller」の代わりに、先に直接作成した「<strong>Animator Override Controller</strong>」に置き換えて設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1216.jpg"/>
+    <br>
+    
+    <p>
+    現在のゲームを実行すると、スライムとドラゴンが同じステートマシンを共有しながら再生されるのを見ることができます。<br>
+    </p>
+    <br>
+    
     <!-- 5. 바닥 네비바 -->
     <br>
     <br>
