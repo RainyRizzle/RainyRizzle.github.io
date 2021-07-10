@@ -157,8 +157,15 @@
     &emsp;&emsp;&emsp;&emsp;//캐릭터의 오른손 본을 무기의 부모로서 설정<br>
     &emsp;&emsp;&emsp;&emsp;<strong>Transform handBone = portrait.GetBoneSocket("Bone Hand R");</strong><br>
     &emsp;&emsp;&emsp;&emsp;gunTransform.parent = handBone;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//위치와 회전을 소켓과 동일하게 만들고, 크기는 부호만 확인<br>
     &emsp;&emsp;&emsp;&emsp;gunTransform.localPosition = Vector3.zero;<br>
     &emsp;&emsp;&emsp;&emsp;gunTransform.localRotation = Quaternion.identity;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Vector3 gunScale = gunTransform.localScale;<br>
+    &emsp;&emsp;&emsp;&emsp;if(handBone.localScale.x < 0) { gunScale.x *= -1; }<br>
+    &emsp;&emsp;&emsp;&emsp;if(handBone.localScale.y < 0) { gunScale.y *= -1; }<br>
+    &emsp;&emsp;&emsp;&emsp;gunTransform.localScale = gunScale;<br>
     &emsp;&emsp;}<br>
     }<br>
     <br>
@@ -247,8 +254,15 @@
     &emsp;&emsp;&emsp;&emsp;//캐릭터의 오른손 본을 무기의 부모로서 설정<br>
     &emsp;&emsp;&emsp;&emsp;Transform handBone = portrait.GetBoneSocket("Bone Hand R");<br>
     &emsp;&emsp;&emsp;&emsp;gunTransform.parent = handBone;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//위치와 회전을 소켓과 동일하게 만들고, 크기는 부호만 확인<br>
     &emsp;&emsp;&emsp;&emsp;gunTransform.localPosition = Vector3.zero;<br>
     &emsp;&emsp;&emsp;&emsp;gunTransform.localRotation = Quaternion.identity;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Vector3 gunScale = gunTransform.localScale;<br>
+    &emsp;&emsp;&emsp;&emsp;if(handBone.localScale.x < 0) { gunScale.x *= -1; }<br>
+    &emsp;&emsp;&emsp;&emsp;if(handBone.localScale.y < 0) { gunScale.y *= -1; }<br>
+    &emsp;&emsp;&emsp;&emsp;gunTransform.localScale = gunScale;<br>
     <br>
     &emsp;&emsp;&emsp;&emsp;//손가락 메시의 바로 뒤에서 렌더링 되도록 설정<br>
     &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>int fingerSortingOrder = portrait.GetSortingOrder("Hand R Finger");</strong></span><br>
