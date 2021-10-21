@@ -71,7 +71,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.3.2</span></h4>
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
     
     <p>
     ゲームでキャラクターの衣装や見た目を変える<strong>カスタマイズ</strong>機能は、重要な要素です。<br>
@@ -326,6 +326,150 @@
     </p>
     <br>
     
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>ルートユニット（Root Unit）の同期</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
+    
+    <p>
+    「Synchronize」関数を使用するとき、アニメーションを同期していない可能性があります。<br>
+    しかし、もし、アニメーションを同期していなくても、ルートユニットが転換されることを同期しようとする場合があります。<br>
+    制御パラメータを同期したり、ボーンを同期するときに特に必要な機能である。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1382.jpg"/>
+    <br>
+    
+    <p>
+    まず、メインキャラクターです。<br>
+    <strong>(1)</strong> 3つの「ルートユニット（Root Unit）」が登録されています。<br>
+    <strong>(2)</strong> それぞれのルートユニットの画像は、上記のように数字で区別する簡単にしました。<br>
+    <strong>(3)</strong> それぞれのルートユニットが実行されるように、3つの「アニメーションクリップ」が作成されています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1383.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1384.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1385.jpg"/>
+    <br>
+    
+    <p>
+    3つのアニメーションは、それぞれのルートユニットを対象としていますので、アニメーションを再生すると、上記のように該当のルートユニットに転換されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1386.jpg"/>
+    <br>
+    
+    <p>
+    今回は、同期を行うキャラクターです。<br>
+    同様に、3つのルートユニットがあります。<br>
+    しかし、アニメーションがなく自分では、ルートユニットが切り替えはありません。<br>
+    </p>
+    <br>
+    
+    <p>
+    スクリプトを以下のように作成して対象のルートユニットが切り替わるように同期してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class RootUnitSync : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;//アニメーションが再生されているキャラクター<br>
+    &emsp;&emsp;public apPortrait mainCharacter;<br>
+    &emsp;&emsp;//メインキャラクターに同期をするキャラクター<br>
+    &emsp;&emsp;public apPortrait syncCharacter;<br>
+    <br>
+    &emsp;&emsp;void Start() { }<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//数字キーを入力すると、メインキャラクターのアニメーションが再生され、該当のルートユニットに切り替えます。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha1)) { mainCharacter.Play("Anim0"); }<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha2)) { mainCharacter.Play("Anim1"); }<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha3)) { mainCharacter.Play("Anim2"); }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//ルートユニットを同期します。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;syncCharacter.<strong>Synchronize</strong>(mainCharacter, false, false, <span class="text-danger"><strong>true</strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//同期をオフにします。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;syncCharacter.Unsynchronize();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    「Synchronize」関数の引数の中で、「ルートユニットの同期」要求が「<span class="text-danger"><strong>true</strong></span>」であることを確認してください。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意</strong></span><br>
+    ルートユニット同期要求は、次の場合に動作しません。<br>
+     - ルートユニットの数が1個以下、または、互いに数が異なる場合<br>
+     - アニメーションが同期されている場合（アニメーションの同期は、ルートユニット同期機能が含まれています。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1387.jpg"/>
+    <br>
+    
+    <p>
+    完成したスクリプトをUnityシーンに配置してみましょう。<br>
+    <strong>(1)</strong> 「MainCharacter」と「SyncCharacter」が生成されており、新しいGameObjectを作成上記のスクリプトを追加します。<br>
+    <strong>(2)</strong> スクリプトの各apPortraitメンバーを適切に割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1388.jpg"/>
+    <br>
+    
+    <p>
+    現在のゲームを実行してみましょう。<br>
+    メインキャラクターのアニメーションによって、ルートユニットが切り替わります。<br>
+    同期をすれば、同期された文字も一緒にルートユニットが転換されることを見ることができます。<br>
+    </p>
+    <br>
+    
     <!-- 5. 바닥 네비바 -->
     <br>
     <br>
@@ -333,7 +477,7 @@
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
         <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_WindEffect.html">< 風の効果を実装</a>
-        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_BuildiOSPlatforms.html">iOSと他のプラットフォーム ></a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_SyncBonesToChangeCostumes.html">ボーンを同期してコスチュームを変更 ></a>
     </nav>
     
     <!-- 페이지 내용 끝! -->

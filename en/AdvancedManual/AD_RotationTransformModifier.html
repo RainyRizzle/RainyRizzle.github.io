@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Rotation in the Transform modifier</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_RotationTransformModifier.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_RotationTransformModifier.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_RotationTransformModifier.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Rotation in the Transform modifier</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Rotation in the Transform modifier</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
+    
+    <p>
+    We've received feedback on some issues with rotating objects in the "<strong>Transform (Controller)</strong>" modifier.<br>
+    In v1.3.4, the problem was solved by arranging it into two main categories.<br>
+    One is "Limitation of rotation", which has already been introduced in animation editing, and the other is "Rotation by Vector".<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Turn off rotation angle limitation</h3>
+    <br>
+    
+    <p>
+    This feature is a function that already exists when editing animations. (<a href="../../en/AdvancedManual/AD_RotateWOLimit.html">Related page</a>)<br>
+    This page also briefly introduces how to use it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1368.jpg"/>
+    <br>
+    
+    <p>
+    This is an example that will be used on this page.<br>
+    There are bones, to which 1 mesh is attached.<br>
+    We've applied a Transform (Controller) modifier, and we're going to rotate the bone.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1369.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Let's select a bone and make it rotate counterclockwise using the mouse.<br>
+    <strong>(2)</strong> However, at the point where it goes beyond 180 degrees, you can see that the angle suddenly switches to negative.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1370.jpg"/>
+    <br>
+    
+    <p>
+    If you move the bone with the control parameter in this state, the intended rotation is counterclockwise, but actually it rotates in the opposite direction.<br>
+    This is because AnyPortrait's rotation gizmo has "Limitation of Rotation Angle", which is enabled by default.<br>
+    This causes the value to be constrained from -180 to +180 when rotating the object using the gizmo.<br>
+    But in this case it is necessary to release the limitation.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1371.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the "<strong>180</strong>" button on the right UI to change to "<strong>Infinite</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1372.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> Let's rotate the bone counterclockwise again.<br>
+    <strong>(3)</strong> Now you can see the value keep increasing even beyond 180 degrees.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1373.jpg"/>
+    <br>
+    
+    <p>
+    This is the finished result.<br>
+    You can see that it rotates counterclockwise as intended.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Rotation by Vector</h3>
+    <br>
+    
+    <p>
+    This can be a rather difficult topic.<br>
+    When interpolating "Rotation Value" in AnyPortrait, "Angle" is used as it is.<br>
+    This is the most obvious way, but problems arise when:<br>
+    - When interpolating two or more keys with a large difference<br>
+    - When keys are cycled<br>
+    The above does not happen with keyframe-based animations.<br>
+    However, in "Transform modifier using Vector2 type control parameter", the above condition is satisfied.<br>
+    To solve this problem, we need a "new interpolation technique" not "Rotation by Angle".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1374.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Added "<strong>Transform (Controller)</strong> modifier".<br>
+    <strong>(2)</strong> The control parameter of the Vector2 type to the modifier is added, and added keys in all directions.<br>
+    <strong>(3)</strong> We want to make the bone move and rotate in all directions according to the control parameter.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1375.jpg"/>
+    <br>
+    
+    <p>
+    We made the bones move according to each direction of the control parameter.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1376.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> When the value of the control parameter changes <strong>(2)</strong> the bone generally moves well in that direction.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1377.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> But in some sections <strong>(2)</strong> you can see that the bone rotates in a strange direction.<br>
+    This is the problem with "<strong>Rotation by Angle</strong>" described earlier.<br>
+    </p>
+    <br>
+    
+    <p>
+    To solve this problem, a new technique called "<strong>Rotation by Vector</strong>" was added in v1.3.4.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1378.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> In the settings of the modifier, press the "<strong>Rotation by Angle</strong>" button and change it to "<strong>Rotation by Vector</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1379.jpg"/>
+    <br>
+    
+    <p>
+    Bone now moves normally in all directions when the value of the control parameter changes.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1380.jpg"/>
+    <br>
+    
+    <p>
+    The "<strong>Rotate by Vector</strong>" approach performs interpolation with a different approach.<br>
+    This method converts "angle" to "vector" once, then computes "weighted vector sum".<br>
+    After that, it goes through the process of converting the "vector sum result" back to "angle".<br>
+    Thanks to this, even when keys are cycled or when two or more keys are complexly interpolated, values can be obtained through an intuitive operation called vector sum.<br>
+    However, this method is not perfect.<br>
+    Check out the limitations of each method.<br>
+    </p>
+    <br>
+    
+    <p>
+    Cons of "<span class="text-primary"><strong>Rotation by Angle</strong></span>"<br>
+    - When there are two or more keys or when interpolating keys that are cycled, they can be rotated in an unintended direction.<br>
+    </p>
+    <br>
+    
+    <p>
+    Cons of "<span class="text-danger"><strong>Rotation by Vector</strong></span>"<br>
+    - Interpolation may not be possible if the vector sum is 0, such as two keys forming an exact 180 degree angle.<br>
+    - Due to the nature of vector summation, all interpolated rotations are limited to within 180 degrees.<br>
+    - Since the calculation method is complicated, the performance is slightly reduced.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_CopyAndPasteWithSlots.html">< Copy/paste using slots</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ExportImportAnimation.html">Export / Import Animation ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

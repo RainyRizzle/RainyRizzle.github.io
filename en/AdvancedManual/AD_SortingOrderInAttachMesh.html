@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Sorting Order in attaching meshes</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_SortingOrderInAttachMesh.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_SortingOrderInAttachMesh.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_SortingOrderInAttachMesh.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Sorting Order in attaching meshes</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Sorting Order in attaching meshes</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
+    
+    <p>
+    When making a game, different characters are combined and rendered, or external meshes are created that are equipped as costumes or weapons.<br>
+    In this case, it is very important to properly modify the rendering order of the attached meshes.<br>
+    We introduced how to set the rendering order using <strong>Sorting Order</strong> in another manual.<br>
+    In addition to this, this page also covers cases where the rendering order of meshes is changed in real time by "<strong>Extra Option</strong>".<br>
+    It will be helpful to look at the manuals below related to this page together.<br>
+    - <a href="../../en/Script/SC_Init.html">Script : Initialization, Basic Settings</a><br>
+    - <a href="../../en/Script/SC_Mesh.html">Script : Mesh, Mesh Group Transform</a><br>
+    - <a href="../../en/AdvancedManual/AD_SortingLayer.html">Sorting Layer/Order Setting</a><br>
+    - <a href="../../en/AdvancedManual/AD_ExtraOption.html">Switching Rendering Order and Images</a><br>
+    - <a href="../../en/AdvancedManual/AD_AttachEquipments.html">Attach Equipments</a><br>
+    - <a href="../../en/AdvancedManual/AD_SynchronizeWithOthers.html">Synchronize with other characters</a><br>
+    - <a href="../../en/AdvancedManual/AD_SyncBonesToChangeCostumes.html">Synchronize bones to change costumes</a><br>
+    </p>
+    <br>
+    
+    <p>
+    Specifically, this example uses the "<strong>Synchronize Bones</strong>" function.<br>
+    For more information on this synchronization, please check the <a href="../../en/AdvancedManual/AD_SyncBonesToChangeCostumes.html">related page</a>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1389.jpg"/>
+    <br>
+    
+    <p>
+    This is a robot character.<br>
+    We will made that an arm of this robot moves around its body.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1390.jpg"/>
+    <br>
+    
+    <p>
+    Use "<strong>Extra Option</strong>" (<a href="../../en/AdvancedManual/AD_ExtraOption.html">Related page</a>) to make the arm move forward and backward of the body.<br>
+    <strong>(1)</strong> Add the "<strong>Color Only (Controller)</strong>" modifier.<br>
+    <strong>(2)</strong> Activate "<strong>Extra Option</strong>".<br>
+    <strong>(3)</strong> Add keys while creating control parameters to control the rendering position of the arm.<br>
+    <strong>(4)</strong> Select the arm meshes.<br>
+    <strong>(5)</strong> Press the "<strong>Set</strong>" button to open the "<strong>Extra Option</strong>" dialog.<br>
+    <strong>(6)</strong> Make the <strong>Detph</strong> of the meshes move forward and backward of the body.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1391.jpg"/>
+    <br>
+    
+    <p>
+    We made the arms render in front or behind the body depending on the control parameters.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1392.jpg"/>
+    <br>
+    
+    <p>
+    The animation was completed by adding the movement of the bones.<br>
+    You can see the arm moving around the body.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1393.jpg"/>
+    <br>
+    
+    <p>
+    Create a new character.<br>
+    This character is "equipment mounted on a robotic arm".<br>
+    It has 4 meshes named "Equip1-4".<br>
+    This character was created to take advantage of "bone sync".<br>
+    You can learn more about how to make it and the description of the script below at the <a href="../../en/AdvancedManual/AD_SyncBonesToChangeCostumes.html">related page</a>.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now let's write a script to make the equipment attach to the robot arm.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class RobotDepthSyncScript : MonoBehaviour<br>
+    {&emsp;&emsp;<br>
+    &emsp;&emsp;public Transform robotGroup; // The robot's parent GameObject.<br>
+    &emsp;&emsp;public apPortrait mainCharacter; // Robot character.<br>
+    &emsp;&emsp;public apPortrait equipment; // Equipment character to be attached to the robot.<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Press the A key to attach the equipment.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Attach();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Press the S key to release the attachment.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Detach();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;private void Attach()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Registers the equipment as a child of the robot's parent GameObject.<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.parent = robotGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Synchronize the bones.<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.<strong>Synchronize</strong>(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;private void Detach()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Detach the equipment from the robot's parent GameObject.<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.parent = null;<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.position = new Vector3(-5, 0, 0);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Disable synchronization.<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.<strong>Unsynchronize()</strong>;<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    With a simple script like the one above, you can make two characters with the same bone synchronize.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1394.jpg"/>
+    <br>
+    
+    <p>
+    Let's apply the script we wrote in Unity.<br>
+    <strong>(1)</strong> Create a new GameObject named "RobotGroup" and register the robot character as a child. Also create a GameObject to add the script to.<br>
+    <strong>(2)</strong> This is a Unity scene composed by allocating script members.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1395.jpg"/>
+    <br>
+    
+    <p>
+    If you run the game and press the A key, you can see the equipment sticking to the robot and moving.<br>
+    However, the order in which the meshes of the equipment are rendered looks very strange.<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's modify the script to specify the rendering order.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class RobotDepthSyncScript : MonoBehaviour<br>
+    {&emsp;&emsp;<br>
+    &emsp;&emsp;public Transform robotGroup; // The robot's parent GameObject.<br>
+    &emsp;&emsp;public apPortrait mainCharacter; // Robot character.<br>
+    &emsp;&emsp;public apPortrait equipment; // Equipment character to be attached to the robot.<br>
+    <br>
+    &emsp;&emsp;// Store one of the meshes of the robot arm to reference the Sorting Order value.<br>
+    &emsp;&emsp;<span class="text-danger"><strong>private apOptTransform targetMesh;</strong></span><br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Among the arm meshes of the robot, "the mesh rendered in the most front" is stored to a variable.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>targetMesh = mainCharacter.GetOptTransform("HandMidGear");</strong></span><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Press the A key to attach the equipment.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Attach();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Press the S key to release the attachment.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Detach();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;private void Attach()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Registers the equipment as a child of the robot's parent GameObject.<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.parent = robotGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Synchronize the bones.<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// When equipment is attached to the robot arm, it refreshes the rendering order of the equipment meshes.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>RefreshMeshDepth();</strong></span><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;private void Detach()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Detach the equipment from the robot's parent GameObject.<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.parent = null;<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.position = new Vector3(-5, 0, 0);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Disable synchronization.<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.Unsynchronize();<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// Refresh the Sorting Order of the equipment meshes.<br>
+    &emsp;&emsp;<span class="text-danger"><strong>private void RefreshMeshDepth()</strong></span><br>
+    &emsp;&emsp;<span class="text-danger"><strong>{</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;// Gets the Sorting Order of the robot character's arm mesh.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>int baseSortingOrder = targetMesh.GetSortingOrder();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Set the Sorting Order one by one to render in front of the robot character's arm mesh.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>equipment.SetSortingOrder("Equip4", baseSortingOrder + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>equipment.SetSortingOrder("Equip1", baseSortingOrder + 2);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>equipment.SetSortingOrder("Equip2", baseSortingOrder + 3);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>equipment.SetSortingOrder("Equip3", baseSortingOrder + 4);</strong></span><br>
+    &emsp;&emsp;<span class="text-danger"><strong>}</strong></span><br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1396.jpg"/>
+    <br>
+    
+    <p>
+    Let's change the settings so that the rendering order changes according to the modified script.<br>
+    <strong>(1)</strong> Select the robot character, which is the main character. (It is not an equipment character.)<br>
+    <strong>(2)</strong> Change the <strong>Sorting Order Option</strong> to <strong>Detph To Order</strong>, and set <strong>Order Per Depth</strong> to a moderately large <strong>10</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1397.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the parent GameObject.<br>
+    <strong>(2)</strong> Add the <strong>Sorting Group</strong> component.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1398.jpg"/>
+    <br>
+    
+    <p>
+    If you run the game and mount the equipment to the robot, you can see the meshes render normally.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1399.jpg"/>
+    <br>
+    
+    <p>
+    However, it does not completely solve the problem.<br>
+    This is because the robot's arm meshes are also rendered from the back of the body by "<strong>Extra Option</strong>".<br>
+    Even when the robot arm is rendered from behind, you can see the equipment meshes being rendered in front of the body.<br>
+    (It may be the other way around depending on when the equipment is attached.)<br>
+    </p>
+    <br>
+    
+    <p>
+    Previously "specify the mesh's Sorting Order when attaching", but to fix this problem, you need to "refresh the mesh's Sorting Order continuously".<br>
+    Let's modify the script further.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class RobotDepthSyncScript : MonoBehaviour<br>
+    {&emsp;&emsp;<br>
+    &emsp;&emsp;public Transform robotGroup; // The robot's parent GameObject.<br>
+    &emsp;&emsp;public apPortrait mainCharacter; // Robot character.<br>
+    &emsp;&emsp;public apPortrait equipment; // Equipment character to be attached to the robot.<br>
+    <br>
+    &emsp;&emsp;// Store one of the meshes of the robot arm to reference the Sorting Order value.<br>
+    &emsp;&emsp;private apOptTransform targetMesh;<br>
+    <br>
+    &emsp;&emsp;// Variables to check if the rendering order of the arm mesh is updated.<br>
+    &emsp;&emsp;<span class="text-danger"><strong>private bool isAttached = false;</strong></span> // Whether the equipment is in an attached state.<br>
+    &emsp;&emsp;<span class="text-danger"><strong>private int prevSortingOrder = -1;</strong></span> // The value of the SortingOrder of the targetMesh in the previous frame.<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Among the arm meshes of the robot, "the mesh rendered in the most front" is stored to a variable.<br>
+    &emsp;&emsp;&emsp;&emsp;targetMesh = mainCharacter.GetOptTransform("HandMidGear");<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Press the A key to attach the equipment.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Attach();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Press the S key to release the attachment.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Detach();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// LateUpdate() is used to refer to the Sorting Order value after AnyPortrait character update is processed.<br>
+    &emsp;&emsp;<span class="text-danger"><strong>private void LateUpdate()</strong></span><br>
+    &emsp;&emsp;<span class="text-danger"><strong>{</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;// Checks if the rendering order of the robot arm mesh is changed when the equipment is attached.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>if (isAttached)</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>{</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>if (targetMesh.GetSortingOrder() != prevSortingOrder)</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>{</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// If the arm mesh's Sorting Order is different from the previous frame, refresh the attached equipment meshes' Sorting Order.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>RefreshMeshDepth();</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// After processing is completed, it is updated with the Sorting Order value of the current frame.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>prevSortingOrder = targetMesh.GetSortingOrder();</strong></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>}</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>}</strong></span><br>
+    &emsp;&emsp;<span class="text-danger"><strong>}</strong></span><br>
+    <br>
+    &emsp;&emsp;private void Attach()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Registers the equipment as a child of the robot's parent GameObject.<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.parent = robotGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Synchronize the bones.<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// When equipment is attached to the robot arm, it refreshes the rendering order of the equipment meshes.<br>
+    &emsp;&emsp;&emsp;&emsp;RefreshMeshDepth();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Store the Sorting Order of the arm mesh immediately after attaching, and store that it is attached in the isAttached variable.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>prevSortingOrder = targetMesh.GetSortingOrder();</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>isAttached = true;</strong></span><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;private void Detach()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Detach the equipment from the robot's parent GameObject.<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.parent = null;<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.position = new Vector3(-5, 0, 0);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Disable synchronization.<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.Unsynchronize();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Since the attachment has been released, enter false so that LateUpdate() does not keep checking the rendering order of the arm mesh.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>isAttached = false;</strong></span><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// Refresh the Sorting Order of the equipment meshes.<br>
+    &emsp;&emsp;private void RefreshMeshDepth()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Gets the Sorting Order of the robot character's arm mesh.<br>
+    &emsp;&emsp;&emsp;&emsp;int baseSortingOrder = targetMesh.GetSortingOrder();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Set the Sorting Order one by one to render in front of the robot character's arm mesh.<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.SetSortingOrder("Equip4", baseSortingOrder + 1);<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.SetSortingOrder("Equip1", baseSortingOrder + 2);<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.SetSortingOrder("Equip2", baseSortingOrder + 3);<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.SetSortingOrder("Equip3", baseSortingOrder + 4);&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    The key to the modified script is to keep checking "whether the <strong>Sorting Order</strong> value of the base arm mesh has changed".<br>
+    AnyPortrait characters are updated in "<strong>LateUpdate()</strong>", so you need to check <strong>Sorting Order</strong> in "<strong>LateUpdate()</strong>" here as well.<br>
+    In particular, pay attention to the syntax for comparing the <strong>Sorting Order</strong> of the previous frame by storing it in a separate variable (prevSortingOrder)!<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1400.jpg"/>
+    <br>
+    
+    <p>
+    Above we use "LateUpdate<strong>()</strong>" to check the Sorting Order value, but that code can still be called before AnyPortrait character's update.<br>
+    In this case, it is difficult to check the "Current Sorting Order" normally.<br>
+    You need to make this script run later than AnyPortrait.<br>
+    (Similar issues are also addressed in the <a href="../../en/AdvancedManual/AD_ExecutionOrderProblem.html">related page</a>.)<br>
+    <strong>(1)</strong> Open "<strong>Project Settings</strong>" in Unity and select "<strong>Script Execution Order</strong>".<br>
+    <strong>(2)</strong> Drag the created script and add it to the script list and place it below "<strong>Default Time</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1401.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you can see the equipment moving and rendering according to the robot's arm movement and rendering order.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>How to detect a change in Sorting Order</h4>
+    <br>
+    
+    <p>
+    In this page, after storing a specific mesh as a variable, we checked the change of Sorting Order.<br>
+    In addition, it is also possible to use "the value of the control parameter that determines the Extra Option" or use the "Animation event".<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Assigning Sorting Order to Attached Meshes</h4>
+    <br>
+    
+    <p>
+    The order of the meshes will be determined by the illustration you create.<br>
+    So, it is up to you to decide on which mesh the attached mesh will be placed before or after.<br>
+    It's a quick and easy way to specify the name and order of the meshes directly in the script, as is the case on this page.<br>
+    However, if you want to attach various objects, it would be better to write a script with separate data or rules.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>About the issue of Draw call</h4>
+    <br>
+    
+    <p>
+    Draw calls increase significantly when meshes with different images or materials are rendered staggered.<br>
+    To solve this, you need to share an image or create a special material.<br>
+    Our team is considering features that can minimize the increase in draw calls in this case.<br>
+    If you give us your opinion on this, we will actively reflect it in development.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_SyncBonesToChangeCostumes.html">< Synchronize bones to change costumes</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_BuildiOSPlatforms.html">Build on iOS and other platforms ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

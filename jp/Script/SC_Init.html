@@ -564,13 +564,18 @@
     <div class="card">
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>Synchronize</strong> <span class="text-muted">( </span><span class="text-success">apPortrait</span> <span class="text-muted">targetPortrait,</span> <span class="text-primary">bool</span> <span class="text-muted">syncAnimation,</span> <span class="text-primary">bool</span> <span class="text-muted">syncControlParam )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>Synchronize</strong> <span class="text-muted">( </span><span class="text-success">apPortrait</span> <span class="text-muted">targetPortrait,</span> <span class="text-primary">bool</span> <span class="text-muted">syncAnimation,</span> <span class="text-primary">bool</span> <span class="text-muted">syncControlParam,</span> <span class="text-primary">bool</span> <span class="text-muted">syncRootUnit )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">bool</span> <strong>Synchronize</strong> <span class="text-muted">( </span><span class="text-success">apPortrait</span> <span class="text-muted">targetPortrait,</span> <span class="text-primary">bool</span> <span class="text-muted">syncAnimation,</span> <span class="text-primary">bool</span> <span class="text-muted">syncControlParam,</span> <span class="text-primary">bool</span> <span class="text-muted">syncBones,</span> <span class="text-success">SYNC_BONE_OPTION</span> <span class="text-muted">syncBoneOption,</span> <span class="text-primary">bool</span> <span class="text-muted">syncRootUnit )</span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.3.2</span></h5>
+    <h5><span class="badge badge-secondary">1.3.4</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;アニメや制御パラメータの値を対象キャラクターに同期をします。<br>
     &nbsp;&nbsp;&nbsp;この関数を呼び出すと、そのキャラクターは対象キャラクターに依存して更新されます。<br>
+    &nbsp;&nbsp;&nbsp;この関数を使用する例を次のページで見ることができます。<br>
+    &nbsp;&nbsp;&nbsp;- <a href="../../jp/AdvancedManual/AD_SynchronizeWithOthers.html">他のキャラクターとの同期</a><br>
+    &nbsp;&nbsp;&nbsp;- <a href="../../jp/AdvancedManual/AD_SyncBonesToChangeCostumes.html">ボーンを同期してコスチュームを変更</a><br>
     </p>
     
     <br>
@@ -579,6 +584,9 @@
     &nbsp;&nbsp;&nbsp;<span class="text-success">apPortrait</span> targetPortrait : 同期対象となるapPortraitです。<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> syncAnimation : アニメーションを同期するかどうかです。<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> syncControlParam : 制御パラメータを同期させるかどうかです。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> syncRootUnit : 「ルートユニット（Root Unit）」を同期するかどうかです。同期されるapPortraitの「ルートユニット」の個数が2個以上で同じです。アニメーションが同期されると、この要求は無視されます。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> syncBones : ボーンの動きを同期させるかどうかです。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">SYNC_BONE_OPTION</span> syncBoneOption : ボーンの動きを同期させることは、どのような方法で同期するかを選択することができます。「MatchFromRoot」を入力すると、ルートボーンからの構造が同一でなければならず、「MatchFromSubBones」を入力すると、同期されるキャラクターのルートボーンが対象キャラクターのルートボーンがなくても、同期がされます。syncBonesがfalseであれば、このオプションは無視されるので、任意の値を入力します。<br>
     </p>
     
     <br>
@@ -600,6 +608,31 @@
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;Synchronize関数で設定された同期をオフにします。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetUpdateTimeMethod</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">useUnscaleDeltaTime )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetUpdateTimeMethod</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">useUnscaleDeltaTime,</span> <span class="text-primary">float</span> <span class="text-muted">multiplier )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.3.4</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;キャラクターが更新されると、Unityのいくつかの時間の値を使用するかを決定します。<br>
+    &nbsp;&nbsp;&nbsp;このオプションに応じて、ゲーム倍速に影響を受けるかどうかを設定することができ、また、別の倍速を設定することができます。<br>
+    &nbsp;&nbsp;&nbsp;Mecanimを利用したり、Importantオプションがオフの場合、一部の機能には、倍速が適用されません。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> useUnscaleDeltaTime : この値がtrueの場合Unityの「Time.unscaledDeltaTime」によって更新され、falseの場合「Time.deltaTime」によって更新されます。（デフォルトはfalseです。）<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> multiplier : アップデート倍速を設定することができます。入力しない場合は、デフォルトの1倍速に設定されます。<br>
     </p>
     
     </div>

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>メッシュ取付時の「Sorting Order」設定</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_SortingOrderInAttachMesh.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_SortingOrderInAttachMesh.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_SortingOrderInAttachMesh.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > メッシュ取付時の「Sorting Order」設定</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">メッシュ取付時の「Sorting Order」設定</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
+    
+    <p>
+    ゲームでは、キャラクターの外部のメッシュを衣装や武器のように取り付けます。<br>
+    このとき、付着したメッシュのレンダリング順序を適切に修正することは非常に重要です。<br>
+    他のマニュアルで「<strong>Sorting Order</strong>」を利用して、レンダリングの順序を定める方法について紹介したことがあります。<br>
+    ここに加えて、このページは「[Extra設定」によって、リアルタイムでメッシュのレンダリング順序が変わる場合にも説明します。<br>
+    このページに関連する、以下のマニュアルを一緒に見れば助けになるでしょう。<br>
+    - <a href="../../jp/Script/SC_Init.html">スクリプト : 初期化、基本設定</a><br>
+    - <a href="../../jp/Script/SC_Mesh.html">スクリプト : メッシュ、メッシュグループ</a><br>
+    - <a href="../../jp/AdvancedManual/AD_SortingLayer.html">「Sorting Layer/Order」設定</a><br>
+    - <a href="../../jp/AdvancedManual/AD_ExtraOption.html">レンダリング順序と画像の切り替え</a><br>
+    - <a href="../../jp/AdvancedManual/AD_AttachEquipments.html">キャラクターにアイテム装備</a><br>
+    - <a href="../../jp/AdvancedManual/AD_SynchronizeWithOthers.html">他のキャラクターとの同期</a><br>
+    - <a href="../../jp/AdvancedManual/AD_SyncBonesToChangeCostumes.html">ボーンを同期してコスチュームを変更</a><br>
+    </p>
+    <br>
+    
+    <p>
+    特にこの例では、「ボーンの同期」機能を利用します。<br>
+    ボーンの同期の詳細については、<a href="../../jp/AdvancedManual/AD_SyncBonesToChangeCostumes.html">関連ページ</a>でご確認ください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1389.jpg"/>
+    <br>
+    
+    <p>
+    説明のために作られたロボットキャラクターです。<br>
+    この例では、一つの腕が体の周りを回りながら動くようにすることです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1390.jpg"/>
+    <br>
+    
+    <p>
+    腕が体の正面、背面に動くように作るためには、「関連ページ）を使用してください。<br>
+    <strong>(1)</strong> 「<strong>Color Only（Controller）</strong>」モディファイヤを追加します。<br>
+    <strong>(2)</strong> 「<strong>Extra Option</strong>」を有効にします。<br>
+    <strong>(3)</strong> 腕の描画位置を制御する制御パラメータを生成した状態でキーを追加します。<br>
+    <strong>(4)</strong> 腕メッシュを選択します。<br>
+    <strong>(5)</strong> 「<strong>Set</strong>ボタン」を押して「 Extra設定」ダイアログを開きます。<br>
+    <strong>(6)</strong> メッシュの「<strong>Detph</strong>」が体の前、後方に移動するようにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1391.jpg"/>
+    <br>
+    
+    <p>
+    腕が制御パラメータに応じて、体の前または後ろのレンダリングされるようになりました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1392.jpg"/>
+    <br>
+    
+    <p>
+    ボーンアニメーションまでに完成しました。<br>
+    腕が体の周りをぐるぐる回りながら動くのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1393.jpg"/>
+    <br>
+    
+    <p>
+    新しいキャラクターを作成します。<br>
+    このキャラクターは、「ロボットアームに装着されている機器の」です。<br>
+    「Equip1〜4」という4つのメッシュがあります。<br>
+    このキャラクターは、「ボーンの同期」を利用するために製作された。<br>
+    製作方法と下のスクリプトの詳細については、<a href="../../jp/AdvancedManual/AD_SyncBonesToChangeCostumes.html">関連ページ</a>で詳細を確認することができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    今スクリプトを作成して装置がロボットアームに取り付けされるように作られてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class RobotDepthSyncScript : MonoBehaviour<br>
+    {&emsp;&emsp;<br>
+    &emsp;&emsp;public Transform robotGroup; // ロボットの親GameObjectです。<br>
+    &emsp;&emsp;public apPortrait mainCharacter; // ロボットキャラクターです。<br>
+    &emsp;&emsp;public apPortrait equipment; // ロボットに取り付けること装置です。<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Aキーを押すと、装置が付きます。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Attach();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Sキーを押すと、付着が解除されます。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Detach();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;private void Attach()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 装置をロボットの親GameObjectの子として登録します。<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.parent = robotGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// ボーンを同期します。<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.<strong>Synchronize</strong>(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;private void Detach()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 装置をロボットの親GameObjectから分離します。<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.parent = null;<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.position = new Vector3(-5, 0, 0);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 同期をオフにします。<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.<strong>Unsynchronize()</strong>;<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    上記のような簡単なスクリプトを介して共通のボーンの二つのキャラクターが同期されるようにすることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1394.jpg"/>
+    <br>
+    
+    <p>
+    作成したスクリプトをUnityで適用してみましょう。<br>
+    <strong>(1)</strong> 「RobotGroup」という新しいGameObjectを作成し、ロボットのキャラクターを子として登録されます。スクリプトを追加するGameObjectも生成します。<br>
+    <strong>(2)</strong> スクリプトのメンバーまで割り当てて完成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1395.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行させてAキーを押すと、装置がロボットにくっついて動くのを見ることができます。<br>
+    しかし、装置のメッシュがレンダリングされる順序が非常に奇妙に見えます。<br>
+    </p>
+    <br>
+    
+    <p>
+    スクリプトを修正して、レンダリングの順序を指定してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class RobotDepthSyncScript : MonoBehaviour<br>
+    {&emsp;&emsp;<br>
+    &emsp;&emsp;public Transform robotGroup; // ロボットの親GameObjectです。<br>
+    &emsp;&emsp;public apPortrait mainCharacter; // ロボットキャラクターです。<br>
+    &emsp;&emsp;public apPortrait equipment; // ロボットに取り付けること装置です。<br>
+    <br>
+    &emsp;&emsp;// Sorting Order値を参照するロボットアームのメッシュです。<br>
+    &emsp;&emsp;<span class="text-danger"><strong>private apOptTransform targetMesh;</strong></span><br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 装置が取り付けられるロボットのアームメッシュの中「最も前にレンダリングされるメッシュ」を変数に格納します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>targetMesh = mainCharacter.GetOptTransform("HandMidGear");</strong></span><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Aキーを押すと、装置が付きます。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Attach();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Sキーを押すと、付着が解除されます。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Detach();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;private void Attach()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 装置をロボットの親GameObjectの子として登録します。<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.parent = robotGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// ボーンを同期します。<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 装置がロボットアームに取り付けたときに、装置のメッシュのレンダリング順序を更新します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>RefreshMeshDepth();</strong></span><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;private void Detach()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 装置をロボットの親GameObjectから分離します。<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.parent = null;<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.position = new Vector3(-5, 0, 0);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 同期をオフにします。<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.Unsynchronize();<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// 装置のメッシュのSorting Orderを更新します。<br>
+    &emsp;&emsp;<span class="text-danger"><strong>private void RefreshMeshDepth()</strong></span><br>
+    &emsp;&emsp;<span class="text-danger"><strong>{</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;// ロボットキャラクターの腕メッシュのSorting Orderを取得します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>int baseSortingOrder = targetMesh.GetSortingOrder();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// ロボットキャラクターの腕メッシュより前のレンダリングされるようにSorting Orderを一つずつ設定します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>equipment.SetSortingOrder("Equip4", baseSortingOrder + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>equipment.SetSortingOrder("Equip1", baseSortingOrder + 2);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>equipment.SetSortingOrder("Equip2", baseSortingOrder + 3);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>equipment.SetSortingOrder("Equip3", baseSortingOrder + 4);</strong></span><br>
+    &emsp;&emsp;<span class="text-danger"><strong>}</strong></span><br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1396.jpg"/>
+    <br>
+    
+    <p>
+    修正されたスクリプトに基づいて、レンダリング順序が変わるように設定を変えてみましょう。<br>
+    <strong>(1)</strong> メインキャラクターであるロボットキャラクターを選択します。（機器のキャラクターがありません。）<br>
+    <strong>(2)</strong> 「<strong>Sorting Order Option</strong>」を「<strong>Detph To Order</strong>」に変更し、「<strong>Order Per Depth</strong>」を適当に大きな「<strong>10</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1397.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 親GameObjectを選択します。<br>
+    <strong>(2)</strong> 「<strong>Sorting Group</strong>」コンポーネントを追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1398.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行して、装置をロボットに装着すると、メッシュが正常に表示されるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1399.jpg"/>
+    <br>
+    
+    <p>
+    しかし、完全に問題が解決されたわけではない。<br>
+    このロボットは、「Extra設定」によって腕メッシュが体の後ろでレンダリングされることもあるからです。<br>
+    ロボットアームが後ろからレンダリングされた時も装備メッシュは体の前でレンダリングがされていることを見ることができます。<br>
+    （装置を取り付けるのタイミングによりましてはその逆になります。）<br>
+    </p>
+    <br>
+    
+    <p>
+    以前は、「付着したときに、メッシュのSorting Orderを指定」したが、この問題を解決するには、「リアルタイムでメッシュのSorting Orderを更新」する必要があります。<br>
+    スクリプトをより修正してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class RobotDepthSyncScript : MonoBehaviour<br>
+    {&emsp;&emsp;<br>
+    &emsp;&emsp;public Transform robotGroup; // ロボットの親GameObjectです。<br>
+    &emsp;&emsp;public apPortrait mainCharacter; // ロボットキャラクターです。<br>
+    &emsp;&emsp;public apPortrait equipment; // ロボットに取り付けること装置です。<br>
+    <br>
+    &emsp;&emsp;// Sorting Order値を参照するロボットアームのメッシュです。<br>
+    &emsp;&emsp;private apOptTransform targetMesh;<br>
+    <br>
+    &emsp;&emsp;// 腕メッシュのレンダリング順序が更新されることを確認するための変数です。<br>
+    &emsp;&emsp;<span class="text-danger"><strong>private bool isAttached = false;</strong></span> // 装置が接続されているかどうかです。<br>
+    &emsp;&emsp;<span class="text-danger"><strong>private int prevSortingOrder = -1;</strong></span> // 前のフレームからのtargetMeshのSortingOrderの値です。<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 装置が取り付けられるロボットのアームメッシュの中「最も前にレンダリングされるメッシュ」を変数に格納します。<br>
+    &emsp;&emsp;&emsp;&emsp;targetMesh = mainCharacter.GetOptTransform("HandMidGear");<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Aキーを押すと、装置が付きます。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Attach();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Sキーを押すと、付着が解除されます。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Detach();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// AnyPortraitキャラクターのアップデートが処理された後にSorting Orderの値を参照するためにLateUpdate()を利用します。<br>
+    &emsp;&emsp;<span class="text-danger"><strong>private void LateUpdate()</strong></span><br>
+    &emsp;&emsp;<span class="text-danger"><strong>{</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;// 装置が付着した状態のとき、ロボットアームメッシュのレンダリング順序が変わったのか確認します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>if (isAttached)</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>{</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>if (targetMesh.GetSortingOrder() != prevSortingOrder)</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>{</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 腕メッシュのSorting Orderが前のフレームと異なる場合、付着された装置のメッシュのSorting Orderを更新します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>RefreshMeshDepth();</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 処理が完了した後、現在のフレームのSorting Order値に更新します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>prevSortingOrder = targetMesh.GetSortingOrder();</strong></span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>}</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>}</strong></span><br>
+    &emsp;&emsp;<span class="text-danger"><strong>}</strong></span><br>
+    <br>
+    &emsp;&emsp;private void Attach()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 装置をロボットの親GameObjectの子として登録します。<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.parent = robotGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// ボーンを同期します。<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 装置がロボットアームに取り付けたときに、装置のメッシュのレンダリング順序を更新します。<br>
+    &emsp;&emsp;&emsp;&emsp;RefreshMeshDepth();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 付着直後に腕メッシュのSorting Orderを保存したり、付着したことをisAttached変数に格納します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>prevSortingOrder = targetMesh.GetSortingOrder();</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>isAttached = true;</strong></span><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;private void Detach()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 装置をロボットの親GameObjectから分離します。<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.parent = null;<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.transform.position = new Vector3(-5, 0, 0);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 同期をオフにします。<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.Unsynchronize();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 付着が解除されたので、LateUpdate()で腕メッシュのレンダリング順序を続けるチェックしないようにfalseを入力します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>isAttached = false;</strong></span><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// 装置のメッシュのSorting Orderを更新します。<br>
+    &emsp;&emsp;private void RefreshMeshDepth()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// ロボットキャラクターの腕メッシュのSorting Orderを取得します。<br>
+    &emsp;&emsp;&emsp;&emsp;int baseSortingOrder = targetMesh.GetSortingOrder();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// ロボットキャラクターの腕メッシュより前のレンダリングされるようにSorting Orderを一つずつ設定します。<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.SetSortingOrder("Equip4", baseSortingOrder + 1);<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.SetSortingOrder("Equip1", baseSortingOrder + 2);<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.SetSortingOrder("Equip2", baseSortingOrder + 3);<br>
+    &emsp;&emsp;&emsp;&emsp;equipment.SetSortingOrder("Equip3", baseSortingOrder + 4);&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    変更されたスクリプトの核心は、「基準となる腕メッシュの「Sorting Order」の値が変わったのか」を継続的にチェックすることです。<br>
+    AnyPortraitキャラクターは「LateUpdate<strong>()</strong>」で更新されるため、ここでも「LateUpdate<strong>()</strong>」で「Sorting Order」をチェックする必要があります。<br>
+    特に、前のフレームの「Sorting Order」を別の変数（prevSortingOrder）に保存して比較するための構文を注意深く見てください！<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1400.jpg"/>
+    <br>
+    
+    <p>
+    「LateUpdate<strong>()</strong>」で「Sorting Order」値を検査するように作成したが、それでもそのコードがAnyPortraitキャラクターのアップデートより先に呼び出すことができます。<br>
+    この場合には、通常、「現在のSorting Order」を確認することが困難である。<br>
+    このスクリプトは、AnyPortraitより後で動作するようにする必要があります。<br>
+    （似たような問題に対して、<a href="../../jp/AdvancedManual/AD_ExecutionOrderProblem.html">関連ページ</a>で扱っています。）<br>
+    <strong>(1)</strong> Unityの「<strong>Project Settings</strong>」を開き、「<strong>Script Execution Order</strong>」を選択します。<br>
+    <strong>(2)</strong> 作成したスクリプトをドラッグして、スクリプトのリストに追加した後、「<strong>Default Time</strong>」より下に位置します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1401.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、ロボットの腕の動き、レンダリングの順序に合わせて装置が動いて表示されるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Sorting Orderの変化を検出する方法について</h4>
+    <br>
+    
+    <p>
+    このページでは、特定のメッシュを変数に格納した後、「Sorting Order」の変化をチェックしました。<br>
+    そのほかにも、「Extra設定を決定する制御パラメータの値」を利用したり、「アニメーションイベント」を利用することも可能です。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>付着されたメッシュの「Sorting Order」を割り当</h4>
+    <br>
+    
+    <p>
+    製作するイラストによってメッシュの順序が決まることです。<br>
+    したがって取り付けられるメッシュがどのメッシュの前、後ろに配置されるなるリソースに応じて定してください。<br>
+    このページでの場合のように、メッシュの名前と順序をスクリプトから直接指定することが迅速かつ簡単です。<br>
+    しかし、さまざまなオブジェクトを付着する場合、別のデータやルールを決めて、スクリプトを作成することがよいでしょう。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>ドローコール（Drawcall）について</h4>
+    <br>
+    
+    <p>
+    別の画像や材質のメッシュが交わって表示される場合ドローコールが大幅に増加します。<br>
+    これを解決するには、画像を共有したり、特別な材料を作成します。<br>
+    私たちのチームは、このような場合にドローコールの増加を最小限に抑えることができる機能を考慮しています。<br>
+    これに対する意見をいただければ、開発に積極的に反映します。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_SyncBonesToChangeCostumes.html">< ボーンを同期してコスチュームを変更</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_BuildiOSPlatforms.html">iOSと他のプラットフォーム ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

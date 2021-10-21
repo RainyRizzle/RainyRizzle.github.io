@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>画像のサイズを変更</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ChangeImageSize.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ChangeImageSize.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_ChangeImageSize.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 画像のサイズを変更</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">画像のサイズを変更</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
+    
+    <p>
+    ほとんどの場合、AnyPortraitで使用される「イメージ（Image）」属性は、Unityでのテクスチャアセットの設定に従います。<br>
+    したがって、一般的に「イメージの実際のサイズ」、「テクスチャアセットとしてインポートされたサイズ」、「AnyPortraitで設定されたサイズ」はすべて同じです。<br>
+    しかし、場合によっては、画像の大きさの値が異なることがあります。<br>
+    テクスチャアセットの画像のサイズを減らしてインポートすることもでき、AnyPortraitで実際とは異なる画像のサイズを設定することもできます。<br>
+    このページは、このような特殊な状況に有用な情報を提供しています。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>案内</strong></span><br>
+    このページで紹介する機能は、実際には、イメージファイルのサイズを変更することがありません。<br>
+    「実際のサイズ」と「UnityまたはAnyPortraitで認識されたサイズ」を区別する必要があり、このページには、「実際のサイズ」につきましてはいません。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>画像のサイズの属性を変更</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1332.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitエディタで画像を選択すると、上記のような情報が表示されます。<br>
+    <strong>(1)</strong> AnyPortraitでの画像の大きさです。<br>
+    <strong>(2)</strong> Unityのテクスチャアセットとしてのイメージのサイズです。<br>
+    <strong>(3)</strong> 画像のサイズを変更するUIです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1333.jpg"/>
+    <br>
+    
+    <p>
+    もしテクスチャアセットとしてサイズとAnyPortraitでの大きさが異なっている場合、どのよう表示されるでしょうか？<br>
+    準備した例の実際のイメージのサイズは、「4096x4096」であり、Unityのインポート設定によってで「2048x2048」に変更された状態でした。<br>
+    そして、その画像をAnyPortraitで開いたので、現在は「2048x2048」に等しく見えたのです。<br>
+    上記のようにテクスチャのインポート設定を変更して、画像のサイズを大きく、または小さくてみましょう。<br>
+    （この例のほかの多くの場合でもテクスチャのサイズが変わることがあります。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1334.jpg"/>
+    <br>
+    
+    <p>
+    再びAnyPortraitエディタに戻り、画像を選択してみましょう。<br>
+    <strong>(1)</strong> テクスチャアセットのサイズが「4096x4096」に変わっているのを見ることができます。<br>
+    AnyPortraitの画像サイズと異なっているので、赤文字で変わりました。<br>
+    </p>
+    <br>
+    
+    <p>
+    通常は、画像の大きさの属性が異なる状態で製作をしても大きな問題はありません。<br>
+    むしろ画像のサイズを変更すると、すでに作業メッシュに影響を与えることができて注意してください。<br>
+    しかし、作業の初期のとき、一貫性のあるサイズの属性を持って作業をしたい場合は、以下の順に画像のサイズを変更してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1335.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Change Size</strong>」項目のサイズを入力欄に変更したい画像サイズの縦、横をそれぞれ入力します。<br>
+    <strong>(2)</strong> 「<strong>Apply</strong>ボタン」を押します。<br>
+    <strong>(3)</strong> 警告メッセージが表示されます。「<strong>Okay</strong>ボタン」を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1336.jpg"/>
+    <br>
+    
+    <p>
+    この時、警告メッセージがもう一つ表示されます。<br>
+    これは、画像のサイズを変更する場合、メッシュグループ内のメッシュに影響を与えるので、これをどのように処理するかを尋ねるメッセージです。<br>
+    二つのオプションが提供され、後述される説明に沿ってボタンを押すと、なりません。<br>
+    「<strong>Calibrate Scale</strong>」または「<strong>Ignore</strong>」ボタンを押すと、画像のサイズが変更されます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>メッシュグループ内のメッシュの大きさの補正するかどうか</h3>
+    <br>
+    
+    <p>
+    画像のサイズを変更すると、メッシュは、画像のサイズ変更率に合わせてサイズが変更されます。<br>
+    したがってキャラクターのメッシュが破損していません。<br>
+    しかし、メッシュグループに配置されたメッシュの場合は少し異なります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1337.jpg"/>
+    <br>
+    
+    <p>
+    説明のために上記のような状況を設定してみました。<br>
+    <strong>(1)</strong> メッシュグループを一つ作成しました。<br>
+    <strong>(2)</strong> ここでは4つのメッシュを追加しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1338.jpg"/>
+    <br>
+    
+    <p>
+    再び戻ってきて、画像のサイズを変更してみましょう。<br>
+    <strong>(1)</strong> 今回は画像の幅、高さの比率を人為的に変えてみようと幅だけ半分に減らします。<br>
+    <strong>(2)</strong> 「<strong>Apply</strong>ボタン」を押して <strong>(3)</strong> 警告メッセージの「<strong>Okay</strong>ボタン」を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1339.jpg"/>
+    <br>
+    
+    <p>
+    上記の確認した警告メッセージが表示されます。<br>
+    既存のメッシュグループ内のメッシュに影響を与える可能性があることを示しています。<br>
+    <strong>Cancel</strong>を除いて、二つの選択肢があることを見ることができます。<br>
+     - <strong>Calibrate Scale</strong>：メッシュグループ内のメッシュのデフォルトサイズに画像のサイズ変更率を逆に適用する補正過程を経て、既存のフォームを可能維持するようにします。<br>
+     - <strong>Ignore</strong>：別の補正過程を経ずに、画像のサイズを変更します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 一度「<strong>Calibrate Scale</strong>」ボタンを押して、結果を確認してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1340.jpg"/>
+    <br>
+    
+    <p>
+    メッシュグループを確認する前に、メッシュを確認してみましょう。<br>
+    画像の幅が半分に減っただけメッシュも縦に長くなった形状をしていることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1341.jpg"/>
+    <br>
+    
+    <p>
+    ところが、メッシュグループを選択して確認してみると、メッシュの大きさが変わらないように見えます。<br>
+    <strong>(1)</strong> 「<strong>Edit Default Transform</strong>」を有効にした状態でメッシュを選択します。<br>
+    <strong>(2)</strong> Xサイズが2倍に増加したことがわかります。<br>
+    「<strong>Calibrate Scale</strong>」オプションを使用すると、メッシュの大きさを補正して外観が可能な維持されるよう作成します。<br>
+    ただし、これは基本的な補正であり、モディファイヤが適用された状態であれば、従来とは異なる結果を示すことがあることに注意してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1343.jpg"/>
+    <br>
+    
+    <p>
+    画像のサイズを変更する前に戻って、今度は、「<strong>Ignore</strong>」ボタンを押してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1344.jpg"/>
+    <br>
+    
+    <p>
+    メッシュグループを選択すると、画像が縮小された割合だけメッシュも一緒に縮小されたことを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_LinearSpace.html">< 「Linear Color Space」と「Asset」設定</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_MirrorMesh.html">メッシュミラーツール ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

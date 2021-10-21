@@ -71,7 +71,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.3.2</span></h4>
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
     
     <p>
     게임에서 캐릭터의 의상이나 외형을 바꾸는 <strong>커스터마이즈</strong> 기능은 중요한 요소입니다.<br>
@@ -326,6 +326,150 @@
     </p>
     <br>
     
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>루트 유닛 동기화</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
+    
+    <p>
+    Synchronize의 함수를 이용할 때, 애니메이션을 동기화하지 않을 수 있습니다.<br>
+    하지만 만약 애니메이션을 동기화하지 않더라도 루트 유닛이 전환되는 것을 동기화하고자 하는 경우가 있습니다.<br>
+    컨트롤 파라미터를 동기화하거나 본을 동기화할 때 특히 필요한 기능일 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1382.jpg"/>
+    <br>
+    
+    <p>
+    먼저 "동기화의 대상"이 되는 캐릭터입니다.<br>
+    <strong>(1)</strong> 3개의 <strong>루트 유닛(Root Unit)</strong>이 등록되어 있습니다.<br>
+    <strong>(2)</strong> 각각의 루트 유닛의 이미지는 위와 같이 숫자로 구분하기 쉽게 만들었습니다.<br>
+    <strong>(3)</strong> 각각의 루트 유닛이 실행되도록 3개의 애니메이션 클립이 생성되어 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1383.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1384.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1385.jpg"/>
+    <br>
+    
+    <p>
+    3개의 애니메이션은 각각의 루트 유닛을 대상으로 하고 있기 때문에, 애니메이션을 재생하면 위와 같이 루트 유닛이 전환될 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1386.jpg"/>
+    <br>
+    
+    <p>
+    이번에는 "동기화를 할" 캐릭터입니다.<br>
+    동일하게 3개의 루트 유닛이 있습니다.<br>
+    하지만 애니메이션이 없어서 자체적으로 루트 유닛이 전환될 수 없는 캐릭터입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    스크립트를 아래와 같이 작성하여 대상인 루트 유닛으로 전환되도록 동기화해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class RootUnitSync : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;//애니메이션이 재생되는 캐릭터<br>
+    &emsp;&emsp;public apPortrait mainCharacter;<br>
+    &emsp;&emsp;//메인 캐릭터에 동기화를 할 캐릭터<br>
+    &emsp;&emsp;public apPortrait syncCharacter;<br>
+    <br>
+    &emsp;&emsp;void Start() { }<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//숫자키를 입력하면 메인 캐릭터의 애니메이션이 재생되어 루트 유닛이 전환됩니다.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha1)) { mainCharacter.Play("Anim0"); }<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha2)) { mainCharacter.Play("Anim1"); }<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha3)) { mainCharacter.Play("Anim2"); }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//루트 유닛을 동기화합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;syncCharacter.<strong>Synchronize</strong>(mainCharacter, false, false, <span class="text-danger"><strong>true</strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//동기화를 해제합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;syncCharacter.Unsynchronize();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Synchronize 함수의 인자 중 "루트 유닛 동기화" 요청이 <span class="text-danger"><strong>true</strong></span>인 것을 확인해주세요.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>주의</strong></span><br>
+    루트 유닛 동기화 요청은 다음의 경우에 동작하지 않습니다.<br>
+    - 루트 유닛의 개수가 1개 이하거나 서로 개수가 다른 경우<br>
+    - 애니메이션이 동기화되는 경우 (애니메이션 동기화는 루트 유닛 동기화 기능을 포함합니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1387.jpg"/>
+    <br>
+    
+    <p>
+    완성된 스크립트를 유니티 씬에 배치해봅시다.<br>
+    <strong>(1)</strong> MainCharacter와 SyncCharacter가 생성되어 있으며, 새로운 GameObject를 만들어서 위의 스크립트를 추가합니다.<br>
+    <strong>(2)</strong> 스크립트의 각 apPortrait 멤버들을 적절히 할당합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1388.jpg"/>
+    <br>
+    
+    <p>
+    이제 게임을 실행해봅시다.<br>
+    메인 캐릭터의 애니메이션에 따라서 루트 유닛이 전환됩니다.<br>
+    동기화를 하면, 동기화된 캐릭터도 같이 루트 유닛이 전환되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
     <!-- 5. 바닥 네비바 -->
     <br>
     <br>
@@ -333,7 +477,7 @@
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
         <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_WindEffect.html">< 바람 효과 구현하기</a>
-        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_BuildiOSPlatforms.html">iOS 및 다른 플랫폼으로 빌드하기 ></a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_SyncBonesToChangeCostumes.html">본을 동기화하여 의상 교체하기 ></a>
     </nav>
     
     <!-- 페이지 내용 끝! -->

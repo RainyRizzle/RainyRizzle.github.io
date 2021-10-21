@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>ボーンを同期してコスチュームを変更</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_SyncBonesToChangeCostumes.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_SyncBonesToChangeCostumes.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_SyncBonesToChangeCostumes.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > ボーンを同期してコスチュームを変更</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">ボーンを同期してコスチュームを変更</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
+    
+    <p>
+    AnyPortraitを利用してゲームを作成するユーザーの皆様の「キャラクターの衣装を交換する」について多くのフィードバックをいただきました。<br>
+    私たちのチームは、キャラクターの衣装を変える方法を下記のようにご案内しました。<br>
+    - <a href="../../jp/AdvancedManual/AD_CharacterCostume.html">キャラクターの衣装を交換</a><br>
+    - <a href="../../jp/AdvancedManual/AD_SynchronizeWithOthers.html">他のキャラクターとの同期</a><br>
+    </p>
+    <br>
+    
+    <p>
+    しかし、より効率的に制作をするために私たちは別の方法を考えました。<br>
+    多くのゲームのプロジェクトでボーンを利用して、キャラクタアニメーションを制作するという点では、ボーンを同期する方法がかなり有用であると私たちは考えています。<br>
+    このページで紹介する方法は、次の場合に非常に便利になります。<br>
+     - 「ボディ」の大きさが一定して、付着されている「コスチューム」の数が多い場合<br>
+     - 「コスチューム」に別のアニメーションを作成せずにたい場合<br>
+     - 「コスチューム」のほとんどのボーンが「ボディ」のボーンを共有している場合<br>
+     - ボーンの大きさを変更しない場合<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1281.jpg"/>
+    <br>
+    
+    <p>
+    このページで取り上げキャラクターや衣装のイメージです。<br>
+    すべてのPSDファイルとして作成された。<br>
+    このページでは、「<strong>コスチューム（Costume1、2、3）</strong>」をそれぞれ「<strong>ボディ（MainCharacter）</strong>に」同期しながらコスチュームを交換する方法を紹介します。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>ボディのキャラクターを作成</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1282.jpg"/>
+    <br>
+    
+    <p>
+    まず、元となる「<strong>ボディ（MainCharacter）</strong>」を作ってみましょう。<br>
+    PSDファイルをインポートして、キャラクターを製作します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1283.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「Riggingモディファイヤ」を利用して、ボーンとメッシュを接続し、また、「Transform（Animation）モディファイヤ」を追加します。<br>
+    <strong>(2)</strong> 2つのアニメーションを制作しました。<br>
+    これで、「<strong>ボディ（MainCharacter）</strong>」が完成しました。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>コスチューム作成</h3>
+    <br>
+    
+    <p>
+    「コスチューム」を作成する方法は、大きく二つがあります。<br>
+    簡単な方法は、「ボディ」のボーンをファイルにエクスポートし、再び新たなapPortraitに持って来てリギングする方法です。<br>
+    ボーンをファイルにエクスポートおよびインポートする方法は、以下のページで確認することができます。<br>
+    - <a href="../../jp/AdvancedManual/AD_SaveBoneSettings.html">骨の設定をエクスポート/インポート</a><br>
+    </p>
+    <br>
+    
+    <p>
+    しかし、同期されているオブジェクトを精巧に接続するためには、繊細なリギングをする必要があります。<br>
+    したがって、別の方法である「複製してリギングする」方法をご紹介します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1284.jpg"/>
+    <br>
+    
+    <p>
+    この方法は、「ボディ」を複製して、「コスチューム」を取り付けた状態で新しい完成されたキャラクターを作成することが重要な点です。<br>
+    <strong>(1)</strong> Unityシーンで、作成した「<strong>MainCharacter</strong>」を複製し、これの名前を「<strong>Costume1</strong>」に変更します。<br>
+    <strong>(2)</strong> 名前が異なる同じ2つのキャラクターを見ることができます。「複製された<strong>Costume1</strong>」キャラクターを選択して編集してみましょう。（以降、ボディキャラクターを編集しません。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1285.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitエディタで「<strong>Costume1</strong>」キャラクターを開きます。<br>
+    まだ修正されていない状態なので、「<strong>MainCharacter</strong>」と全く同じ状態です。<br>
+    <strong>(1)</strong> コスチュームのPSDイメージファイルを開いてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1286.jpg"/>
+    <br>
+    
+    <p>
+    「コスチューム」のPSDイメージファイルをインポートします。<br>
+    この時、注意する必要がある点があります。<br>
+     - 「ボディ」のPSD画像の大きさと、「コスチューム」のPSD画像のサイズが同じである必要があります。<br>
+     -  PSD画像上で「ボディ」と「コスチューム」の位置がぴったり合わなければします。<br>
+    上記の条件を満たしていない「コスチューム」イメージファイルを開いた場合は、手作業でメッシュの位置を調整する必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    コスチュームのPSDファイルを「Atlas」に「Bake」して、現在のapPortraitに取得します。<br>
+    「Atlas Bake設定」は「ボディ」の設定と、あえて同じでなくてもかまいません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1287.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「コスチューム」の画像のオブジェクトがさらに生成されました。<br>
+    <strong>(2)</strong> 特に、「コスチューム」の新たなメッシュグループが作成されたことを確認してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1288.jpg"/>
+    <br>
+    
+    <p>
+    次の作業は、「ボディ」のメッシュグループに「コスチューム」というメッセージを重なることです。<br>
+    <strong>(1)</strong> 元の「ボディ」のメッシュグループを選択します。<br>
+    <strong>(2)</strong> 「<strong>+</strong> ボタン」を押します。<br>
+    <strong>(3)</strong> 「<strong>Mesh Group</strong>タブ」を選択します。<br>
+    <strong>(4)</strong> 追加された衣装の「メッシュグループ」を選択します。<br>
+    <strong>(5)</strong> 「<strong>Add</strong>ボタン」を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1289.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ここで、「コスチューム」というメッセージがあるメッシュグループが合わさったことがわかります。<br>
+    ここで「コスチューム」というメッセージを移しつのメッシュグループだけ残してみましょう。<br>
+    （このプロセスは、不要なデータを減らすためです。必須ではありません選択的なプロセスです。）<br>
+    <strong>(2)</strong> 「コスチューム」メッシュグループ内のメッシュを選択します。（ <kbd>Shift</kbd> を押して選択すると、便利です。）<br>
+    <strong>(3)</strong> 「<strong>Migrate</strong>ボタン」を押します。<br>
+    <strong>(4)</strong> 二つの「メッシュグループ」が表示されることです。ルートメッシュグループである「ボディ」に対応するメッシュグループを選択します。<br>
+    <strong>(5)</strong> 「<strong>Select</strong>ボタン」を押します。<br>
+    <strong>(6)</strong> 「<strong>Migrate</strong>」機能を使用するときは、データ前処理で問題が発生することができて注意する必要があります。（<a href="../../jp/AdvancedManual/AD_DuplicateMigratingSubObj.html">関連ページ</a>）「OKボタン」を押してくれます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1290.jpg"/>
+    <br>
+    
+    <p>
+    「コスチューム」のメッシュグループ内のメッシュがルートメッシュグループに移動しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1291.jpg"/>
+    <br>
+    
+    <p>
+    空のメッシュグループを削除します。<br>
+    <strong>(1)</strong> 「コスチュームメッシュグループ」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Detach</strong>ボタン」を押します。<br>
+    <strong>(3)</strong> メッセージの「<strong>Detach</strong>ボタン」を押して、メッシュグループを分離します。<br>
+    これで、メッシュグループが除外されました。<br>
+    「Detach」の後、「左のHierarchy」から「コスチュームメッシュグループ」を削除してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1292.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 上記のように「ボディ」と「コスチューム」が適切に表示されるように、「コスチューム」というメッセージのレンダリング順序を変更してみましょう。<br>
+    <strong>(2)</strong> 「コスチューム」というメッセージと、「ボディ」というメッセージを区別するために、「ボディ」というメッセージの名前の前に「<strong>REF_</strong>」という接頭辞を付けてみましょう。<br>
+    <strong>(3)</strong> 「コスチューム」というメッセージを編集して完成してリギングのための準備をします。<br>
+    </p>
+    <br>
+    
+    <p>
+    もし「コスチューム」のPSDファイルを読み込む際の注意事項が守られなかった場合は、この段階では、「ボディ」と「コスチューム」メッシュの位置が合わないことです。<br>
+    もしそうなら、この段階で「コスチューム」メッシュの位置を適切に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1293.jpg"/>
+    <br>
+    
+    <p>
+    リギングをする前に、ボーンを追加することができます。<br>
+    <strong>(1)</strong> 髪の毛の動きを表現するためのボーンを追加しました。<br>
+    髪のボーンをボディの「Head」のボーンの子として接続しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1294.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> スカートの動きのためのボーンも追加します。<br>
+    <strong>(2)</strong> 「Jiggle Bone」に設定して、別のアニメーションがなくても、物理的な揺れを持つようにすることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1295.jpg"/>
+    <br>
+    
+    <p>
+    次に、コスチュームメッシュに対してリギングをみましょう。<br>
+    「Riggingモディファイヤ」を選択して、メッシュを追加した後の重みを割り当てます。<br>
+    （「Riggingモディファイヤ」は、すでに存在するものです。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1296.jpg"/>
+    <br>
+    
+    <p>
+    コスチュームメッシュを対象にリギングをするとき、最も重要なことは、「ボディと重なる部分」で重みを割り当てる方法です。<br>
+    重みを適切に割り当てられていなければ、キャラクターの手や足コスチュームをくぐって出てくる姿を見ることもあるでしょう。<br>
+    このとき、「<strong>Pos-Copy</strong>」機能を使用すると、このような悩みを少なくすることができるでしょう。（<a href="../../jp/AdvancedManual/AD_VariousRigging.html">関連ページ</a>）<br>
+    <strong>(1)</strong> 重なっている「ボディ」のメッシュのすべての頂点を選択します。<br>
+    <strong>(2)</strong> 「<strong>Pos-Copy</strong>ボタン」を押してリギング重みをコピーします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1297.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> コスチュームメッシュの頂点を選択します。<br>
+    <strong>(4)</strong> 「<strong>Pos-Paste</strong>ボタン」を押して、コピーされた重みを頂点に割り当てられます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1298.jpg"/>
+    <br>
+    
+    <p>
+    ボーンを動かしてみると、ボディのメッシュとコスチュームメッシュが一緒に動くのを見ることができます。<br>
+    この段階での重みをより精密に変更する必要があるが、それでもこの機能を介して多くの作業時間を短縮することができるでしょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1299.jpg"/>
+    <br>
+    
+    <p>
+    すべてのメッシュを対象にリギングを終えたらキャラクターが服を着たように、自然に動くことです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1300.jpg"/>
+    <br>
+    
+    <p>
+    同じように、他のコスチューム（Costume2、Costume3）も作ってあげましょう。<br>
+    （それぞれのコスチュームは、異なるapPortraitで製作する必要があります。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1301.jpg"/>
+    <br>
+    
+    <p>
+    現在の段階までに完成された画面です。<br>
+    ボディキャラクター（MainCharacter）とコスチュームが加えられた3つのキャラクター（Costume1、2、3）このシーンに配置されました。<br>
+    </p>
+    <br>
+    
+    <p>
+    まだコスチュームとキャラクターが合わさった状態なので、「Costume1、2、3」でボディのキャラクターのメッシュを除去する作業が残っています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1302.jpg"/>
+    <br>
+    
+    <p>
+    「コスチュームキャラクター（Costume1、2、3）」をAnyPortraitエディタで開き、「メッシュグループ」を選択します。<br>
+    <strong>(1)</strong> ボディのメッシュを選択します。先に対応するメッシュの名前に「<strong>REF_</strong>」を付けた場合、区分することが容易になります。<br>
+    <strong>(2)</strong> 「<strong>Detach</strong>ボタン」を押します。<br>
+    <strong>(3)</strong> メッセージの「<strong>Detach</strong>ボタン」を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1303.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> そのほかにも、「ボディ」のキャラクターの画像は、メッシュもすべて削除します。<br>
+    今、上記のように「コスチューム」の画像は、メッシュ、メッシュグループのみ残りました。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1304.jpg"/>
+    <br>
+    
+    <p>
+    複数の画像やメッシュを削除するとき、いちいち選択して削除することは非常に面倒なことです。<br>
+    Hierarchyで右クリックをした後、上記のように複数を一度に削除することができます。<br>
+    この機能については、<a href="../../jp/AdvancedManual/AD_HierarchyUI.html">関連ページ</a>を参照してください。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1305.jpg"/>
+    <br>
+    
+    <p>
+    このプロセスをすべて終えたなら、上記のように1つの「ボディのキャラクター」と3つの「コスチュームのキャラクター」がシーンに配置されます。<br>
+     - ボディキャラクターやコスチュームはほぼ同じボーンを持っており、「Riggingモディファイヤ」が同様に適用されています。<br>
+     - ボディのキャラクターだけ「Transform（Animation）」と「アニメーション」を持ちます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>スクリプトを作成して同期</h3>
+    <br>
+    
+    <p>
+    次のステップは、スクリプトを作成してコスチュームをボディキャラクターに付着することです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1306.jpg"/>
+    <br>
+    
+    <p>
+    上記のように思ったことをスクリプトで作成試みることです。<br>
+     - 「<strong>Character Group</strong>」という別のGameObjectに「<strong>ボディ（MainCharacter）</strong>」を子として登録します。<br>
+     - 「<strong>コスチューム</strong>」を付したときに「<strong>Character Group</strong>」の子として登録します。「ボディ」と「コスチューム」が一緒に動くために「<strong>Character Group</strong>」だけ制御するようにすることができます。<br>
+     - レンダリングの問題を解決するために、 「<strong>Character Group</strong>」に「<strong>Sorting Group</strong>」コンポーネントを追加します。<br>
+     - コスチュームとボディキャラクター間のボーンの動きを同期します。<br>
+    </p>
+    <br>
+    
+    <p>
+    上記の内容をすべて盛り込んだスクリプトを作成してみましょう。<br>
+    新しいC＃スクリプトを作成し、以下のように作成してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class BoneSyncScript : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public Transform characterGroup;<br>
+    &emsp;&emsp;public apPortrait mainCharacter;<br>
+    <br>
+    &emsp;&emsp;public apPortrait costume1;<br>
+    &emsp;&emsp;public apPortrait costume2;<br>
+    &emsp;&emsp;public apPortrait costume3;<br>
+    <br>
+    &emsp;&emsp;void Start() { }<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//QやWキーを押して、ボディのキャラクターのアニメーションを再生します。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Q)) { mainCharacter.Play("Idle"); }<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.W)) { mainCharacter.Play("Walk"); }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//数字キー1を押すと、すべてのコスチュームの付着が解除され、コスチューム1が付きます。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha1))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;DetachCostumes();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>AttachCostume1();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//数字キー2を押すと、すべてのコスチュームの付着が解除され、コスチューム2が付きます。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha2))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;DetachCostumes();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>AttachCostume2();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//数字キー3を押すと、すべてのコスチュームの付着が解除され、コスチューム3が付きます。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha3))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;DetachCostumes();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>AttachCostume3();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//数字キー4を押すと、すべてのコスチュームの付着が解除されます。<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha4))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;DetachCostumes();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;//コスチュームの付着をすべて解除する関数<br>
+    &emsp;&emsp;private void DetachCostumes()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//Unsynchronize関数を呼び出して、この同期をオフにします。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>costume1.Unsynchronize();</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>costume2.Unsynchronize();</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>costume3.Unsynchronize();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//親GameObjectから独立させます。（位置は見事に適切に分散させた。）<br>
+    &emsp;&emsp;&emsp;&emsp;costume1.transform.parent = null;<br>
+    &emsp;&emsp;&emsp;&emsp;costume1.transform.position = new Vector3(0, 0, 0);<br>
+    &emsp;&emsp;&emsp;&emsp;costume2.transform.parent = null;<br>
+    &emsp;&emsp;&emsp;&emsp;costume2.transform.position = new Vector3(4, 0, 0);<br>
+    &emsp;&emsp;&emsp;&emsp;costume3.transform.parent = null;<br>
+    &emsp;&emsp;&emsp;&emsp;costume3.transform.position = new Vector3(8, 0, 0);<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;//コスチューム1（Costume1）をCharacter Groupの子として登録し、<br>
+    &emsp;&emsp;//ボディキャラクターのボーンの動きと同期をします。<br>
+    &emsp;&emsp;private void <strong>AttachCostume1()</strong><br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Character Groupの子として登録し、Local位置を初期化します。<br>
+    &emsp;&emsp;&emsp;&emsp;costume1.transform.parent = characterGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;costume1.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Synchronize関数を用いて、ボーンの動きを同期させることができます。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume1.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);</strong></span><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;//コスチューム2（Costume2）をCharacter Groupの子として登録し、<br>
+    &emsp;&emsp;//ボディキャラクターのボーンの動きと同期をします。<br>
+    &emsp;&emsp;private void <strong>AttachCostume2()</strong><br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Character Groupの子として登録し、Local位置を初期化します。<br>
+    &emsp;&emsp;&emsp;&emsp;costume2.transform.parent = characterGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;costume2.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Synchronize関数を用いて、ボーンの動きを同期させることができます。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);</strong></span><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;//コスチューム3（Costume3）をCharacter Groupの子として登録し、<br>
+    &emsp;&emsp;//ボディキャラクターのボーンの動きと同期をします。<br>
+    &emsp;&emsp;private void <strong>AttachCostume3()</strong><br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Character Groupの子として登録し、Local位置を初期化します。<br>
+    &emsp;&emsp;&emsp;&emsp;costume3.transform.parent = characterGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;costume3.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Synchronize関数を用いて、ボーンの動きを同期させることができます。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);</strong></span><br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    ここで最も重要なスクリプトは、「AttachCostume」関数の中にあります。<br>
+    「characterGroup」の子として登録するコードとドブルオソ「<strong>Synchronize</strong>」関数を使用する部分を慎重に確認してください。<br>
+    必要であればアニメーション、制御パラメータまたはルートユニットを同期することも可能です。<br>
+    「<strong>Synchronize</strong>」関数の詳細説明は、<a href="../../jp/Script/SC_Init.html">関連ページ</a>で確認でき、また、「ボーンの同期」の詳細な説明をこのページの下部に見ることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    今作成したスクリプトをシーンに配置して動作するように作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1307.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「CharacterGroup」という名前のGameObjectを作成し、「ボディキャラクター（MainCharacter）」を子として追加します。また、「スクリプト」を配置する新しいGameObjectを作成します。<br>
+    <strong>(2)</strong> スクリプトをコンポーネントに追加し、それぞれの要素を接続します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1308.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>CharacterGroup</strong>」を選択し、 <strong>(2)</strong> 「<strong>Sorting Group</strong>」コンポーネントを追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1310.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、スクリプトが動作し、キャラクターのコスチュームを1つずつ交換を試みることができます。<br>
+    ボーンが同期され、キャラクターとコスチュームが一つになったかのように動きます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>メッシュのレンダリング順序を変更</h3>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1311.jpg"/>
+    <br>
+    
+    <p>
+    基本的な同期はすべて終わったが、まだ作業が残っています。<br>
+    合わさったキャラクターを詳しく見ると、重なったメッシュのレンダリング順序が適切ではありません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1312.jpg"/>
+    <br>
+    
+    <p>
+    「コスチューム1（Costume1）」の場合には、上記のような順序でメッシュが表示されるようにデザインがされた。<br>
+    上記の手順に合わせてメッシュのレンダリング順序を割り当てるようにスクリプトを修正してみましょう。<br>
+    （レンダリングの順序を設定する方法を扱う方法の詳細についてについては、「<a href="../../jp/AdvancedManual/AD_SortingOrderInAttachMesh.html">関連ページ</a>」で確認できます。）<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    &emsp;&emsp;（前略）<br>
+    &emsp;&emsp;//コスチューム1（Costume1）をCharacter Groupの子として登録し、<br>
+    &emsp;&emsp;//ボディキャラクターのボーンの動きと同期をします。<br>
+    &emsp;&emsp;private void <strong>AttachCostume1()</strong><br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Character Groupの子として登録し、Local位置を初期化します。<br>
+    &emsp;&emsp;&emsp;&emsp;costume1.transform.parent = characterGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;costume1.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Synchronize関数を用いて、ボーンの動きを同期させることができます。<br>
+    &emsp;&emsp;&emsp;&emsp;costume1.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//コスチューム1メッシュのレンダリングの順序（Sorting Order）をボディのメッシュに基づいて変更します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume1.SetSortingOrder("HairFront", mainCharacter.GetSortingOrder("Head") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume1.SetSortingOrder("LeftArm", mainCharacter.GetSortingOrder("LeftArm") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume1.SetSortingOrder("Body", mainCharacter.GetSortingOrder("LeftLeg") + 2);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume1.SetSortingOrder("LeftShoe", mainCharacter.GetSortingOrder("LeftLeg") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume1.SetSortingOrder("RightShoe", mainCharacter.GetSortingOrder("RightLeg") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume1.SetSortingOrder("HairSide", mainCharacter.GetSortingOrder("RightArm") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume1.SetSortingOrder("HairBack", mainCharacter.GetSortingOrder("RightArm") - 10);</strong></span><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;//コスチューム2（Costume2）をCharacter Groupの子として登録し、<br>
+    &emsp;&emsp;//ボディキャラクターのボーンの動きと同期をします。<br>
+    &emsp;&emsp;private void <strong>AttachCostume2()</strong><br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Character Groupの子として登録し、Local位置を初期化します。<br>
+    &emsp;&emsp;&emsp;&emsp;costume2.transform.parent = characterGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;costume2.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Synchronize関数を用いて、ボーンの動きを同期させることができます。<br>
+    &emsp;&emsp;&emsp;&emsp;costume2.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//コスチューム2メッシュのレンダリングの順序（Sorting Order）をボディのメッシュに基づいて変更します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("HairFront", mainCharacter.GetSortingOrder("Head") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("HairSide", mainCharacter.GetSortingOrder("Head") - 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("LeftArm", mainCharacter.GetSortingOrder("LeftArm") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("Body", mainCharacter.GetSortingOrder("Body") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("BeltFront", mainCharacter.GetSortingOrder("LeftLeg") + 4);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("Pants_LeftLeg", mainCharacter.GetSortingOrder("LeftLeg") + 3);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("BeltBack", mainCharacter.GetSortingOrder("LeftLeg") + 2);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("LeftShoe", mainCharacter.GetSortingOrder("LeftLeg") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("RightLeg", mainCharacter.GetSortingOrder("RightLeg") + 2);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("RightShoe", mainCharacter.GetSortingOrder("RightLeg") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("RightArm", mainCharacter.GetSortingOrder("RightArm") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("RightArm", mainCharacter.GetSortingOrder("RightArm") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("HairBack", mainCharacter.GetSortingOrder("RightArm") - 10);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("HairAcc", mainCharacter.GetSortingOrder("RightArm") - 11);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("HairTail", mainCharacter.GetSortingOrder("RightArm") - 12);</strong></span><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;//コスチューム3（Costume3）をCharacter Groupの子として登録し、<br>
+    &emsp;&emsp;//ボディキャラクターのボーンの動きと同期をします。<br>
+    &emsp;&emsp;private void <strong>AttachCostume3()</strong><br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Character Groupの子として登録し、Local位置を初期化します。<br>
+    &emsp;&emsp;&emsp;&emsp;costume3.transform.parent = characterGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;costume3.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Synchronize関数を用いて、ボーンの動きを同期させることができます。<br>
+    &emsp;&emsp;&emsp;&emsp;costume3.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//コスチューム3メッシュのレンダリングの順序（Sorting Order）をボディのメッシュに基づいて変更します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("Hat", mainCharacter.GetSortingOrder("Head") + 2);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("HairFront", mainCharacter.GetSortingOrder("Head") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("LeftArmFront", mainCharacter.GetSortingOrder("LeftArm") + 4);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("LeftHand", mainCharacter.GetSortingOrder("LeftArm") + 3);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("RightArmFront", mainCharacter.GetSortingOrder("LeftArm") + 2);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("Neck", mainCharacter.GetSortingOrder("LeftArm") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("LeftArmBack", mainCharacter.GetSortingOrder("LeftArm") - 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("BodyFront", mainCharacter.GetSortingOrder("LeftLeg") + 3);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("Skirt", mainCharacter.GetSortingOrder("LeftLeg") + 2);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("LeftShoe", mainCharacter.GetSortingOrder("LeftLeg") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("RightShoe", mainCharacter.GetSortingOrder("RightLeg") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("BodyBack", mainCharacter.GetSortingOrder("RightLeg") - 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("RightHand", mainCharacter.GetSortingOrder("RightArm") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("RightArmBack", mainCharacter.GetSortingOrder("RightArm") - 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("HairBack", mainCharacter.GetSortingOrder("RightArm") - 10);</strong></span><br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    衣装に応じてメッシュが異なって構成されるので、メッシュの「Sorting Order」を指定するコードがそれぞれ異なります。<br>
+    上記のスクリプトは、説明のためにラフに作成された、別のルールを作成するなどの、より洗練され、スクリプトを作成することも可能になります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1309.jpg"/>
+    <br>
+    
+    <p>
+    今シーンに戻って、「Sorting Order」オプションを設定します。<br>
+    <strong>(1)</strong>「本体キャラクター（MainCharacter）」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Sorting Order Option</strong>」を「<strong>Depth To Order</strong>」に設定し、「<strong>Order Per Depth</strong>」を適度に大きな値を指定します。ここでは 「<strong>10</strong>」を指定しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1313.jpg"/>
+    <br>
+    
+    <p>
+    ボーン同期を利用して、キャラクターのコスチュームを交換する例が完成しました！<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>ボーン同期条件とオプション</h3>
+    <br>
+    
+    <p>
+    ボーンの同期の特性は以下のとおりです。<br>
+     - ボーンの同期条件は大きく、「名前」と「構造」です。<br>
+     - 同期をするためには、同期対象となるボーンの間の名前が同じです。<br>
+     - 名前が同じである場合、ルートボーンから「親-子」の構造が同じである必要があります。ただし、これはオプションに応じて少し異なります。<br>
+     - ボーンの位置、形状、大きさは、同期条件で考慮されません。<br>
+     - 偶然同じ名前のボーンが意図せずに同期させることができるので、名前をよく設定する必要があります。<br>
+     - 基本的には、ルートのボーンから同じ構造を持つ必要があります。<br>
+     - 「ルートユニット（Root Unit）」の順に検討します。同じ番号のルートユニットに含まれているボーンとの同期を試みます。<br>
+     - いくつかの同期されていないボーンがあってもかまいません。<br>
+    </p>
+    <br>
+    
+    <p>
+    ただし、同期のオプションに応じて同期の結果が少し異なります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1381.jpg"/>
+    <br>
+    
+    <p>
+    同期のオプションによる同期の結果の違いの図式です。<br>
+    「Synchronize」関数の引数である「SYNC_BONE_OPTION」の値に応じて同期の結果が変わります。<br>
+     - <strong>MatchFromRoot</strong>：ルートのボーンから同じ構造を持つ必要があり、同期がされます。<br>
+     - <strong>MatchFromSubBones</strong>：同期されているボーンの中のルートのボーンが対象キャラクターのルートボーンがなくても、同期がされます。上記の場合、「<strong>Arm1 > Arm2 > Hand</strong>」の場合はこれに該当します。（逆は同期されません。）<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    複数の「テクスチャアトラス（Atlas）」を利用する場合は、「<strong>Draw Call</strong>」が大幅に増加することができます。<br>
+    共通のテクスチャを利用する方法や、別の最適化手法が必要です。<br>
+    私たちのチームもこの問題につきましては悩み中です。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_SynchronizeWithOthers.html">< 他のキャラクターとの同期</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_SortingOrderInAttachMesh.html">メッシュ取付時の「Sorting Order」設定 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

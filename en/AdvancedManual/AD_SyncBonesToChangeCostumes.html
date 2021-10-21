@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Synchronize bones to change costumes</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_SyncBonesToChangeCostumes.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_SyncBonesToChangeCostumes.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_SyncBonesToChangeCostumes.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Synchronize bones to change costumes</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Synchronize bones to change costumes</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
+    
+    <p>
+    Users who make games using AnyPortrait have given a lot of feedback on "replacing a character's costume".<br>
+    Our team has given users the following guide on how to replace costume through two methods.<br>
+    - <a href="../../en/AdvancedManual/AD_CharacterCostume.html">Replace a character's costume</a><br>
+    - <a href="../../en/AdvancedManual/AD_SynchronizeWithOthers.html">Synchronize with other characters</a><br>
+    </p>
+    <br>
+    
+    <p>
+    But in order to make it more efficient, we thought about another way.<br>
+    Given that many game projects use bones to animate their characters, we think that synchronizing bones can be quite useful.<br>
+    The method introduced on this page will be very useful in the following cases.<br>
+    - When the size of the "body" is constant and there are many attached "costumes"<br>
+    - If you do not want to create a separate animation for "costumes"<br>
+    - When most of the bones of the "costumes" share the bones of the "body"<br>
+    - If you do not resize the bones<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1281.jpg"/>
+    <br>
+    
+    <p>
+    These are the character and costume images we will cover on this page.<br>
+    All made with PSD files.<br>
+    This page will show you how to swap costumes with synchronizing each <strong>"Costume1, 2, 3"</strong> to the <strong>"MainCharacter"</strong>.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Creating a Main Character</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1282.jpg"/>
+    <br>
+    
+    <p>
+    First, let's create a base <strong>"MainCharacter"</strong>.<br>
+    Import a PSD file and create a character.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1283.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Connect bones and meshes using <strong>Rigging modifier</strong> and add <strong>Transform (Animation) modifier</strong>.<br>
+    <strong>(2)</strong> Created two animations.<br>
+    This completes <strong>"MainCharacter"</strong>.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Creating a Costume</h3>
+    <br>
+    
+    <p>
+    There are two main ways to make a costume.<br>
+    A simple way is to export the main character's bones to a file, import them back into a new apPortrait, and rig them.<br>
+    Instructions on how to export and import bones to a file can be found on the page below.<br>
+    - <a href="../../en/AdvancedManual/AD_SaveBoneSettings.html">Export / Import Bone settings</a><br>
+    </p>
+    <br>
+    
+    <p>
+    However, delicate rigging is required to precisely connect synchronized objects.<br>
+    So, another method introduced here, <strong>Duplicate and Rigged Together</strong> will help you.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1284.jpg"/>
+    <br>
+    
+    <p>
+    The important point for this method is to duplicate the main character and create a new finished character with the costume attached.<br>
+    <strong>(1)</strong> In the Unity scene, <strong>duplicate</strong> the <strong>"MainCharacter"</strong> created earlier and <strong>rename</strong> it to <strong>"Costume1"</strong>.<br>
+    <strong>(2)</strong> You will see two identical characters with different names.<br>
+    From now on, let's select the <strong>duplicated "Costume1"</strong> character and edit it. (The main character is no longer edited.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1285.jpg"/>
+    <br>
+    
+    <p>
+    Open <strong>"Costume1" character</strong> with AnyPortrait editor.<br>
+    It is in the same state as <strong>"MainCharacter"</strong> because it has not been modified yet.<br>
+    <strong>(1)</strong> Let's open the costume PSD file.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1286.jpg"/>
+    <br>
+    
+    <p>
+    Import the "Costume" PSD image file.<br>
+    There are a few things to be aware of at this point.<br>
+    - The size of the PSD image of the main character and the PSD image of the costume must be the same.<br>
+    - When overlapping the body character and the costume on the PSD image, the position must match.<br>
+    If you open a costume image file that does not satisfy the above conditions, you must manually adjust the position of the costume meshes.<br>
+    </p>
+    <br>
+    
+    <p>
+    Bake the costume PSD file into Atlas and import it into the current apPortrait.<br>
+    The Atlas Bake setup doesn't have to be the same as the main character.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1287.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Objects for the costume image are created separately from the original image, mesh, and mesh group.<br>
+    <strong>(2)</strong> In particular, check that a new mesh group has been created for the costume.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1288.jpg"/>
+    <br>
+    
+    <p>
+    The next task is to overlay the costume meshes on the mesh group for the body.<br>
+    <strong>(1)</strong> Again, select the mesh group for the main character.<br>
+    <strong>(2)</strong> Press the <strong>+</strong> button.<br>
+    <strong>(3)</strong> Select the <strong>Mesh Group</strong> tab.<br>
+    <strong>(4)</strong> Select the mesh group for the added costume.<br>
+    <strong>(5)</strong> Click the <strong>Add</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1289.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> You can now see the mesh group of the costume joined to the body mesh group.<br>
+    Let's migrate the costume meshes for leaving only one mesh group.<br>
+    (This process is to reduce unnecessary data and is not mandatory.)<br>
+    <strong>(2)</strong> Select all meshes in the costume mesh group. (It is convenient to press  <kbd>Shift</kbd>  to select.)<br>
+    <strong>(3)</strong> Press the <strong>Migrate</strong> button.<br>
+    <strong>(4)</strong> Two mesh groups will be shown. Select the mesh group that corresponds to the body that is the root mesh group.<br>
+    <strong>(5)</strong> Press the <strong>Select</strong> button.<br>
+    <strong>(6)</strong> When using the Migrate function, you need to be careful as there may be problems in the data migration process. (<a href="../../en/AdvancedManual/AD_DuplicateMigratingSubObj.html">Related page</a>) Click the Okay button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1290.jpg"/>
+    <br>
+    
+    <p>
+    Now all meshes within the mesh group for the costume have been moved to the root mesh group.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1291.jpg"/>
+    <br>
+    
+    <p>
+    Let's remove the empty mesh group.<br>
+    <strong>(1)</strong> Select the costume mesh group, which is empty.<br>
+    <strong>(2)</strong> Press the <strong>Detach</strong> button.<br>
+    <strong>(3)</strong> In the message, press the <strong>Detach</strong> button to separate the mesh group.<br>
+    The mesh group is now not a child mesh group.<br>
+    After detach, select the costume mesh group in the left Hierarchy tab and remove it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1292.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Let's change the rendering order of the costume meshes so that the body and costumes are rendered properly as above.<br>
+    <strong>(2)</strong> Let's prefix the body mesh's name with <strong>"REF_"</strong> to differentiate between the costume meshes and the body meshes.<br>
+    <strong>(3)</strong> Edit and complete the costume meshes to prepare them for rigging.<br>
+    </p>
+    <br>
+    
+    <p>
+    If the precautions when importing the Costume PSD file have not been followed, the position of the body and the costume meshes will not match at this step.<br>
+    If that, modify the position of the costume meshes appropriately in this step.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1293.jpg"/>
+    <br>
+    
+    <p>
+    You can add bones before rigging.<br>
+    <strong>(1)</strong> Bones are added to express the hair movement.<br>
+    We connected these bones as children of the "Head bone" of the bones of the body.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1294.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Add bones for the movement of the skirt.<br>
+    <strong>(2)</strong> By setting them to Jiggle Bones, they can be made to have physical shaking without additional animation.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1295.jpg"/>
+    <br>
+    
+    <p>
+    Now let's rig the costume meshes.<br>
+    Select the Rigging modifier, add meshes and assign weights.<br>
+    (The Rigging modifier will already exist.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1296.jpg"/>
+    <br>
+    
+    <p>
+    When rigging costumes meshes, the most important thing is how to assign weights in the <strong>overlapping part of the body</strong>.<br>
+    If you don't assign weights properly, you might even see your character's hands or feet sticking out of their clothing.<br>
+    In this case, using the <strong>Pos-Copy</strong> function will alleviate these concerns. (<a href="../../en/AdvancedManual/AD_VariousRigging.html">Related Pages</a>)<br>
+    <strong>(1)</strong> Select all the vertices of the mesh of the body overlapping the costume to be rigged.<br>
+    <strong>(2)</strong> Press the <strong>Pos-Copy</strong> button to copy the rigging weights.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1297.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> Select the vertices of the costume mesh.<br>
+    <strong>(4)</strong> Press the <strong>Pos-Paste</strong> button to assign the copied weight to the vertices.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1298.jpg"/>
+    <br>
+    
+    <p>
+    Now, when you move the bones, you will see that the costume mesh moves along with the body mesh.<br>
+    You will need to fine-tune the weights at this step, but this feature will help you a lot.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1299.jpg"/>
+    <br>
+    
+    <p>
+    Once you've rigged all meshes, your character should move naturally as if it wore the costume.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1300.jpg"/>
+    <br>
+    
+    <p>
+    In the same way, let's make other costumes (Costume2, Costume 3).<br>
+    (Each costume must be a different apPortrait.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1301.jpg"/>
+    <br>
+    
+    <p>
+    This is the screen that has been completed up to the present stage.<br>
+    The Main Character and three Costumed Characters (Costume1, 2, 3) were placed in the scene.<br>
+    </p>
+    <br>
+    
+    <p>
+    Since the costume and the character are still combined, the task of removing the meshes of the main body in Costumes 1, 2, and 3 remains.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1302.jpg"/>
+    <br>
+    
+    <p>
+    Open <strong>Costume 1, 2, 3)</strong> with AnyPortrait editor and select the mesh group.<br>
+    <strong>(1)</strong> Select the meshes of the main body. If you appended <strong>"REF_"</strong> to the names of the meshes earlier, it will be easier to select them apart.<br>
+    <strong>(2)</strong> Press the <strong>Detach</strong> button.<br>
+    <strong>(3)</strong> Press the <strong>Detach</strong> button in the message.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1303.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> In addition, all images and meshes of the main character are removed.<br>
+    Now only the images, meshes, and mesh group for the costume are left, as shown above.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1304.jpg"/>
+    <br>
+    
+    <p>
+    When removing multiple images or meshes, it is very cumbersome to select and remove them one by one.<br>
+    You can right-click on the Hierarchy and remove multiple items at once as shown above.<br>
+    For this function, please refer to <a href="../../en/AdvancedManual/AD_HierarchyUI.html">Related page</a>.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1305.jpg"/>
+    <br>
+    
+    <p>
+    Once you have completed all of these steps, one "Main Character" and three "Costume Characters" will be placed in the Unity Scene as shown above.<br>
+    - The main character and costumes have almost the same bones, and the <strong>Rigging modifier</strong> is applied the same.<br>
+    - Only the main character has <strong>Transform (Animation)</strong> and <strong>Animation</strong>.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Synchronize by writing a script</h3>
+    <br>
+    
+    <p>
+    The next step is to write a script to attach the costumes to the main character.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1306.jpg"/>
+    <br>
+    
+    <p>
+    We will write the contents of the above idea into a script.<br>
+    - Create a <strong>GameObject</strong> called <strong>Character Group</strong> and register <strong>MainCharacter</strong> as a child.<br>
+    - When <strong>Costume</strong> is <strong>attached</strong>, it is registered as a child of <strong>Character Group</strong>. This is for controlling the <strong>Character Group</strong> to make the main character and costume move together.<br>
+    - Add a <strong>Sorting Group</strong> component to <strong>Character Group</strong> to solve the rendering problem.<br>
+    - Synchronize the movement of bones between the costume and the main character.<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's write a script that contains all of the above.<br>
+    Let's create a new C# script and write it as follows.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class BoneSyncScript : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public Transform characterGroup;<br>
+    &emsp;&emsp;public apPortrait mainCharacter;<br>
+    <br>
+    &emsp;&emsp;public apPortrait costume1;<br>
+    &emsp;&emsp;public apPortrait costume2;<br>
+    &emsp;&emsp;public apPortrait costume3;<br>
+    <br>
+    &emsp;&emsp;void Start() { }<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//Press the Q or W key to play the main character's animation.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Q)) { mainCharacter.Play("Idle"); }<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.W)) { mainCharacter.Play("Walk"); }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//If you press the number key 1, all costumes will be detached, and costume 1 will be attached.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha1))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;DetachCostumes();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>AttachCostume1();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//If you press the number key 2, all costumes will be detached, and costume 2 will be attached.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha2))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;DetachCostumes();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>AttachCostume2();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//If you press the number key 3, all costumes will be detached, and costume 3 will be attached.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha3))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;DetachCostumes();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>AttachCostume3();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//If you press the number key 4, all costumes will be detached.<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha4))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;DetachCostumes();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;//Function to detach all costumes<br>
+    &emsp;&emsp;private void DetachCostumes()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//Unsynchronize the bones by calling the Unsynchronize function.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>costume1.Unsynchronize();</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>costume2.Unsynchronize();</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>costume3.Unsynchronize();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Separates the costumes from the parent GameObject.<br>
+    &emsp;&emsp;&emsp;&emsp;//(Positions are assigned to be nicely distributed appropriately.)<br>
+    &emsp;&emsp;&emsp;&emsp;costume1.transform.parent = null;<br>
+    &emsp;&emsp;&emsp;&emsp;costume1.transform.position = new Vector3(0, 0, 0);<br>
+    &emsp;&emsp;&emsp;&emsp;costume2.transform.parent = null;<br>
+    &emsp;&emsp;&emsp;&emsp;costume2.transform.position = new Vector3(4, 0, 0);<br>
+    &emsp;&emsp;&emsp;&emsp;costume3.transform.parent = null;<br>
+    &emsp;&emsp;&emsp;&emsp;costume3.transform.position = new Vector3(8, 0, 0);<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;//Register Costume 1 as a child of the Character Group, and synchronize it with the bone movement of the main character.<br>
+    &emsp;&emsp;private void <strong>AttachCostume1()</strong><br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//Register as a child of Character Group and initialize Local location.<br>
+    &emsp;&emsp;&emsp;&emsp;costume1.transform.parent = characterGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;costume1.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Synchronize bone movements.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume1.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);</strong></span><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;//Register Costume 2 as a child of the Character Group, and synchronize it with the bone movement of the main character.<br>
+    &emsp;&emsp;private void <strong>AttachCostume2()</strong><br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//Register as a child of Character Group and initialize Local location.<br>
+    &emsp;&emsp;&emsp;&emsp;costume2.transform.parent = characterGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;costume2.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Synchronize bone movements.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);</strong></span><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;//Register Costume 3 as a child of the Character Group, and synchronize it with the bone movement of the main character.<br>
+    &emsp;&emsp;private void <strong>AttachCostume3()</strong><br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//Register as a child of Character Group and initialize Local location.<br>
+    &emsp;&emsp;&emsp;&emsp;costume3.transform.parent = characterGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;costume3.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Synchronize bone movements.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);</strong></span><br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    The most important script here is inside the <strong>AttachCostume</strong> functions.<br>
+    Please check carefully the part that uses the <strong>Synchronize</strong> function along with the code to register as a child of <strong>characterGroup</strong>.<br>
+    It is also possible to synchronize animations, control parameters or root units if necessary.<br>
+    A detailed description of the <strong>Synchronize</strong> function can be found in <a href="../../en/Script/SC_Init.html">Related Pages</a>, and you can also see a detailed description of <strong>Synchronization of Bones</strong> at the bottom of this page.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now put the script you wrote into the Unity scene to make it work.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1307.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Create a GameObject named CharacterGroup and add the MainCharacter as a child. And, create a new GameObject to place the script into.<br>
+    <strong>(2)</strong> Add a script as a component and connect each element.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1308.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select <strong>CharacterGroup</strong> and <strong>(2)</strong> add the <strong>Sorting Group</strong> component.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1310.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, the script runs, and you can make the costumes be worn one by one on your character.<br>
+    As the bones synchronize, the character and costumes move as if they were one.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Modifying the rendering order of meshes</h3>
+    <br>
+    
+    <p>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1311.jpg"/>
+    <br>
+    
+    <p>
+    The basic sync is all done, but there is still work to be done.<br>
+    If you look closely at the merged character, the rendering order of the overlapping meshes is incorrect.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1312.jpg"/>
+    <br>
+    
+    <p>
+    In the case of <strong>Costume1</strong>, the image layers, that is, the meshes, were drawn as shown above.<br>
+    Let's modify the script to assign the rendering order of the meshes according to the above order.<br>
+    (See <a href="../../en/AdvancedManual/AD_SortingOrderInAttachMesh.html">Related Pages</a> for details on how to set the rendering order for meshes.)<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    &emsp;&emsp;(Code from the previous part omitted)<br>
+    &emsp;&emsp;//Register Costume 1 as a child of the Character Group, and synchronize it with the bone movement of the main character.<br>
+    &emsp;&emsp;private void <strong>AttachCostume1()</strong><br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//Register as a child of Character Group and initialize Local location.<br>
+    &emsp;&emsp;&emsp;&emsp;costume1.transform.parent = characterGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;costume1.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Synchronize bone movements.<br>
+    &emsp;&emsp;&emsp;&emsp;costume1.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Modify the sorting order of the Costume 1 meshes based on the meshes of the Main Character.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume1.SetSortingOrder("HairFront", mainCharacter.GetSortingOrder("Head") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume1.SetSortingOrder("LeftArm", mainCharacter.GetSortingOrder("LeftArm") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume1.SetSortingOrder("Body", mainCharacter.GetSortingOrder("LeftLeg") + 2);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume1.SetSortingOrder("LeftShoe", mainCharacter.GetSortingOrder("LeftLeg") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume1.SetSortingOrder("RightShoe", mainCharacter.GetSortingOrder("RightLeg") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume1.SetSortingOrder("HairSide", mainCharacter.GetSortingOrder("RightArm") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume1.SetSortingOrder("HairBack", mainCharacter.GetSortingOrder("RightArm") - 10);</strong></span><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;//Register Costume 2 as a child of the Character Group, and synchronize it with the bone movement of the main character.<br>
+    &emsp;&emsp;private void <strong>AttachCostume2()</strong><br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//Register as a child of Character Group and initialize Local location.<br>
+    &emsp;&emsp;&emsp;&emsp;costume2.transform.parent = characterGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;costume2.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Synchronize bone movements.<br>
+    &emsp;&emsp;&emsp;&emsp;costume2.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Modify the sorting order of the Costume 2 meshes based on the meshes of the Main Character.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("HairFront", mainCharacter.GetSortingOrder("Head") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("HairSide", mainCharacter.GetSortingOrder("Head") - 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("LeftArm", mainCharacter.GetSortingOrder("LeftArm") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("Body", mainCharacter.GetSortingOrder("Body") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("BeltFront", mainCharacter.GetSortingOrder("LeftLeg") + 4);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("Pants_LeftLeg", mainCharacter.GetSortingOrder("LeftLeg") + 3);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("BeltBack", mainCharacter.GetSortingOrder("LeftLeg") + 2);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("LeftShoe", mainCharacter.GetSortingOrder("LeftLeg") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("RightLeg", mainCharacter.GetSortingOrder("RightLeg") + 2);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("RightShoe", mainCharacter.GetSortingOrder("RightLeg") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("RightArm", mainCharacter.GetSortingOrder("RightArm") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("RightArm", mainCharacter.GetSortingOrder("RightArm") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("HairBack", mainCharacter.GetSortingOrder("RightArm") - 10);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("HairAcc", mainCharacter.GetSortingOrder("RightArm") - 11);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume2.SetSortingOrder("HairTail", mainCharacter.GetSortingOrder("RightArm") - 12);</strong></span><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;//Register Costume 3 as a child of the Character Group, and synchronize it with the bone movement of the main character.<br>
+    &emsp;&emsp;private void <strong>AttachCostume3()</strong><br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;//Register as a child of Character Group and initialize Local location.<br>
+    &emsp;&emsp;&emsp;&emsp;costume3.transform.parent = characterGroup;<br>
+    &emsp;&emsp;&emsp;&emsp;costume3.transform.localPosition = Vector3.zero;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Synchronize bone movements.<br>
+    &emsp;&emsp;&emsp;&emsp;costume3.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;//Modify the sorting order of the Costume 3 meshes based on the meshes of the Main Character.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("Hat", mainCharacter.GetSortingOrder("Head") + 2);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("HairFront", mainCharacter.GetSortingOrder("Head") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("LeftArmFront", mainCharacter.GetSortingOrder("LeftArm") + 4);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("LeftHand", mainCharacter.GetSortingOrder("LeftArm") + 3);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("RightArmFront", mainCharacter.GetSortingOrder("LeftArm") + 2);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("Neck", mainCharacter.GetSortingOrder("LeftArm") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("LeftArmBack", mainCharacter.GetSortingOrder("LeftArm") - 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("BodyFront", mainCharacter.GetSortingOrder("LeftLeg") + 3);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("Skirt", mainCharacter.GetSortingOrder("LeftLeg") + 2);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("LeftShoe", mainCharacter.GetSortingOrder("LeftLeg") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("RightShoe", mainCharacter.GetSortingOrder("RightLeg") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("BodyBack", mainCharacter.GetSortingOrder("RightLeg") - 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("RightHand", mainCharacter.GetSortingOrder("RightArm") + 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("RightArmBack", mainCharacter.GetSortingOrder("RightArm") - 1);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>costume3.SetSortingOrder("HairBack", mainCharacter.GetSortingOrder("RightArm") - 10);</strong></span><br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Since meshes are configured differently depending on the costumes, the code for specifying the mesh's Sorting Order is different for each.<br>
+    The above script was written rough for explanation, but it would be possible to write a more sophisticated script, such as making a nice rule.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1309.jpg"/>
+    <br>
+    
+    <p>
+    Now go back to the Unity scene and set the Sorting Order option.<br>
+    <strong>(1)</strong> Select <strong>MainCharacter</strong>.<br>
+    <strong>(2)</strong> Set <strong>Sorting Order Option</strong> to <strong>Depth To Order</strong>, and specify a moderately large value for <strong>Order Per Depth</strong>. Here we have specified 10.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1313.jpg"/>
+    <br>
+    
+    <p>
+    An example of replacing a character's costumes using this synchronization is complete!<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Bone synchronization conditions and options</h3>
+    <br>
+    
+    <p>
+    The characteristics of bone synchronization are as follows:<br>
+    - The conditions for synchronizing bones are largely <strong>Name</strong> and <strong>Structure</strong>.<br>
+    - In order to synchronize, the names of the bones to be synchronized must be the same.<br>
+    - The <strong>parent-child</strong> structure from the root bone must be the same if the name is the same. However, this is slightly different depending on the options.<br>
+    - The position, shape, and size of the bone are not considered in the synchronization condition.<br>
+    - Bone with the same name can accidentally be synchronized unintentionally, so be sure to name them well.<br>
+    - Basically, it should have the same structure from the root bone.<br>
+    - Consider the order of the root units. Attempts to synchronize with bones contained in the root unit of the same number.<br>
+    - It is okay if there are some out-of-sync bones.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, the synchronization result is slightly different depending on the synchronization option.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1381.jpg"/>
+    <br>
+    
+    <p>
+    This is a schematic of the difference in synchronization results depending on the synchronization options.<br>
+    The synchronization result changes according to the SYNC_BONE_OPTION value, which is an argument of the Synchronize function.<br>
+    - <strong>MatchFromRoot</strong> : Synchronization requires the same structure from the root bone.<br>
+    - <strong>MatchFromSubBones</strong> : Among the synchronized bones, even if the root bone is not the root bone of the target character, it will be synchronized. In the above case, <strong>Arm1 > Arm2 > Hand</strong> is the that case. (In the opposite cases, however, they are not synchronized.)<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    <strong>Draw Call</strong> can increase significantly when using multiple texture atlas.<br>
+    A method using a common texture or a separate optimization technique is required.<br>
+    Our team is also considering solving this issue.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_SynchronizeWithOthers.html">< Synchronize with other characters</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_SortingOrderInAttachMesh.html">Sorting Order in attaching meshes ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

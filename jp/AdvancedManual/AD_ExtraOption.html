@@ -71,7 +71,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.1.4</span></h4>
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
     
     <p>
     アニメーションが再生されたり、ゲームが実行される途中でメッシュのレンダリング順序を切り替える必要がある場合があります。<br>
@@ -548,6 +548,99 @@
     単に再生されるフレームの位置ではなく、カーブによって補間された重みに基づいてExtra設定の適用するかどうかが決定されます。<br>
     <strong>(1)</strong> アニメーションカーブの補間された重みを対象に、Offsetの範囲を決定します。<br>
     <strong>(2)</strong> アニメーションカーブの形に応じて、どのフレームからExtra設定が適用されるかを決定します。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>複数のオブジェクトを対象にExtra設定を適用</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
+    
+    <p>
+    AnyPortrait v1.3.4から複数のオブジェクトにExtra設定を一度に適用することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1363.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> モディファイヤに登録された複数のメッシュを選択します。<br>
+    <strong>(2)</strong> 制御パラメータのキーまたはアニメーションのキーフレームが選択された状態で、画面上部の「<strong>Set</strong>ボタン」を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1364.jpg"/>
+    <br>
+    
+    <p>
+    選択されたメッシュのDepthを同時に制御することができます。<br>
+    この時、黄色の矢印で表示されるDepth変化値は、選択されたメッシュのいずれかにのみ表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1365.jpg"/>
+    <br>
+    
+    <p>
+    リストから選択されたメッシュのうち、他の一つを選択すると、そのメッシュのDepth変化値が表示されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    この時、注意すべき点があります。<br>
+    現在Extra設定のリストに表示されるのは、「選択したオブジェクトのDepthの変化値」です。<br>
+    現在選択されていないオブジェクトのExtra設定は、このダイアログで表示されません。<br>
+    したがって、異なるオブジェクトのExtra設定による結果は、ワークスペースで確認する必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    もし別のオブジェクトのDepthの値が同じになってしまうとどうなるのかを確認してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1366.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> メッシュを選択して、<strong>(2)</strong> Depthを「Top+10」に設定しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1367.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 同様に、他のメッシュを選択して、<strong>(2)</strong> 同じように、「Top+10」に移動するように設定しました。<br>
+    </p>
+    <br>
+    
+    <p>
+    二つのメッシュのDepthはようなった状態です。<br>
+    同じDepthのメッシュを確認してみるの既存の順にレンダリングがされていることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    オブジェクトが同じDepthの場合は、v1.3.4から下の規則に基づいて、レンダリングの順序が決定されます。<br>
+     - 同じDepthの場合、既存のレンダリング順序が反映されます。<br>
+     -  Detphが増加する要求が減少する要求よりも優先して処理されます。<br>
+     -  Depth増減要求中、先に処理されることが、その方向にもっとDepthが変化すると考えられる。<br>
     </p>
     <br>
     

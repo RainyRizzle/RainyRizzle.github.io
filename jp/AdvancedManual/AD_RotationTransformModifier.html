@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>「Transform」モディファイヤでの回転</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_RotationTransformModifier.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_RotationTransformModifier.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_RotationTransformModifier.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 「Transform」モディファイヤでの回転</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">「Transform」モディファイヤでの回転</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
+    
+    <p>
+    「<strong>Transform（Controller）</strong>」モディファイヤのオブジェクトの回転についていくつかの問題に関するフィードバックを受けました。<br>
+    v1.3.4から大きく二つにまとめて、問題を解決しました。<br>
+    1つはアニメーション編集ですでに導入されている「回転角を制限」、もう1つは「ベクトルによる回転」です。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>回転角度制限を解除</h3>
+    <br>
+    
+    <p>
+    この機能は、アニメーション編集時に既に存在した機能をそのまま取得されています。（<a href="../../jp/AdvancedManual/AD_RotateWOLimit.html">関連ページ</a>）<br>
+    このページで使い方を簡単に紹介します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1368.jpg"/>
+    <br>
+    
+    <p>
+    このページで使用される例です。<br>
+    ボーンがあり、ここにメッシュが接続されています。<br>
+    「Transform（Controller）モディファイヤ」が適用されており、この状態でボーンを回転させてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1369.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ボーンを選択して、マウスを使用して、反時計回りに回転するように作ろうとします。<br>
+    <strong>(2)</strong> しかし、180度を越えた時点で、突然の角度が負の値に変換されることを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1370.jpg"/>
+    <br>
+    
+    <p>
+    この状態で、制御パラメータとして、ボーンを動かしてみると、意図したのは、反時計回りの回転が、実際には逆に回転してしまいます。<br>
+    AnyPortraitの回転ツール（Gizmo）に基本的に「回転角度制限」が設定されているからです。<br>
+    これは、回転ツールを使用して、オブジェクトを回転する場合は、その値が-180〜+180に制限するようにします。<br>
+    しかし、この場合には、その制限を解除することが必要です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1371.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 右のUIで、「180」ボタンを押して、「無限」の状態に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1372.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> 再度骨を反時計回りに回転してみましょう。<br>
+    <strong>(3)</strong> ここで、180度を超えても値が増加することを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1373.jpg"/>
+    <br>
+    
+    <p>
+    完成された結果です。<br>
+    意図したとおり、反時計回りに回転することを見ることができます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>ベクトルによる回転</h3>
+    <br>
+    
+    <p>
+    これはやや難しいテーマがあります。<br>
+    AnyPortraitで「回転値」を補間する際、基本的に「回転角度」をそのまま利用します。<br>
+    これは、最も明快な方法であるが、次の場合に問題が発生します。<br>
+     - 角度差が大きい2つ以上のキーを補間する場合<br>
+     - キーが循環する場合<br>
+    キーフレームベースのアニメーションでは、上記の状況が発生しません。<br>
+    しかし、「Vector2タイプの制御パラメータを使用してTransformモディファイヤ」では、上記の条件が満足されてしまうという問題が発生します。<br>
+    この問題を解決するためには、「角度による回転」ではなく、新しい補間手法が必要です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1374.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Transform（Controller）</strong>モディファイヤ」が追加されました。<br>
+    <strong>(2)</strong> Vector2タイプの制御パラメータをモディファイヤに登録し、すべての方向にキーを追加しました。<br>
+    <strong>(3)</strong> ボーンが制御パラメータに基づいて全方向に移動し、回転するように作ろうとしています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1375.jpg"/>
+    <br>
+    
+    <p>
+    制御パラメータの各方向に合わせて、骨が動くようにしました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1376.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 制御パラメータの値を動かしてみると、<strong>(2)</strong> ボーンがその方向に合わせて動くように見えます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1377.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ところで、いくつかの区間では、<strong>(2)</strong> ボーンが変な方向に回転し、移動することを見ることができます。<br>
+    この部分が前述した「角度による回転」の問題です。<br>
+    </p>
+    <br>
+    
+    <p>
+    この問題を解決するために、 「<strong>ベクトルによる回転</strong>」という新しい手法がv1.3.4に追加されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1378.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> モディファイヤの設定で「<strong>Rotation by Angle</strong>」ボタンを押して「<strong>Rotation by Vector</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1379.jpg"/>
+    <br>
+    
+    <p>
+    今制御パラメータを動かしてみると、骨が正常に動くことを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1380.jpg"/>
+    <br>
+    
+    <p>
+    「ベクトルによる回転」方式は、他のアプローチで補間を実行します。<br>
+    この方式は、「角度」を「ベクトル」に一度変換した後、「重みが適用されたベクトル合計」を計算します。<br>
+    その後、「ベクトルした結果」を再び 「角度」に変換するプロセスを行っています。<br>
+    おかげでキーが循環する場合や、2つ以上のキーが複雑に補間される場合にも、「ベクトルし」という直感的な操作を介して値を求めることができるのです。<br>
+    しかし、この方式が万能ではありません。<br>
+    それぞれの方式が持つ限界を確認してみてください。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<span class="text-primary">角度による回転</span>」の欠点<br>
+     - 2つ以上のキーがある場合、または循環されるキーを補間する場合に、意図していない方向に回転することができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<span class="text-danger">ベクトルによる回転</span>」の欠点<br>
+     - 二つのキーが正確に180度をなすなど、ベクトル和が0になる場合には補間が不可能な場合があります。<br>
+     - ベクトル合意の特性上、すべての補間された回転は、180度以内に制限されます。<br>
+     - 演算方式が複雑であるため、パフォーマンスが少し低下します。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_CopyAndPasteWithSlots.html">< スロットを使用してコピー/貼り付け</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_ExportImportAnimation.html">アニメーションをエクスポート/インポート ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

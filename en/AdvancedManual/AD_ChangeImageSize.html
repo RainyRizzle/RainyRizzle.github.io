@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Changing the image size</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_ChangeImageSize.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ChangeImageSize.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ChangeImageSize.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Changing the image size</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Changing the image size</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
+    
+    <p>
+    In most cases, the "Image" used in AnyPortrait follows the texture asset settings in Unity.<br>
+    So in general, "actual size of image", "imported size as texture asset", and "size property in AnyPortrait" are all the same.<br>
+    However, in some cases, the size of the image may have different values.<br>
+    You can import by reducing the size of the image from the texture asset, and you can also set the size of the image differently in AnyPortrait.<br>
+    This page has useful information for these special situations.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    The function introduced on this page is not to change the size of the image file.<br>
+    You need to make a distinction between "actual size" and "recognized size by Unity or AnyPortrait", this page is not about "actual size".<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Change the size property of an image</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1332.jpg"/>
+    <br>
+    
+    <p>
+    When you select an image in AnyPortrait editor, the above information appears.<br>
+    <strong>(1)</strong> The size of the image in AnyPortrait.<br>
+    <strong>(2)</strong> The size of the image as the Texture Asset in Unity.<br>
+    <strong>(3)</strong> UI to change the image size.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1333.jpg"/>
+    <br>
+    
+    <p>
+    If the size of a texture asset is different from the size in AnyPortrait, how will it appear?<br>
+    The actual image size of the prepared example was "4096 x 4096", and was changed to "2048 x 2048" due to Unity's import settings.<br>
+    And since we opened that image in AnyPortrait, it now looks the same as "2048 x 2048".<br>
+    Let's change the texture import settings as above to make the image bigger or smaller.<br>
+    (In addition to this example, there are various cases where the size of the texture changes.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1334.jpg"/>
+    <br>
+    
+    <p>
+    Let's go back to the AnyPortrait editor and select an image.<br>
+    <strong>(1)</strong> You can see that the size of the texture asset has been changed to "4096 x 4096".<br>
+    It has been changed to red text because it is different from AnyPortrait's image size.<br>
+    </p>
+    <br>
+    
+    <p>
+    Normally, there is no big problem even if the images are produced with different size properties.<br>
+    Rather, be careful, as resizing the image can affect the meshes you've already worked with.<br>
+    However, at the beginning of work, if you want to work with consistent size properties, change the image size in the following order.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1335.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> In the size input box of the <strong>Change Size</strong> item, input the width and height of the image you want to change, respectively.<br>
+    <strong>(2)</strong> Click the <strong>Apply</strong> button.<br>
+    <strong>(3)</strong> A warning message appears. Press the <strong>Okay</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1336.jpg"/>
+    <br>
+    
+    <p>
+    At this point, another warning message appears.<br>
+    This is a message asking how to handle this, as resizing the image affects the meshes in the mesh group.<br>
+    Two options are provided, and you can press the button as described below.<br>
+    Press the <strong>Calibrate Scale</strong> or <strong>Ignore</strong> button to change the image size.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Whether to calibrate the size of meshes in a mesh group</h3>
+    <br>
+    
+    <p>
+    When you resize the image, the meshes are resized by the image's resizing ratio.<br>
+    So the character's meshes are not damaged.<br>
+    However, the case of meshes placed in a mesh group is slightly different.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1337.jpg"/>
+    <br>
+    
+    <p>
+    For the sake of explanation, we set up the above situation.<br>
+    <strong>(1)</strong> Created one mesh group.<br>
+    <strong>(2)</strong> Added 4 meshes here.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1338.jpg"/>
+    <br>
+    
+    <p>
+    Let's come back and resize the image.<br>
+    <strong>(1)</strong> This time, in order to artificially change the width and height ratio of the image, we reduce the <strong>width</strong> by half.<br>
+    <strong>(2)</strong> Press the <strong>Apply</strong> button and <strong>(3)</strong> press the <strong>Okay</strong> button in the warning message.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1339.jpg"/>
+    <br>
+    
+    <p>
+    The warning message you saw above appears.<br>
+    Indicates that meshes within an existing mesh group can be affected.<br>
+    You can see that there are two options except for <strong>Cancel</strong>.<br>
+    - <strong>Calibrate Scale</strong> : It goes through a calibration process that reverses the image size change ratio to the default size of the mesh in the mesh group to maintain the original shape as much as possible.<br>
+    - <strong>Ignore</strong> : Changes the image size without going through a separate correction process.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> First, click the <strong>Calibrate Scale</strong> button to check the result.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1340.jpg"/>
+    <br>
+    
+    <p>
+    Let's check the meshes before checking the mesh groups.<br>
+    As the width of the image is reduced by half, you can see that the meshes are also horizontally shrink.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1341.jpg"/>
+    <br>
+    
+    <p>
+    However, if you select a mesh group and check it, it looks like the meshes haven't changed in size.<br>
+    <strong>(1)</strong> With <strong>Edit Default Transform</strong> enabled, select the mesh.<br>
+    <strong>(2)</strong> You can see that the X size is doubled.<br>
+    The <strong>Calibrate Scale</strong> option will calibrate the meshes to keep their appearance as good as possible.<br>
+    However, please note that this is a basic calibration and may show different results if modifiers are applied.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1343.jpg"/>
+    <br>
+    
+    <p>
+    Let's go back to before we resize the image and press the <strong>Ignore</strong> button this time.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1344.jpg"/>
+    <br>
+    
+    <p>
+    If you select a mesh group, you can see that the meshes are also reduced by the ratio of the image reduced.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_LinearSpace.html">< Linear Color Space and Asset Settings</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_MirrorMesh.html">Mirror tool for Making Meshes ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

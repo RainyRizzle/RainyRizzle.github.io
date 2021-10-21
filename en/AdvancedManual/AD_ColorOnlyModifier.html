@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Color Only Modifier</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_ColorOnlyModifier.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ColorOnlyModifier.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ColorOnlyModifier.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Color Only Modifier</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Color Only Modifier</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.3</span></h4>
+    
+    <p>
+    When you want to change the color of a mesh or hide a mesh by control parameters or animations, until now, we mainly used the "Transform modifier".<br>
+    However, it seems rather unnecessary to use the Transform modifier even if you do not need to change the shape or position of the mesh.<br>
+    So a new modifier was added in v1.3.3 which is nice to use in this case.<br>
+    Try the "<strong>Color Only Modifier</strong>" introduced on this page!<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1355.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> With the <strong>Modifier</strong> tab of the mesh group selected, click the <strong>Add Modifier</strong> button.<br>
+    <strong>(2)</strong> You can see "<strong>Color Only (Controller)</strong>" and "<strong>Color Only (Animation)</strong>" modifiers in the list of modifiers.<br>
+    </p>
+    <br>
+    
+    <p>
+    - <strong>Color Only (Controller)</strong> : You can control the color or visibility of the target by control parameters.<br>
+    - <strong>Color Only (Animation)</strong> : You can control the color or visibility of the target in keyframes of the animation.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1356.jpg"/>
+    <br>
+    
+    <p>
+    It is possible to reproduce the method introduced in "Getting Started 1 (<a href="../../en/GettingStarted/GS_1_6.html">Related page</a>)" as a Color Only modifier.<br>
+    <strong>(1)</strong> Added <strong>Color Only (Controller)</strong> modifier.<br>
+    <strong>(2)</strong> Select the meshes.<br>
+    <strong>(3)</strong> Add a key to the control parameter.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1357.jpg"/>
+    <br>
+    
+    <p>
+    Similar to setting visibility with the Transform modifier, you can control the visibility of meshes with the Color Only modifier.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>How to use Extra Option</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1358.jpg"/>
+    <br>
+    
+    <p>
+    The Color Only modifier also supports "<strong>Extra Option</strong>" (<a href="../../en/AdvancedManual/AD_ExtraOption.html">Related Page</a>).<br>
+    <strong>(1)</strong> Press the "<strong>Extra Option</strong>" button to activate the option.<br>
+    <strong>(2)</strong> Select the target and press the "<strong>Set</strong>" button with the key of the control parameter or the keyframe of the animation.<br>
+    <strong>(3)</strong> The "<strong>Extra Option</strong>" dialog opens. Here you can change the rendering order or replace images.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>The case that you need Color Only modifier</h3>
+    <br>
+    
+    <p>
+    "<strong>Color Only modifier</strong>" is faster than the "Transform modifier" as well as the "Morph modifier" as it only handles simple functions.<br>
+    So it will usually be used for optimization purposes.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, only "<strong>Color Only Modifier</strong>" can be used under the following conditions.<br>
+    - <strong>Child mesh group</strong> is added to the mesh group<br>
+    - Bones and <strong>Rigging modifier</strong> exist in the parent mesh group<br>
+    - <strong>Meshes of child mesh group</strong> are connected to the bones of parent mesh group by Rigging modifier<br>
+    - If you want to control the visibility or color of the meshes of the child mesh group<br>
+    </p>
+    <br>
+    
+    <p>
+    "Transform modifier" cannot be used when all of these conditions are satisfied.<br>
+    In this case, only use the "Color Only modifier".<br>
+    You can learn more about it in the description that follows.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1359.jpg"/>
+    <br>
+    
+    <p>
+    We reproduced the situation described above.<br>
+    "Mouth" meshes have been added as included in a child mesh group.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1360.jpg"/>
+    <br>
+    
+    <p>
+    We used the "<strong>Rigging modifier</strong>" of the parent mesh group to connect the meshes of the child mesh group with the bones.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1361.jpg"/>
+    <br>
+    
+    <p>
+    In this state, let's use the "Transform modifier" as usual.<br>
+    <strong>(1)</strong> Add "<strong>Transform (Controller) Modifier</strong>".<br>
+    <strong>(2)</strong> Select the offending "a mesh in child mesh group".<br>
+    <strong>(3)</strong> We tried to add it to the modifier, but we can only see a message stating that the rigged child mesh cannot be added.<br>
+    </p>
+    <br>
+    
+    <p>
+    This is because the "<strong>Transform Modifier</strong>" is limited due to an issue where the Transform operation through the child mesh group and the Rigging operation conflict and show very strange behavior.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1362.jpg"/>
+    <br>
+    
+    <p>
+    However, using "<strong>Color Only Modifier</strong>" it is possible to register and control those meshes.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ColorModifier.html">< Modifier Settings for Color Animation</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ToggleWOTranslucent.html">Show/hide without Translucent step ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

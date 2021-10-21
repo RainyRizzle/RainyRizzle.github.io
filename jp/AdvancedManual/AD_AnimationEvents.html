@@ -71,7 +71,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
     
     <p>
     ゲームに応じて、アニメーションのある時点で、キャラクターは何らかの相互作用を必要とします。<br>
@@ -341,6 +341,127 @@
     
     <p>
     ゲームを実行すると、3つのパラメータがスクリプトに渡されることがわかります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>改善されたインスペクタでのアニメーションイベント</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
+    
+    <p>
+    AnyPortrait v1.3.4で、更新されたインスペクター（<a href="../../jp/AdvancedManual/AD_InspectorUI.html">関連ページ</a>）を通って、アニメーションイベントをすばやく確認することができます。<br>
+    また、アニメーションイベントをスクリプトにコピーするか、呼び出し方式を変えることが可能です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1324.jpg"/>
+    <br>
+    
+    <p>
+    アニメーションイベントを持ったキャラクターをUnityシーンから選択すれば、上記のような画面がインスペクタに表示されます。<br>
+    <strong>(1)</strong> アニメの呼び出し方式を「<strong>Send Message</strong>」と「<strong>Callback</strong>」の中から選択することができます。従来の方式では、「<strong>Send Message</strong>」です。<br>
+    <strong>(2)</strong> アニメのイベントを受信して処理する「リスナー（Listener）」オブジェクトです。（既存のInspector上に存在していた、このトピックの位置が変わりました。）<br>
+    <strong>(3)</strong> アニメイベントです。イベントの名前とパラメータを確認することができます。<br>
+    <strong>(4)</strong> アニメイベントを「クリップボード」にコピーします。コピーされたフォームは、C#スクリプトで貼り付けることができるよう加工されます。<br>
+    <strong>(5)</strong> すべてのアニメーションイベントをクリップボードにコピーします。<br>
+    </p>
+    <br>
+    
+    <p>
+    ここで追加された機能である「クリップボードにアニメーションイベントをコピーする」機能を使ってみましょう。<br>
+    まず、<strong>(4)</strong>または<strong>(5)</strong>のコピーボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1325.jpg"/>
+    <br>
+    
+    <p>
+    スクリプトエディタを開いて貼り付けをすると、上記のよう、アニメーションイベントの名前、種類に合ったコードが追加されます。<br>
+    今、アニメーションイベントを覚えて作成する余計な手間を避けることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1326.jpg"/>
+    <br>
+    
+    <p>
+    v1.3.4で追加されたもう一つの特徴は、「<strong>Callback</strong>」方式です。<br>
+    既存の「<strong>Send Message</strong>」が「<strong>Unity Send Message</strong>」を利用したものであれば、これは、関数を直接指定する「<strong>Unity Event</strong>」と同様の方法です。<br>
+    性能の向上はもちろんのこと、イベントを受信する関数の名前を同じに設定する必要がない利点があります。<br>
+    （実際には「Unity Event」を使用しなかったが、私たちは、ユーザーが「Unity Event」のように使用できるように、ほぼ同様に開発しました。）<br>
+    <strong>(1)</strong> 「<strong>Event Method</strong>」を「<strong>Callback</strong>」に変更してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1327.jpg"/>
+    <br>
+    
+    <p>
+    既存の「<strong>Event Listener</strong>」がなくなり、各イベントの呼び出しのターゲットを指定することができるようUIが変更されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1328.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>+</strong>ボタンを押します。<br>
+    <strong>(2)</strong> イベントリスナーとコールバック関数を設定できる項目が追加されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1329.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> シーンでイベントを受け取る「Monobehaviour」オブジェクトを割り当てます。<br>
+    <strong>(2)</strong> 右側の空白をクリックすると、イベントを受け取ることができる関数の一覧が表示されます。適切な関数を選択します。<br>
+    もし1つの「GameObject」に二つ以上の「Monobehaviour」コンポーネントが追加されている場合は、関数の一覧を通しリスナーを交換することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1330.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 同じように、1つのイベントを同時に複数のリスナーで受け取るか、または複数の関数で受けることができるように設定することができます。<br>
+    <strong>(2)</strong> 項目を削除したい場合は、<strong>-</strong>ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1331.jpg"/>
+    <br>
+    
+    <p>
+    コールバック関数を指定するときは、イベントの種類（パラメータの数、種類、順番）に合った関数がない場合は、上記のようにリストには何も出ません。<br>
+    </p>
+    <br>
+    
+    <p>
+    どのような方法を使用しても、あなたのスクリプトが、アニメーションイベントを受けて動作するようにすることができます。<br>
+    自分に合った方法を使用してみてください！<br>
     </p>
     <br>
     

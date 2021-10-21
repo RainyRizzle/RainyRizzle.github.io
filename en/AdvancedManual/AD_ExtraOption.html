@@ -71,7 +71,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.1.4</span></h4>
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
     
     <p>
     Sometimes you need to switch the rendering order of the mesh while the animation plays or the game is running.<br>
@@ -545,6 +545,99 @@
     Instead of the position of the frame to be played, it determines whether or not the Extra option is applied based on the interpolation weight by the curve.<br>
     <strong>(1)</strong> Determine the range of the offset with respect to the interpolation weight of the animation curve.<br>
     <strong>(2)</strong> The shape of the animation curve determines from which frame the Extra option will be applied.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Applying Extra Options to multiple objects</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
+    
+    <p>
+    From AnyPortrait v1.3.4, it is supported to apply Extra Option to multiple objects at once.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1363.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select multiple meshes registered in the modifier.<br>
+    <strong>(2)</strong> With the key of the control parameter or the keyframe of the animation selected, press the <strong>Set</strong> button at the top of the screen.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1364.jpg"/>
+    <br>
+    
+    <p>
+    You can control the depth of selected meshes at once.<br>
+    At this time, the depth change value indicated by the yellow arrow is only shown for one of the selected meshes.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1365.jpg"/>
+    <br>
+    
+    <p>
+    If you select another one of the selected meshes from the list, the depth change value of that mesh is displayed.<br>
+    </p>
+    <br>
+    
+    <p>
+    There are a few things to note at this point.<br>
+    What is currently shown in the list of Extra Option is "Depth change value of selected objects".<br>
+    The Extra Option of the currently unselected objects are not shown in this dialog.<br>
+    Therefore, you should check the results of the Extra Option of different objects in the workspace.<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's check what happens if the depth values of different objects become the same.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1366.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select one mesh and <strong>(2)</strong> Set Depth to "Top+10".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1367.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> Select another mesh and <strong>(2)</strong> Set it to move to "Top+10" the same.<br>
+    </p>
+    <br>
+    
+    <p>
+    The depth of the two meshes is the same.<br>
+    When checking meshes with the same depth, you can see that they are rendered in the original order.<br>
+    </p>
+    <br>
+    
+    <p>
+    If objects have the same Depth by Extra Option, the rendering order is determined according to the rules below from v1.3.4.<br>
+    - If they have the same depth, the existing rendering order is applied.<br>
+    - Requests with increasing Detph take precedence over requests with decreasing Detph.<br>
+    - Among the depth increase/decrease requests, the one that is processed first is considered to change the depth more in that direction.<br>
     </p>
     <br>
     
