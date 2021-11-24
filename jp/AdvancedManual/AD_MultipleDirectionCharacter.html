@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>複数方向の姿を持つキャラクターを作</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_MultipleDirectionCharacter.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MultipleDirectionCharacter.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_MultipleDirectionCharacter.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 複数方向の姿を持つキャラクターを作</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">複数方向の姿を持つキャラクターを作</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
+    
+    <p>
+    ゲームに登場するキャラクターを作るとき、ゲームの特性によって「前面」、「側面」、「背面」が見えるように作らなければならない場合があります。<br>
+    これはトップビューのゲームだけでなく、サイドビューのアクションゲームでもよく使われます。<br>
+    このページでは、AnyPortraitを使用してさまざまな方向の外観を持つキャラクターを作成する方法について説明します。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページでは機能中心で説明し、アニメーションを作成する細かいプロセスや画像を制作する方法は扱いませんので参考にしてください。<br>
+    </p>
+    <br>
+    
+    <p>
+    複数方向の姿を持つキャラクターを作る方法には大きく二つの方法があります。<br>
+    最初の方法は、「複数のルートユニット」を作成してスクリプトに外観を切り替える方法です。<br>
+    別の方法は、「複数の子メッシュグループを持つ 1 つのルートユニット」を作成して制御パラメータに変更する方法です。<br>
+    それぞれ長所と短所を持っているので、以下の説明からあなたに合った方法を選んでください。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>PSDファイルのインポートに関するヒント</h4>
+    <br>
+    
+    <p>
+    本格的な説明に先立ち、子メッシュグループを直接作成したり、複数のルートユニットを作成するためにPSDファイルを作成してインポートする方法について説明します。<br>
+    この方法を事前に知っておくと、PSDイメージを準備してメッシュグループを整理するのに役立ちます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1404.jpg"/>
+    <br>
+    
+    <p>
+    準備したPSDファイルです。<br>
+    詳しく見ると、2つの画像レイヤーが1つのグループにまとめられていることがわかります。<br>
+    レイヤーをグループにまとめてAnyPortraitにインポートすると、そのグループは「子メッシュグループ」に変換されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1405.jpg"/>
+    <br>
+    
+    <p>
+    準備したPSDファイルをAnyPortraitにインポートしましょう。<br>
+    <strong>(1)</strong> 「<strong>Import PSD File</strong>」ボタンを押してPSDファイルを開きます。<br>
+    <strong>(2)</strong> PSDファイルのグループが認識されていることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1406.jpg"/>
+    <br>
+    
+    <p>
+    PSDファイルのインポート作業を完了してみましょう。<br>
+    上記のようにPSDファイルと同じように構成されています。<br>
+    <strong>(1)</strong> 2つの「子メッシュグループ」が作成され、1つの「ルートメッシュグループ」に属しています。<br>
+    <strong>(2)</strong> ルートメッシュグループを選択すると、PSDファイルと同様に、メッシュと子メッシュグループが作成および配置されていることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1407.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 子メッシュグループを選択してみると、<strong>(2)</strong> ここに属するメッシュのみを別々に確認して編集できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    この機能を使用すると、単一のPSDファイルを使用して「複数の方向の外観を持つキャラクター」をすばやく簡単に整理できます。<br>
+    構成を変更したい場合は、次の説明を確認してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1408.jpg"/>
+    <br>
+    
+    <p>
+    ルートメッシュグループから子メッシュグループを削除しましょう。<br>
+    <strong>(1)</strong> 削除したい子メッシュグループを選択します。<br>
+    <strong>(2)</strong> 「<strong>Detach</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> 案内メッセージの「<strong>Detach</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1409.jpg"/>
+    <br>
+    
+    <p>
+    子メッシュグループが削除されたことがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1410.jpg"/>
+    <br>
+    
+    <p>
+    今度は逆に子メッシュグループを追加しましょう。<br>
+    <strong>(1)</strong> 「<strong>+</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Mesh Group</strong>」タブを押します。<br>
+    <strong>(3)</strong> 追加したいメッシュグループを選択し、 <strong>(4)</strong> 「<strong>Add</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1411.jpg"/>
+    <br>
+    
+    <p>
+    メッシュグループが「子メッシュグループ」として登録されました。<br>
+    ただし、この場合はメッシュグループが原点に配置されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1412.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Edit Default Transform</strong>」モードをオンにし、 <strong>(2)</strong> 直接位置を変更する必要があります。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    
+    <br><br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>方法1.複数のルートユニットを使用する</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1413.jpg"/>
+    <br>
+    
+    <p>
+    複数の方向を持つキャラクターを作成する最初の方法は、それぞれの方向に沿ったルートユニットを作成することです。<br>
+    アニメーションの途中で方向を切り替えるなどの複雑なアニメーションを作成しない場合、この方法はかなり直感的でスクリプトで扱いやすいです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1414.jpg"/>
+    <br>
+    
+    <p>
+    作成したメッシュグループとルートユニットは、上記のように「Front」、「Side」、「Back」です。<br>
+    各メッシュグループは互いに独立しています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1415.jpg"/>
+    <br>
+    
+    <p>
+    ルートユニットとなる各メッシュグループは、ボーンと「Riggingモディファイア」、「Transform（Animation）モディファイア」を持っています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1416.jpg"/>
+    <br>
+    
+    <p>
+    それぞれの方向のアニメーションを作成します。<br>
+    <strong>(1)</strong> 「<strong>Front</strong>」のアニメーションである「<strong>Walk_Front</strong>」を作成します。<br>
+    <strong>(2)</strong> アニメーションを「<strong>Front</strong>」メッシュグループにリンクします。<br>
+    <strong>(3)</strong> 「<strong>Front</strong>」メッシュグループのアニメーションを作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1417.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1418.jpg"/>
+    <br>
+    
+    <p>
+    同じように「<strong>Side</strong>」、「<strong>Back</strong>」のアニメーションを作成します。<br>
+    </p>
+    <br>
+    
+    <p>
+    それでは、簡単なスクリプトを作成してキャラクターの向きを変えるようにしましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class MultiRootUnitController : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;// 対象キャラクター<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    <br>
+    &emsp;&emsp;void Start() { }<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha1))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 数字1キーを押すと、「Front」のウォーキングアニメーションが再生されます。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.Play("Walk_Front");</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha2))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 数字2キーを押すと、「Side」のウォーキングアニメーションが再生されます。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.Play("Walk_Side");</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha3))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 数字3キーを押すと、「Back」のウォーキングアニメーションが再生されます。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.Play("Walk_Back");</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    スクリプトを見ると、ルートユニットを切り替える別のコードはなく、単にアニメーションを再生するコードしかありません。<br>
+    アニメーションによってルートユニットが切り替わるので、コードを本当に簡単に書くことができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1419.jpg"/>
+    <br>
+    
+    <p>
+    作成したキャラクターと作成したスクリプトをUnityシーンに配置しましょう。<br>
+    <strong>(1)</strong> AnyPortraitエディタで「<strong>Bake</strong>」をすると、キャラクターがシーンに配置されます。<br>
+    <strong>(2)</strong> 新しい「<strong>GameObject</strong>」を作成します。<br>
+    <strong>(3)</strong> 生成された 「<strong>GameObject</strong>」に先に作成したスクリプトを追加し、「apPortrait」を割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1420.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行してスクリプトで作成したように、数字1、2、3を押すと、対応するルートユニットに切り替えてアニメーションが実行されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    複数のルートユニットを使用することは、従来の制作方式では大きく変わらず、キャラクターの向きに合ったアニメーションを再生するようにスクリプトで作成すればよい。<br>
+    ワークフローとスクリプトの作成が簡単で直感的であることは、このアプローチの利点です。<br>
+    一方、方向が切り替わるアニメーションを作成するのは難しいという欠点です。<br>
+    方向を切り替えるアニメーションを作成したい場合は、各方向のアニメーションを作成して順番に再生するスクリプトを作成する必要があります。<br>
+    したがって、このアプローチは「トップビュー（Top-View）」のゲームで効果的に使用できます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>方法2.複数の子メッシュグループを使用する</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1421.jpg"/>
+    <br>
+    
+    <p>
+    2番目の方法は、「1つのルートユニットとなるメッシュグループ」に「複数の子メッシュグループ」を追加する方法です。<br>
+    レンダリングする必要がある子メッシュグループのみを表示し、残りのメッシュグループを非表示にして、キャラクターの向きを変えることができます。<br>
+    <strong>(1)</strong> 前の説明と同じキャラクターのように見えますが、1つのメッシュグループに3つのメッシュグループが子メッシュグループとして登録されています。<br>
+    <strong>(2)</strong> 各メッシュグループは独立してメッシュとボーンを持っており、「<strong>Rigging Modifier</strong>」が適用されています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1422.jpg"/>
+    <br>
+    
+    <p>
+    親子メッシュグループを使用して作業する場合は、どのメッシュグループにどのモディファイアを追加するかを決定する必要があります。<br>
+    子メッシュグループがそれぞれボーンを持ちながら独立した動きを持つ場合は、特に注意が必要です。<br>
+    私たちは上記のようにモディファイアを設定することをお勧めします。<br>
+    </p>
+    <br>
+    
+    <p>
+    タスクの利便性、一貫性、パフォーマンスの両方を考慮する場合は、「ルートメッシュグループ」に「Morph、Transform、Color Onlyモディファイア」を追加することをお勧めします。<br>
+    特に、「Animationモディファイア」はルートメッシュグループにのみ追加できます。<br>
+    （誤って「Animationモディファイア」を子メッシュグループに追加してアニメーションを作成した場合は、<a href="../../jp/AdvancedManual/AD_AnimationIssueChild.html">関連ページ</a>の解決方法を参照してください。）<br>
+    </p>
+    <br>
+    
+    <p>
+    「Rigging, Physics モディファイア」は外部データ (制御パラメータ、アニメーション) に関係なく動作するため、ボーンやメッシュを持つ 「子メッシュグループ」に追加する方が便利です。<br>
+    特に、子メッシュグループにボーンがある場合は、「Riggingモディファイア」を子メッシュグループに追加するのが便利です。<br>
+    ただし、対象メッシュに2つ以上の「Riggingモディファイア」が適用される場合、問題が発生しますのでご注意ください。<br>
+    この点に注意して設定してください。<br>
+    親メッシュグループにこれらのモディファイアを追加して適用しても構いません。<br>
+    </p>
+    <br>
+    
+    <p>
+    「Controllerモディファイア」（Morph、Transform、Color Only）を子メッシュグループに追加することは可能ですが、私たちはお勧めしません。<br>
+    親子メッシュグループにモディファイアを複合的に登録したが、意図しないキャラクターの動きに苦しむ方々からのフィードバックを多く受けました。<br>
+    したがって、可能であれば、外部データによるバリエーションはルートメッシュグループで一貫して編集することをお勧めします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1423.jpg"/>
+    <br>
+    
+    <p>
+    この方法で最も重要なポイントは、「制御パラメータを使用して表示される子メッシュグループを切り替えること」です。<br>
+    これは、前の最初の方法でアニメーションを実行してルートユニットを切り替えることに対応します。<br>
+    <strong>(1)</strong> 新しい「制御パラメータ」を追加します。 ここでは、「Root Pose」という名前の「制御パラメータ」を作成しました。<br>
+    <strong>(2)</strong> 制御パラメータの種類を「<strong>Int</strong>」に設定します。<br>
+    <strong>(3)</strong> 値の範囲を「-1～1」に設定したが、これはそれぞれ「<strong>Back : -1, Side : 0, Front : 1</strong>」にマッピングするためである。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1424.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ルートメッシュグループを選択します。<br>
+    <strong>(2)</strong> 「<strong>Modifier</strong>」タブを選択し、「<strong>Add Modifier</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> 「<strong>Color Only（Controller）</strong>」モディファイアを選び、 <strong>(4)</strong> 「<strong>Select</strong>」ボタンを押す。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1425.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 制御パラメータに3つの「キー（Key）」を登録します。<br>
+    <strong>(2)</strong> 子メッシュグループをモディファイアに登録します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1426.jpg"/>
+    <br>
+    
+    <p>
+    制御パラメータに従って表示される子メッシュグループを変更します。<br>
+    値が「-1」の場合は「Back」が表示され、「0」の場合は「Side」、「1」の場合は「Front」のみが表示されます。<br>
+    これで「Root Pose」制御パラメータの値によってキャラクターの向きが変わるようになりました。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    もしキャラクターの方向が変換される過程の様子を表現したい場合は、以下のように設定してください。<br>
+    - 「制御パラメータ」のタイプを「Int」ではなく「Float」に設定します。<br>
+    - 「Color Onlyモディファイア」を使用する代わりに「Morphモディファイア」を使用し、「<strong>Color Option</strong>」と「<strong>Toggle Visibility without blending</strong>」を有効にします。 （<a href="../../jp/AdvancedManual/AD_ToggleWOTranslucent.html">関連ページ</a>）<br>
+    - 制御パラメータにキーを追加し、頂点を編集して中間の外観を作成します。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    続くプロセスを説明する前に、複数の子メッシュグループを使用する場合は、次の機能の説明を最初に確認してください。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>別のモディファイアを編集するときに子メッシュグループが切り替えられない場合</h4>
+    <br>
+    
+    <p>
+    「編集モード」をオンにすると、デフォルトでは他のモディファイアや他の制御パラメータは機能しません。<br>
+    そのため、このページで作成した「Root Pose制御パラメータで表示される子メッシュグループを切り替える」が動作しなくなります。<br>
+    右の「Hierarchy UI」の「緑色の目のアイコン」を押して強制的に見せることができますが、これは一時的な方法なので、作業はまだ面倒です。<br>
+    2つの方法でこの問題を解決しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1427.jpg"/>
+    <br>
+    
+    <p>
+    説明のために別の「Morphモディファイア」を追加してみましょう。<br>
+    上記のように新しい「制御パラメータ」と「Morphモディファイア」を追加しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1428.jpg"/>
+    <br>
+    
+    <p>
+    「Morphモディファイア」を利用してキャラクターの角の長さを変更してみました。<br>
+    まず、「Front」メッシュグループの「角」メッシュを変形しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1429.jpg"/>
+    <br>
+    
+    <p>
+    「Front」のメッシュを変形したので、「Side」のメッシュを変形しようとしています。<br>
+    <strong>(1)</strong> 表示される子メッシュグループを「Side」に置き換えるために「<strong>Root Pose</strong>」制御パラメータの値を変更しました。<br>
+    <strong>(2)</strong> しかし、子メッシュグループには「Front」が表示され続けており、他の方向のメッシュを編集することは困難です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1430.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>表示メニュー > Edit Mode Option > Apply Multiple Modifiers if no conflict</strong>」をオンにします。 （ショートカット： <kbd>D</kbd> ）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1431.jpg"/>
+    <br>
+    
+    <p>
+    これで、編集モードでも他のモディファイアが動作するようになり、「Root Pose」の制御パラメータによって「Side」、「Back」が見えるようになります。<br>
+    （編集モードオプションの詳細については、<a href="../../jp/AdvancedManual/AD_ModifierEditOption.html">関連ページ</a>を参照してください。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1432.jpg"/>
+    <br>
+    
+    <p>
+    または、「可視性プリセット」（<a href="../../jp/AdvancedManual/AD_VisibilityPreset.html">関連ページ</a>）を使用して、子メッシュグループを強制的に切り替えることもできます。<br>
+    「<strong>表示メニュー > Visibility Preset > Settings</strong>」で、可視性プリセット設定画面を開きます。<br>
+    <strong>(1)</strong> 新しいルールを作成します。<br>
+    <strong>(2)</strong> 「<strong>Custom</strong>」方式で設定し、必要に応じてショートカットキーを指定します。<br>
+    <strong>(3)</strong> ルートメッシュグループを選択します。<br>
+    <strong>(4)</strong> このルールが適用されると、「Front」メッシュグループのみが表示されるので、「Front」メッシュグループを強制的に表示するように設定します。<br>
+    <strong>(5)</strong> 逆に、「Side」と「Back」のメッシュグループは強制的に非表示になります。<br>
+    </p>
+    <br>
+    
+    <p>
+    同じ方法でルールを追加して、各ルールによって「Front」、「Side」、「Back」が表示されるようにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1433.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>表示メニュー > Visibility Preset > Enable Preset</strong>」を有効にし（ショートカット： <kbd>I</kbd> ）、必要なルールを選択すると、対応するメッシュグループのみを表示するように作成できます。<br>
+    ルールに設定されたショートカットを使用すると、作業速度を上げることができます。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1434.jpg"/>
+    <br>
+    
+    <p>
+    ボーンアニメを作ろう<br>
+    <strong>(1)</strong> ルートメッシュグループを選択し、「<strong>Modifier</strong>」タブの「<strong>Add Modifier</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Transform (Animation)</strong>」 モディファイアを選択し、 <strong>(3)</strong> 「<strong>Select</strong>」 ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1435.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 新しいアニメーションを追加します。<br>
+    <strong>(2)</strong> アニメーションに名前を付けた後、「<strong>Select Mesh Group</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> メッシュグループが表示され、子メッシュグループは選択できないことがわかります。 ルートメッシュグループを選択します。<br>
+    <strong>(4)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1436.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Add Timeline</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 子メッシュグループを切り替えるには、「<strong>Control Parameters</strong>」タイムラインを最初に追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1437.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 追加した「<strong>Control Parameters</strong>」タイムラインを選択します。<br>
+    <strong>(2)</strong> 前に作成した「<strong>Root Pose</strong>」制御パラメータを選択します。<br>
+    <strong>(3)</strong> 「<strong>Add Timeline Layer to Edit</strong>」ボタンを押してタイムラインにコントロールパラメータを登録します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1438.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> もう一度「<strong>Add Timeline</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> ボーンアニメーションを作成するには、「<strong>Modifier: Transform (Animation)</strong>」を選択して追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1439.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 追加した「<strong>Transform（Animation）</strong>」タイムラインを選択します。<br>
+    <strong>(2)</strong> 「<strong>Bones</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>All Bones to Layers</strong>」ボタンを押します。<br>
+    <strong>(4)</strong> 案内メッセージの「<strong>Okay</strong>」ボタンを押して、すべてのボーンをタイムラインに登録します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1440.jpg"/>
+    <br>
+    
+    <p>
+    それではアニメーションを作りましょう。<br>
+    ボーンアニメーションを作成する前に、表示される子メッシュグループ、つまりキャラクターの方向をまずキーフレームに設定してみましょう。<br>
+    （作業者のスタイルによっては、このページの説明とは異なり、メッシュグループのレンダリングとボーンアニメーションを同時に編集することもできます。）<br>
+    <strong>(1)</strong> アニメーション「編集モード」をオンにし、「Control Parameters」タイムラインの「<strong>Root Pose</strong>」を選択します。<br>
+    <strong>(2)</strong> キーフレームを追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1441.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> キーフレームを選択し、 <strong>(2)</strong> 制御パラメータの値を指定します。<br>
+    <strong>(3)</strong> 上記のように「<strong>Front > Side > Back > Side</strong>」が繰り返し表示されるようにキーフレームを設定しました。<br>
+    <strong>(4)</strong> アニメーションを再生すると、ワークスペースの「<strong>Root Pose</strong>」の値に応じてキャラクターの向きが切り替わることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1442.jpg"/>
+    <br>
+    
+    <p>
+    その後、ボーンアニメーションを作成します。<br>
+    <strong>(1)</strong> 「<strong>Transform (Animation)</strong>」タイムラインを選択し、「編集モード」をオンにします。<br>
+    <strong>(2)</strong> ところで、この状態では「<strong>Root Pose</strong>」制御パラメータが適用されないため、ワークスペースにすべてのメッシュグループが表示されるという問題が発生します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1443.jpg"/>
+    <br>
+    
+    <p>
+    このページの前述の方法でこの問題を解決します。<br>
+    <strong>(1)</strong> 「<strong>表示メニュー > Edit Mode Options > Apply Multiple Modifiers if no conflict</strong>」 (ショートカット:  <kbd>D</kbd> ) を有効にします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1444.jpg"/>
+    <br>
+    
+    <p>
+    編集対象ではなくタイムラインも機能し、現在の状態に合った子メッシュグループのみがワークスペースに表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1445.jpg"/>
+    <br>
+    
+    <p>
+    ボーンがワークスペースに見えないように設定した状態でした。<br>
+    「 <kbd>B</kbd> 」キーを押すか、「<strong>表示メニュー > Show Bones</strong>」をオンにしてボーンが見えるようにしましょう。<br>
+    ところで、見られる子メッシュグループとは別に、すべてのボーンが見えます。<br>
+    あまりにも多くのボーンが乱雑にワークスペースに表示されるため、編集するのは困難です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1446.jpg"/>
+    <br>
+    
+    <p>
+    「可視性プリセット（Visibility Preset）」を使ってみましょう。<br>
+    <strong>(1)</strong> 「<strong>表示メニュー > Visibility Preset > Settings</strong>」を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1447.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 新しいルールを追加します。<br>
+    <strong>(2)</strong> このルールの方式を「<strong>Show Bones If Mesh Group Visible</strong>」に設定します。<br>
+    このオプションは、ボーンが属するメッシュグループがレンダリングされた場合にのみ、ボーンがワークスペースにレンダリングされるようにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1448.jpg"/>
+    <br>
+    
+    <p>
+    生成されたルールを適用します。<br>
+    <strong>(1)</strong> 「<strong>表示メニュー > Visible Preset</strong>」で作成したルールを選択し、 <strong>(2)</strong> 「<strong>Enable Preset</strong>」を押して有効にします。 （ショートカット： <kbd>I</kbd> ）<br>
+    <strong>(3)</strong> アニメーションを再生すると、表示される子メッシュグループのボーンだけがワークスペースに表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1449.jpg"/>
+    <br>
+    
+    <p>
+    すべての準備が終わったら、ボーンアニメーションを作る番です。<br>
+    アニメーションクリップ内で、キャラクターが方向を変えながら移動するようにモーションを作成できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    このプロセスはモーションによって、そしてあなたがアニメーションをどのように作るかによってプロセスに違いがあります。<br>
+    次のワークフローを参考にモーションを作成してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1456.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Transform タイムラインおよびタイムラインレイヤーを選択してキーフレームを生成した後、 <strong>(2)</strong> キャラクターのポーズを修正します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1457.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> キャラクターの方向が変わる直前にキーフレームを生成します。<br>
+    <strong>(2)</strong> キャラクターのポーズをつなぐ次の方向のポーズに似ているように修正します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1458.jpg"/>
+    <br>
+    
+    <p>
+    次のフレームに移動してキャラクターの向きが変わったとき、前のフレームとポーズの差が少ないほどアニメーションは自然になります。<br>
+    </p>
+    <br>
+    
+    <p>
+    前のキャラクター方向の最後のキーフレームと次の方向の最初のキーフレームの位置が同じになると、より自然な方向転換になります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1450.jpg"/>
+    <br>
+    
+    <p>
+    ボーンアニメーションと制御パラメータを組み合わせてキャラクターが回転するようなアニメーションを上記のように簡単に作ってみました。<br>
+    より多くのキーフレーム、Morphモディファイア、回転に適したキャラクターイメージなどが保たれれば、はるかに高いクオリティの作品を作ることができるでしょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    キャラクターの向きが自然に切り替わるように制御パラメータとポーズを設定するには多くのノウハウが必要です。<br>
+    機能についての私たちの説明に加えて、アニメーションを直接作ってみながら、多くの経験を積んで素敵な作品を作ってみてください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1451.jpg"/>
+    <br>
+    
+    <p>
+    完成したキャラクターアニメーションをUnityシーンに確認しましょう。<br>
+    <strong>(1)</strong> ルートユニットを選択した画面でアニメーションクリップを選択し、「<strong>Auto Play</strong>」を有効にして自動的にアニメーションを再生します。<br>
+    <strong>(2)</strong> 「<strong>Bake</strong>」を実行します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1452.jpg"/>
+    <br>
+    
+    <p>
+    完成したアニメーションがUnityシーンで再生されるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    複数の子メッシュグループを使用する方法は、説明に示すように、多数のオブジェクトを同時に編集する必要があります。<br>
+    作業が少し難しく、設定する必要があるものが多いのは必然的な欠点です。<br>
+    しかし、このような困難を乗り越えれば、1つのアニメーション内でキャラクターの向きが変わることを表現できるという大きな利点を得ることができます。<br>
+    「サイドビュー（Side-View）」のアクションゲームでキャラクターが走り、戦い、ジャンプして振り返るなどの複合的なモーションを作るのに適した技法です。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>現在表示されている子メッシュグループを確認</h4>
+    <br>
+    
+    <p>
+    ゲームでキャラクターの向きが変わると、装着されたアイテムのイメージを変更するなどの処理が必要になることがあります。<br>
+    この場合に必要な設定とスクリプトの例を説明します。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページでキャラクターの向きを変える制御パラメータである「<strong>Root Pose</strong>」の値をリアルタイムで確認するスクリプトを作成しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class GetRootPoseScript : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    <br>
+    &emsp;&emsp;// Root Pose 制御パラメータ変数<br>
+    &emsp;&emsp;<strong>private apControlParam rootPose;</strong><br>
+    <br>
+    &emsp;&emsp;// GUIで確認する現在のキャラクター方向の名前<br>
+    &emsp;&emsp;private string poseName = "";<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 「Root Pose」制御パラメータを取得し、変数として保存します。<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>rootPose = portrait.GetControlParam("Root Pose");</strong><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// 値を確認するのは、Updateではなく「LateUpdate」でなければなりません。<br>
+    &emsp;&emsp;void LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 現在の制御パラメータの値を確認します。 Root PoseがInt型だったので、「Int」値を取得します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>int currentPose = rootPose.IntValue;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 制御パラメータの値に割り当てられたキャラクターの方向を文字列として格納します。<br>
+    &emsp;&emsp;&emsp;&emsp;switch (currentPose)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;case -1: <strong>poseName = "Back";</strong> break;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;case 0: <strong>poseName = "Side";</strong> break;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;case 1: <strong>poseName = "Front";</strong> break;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;private void OnGUI()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 文字列として保存されたキャラクターの方向を Unity 画面に出力します。<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>GUI.Label(new Rect(10, 10, 500, 20), "Current Pose : " + poseName);</strong><br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    上記のスクリプトを見ると、「Update」ではなく「<strong>LateUpdate</strong>」で制御パラメータの値を確認することがわかります。<br>
+    AnyPortraitのアップデートは、「Update」ではなく「<strong>LateUpdate</strong>」で動作するためです。<br>
+    これは、他のスクリプトの処理が完了した後に動作するように設計されているためです。<br>
+    （Unityのアニメーションシステムがスクリプトより後で動作するのと同じ理由です。）<br>
+    </p>
+    <br>
+    
+    <p>
+    したがって、逆に AnyPortrait の更新直後の値を確認するには、「<strong>LateUpdate</strong> 」でコードが動作するように書く必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1453.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Unityシーンに戻り、新しい「<strong>GameObject</strong>」を作成します。<br>
+    <strong>(2)</strong> スクリプトを追加し、キャラクターを「apPortrait変数」に割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1454.jpg"/>
+    <br>
+    
+    <p>
+    さらに設定する必要があるプロセスがあります。<br>
+    「<strong>LateUpdate</strong>」でコードが実行されても、「スクリプト呼び出しの順序」によって、AnyPortraitのアップデートよりもスクリプトが最初に動作することがあります。<br>
+    そのため、AnyPortrait のアップデートより遅く実行されるように、「スクリプト呼び出し順序」も変更する必要があります。<br>
+    （これに関しては、<a href="../../jp/AdvancedManual/AD_ExecutionOrderProblem.html">関連ページ</a>でも確認できます。)<br>
+    <strong>(1)</strong> Unity の設定中に 「<strong>Project Settings > Script Execution Order</strong>」を選択します。<br>
+    <strong>(2)</strong> 作成したスクリプトを追加し、「<strong>Default Time</strong>」より後に実行されるように順序を変更します。<br>
+    <strong>(3)</strong> 「<strong>Apply</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1455.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、キャラクターの向きをスクリプトが認識して画面に出力するのがわかります。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_SortingOrderInAttachMesh.html">< メッシュ取付時の「Sorting Order」設定</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_BuildiOSPlatforms.html">iOSと他のプラットフォーム ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

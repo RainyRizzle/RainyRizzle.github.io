@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Creating a character in multiple directions</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_MultipleDirectionCharacter.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MultipleDirectionCharacter.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_MultipleDirectionCharacter.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Creating a character in multiple directions</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Creating a character in multiple directions</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.4</span></h4>
+    
+    <p>
+    When creating the characters that appear in the game, depending on the game, you may need to make them face the front, the side, and the back.<br>
+    This type of work is often used in top-view games as well as side-view action games.<br>
+    This page covers how to use AnyPortrait to create a character that looks in multiple directions.<br>
+    </p>
+    <br>
+    
+    <p>
+    Please note that this description focuses on the functions and does not cover the detailed process of making animations or how to draw images.<br>
+    </p>
+    <br>
+    
+    <p>
+    There are two main ways to create a character with a multi-directional appearance.<br>
+    The first method is to create <strong>multiple root units</strong> and convert it into a script.<br>
+    Another way is to create <strong>one root unit with multiple child mesh groups</strong> and control it with a control parameter.<br>
+    Each has pros and cons, so choose the one that works for you from the descriptions below.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Importing a PSD File</h4>
+    <br>
+    
+    <p>
+    Before going into detail, here's how to create and import a PSD file to directly create child mesh groups or create multiple root units.<br>
+    Knowing this in advance will help you prepare your PSD image and organize the mesh groups.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1404.jpg"/>
+    <br>
+    
+    <p>
+    This is the prepared PSD file.<br>
+    If you look closely, you can see the two groups where the two image layers are grouped.<br>
+    When these layers are grouped and imported into AnyPortrait, the groups are converted into <strong>child mesh groups</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1405.jpg"/>
+    <br>
+    
+    <p>
+    Let's import the PSD file into AnyPortrait.<br>
+    <strong>(1)</strong> Click the <strong>Import PSD File</strong> button and open the PSD file.<br>
+    <strong>(2)</strong> You can see that groups of the PSD file are recognized.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1406.jpg"/>
+    <br>
+    
+    <p>
+    Let's finish importing the PSD file.<br>
+    It is structured the same as the PSD file as above.<br>
+    <strong>(1)</strong> Two <strong>child mesh groups</strong> as sub objects have been created and belong to one <strong>root mesh group</strong>.<br>
+    <strong>(2)</strong> If you select the root mesh group, you can see that the meshes and child mesh groups are created and placed as well as the PSD file.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1407.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> If you select a child mesh group, <strong>(2)</strong> only the meshes belonging to it can be viewed and edited separately.<br>
+    </p>
+    <br>
+    
+    <p>
+    Using this function, you can quickly and easily compose "a character facing multiple directions" using a single PSD file.<br>
+    If you want to change the configuration, check the following instructions.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1408.jpg"/>
+    <br>
+    
+    <p>
+    Let's detach the child mesh group from the root mesh group.<br>
+    <strong>(1)</strong> Select the child mesh group you want to remove.<br>
+    <strong>(2)</strong> Press the <strong>Detach</strong> button.<br>
+    <strong>(3)</strong> Press the <strong>Detach</strong> button in the message.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1409.jpg"/>
+    <br>
+    
+    <p>
+    You can see the child mesh group has been detached.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1410.jpg"/>
+    <br>
+    
+    <p>
+    In opposite, let's add a child mesh group.<br>
+    <strong>(1)</strong> Press the "<strong>+</strong>" button.<br>
+    <strong>(2)</strong> Click the <strong>Mesh Group</strong> tab.<br>
+    <strong>(3)</strong> Select the mesh group you want to add and <strong>(4)</strong> click the <strong>Add</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1411.jpg"/>
+    <br>
+    
+    <p>
+    A mesh group is registered as a child mesh group.<br>
+    However, in this case, the mesh group is placed at the origin.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1412.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Turn on the <strong>Edit Default Transform</strong> mode and <strong>(2)</strong> modify the position manually.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    
+    <br><br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Method 1. Using Multiple Root Units</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1413.jpg"/>
+    <br>
+    
+    <p>
+    The first way to create a character facing multiple directions is to create root units for each direction.<br>
+    Unless you're making complex animations such as switching directions in the middle of a motion, this method is pretty intuitive and easy to script.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1414.jpg"/>
+    <br>
+    
+    <p>
+    The prepared mesh groups and root units are "Front", "Side" and "Back" as above.<br>
+    Each mesh group is independent of each other.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1415.jpg"/>
+    <br>
+    
+    <p>
+    Each mesh group that becomes the root unit has bones and a "Rigging modifier" and a "Transform (Animation) modifier".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1416.jpg"/>
+    <br>
+    
+    <p>
+    Animations are also made for each direction.<br>
+    <strong>(1)</strong> Create an animation "<strong>Walk_Front</strong>" for "<strong>Front</strong>".<br>
+    <strong>(2)</strong> Connect this animation to the "<strong>Front</strong>" mesh group.<br>
+    <strong>(3)</strong> Make the animation for the front mesh group.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1417.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1418.jpg"/>
+    <br>
+    
+    <p>
+    In the same way, create animations for "<strong>Side</strong>" and "<strong>Back</strong>".<br>
+    </p>
+    <br>
+    
+    <p>
+    Now let's write a simple script to change the direction of the character.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class MultiRootUnitController : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;// Target AnyPortrait character<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    <br>
+    &emsp;&emsp;void Start() { }<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha1))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Press the number 1 key to play the "Front" walking animation.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.Play("Walk_Front");</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha2))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Press the number 2 key to play the "Side" walking animation.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.Play("Walk_Side");</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;if(Input.GetKeyDown(KeyCode.Alpha3))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Press the number 3 key to play the "Back" walking animation.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.Play("Walk_Back");</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Looking at the script, there is no separate code to switch the root unit, just the code to play animations.<br>
+    The root unit is switched according to the animation, so you can write the code really simple.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1419.jpg"/>
+    <br>
+    
+    <p>
+    Let's put the character and the script into the Unity scene.<br>
+    <strong>(1)</strong> <strong>Bake</strong> the character in the AnyPortrait editor, place it in the scene.<br>
+    <strong>(2)</strong> Create a new <strong>GameObject</strong>.<br>
+    <strong>(3)</strong> Add the script to the created GameObject and assign apPortrait.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1420.jpg"/>
+    <br>
+    
+    <p>
+    Run the game and press the number 1, 2, 3 keys as we wrote in the script to switch to the corresponding root unit and run the animation.<br>
+    </p>
+    <br>
+    
+    <p>
+    Using multiple root units is not much different from the existing production method, you can just write a script to play animations that match the direction of the character.<br>
+    The advantage of this approach is that the workflow and scripting are easy and intuitive.<br>
+    On the other hand, the disadvantage is that it is difficult to create a motion that switches directions.<br>
+    If you want to create an animation that switches directions, you need to write a script to play animations for each direction in order.<br>
+    With these characteristics, this method can be effectively used in top-view games.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Method 2. Using Multiple Child Mesh Groups</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1421.jpg"/>
+    <br>
+    
+    <p>
+    The second method is to add "child mesh groups" as sub objects to "the root mesh group that become the root unit".<br>
+    You can make only the child mesh group that need to be rendered visible, and hide the rest of the mesh groups so that the character's direction changes.<br>
+    <strong>(1)</strong> The character looks the same as the previous description, but 3 mesh groups are registered as sub objects in one mesh group.<br>
+    <strong>(2)</strong> Each mesh group has independently meshes and bones, and "<strong>Rigging modifier</strong>" is applied.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1422.jpg"/>
+    <br>
+    
+    <p>
+    When working with creating parent-child mesh groups, you need to decide which modifier to add to which mesh group.<br>
+    This is especially important if the child mesh groups each have a bone and move independently.<br>
+    We recommend configuring modifiers as above.<br>
+    </p>
+    <br>
+    
+    <p>
+    Considering the ease of work, consistency, and performance, it is recommended to add <strong>Morph, Transform, Color Only modifiers</strong> to the <strong>root mesh group</strong>.<br>
+    In particular, <strong>Animation modifiers</strong> can only be added to the root mesh group.<br>
+    (If you accidentally add the <strong>Animation modifier</strong> to a child mesh group and create an animation, please refer to the <a href="../../en/AdvancedManual/AD_AnimationIssueChild.html">related page</a> to solve it.)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>Rigging, Physics modifiers</strong> work regardless of external data (control parameters, animations), so it might be more convenient to add them to the <strong>child mesh group</strong> with bones or meshes.<br>
+    Adding a <strong>Rigging modifier</strong> to the child mesh group can be convenient for you to work with, especially if the child mesh group has bones.<br>
+    However, please be careful, as a problem occurs when more than one <strong>Rigging modifier</strong> is applied to the target mesh.<br>
+    It is ok to add these modifiers to the parent mesh group and apply them.<br>
+    </p>
+    <br>
+    
+    <p>
+    It is possible to add <strong>Controller modifiers</strong> (Morph, Transform, Color Only) to a child mesh group, but we do not recommend it.<br>
+    In our experience, complex registration of modifiers to parent-child mesh groups has resulted in problems with unintended movement.<br>
+    Therefore, it is recommended to edit the deformation by external data consistently in the root mesh group if possible.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1423.jpg"/>
+    <br>
+    
+    <p>
+    The most important point in this approach is to "switch the child mesh group shown using the control parameter".<br>
+    This corresponds to switching the root unit by running the animation in the first way above.<br>
+    <strong>(1)</strong> Add a new control parameter. We created a control parameter named "Root Pose".<br>
+    <strong>(2)</strong> Set the control parameter type to <strong>Int</strong>.<br>
+    <strong>(3)</strong> We set the range of values from -1 to 1, to map them to <strong>"Back: -1", "Side: 0", "Front: 1"</strong> respectively.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1424.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the root mesh group.<br>
+    <strong>(2)</strong> Select the <strong>Modifier</strong> tab and click the <strong>Add Modifier</strong> button.<br>
+    <strong>(3)</strong> Select the "<strong>Color Only (Controller)</strong>" modifier and <strong>(4)</strong> press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1425.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Register 3 keys in the control parameter.<br>
+    <strong>(2)</strong> Register the child mesh groups in the modifier.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1426.jpg"/>
+    <br>
+    
+    <p>
+    Makes the visible child mesh group be changed according to the control parameter.<br>
+    When the value is -1, it is set to show the "Back", "Side" is shown when it is 0, "Front" is shown when it is 1.<br>
+    You can now change the direction of the character by controlling the "Root Pose" control parameter.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    If you want to express the in-between motion of changing the direction of the character, please set it as follows.<br>
+    - Set the control parameter type to "Float" instead of "Int".<br>
+    - Use the <strong>Morph modifier</strong> instead of the Color Only modifier, and enable <strong>Color Option</strong> and <strong>Toggle Visibility without blending</strong>. (<a href="../../en/AdvancedManual/AD_ToggleWOTranslucent.html">Related Page</a>)<br>
+    - Add more keys for control parameters and edit the vertices to create an intermediate appearance.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    Before explaining the subsequent process, if you use multiple child mesh groups, please check the description of the following functions first.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Child mesh groups not switching when editing other modifiers</h4>
+    <br>
+    
+    <p>
+    By default, when <strong>Edit Mode</strong> is turned on, other modifiers or other control parameters do not work.<br>
+    So, "switching visible child mesh groups with the Root Pose control parameter" will not work.<br>
+    You can force it to show by pressing the "green eye icon" in the right Hierarchy UI, but this is a temporary method, so the workflow is still cumbersome.<br>
+    There are two ways to solve this problem.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1427.jpg"/>
+    <br>
+    
+    <p>
+    To illustrate, let's add a separate Morph modifier.<br>
+    Added a new control parameter and the Morph modifier as above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1428.jpg"/>
+    <br>
+    
+    <p>
+    We tried changing the length of the character's horns using the Morph modifier.<br>
+    First, we transformed the "horns" mesh in the "Front" mesh group.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1429.jpg"/>
+    <br>
+    
+    <p>
+    We have finished transforming the mesh of the "Front", we want to transform the other mesh of the "Side".<br>
+    <strong>(1)</strong> Change the value of the "<strong>Root Pose</strong>" control parameter to show the "Side" mesh group.<br>
+    <strong>(2)</strong> However, "Front" is still shown, making it difficult to edit meshes in different directions.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1430.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Turn on "<strong>View menu > Edit Mode Option > Apply Multiple Modifiers if no conflict</strong>". (Shortcut key:  <kbd>D</kbd> )<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1431.jpg"/>
+    <br>
+    
+    <p>
+    The other modifiers now work even in edit mode, allowing you to render "Side" or "Back" according to the "Root Pose" control parameter.<br>
+    (More details about the edit mode options can be found at the <a href="../../en/AdvancedManual/AD_ModifierEditOption.html">related page</a>.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1432.jpg"/>
+    <br>
+    
+    <p>
+    Alternatively, you can use the <strong>Visibility Preset</strong> (<a href="../../en/AdvancedManual/AD_VisibilityPreset.html">Related Page</a>) to switch the child mesh groups in a force.<br>
+    Open the Visibility Preset Setting through <strong>View menu > Visibility Preset > Settings</strong>.<br>
+    <strong>(1)</strong> Create a new rule.<br>
+    <strong>(2)</strong> Set in the <strong>Custom</strong> method and, if necessary, designate a shortcut key.<br>
+    <strong>(3)</strong> Select the root mesh group.<br>
+    <strong>(4)</strong> If this rule is applied, only the "Front" mesh group will be shown, so set the <strong>Front</strong> mesh group to be shown forcibly.<br>
+    <strong>(5)</strong> Conversely, the "Side" and "Back" mesh groups are forced to be hidden.<br>
+    </p>
+    <br>
+    
+    <p>
+    Add more rules in the same way so that "Front", "Side" and "Back" are shown by each rule.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1433.jpg"/>
+    <br>
+    
+    <p>
+    Activate <strong>View Menu > Visibility Preset > Enable Preset</strong> (shortcut:  <kbd>I</kbd> ) and select the rule to make only the relevant mesh group visible.<br>
+    If you use the shortcut set in the rule, you will be able to speed up your work.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1434.jpg"/>
+    <br>
+    
+    <p>
+    Let's create the bone animation.<br>
+    <strong>(1)</strong> Select the root mesh group and click the <strong>Add Modifier</strong> button in the <strong>Modifier</strong> tab.<br>
+    <strong>(2)</strong> Select the <strong>Transform (Animation)</strong> modifier and <strong>(3)</strong> press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1435.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Add a new animation.<br>
+    <strong>(2)</strong> After setting the animation a name, click the <strong>Select Mesh Group</strong> button.<br>
+    <strong>(3)</strong> Mesh groups appear, you can see that child mesh groups that cannot be root units cannot be selected. Select the root mesh group.<br>
+    <strong>(4)</strong> Press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1436.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Click the <strong>Add Timeline</strong> button.<br>
+    <strong>(2)</strong> Add a <strong>Control Parameters</strong> timeline to switch child mesh groups.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1437.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the added <strong>Control Parameters</strong> timeline.<br>
+    <strong>(2)</strong> Select the "<strong>Root Pose</strong>" control parameter created earlier.<br>
+    <strong>(3)</strong> Click the <strong>Add Timeline Layer to Edit</strong> button to register the control parameter in the timeline.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1438.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Click the <strong>Add Timeline</strong> button again.<br>
+    <strong>(2)</strong> To create a bone animation, select <strong>Modifier: Transform (Animation)</strong> and add it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1439.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the added <strong>Transform (Animation)</strong> timeline.<br>
+    <strong>(2)</strong> Select the <strong>Bones</strong> tab.<br>
+    <strong>(3)</strong> Click the <strong>All Bones to Layers</strong> button.<br>
+    <strong>(4)</strong> Click the <strong>Okay</strong> button in the message to register all bones in the timeline.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1440.jpg"/>
+    <br>
+    
+    <p>
+    Now let's make the bone animation.<br>
+    Before making the bone animation, let's set keyframes to show or hide the child mesh group, i.e. the direction of the character.<br>
+    (Depending on your style, you may be able to edit the visibility of the mesh group and the bone animation at the same time, contrary to the description on this page.)<br>
+    <strong>(1)</strong> Turn on the <strong>Edit mode</strong>, and select “<strong>Root Pose</strong>” in the <strong>Control Parameters</strong> timeline.<br>
+    <strong>(2)</strong> Add keyframes.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1441.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select <strong>Keyframe</strong> and <strong>(2)</strong> specify the value of the control parameter.<br>
+    <strong>(3)</strong> As above, we set a keyframe so that "<strong>Front > Side > Back > Side</strong>" is displayed repeatedly.<br>
+    <strong>(4)</strong> If you play the animation, you can see that the direction of the character changes according to the value of "<strong>Root Pose</strong>" in the workspace.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1442.jpg"/>
+    <br>
+    
+    <p>
+    The next step is to create a bone animation.<br>
+    <strong>(1)</strong> Select the <strong>Transform (Animation)</strong> timeline and turn on the <strong>Edit mode</strong>.<br>
+    <strong>(2)</strong> However, in this state, the "<strong>Root Pose</strong>" control parameter is not applied, so all mesh groups are displayed in the workspace.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1443.jpg"/>
+    <br>
+    
+    <p>
+    The method described earlier on this page solves this problem.<br>
+    <strong>(1)</strong> Enable <strong>View Menu > Edit Mode Options > Apply Multiple Modifiers if no conflict</strong> (shortcut:  <kbd>D</kbd> ).<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1444.jpg"/>
+    <br>
+    
+    <p>
+    Now the timeline that is not currently being edited works, so only child mesh groups that fit the current state are shown in the workspace.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1445.jpg"/>
+    <br>
+    
+    <p>
+    Currently, the bones are set to not be visible in the workspace.<br>
+    Let's make the bones visible by pressing the&nbsp;&nbsp;<kbd>B</kbd>&nbsp;&nbsp;button or by turning on the <strong>View menu > Show Bones</strong>.<br>
+    However, all bones are shown independently of the rendering state of the child mesh groups.<br>
+    Too many bones are cluttered up in the workspace, making it difficult to edit.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1446.jpg"/>
+    <br>
+    
+    <p>
+    Let's use <strong>Visibility Preset</strong>.<br>
+    <strong>(1)</strong> Select <strong>View menu > Visibility Preset > Settings</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1447.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Add a new rule.<br>
+    <strong>(2)</strong> Set the method of this rule to "<strong>Show Bones If Mesh Group Visible</strong>".<br>
+    This option causes the bones to be rendered in the workspace only when the mesh group they belong to is rendered.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1448.jpg"/>
+    <br>
+    
+    <p>
+    Apply the created rule.<br>
+    <strong>(1)</strong> Select the created rule in <strong>View menu > Visible Preset</strong> and <strong>(2)</strong> click <strong>Enable Preset</strong> to activate it. (Shortcut key:  <kbd>I</kbd> )<br>
+    <strong>(3)</strong> When the animation is played, only the bones for the child mesh group that are visible are shown in the workspace.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1449.jpg"/>
+    <br>
+    
+    <p>
+    Now that everything is ready, it's time to create the bone animation.<br>
+    Within an animation clip, you can create motion to make a character move while changing direction.<br>
+    </p>
+    <br>
+    
+    <p>
+    This process will be different depending on what motion your character has and how you animate it.<br>
+    Even so, the following explanations will help you as you create motions.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1456.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the Transform timeline and timeline layers, create keyframes, and <strong>(2)</strong> modify the character's pose.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1457.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Create keyframes just before the character's direction changes.<br>
+    <strong>(2)</strong> Modify the pose as closely as possible to the next pose of the character.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1458.jpg"/>
+    <br>
+    
+    <p>
+    When the character's direction changes by moving to the next frame, the smaller the difference in pose from the previous frame, the more natural the animation.<br>
+    </p>
+    <br>
+    
+    <p>
+    If the positions of the last keyframes in the previous character direction and the first keyframes in the next direction are the same, the transition will be more natural.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1450.jpg"/>
+    <br>
+    
+    <p>
+    By combining the bone animation and the control parameters, we created an animation that looks like a character rotating as above.<br>
+    If you add more keyframes, Morph modifier, and proper character images suitable for rotation, you will be able to create a much higher quality work.<br>
+    </p>
+    <br>
+    
+    <p>
+    Setting the control parameters and poses so that the character's direction transitions naturally takes a lot of know-how.<br>
+    In addition to our description of the features, try creating your own animations to gain a lot of experience and create great creations.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1451.jpg"/>
+    <br>
+    
+    <p>
+    Let's check the finished character animation in the Unity scene.<br>
+    <strong>(1)</strong> On the screen where the root unit is selected, select <strong>Animation Clip</strong> and activate <strong>Auto Play</strong> to make the animation play automatically.<br>
+    <strong>(2)</strong> Execute <strong>Bake</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1452.jpg"/>
+    <br>
+    
+    <p>
+    You should see the finished animation playing in the Unity scene.<br>
+    </p>
+    <br>
+    
+    <p>
+    The way to use multiple child mesh groups is to edit many objects at the same time as shown in the description.<br>
+    The inevitable cons are that the workflow is rather difficult and there are a lot of things that need to be set up.<br>
+    However, overcoming these difficulties has a huge advantage in being able to represent a change in character direction within a single animation.<br>
+    This is a good technique for creating complex motions in side-view action games, such as characters running, fighting, jumping and turning around.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Check the currently visible child mesh group</h4>
+    <br>
+    
+    <p>
+    When a character's direction changes in the game, it may require processing, such as changing the image of an equipped item.<br>
+    For this case, we will explain the necessary settings and script examples.<br>
+    </p>
+    <br>
+    
+    <p>
+    On this page, let's write a script that checks the value of "<strong>Root Pose</strong>", a control parameter that changes the character's direction, in real time.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class GetRootPoseScript : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    <br>
+    &emsp;&emsp;// Root Pose Control Parameter Variable<br>
+    &emsp;&emsp;<strong>private apControlParam rootPose;</strong><br>
+    <br>
+    &emsp;&emsp;// The name of the current character direction to check in the GUI<br>
+    &emsp;&emsp;private string poseName = "";<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Get the Root Pose control parameter and store it as a variable.<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>rootPose = portrait.GetControlParam("Root Pose");</strong><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// Checking the value should be LateUpdate, not Update.<br>
+    &emsp;&emsp;void LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Check the value of the current control parameter. Since the Root Pose was of type Int, it gets an Int value.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>int currentPose = rootPose.IntValue;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Stores the character direction assigned to the value of the control parameter as a string.<br>
+    &emsp;&emsp;&emsp;&emsp;switch (currentPose)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;case -1: <strong>poseName = "Back";</strong> break;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;case 0: <strong>poseName = "Side";</strong> break;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;case 1: <strong>poseName = "Front";</strong> break;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;private void OnGUI()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// The direction of the character stored as a string is displayed on the Unity screen.<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>GUI.Label(new Rect(10, 10, 500, 20), "Current Pose : " + poseName);</strong><br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    If you look at the script above, you can see that the value of the control parameter is checked in <strong>LateUpdate</strong> rather than Update.<br>
+    This is because the update of AnyPortrait operates in <strong>LateUpdate</strong>, not Update.<br>
+    This is because it is designed to run after other scripts have finished processing.<br>
+    (This is the same reason Unity's animation works later than scripts.)<br>
+    </p>
+    <br>
+    
+    <p>
+    Therefore, if you want to check the value immediately after update of AnyPortrait, you need to write the code to work in <strong>LateUpdate</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1453.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Return to the Unity scene, and create a <strong>New GameObject</strong>.<br>
+    <strong>(2)</strong> Add a script and assign a character to the apPortrait variable.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1454.jpg"/>
+    <br>
+    
+    <p>
+    There is an additional process that needs to be set.<br>
+    Even if the code is executed in <strong>LateUpdate</strong>, the script may be executed before the update of AnyPortrait according to "<strong>Script invocation order</strong>".<br>
+    So you also need to modify "<strong>Script Execution Order</strong>" to run later than AnyPortrait update.<br>
+    (You can also check this in the <a href="../../en/AdvancedManual/AD_ExecutionOrderProblem.html">related page</a>.)<br>
+    <strong>(1)</strong> In Unity settings, select <strong>Project Settings > Script Execution Order</strong>.<br>
+    <strong>(2)</strong> Add the created script and change the order to be executed later than <strong>Default Time</strong>.<br>
+    <strong>(3)</strong> Click the <strong>Apply</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1455.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you can see that the script recognizes the direction of the character and outputs it to the screen.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_SortingOrderInAttachMesh.html">< Sorting Order in attaching meshes</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_BuildiOSPlatforms.html">Build on iOS and other platforms ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>
