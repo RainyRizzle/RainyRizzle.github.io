@@ -500,6 +500,266 @@
     <br>
     <br>
     
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>커스텀 재질 만들기 (URP)</h3>
+    <br>
+    
+    <p>
+    커스텀 쉐이더를 작성하는 것처럼, Shader Graph를 이용하여 커스텀 재질을 만들 수 있습니다.<br>
+    여기서는 간단히 <strong>노멀맵 (Normal Map)</strong> 또는 <strong>범프맵 (Bump Map)</strong>을 이용하는 과정을 설명합니다.<br>
+    이 페이지의 설명을 응용하여 다양한 렌더링 기법을 적용해보세요.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>참고</strong></span><br>
+    이 페이지에서는 노멀맵과 범프맵이라는 용어를 혼용하여 표기합니다.<br>
+    이 설명은 Unity 2021을 바탕으로 작성되었으므로 유니티 버전에 따라 설정이나 UI가 다를 수 있습니다.<br>
+    또한, 이 예제는 <strong>URP (Universal Render Pipeline)</strong>의 <strong>2D Renderer</strong>가 적용된 환경에서 동작하도록 만들어졌습니다.<br>
+    렌더링 환경에 따라 Shader Graph를 적절히 설정하여 사용하세요.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1459.jpg"/>
+    <br>
+    
+    <p>
+    2개의 텍스쳐 이미지를 준비했습니다.<br>
+    재질의 표면의 굴곡을 나타내는 <strong>노멀맵 (Normal Map)</strong>과 기본적인 색상 텍스쳐입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    다음 단계는 Shader Graph를 작성하는 것입니다.<br>
+    새로운 Shader Graph를 만들거나 기존의 에셋을 복제한 후 수정하면 됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1460.jpg"/>
+    <br>
+    
+    <p>
+    새로운 Shader Graph를 추가하는 방법입니다.<br>
+    이 예제에서는 URP 환경에서 빛의 영향을 받는 재질을 만들고자 합니다.<br>
+    따라서 Asset 화면에서 "<strong>Create > Shader Graph > URP > Sprite Lit Shader Graph</strong>"를 선택합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1461.jpg"/>
+    <br>
+    
+    <p>
+    또는 AnyPortrait에서 제공하는 Shader Graph를 복제하여 수정할 수도 있습니다.<br>
+    <strong>재질 라이브러리</strong> (<a href="../../kr/AdvancedManual/AD_MaterialLibrary.html">관련 페이지</a>)에서 제공하는 <strong>URP Presets</strong>를 설치하면 몇개의 Shader Graph들이 추가됩니다.<br>
+    여기서 <strong>Assets > AnyPortrait > Assets > Shaders > Advanced > URP 2D Lit (Experimental)</strong> 폴더의 두개의 Shader Graph를 복제하여 수정하면 됩니다.<br>
+    각각 클리핑 되는 메시에 적용되는 것과 일반 메시에 적용되는 것입니다.<br>
+    원칙적으로는 두개의 Shader Graph를 복제하여 수정해야하지만, 여기서는 일반 메시에 적용되는 Shader Graph만 복제( <kbd>Ctrl+D</kbd> )하여 수정해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1462.jpg"/>
+    <br>
+    
+    <p>
+    새로 생성하거나 복제된 Shader Graph의 이름을 설정하고, Shader Graph의 설정을 확인해봅시다.<br>
+    <strong>Sprite Lit</strong> 재질이어야 제대로된 범프 재질을 만들 수 있을 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1463.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 앞선 설명을 바탕으로 필수적인 Shader Graph를 작성합니다.<br>
+    <strong>(2)</strong> <strong>Texture 2D</strong> 타입의 새로운 속성을 추가합니다. <br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1464.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 새로운 텍스쳐 속성의 이름을 <strong>BumpMap</strong>으로 설정했습니다.<br>
+    <strong>(2)</strong> <strong>BumpMap</strong> 속성의 설정을 확인합니다.<br>
+    <strong>(3)</strong> <strong>Reference</strong>의 값을 <strong>_BumpMap</strong>으로 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1465.jpg"/>
+    <br>
+    
+    <p>
+    이제 Shader Graph를 수정해봅시다.<br>
+    <strong>(1)</strong> BumpMap 속성을 위와같이 드래그하여 노드로서 배치합니다.<br>
+    <strong>(2)</strong> <strong>Sample Texture 2D</strong> 노드를 추가하여 연결합니다. 이때, <strong>Type</strong>이 <strong>Normal</strong>이어야 하며, <strong>Space</strong>의 값은 <strong>Tangent</strong>여야 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1466.jpg"/>
+    <br>
+    
+    <p>
+    기존의 Shader Graph에서의 <strong>Tiling And Offset</strong>의 결과값을 추가된 <strong>Sample Texture 2D</strong>의 <strong>UV</strong>에 연결합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1467.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 저희가 준비한 노멀맵을 적용하면 Y축 각도가 반전되는 문제가 있었습니다.<br>
+    이때는 위와 같이 <strong>Flip</strong> 노드를 이용하여 <strong>Green</strong>의 값을 반전하도록 설정하면 됩니다.<br>
+    (문제가 발생하지 않는다면 <strong>Flip</strong> 노드를 이용할 필요는 없습니다.)<br>
+    <strong>(2)</strong> 앞의 <strong>BumpMap > Sample Texture 2D</strong>로 이어지는 노드의 값을 <strong>Flip</strong> 노드를 경유하여 <strong>Normal (Tangent Space)</strong>에 연결합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 10-2. 외부 이미지+외부 링크 (가운데 정렬+새탭열기) -->
+    <a href="https://drive.google.com/file/d/1SbBiSRws8EPhCPSMhdb33oM8FEnI2ANI/view?usp=sharing" target="_sub">
+        <img class="img-fluid rounded-sm mx-auto d-block" style="max-width: 90%;" src="../../Images/Advanced/AdManual_1477.jpg"/>
+    </a>
+    <br>
+    
+    <p>
+    완성된 Shader Graph는 위와 같습니다.<br>
+    이미지를 클릭하면 큰 이미지로 확인해볼 수 있습니다.<br>
+    BumpMap 속성을 포함하여 추가된 노드들을 확인해보세요.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1468.jpg"/>
+    <br>
+    
+    <p>
+    이제 렌더링 테스트를 위한 AnyPortrait 캐릭터를 만들 차례입니다.<br>
+    준비했던 이미지 중 <strong>색상 텍스쳐</strong>를 이용하여 캐릭터를 만듭니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1469.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 루트 유닛을 선택한 화면에서 <strong>Material Library</strong> 버튼을 누릅니다.<br>
+    <strong>(2)</strong> <strong>URP Presets</strong>를 설치했다면 <strong>URP Unlit, URP Lit, URP 2D Lit</strong> 프리셋이 추가되어 있을 것입니다.<br>
+    (이 프리셋을 설정하고 활용하는 방법에 대해서는 <a href="../../kr/AdvancedManual/AD_URP.html">관련 페이지</a>를 확인해주세요.)<br>
+    <strong>(3)</strong> 새로운 <strong>재질 세트</strong>를 만들기 위해 <strong>Make Material Set</strong> 버튼을 누릅니다.<br>
+    <strong>(4)</strong> 빛이 적용되는 재질을 만들 것이므로 <strong>URP 2D Lit</strong> 프리셋을 선택하고 생성합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1470.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 생성된 <strong>재질 세트</strong>를 선택합니다.<br>
+    <strong>(2)</strong> <strong>Default Material</strong> 버튼을 눌러서 <strong>ON</strong> 상태로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1471.jpg"/>
+    <br>
+    
+    <p>
+    Shader Graph를 이용하여 작성한 커스텀 쉐이더를 적용해볼 차례입니다.<br>
+    가능하면 모든 종류(블렌딩, 클리핑, 색상 공간)에 대한 Shader Graph를 만들고 하나씩 적용해야하지만, 여기서는 가장 기본이 되는 것만 교체해봅시다.<br>
+    <strong>(1)</strong> <strong>1. Color Space : Gamma > Basic Rendering > Alpha Blend</strong>의 Shader Graph를 <strong>(2)</strong> 앞서 작성한 Shader Graph로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1472.jpg"/>
+    <br>
+    
+    <p>
+    노멀맵 텍스쳐를 적용해야 하므로 속성을 추가해야합니다.<br>
+    화면을 아래로 스크롤하여 <strong>Add Property</strong> 버튼을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1473.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 추가된 속성을 이름을 앞에서 설정했던 "<strong>_BumpMap</strong>"으로 설정합니다.<br>
+    <strong>(2)</strong> 타입을 <strong>Texture</strong>로 변경합니다.<br>
+    <strong>(3)</strong> 공통 텍스쳐를 사용할지 여부를 선택합니다.<br>
+    <strong>(4)</strong> 준비했던 노멀맵 텍스쳐를 지정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1474.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>를 실행하고 유니티 씬으로 돌아갑니다.<br>
+    URP 2D에서 사용되는 "<strong>Light 2D</strong>"들을 배치하여 공간에 빛을 추가합니다.<br>
+    하지만 노멀맵이 적용되지 않아 보입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1475.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 빛(Light 2D)을 선택합니다.<br>
+    <strong>(2)</strong> 속성 중 <strong>Normal Maps > Quality</strong>의 값이 <strong>Disabled</strong>이면 메시를 렌더링 할 때 노멀 값이 처리되지 않습니다.<br>
+    이 속성을 <strong>Fast</strong>나 <strong>Accurate</strong>로 변경합니다.<br>
+    <strong>(3)</strong> 이제 BumpMap에 지정했던 텍스쳐가 적용되어 렌더링되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1476.jpg"/>
+    <br>
+    
+    <p>
+    위와 같이 빛들을 추가하여 그럴싸한 렌더링 결과를 만들 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    여기서는 URP 2D 환경에서 노멀맵을 추가하는 Lit 재질을 만드는 간단한 예시를 설명했습니다.<br>
+    이 과정을 참고하여 다양한 렌더링 기법들을 여러분의 캐릭터에 적용해보세요!<br>
+    </p>
+    <br>
+    
     <!-- 5. 바닥 네비바 -->
     <br>
     <br>

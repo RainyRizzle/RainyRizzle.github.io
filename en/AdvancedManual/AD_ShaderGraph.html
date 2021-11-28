@@ -505,6 +505,266 @@
     <br>
     <br>
     
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Creating Custom Materials (URP)</h3>
+    <br>
+    
+    <p>
+    Just like writing custom shaders, you can use Shader Graph to create custom materials.<br>
+    The process of using <strong>Normal Map</strong> or <strong>Bump Map</strong> is briefly explained here.<br>
+    Try the various rendering techniques by learning the instructions on this page.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    In this page, the terms "normal map" and "bump map" are used interchangeably.<br>
+    This description is based on Unity 2021. Settings or UI may differ depending on the Unity version.<br>
+    Also, this example was made to work in an environment where <strong>2D Renderer</strong> of <strong>URP (Universal Render Pipeline)</strong> is applied.<br>
+    Use the Shader Graph setting appropriately according to the rendering environment.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1459.jpg"/>
+    <br>
+    
+    <p>
+    We prepared two texture images.<br>
+    These are the <strong>Normal Map</strong> representing the curvature of the surface of the material and the basic color texture.<br>
+    </p>
+    <br>
+    
+    <p>
+    The next step is to create the Shader Graph.<br>
+    Just create a new Shader Graph or clone an existing asset and edit it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1460.jpg"/>
+    <br>
+    
+    <p>
+    This is how to add a new Shader Graph.<br>
+    In this example, we want to create a material that is affected by light in a URP environment.<br>
+    So, in the Asset tab, select "<strong>Create > Shader Graph > URP > Sprite Lit Shader Graph</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1461.jpg"/>
+    <br>
+    
+    <p>
+    Alternatively, you can modify the Shader Graph provided by AnyPortrait by duplicating it.<br>
+    If you install <strong>URP Presets</strong> provided in <strong>Material Library</strong> (<a href="../../en/AdvancedManual/AD_MaterialLibrary.html">Related page</a>), some Shader Graphs are added.<br>
+    You can duplicate and modify the two Shader Graphs in the "<strong>Assets > AnyPortrait > Assets > Shaders > Advanced > URP 2D Lit (Experimental)</strong>" folder.<br>
+    These will be applied to meshes being clipped and to normal meshes respectively.<br>
+    In principle, you should duplicate and modify two Shader Graphs, but in this guide, let's modify only the Shader Graph for a normal mesh by duplicating ( <kbd>Ctrl+D</kbd> ).<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1462.jpg"/>
+    <br>
+    
+    <p>
+    Let's set the name of the newly created or cloned Shader Graph and check the Shader Graph settings.<br>
+    This has to be the <strong>Sprite Lit</strong> material, which is able to be a proper bump material.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1463.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Make an essential Shader Graph based on the above explanation.<br>
+    <strong>(2)</strong> Add a new property of the <strong>Texture 2D</strong> type.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1464.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Set the name of the new texture property to "<strong>BumpMap</strong>".<br>
+    <strong>(2)</strong> Check the setting of the "<strong>BumpMap</strong>" property.<br>
+    <strong>(3)</strong> Set the value of "<strong>Reference</strong>" to "<strong>_BumpMap</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1465.jpg"/>
+    <br>
+    
+    <p>
+    Now let's modify the Shader Graph.<br>
+    <strong>(1)</strong> Drag the <strong>BumpMap</strong> property as above and place it as a node.<br>
+    <strong>(2)</strong> Add and connect the "<strong>Sample Texture 2D</strong>" node. At this time, <strong>Type</strong> should be "<strong>Normal</strong>", and the value of <strong>Space</strong> should be "<strong>Tangent</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1466.jpg"/>
+    <br>
+    
+    <p>
+    Connect the result value of "<strong>Tiling And Offset</strong>" in the existing Shader Graph to "<strong>UV</strong>" of the added "<strong>Sample Texture 2D</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1467.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> When we applied the normal map we prepared, there was a problem that the Y-axis angle was inverted.<br>
+    In this case, use the "<strong>Flip</strong>" node as above to invert the value of <strong>Green</strong>.<br>
+    (You don't need to use the <strong>Flip</strong> node if that doesn't happen.)<br>
+    <strong>(2)</strong> Connect the value of the node connected to the previous "<strong>BumpMap > Sample Texture 2D</strong>" to "<strong>Normal (Tangent Space)</strong>" via the "<strong>Flip</strong>" node.<br>
+    </p>
+    <br>
+    
+    <!-- 10-2. 외부 이미지+외부 링크 (가운데 정렬+새탭열기) -->
+    <a href="https://drive.google.com/file/d/1SbBiSRws8EPhCPSMhdb33oM8FEnI2ANI/view?usp=sharing" target="_sub">
+        <img class="img-fluid rounded-sm mx-auto d-block" style="max-width: 90%;" src="../../Images/Advanced/AdManual_1477.jpg"/>
+    </a>
+    <br>
+    
+    <p>
+    The completed Shader Graph is as above.<br>
+    Click on the image to see a larger image.<br>
+    Check the added nodes with the "BumpMap" property.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1468.jpg"/>
+    <br>
+    
+    <p>
+    Now it's time to create the AnyPortrait character to test rendering.<br>
+    Create a character using <strong>Color texture</strong> of the prepared images.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1469.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Material Library</strong> button on the screen where the root unit is selected.<br>
+    <strong>(2)</strong> If <strong>URP Presets</strong> is installed, "<strong>URP Unlit, URP Lit, URP 2D Lit</strong>" presets will be added.<br>
+    (For how to set and use this preset, please check the <a href="../../en/AdvancedManual/AD_URP.html">related page</a>.)<br>
+    <strong>(3)</strong> Click the <strong>Make Material Set</strong> button to create a new <strong>Material Set</strong>.<br>
+    <strong>(4)</strong> Since we are going to create a material to which the light will be applied, select the "<strong>URP 2D Lit</strong>" preset and create it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1470.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the created <strong>Material Set</strong>.<br>
+    <strong>(2)</strong> Press the <strong>Default Material</strong> button to change it to <strong>ON</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1471.jpg"/>
+    <br>
+    
+    <p>
+    It's time to apply a custom shader written using Shader Graph.<br>
+    If possible, you should create Shader Graphs for every kind (blending, clipping, color space) and apply them one by one, but let's replace only the most basic item in here.<br>
+    <strong>(1)</strong> Change the Shader Graph of "<strong>1. Color Space : Gamma > Basic Rendering > Alpha Blend</strong>" <strong>(2)</strong> to the Shader Graph created earlier.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1472.jpg"/>
+    <br>
+    
+    <p>
+    We need to apply a normal map texture, so we need to add a property.<br>
+    Scroll down the screen and click the <strong>Add Property</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1473.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Set the name of the added property to "<strong>_BumpMap</strong>" previously set.<br>
+    <strong>(2)</strong> Change the type to <strong>Texture</strong>.<br>
+    <strong>(3)</strong> Select whether to use a <strong>Common texture</strong> or not.<br>
+    <strong>(4)</strong> Assign the prepared <strong>Normal Map texture</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1474.jpg"/>
+    <br>
+    
+    <p>
+    Run the <strong>Bake</strong> and return to the Unity scene.<br>
+    Add lights to scene by placing "<strong>Light 2D</strong>" used in URP 2D.<br>
+    But it seems that the normal map is not applied.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1475.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select "Light 2D".<br>
+    <strong>(2)</strong> If the value of "<strong>Normal Maps > Quality</strong>" among properties is <strong>Disabled</strong>, the normal value is not processed when rendering the mesh.<br>
+    Change this property to <strong>Fast</strong> or <strong>Accurate</strong>.<br>
+    <strong>(3)</strong> Now you can see that the texture specified in the <strong>BumpMap</strong> is applied and rendered.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1476.jpg"/>
+    <br>
+    
+    <p>
+    You can create a nice rendering result by adding lights as above.<br>
+    </p>
+    <br>
+    
+    <p>
+    In this description, we have given you a simple example of creating a Lit material that adds a normal map in a URP 2D environment.<br>
+    Please refer to this process to apply various rendering techniques to your character!<br>
+    </p>
+    <br>
+    
     <!-- 5. 바닥 네비바 -->
     <br>
     <br>

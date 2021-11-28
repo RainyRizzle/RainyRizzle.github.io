@@ -500,6 +500,266 @@
     <br>
     <br>
     
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>カスタムマテリアルの作成（URP）</h3>
+    <br>
+    
+    <p>
+    カスタムシェーダを作成するのと同じように、Shader Graphを使用してカスタムマテリアルを作成できます。<br>
+    ここでは、単に「<strong>Normal Map</strong>」または「<strong>Bump Map</strong>」を使用するプロセスについて説明します。<br>
+    このページの説明を応用して、さまざまなレンダリング手法を適用してください。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注</strong></span><br>
+    このページでは、「Normal Map」と「Bump Map」という用語を混用して表記します。<br>
+    この説明は「Unity 2021」に基づいて書かれています。Unityのバージョンによって設定やUIが異なる場合があります。<br>
+    また、この例は、「<strong>URP（Universal Render Pipeline）</strong>」の「<strong>2D Renderer</strong> 」が適用された環境で動作するように作成されました。<br>
+    レンダリング環境に応じてShader Graphを適切に設定して使用してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1459.jpg"/>
+    <br>
+    
+    <p>
+    2つのテクスチャ画像を用意しました。<br>
+    材質の表面の凹凸を表現する「Normal Map」と基本的な「カラーテクスチャ」です。<br>
+    </p>
+    <br>
+    
+    <p>
+    次のステップはShader Graphを書くことです。<br>
+    新しいShader Graphを作成するか、既存のアセットを複製して修正します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1460.jpg"/>
+    <br>
+    
+    <p>
+    新しい Shader Graph を追加する方法です。<br>
+    この例では、URP環境で光の影響を受けるシェーダを作成したいと思います。<br>
+    したがって、Asset画面で「<strong>Create > Shader Graph > URP > Sprite Lit Shader Graph</strong>」を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1461.jpg"/>
+    <br>
+    
+    <p>
+    または、AnyPortraitが提供するShader Graphを複製して変更することもできます。<br>
+    <strong>マテリアルライブラリ</strong>（<a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">関連ページ</a>）で提供される「<strong>URP Presets</strong>」をインストールすると、いくつかのShader Graphが追加されます。<br>
+    ここでは、「<strong>Assets > AnyPortrait > Assets > Shaders > Advanced > URP 2D Lit （Experimental）</strong>」フォルダ内の 2 つの Shader Graph を複製して修正するだけです。<br>
+    それぞれクリッピングされるメッシュに適用されるものと、通常のメッシュに適用されるものです。<br>
+    原則として、2つのShader Graphを複製して修正する必要がありますが、ここでは通常のメッシュに適用されるShader Graphだけを複製（ <kbd>Ctrl+D</kbd> ）して修正してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1462.jpg"/>
+    <br>
+    
+    <p>
+    新しく作成または複製されたShader Graphの名前を設定し、Shader Graphの設定を確認しましょう。<br>
+    「<strong>Sprite Lit</strong>」に設定されていると、正しく「Bump」材質を作成できるはずです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1463.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 前の説明に基づき、必須の Shader Graph を作成します。<br>
+    <strong>(2)</strong> 「<strong>Texture 2D</strong>」タイプの新しい属性を追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1464.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 新しいテクスチャ属性の名前を「<strong>BumpMap</strong>」に設定しました。<br>
+    <strong>(2)</strong> 「<strong>BumpMap</strong>」プロパティの設定を確認します。<br>
+    <strong>(3)</strong> 「<strong>Reference</strong>」の値を「<strong>_BumpMap</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1465.jpg"/>
+    <br>
+    
+    <p>
+    それではShader Graphを修正してみましょう。<br>
+    <strong>(1)</strong> 「BumpMap」プロパティを上記のようにドラッグしてノードとして配置します。<br>
+    <strong>(2)</strong> 「<strong>Sample Texture 2D</strong>」ノードを追加して接続します。 このとき、「<strong>Type</strong>」は「<strong>Normal</strong>」でなければならず、「<strong>Space</strong>」の値は「<strong>Tangent</strong>」でなければなりません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1466.jpg"/>
+    <br>
+    
+    <p>
+    既存のShader Graphの「<strong>Tiling And Offset</strong>」の結果値を追加された「<strong>Sample Texture 2D</strong>」の「<strong>UV</strong>」に接続します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1467.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> このとき、「Normal Map」を適用すると「Y軸角度」が反転する問題がありました。<br>
+    このときは、上記のように「<strong>Flip</strong>」ノードを利用して「<strong>Green</strong>」の値を反転するように設定すればよい。<br>
+    （問題が発生しない場合は、<strong>Flip</strong>ノードを使用する必要はありません。）<br>
+    <strong>(2)</strong> 前の「<strong>BumpMap > Sample Texture 2D</strong>」につながるノードの値を<strong>Flip</strong>ノードを経由して「<strong>Normal (Tangent Space)</strong>」に接続します。<br>
+    </p>
+    <br>
+    
+    <!-- 10-2. 외부 이미지+외부 링크 (가운데 정렬+새탭열기) -->
+    <a href="https://drive.google.com/file/d/1SbBiSRws8EPhCPSMhdb33oM8FEnI2ANI/view?usp=sharing" target="_sub">
+        <img class="img-fluid rounded-sm mx-auto d-block" style="max-width: 90%;" src="../../Images/Advanced/AdManual_1477.jpg"/>
+    </a>
+    <br>
+    
+    <p>
+    完成したShader Graphは上記と同じです。<br>
+    画像をクリックすると大きな画像で確認できます。<br>
+    「BumpMap」プロパティを含む追加されたノードを確認してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1468.jpg"/>
+    <br>
+    
+    <p>
+    これで、レンダリングテスト用のAnyPortraitキャラクターを作成します。<br>
+    用意した画像のうち、「カラーテクスチャ」を利用してキャラクターを作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1469.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ルートユニットを選択した画面で「<strong>Material Library</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>URP Presets</strong>」をインストールした場合は、「<strong>URP Unlit、URP Lit、URP 2D Lit</strong>」プリセットが追加されているはずです。<br>
+    （このプリセットを設定して活用する方法については、<a href="../../jp/AdvancedManual/AD_URP.html">関連ページ</a>を確認してください。）<br>
+    <strong>(3)</strong> 新しい「マテリアルセット（Material Set）」を作成するには、<strong>Make Material Set</strong>ボタンを押します。<br>
+    <strong>(4)</strong> 光が適用されるマテリアルを作成するので、「<strong>URP 2D Lit</strong>」プリセットを選択して生成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1470.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 作成した「マテリアルセット」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Default Material</strong>」ボタンを押して「<strong>ON</strong>」状態に切り替えます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1471.jpg"/>
+    <br>
+    
+    <p>
+    Shader Graphを使って作成したカスタムシェーダを適用してみましょう。<br>
+    可能であれば、すべての種類（ブレンディング、クリッピング、カラースペース）に対してShader Graphを作成して1つずつ適用する必要がありますが、ここでは最も基本的なものだけを置き換えてみましょう。<br>
+    <strong>(1)</strong> 「<strong>1. Color Space : Gamma > Basic Rendering > Alpha Blend</strong>」のShader Graph を <strong>(2)</strong> 先ほど作成した Shader Graph に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1472.jpg"/>
+    <br>
+    
+    <p>
+    「Normal Map」テクスチャを適用する必要があるため、プロパティを追加する必要があります。<br>
+    画面を下にスクロールして「<strong>Add Property</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1473.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 追加された属性を名前を前に設定した「<strong>_BumpMap</strong>」に設定します。<br>
+    <strong>(2)</strong> タイプを「<strong>Texture</strong>」に変更します。<br>
+    <strong>(3)</strong> 「Common Texture」を使用するかどうかを選択します。<br>
+    <strong>(4)</strong> 用意した「Normal Map」テクスチャを指定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1474.jpg"/>
+    <br>
+    
+    <p>
+    「Bake」を実行してUnityシーンに戻ります。<br>
+    「URP 2D」で使用される「<strong>Light 2D</strong>」を配置して、空間に光を追加します。<br>
+    しかし、「Normal Map」が適用されていないようです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1475.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 光（Light 2D）を選択します。<br>
+    <strong>(2)</strong> 属性のうち 「<strong>Normal Maps > Quality</strong>」の値が「Disabled」の場合、メッシュをレンダリングする際に「Normal」の値は処理されません。<br>
+    このプロパティを「<strong>Fast</strong>」または「<strong>Accurate</strong>」に変更します。<br>
+    <strong>(3)</strong> 「BumpMap」で指定したテクスチャが適用され、レンダリングされることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1476.jpg"/>
+    <br>
+    
+    <p>
+    上記のように光を追加して素晴らしいレンダリング結果を作成できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    ここでは、「URP 2D」環境で「Normal Map」を追加する「Lit Shader」を作成する簡単な例を説明しました。<br>
+    このプロセスを参考に、さまざまなレンダリング手法をあなたのキャラクターに適用してください！<br>
+    </p>
+    <br>
+    
     <!-- 5. 바닥 네비바 -->
     <br>
     <br>
