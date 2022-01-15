@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>씬에서의 라이팅 설정</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_LightingScene.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_LightingScene.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_LightingScene.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > 씬에서의 라이팅 설정</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">씬에서의 라이팅 설정</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.5</span></h4>
+    
+    <p>
+    AnyPortrait에서 작업한 캐릭터가 유니티 씬에서는 지나치게 밝게 보여질 수 있습니다.<br>
+    이것은 AnyPortrait의 기본 재질이 <strong>Ambient Color</strong>의 영향을 받기 때문입니다.<br>
+    반대로, 빛의 영향을 받도록 설정해야하는 경우도 있습니다.<br>
+    이 페이지에서는 유니티 씬에서 라이팅 설정을 어떻게 해야하는지에 대해서 간단히 다뤄봅니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>빛을 제거하여 원래의 색상이 보여지게 만들기</h3>
+    <br>
+    
+    <p>
+    기본 재질(Unlit)을 이용하는 경우, 이미지의 색상이 그대로 렌더링되도록 설정해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1479.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait 에디터로 제작한 캐릭터를 <strong>Bake</strong>를 한 후, 유니티 씬에서 확인한 결과입니다.<br>
+    원래의 이미지보다 다소 밝게 렌더링이 된 상태입니다.<br>
+    유니티는 3D 게임 엔진이므로, 처음 프로젝트를 만들고 씬을 생성하면 기본적으로 빛이 추가되어있습니다.<br>
+    하지만 여기서는 이러한 빛 설정이 오히려 이미지의 색상을 제대로 표현하지 못하게 만듭니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1480.jpg"/>
+    <br>
+    
+    <p>
+    유니티 메뉴에서 <strong>Window > Rendering > Lighting</strong>을 선택합니다.<br>
+    (Lighting 메뉴의 위치는 유니티 버전마다 다를 수 있습니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1481.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Environment</strong> 탭을 선택합니다.<br>
+    <strong>(2)</strong> <strong>Environment Lighting</strong>의 <strong>Source</strong>의 값을 <strong>Color</strong>로 변경합니다.<br>
+    <strong>(3)</strong> <strong>Ambient Color</strong>를 <span class="text-danger"><strong>검은색</strong></span>으로 변경합니다.<br>
+    <strong>(4)</strong> 이제 이미지의 색상이 정상적으로 표현되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1482.jpg"/>
+    <br>
+    
+    <p>
+    유니티의 기본 씬에는 <strong>Directional Light</strong>가 배치되어 있습니다.<br>
+    하지만 이 경우엔 빛이 필요가 없습니다.<br>
+    <strong>(1)</strong> <strong>Directional Light</strong>를 포함해서 씬에 배치된 빛 객체들을 삭제합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>참고</strong></span><br>
+    Unlit 재질을 사용할 때, <strong>Bake</strong>를 수행하면 자동으로 <strong>Ambient Color</strong>를 검은색으로 변경하는 기능이 동작합니다.<br>
+    이에 대한 자세한 설명은 <a href="../../kr/AdvancedManual/AD_BakeDialog.html">관련 페이지</a>를 참고해주세요.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>빛의 영향을 받도록 설정하기</h3>
+    <br>
+    
+    <p>
+    이번엔 반대로, <strong>Lit</strong> 재질을 이용하여 빛에 따라 밝아지거나 어두워지도록 설정해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1483.jpg"/>
+    <br>
+    
+    <p>
+    <strong>재질 라이브러리</strong>(<a href="../../kr/AdvancedManual/AD_MaterialLibrary.html">관련 페이지</a>)를 이용하여 Lit 재질, 또는 비슷한 성질을 가진 재질로 설정된 상태입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1484.jpg"/>
+    <br>
+    
+    <p>
+    빛이 없다면 유니티 씬에서는 캐릭터가 어둡게 렌더링될 것입니다.<br>
+    <strong>(1)</strong> 위에서 설명된 <strong>Lighting</strong> 설정에서의 <strong>Ambient Color</strong>를 <span class="text-danger"><strong>검은색이 아닌 색상</strong></span>으로 설정합니다.<br>
+    <strong>(2)</strong> 캐릭터의 색상이 빛에 따라 바뀌는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1485.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 빛 객체들을 씬에 배치하면 <strong>(2)</strong> 빛에 따라 멋지게 렌더링되는 캐릭터를 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>참고</strong></span><br>
+    만약 <strong>URP 2D</strong>를 이용하는 경우, 다른 종류의 빛을 이용해야합니다.<br>
+    이에 대한 내용은 <a href="../../kr/AdvancedManual/AD_URP.html">관련 페이지</a>를 참고해주세요.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_CameraScene.html">< 씬에서의 카메라 설정</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_MaterialLibrary.html">재질 라이브러리 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

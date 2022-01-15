@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>シーンの照明設定</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_LightingScene.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_LightingScene.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_LightingScene.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > シーンの照明設定</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">シーンの照明設定</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.5</span></h4>
+    
+    <p>
+    AnyPortraitで作業したキャラクターは、Unityシーンでは明るく過度に見えることがあります。<br>
+    これは、AnyPortraitの基本マテリアルが「<strong>Ambient Color</strong>」の影響を受けるためです。<br>
+    逆に、光の影響を受けるように設定する必要がある場合もあります。<br>
+    このページでは、Unityシーンでライティング設定を行う方法について簡単に説明します。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>画像の元の色が見えるように設定</h3>
+    <br>
+    
+    <p>
+    基本マテリアル(Unlit)を利用する場合、イメージの色がそのままレンダリングされるように設定してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1479.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitエディタで制作したキャラクターを「<strong>Bake</strong>」をした後、Unityシーンで確認した結果です。<br>
+    元の画像よりやや明るくレンダリングされた状態です。<br>
+    Unityは3Dゲームエンジンなので、初めてプロジェクトを作成してシーンを作成すると基本的に光が追加されています。<br>
+    しかし、ここでは、これらの光の設定はむしろ画像の色を正しく表現しません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1480.jpg"/>
+    <br>
+    
+    <p>
+    Unityメニューから、<strong>Window > Rendering > Lighting</strong>を選択します。<br>
+    (「Lighting」メニューの位置は Unity バージョンによって異なる場合があります。)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1481.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Environment</strong>」タブを選択します。<br>
+    <strong>(2)</strong> 「<strong>Environment Lighting</strong>」の「<strong>Source</strong>」の値を「<strong>Color</strong>」に変更します。<br>
+    <strong>(3)</strong> 「<strong>Ambient Color</strong>」を「<span class="text-danger">黒</span>」に変更します。<br>
+    <strong>(4)</strong> 色が正常に表示されることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1482.jpg"/>
+    <br>
+    
+    <p>
+    Unityのデフォルトシーンには「<strong>Directional Light</strong>」が配置されています。<br>
+    しかし、この場合は光は必要ありません。<br>
+    <strong>(1)</strong> 「<strong>Directional Light</strong>」を含めてシーンに配置された光オブジェクトを削除します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>参考</strong></span><br>
+    「Unlit」マテリアルを使用する場合、「Bake」を行うと自動的に「Ambient Color」を「黒」に変更する機能が動作します。<br>
+    これについての詳細は、<a href="../../jp/AdvancedManual/AD_BakeDialog.html">関連ページ</a>を参照してください。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>光の影響を受けるように設定</h3>
+    <br>
+    
+    <p>
+    今度は逆に、「<strong>Lit</strong>」マテリアルを使って光によって明るくなるか暗くなるように設定してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1483.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>マテリアルライブラリ</strong>」（<a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">関連ページ</a>）を使用して、「Litマテリアル」または「Litに似たマテリアル」に設定されています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1484.jpg"/>
+    <br>
+    
+    <p>
+    光がなければ、ユニティシーンではキャラクターが暗くレンダリングされます。<br>
+    <strong>(1)</strong> 上記の「<strong>Lighting</strong>」設定の「<strong>Ambient Color</strong>」を「<span class="text-danger">黒以外の色</span>」に設定します。<br>
+    <strong>(2)</strong> キャラクターの色が光によって変わるのがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1485.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 光オブジェクトをシーンに配置すると、<strong>(2)</strong> 光に応じて素敵にレンダリングされたキャラクターを見ることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>参考</strong></span><br>
+    「<strong>URP 2D</strong>」を使用する場合は、他の種類の光を使用する必要があります。<br>
+    これについては、<a href="../../jp/AdvancedManual/AD_URP.html">関連ページ</a>を参照してください。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_CameraScene.html">< シーンのカメラ設定</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_MaterialLibrary.html">マテリアルライブラリ ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

@@ -710,6 +710,30 @@
     <!-- 17. 스크립트 설명 박스 -->
     <div class="card">
     <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomTextureOffsetAll</strong> <span class="text-muted">( </span><span class="text-success">Vector2</span> <span class="text-muted">textureOffsetValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomTextureScaleAll</strong> <span class="text-muted">( </span><span class="text-success">Vector2</span> <span class="text-muted">textureScaleValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.3.5</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Change the value of Offset or Scale of custom texture property of all meshes.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> textureOffsetValue : Offset of the texture propertie<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Vector2</span> textureScaleValue : Scale of the texture propertie<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Texture property name<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatch</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatch</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ResetMeshMaterialToBatch</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName )</span>
@@ -764,6 +788,48 @@
     <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : The name of the apOptTexture to reference. (Name of the Image of the editor.)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>MergeMaterials</strong> <span class="text-muted">( </span><span class="text-primary">params</span> <span class="text-success">apPortrait</span><span class="text-muted">[]</span><span class="text-success"></span> <span class="text-muted">otherPortraits )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.3.5</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Reduces draw calls by merging materials, including the character the function is called on and other characters input as arguments.<br>
+    &nbsp;&nbsp;&nbsp;apPortraits with merged materials share the behavior of the functions changing materials in a batch.<br>
+    &nbsp;&nbsp;&nbsp;When materials are merged, the behavior of some functions change.<br>
+    &nbsp;&nbsp;&nbsp;When this function is called, the "ResetMeshMaterialToBatchAll<strong>()</strong>" function is executed inside.<br>
+    &nbsp;&nbsp;&nbsp;For more information, please refer to the <a href="../../en/AdvancedManual/AD_MergeMaterials.html">related page</a>.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">params</span> <span class="text-success">apPortrait</span><span class="text-muted">[]</span><span class="text-success"></span> otherPortraits : Enter other apPortraits. You can enter one or more or none by the params keyword.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>UnmergeMaterials</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.3.5</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Unmerge materials.<br>
+    &nbsp;&nbsp;&nbsp;All apPortraits connected to this apPortrait are treated in the same way, so you only need to call this function once.<br>
+    &nbsp;&nbsp;&nbsp;When this function is called, the "ResetMeshMaterialToBatchAll<strong>()</strong>" function is executed inside.<br>
     </p>
     
     </div>

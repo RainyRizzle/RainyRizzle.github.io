@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>スクリプトで更新時間を制御</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ControlUpdateRate.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ControlUpdateRate.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_ControlUpdateRate.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > スクリプトで更新時間を制御</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">スクリプトで更新時間を制御</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.5</span></h4>
+    
+    <p>
+    ゲームにはさまざまな演出技法が使われており、代表的な技法は再生速度を調節することです。<br>
+    ゲーム全体のスピードを速くまたは遅くして緊張感のあるプレイを提供したり、特定のキャラクターのアニメーション速度だけを制御して面白い効果を見せることもできます。<br>
+    デフォルトでは、Unityの<strong>Time</strong>クラスを使用してゲームの速度を調整できます。<br>
+    ここに加えて、AnyPortraitのキャラクターのアニメーション再生速度をスクリプトで制御できます。<br>
+    このページでは、アニメーションの再生速度を制御するスクリプトの例を紹介します。<br>
+    </p>
+    <br>
+    
+    <p>
+    スクリプト関数の説明は、<a href="../../jp/Script/SC_Init.html">関連ページ</a>でも参照できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1542.jpg"/>
+    <br>
+    
+    <p>
+    スクリプトの例を示すために、上記のように4つの同じキャラクターを配置しました。<br>
+    以下のスクリプト例の結果は、ページ下部の動画で見ることができます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>ゲームプレイ速度を変更</h3>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    void Update()<br>
+    {<br>
+    &emsp;&emsp;// Qキーを押すと、ゲームの速度がデフォルト値（1）に戻ります。<br>
+    &emsp;&emsp;if (Input.GetKeyDown(KeyCode.Q))<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Time.timeScale = 1.0f;<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// Wキーを押すとゲームのスピードが3倍になります。<br>
+    &emsp;&emsp;if (Input.GetKeyDown(KeyCode.W))<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Time.timeScale = 3.0f;<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    「<strong>Time.deltaTime</strong>」を利用するすべてのオブジェクトは、ゲームの倍速の影響を受けます。<br>
+    AnyPortraitで制作されたキャラクターも基本的にゲーム配速の影響を受けます。<br>
+    下の映像のすべての場合は、それぞれ全体ゲームの倍速が1倍と3倍の時を比較して示しています。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>方法 1: 倍率を指定</h3>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    void Update()<br>
+    {<br>
+    &emsp;&emsp;// (省略)<br>
+    &emsp;&emsp;// Aキーを押すと、倍速オプションがすべて初期化されます。<br>
+    &emsp;&emsp;if (Input.GetKeyDown(KeyCode.A))<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;portraitA.<strong>SetUpdateTimeMethod(false);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;portraitB.<strong>SetUpdateTimeMethod(false);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;portraitC.<strong>SetUpdateTimeMethod(false);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;portraitD.<strong>SetUpdateTimeMethod(false);</strong><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// Sキーを押すと倍率を指定します。<br>
+    &emsp;&emsp;if (Input.GetKeyDown(KeyCode.S))<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;portraitA.<strong>SetUpdateTimeMethod(false);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;portraitB.<strong>SetUpdateTimeMethod(false, 1.5f);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;portraitC.<strong>SetUpdateTimeMethod(true);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;portraitD.<strong>SetUpdateTimeMethod(true, 1.5f);</strong><br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    「<strong>SetUpdateTimeMethod(bool useUnscaleDeltaTime, float multiplier)</strong>」関数は、ゲーム全体の更新速度に基づいて一定の倍速を乗じてアニメーション速度を決めます。<br>
+    - <strong>bool useUnscaleDeltaTime</strong> : デフォルト値「<strong>false</strong>」と入力すると、「ゲームの倍速（Time.timeScale）」の影響を受けます。 「<strong>true</strong>」と入力すると、ゲームの倍速の影響を受けません。<br>
+    - <strong>float multiplier</strong> : ゲーム全体のアップデート速度に「倍率」を乗じてアップデート時間を決定します。 入力しない場合、1 が乗算されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    倍速設定をデフォルト値に戻したい場合は、「<strong>SetUpdateTimeMethod(false)</strong>」で作成してください。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>方法 2: コールバック関数の使用</h3>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    void Update()<br>
+    {<br>
+    &emsp;&emsp;// (省略)<br>
+    &emsp;&emsp;// Dキーを押すと、コールバック関数で再生速度を決定します。<br>
+    &emsp;&emsp;if (Input.GetKeyDown(KeyCode.D))<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;portraitA.<strong>SetUpdateTimeMethod(OnDeltaTimeRequested, portraitA);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;portraitB.<strong>SetUpdateTimeMethod(OnDeltaTimeRequested, portraitB);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;portraitC.<strong>SetUpdateTimeMethod(OnDeltaTimeRequested, portraitC);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;portraitD.<strong>SetUpdateTimeMethod(OnDeltaTimeRequested, portraitD);</strong><br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    // 各apPortraitの再生速度を返すコールバック関数。<br>
+    private float <strong>OnDeltaTimeRequested</strong>(object savedObject)<br>
+    {<br>
+    &emsp;&emsp;// 保存されたオブジェクトに応じて異なる再生速度を返します。<br>
+    &emsp;&emsp;if (savedObject == (object)portraitA)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;return Time.deltaTime / 2.0f;<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;else if (savedObject == (object)portraitB)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;return Time.deltaTime * 3.0f;<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;else if (savedObject == (object)portraitC)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;return Time.unscaledDeltaTime / 2.0f;<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;else if (savedObject == (object)portraitD)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;return Time.unscaledDeltaTime * 3.0f;<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;return Time.deltaTime;<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    「<strong>SetUpdateTimeMethod(OnDeltaTimeRequested onDeltaTimeRequested, object savedObject)</strong>」関数は、より柔軟に再生速度を変更できます。<br>
+    この関数が呼び出されるフレームのゲーム時間を返すだけで、戻り値を変更して、アニメーションをすばやく再生するように変更できます。<br>
+    この方法の素晴らしい点は、返されるゲーム時間の値をリアルタイムで変更できることです。<br>
+    たとえば、ゲームでキャラクターが「動きが遅くなる魔法攻撃」に当たってしまい、一定時間の動作が遅くなることをこの関数を利用して簡単に表現できます。<br>
+    あるいは、再生速度が徐々に変化することを表現するのも簡単です。<br>
+    「<strong>savedObject</strong>」と入力しておくと、上記のようにこの関数がどのキャラクターを対象に呼び出されるのかを区別できます。<br>
+    「<strong>Time.deltaTime</strong>」を利用すると、ゲームの倍速の影響を受けることができます。<br>
+    逆に、「<strong>Time.unscaledDeltaTime</strong>」を使用すると、ゲームのスピードに影響されないオブジェクトを作成することもできます。<br>
+    独自のシステムを実装して、Unityの時間とは異なる別々のゲーム速度を実装することも可能です。<br>
+    </p>
+    <br>
+    
+    <p>
+    上記のそれぞれの場合による再生速度の違いを下の動画で確認してみてください。<br>
+    </p>
+    <br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/PKiktsprN68" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>参考</strong></span><br>
+    apPortraitの更新速度変更関数には、次の制限があります。<br>
+    - 「Mecanim」を使用する場合は適用されず、この場合はクリップの速度に従います。<br>
+    - 物理機能には適用されません。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_MultipleDirectionCharacter.html">< 複数方向の姿を持つキャラクターを作</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_BuildiOSPlatforms.html">iOSと他のプラットフォーム ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Merge Materials</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_MergeMaterials.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MergeMaterials.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_MergeMaterials.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Merge Materials</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Merge Materials</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.5</span></h4>
+    
+    <p>
+    AnyPortrait uses a method of rendering multiple Mesh Renderers in order.<br>
+    However, this method can lead to a significant increase in draw calls.<br>
+    So AnyPortrait has various systems to reduce draw calls. (<a href="../../en/AdvancedManual/AD_ReduceDrawCalls.html">Related page</a>)<br>
+    </p>
+    <br>
+    
+    <p>
+    However, the existing draw call optimization system has a limitation in that it works only when the image and material are the same.<br>
+    If a single character contains more than one image, or if you want to synchronize two characters to look like one character, this limitation is greatly emphasized.<br>
+    </p>
+    <br>
+    
+    <p>
+    The "<strong>Merging Materials</strong>" function added in AnyPortrait v1.3.5 relaxes this limitation a bit more.<br>
+    Even if the images are different, multiple materials can be rendered at once if the <strong>Shader</strong> is the same..<br>
+    </p>
+    <br>
+    
+    <p>
+    This page covers how to use the <strong>Merging Materials</strong> function, main features, and points to note.<br>
+    In particular, we will explain using an example of <strong>Synchronizing characters</strong> that can use this function effectively.<br>
+    Scripts related to <strong>Synchronizing characters</strong> are not introduced in detail on this page, so please refer to the <a href="../../en/AdvancedManual/AD_SyncBonesToChangeCostumes.html">related page</a> instead.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Relationship between draw calls and execution performance</h4>
+    <br>
+    
+    <p>
+    Unity's optimization guide tells you to keep draw calls as low as possible.<br>
+    In fact, draw call optimization is the number one performance optimization practice for all game engines.<br>
+    </p>
+    <br>
+    
+    <p>
+    Conversely, this is seen as an important challenge for engine developers as well as engine users.<br>
+    Likewise, Unity is also gradually reducing the impact of draw calls on execution performance.<br>
+    (According to the forum, it seems to be effectively managed since Unity 5.)<br>
+    </p>
+    <br>
+    
+    <p>
+    So, modern engine users don't have much of a problem with loose draw call management.<br>
+    Unless you're aiming to run on a device with limited specs, you won't get much of an execution performance gain by struggling to optimize draw calls.<br>
+    This is because the optimization performance of Unity itself has been improved sufficiently.<br>
+    (In particular, <strong>SRP Batch</strong>, which will be described later, is representative.)<br>
+    </p>
+    <br>
+    
+    <p>
+    As a result, you don't have to stress about draw calls ahead of time, as long as your project's performance is fine.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Merge materials from two or more characters</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1512.jpg"/>
+    <br>
+    
+    <p>
+    For explanation, we have prepared an example of attaching a character's costume. (<a href="../../en/AdvancedManual/AD_SyncBonesToChangeCostumes.html">Related page</a>)<br>
+    In this example, the "<strong>MainCharacter</strong>" and "<strong>Costume</strong>" objects are synchronized with each other and act as a single character.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1513.jpg"/>
+    <br>
+    
+    <p>
+    However, as the meshes of "<strong>Costume</strong>" are placed between the meshes of "<strong>MainCharacter</strong>", the draw call increases significantly as above.<br>
+    This is because "<strong>MainCharacter</strong>" and "<strong>Costume</strong>" each have different images and the draw calls could not be merged.<br>
+    3 draw calls are expected (background and 2 character objects), but in reality 14 more were shown.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1514.jpg"/>
+    <br>
+    
+    <p>
+    Let's run "<strong>Frame Debugger</strong>" to see the rendering process in detail.<br>
+    Run "<strong>Window > Analysis > Frame Debugger</strong>" in the Unity menu.<br>
+    (The location of the menu may vary by version of Unity.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1515.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Run the game and click the <strong>Enable</strong> button.<br>
+    <strong>(2)</strong> You can see the current rendering information.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1516.jpg"/>
+    <br>
+    
+    <p>
+    Above is an image showing the rendering steps one by one in order.<br>
+    You can see the meshes from "<strong>MainCharacter</strong>" and meshes from "<strong>Costume</strong>" are rendered alternately.<br>
+    If the materials isn't merged, you can see that the draw calls as above can be increased.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1517.jpg"/>
+    <br>
+    
+    <p>
+    In order to use the <strong>Merging Materials</strong> function, you must use a dedicated material.<br>
+    <strong>(1)</strong> Open AnyPortrait editor, select a character, and select a <strong>Root Unit</strong>.<br>
+    <strong>(2)</strong> Press the <strong>Material Library</strong> button.<br>
+    (For more information on how to use the material library, please refer to <a href="../../en/AdvancedManual/AD_MaterialLibrary.html">Related page</a>.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1518.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select “<strong>Mergeable Presets</strong>” among presets.<br>
+    (If your project's render pipeline is set to URP, select "<strong>URP (2021) Presets</strong>" instead.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1519.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> With the preset selected, press the <strong>Unpack Preset</strong> button.<br>
+    <strong>(2)</strong> After installing the package, a message appears indicating that the material library must be restarted. Press the <strong>Okay</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1520.jpg"/>
+    <br>
+    
+    <p>
+    All packages are installed and open the material library again.<br>
+    You can see the installed "<strong>Mergeable</strong>" presets.<br>
+    There are two material presets: <strong>Unlit</strong> material and <strong>Lit</strong> material.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1521.jpg"/>
+    <br>
+    
+    <p>
+    Let's create a material set using the installed material presets.<br>
+    <strong>(1)</strong> Click the <strong>Make Material Set</strong> button.<br>
+    <strong>(2)</strong> Select one of the installed <strong>Mergeable</strong> presets. We're not going to use lights in this page, so choose "<strong>Mergeable Unlit</strong>".<br>
+    <strong>(3)</strong> Press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1522.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the added material set.<br>
+    <strong>(2)</strong> Press the <strong>Default Material</strong> button to activate it as <strong>ON</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1523.jpg"/>
+    <br>
+    
+    <p>
+    Execute <strong>Bake</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1524.jpg"/>
+    <br>
+    
+    <p>
+    Open another character to which you want to merge materials, and repeat the above process.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now the two characters are rendered with the same "<strong>Mergeable Unlit</strong>" shader, but with different images.<br>
+    Let's write a script to merge the materials.<br>
+    (The script description or function for character synchronization is omitted. Please check the detailed description in <a href="../../en/AdvancedManual/AD_SyncBonesToChangeCostumes.html">Related page</a>.)<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class MergeMaterialScript : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait mainCharacter;<br>
+    &emsp;&emsp;public apPortrait costumePrefab;<br>
+    <br>
+    &emsp;&emsp;private apPortrait _attachedCostume = null;<br>
+    <br>
+    &emsp;&emsp;void Start() { }<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Press Q key to attach and sync the costume to the character. (Function description is skipped)<br>
+    &emsp;&emsp;&emsp;&emsp;if( Input.GetKeyDown( KeyCode.Q ) )<br>
+    &emsp;&emsp;&emsp;&emsp;{&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// When a cloth is attached, the cloth object is assigned to the _attachedCostume variable.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;AttachCostume();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Press W key to remove the attached costume.<br>
+    &emsp;&emsp;&emsp;&emsp;if (Input.GetKeyDown(KeyCode.W))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Unmerge materials before removing the costume.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>mainCharacter.UnmergeMaterials();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Unsynchronize and remove the costume. (Function description is skipped)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// The _attachedCostume variable will be null.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;DetachCostume();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Press A key to merge materials with the attached costume.<br>
+    &emsp;&emsp;&emsp;&emsp;if (Input.GetKeyDown(KeyCode.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;if(_attachedCostume != null)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>mainCharacter.MergeMaterials(_attachedCostume);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Press S key to unmerge materials whether attached or not.<br>
+    &emsp;&emsp;&emsp;&emsp;if (Input.GetKeyDown(KeyCode.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>mainCharacter.UnmergeMaterials();</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;(Description of AttachCostume and DetachCostume functions is skipped)<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    You can see in the script above that the functions related to <strong>Merging Materials</strong> are used.<br>
+    - <strong>MergeMaterials</strong>: Merge materials by inputting apPortrait objects as arguments. It works even if you enter multiple apPortrait or nothing.<br>
+    - <strong>UnmergeMaterials</strong> : Unmerge all materials. All apPortrait objects with merged materials are disconnected.<br>
+    </p>
+    <br>
+    
+    <p>
+    And also focus on to call the <strong>UnmergeMaterials</strong> function first before unsynchronizing.<br>
+    </p>
+    <br>
+    
+    <p>
+    And these two functions contain a "material initialization" process inside.<br>
+    Therefore, after calling these functions, the color of the meshes returns to its original state.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now let's apply the above script to see how much the rendering process has changed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1525.jpg"/>
+    <br>
+    
+    <p>
+    In the same way, turn on <strong>Frame Debugger</strong> and tested each case.<br>
+    This is the image before merging materials.<br>
+    As you can see, except for some steps, most meshes are being rendered without being merged.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1526.jpg"/>
+    <br>
+    
+    <p>
+    This is the result of merging materials by executing the <strong>MergeMaterials</strong> function.<br>
+    There were only <span class="text-danger"><strong>1</strong></span> draw calls to render two characters.<br>
+    It's more optimized than <strong>2</strong>, which is the expected minimum draw call to render two characters!<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Features of Merging Materials</h3>
+    <br>
+    
+    <p>
+    The <strong>Merging Materials</strong> function uses a shader that can receive and render <span class="text-danger"><strong>up to 10</strong></span> images.<br>
+    This shader uses the mesh's vertex color to determine which image to use.<br>
+    The <strong>Merging Materials</strong> function utilizes the properties of this shader to check all target meshes and merge them to have as few materials as possible.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, due to these characteristics, the <strong>Merging Materials</strong> function has the following limitations.<br>
+    - Clipping masks and meshes being clipped are excluded.<br>
+    - Shaders other than <strong>Alpha Blend</strong> are excluded.<br>
+    - Script functions that control material properties by specifying texture do not work.<br>
+    - Script functions that want to collectively control material properties are for all characters. (Part of the merged character cannot be specified.)<br>
+    - Images cannot be changed except for custom properties. You can change the image with the Extra option, but this will increase draw calls.<br>
+    - Different shaders are not merged with each other, even if they have <strong>Mergeable</strong> attribute.<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's see what the difference is in the result if we use a script function that controls the material of the mesh.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1527.jpg"/>
+    <br>
+    
+    <p>
+    This is a case where the <strong>SetMeshColorAll(Color color2X)</strong> function of apPortrait is called for one character (MainCharacter).<br>
+    Before the materials are merged (left), only the character whose function is called is colored.<br>
+    However, after the materials are merged (right), the color of other character objects (Costume) for which the color change function has not been called will also be changed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1528.jpg"/>
+    <br>
+    
+    <p>
+    This is the result of calling <strong>SetMeshColorAll(sting optTextureName, Color color2X)</strong>, a function that changes colors by entering the <strong>image name</strong>.<br>
+    (The functions have the same name, but different arguments.)<br>
+    Once the materials are merged, it becomes impossible to separate the textures and change their properties.<br>
+    Because the previous rule, which is "one material per image", doesn't apply.<br>
+    Therefore, the above script function does not work, and you can see that the log has occurred in the Console tab.<br>
+    </p>
+    <br>
+    
+    <p>
+    Script functions that change the material of the mesh behave differently or become unavailable after the materials are merged.<br>
+    Check out the changes to the function below.<br>
+    (Functions that are not introduced behave the same as before.)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>Functions that expand the target to all characters with merged materials</strong><br>
+    : Targets of functions that change material properties for all meshes are expanded.<br>
+    - <span class="text-primary">ResetMeshMaterialToBatchAll()</span><br>
+    - <span class="text-primary">SetMeshAlphaAll(float alpha)</span><br>
+    - <span class="text-primary">SetMeshCustomAlphaAll(float alpha, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshColorAll(Color color2X)</span><br>
+    - <span class="text-primary">SetMeshCustomColorAll(Color color, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomImageAll(Texture2D texture, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomTextureOffsetAll(Vector2 textureOffsetValue, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomTextureScaleAll(Vector2 textureScaleValue, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomFloatAll(float floatValue, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomIntAll(int intValue, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomVector4All(Vector4 vector4Value, string propertyName)</span><br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>Functions that cannot be used</strong><br>
+    : Functions that collectively change material properties using texture as a key value do not work.<br>
+    - <span class="text-primary">ResetMeshMaterialToBatchByTextureName(string optTextureName)</span><br>
+    - <span class="text-primary">SetMeshImageAll(string optTextureName, Texture2D texture)</span><br>
+    - <span class="text-primary">SetMeshCustomImageAll(string optTextureName, Texture2D texture, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshColorAll(string optTextureName, Color color2X)</span><br>
+    - <span class="text-primary">SetMeshAlphaAll(string optTextureName, float alpha)</span><br>
+    - <span class="text-primary">SetMeshCustomColorAll(string optTextureName, Color color, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomAlphaAll(string optTextureName, float alpha, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomFloatAll(string optTextureName, float floatValue, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomIntAll(string optTextureName, int intValue, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomVector4All(string optTextureName, Vector4 vector4Value, string propertyName)</span><br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Is merging materials the best way to reduce draw calls?</h4>
+    <br>
+    
+    <p>
+    If AnyPortrait's existing draw call optimization function is applied, other characters with the same material can be rendered at once within the minimum draw call possible.<br>
+    However, characters with "Merging Materials" applied cannot be rendered together with other characters.<br>
+    This means that in some cases leaving characters as is without trying to merge materials, it can render within fewer draw calls.<br>
+    For more information on optimizing draw calls with other characters, see the <a href="../../en/AdvancedManual/AD_ReduceDrawCalls.html">related page</a>.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. When merging materials is recommended</strong><br>
+    - The case that it's unique in the game, like a player character.<br>
+    - The case that the synchronization function is used to attach costumes, weapons, etc. to the character.<br>
+    - The case that you want to optimize a character, who has 2 or more images and has many meshes.<br>
+    - The case that the draw call between characters is not well shared due to frequent use of color effects.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. When merging materials is not recommended</strong><br>
+    - The case that there are multiple identical characters in the game, such as monster characters.<br>
+    - The case that a character has only one image and color effects are not often used.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Merge Materials in URP 2D Environment</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1529.jpg"/>
+    <br>
+    
+    <p>
+    As above, if your project's render pipeline is a URP that uses 2D Renderer, you need to use a different material.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1530.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the Material Library.<br>
+    <strong>(2)</strong> Select the "<strong>URP (2021) Presets</strong>" package.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1531.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Unpack Preset</strong> button.<br>
+    <strong>(2)</strong> After installation is complete, open the material library again.<br>
+    And then you can see that the presets for URP are installed.<br>
+    <strong>(3)</strong> Click the <strong>Make Material Set</strong> button.<br>
+    <strong>(4)</strong> Select <strong>Mergeable</strong> materials for URP. Please select Unlit or 2D Lit appropriately depending on whether you are lighting or not.<br>
+    <strong>(5)</strong> Press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1532.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the created material set.<br>
+    <strong>(2)</strong> Press the <strong>Default Material</strong> button to activate it as <strong>ON</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1533.jpg"/>
+    <br>
+    
+    <p>
+    Set the other character object in the same way to have the same material.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now let's try the same test using the script we used earlier.<br>
+    Let's run the game and see how the draw calls change before and after merging the materials.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1534.jpg"/>
+    <br>
+    
+    <p>
+    But oddly enough, the draw call value is the 15 regardless of whether the material has been merged or not.<br>
+    </p>
+    <br>
+    
+    <p>
+    This is related to "Optimizing draw calls in Unity", which is explained at the beginning of this page.<br>
+    When using <strong>SRP (Scriptable Render Pipeline)</strong> including URP, Unity use a new draw call process.<br>
+    This process is called "<strong>SRP Batch</strong>".<br>
+    Meshes of different materials are rendered at once within <strong>SRP Batch</strong>.<br>
+    Let's check how <strong>SRP Batch</strong> works in <strong>Frame Debugger</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1535.jpg"/>
+    <br>
+    
+    <p>
+    This is the rendering process before merging materials.<br>
+    If you look at the current rendering properties, the draw call is already reduced to 1, even before merging the materials.<br>
+    Meshes with different materials were rendered at once by <strong>SRP Batch</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1536.jpg"/>
+    <br>
+    
+    <p>
+    If you check the rendering properties, you can see that one material contains two textures.<br>
+    It means that the materials have been merged.<br>
+    You will see the same result after the materials have been merged, as we have already optimized them in Unity.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1537.jpg"/>
+    <br>
+    
+    <p>
+    In fact, in URP, you don't even need to use the <strong>Merging Materials</strong> function.<br>
+    However, for those who want to use the change in script function according to <strong>Merging Materials</strong>, we provide a Mergeable material for URP.<br>
+    As shown in the image above, the "property to change material properties at once for merged characters" is available in URP.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Merging materials for a single character</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1538.jpg"/>
+    <br>
+    
+    <p>
+    You can even enter no argument to "<strong>MergeMaterials</strong>" function.<br>
+    This is for the case of having two or more images in one character, as above.<br>
+    For example, when creating a character with a high-resolution illustration, two or more images are required, and the <strong>Merging Materials</strong> function is used effectively in this case.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1539.jpg"/>
+    <br>
+    
+    <p>
+    The process for merging materials is the same as above.<br>
+    Create and apply material sets based on Mergeable presets in the material library.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1540.jpg"/>
+    <br>
+    
+    <p>
+    Let's run the game.<br>
+    Even though there is only one character before the materials are merged, it is being rendered in several stages.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1541.jpg"/>
+    <br>
+    
+    <p>
+    If you merge the materials using the script, you can see that all meshes are rendered with minimal draw calls except for <strong>meshes related to clipping</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ReduceDrawCalls.html">< Reduce Draw Calls</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_CustomClippingMask.html">Custom Clipping Mask ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

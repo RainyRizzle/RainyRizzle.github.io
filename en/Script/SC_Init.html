@@ -625,6 +625,7 @@
     &nbsp;&nbsp;&nbsp;Determines which time value in Unity to use when the character is updated.<br>
     &nbsp;&nbsp;&nbsp;Depending on this option, you can set whether the game speed will be affected and time multiplier.<br>
     &nbsp;&nbsp;&nbsp;Some features do not apply this function when using Mecanim or when the Important option is turned off.<br>
+    &nbsp;&nbsp;&nbsp;You can learn the example using this functions at the <a href="../../en/AdvancedManual/AD_ControlUpdateRate.html">related page</a>.<br>
     </p>
     
     <br>
@@ -632,6 +633,31 @@
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> useUnscaleDeltaTime : If this value is true, it is updated by Unity's Time.unscaledDeltaTime, and if false, it is updated by Time.deltaTime. (The default is false .)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> multiplier : You can set the update speed. If not entered, it is set to the default speed of 1x.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetUpdateTimeMethod</strong> <span class="text-muted">( </span><span class="text-success">OnDeltaTimeRequested</span> <span class="text-muted">onDeltaTimeRequested )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetUpdateTimeMethod</strong> <span class="text-muted">( </span><span class="text-success">OnDeltaTimeRequested</span> <span class="text-muted">onDeltaTimeRequested,</span> <span class="text-success">object</span> <span class="text-muted">savedObject )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.3.5</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;When a character is updated, you can use a callback function to control the playback speed.<br>
+    &nbsp;&nbsp;&nbsp;Some features do not apply double speed when using Mecanim or when Important is turned off.<br>
+    &nbsp;&nbsp;&nbsp;You can learn the example using this functions at the <a href="../../en/AdvancedManual/AD_ControlUpdateRate.html">related page</a>.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">OnDeltaTimeRequested</span> onDeltaTimeRequested : A callback function that returns the time of the current frame. You can modify the update time. The format of the callback function is "float OnDeltaTimeRequested(object savedObject)" .<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">object</span> savedObject : It is a value that can be used for purposes such as identifying which object is calling when a callback function is called. There is no restriction on the type, and null is possible.<br>
     </p>
     
     </div>

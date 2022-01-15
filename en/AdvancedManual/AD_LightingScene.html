@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Lighting settings of the scene</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_LightingScene.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_LightingScene.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_LightingScene.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Lighting settings of the scene</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Lighting settings of the scene</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.5</span></h4>
+    
+    <p>
+    Characters created in AnyPortrait may appear too bright in the Unity scene.<br>
+    This is because AnyPortrait's default material is affected by <strong>Ambient Color</strong>.<br>
+    Conversely, there are situations where you need to set your characters to be affected by light.<br>
+    This page provides a brief overview of how to set up lighting in your Unity scene.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Remove the light to show the original color</h3>
+    <br>
+    
+    <p>
+    If you use the default material (Unlit), let's set it up so that the color of the image is rendered as it is.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1479.jpg"/>
+    <br>
+    
+    <p>
+    This is the result in the Unity scene after <strong>Bake</strong> the character created with the AnyPortrait editor.<br>
+    It is rendered slightly brighter than the original image.<br>
+    Unity is a 3D game engine, so light is added by default when you first create a project and create a scene.<br>
+    But here, the light settings make the colors in the image not appear normally.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1480.jpg"/>
+    <br>
+    
+    <p>
+    Choose <strong>Window > Rendering > Lighting</strong> from the Unity menu.<br>
+    (The location of the Lighting menu may vary by version of Unity.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1481.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the <strong>Environment</strong> tab.<br>
+    <strong>(2)</strong> Change the value of <strong>Source</strong> of <strong>Environment Lighting</strong> to <strong>Color</strong>.<br>
+    <strong>(3)</strong> Change <strong>Ambient Color</strong> to <span class="text-danger"><strong>Black</strong></span>.<br>
+    <strong>(4)</strong> Now you can see that the color of the image is expressed normally.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1482.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Directional Light</strong> is placed in Unity's default scene.<br>
+    But in this case, we don't need the light.<br>
+    <strong>(1)</strong> Remove the light objects placed in the scene including <strong>Directional Light</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    When using an Unlit material, the function that automatically changes <strong>Ambient Color</strong> to black works when <strong>Bake</strong> is performed.<br>
+    For more information about this, please refer to the <a href="../../en/AdvancedManual/AD_BakeDialog.html">related page</a>.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Set up to be affected by light</h3>
+    <br>
+    
+    <p>
+    Conversely, let's set the <strong>Lit</strong> material to lighten or darken depending on the light.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1483.jpg"/>
+    <br>
+    
+    <p>
+    A Lit material or a Lit-like material is set using <strong>Material Library</strong> (<a href="../../en/AdvancedManual/AD_MaterialLibrary.html">Related page</a>).<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1484.jpg"/>
+    <br>
+    
+    <p>
+    Without light, your character will be rendered dark in your Unity scene.<br>
+    <strong>(1)</strong> Set <strong>Ambient Color</strong> in the <strong>Lighting</strong> settings described above to <span class="text-danger"><strong>Non-black color</strong></span>.<br>
+    <strong>(2)</strong> You can see that the color of the character changes according to the light.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1485.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> If you place light objects in the scene, <strong>(2)</strong> you can see the character render nicely depending on the light.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    If you use <strong>URP 2D</strong>, you need to use a different type of light.<br>
+    For more information on this, please refer to the <a href="../../en/AdvancedManual/AD_URP.html">Related Page</a>.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_CameraScene.html">< Camera settings of the scene</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_MaterialLibrary.html">Material Library ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

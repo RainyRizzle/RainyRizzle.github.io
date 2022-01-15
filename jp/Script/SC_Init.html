@@ -626,6 +626,7 @@
     &nbsp;&nbsp;&nbsp;キャラクターが更新されると、Unityのいくつかの時間の値を使用するかを決定します。<br>
     &nbsp;&nbsp;&nbsp;このオプションに応じて、ゲーム倍速に影響を受けるかどうかを設定することができ、また、別の倍速を設定することができます。<br>
     &nbsp;&nbsp;&nbsp;Mecanimを利用したり、Importantオプションがオフの場合、一部の機能には、倍速が適用されません。<br>
+    &nbsp;&nbsp;&nbsp;この関数を使った例は、<a href="../../jp/AdvancedManual/AD_ControlUpdateRate.html">関連ページ</a>でご覧いただけます。<br>
     </p>
     
     <br>
@@ -633,6 +634,31 @@
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> useUnscaleDeltaTime : この値がtrueの場合Unityの「Time.unscaledDeltaTime」によって更新され、falseの場合「Time.deltaTime」によって更新されます。（デフォルトはfalseです。）<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> multiplier : アップデート倍速を設定することができます。入力しない場合は、デフォルトの1倍速に設定されます。<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetUpdateTimeMethod</strong> <span class="text-muted">( </span><span class="text-success">OnDeltaTimeRequested</span> <span class="text-muted">onDeltaTimeRequested )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetUpdateTimeMethod</strong> <span class="text-muted">( </span><span class="text-success">OnDeltaTimeRequested</span> <span class="text-muted">onDeltaTimeRequested,</span> <span class="text-success">object</span> <span class="text-muted">savedObject )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.3.5</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;キャラクターが更新されると、コールバック関数を使用して再生速度を制御できます。<br>
+    &nbsp;&nbsp;&nbsp;Mecanimを利用したり、Importantオプションがオフの場合、一部の機能には、倍速が適用されません。<br>
+    &nbsp;&nbsp;&nbsp;この関数を使った例は、<a href="../../jp/AdvancedManual/AD_ControlUpdateRate.html">関連ページ</a>でご覧いただけます。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">OnDeltaTimeRequested</span> onDeltaTimeRequested : 現在のフレームの時間を返すコールバック関数です。 ユーザーは直接更新時間を変更できます。 コールバック関数の形式は「float OnDeltaTimeRequested(object savedObject)"」です。<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">object</span> savedObject : コールバック関数が実行されるとき、どのオブジェクトが関数を呼び出したかを区別するなどの目的で使用できる値です。 型に制限はなく、nullも可能です。<br>
     </p>
     
     </div>

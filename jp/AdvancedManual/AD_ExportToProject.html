@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>別のプロジェクトにエクスポート</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ExportToProject.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ExportToProject.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_ExportToProject.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 別のプロジェクトにエクスポート</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">別のプロジェクトにエクスポート</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    Unityで作業した結果を別のプロジェクトにコピーしたい経験がありますか？<br>
+    Unityの最新バージョンをテストしたい場合や、他のプロジェクトとリソースを共有するなど、さまざまな理由でデータをコピーしたい場合があります。<br>
+    ただし、Unityのアセットファイルをそのままコピーすると、データの関連付けが解除され、正しく動作しなくなる可能性があります。<br>
+    また、「AnyPortrait」のように、「シーン（Scene）」にデータが保存されているアセットは、別のファイルが存在しないため、コピーするのが難しいです。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページでは、AnyPortraitのキャラクターを別のプロジェクトにコピーする2つの方法を紹介します。<br>
+    これは、AnyPortraitだけでなく、ほとんどのUnityアセットやプラグインにも使用できる方法です。<br>
+    また、バグや問題を解決するためにワークを私たちのチームに送っても、このページで紹介する方法が役に立ちます。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    AnyPortraitの「バックアップ」（<a href="../../jp/AdvancedManual/AD_Backup.html">関連ページ</a>）を使用して他のプロジェクトにエクスポートすることができます。<br>
+    ただし、バックアップ機能は回復の目的を持つ機能であるため、他のコンポーネントなどに関連する設定はコピーされません。<br>
+    したがって、可能であれば、このページで紹介する方法を活用してください。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>シーンをエクスポート</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1543.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitで制作されたキャラクターはUnityのシーンに保存されます。<br>
+    デフォルトでは、キャラクターは別のファイルとして存在しないため、シーンファイル（.scene）をコピーするのが一般的です。<br>
+    準備されたシーンは上記のように構成されています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1544.jpg"/>
+    <br>
+    
+    <p>
+    エクスポートしたいキャラクターにはいくつかのアニメーションがあります。<br>
+    それでは、このキャラクターを別のプロジェクトにエクスポートしましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1545.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> キャラクターで使用中の「Texture Asset」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Ctrl</strong>」キーを押しながらエクスポートする「<strong>Unityシーン（.scene）</strong>」を選択します。<br>
+    <strong>(3)</strong> エクスポートする対象がすべて選択された状態で「Project UI」で「右クリック」を行います。<br>
+    <strong>(4)</strong> 「<strong>Export Package</strong>」メニューをクリックします。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>追加</strong></span><br>
+    キャラクターがMecanimやアニメーションクリップなどの他のアセットと連動して動作する場合は、そのアセットも一緒に選択してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1546.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Exporting package</strong>」ダイアログが表示されます。<br>
+    <strong>(1)</strong> 「<strong>Include dependencies</strong>」オプションを無効にします。 （このオプションをオンにすると、選択したオブジェクトに関連するすべてのスクリプトが保存されます。）<br>
+    <strong>(2)</strong> 選択したオブジェクトがリストに表示されます。<br>
+    <strong>(3)</strong> 「<strong>Export</strong>」ボタンを押して、適切な場所に「<strong>Unity Packageファイル（.unitypackage）</strong>」を保存します。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1547.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターの「<strong>Texture Asset</strong>」を見つけるのが難しい場合、<br>
+    <strong>(1)</strong> AnyPortraitエディタで画像を選択します。<br>
+    <strong>(2)</strong> 画像で使用中の「Texture Asset」項目をクリックしてください。<br>
+    Unity Editorで対応する「Texture Asset」がハイライトされ、検索が簡単になります。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>シーンのインポート</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1548.jpg"/>
+    <br>
+    
+    <p>
+    保存したシーンファイルを新しいプロジェクトにインポートしましょう。<br>
+    （新しいプロジェクトには同じバージョンのAnyPortraitがインストールされている必要があります。）<br>
+    <strong>(1)</strong> 保存した「Unity Package」ファイルを「ダブルクリック」または <strong>(2)</strong> プロジェクトに「ドラッグ」します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1549.jpg"/>
+    <br>
+    
+    <p>
+    「Unity Package」ファイルをインポートするためのダイアログが開きます。<br>
+    <strong>(1)</strong> シーンと画像が保存されていることがわかります。 すべて選択してください。<br>
+    <strong>(2)</strong> 「<strong>Import</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1550.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> シーンと画像（Texture Asset）が現在のプロジェクトにコピーされます。<br>
+    <strong>(2)</strong> インポートしたシーンを選択すると、キャラクターが正常にコピーされたことがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1551.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitで開いてみると、データが破損することがなく、引き続き編集して利用できます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>「Prefab」をエクスポートしてインポート</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1552.jpg"/>
+    <br>
+    
+    <p>
+    上記のようにコピーするキャラクターだけでなく、他のオブジェクトがシーンに多く配置されている場合には、シーンを丸ごとエクスポートすることは困難です。<br>
+    新しい空のシーンを同じプロジェクトに作成してキャラクターをコピー（ <kbd>Ctrl+C, V</kbd> ）した後、そのシーンをエクスポートすることもできます。<br>
+    しかし、この場合は、「<strong>Prefab</strong>」を利用してみるのも良いでしょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1553.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> コピーしたいキャラクターを「Hierarchy UI」で選択します。<br>
+    <strong>(2)</strong> キャラクターを「Project UI」に「ドラッグ」して「<strong>Prefab</strong>」に変換します。<br>
+    </p>
+    <br>
+    
+    <p>
+    キャラクターを「Prefab」にした場合、このキャラクターは独立したファイルとして存在します。<br>
+    単にこの「Prefab」ファイルを別のプロジェクトにそのままコピーするだけです。<br>
+    実際、AnyPortraitの内部データは破損なくコピーされます。<br>
+    </p>
+    <br>
+    
+    <p>
+    ただし、「Prefab」だけをコピーしてしまうと、「Texture」などの他のアセットとの接続が失われるため、適切ではありません。<br>
+    そのため、ここでも「<strong>Unity Package</strong>」を利用します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1554.jpg"/>
+    <br>
+    
+    <p>
+    エクスポートプロセスはほぼ同じです。<br>
+    <strong>(1)</strong> キャラクターの「<strong>Prefab</strong>」と <strong>(2)</strong> 「<strong>Texture Asset</strong>」を一緒に選択します。<br>
+    （同じようにエクスポートする他のアセットもこのとき一緒に選択してください。）<br>
+    <strong>(3)</strong> 右クリックメニューから「<strong>Export Package</strong>」を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1556.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Include dependencies</strong>」を解除します。<br>
+    <strong>(2)</strong> 「Prefab」と「Texture Asset」がリストに表示されます。<br>
+    <strong>(3)</strong> 「<strong>Export</strong>」ボタンを押して「Unity Package」ファイルを保存します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1557.jpg"/>
+    <br>
+    
+    <p>
+    新しいプロジェクトを開きます。 同様に、同じバージョンの「AnyPortrait」がインストールされている必要があります。<br>
+    <strong>(1)</strong> 保存した「<strong>Unity Package</strong>」ファイルを「ダブルクリック」するか、 <strong>(2)</strong> プロジェクトに「ドラッグ」します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1558.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 現在のプロジェクトにインポートする「Prefab」と「Texture Asset」がリストに表示されます。<br>
+    <strong>(2)</strong> 「<strong>Import</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1559.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> キャラクターの「Prefab」と「Texture Asset」が正常にコピーされました。<br>
+    <strong>(2)</strong> ところで今回はシーンをコピーしたわけではないので、まだキャラクターを見ることができません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1560.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Prefab</strong>」をドラッグしてシーンに配置します。<br>
+    <strong>(2)</strong> キャラクターをシーンビューで確認できます。<br>
+    キャラクタが見えない場合は、キャラクタを選択して「<strong>Inspector</strong>」で「<strong>Refresh Meshes</strong>」ボタンを押すだけです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1561.jpg"/>
+    <br>
+    
+    <p>
+    ここでの問題は、AnyPortraitは「Prefab」状態での編集を許可しないことです。<br>
+    キャラクターを編集するためにAnyPortraitエディタを開くと、上記のようなメッセージが表示されます。<br>
+    「<strong>Okay</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1562.jpg"/>
+    <br>
+    
+    <p>
+    これで「Prefab」との接続が解除され、編集できる状態になります。<br>
+    「Prefab」を利用した書き出し方法でも、キャラクターデータが正常にコピーされることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1563.jpg"/>
+    <br>
+    
+    <p>
+    編集を終えて「Bake」を実行し、Unityシーンに戻ります。<br>
+    <strong>(1)</strong> キャラクターを選択します。<br>
+    <strong>(2)</strong> 「<strong>Inspector</strong>」に「Prefab」に関するUIが追加されていることがわかります。<br>
+    「Prefab」との接続を再度維持または解除する機能です。<br>
+    「Prefab」の詳細については、<a href="../../jp/AdvancedManual/AD_EditingPrefabs.html">関連ページ</a>をご覧ください。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_VulkanIssues.html">< Vulkanビルドのパフォーマンスの問題</a>
+        <a class="btn btn-light" role="button" href="#"></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

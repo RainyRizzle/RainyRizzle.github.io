@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Exporting to another project</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_ExportToProject.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ExportToProject.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ExportToProject.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Exporting to another project</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Exporting to another project</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    
+    <p>
+    Often times, a situation occurs to copy your work in Unity to another project.<br>
+    There may be many reasons, such as wanting to test out an updated version of Unity, or sharing resources with other projects.<br>
+    However, if you copy Unity's asset files as it is, the data connection will be broken, and they may not work properly.<br>
+    Also, like AnyPortrait, it is difficult to copy assets where data is stored in the Unity scene because there is no separate file.<br>
+    </p>
+    <br>
+    
+    <p>
+    This page introduces two ways to copy AnyPortrait's characters to another project.<br>
+    This method can be used not only for AnyPortrait, but also for most Unity assets and plugins.<br>
+    Also, if you'd like to send your work to our team to solve any bugs or difficulties, the methods on this page will be useful.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    It is possible to export to another project using AnyPortrait's <strong>Backup</strong> function (<a href="../../en/AdvancedManual/AD_Backup.html">Related page</a>).<br>
+    However, since the backup function is for the purpose of recovery, properties related to external components are not stored.<br>
+    Therefore, if possible, please use the methods introduced on this page.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Export the Scene</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1543.jpg"/>
+    <br>
+    
+    <p>
+    Characters created with AnyPortrait are stored in Unity's scene.<br>
+    By default, characters do not stored as files, so it is common to copy a scene file (.scene).<br>
+    The prepared scene is composed as above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1544.jpg"/>
+    <br>
+    
+    <p>
+    The character we want to export has some animations.<br>
+    Let's copy this character to another project.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1545.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the <strong>Texture Asset</strong> being used in the character.<br>
+    <strong>(2)</strong> Select the <strong>Unity Scene</strong> to export while holding down the <strong>Ctrl</strong> key.<br>
+    <strong>(3)</strong> With all targets selected, right-click on the <strong>Project</strong> UI.<br>
+    <strong>(4)</strong> Click the <strong>Export Package</strong> menu.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    If your character works with other assets such as Mecanim and animation clips, select those assets as well.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1546.jpg"/>
+    <br>
+    
+    <p>
+    The <strong>Exporting package</strong> dialog appears.<br>
+    <strong>(1)</strong> Disable the <strong>Include dependencies</strong> option. (If this option is turned on, all scripts related to the selected objects will be saved.)<br>
+    <strong>(2)</strong> The selected objects are displayed in the list.<br>
+    <strong>(3)</strong> Save the "<strong>Unity Package File (.unitypackage)</strong>" in an appropriate location by clicking the <strong>Export</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1547.jpg"/>
+    <br>
+    
+    <p>
+    If it is difficult to find the character's <strong>Texture Assets</strong>,<br>
+    <strong>(1)</strong> Select an image in AnyPortrait editor.<br>
+    <strong>(2)</strong> Click the texture asset property being used in the image.<br>
+    The texture asset will be highlighted in the Unity editor to make it easier to find.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Import the Scene file</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1548.jpg"/>
+    <br>
+    
+    <p>
+    Let's import the saved scene file including the character into a new project.<br>
+    (New projects must have the same version of AnyPortrait installed.)<br>
+    <strong>(1)</strong> <strong>Double-click</strong> the saved Unity package file or <strong>(2)</strong> <strong>Drag</strong> it into the project.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1549.jpg"/>
+    <br>
+    
+    <p>
+    A dialog opens for importing the package file.<br>
+    <strong>(1)</strong> The scene and image are stored in the package. Select all.<br>
+    <strong>(2)</strong> Press the <strong>Import</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1550.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> The scene and image are imported to the current project.<br>
+    <strong>(2)</strong> When you select the imported scene, you can see that the character has been copied normally.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1551.jpg"/>
+    <br>
+    
+    <p>
+    If you open it with AnyPortrait editor, the data is not damaged and you can continue to edit and use it.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Export and import the Prefab</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1552.jpg"/>
+    <br>
+    
+    <p>
+    As above, when many other objects as well as the character to be copied are placed in the scene, it is difficult to export the whole scene.<br>
+    Of course, you can also copy ( <kbd>Ctrl+C, V</kbd> ) the target character to the new empty scene in the same project, and export that scene.<br>
+    But in this case, it is also good to use <strong>Prefab</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1553.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the character you want to copy in the <strong>Hierarchy</strong> UI.<br>
+    <strong>(2)</strong> <strong>Drag</strong> the character to the <strong>Project</strong> UI to convert it to a <strong>Prefab</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    If you created a character as a prefab, it now exists as a separate file.<br>
+    Simply copy this prefab file to another project and you're done.<br>
+    In fact, AnyPortrait's internal data is copied without damage.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, copying only the prefab is not appropriate as it will break links with other assets such as textures.<br>
+    So we will use the <strong>Unity Package</strong> here as well.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1554.jpg"/>
+    <br>
+    
+    <p>
+    The export process is almost identical.<br>
+    Select <strong>(1)</strong> <strong>Character Prefab</strong> and <strong>(2)</strong> <strong>Texture Asset</strong> together.<br>
+    (Please select other assets to be exported together at this time.)<br>
+    <strong>(3)</strong> Select <strong>Export Package</strong> from the right-click menu.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1556.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Uncheck <strong>Include dependencies</strong>.<br>
+    <strong>(2)</strong> Prefabs and texture assets appear in the list.<br>
+    <strong>(3)</strong> Click the <strong>Export</strong> button to save the Unity package file.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1557.jpg"/>
+    <br>
+    
+    <p>
+    Open a new project. Likewise, the same version of <strong>AnyPortrait</strong> must be installed.<br>
+    <strong>(1)</strong> <strong>Double-click</strong> the saved Unity package file or <strong>(2)</strong> <strong>Drag</strong> it into the project.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1558.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Prefab</strong> and <strong>Texture Asset</strong> to be imported into the current project appear in the list.<br>
+    <strong>(2)</strong> Press the <strong>Import</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1559.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Character prefab and texture asset are copied normally.<br>
+    <strong>(2)</strong> But this time, we didn't copy the scene, so we can't see the character yet.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1560.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Drag the <strong>Prefab</strong> to place it in the scene.<br>
+    <strong>(2)</strong> You can check the character in the scene view.<br>
+    If the character is not visible, select it and click the <strong>Refresh Meshes</strong> button in the <strong>Inspector</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1561.jpg"/>
+    <br>
+    
+    <p>
+    The problem is, AnyPortrait doesn't allow prefabs to be edited.<br>
+    When you open AnyPortrait editor to edit a character, the message above appears.<br>
+    Press the <strong>Okay</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1562.jpg"/>
+    <br>
+    
+    <p>
+    The link to the prefab is now disconnected and ready for editing.<br>
+    You can see that the character data is copied normally even in the export method using the prefab.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1563.jpg"/>
+    <br>
+    
+    <p>
+    After editing, run <strong>Bake</strong> and return to the Unity scene.<br>
+    <strong>(1)</strong> Select the character.<br>
+    <strong>(2)</strong> You can see that UIs related to the prefab have been added to the <strong>Inspector</strong>.<br>
+    These are the functions to reconnect(Apply) or disconnect the connection with the prefab.<br>
+    More information about Prefabs can be found at the <a href="../../en/AdvancedManual/AD_EditingPrefabs.html">related page</a>.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_VulkanIssues.html">< Performance issues with Vulkan</a>
+        <a class="btn btn-light" role="button" href="#"></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>マテリアルをマージ</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_MergeMaterials.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MergeMaterials.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_MergeMaterials.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > マテリアルをマージ</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">マテリアルをマージ</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.5</span></h4>
+    
+    <p>
+    AnyPortraitは、複数の「Mesh Renderer」を順番にレンダリングする方法を使用します。<br>
+    ところで、この方式はややもと「ドローコール（Draw Call）」を大きく増加させる要因となります。<br>
+    そのため、AnyPortraitには「ドローコール」を減らすためのさまざまなシステムがあります。 （<a href="../../jp/AdvancedManual/AD_ReduceDrawCalls.html">関連ページ</a>）<br>
+    </p>
+    <br>
+    
+    <p>
+    しかし、従来のドローコール最適化システムは、同じイメージとマテリアルを持つ場合に限って動作するという限界がありました。<br>
+    1つのキャラクターに2つ以上の画像が含まれている場合、または2つのキャラクターを同期して1つのキャラクターのように見せたい場合には、この限界点が大きく浮き彫りになります。<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortrait v1.3.5で追加された「<strong>マテリアルマージ</strong>」機能は、この制限をもう少し軽減します。<br>
+    画像が違っても「Shader」が同じであれば、複数のマテリアルを一度にレンダリングできます。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページでは、「マテリアルマージ」機能の使用方法と主な特長、注意点などについて説明します。<br>
+    特に、この機能を効果的に使用できる「キャラクター同期」の例を活用して説明します。<br>
+    「キャラクター同期」に関するスクリプトをこのページでは詳しく紹介しませんので、<a href="../../jp/AdvancedManual/AD_SyncBonesToChangeCostumes.html">関連ページ</a>を代わりに参考にしてください。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>ドローコールと実行性能の関係</h4>
+    <br>
+    
+    <p>
+    Unityの最適化ガイドでは、ドローコールをできるだけ減らす必要があることを案内します。<br>
+    実際、ドローコールの最適化は、すべてのゲームエンジンで最優先されているパフォーマンス最適化のヒントです。<br>
+    </p>
+    <br>
+    
+    <p>
+    逆に言えば、これはエンジンユーザーだけでなくエンジン開発者にとっても重要な課題と考えられます。<br>
+    Unityもドローコールが実行パフォーマンスに与える影響をますます減らしています。<br>
+    （フォーラムによると、Unity 5以降のバージョンから効果的に管理されているようです。）<br>
+    </p>
+    <br>
+    
+    <p>
+    したがって、最近のエンジンユーザーは、ドローコールの管理を気にしなくても、以前のように大きな問題を経験しません。<br>
+    限られた仕様のデバイスで実行することを目指すものでなければ、ユーザーはドローコールを厳しく最適化したときに得られる実行パフォーマンスの利点は大きくないでしょう。<br>
+    Unity自体の最適化パフォーマンスが十分に向上したためです。<br>
+    （特に後述する<strong>SRP Batch</strong>が代表的です。）<br>
+    </p>
+    <br>
+    
+    <p>
+    その結果、あなたのプロジェクトのパフォーマンスに問題がなければ、ドローコールによってあなたが事前にストレスを受けていなくても大丈夫です。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>2つ以上のキャラクターのマテリアルをマージ</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1512.jpg"/>
+    <br>
+    
+    <p>
+    説明のためにキャラクターの服を交換する例を用意しました。 （<a href="../../jp/AdvancedManual/AD_SyncBonesToChangeCostumes.html">関連ページ</a>）<br>
+    この例では、「<strong>MainCharacter</strong>」と「<strong>Costume</strong>」オブジェクトは互いに同期して1つのキャラクターのように動作します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1513.jpg"/>
+    <br>
+    
+    <p>
+    しかし、「<strong>Costume</strong>」のメッシュが「<strong>MainCharacter</strong>」のメッシュの間に配置され、上記のようにドローコールが大幅に増加します。<br>
+    これは、「<strong>MainCharacter</strong>」と「<strong>Costume</strong>」がそれぞれ異なる画像を持ちながらドローコールをマージできなかったためです。<br>
+    ドローコールは3つ（背景と2つのキャラクターオブジェクト）が予想されますが、実際にはそれ以上の14が記録されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1514.jpg"/>
+    <br>
+    
+    <p>
+    レンダリングプロセスを詳しく見るために「<strong>Frame Debugger</strong>」を実行しましょう。<br>
+    Unityメニューの「<strong>Window > Analysis > Frame Debugger</strong>」を実行します。<br>
+    （メニューの位置はUnityバージョンによって異なる場合があります。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1515.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ゲームを実行し、「<strong>Enable</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 現在のレンダリング情報を見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1516.jpg"/>
+    <br>
+    
+    <p>
+    レンダリングステップを順番に示す画像です。<br>
+    「<strong>MainCharacter</strong>」のメッシュと「<strong>Costume</strong>」のメッシュが交互にレンダリングされることがわかります。<br>
+    マテリアルがマージされない場合は、上記のようにドローコールが過度に増加する可能性があることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1517.jpg"/>
+    <br>
+    
+    <p>
+    「マテリアルマージ」機能を使用するには、専用マテリアルを使用する必要があります。<br>
+    <strong>(1)</strong> AnyPortraitエディタを開き、キャラクターを選択し、「Root Unit」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Material Library</strong>」ボタンを押します。<br>
+    （「マテリアルライブラリ」の使い方の詳細については、<a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">関連ページ</a>を参照してください。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1518.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> プリセット中に「<strong>Mergeable Presets</strong>」を選択します。<br>
+    （プロジェクトのレンダリングパイプラインがURPに設定されている場合は、「<strong>URP（2021）Presets</strong>」を代わりに選択してください。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1519.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> プリセットを選択した状態で「<strong>Unpack Preset</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> パッケージのインストール後にマテリアルライブラリを再起動する必要があるというメッセージが表示されます。 <br>
+    「<strong>Okay</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1520.jpg"/>
+    <br>
+    
+    <p>
+    パッケージがすべてインストールされ、再びマテリアルライブラリを開きます。<br>
+    インストールされている「<strong>Mergeable</strong>プリセット」が表示されます。<br>
+    「<strong>Unlit</strong>マテリアル」と「<strong>Lit</strong>マテリアル」、計2つのマテリアルプリセットが見えます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1521.jpg"/>
+    <br>
+    
+    <p>
+    インストールされたマテリアルプリセットを使って「マテリアルセット」を作成しましょう。<br>
+    <strong>(1)</strong> 「<strong>Make Material Set</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> インストールされている「<strong>Mergeable</strong>」プリセットのいずれかを選択します。 ここではライティングをしないので「<strong>Mergeable Unlit</strong>」を選択しました。<br>
+    <strong>(3)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1522.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 追加した「マテリアルセット」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Default Material</strong>」ボタンを押して「<strong>ON</strong>」で有効にします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1523.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>を実行します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1524.jpg"/>
+    <br>
+    
+    <p>
+    マテリアルをマージする別のキャラクターを開き、上記の手順を繰り返します。<br>
+    </p>
+    <br>
+    
+    <p>
+    2つのキャラクターはイメージは異なりますが、同じ「<strong>Mergeable Unlit</strong>」でレンダリングされる状態になりました。<br>
+    スクリプトを作成してマテリアルをマージしましょう。<br>
+    （キャラクター同期のスクリプト説明や関数は省略されています。<a href="../../jp/AdvancedManual/AD_SyncBonesToChangeCostumes.html">関連ページ</a>で詳細な説明をご確認ください。）<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class MergeMaterialScript : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait mainCharacter;<br>
+    &emsp;&emsp;public apPortrait costumePrefab;<br>
+    <br>
+    &emsp;&emsp;private apPortrait _attachedCostume = null;<br>
+    <br>
+    &emsp;&emsp;void Start() { }<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Qキーを押すと、服をキャラクターに付けて同期します。 (関数の説明を省略)<br>
+    &emsp;&emsp;&emsp;&emsp;if (Input.GetKeyDown(KeyCode.Q))<br>
+    &emsp;&emsp;&emsp;&emsp;{&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 服が装着されると、_attachedCostume変数に対応するオブジェクトが割り当てられます。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;AttachCostume();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Wキーを押すと、装着されている服を取り外します。<br>
+    &emsp;&emsp;&emsp;&emsp;if (Input.GetKeyDown(KeyCode.W))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 服を削除する前に、マテリアルのマージを解除します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>mainCharacter.UnmergeMaterials();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 同期を解除して服を削除します。 (関数の説明を省略)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// _attachedCostume変数はnullになります。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;DetachCostume();<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Aキーを押すとマテリアルをマージします。<br>
+    &emsp;&emsp;&emsp;&emsp;if (Input.GetKeyDown(KeyCode.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;if(_attachedCostume != null)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>mainCharacter.MergeMaterials(_attachedCostume);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Sキーを押すと、服装着の有無にかかわらずマテリアルマージを解除します。<br>
+    &emsp;&emsp;&emsp;&emsp;if (Input.GetKeyDown(KeyCode.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>mainCharacter.UnmergeMaterials();</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;（AttachCostume、DetachCostume関数の説明は省略）<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    マテリアルマージに関連する関数が使用されていることを上記のスクリプトで見ることができます。<br>
+    - <strong>MergeMaterials</strong> : apPortraitオブジェクトを引数として入力してマテリアルをマージします。 複数のapPortraitを入力したり、何も入力しなくても動作します。<br>
+    - <strong>UnmergeMaterials</strong> : マテリアルマージをすべて解除します。 マテリアルがマージされたapPortraitオブジェクトのすべての接続が解放されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    同期を解除する前に、まず<strong>UnmergeMaterials</strong>関数を呼び出したことにも注意してください。<br>
+    </p>
+    <br>
+    
+    <p>
+    そして、これら2つの関数は内部に「マテリアル初期化」プロセスを含んでいます。<br>
+    したがって、これらの関数を呼び出した後、メッシュの色などは元に戻ります。<br>
+    </p>
+    <br>
+    
+    <p>
+    それでは、上記のスクリプトを適用してレンダリングプロセスがどれほど変わったかを見てみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1525.jpg"/>
+    <br>
+    
+    <p>
+    同様に「<strong>Frame Debugger</strong>」をオンにして、各ケースについてテストしてみました。<br>
+    マテリアルをマージする前のイメージです。<br>
+    前述のように、いくつかの手順を除いて、ほとんどのメッシュがマージされていない状態でレンダリングされています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1526.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>MergeMaterials</strong>」関数を実行してマテリアルをマージした結果です。<br>
+    2つのキャラクターをレンダリングするのに<span class="text-danger"><strong>1</strong></span>個のドローコールだけが発生しました。<br>
+    2つのキャラクターをレンダリングするために予想される最小のドローコールである<strong>2</strong>よりも最適化されたものです！<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>マテリアルマージ機能の特徴</h3>
+    <br>
+    
+    <p>
+    「マテリアルマージ」機能は、「<span class="text-danger">最大10個</span>」の画像を受け取ってレンダリングできるシェーダを利用します。<br>
+    このシェーダは、メッシュの頂点の色を使用してどの画像を使用するかを決定します。<br>
+    「マテリアルマージ」機能は、このシェーダの特性を活用して、対象となるすべてのメッシュを検査し、できるだけ少ないマテリアルを持つようにマージします。<br>
+    </p>
+    <br>
+    
+    <p>
+    ただし、これらの機能により、「マテリアルマージ」機能には以下の制限があります。<br>
+    - 「クリッピングマスク」と「クリッピングされるメッシュ」は除外されます。<br>
+    - 「Alpha Blend」以外のシェーダは除外されます。<br>
+    - テクスチャをキー値にまとめてマテリアルのプロパティを制御するスクリプト関数は機能しません。<br>
+    - マテリアルの属性を一括制御したいスクリプト関数は、連結されたすべての文字を対象とします。<br>
+    - カスタム属性を除いて画像の変更はできません。 「Extra Option」で画像を変更できますが、ドローコールが増加します。<br>
+    - 「Mergeable」属性を持っていても、異なるシェーダは互いにマージされません。<br>
+    </p>
+    <br>
+    
+    <p>
+    メッシュのマテリアルを制御するスクリプト関数を使用した場合は、結果にどのような違いがあるかを見てみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1527.jpg"/>
+    <br>
+    
+    <p>
+    1 つの文字 (MainCharacter) を対象に、apPortrait の「<strong>SetMeshColorAll(Color color2X)</strong>」関数を呼び出した場合です。<br>
+    マテリアルがマージされる前（左）には、関数が呼び出されたキャラクターだけが色が変更されます。<br>
+    しかし、マテリアルがマージされた後（右）には、色変更関数が呼び出されていない他のキャラクターオブジェクト（Costume）の色も同様に変更されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1528.jpg"/>
+    <br>
+    
+    <p>
+    「イメージ名」を入力して色を一括変更する関数「<strong>SetMeshColorAll(sting optTextureName, Color color2X)</strong>」を呼び出した結果です。<br>
+    （前の例と関数の名前は同じですが、引数が異なります。）<br>
+    マテリアルがマージされると、テクスチャを区別してプロパティを変更することは不可能になります。<br>
+    これは、「イメージごとに1つのマテリアル」という既存のルールが適用されないためです。<br>
+    したがって、上記とスクリプト関数は動作せず、「Console」タブでログを見つけることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    メッシュのマテリアルを変更するスクリプト関数は、マテリアルのマージ後に上記のように異なる動作や使用ができなくなります。<br>
+    関数の変更点を以下で確認してください。<br>
+    （未紹介の関数は従来と同じように動作します。）<br>
+    </p>
+    <br>
+    
+    <p>
+    マテリアルがマージされたすべてのキャラクターに対象が拡張される関数<br>
+    ：すべてのメッシュをターゲットにしてマテリアルのプロパティを変更する関数は、そのターゲットが拡張されます。<br>
+    - <span class="text-primary">ResetMeshMaterialToBatchAll()</span><br>
+    - <span class="text-primary">SetMeshAlphaAll(float alpha)</span><br>
+    - <span class="text-primary">SetMeshCustomAlphaAll(float alpha, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshColorAll(Color color2X)</span><br>
+    - <span class="text-primary">SetMeshCustomColorAll(Color color, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomImageAll(Texture2D texture, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomTextureOffsetAll(Vector2 textureOffsetValue, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomTextureScaleAll(Vector2 textureScaleValue, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomFloatAll(float floatValue, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomIntAll(int intValue, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomVector4All(Vector4 vector4Value, string propertyName)</span><br>
+    </p>
+    <br>
+    
+    <p>
+    使用できない関数<br>
+    ：テクスチャをキー値として一括変更する関数は動作しません。<br>
+    - <span class="text-primary">ResetMeshMaterialToBatchByTextureName(string optTextureName)</span><br>
+    - <span class="text-primary">SetMeshImageAll(string optTextureName, Texture2D texture)</span><br>
+    - <span class="text-primary">SetMeshCustomImageAll(string optTextureName, Texture2D texture, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshColorAll(string optTextureName, Color color2X)</span><br>
+    - <span class="text-primary">SetMeshAlphaAll(string optTextureName, float alpha)</span><br>
+    - <span class="text-primary">SetMeshCustomColorAll(string optTextureName, Color color, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomAlphaAll(string optTextureName, float alpha, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomFloatAll(string optTextureName, float floatValue, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomIntAll(string optTextureName, int intValue, string propertyName)</span><br>
+    - <span class="text-primary">SetMeshCustomVector4All(string optTextureName, Vector4 vector4Value, string propertyName)</span><br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>「マテリアルマージ」がドローコールを減らす最善の方法ですか？</h4>
+    <br>
+    
+    <p>
+    AnyPortraitの既存のドローコール最適化機能が適用されている場合は、同じマテリアルを持つ他のキャラクターができるだけ最小のドローコール内で一度にレンダリングできるようにします。<br>
+    しかし、「マテリアルマージ」が適用されたキャラクターは、他のキャラクターと一緒にレンダリングされません。<br>
+    つまり、場合によっては、「マテリアルマージ」を試みずにそのままにしておくと、より少ないドローコール内でレンダリングされることがあります。<br>
+    「他のキャラクターとのドローコール最適化」については、<a href="../../jp/AdvancedManual/AD_ReduceDrawCalls.html">関連ページ</a>で詳細をご覧いただけます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger">1. マテリアルのマージが推奨される場合</span><br>
+    - プレイヤーキャラクターのように、ゲーム内で唯一の場合<br>
+    - 同期機能を利用して衣装、武器などをキャラクターに装着する場合<br>
+    - 2つ以上の画像を持ち、多くのメッシュを持つキャラクターを最適化したい場合<br>
+    - キャラクターに色効果などをよく使用してキャラクター間のドローコール共有がうまくいかない場合<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger">2. マテリアルのマージが推奨されない場合</span><br>
+    - モンスターキャラクターのように、ゲーム内に同じキャラクターが多数存在する場合<br>
+    - キャラクターのイメージが1つで色効果を頻繁に使用しない場合<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>「URP 2D」環境でマテリアルをマージする</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1529.jpg"/>
+    <br>
+    
+    <p>
+    上記のように、プロジェクトの「レンダリングパイプライン（Render Pipeline）」が「2D Renderer」を使用するURPの場合は、他のマテリアルを使用する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1530.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「マテリアルライブラリ」を開きます。<br>
+    <strong>(2)</strong> 「<strong>URP（2021）Presets</strong>」パッケージを選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1531.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Unpack Preset</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> インストールが完了し、再び「マテリアルライブラリ」を開くと、「URP用プリセット」がインストールされていることがわかります。<br>
+    <strong>(3)</strong> 「<strong>Make Material Set</strong>」ボタンを押します。<br>
+    <strong>(4)</strong> URP用の「<strong>Mergeable</strong>」マテリアルを選択します。 ライティングの有無に応じて「Unlit」または「2D Lit」を適切に選択してください。<br>
+    <strong>(5)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1532.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 作成した「マテリアルセット」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Default Material</strong>」ボタンを押して「<strong>ON</strong>」で有効にします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1533.jpg"/>
+    <br>
+    
+    <p>
+    他のキャラクターオブジェクトも同じマテリアルを持つように同じ方法で設定します。<br>
+    </p>
+    <br>
+    
+    <p>
+    それでは、先ほど使ったスクリプトを使って同じテストをしましょう。<br>
+    ゲームを実行し、マテリアルマージの前後にドローコールがどのように変わるかを確認しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1534.jpg"/>
+    <br>
+    
+    <p>
+    奇妙なことに、マテリアルをマージするかどうかに関係なく、ドローコールは同じように15を記録します。<br>
+    </p>
+    <br>
+    
+    <p>
+    これは、このページの冒頭で説明した「Unityのドローコールの最適化」と関連しています。<br>
+    URP のような「<strong>SRP (Scriptable Render Pipeline)</strong>」を使用する場合、Unity は別のレンダリングプロセスを持ちます。<br>
+    このプロセスを「<strong>SRP Batch</strong>」と呼びます。<br>
+    「<strong>SRP Batch</strong>」内では、異なるマテリアルのメッシュが一度にレンダリングされます。<br>
+    「<strong>Frame Debugger</strong>」で「<strong>SRP Batch</strong>」がどのように動作するかを見てみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1535.jpg"/>
+    <br>
+    
+    <p>
+    マテリアルをマージする前のレンダリングプロセスです。<br>
+    現在のレンダリングプロパティを見ると、マテリアルをマージする前にもかかわらず、すでにドローコールが1に減っている状態です。<br>
+    「<strong>SRP Batch</strong>」によって異なるマテリアルを持つメッシュが一度にレンダリングされてしまったのです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1536.jpg"/>
+    <br>
+    
+    <p>
+    レンダリングプロパティを確認すると、1つのマテリアルに2つのテクスチャが含まれ、マテリアルがマージされたことがわかります。<br>
+    Unityですでに最適化されているため、マテリアルがマージされた後も同じ結果を見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1537.jpg"/>
+    <br>
+    
+    <p>
+    実際、URPではあえて「マテリアルマージ」をしなくても大丈夫です。<br>
+    ただし、「マテリアルマージ」によるスクリプト関数の変化を利用したい方のために、URP用の「Mergeable」マテリアルを提供します。<br>
+    上の画像のように「マージされたキャラクターを対象にマテリアルの属性を一括変更する特性」をURPで利用できます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>単一キャラクターのマテリアルマージ</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1538.jpg"/>
+    <br>
+    
+    <p>
+    マテリアルをマージする関数「<strong>MergeMaterials</strong>」に引数を入力しないことがあります。<br>
+    上記のように、1つのキャラクター内に2つ以上の画像を持つ場合のためです。<br>
+    高解像度のイラストでキャラクターを作る場合、2つ以上のイメージが必要ですが、「マテリアルマージ」機能はこのとき効果的に使用されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1539.jpg"/>
+    <br>
+    
+    <p>
+    マテリアルをマージするためのプロセスは上記と同じです。<br>
+    「マテリアルライブラリ」で「<strong>Mergeable</strong>」プリセットに基づいて「マテリアルセット」を作成して適用します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1540.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行しましょう。<br>
+    マテリアルがマージされる前には、1つのキャラクターだけ存在するにもかかわらず、いくつかの段階に分かれてレンダリングとなっています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1541.jpg"/>
+    <br>
+    
+    <p>
+    スクリプトを使用してマテリアルをマージすると、「クリッピングに関連するメッシュ」を除いて、残りのすべてのメッシュが最小のドローコールでレンダリングされることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_ReduceDrawCalls.html">< ドローコールを減</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_CustomClippingMask.html">カスタムクリッピングマスク ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>
