@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Creating a URP Outline Shader</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_URPOutlineShader.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_URPOutlineShader.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_URPOutlineShader.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Creating a URP Outline Shader</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Creating a URP Outline Shader</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.5</span></h4>
+    
+    <p>
+    By using AnyPortrait's Material Library function, you can apply various shaders.<br>
+    It also supports other rendering pipelines, such as Unity's <strong>Universal Render Pipeline (URP)</strong>, so you can try a variety of techniques.<br>
+    This page describes the process of implementing the technique of drawing the outline of a character in a URP environment at the request of the user.<br>
+    </p>
+    <br>
+    
+    <p>
+    You can see how we implemented this technique considering the characteristics of URP and the system where multiple meshes with "Transparent material" like AnyPortrait are rendered.<br>
+    We hope that this description will help you implement various other techniques, including outlines.<br>
+    </p>
+    <br>
+    
+    <p>
+    Before reading this page, we recommend that you read the following pages first.<br>
+    - <a href="../../en/AdvancedManual/AD_MaterialLibrary.html">Material Library</a><br>
+    - <a href="../../en/AdvancedManual/AD_URP.html">Universal Render Pipeline</a><br>
+    - <a href="../../en/AdvancedManual/AD_ShaderGraph.html">Creating Materials with Shader Graph</a><br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Approaches to Implementing Outline</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1564.jpg"/>
+    <br>
+    
+    <p>
+    There are many different ways to implement an outline shader, but here's a simple way to compare transparency.<br>
+    If a rendered pixel satisfies the following conditions, it can be considered as an "outline".<br>
+    - <span class="text-danger">The pixel color being rendered should be transparent.</span><br>
+    - <span class="text-danger">There should be a non-transparent pixel among the other pixels around it.</span><br>
+    </p>
+    <br>
+    
+    <p>
+    As above, when sampling the color of the texture, you can easily find the part where the outline should be drawn by sampling the surrounding transparency.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1565.jpg"/>
+    <br>
+    
+    <p>
+    If you apply this technique directly as a shader, you will run into the above problem.<br>
+    On the left is the outline of a single mesh, mainly in "<strong>Sprite Renderer</strong>".<br>
+    You can see that the outline is drawn normally.<br>
+    But in the case on the right, i.e. applying that shader to a character created with AnyPortrait, you can see strange results.<br>
+    An outline is also created for each mesh inside.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1566.jpg"/>
+    <br>
+    
+    <p>
+    If a character has multiple meshes, such as AnyPortrait, it is not possible to simply extract the outline with a single shader.<br>
+    This can happen to any other 2D asset, or a 3D character with multiple meshes.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1567.jpg"/>
+    <br>
+    
+    <p>
+    So, the simplest way to solve this problem is to render with the same character placed slightly behind it.<br>
+    This method is the most intuitive and is commonly used in both 2D and 3D, unless you use <strong>Post Processing</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    The following methods can be considered to implement this approach.<br>
+    <strong>1.</strong> How to duplicate the character and place it behind or make it render first, then move it the same as the original<br>
+    <strong>2.</strong> How to make a character render twice using "Multi-Pass Rendering"<br>
+    </p>
+    <br>
+    
+    <p>
+    Of course, the method in <strong>1</strong> is probably the most convenient method.<br>
+    If you want to implement this way, AnyPortrait's <a href="../../en/AdvancedManual/AD_SynchronizeWithOthers.html">Synchronization feature</a> will be helpful.<br>
+    </p>
+    <br>
+    
+    <p>
+    In this page, we will implement the approach in <strong>2</strong>.<br>
+    Since it doesn't duplicate the character, it doesn't consume CPU resources, and it's probably the best choice as it prevents problems caused by out-of-sync movements.<br>
+    </p>
+    <br>
+    
+    <p>
+    Unfortunately, SRP, such as URP, does not natively support multi-pass rendering, unlike the default rendering pipeline.<br>
+    So, in the URP environment, we will use "Stencil" and "LightMode" to reproduce multi-pass.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note 1</strong></span><br>
+    In our tests, we found that "Stencil" did not work on older Android devices.<br>
+    Except some devices, we think the stencil will work on most current devices.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note 2</strong></span><br>
+    The examples on this page are based on the 12.1.1 version of the URP.<br>
+    Depending on the version of URP, code or functionality may not be compatible.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Creating the Outline shader based the shader graph</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1568.jpg"/>
+    <br>
+    
+    <p>
+    Above is an example scene configured for illustrative purposes.<br>
+    Four characters with <strong>URP 2D Lit</strong> material applied are placed.<br>
+    Let's replace the shader of the applied material to make it an outline shader.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    You can download and use the completed shaders and materials directly from the link below.<br>
+    The provided files may not be compatible if the URP version is not 12.1.1 or Unity 2021 version.<br>
+    < <a href="https://drive.google.com/file/d/1Qrvrz6cSeggdKxiOiVfzOQrBsO9oDgQA/view?usp=sharing" target="_sub">Download the outline shader and material package</a> ><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1614.jpg"/>
+    <br>
+    
+    <p>
+    After downloading the package and importing it into the project, the files are added as above.<br>
+    <strong>(1)</strong> This is the shader graph that draws the outline and the material. Just set "Outline Material" as the material of the pass drawing the outline in Renderer Data.<br>
+    <strong>(2)</strong> These are the shader assets for the stencil to be set on the AnyPortrait character. It was categorized with URP 2D Lit, URP Unlit, and Gamma Space and Linear Space respectively.<br>
+    </p>
+    <br>
+    
+    <p>
+    If you use the above files, you can omit the content of creating shaders in the description on this page.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1569.jpg"/>
+    <br>
+    
+    <p>
+    Select a character and open the Material Library.<br>
+    <strong>(1)</strong> Select the currently applied material preset for URP.<br>
+    <strong>(2)</strong> We will replace the shader item that need to be changed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1570.jpg"/>
+    <br>
+    
+    <p>
+    The target shader item is:<br>
+    </p>
+    <br>
+    
+    <p>
+    - If the project environment is <strong>Gamma Color Space</strong>:<br>
+    Modify and replace the shader graph in <strong>Gamma > Basic Rendering > Alpha Blend</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    - If the project environment is <strong>Linear Color Space</strong>:<br>
+    Modify and replace the shader graph in <strong>Linear > Basic Rendering > Alpha Blend</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    Materials other than "Alpha Blend" have no outlines, so you don't need to change them.<br>
+    For the same reason, the Clipped shader doesn't need to be changed either.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1571.jpg"/>
+    <br>
+    
+    <p>
+    Copy the target <strong>Shader Graph</strong> asset and paste it to another path.<br>
+    This Shader Graph asset will be used solely for code generation purposes.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1572.jpg"/>
+    <br>
+    
+    <p>
+    Open the copied Shader Graph asset.<br>
+    <strong>(1)</strong> Click the <strong>+</strong> button to add a <strong>Float</strong> type property.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1573.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> Set the name of the added property to "<strong>LineThickness</strong>". (In the shader code, it is defined as "_LineThickness".)<br>
+    <strong>(3)</strong> Save the Shader Graph.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1574.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the Shader Graph asset again.<br>
+    <strong>(2)</strong> Click the "<strong>View Generated Shader</strong>" button in the <strong>Inspector</strong>.<br>
+    If the code has already been generated, click the <strong>Regenerate</strong> button and then click the <strong>View Generated Shader</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1575.jpg"/>
+    <br>
+    
+    <p>
+    The script editor will open, and you can see the shader code generated from the shader graph.<br>
+    We will use this code to write a new shader.<br>
+    <strong>(1)</strong> Press  <kbd>Ctrl + A</kbd>  to select all shader codes.<br>
+    <strong>(2)</strong> Press  <kbd>Ctrl + C</kbd>  to copy all selected codes.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1576.jpg"/>
+    <br>
+    
+    <p>
+    Create a new shader asset to paste the copied shader code into.<br>
+    Create a new shader asset by right-clicking on the appropriate path and selecting "<strong>Create > Shader > Unlit Shader</strong>".<br>
+    This asset must be a regular Shader Asset, not a Shader Graph.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Why duplicate code from Shader Graph?</h4>
+    <br>
+    
+    <p>
+    Shaders for URP are so complex that it is almost impossible to write them yourself.<br>
+    Also, since the code changes depending on the version, Shader Graph is basically used.<br>
+    However, in Shader Graph it is not possible to add Passes or specify "Light Mode".<br>
+    Therefore, although it is a bit cumbersome, it is necessary to complete the shader graph first, then duplicate the generated code and modify it.<br>
+    </p>
+    <br>
+    
+    <p>
+    If the Shader Graph could be improved and the various techniques described here could be applied, there would be no need to generate code.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1577.jpg"/>
+    <br>
+    
+    <p>
+    Open the created Shader asset.<br>
+    You can see the simple shader code in unlit way.<br>
+    Instead of using this code, try pasting and editing the "code copied from the Shader Graph" currently saved in the clipboard here.<br>
+    <strong>(1)</strong> Press  <kbd>Ctrl + A</kbd>  to select all codes.<br>
+    <strong>(2)</strong> Press  <kbd>Ctrl + V</kbd>  to paste the saved code in the clipboard.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1578.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Temporary code generated from Shader Graph is pasted into <strong>(2)</strong> the Shader asset.<br>
+    Of course, the two codes are exactly the same.<br>
+    Now let's edit the Shader asset.<br>
+    (From now on, Shader Graph and code generated from Shader Graph will not be used.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1579.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Edit the shader name.<br>
+    <strong>(2)</strong> Add it by writing the code below within the syntax of "SubShader".<br>
+    Just add it to the location pointed to in the image above.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Pass<br>
+    {<br>
+    &emsp;&emsp;// A Pass that sets values to the Stencil.<br>
+    &emsp;&emsp;// We won't write any stencil code here, as we'll be specifying the stencil as a material override setting in the Renderer Data.<br>
+    <br>
+    &emsp;&emsp;// Multi-pass is implemented using the name of Light Mode.<br>
+    &emsp;&emsp;// Remember the name "SetStencilPass".<br>
+    &emsp;&emsp;<span class="text-danger"><strong>Tags { "LightMode" = "SetStencilPass" }</strong></span><br>
+    &emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    <br>
+    &emsp;&emsp;// If the ColorMask is set to A, no rendering will occur even if the stencil is set.<br>
+    &emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;ColorMask A<br>
+    <br>
+    &emsp;&emsp;HLSLPROGRAM<br>
+    &emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    <br>
+    &emsp;&emsp;struct Attributes<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;float4 positionOS : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;};<br>
+    &emsp;&emsp;struct Varyings<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;float4 positionHCS : SV_POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;TEXTURE2D(_MainTex);<br>
+    &emsp;&emsp;SAMPLER(sampler_MainTex);<br>
+    <br>
+    &emsp;&emsp;// Write shader properties here.<br>
+    &emsp;&emsp;// To execute "SRP Batcher" for rendering optimization, the following "CBUFFER" syntax must be written the same as other passes.<br>
+    &emsp;&emsp;<span class="text-danger"><strong>CBUFFER_START(UnityPerMaterial)</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>float4 _MainTex_TexelSize;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>float4 _MainTex_ST;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>float4 _Color;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>float _LineThickness;</strong></span><br>
+    &emsp;&emsp;<span class="text-danger"><strong>CBUFFER_END</strong></span><br>
+    <br>
+    &emsp;&emsp;Varyings vert(Attributes IN)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Varyings OUT;<br>
+    &emsp;&emsp;&emsp;&emsp;OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);<br>
+    &emsp;&emsp;&emsp;&emsp;OUT.uv = TRANSFORM_TEX(IN.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;return OUT;<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;half4 frag(Varyings IN) : SV_Target<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Check the transparency of pixels located at a distance of "_LineThickness".<br>
+    &emsp;&emsp;&emsp;&emsp;float offset1 = _LineThickness;<br>
+    &emsp;&emsp;&emsp;&emsp;float offset2 = _LineThickness * 0.7f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_0 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv).a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Check the transparency of the surrounding 8 pixels.<br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_1 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(offset1, 0)).a;<br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_2 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(-offset1, 0)).a;<br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_3 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(0, offset1)).a;<br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_4 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(0, -offset1)).a;<br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_5 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(offset2, offset2)).a;<br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_6 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(-offset2, offset2)).a;<br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_7 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(-offset2, -offset2)).a;<br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_8 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(offset2, -offset2)).a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>half totalAlpha = alpha_0 + alpha_1 + alpha_2 + alpha_3 + alpha_4 + alpha_5 + alpha_6 + alpha_7 + alpha_8;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;float4 c = float4(0, 0, 0, 0);&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>c.a = saturate(totalAlpha * _Color.a);</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Using the point that the stencil is not updated when "discard" is called, only the outline part makes the stencil value to be set.<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// When a pixel is opaque, it corresponds to the inside of the image, not the outline.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>if (alpha_0 > 0.5f)</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>{</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>discard;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>}</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// If there are no opaque pixels around it, it's a margin, not an outline.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>if (c.a < 0.02f)</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>{</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>discard;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>}</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;return c;<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;ENDHLSL<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Please refer to each comment for a detailed explanation of the code.<br>
+    If you add the above code inside your shader code, it will look like the image below.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1580.jpg"/>
+    <br>
+    
+    <p>
+    Of particular note here are the <strong>"Light Mode"</strong> and <strong>CBUFFER</strong> syntax.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> URP distinguishes the rendered Pass using "<strong>Light Mode</strong>".<br>
+    Use this attribute to make this Pass run first, setting values in the stencil before the character is rendered.<br>
+    Let's memorize <strong>"SetStencilPass"</strong>, which is the name of the Light Mode we created here.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> In order to improve rendering performance, SRP including URP renders as many objects as possible with fewer draw calls if the material properties are similar.<br>
+    This attribute is called "<strong>SRP Batcher</strong>".<br>
+    In order for <strong>SRP Batcher</strong> to work, all property syntax within the shader code, that is, the code within "<strong>CBUFFER_START ~ CUBFFER_END</strong>" must be the same.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1581.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the completed shader asset.<br>
+    <strong>(2)</strong> If you wrote it without any problems, you can see that the <strong>SRP Batcher</strong> property is "<strong>compatible</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1582.jpg"/>
+    <br>
+    
+    <p>
+    Let's open the character and apply this shader.<br>
+    <strong>(1)</strong> Open the Material Library and rename this Material Set.<br>
+    Changing the name is to save this Material Set as a Preset so that it can be easily applied to other characters.<br>
+    <strong>(2)</strong> Apply the Shader asset created earlier in the "Alpha Blend" item.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1583.jpg"/>
+    <br>
+    
+    <p>
+    Let's specify "<strong>_LineThickness</strong>", the property added in the previous process.<br>
+    <strong>(1)</strong> Click the "<strong>Add Property</strong>" button.<br>
+    <strong>(2)</strong> Set the name to "<strong>_LineThickness</strong>".<br>
+    <strong>(3)</strong> Set the type to "<strong>Float</strong>".<br>
+    <strong>(4)</strong> Since the thickness of the outline is based on UV, the texture coordinate system, enter a very small value of 1 or less.<br>
+    Since we don't know the proper value yet, we enter a reasonably small value.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1584.jpg"/>
+    <br>
+    
+    <p>
+    If you want to apply this set, you can make it a preset, so you can quickly set it up for other characters as well.<br>
+    <strong>(1)</strong> Press the "<strong>Register as a Preset</strong>" button.<br>
+    <strong>(2)</strong> You can see what has been added as a Preset.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    As of AnyPortrait v1.3.5, there is a bug where the change history is not reflected if you save it as a preset immediately after changing the shader asset.<br>
+    Before saving as a preset, please turn off and on the material library.<br>
+    This bug will be fixed in the next update.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1585.jpg"/>
+    <br>
+    
+    <p>
+    Execute Bake.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1586.jpg"/>
+    <br>
+    
+    <p>
+    You have to do the same for the other characters, but you can reduce the cumbersome process by using the saved Preset.<br>
+    Open another character and launch the Material Library.<br>
+    <strong>(1)</strong> Click the "<strong>Make Material Set</strong>" button to add a new Material Set.<br>
+    <strong>(2)</strong> Select the preset for outline rendering created in the above process.<br>
+    <strong>(3)</strong> Press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1587.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the added Material Set.<br>
+    <strong>(2)</strong> Press the "<strong>Default Material</strong>" button to set it to <strong>ON</strong>.<br>
+    <strong>(3)</strong> Check whether the shader asset created is applied.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1588.jpg"/>
+    <br>
+    
+    <p>
+    Do this the same for all characters.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Creating an Outline Shader and Setting the Renderer</h3>
+    <br>
+    
+    <p>
+    The next task is to make it actually an outline rendering by recognizing the stencil values.<br>
+    It goes through some pretty complicated steps, so please follow them one by one.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1589.jpg"/>
+    <br>
+    
+    <p>
+    Add a layer to differentiate what the outline will be drawn on.<br>
+    <strong>(1)</strong> Select "<strong>Project Settings > Tags and Layers</strong>".<br>
+    <strong>(2)</strong> Add a new layer to "<strong>Layers</strong>".<br>
+    We added a layer named "<strong>OutlineCharacter</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1590.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select all characters.<br>
+    <strong>(2)</strong> Change the layers of the characters to the "OutlineCharacter" you just set.<br>
+    (Change the layers of child objects in batches as well.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1591.jpg"/>
+    <br>
+    
+    <p>
+    The shader created in the previous process is saved in the stencil where it will be the outline.<br>
+    We haven't created any shaders and materials that render the outlines yet.<br>
+    Let's create a shader that renders the outline.<br>
+    Create a new shader graph by right-clicking on the "<strong>Projects</strong>" tab and selecting "<strong>Create > Shader Graph > URP > Unlit Shader Graph</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Why use the "Unlit" shader rather than the "Sprite Unlit" shader?</h4>
+    <br>
+    
+    <p>
+    In 2D games, the <strong>Sprite Unlit</strong> shader supports transparent rendering and the <strong>Unlit</strong> shader only supports opaque rendering, so it is common to use the <strong>Sprite Unlit</strong> shader.<br>
+    However, there is a problem in that it cannot control the rendering order of the outline because the pass that draws the outline in URP operates collectively rather than for each object.<br>
+    In <strong>Opaque shader</strong>, the rendering order is determined by comparing the Z position even if the rendering passes are different, whereas <strong>Transparent shader</strong> cannot control the rendering order because the Z position cannot be used.<br>
+    As a result, if you batch render the outline as a <strong>Transparent shader</strong>, it will always be rendered only behind or in front of all objects.<br>
+    So to use the Z position, we had to use the <strong>Unlit</strong> shader even if the rendering quality was rather poor.<br>
+    </p>
+    <br>
+    
+    <p>
+    In order to use the <strong>Sprite Unlit</strong> shader, either SRP supports multi-pass for each object or AnyPortrait needs to add a multi-material function for this, and we are reviewing this through user feedback.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1592.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the created shader graph.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1593.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Add a "<strong>Color</strong>" property named "<strong>OutlineColor</strong>" and a "<strong>Float</strong>" property named "<strong>ZBias</strong>".<br>
+    The <strong>OutlineColor</strong> property refers to the color of the outline, and <strong>ZBias</strong> makes the outline to be rendered slightly behind the character.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1594.jpg"/>
+    <br>
+    
+    <p>
+    Write the shader graph as above.<br>
+    Note that it shifts the rendering position backwards by <strong>ZBias</strong> relative to the <strong>World</strong> coordinate system.<br>
+    (Open in a new tab to view the original size image.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1595.jpg"/>
+    <br>
+    
+    <p>
+    Let's create an <span class="text-success"><strong>Outline Material</strong></span> to be used in "Outline Rendering Pass".<br>
+    <strong>(1)</strong> Create a new <strong>Material</strong> and select it.<br>
+    <strong>(2)</strong> Change the shader of the material to the outline shader created just before.<br>
+    <strong>(3)</strong> Set "<strong>OutlineColor</strong>" and <strong>ZBias</strong>. We set "ZBias" to "<strong>1</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1596.jpg"/>
+    <br>
+    
+    <p>
+    The next step is to modify the renderer data of the URP.<br>
+    <strong>(1)</strong> Select "<strong>Universal Render Pipeline Asset</strong>" applied to the project.<br>
+    <strong>(2)</strong> You can see the currently applied "<strong>Renderer Data</strong>" in the <strong>Renderer List</strong>.<br>
+    Let's edit this "<strong>Renderer Data</strong>" to add a special rendering pass.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1597.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the currently applied "<strong>Renderer Data</strong>".<br>
+    <strong>(2)</strong> Click the "<strong>Add Renderer Feature</strong>" button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1598.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> Select "<strong>Render Objects</strong>" to add them.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1599.jpg"/>
+    <br>
+    
+    <p>
+    Let's give the added <strong>Render Objects</strong> a role of "Setting the stencil in the area corresponding to the outline".<br>
+    Set as above.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> After setting the name appropriately, set <strong>Event</strong> to <span class="text-danger"><strong>BeforeRenderingOpaques</strong></span>.<br>
+    This is to set the stencil in the outline area before the opaque meshes are drawn.<br>
+    Please note that most of the event names are similar and can be easily confused.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> Set <strong>Queue</strong> to <strong>Transparent</strong>, and change the value of <strong>Layer Mask</strong> to “<strong>OutlineCharacter</strong>” previously set.<br>
+    This render event will now work for AnyPortrait characters.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> Press the <strong>+</strong> button in <strong>LightMode Tags</strong> and enter "<span class="text-danger"><strong>SetStencilPass</strong></span>".<br>
+    "<strong>SetStencilPass</strong>", which appeared in the code of the shader I wrote above, is what is used here.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> To set the stencil in the outline area, open the <strong>Overrides</strong> item and set as follows.<br>
+    - Activate <strong>Stencil</strong>.<br>
+    - Set <strong>Value</strong> to a non-zero value. We set it to "<span class="text-primary"><strong>5</strong></span>", and the Stencil property below should do the same.<br>
+    - Set <strong>Compare Function</strong> to <strong>Always</strong>.<br>
+    - Set <strong>Pass</strong> to <strong>Replace</strong>.<br>
+    The value "<span class="text-primary"><strong>5</strong></span>" will now be written to the stencil where the outline will be drawn.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1600.jpg"/>
+    <br>
+    
+    <p>
+    In the same way, click the "<strong>Add Render Feature</strong>" button and add another <strong>Render Object</strong>.<br>
+    This render event is responsible for "drawing an outline by recognizing the stencil".<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> After setting the name appropriately, set <strong>Event</strong> to <span class="text-danger"><strong>AfterRenderingOpaques</strong></span>.<br>
+    We want to draw an outline after the other opaque meshes have been drawn.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> Set <strong>Queue</strong> to <strong>Transparent</strong> and set the value of <strong>Layer Mask</strong> to “<strong>OutlineCharacter</strong>” to prepare for recognizing the stencil.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> Open <strong>Overrides</strong> and set the "<span class="text-success"><strong>Outline Material</strong></span>" created before <strong>Material</strong> here.<br>
+    Now when this rendering pass works, the outline material will be used instead of the character's material.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> Enable <strong>Depth</strong>, <strong>Write Depth</strong> and set <strong>Depth Test</strong> to the default value of <strong>Less Equal</strong>.<br>
+    <strong>Depth Test</strong> determines whether the outline is obscured by other objects on a pixel-by-pixel basis.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(5)</strong> Recognizes the stencil value created in the rendering event that operates first, and sets it to render only that part.<br>
+    - Activate <strong>Stencil</strong>.<br>
+    - Set <strong>Value</strong> to the same value as previously set (here, "<span class="text-primary"><strong>5</strong></span>").<br>
+    - Set <strong>Compare Function</strong> to <strong>Equal</strong>.<br>
+    - Set <strong>Pass, Fail</strong> to <strong>Keep</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1601.jpg"/>
+    <br>
+    
+    <p>
+    If all settings are complete, you will see the above result.<br>
+    It's a bit rough, but the outline will be visible.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Correcting outline thickness</h3>
+    <br>
+    
+    <p>
+    The outline is rendered, but it is too rough.<br>
+    Let's correct the result by changing the thickness of the outline or the shape of the mesh.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1602.jpg"/>
+    <br>
+    
+    <p>
+    Select a character to open the Material Library.<br>
+    <strong>(1)</strong> Adjust the value of "<strong>_LineThickness</strong>" to properly adjust the thickness of the outline.<br>
+    Since this value is based on the <strong>UV</strong> coordinate system, the appropriate range of values varies depending on the size of the texture.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1603.jpg"/>
+    <br>
+    
+    <p>
+    By modifying the thickness of the outline, a pretty result was obtained.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1604.jpg"/>
+    <br>
+    
+    <p>
+    If your mesh has very small margins, you may not have room to draw the outline as shown above.<br>
+    In this case, you need to modify the mesh.<br>
+    (If possible, it is recommended to edit the animation before creating it.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1605.jpg"/>
+    <br>
+    
+    <p>
+    Modify the mesh so that the outline can be drawn as above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1606.jpg"/>
+    <br>
+    
+    <p>
+    Now you can see the outlines are drawn normally.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1607.jpg"/>
+    <br>
+    
+    <p>
+    This is the result of properly calibrated outlines.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Results according to Outline Material Settings</h3>
+    <br>
+    
+    <p>
+    <span class="text-success"><strong>Outline material</strong></span> has "<strong>OutlineColor</strong>", "<strong>ZBias</strong>" properties.<br>
+    Let's see how this property changes the result.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1608.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select <strong>Outline Material</strong>.<br>
+    <strong>(2)</strong> We changed <strong>OutlineColor</strong> to red.<br>
+    <strong>(3)</strong> You can see that the color of the outline changes to red.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1609.jpg"/>
+    <br>
+    
+    <p>
+    Next is the result according to <strong>ZBias</strong>.<br>
+    If the <strong>ZBias</strong> value is too small, the outline will be drawn close to the character's meshes.<br>
+    In this case, problems also arise between meshes inside the character.<br>
+    </p>
+    <br>
+    
+    <p>
+    If the <strong>ZBias</strong> value is too large, the outline will be drawn behind the character meshes a long distance away.<br>
+    In this case, there is a problem that the outline does not appear between the characters.<br>
+    </p>
+    <br>
+    
+    <p>
+    You can actually place the characters and set <strong>ZBias</strong> appropriately.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1610.jpg"/>
+    <br>
+    
+    <p>
+    Outlines are opaque materials that only render based on their Z position.<br>
+    This property has the advantage of avoiding the problem that the outline is always hidden or always visible when rendered like other meshes.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1611.jpg"/>
+    <br>
+    
+    <p>
+    However, if the Z position of another object is very close to the character, there may be a "character visible but no outline" state.<br>
+    It is recommended to properly specify the Z-position of characters and objects.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Rendering process according to multi-pass rendering</h3>
+    <br>
+    
+    <p>
+    The multi-pass rendering technique has a problem that greatly reduces rendering performance.<br>
+    However, if the optimization function of SRP, including URP, works properly, the burden can be somewhat reduced.<br>
+    Let's take a closer look at how rendering is handled.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1612.jpg"/>
+    <br>
+    
+    <p>
+    Run Unity's "<strong>Frame Debugger</strong>".<br>
+    <strong>(1)</strong> You can see the rendering process of URP including outline.<br>
+    <strong>(2)</strong> This is the process of assigning the value to <strong>Stencil</strong>. You can see that only one "<strong>SRP Batch</strong>" was recorded.<br>
+    <strong>(3)</strong> This is the process of recognizing the stencil and drawing the outline. Likewise, 1 "<strong>SRP Batch</strong>" was recorded.<br>
+    <strong>(4)</strong> This is the process in which the character meshes are actually drawn.<br>
+    </p>
+    <br>
+    
+    <p>
+    If "<strong>SRP Batcher</strong>" works, the stencil setting and outline drawing process is performed by only running "<strong>SRP Batch</strong>" twice in total.<br>
+    As the number of times of drawing is not large, if you optimize well, you can see that the burden on rendering performance is not large.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1613.jpg"/>
+    <br>
+    
+    <p>
+    The image above shows the rendering process one by one.<br>
+    <strong>1.</strong> In the step of assigning the value to the stencil, there is one rendering process, but nothing is actually drawn.<br>
+    <strong>2.</strong> The outlines of all characters are drawn at once.<br>
+    <strong>3.</strong> Character rendering is completed after several renderings.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ControlUpdateRate.html">< Controlling update rate with scripts</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_BuildiOSPlatforms.html">Build on iOS and other platforms ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

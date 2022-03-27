@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>URPアウトラインシェーダーの作成</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_URPOutlineShader.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_URPOutlineShader.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_URPOutlineShader.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > URPアウトラインシェーダーの作成</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">URPアウトラインシェーダーの作成</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.3.5</span></h4>
+    
+    <p>
+    AnyPortraitの「マテリアルライブラリ」機能を利用すると、さまざまな「シェーダ（Shader）」を適用できます。<br>
+    Unityの「<strong>URP（Universal Render Pipeline）</strong>」などの他のレンダリングパイプラインもサポートしているため、さまざまなテクニックを試すことができる利点があります。<br>
+    このページでは、ユーザーの要求でURP環境でキャラクターの「アウトライン」を描くテクニックを実装するプロセスについて説明します。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページでは、URPの特徴、そしてAnyPortraitのような「Transparentマテリアル」を持つ複数のメッシュがレンダリングされるシステムについてどのように悩みながら実装したかを見ることができます。<br>
+    次の説明がアウトラインやさまざまな技術を実装するのに役立つことを願っています。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページを読む前に、次のページを先に読むことをお勧めします。<br>
+    - <a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">マテリアルライブラリ</a><br>
+    - <a href="../../jp/AdvancedManual/AD_URP.html">Universal Render Pipeline</a><br>
+    - <a href="../../jp/AdvancedManual/AD_ShaderGraph.html">「Shader Graph」でマテリアルを作成</a><br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>アウトラインレンダリングを実装するためのアプローチ</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1564.jpg"/>
+    <br>
+    
+    <p>
+    アウトラインシェーダを実装するさまざまな方法がありますが、ここでは透明度を比較する簡単な方法を使用します。<br>
+    レンダリングされるどのピクセルが次の条件を満たす場合、そのピクセルは「アウトライン」に対応すると見なすことができます。<br>
+    - <span class="text-danger">レンダリングされるピクセルの色は透明でなければなりません。</span><br>
+    - <span class="text-danger">周囲の不透明なピクセルが存在します。</span><br>
+    </p>
+    <br>
+    
+    <p>
+    上記のようにテクスチャの色をサンプリングするときに、周囲の透明度を一緒にサンプリングする方法で、アウトラインが描かれるべき部分を簡単に見つけることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1565.jpg"/>
+    <br>
+    
+    <p>
+    この手法をすぐにシェーダとして適用すると、上記のような問題に遭遇します。<br>
+    左は1つのメッシュ、主に「<strong>Sprite Renderer</strong>」での輪郭の様子です。<br>
+    通常、アウトラインが描かれているのがわかります。<br>
+    しかし、右側の場合、つまりAnyPortraitで作成されたキャラクターに対応するシェーダを適用すると、奇妙な結果を見ることができます。<br>
+    内部の各メッシュにもアウトラインが生成されてしまったのです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1566.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitのように複数のメッシュがある場合は、単純にシェーダ1つでアウトラインを抽出することはできません。<br>
+    この問題は、他の2Dアセットや複数のメッシュを持つ3Dキャラクターでも同じように見えることがあります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1567.jpg"/>
+    <br>
+    
+    <p>
+    したがって、この問題を解決する最も簡単な方法は、少し後ろに同じキャラクターを配置してレンダリングすることです。<br>
+    この方法は最も直感的であり、「<strong>Post Processing</strong>」を使用しない限り、2Dと3Dの両方で普遍的に使用される方法です。<br>
+    </p>
+    <br>
+    
+    <p>
+    このアプローチを実施するためには、次の方法が考えられる。<br>
+    <strong>1.</strong> キャラクターを複製して後ろに配置するか、最初にレンダリングするようにした後、元と同じように動かす方法<br>
+    <strong>2.</strong> 「マルチパスレンダリング(Multi-Pass Rendering)」を利用して、キャラクター1つが2回レンダリングされるようにする方法<br>
+    </p>
+    <br>
+    
+    <p>
+    もちろん、「<strong>1</strong>」の方法は最も便利な方法です。<br>
+    この方法で実装したい場合は、AnyPortraitの「<a href="../../jp/AdvancedManual/AD_SynchronizeWithOthers.html">同期機能</a>」が役に立ちます。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページでは「<strong>2</strong>」のアプローチを実装します。<br>
+    キャラクターを複製しないため、CPUリソースを消費する必要はなく、同期されていない動きによって発生する問題を予防することができ、最良の選択でしょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    残念なことは、URP のような SRP では基本レンダリングパイプラインとは異なり、マルチパスレンダリングを基本的にサポートしないということです。<br>
+    したがって、URP環境では、「ステンシル（Stencil）」と「LightMode」を利用してマルチパスを再現する方法を利用します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>参考 1</strong></span><br>
+    私たちのテストでは、古いAndroidデバイスで「ステンシル」が動作しないことがわかりました。<br>
+    現在のほとんどの機器では、ステンシルが動作すると判断されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>参考 2</strong></span><br>
+    このページは「12.1.1」バージョンのURPに基づいて書かれています。<br>
+    URPは、バージョンによってはコードや機能に互換性がない場合があります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>シェーダグラフを修正してアウトラインシェーダを作成</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1568.jpg"/>
+    <br>
+    
+    <p>
+    説明用に構成された例です。<br>
+    「<strong>URP 2D Lit</strong>」 マテリアルが適用された4つのキャラクターが配置されています。<br>
+    適用されたマテリアルのシェーダを修正してアウトラインシェーダにしましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    以下のリンクから完成したシェーダとマテリアルをすぐにダウンロードしてご利用いただけます。<br>
+    提供されるファイルは、URP バージョンが 「12.1.1 」でない場合、または 「Unity 2021 」バージョンでない場合には互換性がない可能性があります。<br>
+    < <a href="https://drive.google.com/file/d/1Qrvrz6cSeggdKxiOiVfzOQrBsO9oDgQA/view?usp=sharing" target="_sub">アウトラインシェーダとマテリアルパッケージをダウンロード</a> ><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1614.jpg"/>
+    <br>
+    
+    <p>
+    パッケージをダウンロードしてプロジェクトにインポートすると、上記のようにファイルが追加されます。<br>
+    <strong>(1)</strong> 輪郭を描くシェーダーグラフとマテリアルです。 「Outline Material」を「Renderer Data」で輪郭を描くPassのマテリアルとして設定してください。<br>
+    <strong>(2)</strong> AnyPortrait キャラクターに設定するステンシル用シェーダーアセットです。 それぞれ「URP 2D Lit」用と「URP Unlit」用、そして「Gamma Space」と「Linear Space」用に区分して作りました。<br>
+    </p>
+    <br>
+    
+    <p>
+    上記のファイルを利用する場合、このページの説明の中でシェーダを製作する内容は省略してもよい。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1569.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターを選択して「マテリアルライブラリ」を開きます。<br>
+    <strong>(1)</strong> 現在適用されているURPのマテリアルプリセットを選択します。<br>
+    <strong>(2)</strong> 変更するシェーダ資産を交換します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1570.jpg"/>
+    <br>
+    
+    <p>
+    対象となるシェーダアセットは次のとおりです。<br>
+    </p>
+    <br>
+    
+    <p>
+    - プロジェクト環境が「<strong>Gamma Color Space</strong>」の場合: 「<strong>Gamma > Basic Rendering > Alpha Blend</strong>」<br>
+    </p>
+    <br>
+    
+    <p>
+    - プロジェクト環境が「<strong>Linear Color Space</strong>」の場合: 「<strong>Linear > Basic Rendering > Alpha Blend</strong>」<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    「Alpha Blend」以外のマテリアルはアウトラインを持たないので、変更する必要はありません。<br>
+    同じ理由でClippedシェーダも変更する必要はありません。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1571.jpg"/>
+    <br>
+    
+    <p>
+    対象となる「シェーダグラフ」アセットをコピーして別のパスに貼り付けます。<br>
+    このシェーダグラフアセットは「コード生成用」としてのみ使用される予定です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1572.jpg"/>
+    <br>
+    
+    <p>
+    コピーしたシェーダーグラフアセットを開きます。<br>
+    <strong>(1)</strong> 「<strong>+</strong>ボタン」を押して「<strong>Float</strong>」タイプの属性を追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1573.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> 追加したプロパティの名前を「<strong>LineThickness</strong>」に設定します。 （シェーダコードには「_LineThickness」と定義されています。）<br>
+    <strong>(3)</strong> シェーダグラフを保存します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1574.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 再度シェーダグラフアセットを選択します。<br>
+    <strong>(2)</strong> <strong>Inspector</strong>の「<strong>View Generated Shader</strong>」ボタンを押します。<br>
+    すでにコードが生成されている場合は、「<strong>Regenerate</strong>」ボタンを押してから「<strong>View Generated Shader</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1575.jpg"/>
+    <br>
+    
+    <p>
+    スクリプトエディタが開き、シェーダグラフから生成されたシェーダコードを表示できます。<br>
+    このコードを使用して新しいシェーダを作成します。<br>
+    <strong>(1)</strong>  <kbd>Ctrl + A</kbd> を押してすべてのコードを選択します。<br>
+    <strong>(2)</strong>  <kbd>Ctrl + C</kbd> を押して選択したすべてのコードをコピーします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1576.jpg"/>
+    <br>
+    
+    <p>
+    コピーしたシェーダコードを貼り付けるシェーダアセットを新しく作成します。<br>
+    適切なパスでマウスを右クリックして「<strong>Create> Shader> Unlit Shader</strong>」をクリックして新しいシェーダーアセットを作成します。<br>
+    このアセットは、シェーダグラフではなく、基本の「シェーダアセット（Shader）」でなければなりません。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>なぜシェーダグラフのコードを複製して書き直すのですか？</h4>
+    <br>
+    
+    <p>
+    URP用のシェーダは非常に複雑で、直接書くことはほとんど不可能です。<br>
+    また、バージョンによってコードが変わるので、シェーダグラフを利用することが定石として知られています。<br>
+    ただし、シェーダグラフでは、「Pass」を追加したり「Light Mode」を指定したりすることはできません。<br>
+    したがって、多少面倒でも、シェーダグラフを最初に完成した後、ここで生成されたコードを複製して修正する方法が必要です。<br>
+    </p>
+    <br>
+    
+    <p>
+    シェーダグラフが改善され、ここで説明されているさまざまな手法が適用できる場合は、あえてコードを生成する方法は必要ありません。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1577.jpg"/>
+    <br>
+    
+    <p>
+    作成したシェーダーアセットを開きます。<br>
+    Unlit方式の簡単なシェーダコードを見ることができます。<br>
+    このコードを使用するのではなく、現在のクリップボードに保存されている「シェーダグラフからコピーしたコード」をここに貼り付けて修正してみます。<br>
+    <strong>(1)</strong>  <kbd>Ctrl + A</kbd> を押してすべてのコードを選択します。<br>
+    <strong>(2)</strong>  <kbd>Ctrl + V</kbd> を押してクリップボードに保存されているコードを貼り付けます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1578.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> シェーダグラフから生成された一時コードが <strong>(2)</strong> シェーダアセットに貼り付けられた結果です。<br>
+    もちろん、2つのコードは完全に同じです。<br>
+    それでは、シェーダーアセットを修正してみましょう。<br>
+    （これからはシェーダグラフとシェーダグラフで生成されたコードはもう使用されません。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1579.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> シェーダの名前を変更します。<br>
+    <strong>(2)</strong> 「SubShader」の構文内に以下のコードを作成して追加します。 <br>
+    上記の画像で指している場所に追加するだけです。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Pass<br>
+    {<br>
+    &emsp;&emsp;// ステンシルに値を設定する「Pass」です。<br>
+    &emsp;&emsp;// 「Renderer Data」で「Overrides」設定でステンシルを指定するので、ここでステンシルコードは作成しません。<br>
+    <br>
+    &emsp;&emsp;// 「Light Mode」の名前を利用してマルチパスを実装します。<br>
+    &emsp;&emsp;// 「SetStencilPass」という名前を覚えておいてください。<br>
+    &emsp;&emsp;<span class="text-danger"><strong>Tags { "LightMode" = "SetStencilPass" }</strong></span><br>
+    &emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    <br>
+    &emsp;&emsp;// 「ColorMask」を「A」に設定すると、ステンシルが設定されてもレンダリングされません。<br>
+    &emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;ColorMask A<br>
+    <br>
+    &emsp;&emsp;HLSLPROGRAM<br>
+    &emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    <br>
+    &emsp;&emsp;struct Attributes<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;float4 positionOS : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;};<br>
+    &emsp;&emsp;struct Varyings<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;float4 positionHCS : SV_POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;TEXTURE2D(_MainTex);<br>
+    &emsp;&emsp;SAMPLER(sampler_MainTex);<br>
+    <br>
+    &emsp;&emsp;// シェーダのプロパティのコードをここに書きます。<br>
+    &emsp;&emsp;// レンダリングを最適化するために「SRP Batcher」を動作させるには、次の「CBUFFER」構文を他の「Pass」と同じにする必要があります。<br>
+    &emsp;&emsp;<span class="text-danger"><strong>CBUFFER_START(UnityPerMaterial)</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>float4 _MainTex_TexelSize;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>float4 _MainTex_ST;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>float4 _Color;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>float _LineThickness;</strong></span><br>
+    &emsp;&emsp;<span class="text-danger"><strong>CBUFFER_END</strong></span><br>
+    <br>
+    &emsp;&emsp;Varyings vert(Attributes IN)<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Varyings OUT;<br>
+    &emsp;&emsp;&emsp;&emsp;OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);<br>
+    &emsp;&emsp;&emsp;&emsp;OUT.uv = TRANSFORM_TEX(IN.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;return OUT;<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;half4 frag(Varyings IN) : SV_Target<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 「_LineThickness」の長さだけ離れて位置するピクセルの透明度をチェックします。<br>
+    &emsp;&emsp;&emsp;&emsp;float offset1 = _LineThickness;<br>
+    &emsp;&emsp;&emsp;&emsp;float offset2 = _LineThickness * 0.7f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_0 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv).a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 周囲の8つのピクセルの透明度をチェックします。<br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_1 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(offset1, 0)).a;<br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_2 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(-offset1, 0)).a;<br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_3 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(0, offset1)).a;<br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_4 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(0, -offset1)).a;<br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_5 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(offset2, offset2)).a;<br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_6 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(-offset2, offset2)).a;<br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_7 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(-offset2, -offset2)).a;<br>
+    &emsp;&emsp;&emsp;&emsp;float alpha_8 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(offset2, -offset2)).a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>half totalAlpha = alpha_0 + alpha_1 + alpha_2 + alpha_3 + alpha_4 + alpha_5 + alpha_6 + alpha_7 + alpha_8;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;float4 c = float4(0, 0, 0, 0);&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>c.a = saturate(totalAlpha * _Color.a);</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 「discard」が呼び出されると、ステンシルが更新されない点を使用して、アウトラインである部分だけがステンシル値を格納するようにします。<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// ピクセルが不透明な場合、アウトラインではなく画像の内側に対応します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>if (alpha_0 > 0.5f)</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>{</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>discard;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>}</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 周囲に不透明なピクセルがない場合は、アウトラインではなくマージンに対応します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>if (c.a < 0.02f)</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>{</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>discard;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>}</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;return c;<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;ENDHLSL<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    コードの詳細な説明はそれぞれのコメントを参照してください。<br>
+    上記のコードをシェーダコード内に追加すると、次の画像のようになります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1580.jpg"/>
+    <br>
+    
+    <p>
+    特にここで注目すべき点は、「<strong>Light Mode</strong>」と「<strong>CBUFFER</strong>の構文」です。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> URPは「<strong>Light Mode</strong>」を使用してレンダリングされるパスを区別します。<br>
+    このプロパティを使用して、文字がレンダリングされる前にステンシルを作成するパスを最初に実行させます。<br>
+    ここで作成した「Light Mode」の名前である「<strong>SetStencilPass</strong>」を覚えておきましょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> URPを含む「<strong>SRP</strong>」は、レンダリング性能を向上させるためにマテリアルの特性が似ている場合、少ないドローコールでもできるだけ多くのオブジェクトをレンダリングします。<br>
+    この特性を「<strong>SRP Batcher</strong>」と呼びます。<br>
+    「<strong>SRP Batcher</strong>」を動作させるには、シェーダコード内のすべてのプロパティ構文、つまり「<strong>CBUFFER_START ~ CUBFFER_END</strong>」内のコードが同じである必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1581.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 完成したシェーダーアセットを選択します。<br>
+    <strong>(2)</strong> 問題なく作成した場合は、「<strong>SRP Batcher</strong>」属性が「<strong>compatible</strong>」であることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1582.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターを開き、このシェーダを適用してみましょう。<br>
+    <strong>(1)</strong> マテリアルライブラリを開き、このマテリアルセットの名前を変更します。<br>
+    名前を変更するのは、このマテリアルセットをプリセットで保存して他のキャラクターにも簡単に適用するためです。<br>
+    <strong>(2)</strong> 先ほど作成したシェーダーアセットを「Alpha Blend」項目に適用します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1583.jpg"/>
+    <br>
+    
+    <p>
+    前の手順で追加したプロパティ「_LineThickness」を指定してみましょう。<br>
+    <strong>(1)</strong> 「<strong>Add Property</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 名前を「<strong>_LineThickness</strong>」に設定します。<br>
+    <strong>(3)</strong> タイプは「<strong>Float</strong>」に設定します。<br>
+    <strong>(4)</strong> アウトラインの太さはテクスチャ座標系である「UV」を基準とするため、1以下の非常に小さい値を入力します。<br>
+    まだ適切な値がわからないので、適度に小さい値を入力してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1584.jpg"/>
+    <br>
+    
+    <p>
+    このマテリアルセットを適用するには、プリセットで作成して他のキャラクターにもすばやく設定できます。<br>
+    <strong>(1)</strong> 「<strong>Register as a Preset</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> プリセットで追加されたものが表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    AnyPortrait v1.3.5に基づいて、シェーダアセットの変更直後にプリセットとして保存すると、変更履歴が反映されないバグがあります。<br>
+    プリセットで保存する前に、マテリアルライブラリをオフにしてからもう一度オンにしてください。<br>
+    このバグは、次のアップデートで修正される予定です。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1585.jpg"/>
+    <br>
+    
+    <p>
+    Bakeを実行します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1586.jpg"/>
+    <br>
+    
+    <p>
+    他のキャラクターにも同じことをしなければなりませんが、保存したプリセットを使うと面倒なプロセスを減らすことができます。<br>
+    別のキャラクターを開き、マテリアルライブラリを実行します。<br>
+    <strong>(1)</strong> 「<strong>Make Material Set</strong>」ボタンを押して新しいマテリアルセットを追加します。<br>
+    <strong>(2)</strong> 上記の手順で作成したアウトラインレンダリング用のプリセットを選択します。<br>
+    <strong>(3)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1587.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 追加したマテリアルセットを選択します。<br>
+    <strong>(2)</strong> 「<strong>Default Material</strong>」ボタンを押して「<strong>ON</strong>」状態にします。<br>
+    <strong>(3)</strong> 作成したシェーダアセットが適用された状態であることを確認します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1588.jpg"/>
+    <br>
+    
+    <p>
+    これをすべてのキャラクターに同じように行います。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>アウトラインレンダリングシェーダを作成して「Renderer Data」を設定</h3>
+    <br>
+    
+    <p>
+    次のタスクは、ステンシルを認識して実際にアウトラインレンダリングになるようにすることです。<br>
+    かなり複雑なステップを経るので、一つずつやってみてください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1589.jpg"/>
+    <br>
+    
+    <p>
+    アウトラインが描画されるオブジェクトを区別するためにレイヤーを追加します。<br>
+    <strong>(1)</strong> 「<strong>Project Settings > Tags and Layers</strong>」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Layers</strong>」に新しいレイヤーを追加します。 ここでは、「<strong>OutlineCharacter</strong>」という名前のレイヤーを追加しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1590.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> キャラクターをすべて選択します。<br>
+    <strong>(2)</strong> キャラクターのレイヤーを設定したばかりの「<strong>OutlineCharacter</strong>」に変更します。<br>
+    （子オブジェクトのレイヤーも一緒に変更します。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1591.jpg"/>
+    <br>
+    
+    <p>
+    先のプロセスで作成したシェーダは、アウトラインになる位置にステンシルに保存する役割をします。<br>
+    まだアウトラインをレンダリングするシェーダとマテリアルは作成していません。<br>
+    アウトラインをレンダリングするシェーダを作成しましょう。<br>
+    「<strong>Projects</strong>」タブで右クリックし、「<strong>Create > Shader Graph > URP > Unlit Shader Graph</strong>」を選択して新しいシェーダグラフを作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>なぜ「Sprite Unlit」シェーダではなく「Unlit」シェーダを使用するのですか？</h4>
+    <br>
+    
+    <p>
+    2Dゲームでは、「<strong>Sprite Unlit</strong>」シェーダは半透明レンダリングをサポートし、「<strong>Unlit</strong>」シェーダは不透明レンダリングのみをサポートするため、通常は「<strong>Sprite Unlit</strong>」シェーダを使用します。<br>
+    しかし、URPでアウトラインを描く「Pass」は、各オブジェクトごとに動作するのではなく、一括で動作するため、アウトラインのレンダリング順序を制御できないという問題があります。<br>
+    「<strong>Opaque</strong>」シェーダは、「Pass」が異なっても「Z位置(Depth)」を比較してレンダリング順序が適切に決定されるのに対し、「<strong>Transparent</strong>」シェーダはZ位置を利用できないため、レンダリング順序を制御できません 。<br>
+    その結果、「<strong>Transparent </strong>」シェーダでアウトラインを一括レンダリングすると、常にすべてのオブジェクトの後ろまたは前にのみレンダリングされます。<br>
+    そのため、Z位置を利用するためにレンダリング品質が低下しても「<strong>Unlit</strong>」シェーダを利用しなければなりませんでした。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>Sprite Unlit</strong>」シェーダを利用するためには、SRPがオブジェクトごとに「Multi-Pass」をサポートするか、AnyPortraitでこれのためのマルチマテリアル機能を追加しなければなりません。 。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1592.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 生成されたシェーダグラフを開きます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1593.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>OutlineColor</strong>」という名前の「<strong>Color</strong>」プロパティと、「<strong>ZBias</strong>」という名前の「<strong>Float</strong>」プロパティを追加します。<br>
+    「<strong>OutlineColor</strong>」プロパティはアウトラインの色を意味し、「<strong>ZBias</strong>」はアウトラインがキャラクターより少し後ろにレンダリングされるようにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1594.jpg"/>
+    <br>
+    
+    <p>
+    上記のようにシェーダグラフを作成します。<br>
+    珍しい点は、「<strong>World</strong>」座標系に基づいて「<strong>ZBias</strong>」だけレンダリング位置を後方に移動させることです。<br>
+    （新しいタブで開くと、元のサイズの画像を見ることができます。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1595.jpg"/>
+    <br>
+    
+    <p>
+    アウトラインを描く「Pass」で利用する<span class="text-success"><strong>アウトラインマテリアル</strong></span>を作りましょう。<br>
+    <strong>(1)</strong> 新しい「マテリアル（Material）」を作成して選択します。<br>
+    <strong>(2)</strong> マテリアルのシェーダを直前に作成したアウトラインシェーダに変更します。<br>
+    <strong>(3)</strong> 「<strong>アウトラインカラー</strong>」と「<strong>ZBias</strong>」を設定します。 ここでは「ZBias」を「<strong>1</strong>」に設定しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1596.jpg"/>
+    <br>
+    
+    <p>
+    次にURPの「Renderer Data」を修正するステップです。<br>
+    <strong>(1)</strong> プロジェクトに適用された「<strong>Universal Render Pipeline Asset</strong>」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Renderer List</strong>」で現在適用されている「<strong>Renderer Data</strong>」が表示されます。<br>
+    この「<strong>Renderer Data</strong>」の設定を修正して特殊なレンダリング「Pass」を追加してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1597.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 現在適用されている「<strong>Renderer Data</strong>」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Add Renderer Feature</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1598.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> 「<strong>Render Objects</strong>」を選択して追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1599.jpg"/>
+    <br>
+    
+    <p>
+    追加された「<strong>Render Objects</strong>」に「アウトラインに対応する領域にステンシルを設定する」の役割を与えてみましょう。<br>
+    上記のように設定します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 名前を適切に設定した後、「<strong>Event</strong>」を「<span class="text-danger"><strong>BeforeRenderingOpaques</strong></span>」に設定します。<br>
+    不透明なメッシュが描画される前に、アウトライン領域にステンシルを設定するためです。<br>
+    イベントの名前がほとんど似ているため、混乱しやすいので注意してください。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> 「<strong>Queue</strong>」を「<strong>Transparent</strong>」に設定し、「<strong>Layer Mask</strong>」の値を先に設定した「<strong>OutlineCharacter</strong>」に変更します。<br>
+    これで、AnyPortraitキャラクターに対してこのレンダリングイベントが動作します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> 「<strong>LightMode Tags</strong>」の「<strong>+</strong>ボタン」を押し、「<span class="text-danger"><strong>SetStencilPass</strong></span>」と入力します。<br>
+    上記で作成したシェーダのコードから登場した「<strong>SetStencilPass</strong>」がここで使われています。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> アウトライン領域にステンシルを設定するには、「<strong>Overrides</strong>」項目を開き、次のように設定します。<br>
+    - 「<strong>Stencil</strong>」を有効にします。<br>
+    - 「<strong>Value</strong>」はゼロ以外の値を指定します。 ここでは「<span class="text-primary"><strong>5</strong></span>」に設定し、以下のStencilプロパティでも同じに設定する必要があります。<br>
+    - 「<strong>Compare Function</strong>」を「<strong>Always</strong>」に設定します。<br>
+    - 「<strong>Pass</strong>」を「<strong>Replace</strong>」に設定します。<br>
+    アウトラインが描画される位置のステンシルには、「<span class="text-primary"><strong>5</strong></span>」という値が書き込まれます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1600.jpg"/>
+    <br>
+    
+    <p>
+    同様に、「<strong>Add Render Feature</strong>」ボタンを押して、「<strong>Render Objects</strong>」をもう1つ追加します。<br>
+    このレンダリングイベントは、「ステンシルを認識してアウトラインを描く」の役割を果たします。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 名前を適切に設定した後、「<strong>Event</strong>」を「<span class="text-danger"><strong>AfterRenderingOpaques</strong></span>」に設定します。<br>
+    他の不透明なメッシュが描かれた後、輪郭を描きたいのです。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> 「<strong>Queue</strong>」を「<strong>Transparent</strong>」に設定し、「<strong>Layer Mask</strong>」の値を「<strong>OutlineCharacter</strong>」に設定してステンシルを認識する準備をします。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> 「<strong>Overrides</strong>」を開き、「<strong>Material</strong>」の前に作成した「<span class="text-success"><strong>アウトラインマテリアル</strong></span>」をここに設定します。<br>
+    このレンダリングパスが動作するときは、キャラクターのマテリアルではなく、アウトラインマテリアルが代わりに使用されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> 「<strong>Depth</strong>」、「<strong>Write Depth</strong>」を有効にし、「<strong>Depth Test</strong>」をデフォルト値の「<strong>Less Equal</strong>」に設定します。<br>
+    「<strong>Depth Test</strong>」を行うと、ピクセル単位でアウトラインが他のオブジェクトに隠れるかどうかが決まります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(5)</strong> 最初に動作するレンダリングイベントで作成されたステンシル値を認識し、その部分のみをレンダリングするように設定します。<br>
+    - 「<strong>Stencil</strong>」を有効にします。<br>
+    - 「<strong>Value</strong>」を前に設定した値（ここでは「<span class="text-primary"><strong>5</strong></span>」）と同じ値に設定します。<br>
+    - 「<strong>Compare Function</strong>」を「<strong>Equal</strong>」に設定します。<br>
+    - 「<strong>Pass, Fail</strong>」をすべて「<strong>Keep</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1601.jpg"/>
+    <br>
+    
+    <p>
+    設定がすべて完了したら、上記の結果を見ることができます。<br>
+    やや粗いですが、アウトラインが見えます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>アウトラインの太さを補正</h3>
+    <br>
+    
+    <p>
+    アウトラインはレンダリングされますが、まだきれいではありません。<br>
+    輪郭の太さやメッシュの形状を変更して結果を補正しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1602.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターを選択して「マテリアルライブラリ」を開きます。<br>
+    <strong>(1)</strong> 「<strong>_LineThickness</strong>」の値を調整して、アウトラインの太さを適切に修正します。<br>
+    この値は「UV」座標系に基づいているため、テクスチャのサイズによって適切な値の範囲が異なります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1603.jpg"/>
+    <br>
+    
+    <p>
+    アウトラインの太さを修正すると、かなりきれいな結果が現れました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1604.jpg"/>
+    <br>
+    
+    <p>
+    上記のように、メッシュに余白がほとんどないため、アウトラインが描画されるスペースがない可能性があります。<br>
+    メッシュを修正する必要があります。<br>
+    （可能であれば、アニメーションを作成する前に事前に修正しておくことをお勧めします。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1605.jpg"/>
+    <br>
+    
+    <p>
+    上記のようにアウトラインが描画されるようにメッシュを変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1606.jpg"/>
+    <br>
+    
+    <p>
+    これで、アウトラインが正常に描かれているのがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1607.jpg"/>
+    <br>
+    
+    <p>
+    アウトラインが適切に補正された結果です。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>アウトラインマテリアル設定による違い</h3>
+    <br>
+    
+    <p>
+    「<span class="text-success"><strong>アウトラインマテリアル</strong></span>」には「<strong>OutlineColor</strong>」、「<strong>ZBias</strong>」プロパティがあります。<br>
+    このプロパティで結果がどのように変わるかを見てみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1608.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>アウトラインマテリアル</strong>」を選択します。<br>
+    <strong>(2)</strong> 「<strong>OutlineColor</strong>」を「赤色」に変更してみました。<br>
+    <strong>(3)</strong> アウトラインの色が「赤色」に変わることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1609.jpg"/>
+    <br>
+    
+    <p>
+    次に「<strong>ZBias</strong>」による結果です。<br>
+    「<strong>ZBias</strong>」値が小さすぎると、アウトラインがキャラクターのメッシュに近いところに描画されます。<br>
+    この場合には、キャラクター内部のメッシュ間でも現れる問題が発生します。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>ZBias</strong>」値が大きすぎる場合、アウトラインはキャラクターメッシュから遠い距離の後ろに描画されます。<br>
+    この場合、輪郭がキャラクターの間に現れない問題が発生します。<br>
+    </p>
+    <br>
+    
+    <p>
+    実際にキャラクターを配置してみて、「<strong>ZBias</strong>」を適切に設定してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1610.jpg"/>
+    <br>
+    
+    <p>
+    アウトラインは不透明なマテリアルで、Z位置に基づいてレンダリングするかどうかを決定します。<br>
+    この特性は、他のメッシュと同様にレンダリングされた場合でも、アウトラインが常に非表示になる、または常に表示される問題を回避する利点があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1611.jpg"/>
+    <br>
+    
+    <p>
+    しかし、他のオブジェクトのZ位置がキャラクターに非常に近い場合、「キャラクターは見えますが、アウトラインは見えない状態」があるかもしれません。<br>
+    キャラクターとオブジェクトのZ位置を適切に指定することをお勧めします。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>レンダリングプロセス</h3>
+    <br>
+    
+    <p>
+    「Multi-Pass」レンダリング手法は、レンダリングパフォーマンスを大幅に低下させる問題があります。<br>
+    ただし、URPを含む「SRPの最適化機能」（SRP Batcher）が正常に動作する場合は、その負担を少し減らすことができます。<br>
+    レンダリングがどのように処理されるかを詳しく見てみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1612.jpg"/>
+    <br>
+    
+    <p>
+    Unityの「<strong>Frame Debugger</strong>」を実行します。<br>
+    <strong>(1)</strong> アウトラインを含むURPのレンダリングプロセスを見ることができます。<br>
+    <strong>(2)</strong> ステンシルの設定処理です。 1回の「<strong>SRP Batch</strong>」しか記録されていないことがわかります。<br>
+    <strong>(3)</strong> ステンシルを認識して輪郭を描く過程です。 同様に、1回の「<strong>SRP Batch</strong>」が記録されました。<br>
+    <strong>(4)</strong> キャラクターメッシュが実際に描かれる過程です。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>SRP Batcher</strong>」が動作している場合、ステンシルの設定とアウトラインの描画プロセスは、合計2回の「<strong>SRP Batch</strong>」のみで動作します。<br>
+    描画回数が多くないだけに最適化だけがうまくいけば、レンダリング性能に対する負担が大きくないことがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1613.jpg"/>
+    <br>
+    
+    <p>
+    上の画像はレンダリングプロセスを1つずつ示しています。<br>
+    <strong>1.</strong> ステンシルを設定する段階では 1 回のレンダリング過程を経ますが実際に描かれることはありません。<br>
+    <strong>2.</strong> すべてのキャラクターの輪郭が一度に描かれます。<br>
+    <strong>3.</strong> 数回のレンダリングを経てキャラクターのレンダリングが完了します。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_ControlUpdateRate.html">< スクリプトで更新時間を制御</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_BuildiOSPlatforms.html">iOSと他のプラットフォーム ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>
