@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>「Secondary Atlas」の作成</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_SecondaryAtlas.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_SecondaryAtlas.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_SecondaryAtlas.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 「Secondary Atlas」の作成</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">「Secondary Atlas」の作成</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1638.jpg"/>
+    <br>
+    
+    <p>
+    ゲームキャラクターをレンダリングするには、基本的なテクスチャに加えて、さまざまな種類のテクスチャが必要になることもあります。<br>
+    物理的特性、バンプ、マスク、特殊効果などをテクスチャに適用してリソースを作成し、これをレンダリングに利用したりします。<br>
+    あるいは、テクスチャを置き換えてキャラクターの外観を変更することもできます。 （<a href="../../jp/AdvancedManual/AD_CharacterCostume.html">関連ページ</a>）<br>
+    これらのテクスチャを「<strong>Secondary Texture</strong>」と呼びます。<br>
+    </p>
+    <br>
+    
+    <p>
+    特に、複数のレイヤーが1つのテクスチャにまとめられた「<strong>Secondary Atlas</strong>」を作成することがよくあります。<br>
+    このとき、「<span class="text-danger">すべてのテクスチャが同じ構造のAtlasを持つこと</span>」という条件を満たす必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    「AnyPortrait v1.4.0」に新しく追加された機能である「Secondary Atlasを作成する」機能を利用すれば、便利に同じ構造のAtlasテクスチャを別のPSDファイルから作成することが可能です。<br>
+    この機能は「PSDファイルの再インポート」ダイアログに追加されているため、その機能を知っておくと適切に使用できます。<br>
+    説明に先立ち、下記のマニュアルをあらかじめお読みください。<br>
+    - <a href="../../jp/AdvancedManual/AD_PSD.html">PSDファイルの読み込み</a><br>
+    - <a href="../../jp/AdvancedManual/AD_RePSD.html">PSDファイルの再インポート</a><br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger">参考</span><br>
+    この機能は、「v1.4.0」の以前のバージョンと互換性がありません。<br>
+    以前のバージョンからPSDをインポートしてAtlasを作成した場合は、「PSDファイルの再インポート」機能を使用して、現在のバージョンに合わせてAtlasデータを生成する必要があります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>「Secondary Atlas」の作成</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1639.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1640.jpg"/>
+    <br>
+    
+    <p>
+    説明のために「原本となるPSDファイル」と「Secondary TextureになるPSDファイル」を用意しました。<br>
+    2つのPSDファイルには同じ名前と構成のレイヤーがあります。<br>
+    「Secondary Atlas」を作成するには、基準となるPSDファイルと可能な同じまたはレイヤー構成を持つ必要があります。<br>
+    もちろん、それ以降のマッピング機能では全く同じでなくてもテクスチャ生成は可能ですが、レイヤー名まで同じようにファイルを準備することをお勧めします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1644.jpg"/>
+    <br>
+    
+    <p>
+    「Secondary Atlas」を作成するためには、基準となる「<strong>Main Atlas</strong>」を最初に作成する必要があります。<br>
+    <strong>(1)</strong> 「<strong>Import PSD File</strong>」機能を使用して <strong>(2)</strong> 「<strong>Main Atlas</strong>」を作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1645.jpg"/>
+    <br>
+    
+    <p>
+    完成したキャラクターです。<br>
+    それでは、このキャラクターのUV情報と互換性のある「Secondary Atlas」を作成しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1646.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Import PSD File</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Reload PSD File</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1647.jpg"/>
+    <br>
+    
+    <p>
+    ダイアログが開くと、「<strong>Main Atlas</strong>」を作成しながら作成された「PSDセット」が登録されます。<br>
+    <strong>(1)</strong> 対応する「PSD セット」を選択します。<br>
+    <strong>(2)</strong> 「Main Atlas」に関する情報を確認することができます。<br>
+    <strong>(3)</strong> 「<strong>Make Secondary PSD Set</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>「PSDセット」が見えない、または「Secondary PSDセット」を生成できません！</h4>
+    <br>
+    
+    <p>
+    v1.4.0より前のバージョンからPSDファイルをインポートした場合、このプロセスは実行できません。<br>
+    回避策は、同じPSDファイルをそのまま再インポートして「Main Atlas」を再生成することです。<br>
+    同じPSDファイルを再インポートする方法については、<a href="../../jp/AdvancedManual/AD_RePSD.html">関連ページ</a>をご覧ください。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1648.jpg"/>
+    <br>
+    
+    <p>
+    選択した「PSDセット」の情報を利用してAtlasを生成する「<span class="text-danger">Secondary PSDセット</span>」が生成され、リストに追加されました。<br>
+    <strong>(1)</strong> 「<strong>Secondary PSD Set</strong>」を選択します。<br>
+    <strong>(2)</strong> 「Secondary Atlas」で作成する「2番目のPSDファイル」を開きます。 （メインアトラスで作成した最初のPSDファイルを開くのではありませんので注意してください！）<br>
+    <strong>(3)</strong> PSDファイル情報と以前の「Bake」情報が表示されます。 現在、「Secondary Atlas」を作成したことがないため、Bake情報はありません。<br>
+    <strong>(4)</strong> 「<strong>Next</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1649.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> オリジナルとなるAtlasを持つ画像が表示されます。<br>
+    <strong>(2)</strong> 以前「Bake」の履歴が表示されます。<br>
+    <strong>(3)</strong> ［選択したオリジナルアトラスの画像］と［Secondary PSDファイル］が同時に表示されます。<br>
+    <strong>(4)</strong> 画面にPSDファイルや画像がどのように表示されるかを決定するボタンです。<br>
+    <strong>(5)</strong> ファイルがすべて正しくロードされたことを確認したら、「<strong>Next</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1650.jpg"/>
+    <br>
+    
+    <p>
+    「Secondary PSDファイル」のレイヤーと「Main Atlasのオリジナルレイヤー」をリンクする手順です。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Secondary PSDファイルのレイヤー</strong> : Bakeかどうか、どのソースレイヤーを参照するかを設定できます。<br>
+    <strong>2. 原稿となるメインアトラスのレイヤー情報</strong> : 原稿となるPSDセットに保存されたデータに基づいて原画レイヤーが表示されます。<br>
+    <strong>3. Auto Mapping</strong> : 名前と順序に基づいてレイヤーを自動的にリンクします。<br>
+    <strong>4. Enable All/Disable All/Reset</strong> : すべての 「Secondary PSDセット」のレイヤーを対象に、Bake か、ソース参照かを変更します。<br>
+    <strong>5. 接続状態を色で表示</strong> : 色を使用して、両方の接続状態を見やすく表示します。<br>
+    <strong>6. アウトラインとしてプレビュー</strong> : この機能をオンにすると、プレビュー画面で選択したターゲットがアウトラインとしてレンダリングされます。<br>
+    <strong>7. プレビュー画面</strong> : 選択したPSDレイヤーの画像に関連付けられたオリジナルのAtlasを出力します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1651.jpg"/>
+    <br>
+    
+    <p>
+    デフォルトでは、名前に基づいて自動的にリンクされます。<br>
+    ただし、接続が正しくない場合は、直接レイヤー間の接続を再確立する必要があります。<br>
+    <strong>(1)</strong> 接続を変更したい「Secondary PSDファイル」のレイヤーの「接続ボタン」を押します。<br>
+    <strong>(2)</strong> 接続したい対象を選択します。<br>
+    </p>
+    <br>
+    
+    <p>
+    接続するか有効にするかを設定したら、 <strong>(3)</strong> 「<strong>Next</strong>」ボタンを押して次の手順に進みます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1652.jpg"/>
+    <br>
+    
+    <p>
+    このステップは面倒ですが、非常に重要です。<br>
+    これは、同じUVを共有するために各レイヤーの位置とサイズを補正する必要があるためです。<br>
+    この画面は次のように構成されています。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Secondary PSDファイルのレイヤー</strong> : Bakeの対象となるPSDレイヤーです。<br>
+    <strong>2. プレビュー画面</strong> : 選択したレイヤーとオリジナルレイヤーが出力されます。 この画面を見ながら位置とサイズを調整する必要があります。 マウスホイールクリック、ドラッグなどで移動、拡大などができます。<br>
+    <strong>3. Rendering/Order</strong> : プレビュー画面でのレンダリング方法と出力順序を変更します。<br>
+    <strong>4. Position Offset</strong> : 選択した 「Secondary PSD レイヤー」の位置を変更するツールです。<br>
+    <strong>5. Prev Atlas Scale</strong> : 元のAtlas に対して現在の PSD ファイルに設定する必要があるサイズ値です。 ファイル単位で設定されるため、すべてのレイヤーに一括適用されます。<br>
+    <strong>6. レイヤー切り替えボタン</strong> : 前、次のレイヤーを選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1653.jpg"/>
+    <br>
+    
+    <p>
+    レイヤーを選択したときに上記のように位置が重なっていない場合、Atlasで作成したときに同じUVを持つことはできません。<br>
+    位置とサイズを調整して、互いに完全に重なるようにする必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1654.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> プレビュー画面でレンダリング方法を変更してアウトラインが見えるようにするか、順序を変更して便利に作業できるように準備します。<br>
+    <strong>(2)</strong> 現在のオリジナルの「Atlas」が後ろから見え、前に「Secondary PSDレイヤー」が青いアウトラインで表示されます。<br>
+    <strong>(3)</strong> 次に、位置、サイズ補正ツールを使用して、2つのレイヤー画像が完全に重なり合うようにしましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1655.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 2つのレイヤーが完全に重なった状態です。 この状態であれば、問題なくセカンダリアトラスを作成できます。<br>
+    <strong>(2)</strong> 「前/次ボタン」を押すか、 <strong>(3)</strong> 「レイヤーリスト」から操作する「Secondary PSDレイヤー」を選びます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1656.jpg"/>
+    <br>
+    
+    <p>
+    すべてのレイヤーで「オーバーラップ」を終了したら、 <strong>(1)</strong> 「<strong>Next</strong>」ボタンを押して最後のステップに進みます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1657.jpg"/>
+    <br>
+    
+    <p>
+    最後に、「Secondary Atlas情報」を利用してテクスチャアセットを作成するステップです。<br>
+    PSDファイルをインポートする他のUIとは異なり、「Bake」に関連するオプションはほとんどありません。<br>
+    「原本のPSDセット」での情報をそのまま活用するため、テクスチャ数やサイズ、余白などを設定しません。<br>
+    <strong>(1)</strong> 保存する「Secondary テクスチャアセット名」と「パス」を設定します。 （「Assets」のサブフォルダ内に配置する必要があります。）<br>
+    <strong>(2)</strong> 「<strong>Bake</strong>」ボタンを押してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1658.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Secondary Atlas</strong>」が完成しました。<br>
+    「<strong>Main Atlas</strong>」と同じように設定されていることを確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1659.jpg"/>
+    <br>
+    
+    <p>
+    「Secondary Atlas」は、どのように活用されるかによって、「背景色」を異なるように指定しなければなりません。<br>
+    （たとえば、ノーマルマップの背景は淡い青色で、マスクマップの背景は黒色のように、用途によって異なる背景色があります。）<br>
+    <strong>(1)</strong> 「<strong>BG Color</strong>」を選び、適切な色を選びます。 「<strong>Alpha</strong>」も同様に指定します。<br>
+    <strong>(2)</strong> 「<strong>Bake</strong>」ボタンをもう一度押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1660.jpg"/>
+    <br>
+    
+    <p>
+    背景色まで適用された結果です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1661.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Complete</strong>」ボタンを押してテクスチャファイルを作成します。<br>
+    <strong>(2)</strong> 操作が完了すると結果ダイアログが表示されます。 「<strong>Okay</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1662.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Secondary Atlas</strong>」は「テクスチャアセット」でのみ作成され、AnyPortaitエディタには登録されません。<br>
+    完成したアセットを「Unity Editor」の「Project」タブで確認しましょう。<br>
+    <strong>(1)</strong> 設定したパスで作成された「Secondary Atlasテクスチャアセット」を見つけることができます。 自動的に選択されます。<br>
+    <strong>(2)</strong> 2つのテクスチャアセットを比較すると、まったく同じAtlas構造を持つことがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1641.jpg"/>
+    <br>
+    
+    <p>
+    完成した「Secondary Atlas」です。<br>
+    UVと互換性のある2つのテクスチャを持って面白いレンダリング結果を作りましょう！<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>オリジナルとなるPSDセットを修正した場合</h4>
+    <br>
+    
+    <p>
+    「Secondary PSDセット」を作成した後に「オリジナルとなるPSDセット」を選択して再び「Atlas」を作成した場合、そのPSDセットから作成されたすべての「Secondary PSDセット」は使用できません。<br>
+    既存の「Secondary PSDセット」を削除し、新しい「Secondary PSDセット」を作成し、上記の手順をすべて再実行する必要があります。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>PSDファイルのサイズが異なる場合</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1663.jpg"/>
+    <br>
+    
+    <p>
+    読み込もうとする「Secondary PSDファイル」の画像が「オリジナルPSDファイル」とサイズが異なる場合は、サイズ補正作業をより注意深くする必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1664.jpg"/>
+    <br>
+    
+    <p>
+    上の画像は、先に説明した「Secondary PSDセット」生成の処理を同じに進め、位置、サイズ補正ステップの画面です。<br>
+    「Secondary PSDレイヤー」の画像が「オリジナルアトラス」のレイヤーイメージより大きいことがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1665.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 操作が便利にプレビュー画面の設定を変更します。<br>
+    <strong>(2)</strong> 位置補正ツールはもちろんのこと、サイズ補正ツールを活用して両方の画像が完全に重なり合うようにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1666.jpg"/>
+    <br>
+    
+    <p>
+    上記のようにサイズと位置を調整して、画像が重なるようにする必要があります。<br>
+    画像のサイズはすべてのレイヤーに同じように適用されるため、一度だけサイズを合わせる場合は、他のレイヤーについては位置補正するだけです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1667.jpg"/>
+    <br>
+    
+    <p>
+    PSDファイルのサイズは異なりましたが、適切にサイズが補正されて完成した「Secondary Atlas」は同じ構成で作成されました。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>画像の形が変わった場合</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1642.jpg"/>
+    <br>
+    
+    <p>
+    カラー情報を利用して特別にレンダリングをする際に、主に「Secondary Atlas」を作成します。<br>
+    しかし、「キャラクターのコスチュームを交換する」のような目的でテクスチャを作成した場合、上記のように一部のレイヤーの形が変わる可能性があります。<br>
+    しかし、これは正しく「Atlas」を生成できない可能性があります。<br>
+    特に、元の画像のサイズよりも「Secondary Texture」の画像のサイズが大きい場合には、画像が切り捨てられることがあります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1668.jpg"/>
+    <br>
+    
+    <p>
+    「Head」レイヤーの画像が変更されたPSDファイルを利用して「Secondary PSDセット」を作成した画面です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1669.jpg"/>
+    <br>
+    
+    <p>
+    1つの画像の形が変わった以外は、すべての構造やサイズが同じです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1671.jpg"/>
+    <br>
+    
+    <p>
+    「Head」画像の形状が変わり、位置を補正する必要がありました。<br>
+    上記のように画像間の共通部分が重なるように位置を補正してみました。<br>
+    帽子部分を除いて、残りの画像が重なっているのがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1672.jpg"/>
+    <br>
+    
+    <p>
+    しかし、Atlasを「Bake」すると、「Head」の画像の一部が切り取られているのがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1643.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Main Atlas</strong>」では「Head」に相当する領域が十分に大きくなかったため、「<strong>Secondary Atlas</strong>」では切り取られたレイヤーができたのです。<br>
+    したがって、交換される画像の形式が変わる可能性がある場合は、「<strong>Main Atlas</strong>」を作成するときに予想される画像のサイズに合わせて事前に十分に大きな余白を設定する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_RePSD.html">< PSDファイルの再インポート</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_HQImage.html">高品質の画像 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

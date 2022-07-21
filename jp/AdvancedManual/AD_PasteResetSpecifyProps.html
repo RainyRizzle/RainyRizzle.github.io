@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>プロパティを指定して貼り付け/リセット</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_PasteResetSpecifyProps.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_PasteResetSpecifyProps.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_PasteResetSpecifyProps.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > プロパティを指定して貼り付け/リセット</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">プロパティを指定して貼り付け/リセット</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.0</span></h4>
+    
+    <p>
+    制御パラメータに関連付けられているモディファイアを編集するとき、値のコピーまたはリセット中に常にすべてのデータがターゲットになりました。<br>
+    AnyPortrait v1.4.0に追加された機能により、コピーやリセットの対象となる属性をユーザーが選択できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1710.jpg"/>
+    <br>
+    
+    <p>
+    説明のために準備した例です。<br>
+    コントロールパラメータに関連付けられている「Morphモディファイア」と「Transformモディファイア」に移動するオブジェクト。<br>
+    この例では、頂点とピンに「<strong>Morph</strong>」を適用するか、ボーンに「<strong>Transform</strong>」を適用して、値をコピーまたはリセットしてみるプロセスを説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1711.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Morph (Controller)</strong>」モディファイアを追加しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1712.jpg"/>
+    <br>
+    
+    <p>
+    Morphモディファイアで頂点はもちろん、ピンを一緒に編集してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1713.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 制御パラメータをモディファイアに登録し、キーを追加します。<br>
+    <strong>(2)</strong> 頂点とピンの位置を変形し、色を黄色に変更しました。<br>
+    </p>
+    <br>
+    
+    <p>
+    それでは、この状態で変形された形や色の値をリセットするか、別のキーにコピーしてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1714.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Reset Value</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> リセットする値の種類を選択するダイアログが表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1715.jpg"/>
+    <br>
+    
+    <p>
+    これはダイアログの構成です。<br>
+    <strong>1.</strong> 頂点またはピンの位置<br>
+    <strong>2.</strong> 選択した頂点またはピンのみをターゲットにするかどうか<br>
+    <strong>3.</strong> メッシュの可視性、色、Extraオプション<br>
+    <strong>4.</strong> 選択完了時にリセットまたは貼り付けを実行<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1716.jpg"/>
+    <br>
+    
+    <p>
+    すべて選択して「<strong>Apply</strong>」ボタンを押すと、上記のようにすべての変形値がリセットされます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1717.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 今回は「<strong>Pins</strong>」のみを選択し、 <strong>(2)</strong> 「<strong>Apply</strong>」ボタンを押してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1718.jpg"/>
+    <br>
+    
+    <p>
+    他のプロパティは、そのままの状態でピンの位置だけがリセットされていることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1719.jpg"/>
+    <br>
+    
+    <p>
+    만약 「<strong>Color</strong>」만 선택했다면 형태는 유지된 상태로 색상만 원래의 값으로 돌아갑니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1720.jpg"/>
+    <br>
+    
+    <p>
+    いくつかの頂点だけをリセットしましょう。<br>
+    <strong>(1)</strong> リセットしたい頂点を選択します。<br>
+    <strong>(2)</strong> 「<strong>Reset Value</strong>」ボタンを押した後、「<strong>Vertices</strong>」のみをオンにします。<br>
+    <strong>(3)</strong> 「<strong>Only Selected Vertices/Pins</strong> 」オプションをオンにして「<strong>Apply</strong>」を押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1721.jpg"/>
+    <br>
+    
+    <p>
+    選択した頂点の位置のみがリセットされていることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1722.jpg"/>
+    <br>
+    
+    <p>
+    この機能は、値を別のキーにコピーするときにも使用できます。<br>
+    <strong>(1)</strong> 値をコピーしたいキーに制御パラメータを移動します。<br>
+    <strong>(2)</strong> 「<strong>Copy</strong>」ボタンを押して値をスロットに保存します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1723.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 値を貼り付けるキーに制御パラメータを移動します。<br>
+    <strong>(2)</strong> スロットを選択します。<br>
+    <strong>(3)</strong> 「<strong>Paste</strong>」ボタンを押します。<br>
+    <strong>(4)</strong> どの値を貼り付けるかを選択するダイアログが表示されます。 「<strong>Vertices</strong>」と「<strong>Pins</strong>」のみを選択した状態で「<strong>Apply</strong>」ボタンを押してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1724.jpg"/>
+    <br>
+    
+    <p>
+    頂点とピンの位置が同じにコピーされていることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1725.jpg"/>
+    <br>
+    
+    <p>
+    また、この機能は<strong>Transformモディファイア</strong>にも同様に適用されます。<br>
+    <strong>(1)</strong> 「<strong>Transform (Controller)</strong>」モディファイアを追加しました。<br>
+    <strong>(2)</strong> 「<strong>Reset Value</strong>」ボタンを押して値を初期化するか、「<strong>Paste</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> 「<strong>Vertices、Pins</strong>」の代わりに「<strong>Transform</strong>」オプションのあるダイアログを使用して値を設定できます。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_CopyAndPasteWithSlots.html">< スロットを使用してコピー/貼り付け</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_RotationTransformModifier.html">「Transform」モディファイヤでの回転 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

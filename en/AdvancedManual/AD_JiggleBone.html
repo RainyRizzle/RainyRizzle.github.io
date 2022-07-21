@@ -71,7 +71,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.2.4</span></h4>
+    <h4><span class="badge badge-secondary">1.4.0</span></h4>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
@@ -196,6 +196,242 @@
     <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
         <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/0NVUzoy-oDg" allowfullscreen></iframe>
     </div>
+    <br>
+    
+    
+    <br><br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Controlling Weight with Control Parameters</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.0</span></h4>
+    
+    <p>
+    By default, Jiggle bones always work, but sometimes you need to stop the Jiggle bones from moving.<br>
+    A typical example in the game is that a stunned character's arms and legs are shaken and stopped.<br>
+    In this case, it would be convenient to be able to control how much the Jiggle bone behaves with a Control Parameter.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1697.jpg"/>
+    <br>
+    
+    <p>
+    We prepared a character with Jiggle bones as above.<br>
+    When the character moves, the long hair will wiggle.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1698.jpg"/>
+    <br>
+    
+    <p>
+    To see the movement of Jiggle bones, we made a simple animation of the character moving left and right.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1699.jpg"/>
+    <br>
+    
+    <p>
+    When the game is launched, the character moves as shown above, and the hair with Jiggle bones also moves according to inertia.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now we will use a control parameter and a simple script to control the movement of Jiggle bones.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1700.jpg"/>
+    <br>
+    
+    <p>
+    Let's create a Control Parameter to turn the Jiggle bone on or off.<br>
+    <strong>(1)</strong> Add a new <strong>Control parameter</strong>.<br>
+    <strong>(2)</strong> Set the name of the Control Parameter and set it as <strong>Float</strong> type.<br>
+    In this example, we set it as "<span class="text-danger"><strong>WeightValue</strong></span>", and let's remember this name.<br>
+    <strong>(3)</strong> Set the <strong>Default</strong> to <strong>0 or 1</strong>.<br>
+    <strong>(4)</strong> Set the <strong>Range</strong> of values to <strong>0 to 1</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    The weight of the Jiggle bone ranges from 0.0 to 1.0, so set the range of the control parameter also the same.<br>
+    Types other than <strong>Float</strong> are not supported.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1701.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select all the bones to which the Jiggle bone option is applied.<br>
+    <strong>(2)</strong> Activate the option by pressing the <strong>Weight by Control Parameter</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1702.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Set</strong> button.<br>
+    <strong>(2)</strong> Select the <strong>Control Parameter</strong> created earlier.<br>
+    <strong>(3)</strong> Press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1703.jpg"/>
+    <br>
+    
+    <p>
+    Run <strong>Bake</strong> to apply the changes to the Unity scene.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now let's write a new script like below to control the Control Parameter.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class WeightedJiggleBoneSample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;// Target apPortrait<br>
+    &emsp;&emsp;<strong>public apPortrait portrait;</strong><br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// If you press the numeric keys, the value of the control parameter changes to 0.0, 0.5, 1.0.<br>
+    &emsp;&emsp;&emsp;&emsp;if (Input.GetKeyDown(KeyCode.Alpha1))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetControlParamFloat</strong>(<span class="text-danger"><strong>"WeightValue"</strong></span>, <strong>0.0f</strong>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;if (Input.GetKeyDown(KeyCode.Alpha2))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetControlParamFloat</strong>(<span class="text-danger"><strong>"WeightValue"</strong></span>, <strong>0.5f</strong>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;if (Input.GetKeyDown(KeyCode.Alpha3))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.<strong>SetControlParamFloat</strong>(<span class="text-danger"><strong>"WeightValue"</strong></span>, <strong>1.0f</strong>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1704.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Create a new <strong>GameObject</strong>, <strong>(2)</strong> add the written script and assign apPortrait.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1705.jpg"/>
+    <br>
+    
+    <p>
+    Run the game and change the value of the control parameter from 0 to 1 by pressing the number keys.<br>
+    You can see the degree to which the Jiggle bones are applied changes as above.<br>
+    </p>
+    <br>
+    
+    <p>
+    By using control parameters, it is possible to control the weight of Jiggle bones by animations as well as scripts.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1706.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the <strong>Animation Clip</strong> created earlier.<br>
+    <strong>(2)</strong> Click the <strong>Add Timeline</strong> button.<br>
+    <strong>(3)</strong> Select <strong>Control Parameters</strong> and <strong>(4)</strong> press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1707.jpg"/>
+    <br>
+    
+    <p>
+    Add the "<strong>WeightValue</strong>" control parameter to the timeline.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1708.jpg"/>
+    <br>
+    
+    <p>
+    Add a keyframe to cause the value of the control parameter to change from <strong>1</strong> to <strong>0</strong> and back from <strong>0</strong> to <strong>1</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1709.jpg"/>
+    <br>
+    
+    <p>
+    If you <strong>Bake</strong> and run the game, you will see the weights of the Jiggle bones change according to the animation.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Please use this function for the only purpose that turn the Jiggle bone on or off!</h4>
+    <br>
+    
+    <p>
+    "Weight" has a value between 0 and 1, but this is to prevent the "<strong>wrong movement</strong>" of physics operations when suddenly turned on or off.<br>
+    The name of this function is "Weight", but, in fact, the independent movement of the Jiggle bone is not interpolated by weight, it works by limiting some properties.<br>
+    Therefore, please change the weight for the short time to enable or disable the Jiggle bones.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
     <br>
     
     <!-- 5. 바닥 네비바 -->

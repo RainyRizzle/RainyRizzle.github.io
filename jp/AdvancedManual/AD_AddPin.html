@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>ピンの追加</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_AddPin.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_AddPin.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_AddPin.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > ピンの追加</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">ピンの追加</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.0</span></h4>
+    
+    <p>
+    「Morphモディファイア」を使用すると、頂点の位置を変更してキャラクターの見た目を変えることができます。<br>
+    この機能は強力ですが、非常に多くの頂点を持つメッシュを編集すると、作業はかなり面倒になります。<br>
+    この状況で効果的に使用できる補助ツール「<span class="text-danger"><strong>ピン（Pin）</strong></span>」が「AnyPortrait v1.4.0」に追加されました。<br>
+    </p>
+    <br>
+    
+    <p>
+    ピンの特徴 次のようになります。<br>
+    - 少数のピンで複数の頂点を制御できます。<br>
+    - ピンは曲線で接続されています。<br>
+    - ピンと頂点は自動的に接続されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページでは、メッシュにピンを追加する方法について説明します。<br>
+    Morphモディファイアでピンを使用する方法は、<a href="../../jp/AdvancedManual/AD_PinMorphWork.html">関連ページ</a>で確認してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1673.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「メッシュ」を選択します。<br>
+    <strong>(2)</strong> メッシュにかなり多くの頂点があることがわかります。 この時ピンを利用すると便利です。<br>
+    <strong>(3)</strong> 「<strong>Pin</strong>」メニューを選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1674.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Pin</strong>」メニューを選択すると、上記のUIが表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    <strong>1.</strong> 「ピンツール」 : 「選択」、「追加」、「接続」、「テスト」ツールです。<br>
+    <strong>2.</strong> 「エッジオプション」 : 選択したピンのエッジの種類を設定します。<br>
+    <strong>3.</strong> 「重み範囲（Range）」 : 頂点に接続するための範囲属性です。<br>
+    <strong>4.</strong> 「Auto Refresh」 : 頂点またはピンに変更がある場合に自動的に重みを再計算するかどうか。<br>
+    <strong>5.</strong> 「Refresh Weight」 : ピンと頂点間の重みを再計算します。<br>
+    <strong>6.</strong> 「Remove All Pins」 : すべてのピンを削除します。<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1675.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1676.jpg"/>
+    <br>
+    
+    <p>
+    ピンを追加しましょう。<br>
+    説明のために、画像に関係なく空のスペースにピンを追加しましょう。<br>
+    <strong>(1)</strong> 「追加」ツールを選択します。<br>
+    <strong>(2)</strong> ワークスペースで <kbd>クリック</kbd> してピンを作成します。<br>
+    <strong>(3)</strong> 最初のピンが選択された状態でもう一度 <kbd>クリック</kbd> してピンを追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1677.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 2本のピンが直線で接続されていることがわかります。<br>
+    <strong>(2)</strong> ピンが選択された状態でもう一度 <kbd>クリック</kbd> してピンを追加してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1678.jpg"/>
+    <br>
+    
+    <p>
+    3つのピンが曲線で接続されています。<br>
+    「ピンツール」の最大の特徴は、曲線で接続されて丸い外観に適していることです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1679.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 再び最後に生成されたピンを <kbd>クリック</kbd> して選択します。<br>
+    <strong>(2)</strong> 最初のピンを選択してみましょう。  <kbd>Ctrl+クリック</kbd>  で簡単に選択できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1680.jpg"/>
+    <br>
+    
+    <p>
+    3本のピンが循環する曲線に接続されています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1681.jpg"/>
+    <br>
+    
+    <p>
+    ピンは曲線状に接続されているため、頂点とは異なる点があります。<br>
+    ピンに最大2つの異なるピンを接続することができ、他のピンは接続できません。<br>
+    <strong>(1)</strong> すでに2つのピンに接続されているピンを選択し、 <strong>(2)</strong> 新しいピンを追加しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1682.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> 新しいピンが作成されましたが、これらのピンは接続されていないことを確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1683.jpg"/>
+    <br>
+    
+    <p>
+    ピンを <kbd>Alt+クリック</kbd> すると、エッジの形状が上記のように変わります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1684.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ピンを選択し、 <strong>(2)</strong>  <kbd>ドラッグ</kbd> でピンの位置を変更できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    また、 <kbd>マウスの右クリック</kbd> を使用すると、ピンの選択を解除したり、ピンやカーブを削除したりできます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1685.jpg"/>
+    <br>
+    
+    <p>
+    説明に従って、上記のようにメッシュの画像に合わせて適切にピンを追加して接続しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1686.jpg"/>
+    <br>
+    
+    <p>
+    ピンを選択してプロパティを変更しましょう。<br>
+    <strong>(1)</strong> 「選択」ツールを選択します。<br>
+    <strong>(2)</strong> 「ピン」を選択します。 このモードでは、ギズモを使用して選択および変形できます。<br>
+    <strong>(3)</strong> このピンに接続された頂点の重みが色で表示されていることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1687.jpg"/>
+    <br>
+    
+    <p>
+    ピンの重み領域を修正してみましょう。<br>
+    重みをどれだけ洗練されているかによって、将来の「Morph」操作がどれほど便利になるかが決まります。<br>
+    <strong>(1)</strong> 「<strong>Range</strong>」オプションの「<strong>Radius</strong>」または「<strong>Falloff</strong>」属性を変更します。<br>
+    <strong>(2)</strong> ワークスペースで円形の重み領域の大きさが変わることがわかります。 同時に、頂点の重みが変化することを視覚的に確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1688.jpg"/>
+    <br>
+    
+    <p>
+    ピンの重み領域には2つの属性があります。<br>
+    「<strong>Radius</strong>」の領域内では、重み値は「1」です。 直接影響を受ける頂点がこの領域内に入るように設定します。<br>
+    「<strong>Falloff</strong>」は、徐々に重みが減る領域です。 重みが急激に減少するのを防ぎます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1690.jpg"/>
+    <br>
+    
+    <p>
+    しかし、重み領域は実際には円形ではなく、上記のような姿をしています。<br>
+    曲線で接続されている他のピンとの重み付け補間が発生するため、もう少し広く重み付けされます。<br>
+    また、補間により、「<strong>Radius</strong>」の範囲内でも距離に応じて重みが徐々に減少することがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1689.jpg"/>
+    <br>
+    
+    <p>
+    複数のピンを選択して重みを同時に設定することも可能です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1691.jpg"/>
+    <br>
+    
+    <p>
+    生成されたピンを接続するツールを使用することもできます。<br>
+    <strong>(1)</strong> 「接続」ツールを選択します。<br>
+    <strong>(2)</strong> このツールが適用される2つのピンが用意されています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1692.jpg"/>
+    <br>
+    
+    <p>
+    順番にピンを選択すると、曲線が生成され、接続されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1693.jpg"/>
+    <br>
+    
+    <p>
+    最後に、ピンが正しく追加され設定されていることを確認するツールについて説明します。<br>
+    <strong>(1)</strong> 「テスト」ツールを選択します。<br>
+    <strong>(2)</strong> ピンを選択するとギズモが表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1694.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ピンを動かしてみると、接続された頂点が一緒に動いているのがわかります。<br>
+    テストツールでは、ピンの位置を変更しても実際の値として保存されません。<br>
+    また、重みに応じて頂点も一緒に動きます。<br>
+    この点を利用してピンの属性、特に重み領域を修正するのに有効です。<br>
+    （ピンの他の属性は保存されます。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1695.jpg"/>
+    <br>
+    
+    <p>
+    上記の修正はテストツールで行うことができます。<br>
+    <strong>(1)</strong> ピンを選択して動かしてみます。<br>
+    <strong>(2)</strong> 頂点がどのように動くかを確認して、重み領域の範囲を調整します。<br>
+    <strong>(3)</strong> 重みが変更され、頂点が異なるように動くことがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1696.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Reset Test Position</strong>」ボタンを押すと、<br>
+    <strong>(2)</strong> ピンのテスト位置はすべて初期化されます。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    続く内容は「<a href="../../jp/AdvancedManual/AD_PinMorphWork.html">「Morph」モディファイヤでの「ピン」の使用</a>」ページで引き続き確認してください！<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_CopyVertices.html">< 頂点のコピー</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_MeshShader.html">メッシュ用シェーダ(Shader) ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

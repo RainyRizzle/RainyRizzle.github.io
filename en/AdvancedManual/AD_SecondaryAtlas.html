@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Creating Secondary Atlas</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_SecondaryAtlas.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_SecondaryAtlas.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_SecondaryAtlas.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Creating Secondary Atlas</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Creating Secondary Atlas</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1638.jpg"/>
+    <br>
+    
+    <p>
+    In addition to the basic textures, various types of textures are often required to render game characters.<br>
+    Material physical properties, bumps, masks, and special effects are often applied to textures and used for rendering.<br>
+    Alternatively, you can change the appearance of your character by replacing the texture. (<a href="../../en/AdvancedManual/AD_CharacterCostume.html">Related Page</a>)<br>
+    These textures are called <strong>Secondary Textures</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    In particular, there are many cases of creating a <strong>Secondary Atlas</strong> in which several layers are combined into one texture.<br>
+    In this case, the condition "<span class="text-danger"><strong>All textures will have the same Atlas structure</strong></span>" must be satisfied.<br>
+    </p>
+    <br>
+    
+    <p>
+    Using the "<strong>Create Secondary Atlas</strong>" function, which is a new function added in AnyPortrait v1.4.0, it is possible to conveniently create Atlas textures with the same structure from other PSD files.<br>
+    This function has been added to the "<strong>Re-import PSD file</strong>" dialog, so you need to know the function to use it properly.<br>
+    Please read the following manuals before explanation.<br>
+    - <a href="../../en/AdvancedManual/AD_PSD.html">Importing a PSD File</a><br>
+    - <a href="../../en/AdvancedManual/AD_RePSD.html">Re-importing a PSD File</a><br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    This feature is not backwards compatible with versions prior to v1.4.0.<br>
+    If you created Atlas by importing a PSD from a previous version, you must use the "Re-import PSD File" function to generate Atlas data for the current version.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Creating Secondary Atlas</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1639.jpg"/>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1640.jpg"/>
+    <br>
+    
+    <p>
+    For explanation, we prepared a PSD file that will be the original and a PSD file that will be a secondary texture.<br>
+    Both PSD files have the same name and composition of layers.<br>
+    In order to create a <strong>Secondary Atlas</strong>, it should have the same or layered composition as possible as the base PSD file.<br>
+    Of course, it is possible to create a texture even if it is not exactly the same through the mapping function afterward, but it is recommended to prepare a file with the same layer name.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1644.jpg"/>
+    <br>
+    
+    <p>
+    In order to create a Secondary Atlas, the <strong>Main Atlas</strong>, which is the basis, must first be created.<br>
+    <strong>(1)</strong> Use the <strong>Import PSD File</strong> function to <strong>(2)</strong> create <strong>Main Atlas</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1645.jpg"/>
+    <br>
+    
+    <p>
+    A character created from a PSD file.<br>
+    Now let's create a Secondary Atlas that is compatible with this character's UV information.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1646.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Click the <strong>Import PSD File</strong> button.<br>
+    <strong>(2)</strong> Click the <strong>Reload PSD File</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1647.jpg"/>
+    <br>
+    
+    <p>
+    When the dialog opens, "<strong>PSD Set</strong>" created while creating <strong>Main Atlas</strong> is registered.<br>
+    <strong>(1)</strong> Select the <strong>PSD Set</strong>.<br>
+    <strong>(2)</strong> You can check information related to <strong>Main Atlas</strong>.<br>
+    <strong>(3)</strong> Click the <strong>Make Secondary PSD Set</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>If you can't see the PSD Set or you can't make a Secondary PSD Set</h4>
+    <br>
+    
+    <p>
+    If you imported your PSD file from a version earlier than v1.4.0, you will not be able to perform this process.<br>
+    The solution is to re-import the same PSD file as is and recreate the Main Atlas.<br>
+    For instructions on how to re-import the same PSD file, see the <a href="../../en/AdvancedManual/AD_RePSD.html">Related Page</a>.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1648.jpg"/>
+    <br>
+    
+    <p>
+    "<span class="text-danger"><strong>Secondary PSD Set</strong></span>" that creates an Atlas using information from the selected <strong>PSD Set</strong> has been created and added to the list.<br>
+    <strong>(1)</strong> Select <strong>Secondary PSD Set</strong>.<br>
+    <strong>(2)</strong> Open the <strong>Second PSD file</strong> to be created as Secondary Atlas. (Be careful, don't select the first PSD file used in Main Atlas!)<br>
+    <strong>(3)</strong> PSD file information and previous bake information are displayed. Currently, we have never created a Secondary Atlas, so we don't have any Bake information.<br>
+    <strong>(4)</strong> Click the <strong>Next</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1649.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Images with the original Atlas are displayed.<br>
+    <strong>(2)</strong> The record of the previous Bake appears.<br>
+    <strong>(3)</strong> <strong>Selected original Atlas image</strong> and <strong>Secondary PSD file</strong> are displayed at the same time.<br>
+    <strong>(4)</strong> These buttons determine how the PSD file or image will be displayed on the screen.<br>
+    <strong>(5)</strong> After confirming that all files are loaded properly, click the <strong>Next</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1650.jpg"/>
+    <br>
+    
+    <p>
+    This is the step to connect the <strong>Secondary PSD file</strong> layer and the <strong>Main Atlas original layer</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Secondary PSD file layers</strong> : You can set whether to bake and which original layer to refer to.<br>
+    <strong>2. Main Atlas layers</strong> : The original layers are displayed based on the data stored in the original PSD set.<br>
+    <strong>3. Auto Mapping</strong> : Automatically link layers based on name and order.<br>
+    <strong>4. Enable All / Disable All / Reset</strong> : Changes whether to bake or refer to the original for all Secondary PSD set layers.<br>
+    <strong>5. Show connection status with color</strong> : Shows the connection status of both sides easily by using color.<br>
+    <strong>6. Preview with outline</strong>: When this function is turned on, the object selected on the preview screen is rendered as an outline.<br>
+    <strong>7. Preview screen</strong> : Outputs the original Atlas linked to the image of the selected PSD layer.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1651.jpg"/>
+    <br>
+    
+    <p>
+    By default, they are automatically linked based on their name.<br>
+    However, if the connection is wrong, you have to manually re-establish the connection between the layers.<br>
+    <strong>(1)</strong> Click the <strong>Connect button</strong> of the layer of the secondary PSD file whose connection you want to change.<br>
+    <strong>(2)</strong> Select the target you want to connect to.<br>
+    </p>
+    <br>
+    
+    <p>
+    After setting whether to connect or bake, <strong>(3)</strong> Click the <strong>Next</strong> button to proceed to the next step.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1652.jpg"/>
+    <br>
+    
+    <p>
+    This step is cumbersome, but very important.<br>
+    This is because we need to correct the position and size of each layer to make them share the same UV.<br>
+    This screen is structured as follows.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Layers in Secondary PSD File</strong> : These are the PSD layers as target of Bake.<br>
+    <strong>2. Preview screen</strong> : The selected layer and the original layer are output. You will need to calibrate the position and size while looking at this screen. You can move, zoom, etc. by clicking and dragging the mouse wheel.<br>
+    <strong>3. Rendering / Order</strong> : Change the rendering method and output order on the preview screen.<br>
+    <strong>4. Position Offset</strong> : Tools to change the position of the selected Secondary PSD layer.<br>
+    <strong>5. Prev Atlas Scale</strong> : The size value that should be set in the current PSD file relative to the original Atlas. It is set on a per-file basis, so it is applied to all layers at once.<br>
+    <strong>6. Layer switch button</strong> : Selects the previous or next layer.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1653.jpg"/>
+    <br>
+    
+    <p>
+    When you select a layer, if the positions don't overlap as above, you won't have the same UVs when made with Atlas.<br>
+    You need to calibrate the position and size to make them perfectly overlap each other.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1654.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> In the preview screen, change the rendering method to make the outline visible or change the order to prepare for convenient work.<br>
+    <strong>(2)</strong> The current original Atlas is shown from the back, and the Secondary PSD layer is shown with a blue outline in the front.<br>
+    <strong>(3)</strong> Now, using the Position and Size correction tools, let's make the two layer images perfectly overlap.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1655.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> The two layers are perfectly overlapped. In this state, you should be able to create Secondary Atlas without any problems.<br>
+    <strong>(2)</strong> Click the <strong>Previous/Next button</strong> or <strong>(3)</strong> Select the <strong>Secondary PSD layer</strong> to work on from the <strong>Layer List</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1656.jpg"/>
+    <br>
+    
+    <p>
+    When you have finished “overlapping” for all layers, <strong>(1)</strong> Click the <strong>Next</strong> button to move on to the last step.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1657.jpg"/>
+    <br>
+    
+    <p>
+    Finally, this is the stage to create a texture asset using Secondary Atlas information.<br>
+    Unlike other UIs that import PSD files, most of the options related to Bake do not exist.<br>
+    Since the information from the original PSD set is used as it is, the number, size, and margin of textures are not set.<br>
+    <strong>(1)</strong> Set <strong>Secondary texture asset name</strong> and <strong>Path</strong> to be saved. (It must be located within a subfolder of Assets.)<br>
+    <strong>(2)</strong> Let's press the <strong>Bake</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1658.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Secondary Atlas</strong> is complete.<br>
+    You can see that it is configured the same as <strong>Main Atlas</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1659.jpg"/>
+    <br>
+    
+    <p>
+    Secondary Atlas should have a different background color depending on how it is used.<br>
+    (For example, the background of the normal map is light blue and the background of the mask map is black.)<br>
+    <strong>(1)</strong> Select <strong>BG Color</strong> and select the appropriate color. <strong>Alpha</strong> is also specified.<br>
+    <strong>(2)</strong> Press the <strong>Bake</strong> button again.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1660.jpg"/>
+    <br>
+    
+    <p>
+    The result is applied even to the background color.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1661.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Click the <strong>Complete</strong> button to create a texture file.<br>
+    <strong>(2)</strong> When the operation is completed, the result dialog appears. Press the <strong>Okay</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1662.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Secondary Atlas</strong> is created only as <strong>Texture Asset</strong> and is not registered in AnyPortait editor.<br>
+    Let's check the finished asset in the <strong>Project</strong> tab of the Unity editor.<br>
+    <strong>(1)</strong> You can find the <strong>Secondary Atlas texture asset</strong> created in the set path. It may be automatically selected.<br>
+    <strong>(2)</strong> Comparing the two texture assets, you can see that they have the exact same Atlas structure.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1641.jpg"/>
+    <br>
+    
+    <p>
+    This is the completed Secondary Atlas.<br>
+    Let's create various rendering results with UV compatible textures!<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>When the original PSD Set is modified</h4>
+    <br>
+    
+    <p>
+    If, after creating the Secondary PSD set, you select the original PSD set and create Atlas again, all Secondary PSD sets created from the PSD set cannot be used.<br>
+    You need to delete the existing Secondary PSD set, create a new Secondary PSD set, and perform all the above steps again.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>If the PSD images have different sizes</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1663.jpg"/>
+    <br>
+    
+    <p>
+    If the image of the secondary PSD file to be imported is different from the original PSD file, the size correction should be done more carefully.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1664.jpg"/>
+    <br>
+    
+    <p>
+    The image above is a screen of the position and size correction steps by performing the same process for creating the secondary PSD set described above.<br>
+    You can see that the image in the Secondary PSD layer is larger than the layer image in the original Atlas.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1665.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Change the settings of the preview screen for convenient operation.<br>
+    <strong>(2)</strong> Use the position correction tool as well as the size correction tool to make the two images perfectly overlap.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1666.jpg"/>
+    <br>
+    
+    <p>
+    You will need to adjust the size and position as above to make the images overlap.<br>
+    The size of the image is applied equally to all layers, so if you resize it only once, you will only need to correct the position of the other layers.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1667.jpg"/>
+    <br>
+    
+    <p>
+    Although the PSD files were different in size, the Secondary Atlas, which was properly sized and completed, was created with the same composition.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>If the shape of the image is changed</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1642.jpg"/>
+    <br>
+    
+    <p>
+    Secondary Atlas will be mainly used for special rendering using color information.<br>
+    However, if you create a texture for the purpose of "replacing a character's clothes", the shape of some layers may change completely as above.<br>
+    However, it is likely that this will not generate Atlas properly.<br>
+    In particular, if the size of the Secondary texture image is larger than the size of the original image, the image may be cropped.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1668.jpg"/>
+    <br>
+    
+    <p>
+    This is the screen where the <strong>Secondary PSD Set</strong> was created using a PSD file with the image of the <span class="text-danger">“Head”</span> layer changed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1669.jpg"/>
+    <br>
+    
+    <p>
+    All structures and sizes are the same except that the shape of one image is changed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1671.jpg"/>
+    <br>
+    
+    <p>
+    As the shape of the <span class="text-danger">"Head"</span> image changed, it became necessary to correct the position.<br>
+    As above, we tried to correct the position so that the common parts between the images overlap.<br>
+    Except for the hat part, you can see the rest of the images overlap.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1672.jpg"/>
+    <br>
+    
+    <p>
+    However, when we bake Atlas, we can see that part of the <span class="text-danger">"Head"</span> image is cropped.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1643.jpg"/>
+    <br>
+    
+    <p>
+    Because the area corresponding to <span class="text-danger">"Head"</span> in <strong>Main Atlas</strong> was not large enough, the layer was cropped in <strong>Secondary Atlas</strong>.<br>
+    As such, if the shape of the replaced images can be changed, you should set a sufficiently large margin in advance to match the expected image size when creating the Main Atlas.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_RePSD.html">< Re-importing a PSD File</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_HQImage.html">High-quality image asset ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

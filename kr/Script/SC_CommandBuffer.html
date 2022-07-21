@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>커맨드 버퍼</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/Script/SC_CommandBuffer.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/Script/SC_CommandBuffer.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/Script/SC_CommandBuffer.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/Script.html"><span class="text-dark">스크립트</span></a> > 커맨드 버퍼</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">커맨드 버퍼</h1>
+    <br>
+    
+    <p>
+    유니티의 <strong>커맨드 버퍼(Command Buffer)</strong>를 AnyPortrait의 캐릭터를 대상으로 사용하기 위한 함수들입니다.<br>
+    다음의 함수들은 apPortrait가 아닌 <strong>apCustomCommandBuffer</strong> 클래스에 속합니다.<br>
+    코드를 작성하는 방법은 페이지 하단의 예제 코드나 커맨드 버퍼 사용 예시를 설명하는 다음의 페이지를 참고해주세요.<br>
+    - <a href="../../kr/AdvancedManual/AD_CommandBuffer.html">커맨드 버퍼 작성하기</a><br>
+    </p>
+    <br>
+    
+    <p>
+    또한 유니티의 커맨드 버퍼에 대한 자세한 설명은 아래의 유니티 공식 메뉴얼에서 확인하실 수 있습니다.<br>
+    - <a href="https://docs.unity3d.com/kr/2022.1/Manual/GraphicsCommandBuffers.html">커맨드 버퍼를 사용하여 빌트인 렌더 파이프라인 확장</a><br>
+    - <a href="https://docs.unity3d.com/kr/2022.1/Manual/srp-using-scriptable-render-context.html">스크립터블 렌더 파이프라인에서 렌더링 커맨드 예약 및 실행</a><br>
+    - <a href="https://docs.unity3d.com/kr/2022.1/ScriptReference/Rendering.CommandBuffer.html">커맨드 버퍼 API</a><br>
+    - <a href="https://docs.unity3d.com/ScriptReference/Rendering.CameraEvent.html">CameraEvent API</a><br>
+    </p>
+    <br>
+    
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apCustomCommandBuffer</span> <strong>Camera</strong> <span class="text-muted">( </span><span class="text-success">camera,</span> <span class="text-muted">apPortrait</span> <span class="text-muted">portrait,</span> <span class="text-primary">string</span> <span class="text-muted">commandBufferName )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apPortrait를 대상으로 하는 커맨드 버퍼 클래스를 생성합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Camera</span> camera : 렌더링을 수행할 카메라<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apPortrait</span> portrait : 렌더링이 되는 apPortrait<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> commandBufferName : 카메라에 등록되는 커맨드 버퍼의 이름<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>Destory</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;커맨드 버퍼를 등록된 카메라로부터 제거합니다.<br>
+    &nbsp;&nbsp;&nbsp;카메라, apPortrait 캐릭터 또는 커맨드 버퍼 클래스중 하나라도 존재하지 않게 된다면 이 함수를 꼭 실행해야합니다.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>AddToCamera</strong> <span class="text-muted">( </span><span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Rendering</span><span class="text-muted">.</span><span class="text-success">CameraEvent</span> <span class="text-muted">cameraEvent )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;카메라에 렌더링을 어느 시점에 수행할지 설정합니다.<br>
+    &nbsp;&nbsp;&nbsp;Built-in 렌더링 파이프라인을 사용하는 경우 호출되어야 하는 함수입니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Rendering</span><span class="text-muted">.</span><span class="text-success">CameraEvent</span> cameraEvent : 렌더링 시점에 대한 enum 변수<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>AddToCameraSRP</strong> <span class="text-muted">( </span><span class="text-success">apCustomCommandBuffer</span><span class="text-muted">.</span><span class="text-success">SRPRenderEvent</span> <span class="text-muted">srpRenderEvent )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;카메라에 렌더링을 어느 시점에 수행할지 설정합니다.<br>
+    &nbsp;&nbsp;&nbsp;Scriptable Render Pipeline(SRP)를 사용할 경우 호출되어야 하는 함수입니다.<br>
+    &nbsp;&nbsp;&nbsp;이 함수는 SRP를 공식적으로 지원하는 Unity 2019.1 또는 그 이후 버전에서만 지원됩니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apCustomCommandBuffer</span><span class="text-muted">.</span><span class="text-success">SRPRenderEvent</span> srpRenderEvent : SRP에서의 렌더링 시점<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>CreateAlternativeMaterials</strong> <span class="text-muted">( </span><span class="text-success">Material</span> <span class="text-muted">alternativeMaterial )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>CreateAlternativeMaterials</strong> <span class="text-muted">( </span><span class="text-success">Dictionary</span><span class="text-muted">&lt;</span><span class="text-success">string,</span> <span class="text-muted">Material></span> <span class="text-muted">imageNameToAlterMaterialMap,</span> <span class="text-success">Material</span> <span class="text-muted">unmatchedMaterial )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;커맨드 버퍼를 이용하여 캐릭터를 렌더링할 때, 다른 재질이 적용되도록 지정합니다.<br>
+    &nbsp;&nbsp;&nbsp;인자로서 입력된 Material의 속성들이 복제되어 렌더링에 사용되도록 예약하지만, "_MainTex"와 "_Color"는 복제되지 않습니다.<br>
+    &nbsp;&nbsp;&nbsp;대체되는 재질의 쉐이더는 "커스텀 쉐이더"로서의 규칙이 지켜져야 합니다.<br>
+    &nbsp;&nbsp;&nbsp;이 함수가 호출된 이후에 "DrawAllMeshesWithAlternativeMaterials" 함수를 이용하여 그리기 요청을 해야합니다.<br>
+    &nbsp;&nbsp;&nbsp;만약 Dictionary 타입의 변수로 재질들을 지정한다면, 캐릭터가 가진 여러개의 이미지마다 서로 다른 재질이 적용되어 렌더링될 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Material</span> alternativeMaterial : 커맨드 버퍼에 의한 렌더링시 대체될 재질<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Dictionary</span><span class="text-muted">&lt;</span><span class="text-success">string,</span> <span class="text-success">Material></span> imageNameToAlterMaterialMap : 이미지 이름에 따라 서로 다른 재질이 대체되도록 지정된 매핑 변수<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Material</span> unmatchedMaterial : 대체 대상의 재질을 찾을 수 없을 경우 공통적으로 적용되는 재질<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ClearCommands</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;커맨드 버퍼의 내용을 초기화합니다.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetRenderTarget</strong> <span class="text-muted">( </span><span class="text-success">RenderTexture</span> <span class="text-muted">renderTexture )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;카메라로 캐릭터를 렌더링한 결과가 "렌더 텍스쳐(Render Texture)"에 저장되도록 설정합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">RenderTexture</span> renderTexture : 렌더링 결과가 저장될 텍스쳐<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ClearRenderTarget</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">clearDepth,</span> <span class="text-primary">bool</span> <span class="text-muted">clearColor,</span> <span class="text-success">Color</span> <span class="text-muted">backgroundColor,</span> <span class="text-primary">float</span> <span class="text-muted">depth )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;설정된 렌더링 대상의 색상이나 깊이 값을 초기화합니다.<br>
+    &nbsp;&nbsp;&nbsp;Built-in 렌더링 파이프라인에서 호출될 수 있는 함수입니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> clearDepth : 깊이값 초기화 여부<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> clearColor : 색상값 초기화 여부<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> backgroundColor : clearColor가 true일 때, 초기화되는 색상<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> depth : clearDepth가 true일 때, 초기화되는 깊이값 (기본값은 1.0f)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ClearRenderTarget</strong> <span class="text-muted">( </span><span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Rendering</span><span class="text-muted">.</span><span class="text-success">RTClearFlags</span> <span class="text-muted">clearFlags,</span> <span class="text-success">Color</span> <span class="text-muted">backgroundColor,</span> <span class="text-primary">float</span> <span class="text-muted">depth,</span> <span class="text-success">uint</span> <span class="text-muted">stencil )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;설정된 렌더링 대상의 색상이나 깊이 값을 초기화합니다.<br>
+    &nbsp;&nbsp;&nbsp;Scriptable Render Pipeline(SRP)에서 호출될 수 있는 함수입니다.<br>
+    &nbsp;&nbsp;&nbsp;이 함수는 SRP를 공식적으로 지원하는 Unity 2019.1 또는 그 이후 버전에서만 지원됩니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Rendering</span><span class="text-muted">.</span><span class="text-success">RTClearFlags</span> clearFlags : 초기화되는 값의 종류를 지정하는 Flag 변수<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> backgroundColor : 초기화되는 색상<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> depth : 초기화되는 깊이값 (기본값은 1.0f)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">uint</span> stencil : 초기화되는 스텐실값 (기본값은 0)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetViewMatrix</strong> <span class="text-muted">()</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetViewMatrix</strong> <span class="text-muted">( </span><span class="text-success">Matrix4x4</span> <span class="text-muted">customViewMatrix )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;렌더링시 View Matrix로서 어떤 값이 적용될지를 커맨드 버퍼에 지정합니다.<br>
+    &nbsp;&nbsp;&nbsp;인자를 지정하지 않는 경우엔 대상의 카메라의 View Matrix와 동일한 값이 렌더링에 이용됩니다.<br>
+    &nbsp;&nbsp;&nbsp;이 함수는 Unity 2019.1 또는 그 이후 버전에서만 지원되며, 해당 버전에서는 이 함수를 꼭 호출해야합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Matrix4x4</span> customViewMatrix : 카메라의 설정과 다르게 적용되는 View Matrix<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetProjectionMatrix</strong> <span class="text-muted">()</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetProjectionMatrix</strong> <span class="text-muted">( </span><span class="text-success">Matrix4x4</span> <span class="text-muted">customProjectionMatrix )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;렌더링시 Projection Matrix로서 어떤 값이 적용될지를 커맨드 버퍼에 지정합니다.<br>
+    &nbsp;&nbsp;&nbsp;인자를 지정하지 않는 경우엔 대상의 카메라의 Projection Matrix와 동일한 값이 렌더링에 이용됩니다.<br>
+    &nbsp;&nbsp;&nbsp;이 함수는 Unity 2019.1 또는 그 이후 버전에서만 지원되며, 해당 버전에서는 이 함수를 꼭 호출해야합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Matrix4x4</span> customProjectionMatrix : 카메라의 설정과 다르게 적용되는 Projection Matrix<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>DrawMesh</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>DrawMesh</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Material</span> <span class="text-muted">material )</span>
+<br><span class="text-primary">DrawMesh</span> <span class="text-success">apOptTransform</span> <strong>optTransform,</strong> <span class="text-muted">( </span><span class="text-success">Matrix4x4</span> <span class="text-muted">localToWorldMatrix )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>DrawMesh</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Matrix4x4</span> <span class="text-muted">localToWorldMatrix,</span> <span class="text-success">Material</span> <span class="text-muted">material )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;apOptTransform의 메시를 렌더링하도록 지정합니다.<br>
+    &nbsp;&nbsp;&nbsp;"apPortrait.GetOptTransform" 함수가 도움이 될 것입니다.<br>
+    &nbsp;&nbsp;&nbsp;재질이나 World Matrix를 임의로 변경하여 렌더링할 수 있습니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 렌더링이 될 메시를 가진 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Material</span> material : 렌더링될 대체 재질<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Matrix4x4</span> localToWorldMatrix : 사용자가 임의로 지정하는 World Matrix<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>DrawAllMeshes</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">sortOrder,</span> <span class="text-primary">bool</span> <span class="text-muted">excludeClippedChildMeshes )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>DrawAllMeshes</strong> <span class="text-muted">( </span><span class="text-success">Material</span> <span class="text-muted">material,</span> <span class="text-primary">bool</span> <span class="text-muted">sortOrder,</span> <span class="text-primary">bool</span> <span class="text-muted">excludeClippedChildMeshes )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;현재 화면에 보여지는 apPortrait의 모든 메시들이 렌더링되도록 지정합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> sortOrder : 렌더링 순서를 다시 계산할지 여부<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> excludeClippedChildMeshes : 커맨드 버퍼와 호환성이 좋지 않은 클리핑되는 메시를 렌더링에서 제외시킬지 여부<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Material</span> material : 렌더링시 사용되는 대체 재질<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>DrawAllMeshesWithAlternativeMaterials</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">sortOrder,</span> <span class="text-primary">bool</span> <span class="text-muted">excludeClippedChildMeshes )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;현재 화면에 보여지는 apPortrait의 모든 메시들이 렌더링되도록 지정하는 "DrawAllMeshes"함수와 동일한 역할을 수행하지만, "CreateAlternativeMaterials" 함수로부터 등록된 대체 재질들이 이용됩니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> sortOrder : 렌더링 순서를 다시 계산할지 여부<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> excludeClippedChildMeshes : 커맨드 버퍼와 호환성이 좋지 않은 클리핑되는 메시를 렌더링에서 제외시킬지 여부<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Rendering</span><span class="text-muted">.</span><span class="text-success">CommandBuffer</span> <strong>GetCommandBuffer</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;유니티의 커맨드 버퍼 객체를 리턴합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Rendering</span><span class="text-muted">.</span><span class="text-success">CommandBuffer</span> : 커맨드 버퍼 객체
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    
+    <br><br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary">using</span> AnyPortrait;<br>
+    <br>
+    <span class="text-primary">public class</span> <span class="text-success">CmdBufferExample</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+     &emsp;&emsp;// 대상 객체들<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">apPortrait</span> portrait;<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">Camera</span> targetCamera;<br>
+    <br>&emsp;&emsp;<br>
+    &nbsp;&nbsp;&nbsp;&emsp;&emsp;// 커스텀 커맨드 버퍼<br>
+    &emsp;&emsp;<span class="text-primary">private</span> <span class="text-success"><strong>apCustomCommandBuffer</strong></span> <strong>_commandBuffer</strong> = <span class="text-primary">null</span>;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_commandBuffer == <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = <span class="text-primary">new</span> <strong>apCustomCommandBuffer</strong>(targetCamera, portrait, <span class="text-danger">"Custom Command Buffer"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.<strong>AddToCamera</strong>(<span class="text-success">UnityEngine.Rendering.CameraEvent</span>.AfterForwardAlpha);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> OnDestroy()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_commandBuffer != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.Destory();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = <span class="text-primary">null</span>;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>&emsp;&emsp;<br>
+    &emsp;&emsp;<span class="text-primary">void</span> LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_commandBuffer != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.ClearCommands();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.SetViewMatrix();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.SetProjectionMatrix();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.DrawAllMeshes(true, true);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/Script/SC_Timeline.html">< 타임라인</a>
+        <a class="btn btn-light" role="button" href="#"></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

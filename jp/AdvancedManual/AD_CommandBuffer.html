@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>「Command Buffer」の作成</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_CommandBuffer.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_CommandBuffer.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_CommandBuffer.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 「Command Buffer」の作成</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">「Command Buffer」の作成</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.0</span></h4>
+    
+    <p>
+    Unityエンジンではレンダリングは自動的に行われますが、スクリプトを作成して機能を拡張することもできます。<br>
+    これを行うためのさまざまな方法の1つは、「<strong>コマンドバッファ（Command Buffer）</strong>」を使用することです。<br>
+    「コマンドバッファ」を簡単にまとめると、「対象のメッシュを指定された条件でレンダリングする要求をスケジュールすること」です。<br>
+    Unityの公式マニュアルで詳細な説明を確認できます。<br>
+    - <a href="https://docs.unity3d.com/ja/2022.1/Manual/GraphicsCommandBuffers.html">ビルトインレンダーパイプラインのコマンドバッファによる拡張</a><br>
+    - <a href="https://docs.unity3d.com/ja/2022.1/Manual/srp-using-scriptable-render-context.html">スクリプタブルレンダーパイプラインにおけるレンダリングコマンドのスケジューリングと実行</a><br>
+    - <a href="https://docs.unity3d.com/ja/2022.1/ScriptReference/Rendering.CommandBuffer.html">CommandBuffer API</a><br>
+    - <a href="https://docs.unity3d.com/ScriptReference/Rendering.CameraEvent.html">CameraEvent API</a><br>
+    </p>
+    <br>
+    
+    <p>
+    Unityの「<strong>CommandBuffer</strong>」クラスを使用すると、AnyPortraitのキャラクターをコマンドバッファを介してレンダリングできますが、ユーザーがアクセスしにくいデータが多いので、それは実装するのが難しいです。<br>
+    「AnyPortrait v1.4.0」に追加された「<strong>apCustomCommandBuffer</strong>」クラスは、「<strong>CommandBuffer</strong>」クラスのAnyPortrait用のバージョンです。<br>
+    このクラスを使用すると、さまざまなテクニックを簡単に実装できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページでは、「<strong>apCustomCommandBuffer</strong>」を使用してスクリプトを作成する方法と、いくつかの面白いテクニックを実装する方法について説明します。<br>
+    「<strong>apCustomCommandBuffer</strong>」クラスの関数の詳細については、<a href="../../jp/Script/SC_CommandBuffer.html">関連ページ</a>を参照してください。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>コマンドバッファで他のカメラにキャラクターを描く</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1760.jpg"/>
+    <br>
+    
+    <p>
+    実装に先立ち、コマンドバッファの配信方法を簡単に理解してみましょう。<br>
+    スクリプトがコマンドバッファを作成してUnityのレンダリングパイプラインに渡すと、レンダリングパイプラインが動作しているときにスケジュールされたコマンドバッファの要求に従って追加のレンダリングが実行されます。<br>
+    このときに渡さなければならない必須要素は、「メッシュ」と「カメラ」です。<br>
+    この点を覚えて実装をしましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1761.jpg"/>
+    <br>
+    
+    <p>
+    コマンドバッファを使用する最も簡単で簡単な例を作成しましょう。<br>
+    「カメラ（Camera 1）」が「キャラクターのメッシュ（Original Meshes）」をレンダリングする環境を用意します。<br>
+    そして別の「カメラ（Camera 2）」で「コマンドバッファ」によって「キャラクター（Cloned Meshes）」が見えるようにしましょう。<br>
+    コマンドバッファを作るために必要な要素として「<strong>Original Meshes</strong>」と「<strong>Camera 2</strong>」を記憶しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1762.jpg"/>
+    <br>
+    
+    <p>
+    説明に合わせてUnityシーンを設定しました。<br>
+    <strong>(1)</strong> 2つのカメラと1つのAnyPortraitキャラクターが存在することがわかります。<br>
+    <strong>(2)</strong> AnyPortrait キャラクターです。<br>
+    <strong>(3)</strong> キャラクターを描くメインカメラです。 先の図式での「<strong>Camera 1</strong>」と同じ役割を果たします。<br>
+    <strong>(4)</strong> メインカメラがレンダリングを終了すると追加レンダリングを行うオーバーレイ用カメラです。 前の図式で「<strong>Camera 2</strong>」と同じ役割を果たします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1763.jpg"/>
+    <br>
+    
+    <p>
+    各カメラの設定です。<br>
+    「<strong>Camera 1</strong>」は、メインカメラとして最初にレンダリングするように設定されています。<br>
+    「<strong>Camera 2</strong>」は「Depth」の値によって「<strong>Camera 1</strong>」より後でレンダリングされ、「Culling Mask」によってキャラクターがレンダリングされません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1764.jpg"/>
+    <br>
+    
+    <p>
+    したがって、ゲームを実行すると、キャラクターは「メインカメラ」でのみ描画されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    それでは、コマンドバッファを作成して更新する簡単なスクリプトを作成しましょう。<br>
+    次のスクリプトは、「入力されたapPortraitキャラクタ」を「入力されたカメラ」に描画させる非常に簡単な役割を果たします。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class CmdBufferExample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;// 対象となるオブジェクト<br>
+    &emsp;&emsp;<strong>public apPortrait portrait;</strong><br>
+    &emsp;&emsp;<strong>public Camera targetCamera;</strong><br>
+    <br>
+    &emsp;&emsp;// コマンドバッファ<br>
+    &emsp;&emsp;<span class="text-danger"><strong>private apCustomCommandBuffer _commandBuffer = null;</strong></span><br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// コマンドバッファを生成します。<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer == null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// apPortraitが初期化されていない場合は、ここで直接初期化します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// apPortraitとカメラを使用してコマンドバッファインスタンスを作成します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// レンダリング時点を設定して、カメラにコマンドバッファを登録します。 （ビルトインレンダーパイプライン用関数）<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.AfterForwardAlpha);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void OnDestroy()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// コマンドバッファを削除します。<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.Destory();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = null;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 更新ごとにレンダリング内容を再更新します。<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// コマンドバッファの内容を空にして書き換えます。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.ClearCommands();</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// カメラのMatrixをコマンドバッファに入力します。 （Unity 2019以降のバージョンで呼び出す必要がある関数）<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.SetViewMatrix();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.SetProjectionMatrix();</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// apPortraitのメッシュをレンダリングするように要求します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.DrawAllMeshes(true, true);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    スクリプトの重要な構文を1つずつ見てみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    // (1) 対象となるオブジェクト<br>
+    <strong>public apPortrait portrait;</strong><br>
+    <strong>public Camera targetCamera;</strong><br>
+    <br>
+    // (2) コマンドバッファ<br>
+    <span class="text-danger"><strong>private apCustomCommandBuffer _commandBuffer = null;</strong></span><br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    メンバーオブジェクトです。<br>
+    <strong>(1)</strong> コマンドバッファの必須要素であるapPortraitとカメラをUnityシーンから接続できるようにpublic変数にします。<br>
+    <strong>(2)</strong> 最も重要なコマンドバッファを「apCustomCommandBuffer」型の変数を使用して生成および制御します。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    // (1) apPortraitが初期化されていない場合は、ここで直接初期化します。<br>
+    portrait.Initialize();<br>
+    <br>
+    // (2) apPortraitとカメラを使用してコマンドバッファインスタンスを作成します。<br>
+    <strong>_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");</strong><br>
+    <br>
+    // (3) レンダリング時点を設定して、カメラにコマンドバッファを登録します。 （ビルトインレンダーパイプライン用関数）<br>
+    <strong>_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.AfterForwardAlpha);</strong><br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    コマンドバッファを生成してレンダリングパイプラインに登録するコード。<br>
+    <strong>(1)</strong> 例では「Start」関数で初期化が実行するように作成したため、apPortrait が初期化されていない可能性があり、初期化コードを作成しました。 必須コードではありません。<br>
+    <strong>(2)</strong> コマンドバッファインスタンスを作成するときは、カメラとapPortraitを引数として入力し、コマンドバッファの名前を追加します。<br>
+    <strong>(3)</strong> 「AddToCamera」関数を使用して、レンダリングパイプラインにコマンドバッファを登録します。<br>
+    このとき、レンダリング過程でどの時点でコマンドバッファの要求が処理されるかを設定します。<br>
+    プロジェクトの環境が「Scriptable Render Pipeline (SRP)」の場合は、「<strong>AddToCameraSRP</strong>」をこの関数の代わりに使用する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <strong>_commandBuffer.Destory();</strong><br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    コマンドバッファを構成する要素である「キャラクター」、「カメラ」、「コマンドバッファを管理するこのスクリプト」のいずれかがシーンに存在しなくなる場合は、上記のコードを必ず呼び出してコマンドバッファをレンダリングパイプラインから削除する必要があります。 <br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    // (1) コマンドバッファの内容を空にして書き換えます。<br>
+    <strong>_commandBuffer.ClearCommands();</strong><br>
+    <br>
+    // (2) カメラのMatrixをコマンドバッファに入力します。 （Unity 2019以降のバージョンで呼び出す必要がある関数）<br>
+    <strong>_commandBuffer.SetViewMatrix();</strong><br>
+    <strong>_commandBuffer.SetProjectionMatrix();</strong><br>
+    <br>
+    // (3) apPortraitのメッシュをレンダリングするように要求します。<br>
+    <strong>_commandBuffer.DrawAllMeshes(true, true);</strong><br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    コマンドバッファの要素に変更がある場合は、コマンドバッファの内容を再作成する必要があります。<br>
+    「AnyPortrait」は各フレームごとにメッシュが更新されるため、「Update」または「LateUpdate」関数でコマンドバッファの内容を書き換える必要があります。<br>
+    <strong>(1)</strong> コマンドバッファの内容を作成するには、既存のバッファ内容を削除する必要があります。<br>
+    <strong>(2)</strong> レンダリングする「View-Projection Matrix」をコマンドバッファに入力します。 「Unity 2019」より前のバージョンではこの関数はサポートされていません。<br>
+    <strong>(3)</strong> apPortrait内でどのメッシュをレンダリングするかをコマンドバッファに入力します。 「DrawAllMeshes」は、可能な現在表示されているすべてのメッシュをレンダリングするように要求します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1765.jpg"/>
+    <br>
+    
+    <p>
+    作成したスクリプトをシーンに入れましょう。<br>
+    <strong>(1)</strong> 新しい「<strong>GameObject</strong>」を作成します。<br>
+    <strong>(2)</strong> 作成したスクリプトをコンポーネントとして登録し、「apPortraitキャラクター」と「オーバーレイカメラ（Camera 2）」をそれぞれ入力します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1766.jpg"/>
+    <br>
+    
+    <p>
+    もう一度ゲームを実行すると、コマンドバッファによって2番目のカメラでもキャラクターが描かれていることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>クリッピングされるメッシュはレンダリングされませんか？</h4>
+    <br>
+    
+    <p>
+    AnyPortraitは、クリッピングメッシュをレンダリングするときにコマンドバッファを使用してマスクテクスチャを作成します。<br>
+    ユーザーが作成したコマンドバッファによってレンダリングされると、対応するマスクテクスチャが正しく生成されない可能性が高くなります。<br>
+    したがって、クリッピングされるメッシュは互換性が悪いため、可能なコマンドバッファによるレンダリングでは除外することをお勧めします。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    コマンドバッファの内容を作成するコードを少しだけ変更しても、レンダリング結果は大きく異なります。<br>
+    試してみて、次のようにコードを一行追加し、変わった結果を確認しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    &emsp;&emsp;(省略)<br>
+    &emsp;&emsp;void LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.ClearCommands();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// レンダリング先の色または奥行き値を初期化します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_commandBuffer.ClearRenderTarget(true, true, Color.magenta);</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetViewMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetProjectionMatrix();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.DrawAllMeshes(true, true);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1767.jpg"/>
+    <br>
+    
+    <p>
+    「オーバーレイカメラ(Camera 2)」でコマンドバッファによってキャラクタがレンダリングされる直前にレンダリングターゲット、つまり画面の色を紫色(Magenta)で初期化したため、上記のような結果が見られます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>グレースケールでキャラクターをレンダリング</h3>
+    <br>
+    
+    <p>
+    コマンドバッファを使用することは、主に特殊なレンダリング効果を作成するためです。<br>
+    レンダリング効果を作成するには、別々のマテリアルをコマンドバッファで利用できる必要があります。<br>
+    今回はコマンドバッファでキャラクターをグレースケールでレンダリングするように実装しましょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    今回は、キャラクターをグレースケールでレンダリングする「カスタムシェーダ」と、前述の「コマンドバッファスクリプト」を作成する必要があります。<br>
+    まず、次の「カスタムシェーダ」を新しく作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom Command Buffer Example/Grayscale"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : SV_POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f vert (appdata v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 frag (v2f i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// RGB色の平均値を使用して単色にします。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = (col.r + col.g + col.b) / 3.0f;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    前述のコマンドバッファスクリプトを変更または新しく作成します。<br>
+    今回は外部のマテリアルをインポートしてレンダリングに使用するように作成する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class CmdBufferExample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    &emsp;&emsp;public Camera targetCamera;<br>
+    <br>
+    &emsp;&emsp;// 別のマテリアルを適用できるように変数を追加します。<br>
+    &emsp;&emsp;<span class="text-danger"><strong>public Material alternativeMaterial;</strong></span><br>
+    <br>
+    &emsp;&emsp;private apCustomCommandBuffer _commandBuffer = null;<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer == null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");&nbsp;&nbsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.AfterForwardAlpha);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 別のマテリアルがレンダリングされるように、コマンドバッファ変数内にマテリアルコピーをさせる関数を呼び出します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_commandBuffer.CreateAlternativeMaterials(alternativeMaterial);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void OnDestroy()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.Destory();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = null;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.ClearCommands();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetViewMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetProjectionMatrix();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 初期化時に登録した外部のマテリアルを利用してメッシュをレンダリングするように要求します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_commandBuffer.DrawAllMeshesWithAlternativeMaterials(true, true);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1768.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 完成した「カスタムシェーダ」を利用する「マテリアル(Material)」アセットを作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1769.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 先ほど作成した「GameObject」を選択します。<br>
+    <strong>(2)</strong> スクリプトの追加された変数にカスタムシェーダを利用する「マテリアルアセット」を割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1770.jpg"/>
+    <br>
+    
+    <p>
+    完成した結果です。<br>
+    コマンドバッファによってレンダリングされると、他のマテリアルに置き換えられてレンダリングされることがわかります。<br>
+    この方法を適用すると、さまざまなレンダリング手法が利用可能になります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>アウトラインを持つキャラクターをレンダリング</h3>
+    <br>
+    
+    <p>
+    上記の説明をもう少し適用すると、実用的な例を作成できます。<br>
+    代表的な技術は「アウトライン」です。<br>
+    ここでは、UVを使ってアウトラインを描く簡単なカスタムシェーダを使って簡単に実装できます。<br>
+    さらに、コマンドバッファの作成時にレンダリングされる時点を変更する必要があります。<br>
+    最後に、上記の例とは異なり、この手法ではメインカメラを対象にコマンドバッファが実行されるようにします。<br>
+    </p>
+    <br>
+    
+    <p>
+    アウトラインを描くカスタムシェーダを作成します。<br>
+    さまざまな方法でアウトラインを描画しますが、ここでは単に基準で周囲のUVでの「Alpha」値を使用して色を拡張する方法を使用します。<br>
+    新しいシェーダーアセットを作成し、以下のように作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom Command Buffer Example/Outline"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// UVをサンプリングする距離を使用して、アウトラインの厚さを設定できます。<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_UVThickness("Line Thickness (UV Based)", Range(0, 0.2)) = 0.01</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// アウトラインの色です。<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_LineColor("Line Color", Color) = (0, 0, 0, 1)</strong><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : SV_POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float _UVThickness;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>half4 _LineColor;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f vert(appdata v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 frag(v2f i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 周囲をサンプリングして「Alpha」値を累積します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>fixed sumAlpha = col.a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(_UVThickness, 0.0f)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(-_UVThickness, 0.0f)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(0.0f, _UVThickness)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(0.0f, -_UVThickness)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(_UVThickness * 0.7f, _UVThickness * 0.7f)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(_UVThickness * 0.7f, -_UVThickness * 0.7f)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(-_UVThickness * 0.7f, _UVThickness * 0.7f)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(-_UVThickness * 0.7f, -_UVThickness * 0.7f)).a;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// アウトラインの透明度と色を計算して結果に反映します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha = saturate(sumAlpha);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = _LineColor;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a = _LineColor.a * _Color.a * sumAlpha;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    次に、コマンドバッファスクリプトを作成します。<br>
+    前の例のコードとほぼ同じように書くだけで、レンダリングの時点を変更する必要があります。<br>
+    作成したカスタムシェーダは、キャラクターイメージをもう少し拡張して単色で描くコードを持つため、これがアウトラインとして機能するにはキャラクターより先に描かれなければなりません。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class CmdBufferExample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    &emsp;&emsp;public Camera targetCamera;<br>
+    <br>
+    &emsp;&emsp;public Material alternativeMaterial;<br>
+    <br>
+    &emsp;&emsp;private apCustomCommandBuffer _commandBuffer = null;<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer == null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");&nbsp;&nbsp;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 一般的なメッシュをレンダリングする時点より前に描画されるように設定を変更します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.AddToCamera(<span class="text-danger"><strong>UnityEngine.Rendering.CameraEvent.BeforeForwardAlpha</strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.CreateAlternativeMaterials(alternativeMaterial);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    （以降のコードは前の説明と同じです。）<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1771.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> アウトラインシェーダを適用した「マテリアル」アセットを作成します。<br>
+    <strong>(2)</strong> マテリアルアセットを選択し、アウトラインの太さと色を設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1772.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> コマンドバッファを制御する「<strong>GameObject</strong>」を選択します。<br>
+    <strong>(2)</strong> アウトラインの場合、オーバーレイカメラではなく、キャラクターをレンダリングする「メインカメラ」が対象になるように設定する必要があります。<br>
+    <strong>(3)</strong> アウトラインを描くマテリアルアセットを割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1773.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、適切なクオリティのアウトラインが描かれていることがわかります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>複数の画像を持つキャラクターをレンダリング</h3>
+    <br>
+    
+    <p>
+    前の説明を通じてコマンドバッファと別のマテリアルを利用してレンダリングを行う過程を習得しました。<br>
+    今回はキャラクターのイメージが2つ以上の場合に外部のマテリアルを割り当てたい場合です。<br>
+    画像によって異なる「セカンダリテクスチャ」を適用してレンダリングをしたい場合は、準備する必要のあるマテリアルとコマンドバッファの初期化コードを修正する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1774.jpg"/>
+    <br>
+    
+    <p>
+    左の2つのテクスチャを使用するキャラクターを用意しました。<br>
+    それぞれの画像に対応する右側の補助テクスチャの色が乗算されるマテリアルを作って、コマンドバッファを通してレンダリングをしましょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    今回も同様にカスタムシェーダを作ってみましょう。<br>
+    「<strong>_MainTex</strong>」プロパティはAnyPortraitによって管理されているため使用されないため、別々のテクスチャプロパティを作成する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom Command Buffer Example/Secondary"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 色を掛ける補助テクスチャです。<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_SecondaryTex("Secondary Texture (RGB)", 2D) = "white" {}</strong><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : SV_POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _SecondaryTex;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f vert(appdata v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 frag(v2f i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 補助テクスチャの色を取得して RGB に乗算する演算を行うコードです。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>fixed4 secondaryCol = tex2D(_SecondaryTex, i.uv);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb *= secondaryCol.rgb;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1775.jpg"/>
+    <br>
+    
+    <p>
+    コマンドバッファを制御するスクリプトを作成する前に、マテリアルを作成しましょう。<br>
+    <strong>(1)</strong> 画像数に合わせてマテリアルを作成します。<br>
+    <strong>(2)</strong> 「<strong>_SecondaryTex</strong>」属性にそれぞれの補助テクスチャを割り当てます。<br>
+    </p>
+    <br>
+    
+    <p>
+    次に、2つ以上のマテリアルをコマンドバッファに割り当ててレンダリングするスクリプトを作成しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    // Dictionary 変数を利用するためのパッケージです。<br>
+    <strong>using System.Collections.Generic;</strong><br>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class CmdBufferExample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    &emsp;&emsp;public Camera targetCamera;<br>
+    <br>
+    &emsp;&emsp;// 画像名とそれに合ったマテリアルを割り当てるために、それぞれ配列の形で変数を作成します。<br>
+    &emsp;&emsp;<strong>public string&#91;&#93; imageNames;</strong><br>
+    &emsp;&emsp;<strong>public Material&#91;&#93; alternativeMaterials;</strong><br>
+    <br>
+    &emsp;&emsp;private apCustomCommandBuffer _commandBuffer = null;<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer == null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.BeforeForwardAlpha);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 配列変数を使用して、「イメージ名 - 置き換えるマテリアル」を連結するDictionary変数を作成して「_commandBuffer」に渡します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>Dictionary&lt;string, Material&gt; imageNamesToMaterial = new Dictionary&lt;string, Material&gt;();</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>for (int i = 0; i < imageNames.Length; i++)</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>{</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>imageNamesToMaterial.Add(imageNames&#91;i&#93;, alternativeMaterials&#91;i&#93;);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>}</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.CreateAlternativeMaterials(imageNamesToMaterial, alternativeMaterials&#91;0&#93;);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void OnDestroy()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.Destory();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = null;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.ClearCommands();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetViewMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetProjectionMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.DrawAllMeshesWithAlternativeMaterials(true, true);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1776.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 2つのイメージを使用するキャラクターが登場するユニティシーンです。<br>
+    <strong>(2)</strong> Unity シーンは前述の説明と同じです。 スクリプトが追加された「<strong>GameObject</strong>」を選択します。<br>
+    <strong>(3)</strong> apPortrait キャラクターが使用するイメージの名前と、それに合ったカスタムシェーダのマテリアルを順番に割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1777.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、メッシュの画像に対応する代替マテリアルが適切に適用され、上記の結果を見ることができます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>透明な背景のレンダリングテクスチャとしてレンダリング</h3>
+    <br>
+    
+    <p>
+    この問題は、複数のユーザーから要求を受けた内容です。<br>
+    キャラクターを画面ではなく「レンダーテクスチャ（Render Texture）」を対象にレンダリングを行うと、レンダリングテクスチャの背景を透明にするとメッシュが消える問題が発生します。<br>
+    レンダリングテクスチャでキャラクターをレンダリングする方法については、<a href="../../jp/AdvancedManual/AD_RenderTexture.html">関連ページ</a>で詳細な説明をご覧ください。<br>
+    このページでは、レンダリングテクスチャでレンダリングを行う際の問題をコマンドバッファで解決する方法を紹介しながら、「レンダリングターゲット」を制御するスクリプトについて説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1778.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターをレンダリングした結果をレンダリングテクスチャに保存した後、これを別のメッシュに塗りつぶしてレンダリングする方法の概略です。<br>
+    キャラクターがレンダリングされたレンダーテクスチャは、ゲーム内で多様に活用できるため、よく使われる手法です。<br>
+    ここでは、まだコマンドバッファは使用されていません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1779.jpg"/>
+    <br>
+    
+    <p>
+    スキームに合わせてシーンを構想しました。<br>
+    2つのレイヤー（UI、Default）で構成され、「AnyPortraitキャラクター」、」2つのカメラ」、そしてレンダーテクスチャが施された「Quad Mesh」がシーンに配置されています。<br>
+    <strong>(1)</strong> 「キャラクター」とそれをレンダリングする「最初のカメラ」です。 メインカメラではレンダリングされません。<br>
+    <strong>(2)</strong> レンダリングテクスチャが適用された［Quad Mesh（RT Quad）］と「メインカメラ」です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1780.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> そして最も重要な「レンダーテクスチャ（Render Texture）」アセットです。<br>
+    <strong>(2)</strong> このレンダーテクスチャは、キャラクターをレンダリングする最初のカメラの「<strong>Target Texture</strong>」として登録されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1781.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターはメインカメラでレンダリングされないように、「Default」ではなくレイヤー（ここでは <strong>UI</strong>) に設定されています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1782.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> メインカメラでレンダリングされる「<strong>Quad Mesh</strong>」です。<br>
+    <strong>(2)</strong> このメッシュのマテリアルのテクスチャは、最初のカメラで使用される「レンダリングテクスチャ」アセットです。<br>
+    この「Quad Mesh」のマテリアルと最初のカメラがレンダリングテクスチャを共有するため、最初のカメラでレンダリングする結果が「Quad Mesh」に表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1783.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、Quad Meshで最初のカメラのレンダリング結果、つまりキャラクターが正常に見えることを確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1784.jpg"/>
+    <br>
+    
+    <p>
+    問題は、レンダリングテクスチャの背景色が不透明でない場合に発生します。<br>
+    <strong>(1)</strong> キャラクターをレンダリングする最初のカメラを選択します。<br>
+    <strong>(2)</strong> 背景色のプロパティを選択します。 （Clear Flagsは「<strong>Solid Color</strong>」でなければなりません。）<br>
+    <strong>(3)</strong> 背景色の「<strong>Alpha</strong>」値を下げます。<br>
+    <strong>(4)</strong> 背景はもちろん、キャラクターを含むレンダーテクスチャ全体がますます透明になることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1789.jpg"/>
+    <br>
+    
+    <p>
+    これを解決する方法です。<br>
+    不透明な背景のレンダリングテクスチャを完成させ、これとは別に「マスクテクスチャ」を「コマンドバッファ」を用いて生成します。<br>
+    マスクを使用して、「背景」と「キャラクター」の領域を区別できます。<br>
+    このマスクテクスチャをレンダリングテクスチャと組み合わせて、背景のみ透明な画像をレンダリングします。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>参考</strong></span><br>
+    明確に区別して説明するために、カメラで生成する既存のレンダリングテクスチャを「カラーレンダリングテクスチャ(Color Render Texture)」と呼び、コマンドバッファが生成するマスクとして機能するレンダリングテクスチャを「マスクレンダリングテクスチャ(Mask Render Texture)」と呼びます。<br>
+    </p>
+    <br>
+    
+    <p>
+    この手法を実装するには多くの作業が必要です。<br>
+    <strong>(1)</strong> 「Alpha」値を「単色(Grayscale)」で保存する「マスクレンダリング用カスタムシェーダ」を作成します。<br>
+    <strong>(2)</strong> 「マスクレンダリングテクスチャ」を追加作成します。<br>
+    <strong>(3)</strong> マスクレンダリングテクスチャをレンダリングする「コマンドバッファスクリプト」を作成します。<br>
+    <strong>(4)</strong> 2つのレンダリングテクスチャをマージする「Quad Meshに塗りつぶされるシェーダとマテリアル」を作成します。<br>
+    </p>
+    <br>
+    
+    <p>
+    まず、コマンドバッファで使用するカスタムシェーダ、つまりAlpha値をモノクロで保存するカスタムシェーダを作成しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom Command Buffer Example/White Mask"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { "RenderType" = "Opaque" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 不透明度は累積されるため、ブレンド方式を「Additive」に変更します。<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>Blend One One</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : SV_POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f vert(appdata v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 frag(v2f i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Alphaの値をRGBに置き換え、Alphaは1に設定します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = saturate(col.a * _Color.a);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a = 1.0f;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    その後、コマンドバッファを制御するスクリプトを作成します。<br>
+    前の例のコードとほとんど同じですが、「レンダーターゲット(Render Target)」としてランダムな「レンダーテクスチャ」を指定する点で違いがあります。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class CmdBufferExample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    &emsp;&emsp;public Camera targetCamera;<br>
+    <br>
+    &emsp;&emsp;public Material alternativeMaterial;<br>
+    <br>
+    &emsp;&emsp;// レンダーターゲットとして使用する「マスク」用途のレンダーテクスチャです。<br>
+    &emsp;&emsp;<strong>public RenderTexture maskRenderTexture;</strong><br>
+    <br>
+    &emsp;&emsp;private apCustomCommandBuffer _commandBuffer = null;<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer == null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.BeforeForwardAlpha);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.CreateAlternativeMaterials(alternativeMaterial);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void OnDestroy()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.Destory();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = null;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.ClearCommands();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// レンダーテクスチャをレンダーターゲットとして設定し、黒で背景を初期化します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.SetRenderTarget(maskRenderTexture);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.ClearRenderTarget(true, true, Color.black);</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetViewMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetProjectionMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.DrawAllMeshesWithAlternativeMaterials(true, true);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    最後に、「Quad Mesh」に塗りつぶすマテリアルのシェーダーを作成します。<br>
+    「カラーレンダリングテクスチャ」と「マスクレンダリングテクスチャ」を組み合わせて背景のみを透明にする役割をします。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom Command Buffer Example/Merge RT and Mask"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 2つのレンダリングテクスチャを受け取るようにプロパティを作成します。<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MainTex("Main Texture (RGBA)", 2D) = "white" {}</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MaskTex("Mask Texture (Grayscale)", 2D) = "white" {}</strong><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : SV_POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _MainTex;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 _MainTex_ST;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _MaskTex;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f vert(appdata v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 frag(v2f i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// マスクレンダリングテクスチャに保存されている色をアルファとして使用します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>fixed4 mask = tex2D(_MaskTex, i.uv);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a = mask.r;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1785.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> コマンドバッファで使用する「マスクレンダーテクスチャ」と「マテリアル」を作成します。 「Alpha」値を色で保存するカスタムシェーダをマテリアルに適用します。<br>
+    <strong>(2)</strong> コマンドバッファを制御する「<strong>GameObject</strong>」を生成します。<br>
+    <strong>(3)</strong> コマンドバッファを制御する「スクリプト」を追加し、「apPortraitキャラクター」、「ファーストカメラ」を割り当て、 <strong>(1)</strong> で生成したマスク生成用「マテリアル」と「マスクレンダリングテクスチャ」を割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1786.jpg"/>
+    <br>
+    
+    <p>
+    画像全体の透明度をマスクレンダリングテクスチャから計算するため、「カラーレンダリングテクスチャ」の背景は元々不透明でなければなりません。<br>
+    <strong>(1)</strong> 最初のカメラを選択します。<br>
+    <strong>(2)</strong> 背景色を選択して <strong>(3)</strong> 不透明にします。<br>
+    このとき、画像の端より少し暗い色に設定すると、よりきれいな結果が得られます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1787.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> そして「<strong>Quad Mesh</strong>」に塗られる「マテリアル」を作成し、2つのレンダリングテクスチャを組み合わせるカスタムシェーダを適用します。<br>
+    <strong>(2)</strong> 「最初のプロパティ（_MainTex）」に「カラーレンダリングテクスチャ」を割り当てます。<br>
+    <strong>(3)</strong> 「2番目のプロパティ（_MaskTex）」に「マスクレンダーテクスチャ」を割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1788.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Quad Mesh</strong>」を選択します。<br>
+    <strong>(2)</strong> 先に作成した「2つのレンダリングテクスチャを組み合わせたマテリアル」をこのメッシュに適用します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1790.jpg"/>
+    <br>
+    
+    <p>
+    完成した結果です。<br>
+    透明な背景では、キャラクターだけが鮮明にレンダリングされる素晴らしい結果を得ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1791.jpg"/>
+    <br>
+    
+    <p>
+    「カラーレンダリングテクスチャ」と「マスクレンダリングテクスチャ」を組み合わせてレンダリングの問題を解決することがわかります。<br>
+    コマンドバッファは、上記のようにレンダリングの問題を解決するために追加のレンダリングテクスチャなどを作成するときに効果的に使用されます。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>パフォーマンスを考慮して慎重に書いてください！</h4>
+    <br>
+    
+    <p>
+    コマンドバッファは素晴らしい効果を示していますが、パフォーマンスの最適化が難しいという欠点があります。<br>
+    ユーザーが直接メッシュをレンダリングするため、UnityとAnyPortraitのドローコール最適化機能は動作しにくいです。<br>
+    したがって、パフォーマンスを常にチェックしながら実装することをお勧めします。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_SpriteMask.html">< 「Sprite Mask」適用</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_CharacterCostume.html">キャラクターの衣装を交換 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

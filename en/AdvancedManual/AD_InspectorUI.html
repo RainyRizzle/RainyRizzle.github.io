@@ -71,61 +71,140 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.3.4</span></h4>
+    <h4><span class="badge badge-secondary">1.4.0</span></h4>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_395.jpg"/>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1627.jpg"/>
     <br>
     
     <p>
-    When you select the apPortrait object created by AnyPortrait in Unity Editor, the information appears in the <strong>Inspector</strong>.<br>
-    This page describes the configuration of the Inspector.<br>
+    If you select an apPortrait object created with AnyPortrait in the Unity editor, the information appears in the <strong>Inspector</strong>.<br>
+    This page explains the elements of the inspector.<br>
     </p>
     <br>
     
-    <!-- 14. 가로 배치 시작 -->
-    <div class="container">
-    <div class="row">
-    <div class="col-sm">
-    
-    <!-- 가로 배치 첫줄 시작 -->
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1628.jpg"/>
+    <br>
     
     <p>
-    <strong>1. Open Editor and Select</strong> : Opens the editor and allows you to edit the current object immediately. (If it is Optimized Bake, you can open the editor but you can not edit it.)<br>
+    The basic configuration of the inspector is as above.<br>
+    <strong>1. Open Editor</strong> : Open the editor and choose to edit the current object right away. (If Optimized Bake, you can open the editor but not edit.)<br>
     <strong>2. Quick Bake</strong> : Bake right away.<br>
     <strong>3. Refresh Meshes</strong> : Refresh the meshes of the baked character.<br>
-    <strong>4 Is Important</strong> : When this setting is on, it will be updated at every frame of the game. Conversely, when off, it is updated by a lower FPS. The FPS you want to run can be changed in the settings dialog or the Bake dialog box.<br>
-    <strong>5. Sorting Layer/Order</strong> : Change the output order.<br>
-    <strong>6. Billboard Type</strong> : Changes the billboard setting.<br>
-    <strong>7. Root Portraits</strong> : The root units are displayed.<br>
-    <strong>8. Sockets</strong> : The sockets of the bone or mesh appear. (v1.3.4)<br>
-    <strong>9. Animation Clips</strong> : Animations appear. If you use Mecanim, corresponding Animation Clip assets are displayed together.<br>
-    <strong>10. Empty Animation Clip</strong> : Animation Clip asset corresponding to "Empty State" when using mecanim.<br>
-    <strong>11. Mecanim Settings</strong> : Options of mecanim (Animator). When using Mecanim, layers of Animator appear. It is not updated until you click the Refresh Layers button.<br>
-    <strong>12. Timeline Settings</strong> : These are the settings when linking with Unity's Timeline.<br>
-    <strong>13. Animation Events</strong> : Animation events are shown. Depending on the event type, you can specify listeners and callback functions. (v1.3.4)<br>
-    <strong>14. Control Parameters</strong> : These are the control parameters that you can check by moving the slider right away. You can test it even when the game is not running<br>
-    <strong>15. Show All Properties</strong> : You can check by opening all properties of apPortrait. (Because there is a lot of data, the performance of the editor may be slow.)<br>
-    ​<br>
+    <strong>4. Tab</strong> : You can view by switching the property UI according to the type.<br>
+    <strong>5. Properties</strong> : Detailed properties are displayed according to the selected tab.<br>
+    <strong>6. Show All Properties</strong> : You can check by opening all properties of apPortrait. (There is a lot of data, so the performance of the editor may be slow. For developers.)<br>
     </p>
     <br>
     
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1629.jpg"/>
+    <br>
     
-    </div>
-    <div class="col-sm">
+    <p>
+    The first tab shows basic properties and properties related to the prefab.<br>
+    - <strong>Is Important</strong> : If this setting is on, it will update every frame of the game, if it is off, it will only update at low FPS. The FPS you want to run can be changed in Settings dialog or Bake dialog.<br>
+    - <strong>Sorting Layer/Order</strong> : Set options for rendering order.<br>
+    - <strong>Billboard Type</strong> : Change billboard settings.<br>
+    - <strong>Prefab</strong> : If the object is a prefab, this property is additionally displayed. You can view and control the connection status with the prefab. (<a href="../../en/AdvancedManual/AD_EditingPrefabs.html">Related Page</a>)<br>
+    </p>
+    <br>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1323.jpg"/>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1630.jpg"/>
     <br>
     
+    <p>
+    In the second tab, referable sub-objects are shown in list format.<br>
+    - <strong>Root Portraits</strong> : You can see the root units.<br>
+    - <strong>Images</strong> : Images are shown, and names can be copied to the clipboard.<br>
+    - <strong>Sockets</strong> : All sockets of the mesh or bone are shown. You can find that Transform or copy its name.<br>
+    </p>
+    <br>
     
-    </div>
-    </div>
-    </div>
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1631.jpg"/>
+    <br>
     
-    <!-- 가로 배치 종료 -->
+    <p>
+    The third tab shows the animation clip list and settings related to Mecanim and Timeline.<br>
+    - <strong>Animation Settings</strong> : A list of animations appears. An "A" icon appears in front of the autorun animation, and you can copy the names or preview them.<br>
+    - <strong>Mecanim Settings</strong> : These are the necessary settings when using Mecanim. (<a href="../../en/AdvancedManual/AD_Mecanim.html">Related Page</a>)<br>
+    - <strong>Timeline Settings</strong> : These settings are used when linking with Unity's Timeline. (<a href="../../en/AdvancedManual/AD_Timeline.html">Related Page</a>)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1633.jpg"/>
+    <br>
+    
+    <p>
+    The fourth tab displays settings related to animation events.<br>
+    For the description of the animation event UI, please refer to <a href="../../en/AdvancedManual/AD_AnimationEvents.html">Related Page</a>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1634.jpg"/>
+    <br>
+    
+    <p>
+    In the fifth tab you can see the control parameters.<br>
+    Here it is possible to see how the character moves right in the Unity editor by manipulating the control parameters.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Preview Animations in the Unity Editor</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1632.jpg"/>
+    <br>
+    
+    <p>
+    With the Animation tab selected, you can preview the animation using the slider.<br>
+    <strong>(1)</strong> Press the "Play" button of the animation you want to preview.<br>
+    <strong>(2)</strong> The animation preview slider will appear.<br>
+    <strong>(3)</strong> If you move the slider, the animation suitable for the frame is calculated and displayed in the Unity editor. If you want to end the preview, just press the "Stop" button for the animation again.<br>
+    </p>
+    <br>
+    
+    <p>
+    Please note that the animation preview has the following limitations.<br>
+    - Clipping mesh rendering does not work.<br>
+    - Animations do not play in real time.<br>
+    - If the billboard option is turned on, character rendering may look strange.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Preview Control Parameter Results in Unity Editor</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1635.jpg"/>
+    <br>
+    
+    <p>
+    If the control parameter is manipulated with the control parameter tab selected, it will be reflected on the character as shown above.<br>
+    As long as the control parameters are not controlled by animations or external scripts, it is possible to manipulate them in the inspector while the game is running.<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

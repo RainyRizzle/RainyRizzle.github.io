@@ -71,61 +71,140 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.3.4</span></h4>
+    <h4><span class="badge badge-secondary">1.4.0</span></h4>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_395.jpg"/>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1627.jpg"/>
     <br>
     
     <p>
-    Unity EditorでAnyPortraitで作成したapPortraitオブジェクトを選択すると、情報が「<strong>インスペクタ(Inspector)</strong>」に表示されます。<br>
-    このページでは、「インスペクタ」の設定について説明します。<br>
+    「Unity Editor」で「AnyPortrait」で作成した「apPortrait」オブジェクトを選択すると、「インスペクタ（Inspector）」にその情報が表示されます。<br>
+    このページでは、インスペクタの画面構成について説明します。<br>
     </p>
     <br>
     
-    <!-- 14. 가로 배치 시작 -->
-    <div class="container">
-    <div class="row">
-    <div class="col-sm">
-    
-    <!-- 가로 배치 첫줄 시작 -->
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1628.jpg"/>
+    <br>
     
     <p>
-    <strong>1. Open Editor and Select</strong> : エディタを開き、現在のオブジェクトをすぐに編集することができます。 (Optimized Bakeの場合はエディタを開くことはできますが、編集はできません。)<br>
-    <strong>2. Quick Bake</strong> : まさに「Bake」を実行します。<br>
+    インスペクターUIの基本構成です。<br>
+    <strong>1. Open Editor</strong> : エディタを開き、すぐに現在のオブジェクトを編集できるように選択します。 （Optimized Bakeの場合、エディタを開くことはできますが、編集はできません。）<br>
+    <strong>2. Quick Bake</strong> : まさにBakeをします。<br>
     <strong>3. Refresh Meshes</strong> : Bakeされたキャラクターのメッシュを更新します。<br>
-    <strong>4. Is Important</strong> : この設定がオンの場合、ゲームの各フレームで更新されます。 逆に、オフの場合は、下位のFPSによって更新されます。 実行するFPSは、設定ダイアログまたは「Bake」ダイアログボックスで変更できます。<br>
-    <strong>5. Sorting Layer/Order</strong> : 出力順序を変更します。<br>
-    <strong>6. Billboard Type</strong> : ビルボードの設定を変更します。<br>
-    <strong>7. Root Portraits</strong> : ルート単位が表示されます。<br>
-    <strong>8. Sockets</strong> : ボーンまたはメッシュのソケットが表示されます。（v1.3.4）<br>
-    <strong>9. Animation Clips</strong> : アニメーションが表示されます。 「Mecanim」を使用すると、対応する「Animation Clip」アセットが一緒に表示されます。<br>
-    <strong>10. Empty Animation Clip</strong> : 「Mecanim」を使用している場合、「Empty State」に対応する「Animation Clip」アセット。<br>
-    <strong>11. Mecanim Settings</strong> : Mecanim使用するかどうか、AnimatorとAnimatorの層が表示されます。「Refresh Layers」ボタンを押すと、接続の設定が更新されます。<br>
-    <strong>12. Timeline Settings</strong> : Unityの「タイムライン（Timeline）」と連動したときに指定の設定です。<br>
-    <strong>13. Animation Events</strong> : アニメイベントです。イベントタイプに応じて、リスナーとコールバック関数を指定することができます。（v1.3.4）<br>
-    <strong>14. Control Parameters</strong> : これらは、スライダをすぐに動かすことで確認できる制御パラメータです。 ゲームが実行されていなくてもテストすることができます<br>
-    <strong>15. Show All Properties</strong> : apPortraitのすべてのプロパティを開いて確認することができます。（データが多いので、エディタのパフォーマンスが低下することがあります。）<br>
-    ​<br>
+    <strong>4. タブ</strong> : 種類に応じてプロパティUIを切り替えて表示できます。<br>
+    <strong>5. プロパティ</strong> : 選択したタブに合わせて詳細なプロパティが表示されます。<br>
+    <strong>6. Show All Properties</strong> : apPortraitのすべてのプロパティを開いて確認できます。 （データが多いため、エディタのパフォーマンスが遅くなる可能性があります。開発者向けです。）<br>
     </p>
     <br>
     
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1629.jpg"/>
+    <br>
     
-    </div>
-    <div class="col-sm">
+    <p>
+    最初のタブには、基本プロパティとプレハブに関するプロパティが表示されます。<br>
+    - <strong>Is Important</strong> : この設定をオンにするとゲーム内のすべてのフレームで更新され、設定がオフの場合は少ないFPSでのみ更新されます。 駆動したいFPSは「設定ダイアログ」や「Bakeダイアログ」から変更できます。<br>
+    - <strong>Sorting Layer/Order</strong> : レンダリング順序に関するオプションを設定します。<br>
+    - <strong>Billboard Type</strong> : ビルボード設定を変更します。<br>
+    - <strong>Prefab</strong> : オブジェクトがプレハブの場合、このプロパティはさらに表示されます。 プレハブとの接続状態を確認して制御できます。 (<a href="../../jp/AdvancedManual/AD_EditingPrefabs.html">関連ページ</a>)<br>
+    </p>
+    <br>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1323.jpg"/>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1630.jpg"/>
     <br>
     
+    <p>
+    2番目のタブでは、参照できるサブオブジェクトがリスト形式で表示されます。<br>
+    - <strong>Root Portraits</strong> : ルートユニットが表示されます。<br>
+    - <strong>Images</strong> : 画像が表示され、クリップボードに名前をコピーできます。<br>
+    - <strong>Sockets</strong> : メッシュやボンのソケットがすべて見えます。 対応するTransformを検索したり、名前をコピーしたりできます。<br>
+    </p>
+    <br>
     
-    </div>
-    </div>
-    </div>
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1631.jpg"/>
+    <br>
     
-    <!-- 가로 배치 종료 -->
+    <p>
+    3番目のタブには、アニメーションクリップリストと「Mecanim」と「Timeline」に関する設定が表示されます。<br>
+    - <strong>Animation Settings</strong> : アニメーションリストが表示されます。 自動実行アニメーションの前には「A」アイコンが表示され、名前をコピーまたはプレビューできます。<br>
+    - <strong>Mecanim Settings</strong> : Mecanimを使用する場合に必要な設定です。 (<a href="../../jp/AdvancedManual/AD_Mecanim.html">関連ページ</a>)<br>
+    - <strong>Timeline Settings</strong> : UnityのTimelineと連動するときに使用される設定です。 (<a href="../../jp/AdvancedManual/AD_Timeline.html">関連ページ</a>)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1633.jpg"/>
+    <br>
+    
+    <p>
+    4番目のタブには、アニメーションイベントに関する設定が表示されます。<br>
+    アニメイベントUIの説明については、<a href="../../jp/AdvancedManual/AD_AnimationEvents.html">関連ページ</a>を参照してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1634.jpg"/>
+    <br>
+    
+    <p>
+    5番目のタブでは、制御パラメータを表示できます。<br>
+    ここで制御パラメータを操作してすぐに Unity Editor でキャラクターがどのように動くかを確認することが可能です。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>アニメーションを Unity Editor でプレビュー</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1632.jpg"/>
+    <br>
+    
+    <p>
+    アニメーションタブを選択した状態で、スライダを使用してアニメーションをプレビューできます。<br>
+    <strong>(1)</strong> プレビューしたいアニメーションの「再生」ボタンを押します。<br>
+    <strong>(2)</strong> アニメーションプレビュースライダーが表示されます。<br>
+    <strong>(3)</strong> スライダーを動かすと、そのフレームに合ったアニメーションが演算され、Unity Editor に表示されます。 プレビューが終了したい場合は、そのアニメーションの「停止」ボタンをもう一度押すだけです。<br>
+    </p>
+    <br>
+    
+    <p>
+    アニメーションプレビューには以下の制限がありますので、参考にしてください。<br>
+    - クリッピングメッシュレンダリングは機能しません。<br>
+    - アニメーションはリアルタイムで再生されません。<br>
+    - ビルボードオプションがオンの場合、キャラクターのレンダリングが奇妙に見えることがあります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>制御パラメータの結果をUnity Editorでプレビュー</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1635.jpg"/>
+    <br>
+    
+    <p>
+    制御パラメータタブを選択した状態で制御パラメータを操作すると、上記のように文字に反映されます。<br>
+    制御パラメータがアニメーションや外部のスクリプトによって制御されない限り、ゲーム実行中でもインスペクタで操作することが可能です。<br>
+    </p>
+    <br>
     
     <!-- 5. 바닥 네비바 -->
     <br>

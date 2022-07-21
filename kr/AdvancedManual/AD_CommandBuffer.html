@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>커맨드 버퍼 작성하기</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_CommandBuffer.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_CommandBuffer.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_CommandBuffer.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > 커맨드 버퍼 작성하기</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">커맨드 버퍼 작성하기</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.0</span></h4>
+    
+    <p>
+    유니티 엔진에서 렌더링은 자동으로 수행되지만, 스크립트를 작성해서 기능을 확장할 수도 있습니다.<br>
+    이를 위한 다양한 방법 중 하나는 "<strong>커맨드 버퍼(Command Buffer)</strong>"를 이용하는 것입니다.<br>
+    <strong>커맨드 버퍼</strong>를 쉽게 요약하면, "대상인 메시를 지정된 조건으로 렌더링해달라는 요청을 예약하는 것"입니다.<br>
+    유니티 공식 메뉴얼에서 자세한 설명을 확인하실 수 있습니다.<br>
+    - <a href="https://docs.unity3d.com/kr/2022.1/Manual/GraphicsCommandBuffers.html">커맨드 버퍼를 사용하여 빌트인 렌더 파이프라인 확장</a><br>
+    - <a href="https://docs.unity3d.com/kr/2022.1/Manual/srp-using-scriptable-render-context.html">스크립터블 렌더 파이프라인에서 렌더링 커맨드 예약 및 실행</a><br>
+    - <a href="https://docs.unity3d.com/kr/2022.1/ScriptReference/Rendering.CommandBuffer.html">커맨드 버퍼 API</a><br>
+    - <a href="https://docs.unity3d.com/ScriptReference/Rendering.CameraEvent.html">CameraEvent API</a><br>
+    </p>
+    <br>
+    
+    <p>
+    유니티의 "<strong>CommandBuffer</strong>" 클래스를 이용하면 AnyPortrait의 캐릭터를 커맨드 버퍼를 통해서 렌더링할 수 있지만, 사용자가 접근하기 어려운 데이터들이 많으므로 그것은 구현하기 어렵습니다.<br>
+    AnyPortrait v1.4.0에 추가된 "<strong>apCustomCommandBuffer</strong>" 클래스는 "<strong>CommandBuffer</strong>" 클래스의 AnyPortrait용 버전입니다.<br>
+    이 클래스를 이용해서 다양한 기법을 쉽게 구현할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이 페이지에서는 <strong>apCustomCommandBuffer</strong>를 사용하여 스크립트를 작성하는 방법과 몇가지 재미있는 기법을 구현하는 내용을 다룹니다.<br>
+    <strong>apCustomCommandBuffer</strong> 클래스의 함수에 대한 자세한 설명은 <a href="../../kr/Script/SC_CommandBuffer.html">관련 페이지</a>에서 확인할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>커맨드 버퍼로 다른 카메라에 캐릭터 그리기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1760.jpg"/>
+    <br>
+    
+    <p>
+    구현에 앞서서, 커맨드 버퍼가 전달되는 방식을 간단히 이해해봅시다.<br>
+    스크립트에서 커맨드 버퍼를 생성하여 유니티의 렌더링 파이프라인에 전달하면, 렌더링 파이프라인이 동작할때 예약된 커맨드 버퍼의 요청사항에 따라 추가적으로 렌더링이 실행됩니다.<br>
+    이때 전달되어야 하는 필수 요소는 "<strong>그려질 메시</strong>"와 "<strong>그리는 카메라</strong>"입니다.<br>
+    이 점을 기억하며 구현을 해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1761.jpg"/>
+    <br>
+    
+    <p>
+    커맨드 버퍼를 이용하는 가장 쉽고 간단한 예제를 만들어봅시다.<br>
+    카메라(Camera 1)가 캐릭터의 메시들(Original Meshes)을 렌더링하는 환경을 준비합니다.<br>
+    그리고 또다른 카메라(Camera 2)에서 커맨드 버퍼에 의해 캐릭터(Cloned Meshes)가 보여지도록 만들어봅시다.<br>
+    커맨드 버퍼를 만들기 위해서 필요한 요소로서 "<strong>Original Meshes</strong>"와 "<strong>Camera 2</strong>"를 기억합시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1762.jpg"/>
+    <br>
+    
+    <p>
+    설명에 맞게 유니티 씬을 구성했습니다.<br>
+    <strong>(1)</strong> 2개의 카메라와 1개의 AnyPortrait 캐릭터가 존재하는 것을 볼 수 있습니다.<br>
+    <strong>(2)</strong> AnyPortrait 캐릭터입니다.<br>
+    <strong>(3)</strong> 캐릭터를 그리는 메인 카메라입니다. 앞선 도식에서의 "<strong>Camera 1</strong>"과 같은 역할을 합니다.<br>
+    <strong>(4)</strong> 메인 카메라가 렌더링을 끝내면 추가적으로 렌더링을 하는 오버레이용 카메라입니다. 앞선 도식에서 "<strong>Camera 2</strong>"와 같은 역할을 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1763.jpg"/>
+    <br>
+    
+    <p>
+    각 카메라의 설정입니다.<br>
+    <strong>Camera 1</strong>은 메인 카메라로서 먼저 렌더링하도록 설정되어 있습니다.<br>
+    <strong>Camera 2</strong>는 "Depth" 값에 의해서 <strong>Camera 1</strong>보다 나중에 렌더링이 되며, "Culling Mask"에 의해서 캐릭터가 렌더링되지 않습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1764.jpg"/>
+    <br>
+    
+    <p>
+    따라서 게임을 실행한다면 캐릭터는 메인 카메라에서만 그려질 것입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이제 커맨드 버퍼를 생성하고 업데이트하는 간단한 스크립트를 작성해봅시다.<br>
+    다음의 스크립트는 "입력된 apPortrait 캐릭터"를 "입력된 카메라"에서 그리도록 만드는 아주 간단한 역할을 수행합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class CmdBufferExample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;// 대상이 되는 객체들<br>
+    &emsp;&emsp;<strong>public apPortrait portrait;</strong><br>
+    &emsp;&emsp;<strong>public Camera targetCamera;</strong><br>
+    <br>
+    &emsp;&emsp;// 커맨드 버퍼<br>
+    &emsp;&emsp;<span class="text-danger"><strong>private apCustomCommandBuffer _commandBuffer = null;</strong></span><br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 커맨드 버퍼를 생성합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer == null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// apPortrait가 초기화되지 않았다면 여기서 직접 초기화합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// apPortrait와 카메라를 이용하여 커맨드 버퍼 인스턴스를 생성합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 렌더링 시점을 설정하여 카메라에 커맨드 버퍼를 등록합니다. (빌트인 렌더 파이프라인용 함수)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.AfterForwardAlpha);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void OnDestroy()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 커맨드 버퍼를 제거합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.Destory();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = null;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 업데이트마다 렌더링 내용을 다시 갱신합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 커맨드 버퍼의 내용을 비우고 다시 작성합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.ClearCommands();</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 카메라의 Matrix를 커맨드 버퍼에 입력합니다. (Unity 2019 및 이후 버전에서 호출되어야 하는 함수)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.SetViewMatrix();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.SetProjectionMatrix();</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// apPortrait의 메시들을 렌더링할 것을 요청합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.DrawAllMeshes(true, true);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    스크립트의 핵심 구문들을 하나씩 살펴봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    // (1) 대상이 되는 객체들<br>
+    <strong>public apPortrait portrait;</strong><br>
+    <strong>public Camera targetCamera;</strong><br>
+    <br>
+    // (2) 커맨드 버퍼<br>
+    <span class="text-danger"><strong>private apCustomCommandBuffer _commandBuffer = null;</strong></span><br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    멤버 객체들입니다.<br>
+    <strong>(1)</strong> 커맨드 버퍼의 필수 요소인 apPortrait와 카메라를 유니티 씬으로부터 연결할 수 있도록 public 변수로 만듭니다.<br>
+    <strong>(2)</strong> 가장 중요한 커맨드 버퍼를 apCustomCommandBuffer 타입의 변수를 이용하여 생성하고 제어합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    // (1) apPortrait가 초기화되지 않았다면 여기서 직접 초기화합니다.<br>
+    portrait.Initialize();<br>
+    <br>
+    // (2) apPortrait와 카메라를 이용하여 커맨드 버퍼 인스턴스를 생성합니다.<br>
+    <strong>_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");</strong><br>
+    <br>
+    // (3) 렌더링 시점을 설정하여 카메라에 커맨드 버퍼를 등록합니다. (빌트인 렌더 파이프라인용 함수)<br>
+    <strong>_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.AfterForwardAlpha);</strong><br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    커맨드 버퍼를 생성하고 렌더링 파이프라인에 등록하는 코드입니다.<br>
+    <strong>(1)</strong> 예제에서는 Start 함수에서 초기화가 실행하도록 작성하였기 때문에, apPortrait가 초기화되지 않았을 수 있어서 초기화 코드를 작성했습니다. 필수 코드는 아닙니다.<br>
+    <strong>(2)</strong> 커맨드 버퍼 인스턴스를 생성할 때 인자로서 카메라와 apPortrait를 입력하고, 커맨드 버퍼의 이름을 추가로 입력합니다.<br>
+    <strong>(3)</strong> "AddToCamera" 함수를 이용하여 렌더링 파이프라인에 커맨드 버퍼를 등록합니다.<br>
+    이때, 렌더링 과정에서 어느 시점에 커맨드 버퍼의 요청이 처리될지를 설정합니다.<br>
+    만약 "Scriptable Render Pipeline (SRP)" 환경이라면 "<strong>AddToCameraSRP</strong>"를 대신 사용해야합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <strong>_commandBuffer.Destory();</strong><br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    만약 커맨드 버퍼를 구성하는 요소인 "캐릭터", "카메라" 및 커맨드 버퍼를 관리하는 이 스크립트 중에 하나라도 씬에 존재하지 않게 된다면, 위 코드를 꼭 호출해서 커맨드 버퍼를 렌더링 파이프라인으로부터 제거해야합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    // (1) 커맨드 버퍼의 내용을 비우고 다시 작성합니다.<br>
+    <strong>_commandBuffer.ClearCommands();</strong><br>
+    <br>
+    // (2) 카메라의 Matrix를 커맨드 버퍼에 입력합니다. (Unity 2019 및 이후 버전에서 호출되어야 하는 함수)<br>
+    <strong>_commandBuffer.SetViewMatrix();</strong><br>
+    <strong>_commandBuffer.SetProjectionMatrix();</strong><br>
+    <br>
+    // (3) apPortrait의 메시들을 렌더링할 것을 요청합니다.<br>
+    <strong>_commandBuffer.DrawAllMeshes(true, true);</strong><br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    커맨드 버퍼의 요소들에 변경 사항이 있다면 커맨드 버퍼의 내용을 다시 작성해야합니다.<br>
+    AnyPortrait는 매프레임마다 메시가 갱신되므로, Update나 LateUpdate 함수에서 커맨드 버퍼의 내용을 다시 작성해야합니다.<br>
+    <strong>(1)</strong> 커맨드 버퍼의 내용을 작성하기 위해서는 기존의 버퍼 내용을 삭제해야합니다.<br>
+    <strong>(2)</strong> 렌더링하는 View-Projection Matrix를 커맨드 버퍼에 입력합니다. Unity 2019보다 이전 버전에서는 이 함수가 지원되지 않습니다.<br>
+    <strong>(3)</strong> apPortrait 내에서 어떤 메시들을 렌더링할 것인지 커맨드 버퍼에 입력합니다. DrawAllMeshes는 가능한 현재 보여지는 모든 메시들을 렌더링하도록 요청합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1765.jpg"/>
+    <br>
+    
+    <p>
+    작성한 스크립트를 유니티 씬에 넣어봅시다.<br>
+    <strong>(1)</strong> 새로운 <strong>GameObject</strong>를 생성합니다.<br>
+    <strong>(2)</strong> 작성한 스크립트를 컴포넌트로 등록하고, "apPortrait 캐릭터"와 "오버레이 카메라(Camera 2)"를 각각 입력합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1766.jpg"/>
+    <br>
+    
+    <p>
+    다시 게임을 실행하면, 커맨드 버퍼에 의해 이제 두번째 카메라에서도 캐릭터가 그려지는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>클리핑되는 메시가 렌더링되지 않아요!</h4>
+    <br>
+    
+    <p>
+    AnyPortrait는 클리핑 메시를 렌더링할 때 커맨드 버퍼를 이용하여 마스크 텍스쳐를 생성합니다.<br>
+    사용자가 만든 커맨드 버퍼에 의해서 렌더링 될 때는 해당 마스크 텍스쳐가 제대로 생성되지 않을 가능성이 높습니다.<br>
+    따라서 클리핑 되는 메시는 호환성이 좋지 않기 때문에 가능한 커맨드 버퍼에 의한 렌더링에서는 제외시키는 것을 권장합니다.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    커맨드 버퍼의 내용을 작성하는 코드를 조금만 바꾸어도 렌더링 결과는 크게 달라집니다.<br>
+    시험삼아 다음과 같이 코드를 한줄 추가해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    &emsp;&emsp;(생략)<br>
+    &emsp;&emsp;void LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.ClearCommands();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 렌더링 대상의 색상이나 깊이값을 초기화합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_commandBuffer.ClearRenderTarget(true, true, Color.magenta);</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetViewMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetProjectionMatrix();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.DrawAllMeshes(true, true);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1767.jpg"/>
+    <br>
+    
+    <p>
+    <strong>오버레이 카메라(Camera 2)</strong>에서 커맨드 버퍼에 의해 캐릭터가 렌더링 되기 직전에 렌더링 타겟, 즉 화면의 색상을 보라색(Magenta)으로 초기화를 했기 때문에 위와 같은 결과를 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>단색으로 캐릭터를 렌더링하기</h3>
+    <br>
+    
+    <p>
+    커맨드 버퍼를 이용하는 것은 주로 특수한 렌더링 효과를 만들기 위함입니다.<br>
+    렌더링 효과를 만들기 위해서는 별도의 재질이 커맨드 버퍼에서 활용될 수 있어야 합니다.<br>
+    이번에는 커맨드 버퍼로 캐릭터를 회색톤의 단색으로 렌더링하도록 구현해봅시다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이번에는 캐릭터를 단색으로 렌더링하는 <strong>커스텀 쉐이더</strong>와 앞서 설명된 <strong>커맨드 버퍼 스크립트</strong>를 작성해야합니다.<br>
+    먼저 다음의 <strong>커스텀 쉐이더</strong>를 새로 작성합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom Command Buffer Example/Grayscale"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : SV_POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f vert (appdata v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 frag (v2f i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// RGB 색상의 평균 값을 이용해서 단색으로 만듭니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = (col.r + col.g + col.b) / 3.0f;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    앞서 설명한 커맨드 버퍼 스크립트를 수정하거나 새로 작성합니다.<br>
+    이번에는 외부의 재질을 가져와서 렌더링에 사용되도록 작성해야 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class CmdBufferExample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    &emsp;&emsp;public Camera targetCamera;<br>
+    <br>
+    &emsp;&emsp;// 별도의 재질을 적용할 수 있도록 변수를 추가합니다.<br>
+    &emsp;&emsp;<span class="text-danger"><strong>public Material alternativeMaterial;</strong></span><br>
+    <br>
+    &emsp;&emsp;private apCustomCommandBuffer _commandBuffer = null;<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer == null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");&nbsp;&nbsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.AfterForwardAlpha);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 별도의 재질이 렌더링되도록 커맨드 버퍼 변수 내에 재질 복사를 시키는 함수를 호출합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_commandBuffer.CreateAlternativeMaterials(alternativeMaterial);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void OnDestroy()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.Destory();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = null;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.ClearCommands();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetViewMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetProjectionMatrix();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 초기화시 등록한 외부의 재질을 이용해서 메시들을 렌더링하도록 요청합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_commandBuffer.DrawAllMeshesWithAlternativeMaterials(true, true);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1768.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 완성된 <strong>커스텀 쉐이더</strong>를 이용하는 <strong>재질(Material)</strong> 에셋을 만듭니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1769.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 앞서 만든 <strong>GameObject</strong>를 선택합니다.<br>
+    <strong>(2)</strong> 스크립트의 추가된 변수에 커스텀 쉐이더를 이용하는 <strong>재질 에셋</strong>을 할당합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1770.jpg"/>
+    <br>
+    
+    <p>
+    완성된 결과입니다.<br>
+    커맨드 버퍼에 의해서 렌더링이 될 때, 다른 재질로 교체되서 렌더링이 되는 것을 볼 수 있습니다.<br>
+    이 방법을 응용하면 다양한 렌더링 기법을 사용할 수 있을 것입니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>외곽선이 있는 캐릭터 렌더링하기</h3>
+    <br>
+    
+    <p>
+    위의 설명들을 조금 더 응용하면 실용적인 예제를 만들 수 있습니다.<br>
+    대표적인 기법은 "외곽선"입니다.<br>
+    여기서는 UV를 이용하여 외곽선을 그리는 간단 커스텀 쉐이더를 이용하여 간단히 구현할 수 있습니다.<br>
+    추가적으로 커맨드 버퍼 생성시 렌더링이 되는 시점을 변경해야합니다.<br>
+    마지막으로, 앞의 예제와 다르게 이 기법에서는 메인 카메라를 대상으로 커맨드 버퍼가 실행되도록 만들 것입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    외곽선을 그리는 커스텀 쉐이더를 만듭니다.<br>
+    다양한 방식으로 외곽선을 그리지만, 여기서는 간단히 기준으로 주변의 UV에서의 Alpha 값을 이용하여 색상을 확장하는 방식을 이용해볼 것입니다.<br>
+    새로운 쉐이더 에셋을 만들고 아래와 같이 작성합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom Command Buffer Example/Outline"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// UV를 샘플링하는 거리를 이용하여 외곽선의 두께를 설정할 수 있습니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_UVThickness("Line Thickness (UV Based)", Range(0, 0.2)) = 0.01</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 외곽선의 색상입니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_LineColor("Line Color", Color) = (0, 0, 0, 1)</strong><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : SV_POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float _UVThickness;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>half4 _LineColor;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f vert(appdata v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 frag(v2f i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 주변을 샘플링하여 Alpha 값을 누적합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>fixed sumAlpha = col.a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(_UVThickness, 0.0f)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(-_UVThickness, 0.0f)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(0.0f, _UVThickness)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(0.0f, -_UVThickness)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(_UVThickness * 0.7f, _UVThickness * 0.7f)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(_UVThickness * 0.7f, -_UVThickness * 0.7f)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(-_UVThickness * 0.7f, _UVThickness * 0.7f)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(-_UVThickness * 0.7f, -_UVThickness * 0.7f)).a;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 외곽선의 투명도와 색상을 계산하여 결과에 반영합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha = saturate(sumAlpha);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = _LineColor;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a = _LineColor.a * _Color.a * sumAlpha;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    다음으로, 커맨드 버퍼 스크립트를 작성합니다.<br>
+    앞의 예제의 코드와 거의 동일하게 작성하면 되는데, 렌더링 시점이 변경되어야 합니다.<br>
+    작성한 커스텀 쉐이더는 캐릭터 이미지를 조금 더 확장해서 단색으로 그리는 코드를 가지기 때문에, 이것이 외곽선으로서 역할을 하려면 "캐릭터보다 먼저 그려져야" 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class CmdBufferExample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    &emsp;&emsp;public Camera targetCamera;<br>
+    <br>
+    &emsp;&emsp;public Material alternativeMaterial;<br>
+    <br>
+    &emsp;&emsp;private apCustomCommandBuffer _commandBuffer = null;<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer == null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");&nbsp;&nbsp;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 일반적인 메시를 렌더링하는 시점보다 먼저 그려지도록 설정을 변경합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.AddToCamera(<span class="text-danger"><strong>UnityEngine.Rendering.CameraEvent.BeforeForwardAlpha</strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.CreateAlternativeMaterials(alternativeMaterial);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    (이후의 코드는 앞의 설명과 동일합니다.)<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1771.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 외곽선 쉐이더가 적용된 <strong>재질</strong> 에셋을 생성합니다.<br>
+    <strong>(2)</strong> 재질 에셋을 선택하고 외곽선의 굵기와 색상을 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1772.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 커맨드 버퍼를 제어하는 <strong>GameObject</strong>를 선택합니다.<br>
+    <strong>(2)</strong> 외곽선의 경우 오버레이 카메라가 아닌, 캐릭터를 렌더링하는 <strong>메인 카메라</strong>가 대상이 되도록 설정해야합니다.<br>
+    <strong>(3)</strong> 외곽선을 그리는 재질 에셋을 할당합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1773.jpg"/>
+    <br>
+    
+    <p>
+    게임을 실행하면 적당한 퀄리티의 외곽선이 그려지는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>두개 이상의 이미지를 가지는 캐릭터를 렌더링하기</h3>
+    <br>
+    
+    <p>
+    앞의 설명을 통해서 커맨드 버퍼와 별도의 재질을 이용하여 렌더링을 하는 과정을 익혔습니다.<br>
+    이번에는 캐릭터의 이미지가 2개 이상인 경우에 외부의 재질을 할당하고자 하는 경우입니다.<br>
+    이미지에 따라서 다른 "<strong>보조 텍스쳐(Secondary Texture)</strong>"를 적용하여 렌더링을 하고자 한다면, 준비해야하는 재질들과 커맨드 버퍼의 초기화 코드를 수정해야합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1774.jpg"/>
+    <br>
+    
+    <p>
+    왼쪽의 두개의 텍스쳐를 사용하는 캐릭터를 준비했습니다.<br>
+    각각의 이미지에 대응하는 오른쪽의 보조 텍스쳐의 색상이 곱해지는 재질을 만들어서 커맨드 버퍼를 통해 렌더링을 해봅시다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이번에도 마찬가지로 커스텀 쉐이더를 만들어봅시다.<br>
+    "<strong>_MainTex</strong>" 속성은 AnyPortrait에 의해서 관리되므로 사용되지 못하므로, 별도의 텍스쳐 속성을 만들어야 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom Command Buffer Example/Secondary"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 색상을 곱할 보조 텍스쳐입니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_SecondaryTex("Secondary Texture (RGB)", 2D) = "white" {}</strong><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : SV_POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _SecondaryTex;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f vert(appdata v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 frag(v2f i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 보조 텍스쳐의 색상을 가져와서 RGB에 곱하는 연산을 하는 코드입니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>fixed4 secondaryCol = tex2D(_SecondaryTex, i.uv);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb *= secondaryCol.rgb;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1775.jpg"/>
+    <br>
+    
+    <p>
+    커맨드 버퍼를 제어하는 스크립트를 작성하기에 앞서서, 재질을 만들어 봅시다.<br>
+    <strong>(1)</strong> 이미지 개수에 맞게 재질들을 만듭니다.<br>
+    <strong>(2)</strong> "<strong>_SecondaryTex</strong>" 속성에 각각의 보조 텍스쳐를 할당합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이제 2개 이상의 재질을 커맨드 버퍼에 지정하여 렌더링하도록 스크립트를 작성해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    // Dictionary 변수를 이용하기 위한 패키지입니다.<br>
+    <strong>using System.Collections.Generic;</strong><br>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class CmdBufferExample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    &emsp;&emsp;public Camera targetCamera;<br>
+    <br>
+    &emsp;&emsp;// 이미지 이름과 그에 맞는 재질을 할당하기 위해 각각 배열의 형태로 변수를 만듭니다.<br>
+    &emsp;&emsp;<strong>public string&#91;&#93; imageNames;</strong><br>
+    &emsp;&emsp;<strong>public Material&#91;&#93; alternativeMaterials;</strong><br>
+    <br>
+    &emsp;&emsp;private apCustomCommandBuffer _commandBuffer = null;<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer == null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.BeforeForwardAlpha);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 배열 변수를 이용해서 "이미지 이름 - 대체될 재질"을 연결하는 Dictionary 변수를 만들어서 _commandBuffer에 전달합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>Dictionary&lt;string, Material&gt; imageNamesToMaterial = new Dictionary&lt;string, Material&gt;();</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>for (int i = 0; i < imageNames.Length; i++)</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>{</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>imageNamesToMaterial.Add(imageNames&#91;i&#93;, alternativeMaterials&#91;i&#93;);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>}</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.CreateAlternativeMaterials(imageNamesToMaterial, alternativeMaterials&#91;0&#93;);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void OnDestroy()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.Destory();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = null;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.ClearCommands();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetViewMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetProjectionMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.DrawAllMeshesWithAlternativeMaterials(true, true);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1776.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 2개의 이미지를 사용하는 캐릭터가 등장하는 유니티 씬입니다.<br>
+    <strong>(2)</strong> 유니티 씬은 앞의 설명에서의 구성과 동일합니다. 스크립트가 추가된 <strong>GameObject</strong>를 선택합니다.<br>
+    <strong>(3)</strong> apPortrait 캐릭터가 사용하는 이미지의 이름과 그에 맞는 커스텀 쉐이더의 재질을 순서대로 할당합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1777.jpg"/>
+    <br>
+    
+    <p>
+    게임을 실행하면 메시의 이미지에 해당하는 대체 재질이 적절히 적용되어 위와 같은 결과를 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>투명한 배경의 렌더 텍스쳐로 렌더링하기</h3>
+    <br>
+    
+    <p>
+    이 이슈는 여러 사용자들로부터 요청을 받았던 내용입니다.<br>
+    캐릭터를 화면이 아닌 <strong>렌더 텍스쳐(Render Texture)</strong>을 대상으로 렌더링을 할 때, 렌더 텍스쳐의 배경을 투명하게 할 경우 메시가 사라지는 문제가 발생합니다.<br>
+    렌더 텍스쳐로 캐릭터를 렌더링하는 방법에 대해서는 <a href="../../kr/AdvancedManual/AD_RenderTexture.html">관련 페이지</a>에서 자세한 설명을 확인하세요.<br>
+    이 페이지에서는 렌더 텍스쳐로 렌더링을 할때의 문제를 커맨드 버퍼로 해결하는 방법을 소개하면서 "<strong>렌더 타겟(Render Target)</strong>"을 제어하는 스크립트를 설명합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1778.jpg"/>
+    <br>
+    
+    <p>
+    캐릭터를 렌더링한 결과를 렌더 텍스쳐에 저장한 후, 이것을 다른 메시에 입혀서 렌더링하는 방식에 대한 도식입니다.<br>
+    캐릭터가 렌더링된 렌더 텍스쳐는 게임 내에서 다양하게 활용될 수 있기 때문에 자주 사용되는 기법입니다.<br>
+    여기서는 아직 커맨드 버퍼가 사용되지 않습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1779.jpg"/>
+    <br>
+    
+    <p>
+    도식에 맞게 씬을 구상했습니다.<br>
+    두개의 레이어 (UI, Default)로 구성했으며 <strong>AnyPortrait 캐릭터</strong>, <strong>2개의 카메라</strong>, 그리고 렌더 텍스쳐가 입혀진 <strong>사각 메시</strong>가 씬에 배치되어있습니다.<br>
+    <strong>(1)</strong> <strong>캐릭터</strong>와 이를 렌더링하는 <strong>첫번째 카메라</strong>입니다. 메인 카메라에서는 렌더링되지 않습니다.<br>
+    <strong>(2)</strong> 렌더 텍스쳐가 적용된 <strong>사각 메시("RT Quad")</strong>와 <strong>메인 카메라</strong>입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1780.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 그리고 가장 핵심이 되는 "<strong>렌더 텍스쳐(Render Texture)</strong>" 에셋입니다.<br>
+    <strong>(2)</strong> 이 렌더 텍스쳐는 캐릭터를 렌더링하는 첫번째 카메라의 "<strong>Target Texture</strong>"으로서 등록됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1781.jpg"/>
+    <br>
+    
+    <p>
+    캐릭터는 메인 카메라에서 렌더링되지 않도록 Default가 아닌 레이어(여기서는 <strong>UI</strong>)로 설정되어 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1782.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 메인 카메라에서 렌더링되는 <strong>사각 메시</strong>입니다.<br>
+    <strong>(2)</strong> 이 메시의 재질의 텍스쳐는 첫번째 카메라에서 사용되는 "<strong>렌더 텍스쳐</strong>" 에셋입니다.<br>
+    이 사각 메시의 재질과 첫번째 카메라가 렌더 텍스쳐를 공유하기 때문에, 첫번째 카메라로 렌더링하는 결과가 사각 메시에 나타나는 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1783.jpg"/>
+    <br>
+    
+    <p>
+    게임을 실행하면 사각형 메시에 첫번째 카메라의 렌더링 결과, 즉 캐릭터가 정상적으로 보여지는 것을 확인할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1784.jpg"/>
+    <br>
+    
+    <p>
+    문제는 렌더 텍스쳐의 배경 색상이 불투명하지 않은 경우에 발생합니다.<br>
+    <strong>(1)</strong> 캐릭터를 렌더링하는 첫번째 카메라를 선택합니다.<br>
+    <strong>(2)</strong> 배경 색상 속성을 선택합니다. (Clear Flags가 <strong>Solid Color</strong>여야 합니다.)<br>
+    <strong>(3)</strong> 배경색의 <strong>Alpha</strong> 값을 줄입니다.<br>
+    <strong>(4)</strong> 배경은 물론이고 캐릭터를 포함한 렌더 텍스쳐 전체가 점점 투명해지는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1789.jpg"/>
+    <br>
+    
+    <p>
+    이 문제를 해결하는 방법입니다.<br>
+    불투명한 배경의 렌더 텍스쳐을 완성하고, 이와 별도로 "<strong>마스크 텍스쳐</strong>"를 <strong>커맨드 버퍼</strong>를 이용하여 생성합니다.<br>
+    마스크를 이용하여 "배경"과 "캐릭터" 영역을 구분할 수 있습니다.<br>
+    이 마스크 텍스쳐를 렌더 텍스쳐와 합쳐서 배경만 투명한 이미지가 렌더링되도록 만듭니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>참고</strong></span><br>
+    명확히 구분하기 위해 카메라에서 생성하는 기존의 렌더 텍스쳐를 "<strong>색상 렌더 텍스쳐</strong>"로 부르고, 커맨드 버퍼가 생성하는 마스크 역할을 하는 렌더 텍스쳐를 "<strong>마스크 렌더 텍스쳐</strong>"로 부릅니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이 기법을 구현하기 위해서는 많은 작업이 필요합니다.<br>
+    <strong>(1)</strong> Alpha값을 단색(Grayscale)로 저장하는 <strong>마스크 렌더링용 커스텀 쉐이더</strong>를 작성합니다.<br>
+    <strong>(2)</strong> <strong>마스크 렌더 텍스쳐</strong>를 추가로 생성합니다.<br>
+    <strong>(3)</strong> 마스크 렌더 텍스쳐를 렌더링하도록 만드는 <strong>커맨드 버퍼 스크립트</strong>를 작성합니다.<br>
+    <strong>(4)</strong> 두개의 렌더 텍스쳐를 병합하는 <strong>사각 메시에 입혀질 쉐이더와 재질</strong>을 만듭니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    가장 먼저 커맨드 버퍼에서 사용할 커스텀 쉐이더, 즉 Alpha 값을 단색으로 저장하는 커스텀 쉐이더를 작성해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom Command Buffer Example/White Mask"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { "RenderType" = "Opaque" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 불투명도는 누적되기 때문에 블렌딩 방식을 Additive로 으로 변경합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>Blend One One</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : SV_POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f vert(appdata v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 frag(v2f i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Alpha 값을 RGB로 바꾸고, Alpha는 1로 설정합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = saturate(col.a * _Color.a);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a = 1.0f;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    이어서 커맨드 버퍼를 제어하는 스크립트를 작성합니다.<br>
+    이전의 예제의 코드와 대부분 동일하지만, "<strong>렌더 타겟</strong>"으로서 임의의 "<strong>렌더 텍스쳐</strong>"를 지정한다는 점에서 차이가 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class CmdBufferExample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    &emsp;&emsp;public Camera targetCamera;<br>
+    <br>
+    &emsp;&emsp;public Material alternativeMaterial;<br>
+    <br>
+    &emsp;&emsp;// 렌더 타겟으로 사용할 "마스크" 용도의 렌더 텍스쳐입니다.<br>
+    &emsp;&emsp;<strong>public RenderTexture maskRenderTexture;</strong><br>
+    <br>
+    &emsp;&emsp;private apCustomCommandBuffer _commandBuffer = null;<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer == null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.BeforeForwardAlpha);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.CreateAlternativeMaterials(alternativeMaterial);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void OnDestroy()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.Destory();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = null;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.ClearCommands();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 렌더 텍스쳐를 렌더 타겟으로서 설정하고 검은색으로 배경을 초기화합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.SetRenderTarget(maskRenderTexture);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.ClearRenderTarget(true, true, Color.black);</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetViewMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetProjectionMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.DrawAllMeshesWithAlternativeMaterials(true, true);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    마지막으로, 사각 메시에 입힐 재질의 쉐이더를 만듭니다.<br>
+    "색상 렌더 텍스쳐"와 "마스크 렌더 텍스쳐"를 조합하여 배경만 투명하게 만드는 역할을 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom Command Buffer Example/Merge RT and Mask"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 두개의 렌더 텍스쳐를 받도록 프로퍼티들을 만듭니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MainTex("Main Texture (RGBA)", 2D) = "white" {}</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MaskTex("Mask Texture (Grayscale)", 2D) = "white" {}</strong><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : SV_POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _MainTex;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 _MainTex_ST;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _MaskTex;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f vert(appdata v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 frag(v2f i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 마스크 렌더 텍스쳐에 저장된 색상을 Alpha로 사용합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>fixed4 mask = tex2D(_MaskTex, i.uv);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a = mask.r;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1785.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 커맨드 버퍼에서 사용할 "<strong>마스크 렌더 텍스쳐</strong>"와 "<strong>재질</strong>"을 생성합니다. Alpha 값을 색상으로 저장하는 커스텀 쉐이더를 재질에 적용해주세요.<br>
+    <strong>(2)</strong> 커맨드 버퍼를 제어하는 <strong>GameObject</strong>를 생성합니다.<br>
+    <strong>(3)</strong> 커맨드 버퍼를 제어하는 <strong>스크립트</strong>를 추가하고 "<strong>apPortrait 캐릭터</strong>", "<strong>첫번째 카메라</strong>"를 할당하고 "<strong>(1)</strong>"에서 생성했던 마스크 생성용 "<strong>재질</strong>"과 "<strong>마스크 렌더 텍스쳐</strong>"를 할당합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1786.jpg"/>
+    <br>
+    
+    <p>
+    전체 이미지의 투명도를 마스크 렌더 텍스쳐에서 계산하기 때문에, "색상 렌더 텍스쳐"의 배경은 원래대로 불투명해야합니다.<br>
+    <strong>(1)</strong> 첫번째 카메라를 선택합니다.<br>
+    <strong>(2)</strong> 배경색을 선택하여 <strong>(3)</strong> 불투명하게 만듭니다.<br>
+    이때, 이미지의 가장자리보다 조금 더 어두운 색상으로 설정하면 더욱 깔끔한 결과를 얻을 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1787.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 그리고 <strong>사각 메시</strong>에 입혀질 <strong>재질</strong>을 만들고 두개의 렌더 텍스쳐를 조합하는 커스텀 쉐이더를 적용합니다.<br>
+    <strong>(2)</strong> <strong>첫번째 프로퍼티(_MainTex)</strong>에는 "<strong>색상 렌더 텍스쳐</strong>"를 할당합니다.<br>
+    <strong>(3)</strong> <strong>두번째 프로퍼티(_MaskTex)</strong>에는 "<strong>마스크 렌더 텍스쳐</strong>"를 할당합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1788.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>사각 메시</strong>를 선택합니다.<br>
+    <strong>(2)</strong> 앞서 만든 "<strong>두개의 렌더 텍스쳐를 조합하는 재질</strong>"을 이 메시에 적용합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1790.jpg"/>
+    <br>
+    
+    <p>
+    완성된 결과입니다.<br>
+    투명한 배경에서 캐릭터만 선명하게 렌더링되는 멋진 결과를 얻을 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1791.jpg"/>
+    <br>
+    
+    <p>
+    "<strong>색상 렌더 텍스쳐</strong>"와 "<strong>마스크 렌더 텍스쳐</strong>"가 합쳐져서 렌더링 문제를 해결함을 알 수 있습니다.<br>
+    커맨드 버퍼는 위와 같이 렌더링 문제를 해결하기 위해 추가적인 렌더 텍스쳐 등을 생성할 때 효과적으로 사용됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>성능을 고려하여 신중히 작성하세요!</h4>
+    <br>
+    
+    <p>
+    커맨드 버퍼는 멋진 효과를 보여주지만 성능 최적화가 어렵다는 단점이 있습니다.<br>
+    사용자가 임의로 렌더링을 하기 때문에 유니티 및 AnyPortrait의 드로우콜 최적화 기능이 동작하기 어렵습니다.<br>
+    따라서 성능을 항상 체크하면서 구현을 하실 것을 권장합니다.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_SpriteMask.html">< Sprite Mask 적용하기</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_CharacterCostume.html">캐릭터의 의상을 교체하기 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

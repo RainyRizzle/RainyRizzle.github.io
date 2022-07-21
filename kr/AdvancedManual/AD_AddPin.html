@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>핀 추가하기</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_AddPin.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_AddPin.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_AddPin.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > 핀 추가하기</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">핀 추가하기</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.0</span></h4>
+    
+    <p>
+    <strong>Morph 모디파이어</strong>를 이용하면 버텍스들의 위치를 변경하여 캐릭터의 외형이 바뀌도록 만들 수 있습니다.<br>
+    이 기능은 강력하지만, 만약 매우 많은 버텍스들을 가진 메시를 편집할 경우 작업이 꽤 번거로워질 것입니다.<br>
+    이러한 상황에서 효과적으로 사용될 수 있는 보조 도구인 "<span class="text-danger"><strong>핀(Pin)</strong></span>"이 AnyPortrait v1.4.0에 추가되었습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    핀의 특징 다음과 같습니다.<br>
+    - 적은 수의 핀으로 다수의 버텍스들을 제어할 수 있습니다.<br>
+    - 핀들은 커브 방식으로 연결됩니다.<br>
+    - 핀과 버텍스들은 자동으로 연결됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이 페이지에서는 메시에 핀을 추가하는 방법을 다룹니다.<br>
+    Morph 모디파이어에서 핀을 이용하는 방법은 <a href="../../kr/AdvancedManual/AD_PinMorphWork.html">관련 페이지</a>에서 확인해주세요.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1673.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>메시</strong>를 선택합니다.<br>
+    <strong>(2)</strong> 메시에 꽤 많은 버텍스들이 있는 것을 볼 수 있습니다. 이때 핀을 이용하면 편리할 것입니다.<br>
+    <strong>(3)</strong> <strong>Pin</strong> 메뉴를 선택합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1674.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Pin</strong> 메뉴를 선택하면 위와 같은 UI가 나타납니다.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    <strong>1. 핀 도구들</strong> : 선택, 추가, 연결, 테스트 도구들입니다.<br>
+    <strong>2. 모서리 옵션</strong> : 선택된 핀의 모서리의 종류를 설정합니다.<br>
+    <strong>3. 가중치 범위 (Range)</strong> : 버텍스들에 연결하기 위한 범위 속성입니다.<br>
+    <strong>4. Auto Refresh</strong> : 버텍스나 핀에 변경이 있을 경우 자동으로 가중치를 다시 계산할지 여부입니다.<br>
+    <strong>5. Refresh Weight</strong> : 핀과 버텍스간 가중치를 다시 계산합니다.<br>
+    <strong>6. Remove All Pins</strong> : 모든 핀들을 삭제합니다.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1675.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1676.jpg"/>
+    <br>
+    
+    <p>
+    핀을 추가해봅시다.<br>
+    설명을 위해 이미지와 무관하게 빈 공간에 핀을 추가해보겠습니다.<br>
+    <strong>(1)</strong> <strong>추가 (Add)</strong> 도구를 선택합니다.<br>
+    <strong>(2)</strong> 작업 공간에서  <kbd>클릭</kbd> 하여 핀을 생성합니다.<br>
+    <strong>(3)</strong> 첫번째 핀이 선택된 상태에서 다시  <kbd>클릭</kbd> 하여 핀을 추가합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1677.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 두개의 핀이 직선으로 연결된 것을 볼 수 있습니다.<br>
+    <strong>(2)</strong> 핀이 선택된 상태에서 다시  <kbd>클릭</kbd> 하여 핀을 추가해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1678.jpg"/>
+    <br>
+    
+    <p>
+    3개의 핀들이 곡선으로 연결되었습니다.<br>
+    <strong>핀 툴</strong>의 가장 큰 특징은 곡선으로 연결되어 둥근 외형에 적합하다는 점입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1679.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 다시 마지막으로 생성된 핀을  <kbd>클릭</kbd> 하여 선택합니다.<br>
+    <strong>(2)</strong> 첫번째 핀을 선택해봅시다.  <kbd>Ctrl+클릭</kbd> 하면 쉽게 선택할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1680.jpg"/>
+    <br>
+    
+    <p>
+    3개의 핀이 순환되는 곡선으로 연결되었습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1681.jpg"/>
+    <br>
+    
+    <p>
+    핀들은 커브 방식으로 연결되기 때문에 버텍스와 다른 점이 있습니다.<br>
+    핀에 최대 2개의 다른 핀이 연결될 수 있으며, 그 외의 핀들은 연결되지 못합니다.<br>
+    <strong>(1)</strong> 이미 두개의 핀과 연결된 핀을 선택하고, <strong>(2)</strong> 새로운 핀을 추가해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1682.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> 새로운 핀이 생성되었지만, 이 핀들은 연결되지 않음을 확인할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1683.jpg"/>
+    <br>
+    
+    <p>
+    핀을  <kbd>Alt+클릭</kbd> 하면 모서리의 형태가 위와 같이 바뀝니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1684.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 핀을 선택하고 <strong>(2)</strong>  <kbd>드래그</kbd> 하여 핀의 위치를 바꿀 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    또한  <kbd>마우스 우클릭</kbd> 을 하면 핀 선택을 해제하거나 핀이나 커브를 삭제할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1685.jpg"/>
+    <br>
+    
+    <p>
+    설명에 따라 위와 같이 메시의 이미지에 맞게 적절히 핀을 추가하고 연결해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1686.jpg"/>
+    <br>
+    
+    <p>
+    핀을 선택하고 속성을 변해봅시다.<br>
+    <strong>(1)</strong> <strong>선택 (Select)</strong> 도구를 선택합니다.<br>
+    <strong>(2)</strong> <strong>핀</strong>을 선택합니다. 이 모드에서는 기즈모를 이용하여 선택 및 변형할 수 있습니다.<br>
+    <strong>(3)</strong> 이 핀에 연결된 버텍스들의 가중치가 색상으로 표시되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1687.jpg"/>
+    <br>
+    
+    <p>
+    핀의 가중치 영역을 수정해봅시다.<br>
+    가중치를 얼마나 정교하게 설정하느냐에 따라서 이후의 Morph 작업이 얼마나 편리해질지가 결정됩니다.<br>
+    <strong>(1)</strong> <strong>Range</strong> 옵션의 <strong>Radius</strong>나 <strong>Falloff</strong> 속성을 변경합니다.<br>
+    <strong>(2)</strong> 작업 공간에서 원형의 가중치 영역의 크기가 바뀌는 것을 볼 수 있습니다. 동시에 버텍스들의 가중치가 변경되는 것을 시각적으로 확인할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1688.jpg"/>
+    <br>
+    
+    <p>
+    핀의 가중치 영역은 두개의 속성을 가집니다.<br>
+    <strong>Radius</strong>의 영역 내에서는 가중치 값은 1입니다. 직접적으로 영향을 받는 버텍스들이 이 영역 안에 들어가도록 설정하세요.<br>
+    <strong>Falloff</strong>는 서서히 가중치가 줄어드는 영역입니다. 가중치가 급격하게 줄어드는 것을 방지합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1690.jpg"/>
+    <br>
+    
+    <p>
+    하지만 가중치 영역은 실제로는 원형이라기 보다는 위와 같은 모습을 가집니다.<br>
+    커브에서 연결된 다른 핀과 가중치 보간이 발생하므로, 조금 더 넓게 가중치가 적용됩니다.<br>
+    또한 보간에 의해 <strong>Radius</strong> 범위 내에서도 거리에 따라 가중치가 서서히 감소되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1689.jpg"/>
+    <br>
+    
+    <p>
+    또한, 여러개의 핀들들 선택하여 가중치를 동시에 설정하는 것도 가능합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1691.jpg"/>
+    <br>
+    
+    <p>
+    생성된 핀을 연결하는 도구를 이용할 수도 있습니다.<br>
+    <strong>(1)</strong> <strong>연결 (Link)</strong> 도구를 선택합니다.<br>
+    <strong>(2)</strong> 이 도구가 적용될 두개의 핀들이 준비되어 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1692.jpg"/>
+    <br>
+    
+    <p>
+    순서대로 핀을 선택하면 커브가 생성되며 연결됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1693.jpg"/>
+    <br>
+    
+    <p>
+    마지막으로, 핀이 제대로 추가되고 설정되었는지 확인하는 도구에 관한 설명입니다.<br>
+    <strong>(1)</strong> <strong>테스트 (Test)</strong> 도구를 선택합니다.<br>
+    <strong>(2)</strong> 핀을 선택하면 기즈모가 나타납니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1694.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 핀을 움직여보면 연결된 버텍스들이 같이 움직이는 것을 볼 수 있습니다.<br>
+    테스트 도구에서는 핀의 위치를 변경해도 실제 값으로서 저장되지 않습니다.<br>
+    또한 가중치에 따라 버텍스들도 같이 움직입니다.<br>
+    이 점을 이용해서 핀의 속성, 특히 가중치 영역을 수정하는데 효과적입니다.<br>
+    (핀의 다른 속성들은 저장됩니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1695.jpg"/>
+    <br>
+    
+    <p>
+    위와 같은 수정 작업을 테스트 도구에서 할 수 있습니다.<br>
+    <strong>(1)</strong> 핀을 선택하여 움직여봅니다.<br>
+    <strong>(2)</strong> 버텍스들이 어떻게 움직이는지 확인하여 가중치 영역의 범위를 조절합니다.<br>
+    <strong>(3)</strong> 가중치가 변경되어 버텍스들이 다르게 움직이는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1696.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Reset Test Position</strong> 버튼을 누르면,<br>
+    <strong>(2)</strong> 핀의 테스트 위치가 모두 초기화됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    이어지는 내용은 "<a href="../../kr/AdvancedManual/AD_PinMorphWork.html">Morph 모디파이어에서 핀 이용하기</a>" 페이지에서 계속해서 확인해주세요!<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_CopyVertices.html">< 버텍스 복사하기</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_MeshShader.html">메시의 쉐이더(Shader) 설정 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

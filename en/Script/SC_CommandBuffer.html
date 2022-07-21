@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Command Buffer</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/Script/SC_CommandBuffer.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/Script/SC_CommandBuffer.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/Script/SC_CommandBuffer.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/Script.html"><span class="text-dark">Script</span></a> > Command Buffer</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Command Buffer</h1>
+    <br>
+    
+    <p>
+    These are the functions to use Unity's <strong>Command Buffer</strong> as a target for AnyPortrait's characters.<br>
+    The following functions belong to the <strong>apCustomCommandBuffer</strong> class, not apPortrait.<br>
+    For instructions on how to write the code, please refer to the example code at the bottom of the page or the following page that explains an example of using the command buffer.<br>
+    - <a href="../../en/AdvancedManual/AD_CommandBuffer.html">Writing Command Buffer</a><br>
+    </p>
+    <br>
+    
+    <p>
+    You can also check the Unity official manual below for a detailed explanation of Unity's command buffer.<br>
+    - <a href="https://docs.unity3d.com/2022.1/Documentation/Manual/GraphicsCommandBuffers.html">Extending the Built-in Render Pipeline with CommandBuffers</a><br>
+    - <a href="https://docs.unity3d.com/2022.1/Documentation/Manual/srp-using-scriptable-render-context.html">Scheduling and executing rendering commands in the Scriptable Render Pipeline</a><br>
+    - <a href="https://docs.unity3d.com/2022.1/Documentation/ScriptReference/Rendering.CommandBuffer.html">CommandBuffer API</a><br>
+    - <a href="https://docs.unity3d.com/ScriptReference/Rendering.CameraEvent.html">CameraEvent API</a><br>
+    </p>
+    <br>
+    
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apCustomCommandBuffer</span> <strong>Camera</strong> <span class="text-muted">( </span><span class="text-success">camera,</span> <span class="text-muted">apPortrait</span> <span class="text-muted">portrait,</span> <span class="text-primary">string</span> <span class="text-muted">commandBufferName )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Create a command buffer class targeting apPortrait.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Camera</span> camera : Camera to render<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apPortrait</span> portrait : apPortrait for rendering<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> commandBufferName : The name of the command buffer registered to the camera<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>Destory</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Removes the command buffer from the registered camera.<br>
+    &nbsp;&nbsp;&nbsp;You must call this function if any of the camera, apPortrait character or command buffer classes cease to exist.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>AddToCamera</strong> <span class="text-muted">( </span><span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Rendering</span><span class="text-muted">.</span><span class="text-success">CameraEvent</span> <span class="text-muted">cameraEvent )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Sets the timing that rendering is performed to the camera.<br>
+    &nbsp;&nbsp;&nbsp;This function should be called when using the built-in rendering pipeline.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Rendering</span><span class="text-muted">.</span><span class="text-success">CameraEvent</span> cameraEvent : An enum variable for rendering time<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>AddToCameraSRP</strong> <span class="text-muted">( </span><span class="text-success">apCustomCommandBuffer</span><span class="text-muted">.</span><span class="text-success">SRPRenderEvent</span> <span class="text-muted">srpRenderEvent )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Sets the timing that rendering is performed to the camera.<br>
+    &nbsp;&nbsp;&nbsp;This function should be called when using the Scriptable Render Pipeline (SRP).<br>
+    &nbsp;&nbsp;&nbsp;This function is only supported in Unity 2019.1 or later versions that officially support SRP.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apCustomCommandBuffer</span><span class="text-muted">.</span><span class="text-success">SRPRenderEvent</span> srpRenderEvent : Render time in SRP<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>CreateAlternativeMaterials</strong> <span class="text-muted">( </span><span class="text-success">Material</span> <span class="text-muted">alternativeMaterial )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>CreateAlternativeMaterials</strong> <span class="text-muted">( </span><span class="text-success">Dictionary</span><span class="text-muted">&lt;</span><span class="text-success">string,</span> <span class="text-muted">Material></span> <span class="text-muted">imageNameToAlterMaterialMap,</span> <span class="text-success">Material</span> <span class="text-muted">unmatchedMaterial )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Specifies that a different material is applied when rendering the character using the command buffer.<br>
+    &nbsp;&nbsp;&nbsp;The properties of the Material input as an argument are duplicated and reserved to be used for rendering, but "_MainTex" and "_Color" are not duplicated.<br>
+    &nbsp;&nbsp;&nbsp;The shader of the material being replaced must follow the rules as "Custom Shader".<br>
+    &nbsp;&nbsp;&nbsp;After this function is called, a drawing request must be made using the "DrawAllMeshesWithAlternativeMaterials" function.<br>
+    &nbsp;&nbsp;&nbsp;If you specify materials as a Dictionary-type variable, different materials can be applied and rendered for multiple images of a character.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Material</span> alternativeMaterial : Material to be replaced when rendering by the command buffer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Dictionary</span><span class="text-muted">&lt;</span><span class="text-success">string,</span> <span class="text-success">Material></span> imageNameToAlterMaterialMap : Mapping variable assigned to replace different materials based on image name<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Material</span> unmatchedMaterial : Commonly applied material when no replacement target material can be found<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ClearCommands</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Initializes the contents of the command buffer.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetRenderTarget</strong> <span class="text-muted">( </span><span class="text-success">RenderTexture</span> <span class="text-muted">renderTexture )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Sets the result of rendering the character with the camera to be saved in "Render Texture".<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">RenderTexture</span> renderTexture : The texture to which the rendering result will be saved<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ClearRenderTarget</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">clearDepth,</span> <span class="text-primary">bool</span> <span class="text-muted">clearColor,</span> <span class="text-success">Color</span> <span class="text-muted">backgroundColor,</span> <span class="text-primary">float</span> <span class="text-muted">depth )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Initializes the color or depth value of the set render target.<br>
+    &nbsp;&nbsp;&nbsp;A function that can be called from a built-in rendering pipeline.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> clearDepth : Whether to initialize the depth value<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> clearColor : Whether to initialize the color value<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> backgroundColor : Color that is initialized when clearColor is true<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> depth : When clearDepth is true, the initialized depth value (default value is 1.0f)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>ClearRenderTarget</strong> <span class="text-muted">( </span><span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Rendering</span><span class="text-muted">.</span><span class="text-success">RTClearFlags</span> <span class="text-muted">clearFlags,</span> <span class="text-success">Color</span> <span class="text-muted">backgroundColor,</span> <span class="text-primary">float</span> <span class="text-muted">depth,</span> <span class="text-success">uint</span> <span class="text-muted">stencil )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Initializes the color or depth value of the set render target.<br>
+    &nbsp;&nbsp;&nbsp;A function that can be called from the Scriptable Render Pipeline (SRP).<br>
+    &nbsp;&nbsp;&nbsp;This function is only supported in Unity 2019.1 or later versions that officially support SRP.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Rendering</span><span class="text-muted">.</span><span class="text-success">RTClearFlags</span> clearFlags : Flag variable that specifies the type of value to be initialized<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> backgroundColor : Color to be initialized<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> depth : Initialized depth value (default is 1.0f)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">uint</span> stencil : Initialized stencil value (default is 0)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetViewMatrix</strong> <span class="text-muted">()</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetViewMatrix</strong> <span class="text-muted">( </span><span class="text-success">Matrix4x4</span> <span class="text-muted">customViewMatrix )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Specifies which value to be applied as the View Matrix to the command buffer when rendering.<br>
+    &nbsp;&nbsp;&nbsp;If no argument is specified, the same value as the target camera's View Matrix is used for rendering.<br>
+    &nbsp;&nbsp;&nbsp;This function is only supported in Unity 2019.1 or later, and this function must be called in that version.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Matrix4x4</span> customViewMatrix : View Matrix applied differently from camera settings<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetProjectionMatrix</strong> <span class="text-muted">()</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetProjectionMatrix</strong> <span class="text-muted">( </span><span class="text-success">Matrix4x4</span> <span class="text-muted">customProjectionMatrix )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Specifies which value to be applied as the Projection Matrix when rendering to the command buffer.<br>
+    &nbsp;&nbsp;&nbsp;If no parameters are specified, the same value as the target camera's Projection Matrix is used for rendering.<br>
+    &nbsp;&nbsp;&nbsp;This function is only supported in Unity 2019.1 or later, and this function must be called in that version.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Matrix4x4</span> customProjectionMatrix : Projection Matrix applied differently from camera settings<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>DrawMesh</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>DrawMesh</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Material</span> <span class="text-muted">material )</span>
+<br><span class="text-primary">DrawMesh</span> <span class="text-success">apOptTransform</span> <strong>optTransform,</strong> <span class="text-muted">( </span><span class="text-success">Matrix4x4</span> <span class="text-muted">localToWorldMatrix )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>DrawMesh</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Matrix4x4</span> <span class="text-muted">localToWorldMatrix,</span> <span class="text-success">Material</span> <span class="text-muted">material )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Specifies that the mesh of the apOptTransform should be rendered.<br>
+    &nbsp;&nbsp;&nbsp;The "apPortrait.GetOptTransform" function will help.<br>
+    &nbsp;&nbsp;&nbsp;You can render with arbitrary changes to the Material or the World Matrix.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform with mesh to be rendered<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Material</span> material : Alternative material to be rendered<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Matrix4x4</span> localToWorldMatrix : User-specified World Matrix<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>DrawAllMeshes</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">sortOrder,</span> <span class="text-primary">bool</span> <span class="text-muted">excludeClippedChildMeshes )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>DrawAllMeshes</strong> <span class="text-muted">( </span><span class="text-success">Material</span> <span class="text-muted">material,</span> <span class="text-primary">bool</span> <span class="text-muted">sortOrder,</span> <span class="text-primary">bool</span> <span class="text-muted">excludeClippedChildMeshes )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Specifies that all meshes of apPortrait currently displayed on the screen are to be rendered.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> sortOrder : Whether to recalculate the rendering order<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> excludeClippedChildMeshes : Whether to exclude from rendering clipped meshes that are not compatible with the command buffer.<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Material</span> material : Alternative material used when rendering<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>DrawAllMeshesWithAlternativeMaterials</strong> <span class="text-muted">( </span><span class="text-primary">bool</span> <span class="text-muted">sortOrder,</span> <span class="text-primary">bool</span> <span class="text-muted">excludeClippedChildMeshes )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;It performs the same role as the "DrawAllMeshes" function, which specifies that all meshes of apPortrait displayed on the screen are to be rendered, but the alternative materials registered from the "CreateAlternativeMaterials" function are used.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> sortOrder : Whether to recalculate the rendering order<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> excludeClippedChildMeshes : Whether to exclude from rendering clipped meshes that are not compatible with the command buffer.<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Rendering</span><span class="text-muted">.</span><span class="text-success">CommandBuffer</span> <strong>GetCommandBuffer</strong> <span class="text-muted">()</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.0</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;Returns the Unity's command buffer instance.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">UnityEngine</span><span class="text-muted">.</span><span class="text-success">Rendering</span><span class="text-muted">.</span><span class="text-success">CommandBuffer</span> : Command buffer instance
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    
+    <br><br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary">using</span> AnyPortrait;<br>
+    <br>
+    <span class="text-primary">public class</span> <span class="text-success">CmdBufferExample</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+     &emsp;&emsp;// Target Objects<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">apPortrait</span> portrait;<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">Camera</span> targetCamera;<br>
+    <br>&emsp;&emsp;<br>
+    &nbsp;&nbsp;&nbsp;&emsp;&emsp;// Custom Command Buffer<br>
+    &emsp;&emsp;<span class="text-primary">private</span> <span class="text-success"><strong>apCustomCommandBuffer</strong></span> <strong>_commandBuffer</strong> = <span class="text-primary">null</span>;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_commandBuffer == <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = <span class="text-primary">new</span> <strong>apCustomCommandBuffer</strong>(targetCamera, portrait, <span class="text-danger">"Custom Command Buffer"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.<strong>AddToCamera</strong>(<span class="text-success">UnityEngine.Rendering.CameraEvent</span>.AfterForwardAlpha);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> OnDestroy()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_commandBuffer != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.Destory();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = <span class="text-primary">null</span>;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>&emsp;&emsp;<br>
+    &emsp;&emsp;<span class="text-primary">void</span> LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_commandBuffer != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.ClearCommands();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.SetViewMatrix();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.SetProjectionMatrix();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.DrawAllMeshes(true, true);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/Script/SC_Timeline.html">< Timeline</a>
+        <a class="btn btn-light" role="button" href="#"></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

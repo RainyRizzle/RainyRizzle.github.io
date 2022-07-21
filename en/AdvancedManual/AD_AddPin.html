@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Adding Pins</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_AddPin.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_AddPin.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_AddPin.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Adding Pins</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Adding Pins</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.0</span></h4>
+    
+    <p>
+    If you use <strong>Morph Modifier</strong>, you can change the position of the vertices to change the character's appearance.<br>
+    This feature is powerful, but it can become quite cumbersome if you are editing a mesh with a lot of vertices.<br>
+    An auxiliary tool "<span class="text-danger"><strong>Pin</strong></span>" that can be effectively used in these situations has been added in AnyPortrait v1.4.0.<br>
+    </p>
+    <br>
+    
+    <p>
+    The pin features are as follows.<br>
+    - You can control multiple vertices with a few pins.<br>
+    - The pins are connected in a curved way.<br>
+    - Pins and vertices are automatically connected.<br>
+    </p>
+    <br>
+    
+    <p>
+    This page covers how to add pins to your mesh.<br>
+    For how to use pins in Morph modifier, please check the <a href="../../en/AdvancedManual/AD_PinMorphWork.html">Related Page</a>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1673.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select <strong>Mesh</strong>.<br>
+    <strong>(2)</strong> You can see that the mesh has quite a few vertices. In this case, it will be convenient to use a pin.<br>
+    <strong>(3)</strong> Select the <strong>Pin</strong> menu.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1674.jpg"/>
+    <br>
+    
+    <p>
+    If you select the <strong>Pin</strong> menu, the above UI appears.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <p>
+    <strong>1. Pin tools</strong> : Tools for "Select, Add, Link, and Test".<br>
+    <strong>2. Corner option</strong> : Set the type of corner of the selected pin.<br>
+    <strong>3. Weight range</strong> : This is the range property for connecting to vertices.<br>
+    <strong>4. Auto Refresh</strong> : Whether to automatically recalculate weights when there are changes to vertices or pins.<br>
+    <strong>5. Refresh Weight</strong> : Recalculates the weight between pins and vertices.<br>
+    <strong>6. Remove All Pins</strong> : Remove all pins in the current mesh.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1675.jpg"/>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1676.jpg"/>
+    <br>
+    
+    <p>
+    Let's add a pin.<br>
+    For the sake of illustration, let's add pins to an empty space independent of the image.<br>
+    <strong>(1)</strong> Select the <strong>Add</strong> tool.<br>
+    <strong>(2)</strong> Create a pin by  <kbd>Click</kbd>  in the workspace.<br>
+    <strong>(3)</strong> With the first pin selected,  <kbd>Click</kbd>  again to add a pin.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1677.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> You can see that the two pins are connected in a straight line.<br>
+    <strong>(2)</strong> With the pin selected,  <kbd>Click</kbd>  again to add a pin.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1678.jpg"/>
+    <br>
+    
+    <p>
+    The three pins are connected by a curve.<br>
+    The biggest feature of the <strong>Pin tool</strong> is that it is connected with a curve and is suitable for a round shape.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1679.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the last pin created again by  <kbd>Click</kbd> .<br>
+    <strong>(2)</strong> Let's select the first pin.  <kbd>Ctrl+Click</kbd>  makes selection easier.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1680.jpg"/>
+    <br>
+    
+    <p>
+    Three pins are connected by a circular curve.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1681.jpg"/>
+    <br>
+    
+    <p>
+    Pins are different from vertices because they are connected in a curved way.<br>
+    Up to two other pins can be connected to a pin, and the other pins cannot be connected.<br>
+    <strong>(1)</strong> Select a pin that is already connected to two pins, and <strong>(2)</strong> add a new pin.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1682.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> You can see that the new pin has been created, but these pins are not connected.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1683.jpg"/>
+    <br>
+    
+    <p>
+    If you  <kbd>Alt+Click</kbd>  the pin, the shape of the corner changes as shown above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1684.jpg"/>
+    <br>
+    
+    <p>
+    You can change the position of a pin by <strong>(1)</strong> selecting the pin and <strong>(2)</strong>  <kbd>Drag</kbd> .<br>
+    </p>
+    <br>
+    
+    <p>
+    You can also deselect a pin or remove a pin or curve by pressing  <kbd>Right Click</kbd> .<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1685.jpg"/>
+    <br>
+    
+    <p>
+    As described above, let's add pins and connect them appropriately to the image of the mesh.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1686.jpg"/>
+    <br>
+    
+    <p>
+    Let's select a pin and change its properties.<br>
+    <strong>(1)</strong> Select the <strong>Select</strong> tool.<br>
+    <strong>(2)</strong> Select <strong>Pin</strong>. In this mode, you can use the gizmo to select and transform.<br>
+    <strong>(3)</strong> You can see that the weights of the vertices connected to this pin are displayed in color.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1687.jpg"/>
+    <br>
+    
+    <p>
+    Let's modify the weight area of the pin.<br>
+    How finely you set the weights determines how convenient the subsequent Morph work is.<br>
+    <strong>(1)</strong> Change the <strong>Radius</strong> or <strong>Falloff</strong> properties of the <strong>Range</strong> option.<br>
+    <strong>(2)</strong> You can see the size of the circular weight area change in the workspace. At the same time, you can visually see that the weights of the vertices change.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1688.jpg"/>
+    <br>
+    
+    <p>
+    A pin's weight range has two properties.<br>
+    Within the area of <strong>Radius</strong>, the weight value is 1. Set the vertices directly affected to fit within this range.<br>
+    <strong>Falloff</strong> is an area where the weight is gradually reduced. Prevents weights from dropping rapidly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1690.jpg"/>
+    <br>
+    
+    <p>
+    However, the weighted area is actually more like the above than a circular one.<br>
+    Weight interpolation with other connected pins on the curve, so it is weighted a little wider.<br>
+    You can also see that the weight gradually decreases with distance, even within the <strong>Radius</strong> range by interpolation.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1689.jpg"/>
+    <br>
+    
+    <p>
+    It is also possible to select multiple pins and set their weights at the same time.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1691.jpg"/>
+    <br>
+    
+    <p>
+    You can also use a tool to connect the generated pins.<br>
+    <strong>(1)</strong> Select the <strong>Link</strong> tool.<br>
+    <strong>(2)</strong> Two pins to which this tool will be applied are prepared.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1692.jpg"/>
+    <br>
+    
+    <p>
+    Selecting pins in sequence creates curves and connects them.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1693.jpg"/>
+    <br>
+    
+    <p>
+    Finally, a description of the tools to ensure that the pins are added and set up properly.<br>
+    <strong>(1)</strong> Select the <strong>Test</strong> tool.<br>
+    <strong>(2)</strong> Select a pin and a gizmo will appear.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1694.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> If you move the pin, you can see that the connected vertices move together.<br>
+    In the test tool, changing the position of a pin is not saved as an actual value.<br>
+    Also, the vertices move according to their weight.<br>
+    It is effective to use this point to modify the properties of the pin, especially the weight area.<br>
+    (Other properties of the pin are saved.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1695.jpg"/>
+    <br>
+    
+    <p>
+    The above modifications can be done in the test tool.<br>
+    <strong>(1)</strong> Select a pin and try to move it.<br>
+    <strong>(2)</strong> Adjust the range of the weight area by checking how the vertices move.<br>
+    <strong>(3)</strong> You can see the vertices move differently because the weights are changed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1696.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Reset Test Position</strong> button, <strong>(2)</strong> all the test positions of the pins are initialized.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    Go to the "<a href="../../en/AdvancedManual/AD_PinMorphWork.html">Using Pins in Morph modifier</a>" page for the sequel!<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_CopyVertices.html">< Copying Vertices</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_MeshShader.html">Shader for meshes ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

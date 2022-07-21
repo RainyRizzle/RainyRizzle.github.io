@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Writing Command Buffer</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_CommandBuffer.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_CommandBuffer.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_CommandBuffer.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Writing Command Buffer</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Writing Command Buffer</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.0</span></h4>
+    
+    <p>
+    Rendering is done automatically by the Unity engine, but you can also extend its functionality by writing scripts.<br>
+    One of the many ways to do this is to use "<strong>Command Buffer</strong>".<br>
+    In a nutshell, <strong>Command Buffer</strong> is "scheduling a request to render the target mesh to specified conditions".<br>
+    You can check the detailed explanation in the official Unity manual.<br>
+    - <a href="https://docs.unity3d.com/2022.1/Documentation/Manual/GraphicsCommandBuffers.html">Extending the Built-in Render Pipeline with CommandBuffers</a><br>
+    - <a href="https://docs.unity3d.com/2022.1/Documentation/Manual/srp-using-scriptable-render-context.html">Scheduling and executing rendering commands in the Scriptable Render Pipeline</a><br>
+    - <a href="https://docs.unity3d.com/2022.1/Documentation/ScriptReference/Rendering.CommandBuffer.html">CommandBuffer API</a><br>
+    - <a href="https://docs.unity3d.com/ScriptReference/Rendering.CameraEvent.html">CameraEvent API</a><br>
+    </p>
+    <br>
+    
+    <p>
+    If you use Unity's "<strong>CommandBuffer</strong>" class, AnyPortrait's character can be rendered through the command buffer, but it is difficult to implement because there is a lot of data that is difficult for users to access.<br>
+    The "<strong>apCustomCommandBuffer</strong>" class added in AnyPortrait v1.4.0 is the version for AnyPortrait of the "<strong>CommandBuffer</strong>" class.<br>
+    You can easily implement various techniques using this class.<br>
+    </p>
+    <br>
+    
+    <p>
+    This page covers how to write scripts using <strong>apCustomCommandBuffer</strong> and implement some fun techniques.<br>
+    A detailed description of the functions of the <strong>apCustomCommandBuffer</strong> class can be found in the <a href="../../en/Script/SC_CommandBuffer.html">Related Page</a>.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Draw a character to another camera with the Command Buffer</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1760.jpg"/>
+    <br>
+    
+    <p>
+    Before we get started, let's briefly understand how the command buffer is passed.<br>
+    When a script creates a command buffer and passes it to Unity's rendering pipeline, additional rendering is executed according to the request of the reserved command buffer when the rendering pipeline is running.<br>
+    The required elements that need to be passed here are "<strong>Mesh to be drawn</strong>" and "<strong>Camera to draw</strong>".<br>
+    With this in mind, let's implement it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1761.jpg"/>
+    <br>
+    
+    <p>
+    Let's make the simplest example using the command buffer.<br>
+    Prepares the environment for "the main camera (Camera 1)" to render the character's original meshes.<br>
+    And let's make "the character (Cloned Meshes)" visible by the command buffer in "another camera (Camera 2)".<br>
+    Let's remember "<strong>Original Meshes</strong>" and "<strong>Camera 2</strong>" as the necessary elements to create the command buffer.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1762.jpg"/>
+    <br>
+    
+    <p>
+    We've set up the Unity scene to fit your description.<br>
+    <strong>(1)</strong> You can see that there are 2 cameras and 1 AnyPortrait character.<br>
+    <strong>(2)</strong> This is the AnyPortrait character (apPortrait).<br>
+    <strong>(3)</strong> This is the main camera for drawing characters. It plays the same role as “<strong>Camera 1</strong>” in the previous diagram.<br>
+    <strong>(4)</strong> This is an overlay camera that renders additionally when the main camera finishes rendering. It acts the same as "<strong>Camera 2</strong>" in the previous diagram.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1763.jpg"/>
+    <br>
+    
+    <p>
+    These are the settings for each camera.<br>
+    <strong>Camera 1</strong> is set to render first as the main camera.<br>
+    <strong>Camera 2</strong> is rendered later than <strong>Camera 1</strong> by the "Depth" value, and the character is not rendered by the "Culling Mask".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1764.jpg"/>
+    <br>
+    
+    <p>
+    So if you run the game, the character will only be drawn on the main camera.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now let's write a simple script that creates and updates the command buffer.<br>
+    The following script does a very simple job of making the "input apPortrait character" draw on the "input camera".<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class CmdBufferExample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;// Target objects<br>
+    &emsp;&emsp;<strong>public apPortrait portrait;</strong><br>
+    &emsp;&emsp;<strong>public Camera targetCamera;</strong><br>
+    <br>
+    &emsp;&emsp;// Command Buffer for apPortrait<br>
+    &emsp;&emsp;<span class="text-danger"><strong>private apCustomCommandBuffer _commandBuffer = null;</strong></span><br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Create a command buffer.<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer == null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// If apPortrait is not initialized, initialize it directly here.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Create a command buffer instance using apPortrait and camera.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Register the command buffer in the camera by setting the rendering point. (functions for the built-in render pipeline)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.AfterForwardAlpha);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void OnDestroy()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Remove the command buffer.<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.Destory();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = null;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Each update refreshes the buffer content again.<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Clear the contents of the command buffer and start to rewrite it.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.ClearCommands();</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Puts the camera's Matrix into the command buffer. (Functions that must be called in Unity 2019 and later)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.SetViewMatrix();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.SetProjectionMatrix();</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Request to render meshes of apPortrait.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.DrawAllMeshes(true, true);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Let's take a look at the key statements of the script one by one.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    // (1) Target objects<br>
+    <strong>public apPortrait portrait;</strong><br>
+    <strong>public Camera targetCamera;</strong><br>
+    <br>
+    // (2) Command Buffer for apPortrait<br>
+    <span class="text-danger"><strong>private apCustomCommandBuffer _commandBuffer = null;</strong></span><br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    These are member objects.<br>
+    <strong>(1)</strong> Make apPortrait and Camera variables, which are essential elements of the command buffer, so that can be connected from the Unity scene.<br>
+    <strong>(2)</strong> Create the command buffer variable as apCustomCommandBuffer type.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    // (1) If apPortrait is not initialized, initialize it directly here.<br>
+    portrait.Initialize();<br>
+    <br>
+    // (2) Create a command buffer instance using apPortrait and camera.<br>
+    <strong>_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");</strong><br>
+    <br>
+    // (3) Register the command buffer in the camera by setting the rendering point. (functions for the built-in render pipeline)<br>
+    <strong>_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.AfterForwardAlpha);</strong><br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    This code work for that creates a command buffer and registers it with the render pipeline.<br>
+    <strong>(1)</strong> In the example, apPortrait may not be initialized because initialization is written in the Start function, so we wrote initialization code. It is not required code.<br>
+    <strong>(2)</strong> When creating a command buffer instance, input the Camera and apPortrait as arguments, and additionally input the command buffer's name.<br>
+    <strong>(3)</strong> Register the command buffer in the rendering pipeline using the "AddToCamera" function.<br>
+    At this time, it sets when the request of the command buffer will be processed during the rendering process.<br>
+    If the project uses "Scriptable Render Pipeline (SRP)" environment, you should use "<strong>AddToCameraSRP</strong>" instead.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <strong>_commandBuffer.Destory();</strong><br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    If any of the command buffer elements "character", "camera" and "this script that manages the command buffer" do not exist in the scene, the above code must be called to remove the command buffer from the rendering pipeline.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    // (1) Clear the contents of the command buffer and start to rewrite it.<br>
+    <strong>_commandBuffer.ClearCommands();</strong><br>
+    <br>
+    // (2) Puts the camera's Matrix into the command buffer. (Functions that must be called in Unity 2019 and later)<br>
+    <strong>_commandBuffer.SetViewMatrix();</strong><br>
+    <strong>_commandBuffer.SetProjectionMatrix();</strong><br>
+    <br>
+    // (3) Request to render meshes of apPortrait.<br>
+    <strong>_commandBuffer.DrawAllMeshes(true, true);</strong><br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    If any elements of the command buffer are changed, the contents of the command buffer must be rewritten.<br>
+    Since AnyPortrait updates the mesh every frame, you need to rewrite the contents of the command buffer in the Update or LateUpdate function.<br>
+    <strong>(1)</strong> To write the contents of the command buffer, the contents of the existing buffer must be cleared.<br>
+    <strong>(2)</strong> Input the rendering View-Projection Matrix into the command buffer. This function is not supported in versions earlier than Unity 2019.<br>
+    <strong>(3)</strong> Input which meshes to render in the command buffer in apPortrait. "DrawAllMeshes" asks to render all currently visible meshes if possible.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1765.jpg"/>
+    <br>
+    
+    <p>
+    Let's put the script we wrote into our Unity scene.<br>
+    <strong>(1)</strong> Create a new <strong>GameObject</strong>.<br>
+    <strong>(2)</strong> Register the created script as a component, and input "apPortrait character" and "Overlay camera (Camera 2)" respectively.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1766.jpg"/>
+    <br>
+    
+    <p>
+    If you run the game again, you should see the character being drawn on the second camera by the command buffer now.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>The clipped mesh doesn't render!</h4>
+    <br>
+    
+    <p>
+    AnyPortrait uses a command buffer to create a mask texture when rendering a clipping mesh.<br>
+    When rendered by a user-created command buffer, there is a high probability that the corresponding mask texture will not be created properly.<br>
+    Therefore, it is recommended to exclude the clipped mesh from rendering by the command buffer as possible because it is not compatible.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    Even small changes to the code that writes the contents of the command buffer can make a huge difference to the rendering result.<br>
+    As an experiment, let's add a line of code like this:<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    &emsp;&emsp;(Skipped)<br>
+    &emsp;&emsp;void LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.ClearCommands();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Initializes the color or depth value of the render target.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_commandBuffer.ClearRenderTarget(true, true, Color.magenta);</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetViewMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetProjectionMatrix();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.DrawAllMeshes(true, true);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1767.jpg"/>
+    <br>
+    
+    <p>
+    In <strong>Overlay Camera (Camera 2)</strong>, just before the character is rendered by the command buffer, the rendering target, that is, the screen color, was initialized to magenta, so you can see the above result.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Rendering the character in Grayscale</h3>
+    <br>
+    
+    <p>
+    The use of command buffers is primarily for creating special rendering effects.<br>
+    To create a rendering effect, a separate material must be available in the command buffer.<br>
+    This time, let's implement the command buffer to render the character in grayscale.<br>
+    </p>
+    <br>
+    
+    <p>
+    This time, we need to write a <strong>Custom Shader</strong> that renders the character in a solid color and the <strong>Command Buffer Script</strong> described above.<br>
+    First, write the following <strong>Custom Shader</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom Command Buffer Example/Grayscale"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : SV_POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f vert (appdata v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 frag (v2f i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// It uses the average value of RGB colors to make it a single color.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = (col.r + col.g + col.b) / 3.0f;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Modify or create a new command buffer script as described above.<br>
+    This time we need to take the external material and write it to be used for rendering.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class CmdBufferExample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    &emsp;&emsp;public Camera targetCamera;<br>
+    <br>
+    &emsp;&emsp;// Add a variable so that you can apply a separate material.<br>
+    &emsp;&emsp;<span class="text-danger"><strong>public Material alternativeMaterial;</strong></span><br>
+    <br>
+    &emsp;&emsp;private apCustomCommandBuffer _commandBuffer = null;<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer == null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");&nbsp;&nbsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.AfterForwardAlpha);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Calls a function that inputs and copies the material in the command buffer variable so that a separate material is rendered.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_commandBuffer.CreateAlternativeMaterials(alternativeMaterial);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void OnDestroy()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.Destory();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = null;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.ClearCommands();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetViewMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetProjectionMatrix();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Request to render meshes using the external material registered during initialization.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_commandBuffer.DrawAllMeshesWithAlternativeMaterials(true, true);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1768.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Create a <strong>Material</strong> asset using the completed <strong>Custom Shader</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1769.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the <strong>GameObject</strong> created earlier.<br>
+    <strong>(2)</strong> Assign <strong>Material</strong> asset using the custom shader to the added variable of the script.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1770.jpg"/>
+    <br>
+    
+    <p>
+    This is the finished result.<br>
+    When rendering by the command buffer, you can see that the rendering is replaced by a different material.<br>
+    By applying this method, you will be able to use various rendering techniques.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Rendering the character with the Outline</h3>
+    <br>
+    
+    <p>
+    By utilizing the above explanations a little more, you can make a practical example.<br>
+    A typical technique is "Outline".<br>
+    In this example, you can implement it easily by using a simple custom shader that draws an outline using UV.<br>
+    Additionally, when creating a command buffer, you need to change the rendering point.<br>
+    Finally, unlike the previous example, this technique will make the command buffer run against the Main Camera.<br>
+    </p>
+    <br>
+    
+    <p>
+    Write a custom shader that draws the outline.<br>
+    There are various ways to draw the outline, but here we will simply use the method of expanding the color using the Alpha value from the surrounding UV as a reference.<br>
+    Create a new shader asset and write it like this:<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom Command Buffer Example/Outline"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// You can set the thickness of the outline using the distance at which the UV is sampled.<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_UVThickness("Line Thickness (UV Based)", Range(0, 0.2)) = 0.01</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// The color of the outline.<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_LineColor("Line Color", Color) = (0, 0, 0, 1)</strong><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : SV_POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float _UVThickness;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>half4 _LineColor;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f vert(appdata v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 frag(v2f i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Accumulate Alpha values by sampling the surroundings.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>fixed sumAlpha = col.a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(_UVThickness, 0.0f)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(-_UVThickness, 0.0f)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(0.0f, _UVThickness)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(0.0f, -_UVThickness)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(_UVThickness * 0.7f, _UVThickness * 0.7f)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(_UVThickness * 0.7f, -_UVThickness * 0.7f)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(-_UVThickness * 0.7f, _UVThickness * 0.7f)).a;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha += tex2D(_MainTex, i.uv + float2(-_UVThickness * 0.7f, -_UVThickness * 0.7f)).a;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Calculates the transparency and color of the outline and reflects it in the result.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sumAlpha = saturate(sumAlpha);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = _LineColor;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a = _LineColor.a * _Color.a * sumAlpha;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Next, write the command buffer script.<br>
+    It can be written almost identically to the code in the previous example, but the rendering point needs to be changed.<br>
+    The custom shader we wrote has code that extends the character image a bit more and draws it in a solid color, so it needs to be "drawn before the character" for it to act as an outline.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class CmdBufferExample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    &emsp;&emsp;public Camera targetCamera;<br>
+    <br>
+    &emsp;&emsp;public Material alternativeMaterial;<br>
+    <br>
+    &emsp;&emsp;private apCustomCommandBuffer _commandBuffer = null;<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer == null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");&nbsp;&nbsp;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Change the setting so that it is drawn before "when we render a normal mesh".<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.AddToCamera(<span class="text-danger"><strong>UnityEngine.Rendering.CameraEvent.BeforeForwardAlpha</strong></span>);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.CreateAlternativeMaterials(alternativeMaterial);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    (The following code is the same as the previous one.)<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1771.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Create a <strong>Material</strong> asset with the outline shader applied.<br>
+    <strong>(2)</strong> Select the <strong>Material</strong> asset and set the Thickness and Color of the outline.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1772.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the <strong>GameObject</strong> that controls the command buffer.<br>
+    <strong>(2)</strong> For the outline, you need to set the <strong>Main Camera</strong> that renders the character as the target, not the overlay camera.<br>
+    <strong>(3)</strong> Assign the <strong>Material</strong> asset that draws the outline.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1773.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you can see that the outline is drawn with a reasonable quality.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Rendering the character which has two or more images</h3>
+    <br>
+    
+    <p>
+    Through the previous explanation, we learned the process of rendering using a command buffer and an alternative material.<br>
+    Next, in the case of that there is a character who has two or more images, let's render it assigning external materials.<br>
+    If you want to render by applying a different "<strong>Secondary Texture</strong>" depending on the image, you need to modify the materials you need to prepare and the initialization code of the command buffer.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1774.jpg"/>
+    <br>
+    
+    <p>
+    We prepared a character that uses the two textures on the left.<br>
+    Let's make a material that is multiplied by the color of the secondary texture on the right corresponding to each image and render it through the command buffer.<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's create a custom shader this time as well.<br>
+    The "<strong>_MainTex</strong>" property is managed by AnyPortrait and cannot be used, so you need to create a separate texture property.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom Command Buffer Example/Secondary"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// A secondary texture to multiply by color.<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_SecondaryTex("Secondary Texture (RGB)", 2D) = "white" {}</strong><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : SV_POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _SecondaryTex;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f vert(appdata v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 frag(v2f i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Take the color of the secondary texture and multiply it to RGB.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>fixed4 secondaryCol = tex2D(_SecondaryTex, i.uv);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb *= secondaryCol.rgb;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1775.jpg"/>
+    <br>
+    
+    <p>
+    Before writing the script to control the command buffer, let's create a material.<br>
+    <strong>(1)</strong> Create <strong>Materials</strong> according to the number of images.<br>
+    <strong>(2)</strong> Assign each Secondary Texture to the "<strong>_SecondaryTex</strong>" attribute.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now let's write a script to render by assigning two or more materials to the command buffer.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    // This is a package for using Dictionary variables.<br>
+    <strong>using System.Collections.Generic;</strong><br>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class CmdBufferExample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    &emsp;&emsp;public Camera targetCamera;<br>
+    <br>
+    &emsp;&emsp;// Create a variable in the form of an array to assign an image name and corresponding material to each.<br>
+    &emsp;&emsp;<strong>public string&#91;&#93; imageNames;</strong><br>
+    &emsp;&emsp;<strong>public Material&#91;&#93; alternativeMaterials;</strong><br>
+    <br>
+    &emsp;&emsp;private apCustomCommandBuffer _commandBuffer = null;<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer == null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.BeforeForwardAlpha);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Using an array variable, create a Dictionary variable that connects "image name - alternative material" and pass it to "_commandBuffer".<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>Dictionary&lt;string, Material&gt; imageNamesToMaterial = new Dictionary&lt;string, Material&gt;();</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>for (int i = 0; i < imageNames.Length; i++)</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>{</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>imageNamesToMaterial.Add(imageNames&#91;i&#93;, alternativeMaterials&#91;i&#93;);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>}</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.CreateAlternativeMaterials(imageNamesToMaterial, alternativeMaterials&#91;0&#93;);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void OnDestroy()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.Destory();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = null;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.ClearCommands();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetViewMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetProjectionMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.DrawAllMeshesWithAlternativeMaterials(true, true);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1776.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> This is a Unity scene featuring a character using two images.<br>
+    <strong>(2)</strong> The Unity scene is the same as in the previous description. Select the <strong>GameObject</strong> with the script added.<br>
+    <strong>(3)</strong> Assign the name of the image used by the apPortrait character and the material of the custom shader that matches it, in order.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1777.jpg"/>
+    <br>
+    
+    <p>
+    If you run the game, you will see the above result with the appropriate alternate material corresponding to the image on the mesh applied.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Rendering the Render Texture with a Transparent background</h3>
+    <br>
+    
+    <p>
+    This issue has been requested by several users.<br>
+    When rendering a character to <strong>Render Texture</strong> rather than the screen, if the background of the render texture is made transparent, the mesh disappears.<br>
+    For more information on how to render a character with a render texture, see the <a href="../../en/AdvancedManual/AD_RenderTexture.html">Related Page</a> for detailed instructions.<br>
+    This page describes the script that controls the "<strong>Render Target</strong>", introducing how to solve the problem of rendering with a render texture with a command buffer.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1778.jpg"/>
+    <br>
+    
+    <p>
+    This is a diagram of how to render a character by saving the rendered result in a render texture and then overlaying it on another mesh.<br>
+    Render textures in which characters are rendered are often used because they can be used in various ways in the game.<br>
+    The command buffer is not used in this step yet.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1779.jpg"/>
+    <br>
+    
+    <p>
+    We configured the scene according to the above idea.<br>
+    It consists of two layers (UI, Default), and <strong>AnyPortrait character</strong>, <strong>2 Cameras</strong>, and a <strong>Quad Mesh</strong> with render texture are placed in the scene.<br>
+    <strong>(1)</strong> <strong>Character</strong> and the <strong>First Camera</strong> that renders it. It is not rendered on the Main Camera.<br>
+    <strong>(2)</strong> <strong>Quad Mesh ("RT Quad")</strong> and <strong>Main Camera</strong> with render texture applied.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1780.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> And this is the “<strong>Render Texture</strong>” asset which is the key of this technique.<br>
+    <strong>(2)</strong> This Render Texture is registered as "<strong>Target Texture</strong>" of the First Camera that renders the character.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1781.jpg"/>
+    <br>
+    
+    <p>
+    The character is set to a non-Default layer (in this example, set to <strong>UI</strong>) so that it doesn't render on the Main Camera.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1782.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> This is the <strong>Quad Mesh</strong> rendered by the Main Camera.<br>
+    <strong>(2)</strong> The texture of this mesh's material is the "<strong>Render Texture</strong>" asset used by the First Camera.<br>
+    Because the material of this Quad Mesh and the First Camera share the same Render Texture, the result of rendering with the First Camera will appear in the Quad Mesh.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1783.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you can see the rendering result of the First Camera on the Quad Mesh, that is, the character is displayed normally.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1784.jpg"/>
+    <br>
+    
+    <p>
+    The problem arises when the background color of the render texture is not opaque.<br>
+    <strong>(1)</strong> Select the First Camera to render the character.<br>
+    <strong>(2)</strong> Select the Background color property. (Clear Flags must be <strong>Solid Color</strong>.)<br>
+    <strong>(3)</strong> Reduce the <strong>Alpha</strong> value of the background color.<br>
+    <strong>(4)</strong> You can see that the entire render texture including the character as well as the background becomes increasingly transparent.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1789.jpg"/>
+    <br>
+    
+    <p>
+    This is the idea how to solve this problem.<br>
+    Complete the render texture of the opaque background, and separately create "<strong>Mask Texture</strong>" using the <strong>Command Buffer</strong>.<br>
+    The <strong>Mask</strong> can be used to separate the "Background" and "Character" areas.<br>
+    Combine this Mask Texture with the original Render Texture to render the image with only the background transparent.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note that.</strong></span><br>
+    For clarity, the original render texture generated by the camera is called "<strong>Color Render Texture</strong>", and the render texture that acts as a mask generated by the command buffer is called "<strong>Mask Render Texture</strong>".<br>
+    </p>
+    <br>
+    
+    <p>
+    A lot of work is required to implement this technique.<br>
+    <strong>(1)</strong> Write a <strong>Custom Shader for mask rendering</strong> that stores "the Alpha value in Grayscale".<br>
+    <strong>(2)</strong> Create an additional "<strong>Mask Render Texture</strong>".<br>
+    <strong>(3)</strong> Write a "<strong>Command Buffer Script</strong>" to render the mask render texture.<br>
+    <strong>(4)</strong> Create a <strong>Shader and Material to be applied to the Quad Mesh</strong> that merges the two Render Textures.<br>
+    </p>
+    <br>
+    
+    <p>
+    First, let's write a custom shader to use in the command buffer, that is, a custom shader that stores the Alpha value as a Grayscale.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom Command Buffer Example/White Mask"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex("Main Texture (RGBA)", 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;_Color("2X Color (RGBA Mul)", Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { "RenderType" = "Opaque" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Because opacity is cumulative, change the blending method to Additive.<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>Blend One One</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : SV_POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sampler2D _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;half4 _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f vert(appdata v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 frag(v2f i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Change the Alpha value to RGB, and set Alpha to 1.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = saturate(col.a * _Color.a);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a = 1.0f;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Next, write a script to control the Command Buffer.<br>
+    Most of the code in the previous example is the same, except that it specifies an arbitrary "<strong>Render Texture</strong>" as "<strong>Render Target</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    <br>
+    public class CmdBufferExample : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    &emsp;&emsp;public Camera targetCamera;<br>
+    <br>
+    &emsp;&emsp;public Material alternativeMaterial;<br>
+    <br>
+    &emsp;&emsp;// A Mask Render Texture which is used as a Render Target.<br>
+    &emsp;&emsp;<strong>public RenderTexture maskRenderTexture;</strong><br>
+    <br>
+    &emsp;&emsp;private apCustomCommandBuffer _commandBuffer = null;<br>
+    <br>
+    &emsp;&emsp;void Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer == null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, "Custom Command Buffer");<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.BeforeForwardAlpha);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.CreateAlternativeMaterials(alternativeMaterial);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void OnDestroy()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.Destory();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer = null;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;void LateUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_commandBuffer != null)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.ClearCommands();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Set the Render Texture as the Render Target and initialize the background to Black.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.SetRenderTarget(maskRenderTexture);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>_commandBuffer.ClearRenderTarget(true, true, Color.black);</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetViewMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.SetProjectionMatrix();<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_commandBuffer.DrawAllMeshesWithAlternativeMaterials(true, true);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Finally, create a Shader for the material to be applied to the Quad Mesh.<br>
+    Combining "Color Render Texture" and "Mask Render Texture" serves to make only the background transparent.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader "Custom Command Buffer Example/Merge RT and Mask"<br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Create properties to receive two Render Textures.<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MainTex("Main Texture (RGBA)", 2D) = "white" {}</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MaskTex("Mask Texture (Grayscale)", 2D) = "white" {}</strong><br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;struct v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float2 uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float4 vertex : SV_POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _MainTex;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 _MainTex_ST;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _MaskTex;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f vert(appdata v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;v2f o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 frag(v2f i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Use the color stored in the Mask Render Texture as Alpha.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>fixed4 mask = tex2D(_MaskTex, i.uv);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a = mask.r;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1785.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Create "<strong>Mask Render Texture</strong>" and "<strong>Material</strong>" to be used in the command buffer. Apply a custom shader to the material that stores the Alpha value as a color.<br>
+    <strong>(2)</strong> Create a <strong>GameObject</strong> to control the command buffer.<br>
+    <strong>(3)</strong> Add <strong>Script controlling the Command Buffer</strong> and assign "<strong>apPortrait character</strong>" and "<strong>First camera</strong>", and also assign "<strong>Material</strong>" and "<strong>Mask" Render texture</strong>" were created in Step <strong>(1)</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1786.jpg"/>
+    <br>
+    
+    <p>
+    Since the transparency of the entire image is calculated from the Mask Render Texture, the background of the "Color Render Texture" should be "Opaque" as it is.<br>
+    <strong>(1)</strong> Select the <strong>First Camera</strong>.<br>
+    <strong>(2)</strong> Set a background color <strong>(3)</strong> as it is opaque.<br>
+    In this case, you can get a cleaner result by setting the color a little darker than the edges of the image.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1787.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Then, create a <strong>Material</strong> to be applied to the <strong>Quad Mesh</strong> and apply a custom shader that combines the two render textures.<br>
+    <strong>(2)</strong> Assign "<strong>Color Render Texture</strong>" to <strong>First Property (_MainTex)</strong>.<br>
+    <strong>(3)</strong> Assign "<strong>Mask Render Texture</strong>" to <strong>Second Property (_MaskTex)</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1788.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select <strong>Quad Mesh</strong>.<br>
+    <strong>(2)</strong> Apply the "<strong>Material that combines two render textures</strong>" created earlier to this mesh.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1790.jpg"/>
+    <br>
+    
+    <p>
+    This is the finished result.<br>
+    Get great results with only the characters rendered clearly on a transparent background.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1791.jpg"/>
+    <br>
+    
+    <p>
+    You can see that "<strong>Color Render Texture</strong>" and "<strong>Mask Render Texture</strong>" are merged to solve the rendering problem.<br>
+    The command buffer is effectively used to create additional render textures, etc. to solve the rendering problem as above.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Write carefully with performance in mind!</h4>
+    <br>
+    
+    <p>
+    Command buffers do a great job, but the downside is that performance optimization is difficult.<br>
+    Because the user renders arbitrarily, the draw call optimization function of Unity and AnyPortrait is difficult to operate.<br>
+    Therefore, it is recommended to implement it while always checking the performance.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_SpriteMask.html">< Applying Sprite Mask</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_CharacterCostume.html">Replace a character's costume ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>
