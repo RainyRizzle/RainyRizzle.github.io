@@ -71,7 +71,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.4.0</span></h4>
+    <h4><span class="badge badge-secondary">1.4.1</span></h4>
     
     <p>
     Depending on the game, at some point in the animation, the character needs some interaction.<br>
@@ -603,6 +603,148 @@
     
     <p>
     You can see that the animation event information saved as a preset is copied and applied.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Fix invalid event names</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.1</span></h4>
+    
+    <p>
+    Animation events will be called from scripts, so they should be named according to scripting conventions where possible.<br>
+    - The name must be a combination of <strong>Alphabets, numbers, and underscore ("_")</strong>, and spaces are not allowed.<br>
+    - <strong>Blank Name</strong> is not allowed.<br>
+    - "<strong>Overloading</strong>" is not allowed when the call method is "<strong>Send Message</strong>". That is, there must not be more than one event with the same name with different parameter combinations.<br>
+    </p>
+    <br>
+    
+    <p>
+    If the name of the event is invalid, you can use a function that automatically corrects the name.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1796.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> The name of the above animation event is "Sample Event Name (!)". By convention, this name is invalid because it contains special characters and spaces.<br>
+    <strong>(2)</strong> A message appears explaining why the name of the event is invalid.<br>
+    <strong>(3)</strong> If you click the <strong>Fix now</strong> button, the name is automatically corrected. (However, if there is no valid character, it will not be modified.)<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Assign the event listener easily in Callback</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.1</span></h4>
+    
+    <p>
+    The advantage of calling animation events in the <strong>Callback</strong> method is that you can set up multiple event listeners.<br>
+    However, it is cumbersome to assign each event listener for every event.<br>
+    Let's use a feature that makes this easy.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1797.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> A character created with AnyPortrait and a GameObject that will act as <strong>Event Listener</strong> are placed in the scene.<br>
+    <strong>(2)</strong> The event call method is set to "<strong>Callback</strong>".<br>
+    <strong>(3)</strong> Assign <strong>GameObject</strong> as <strong>Event Listener</strong> to <strong>Target</strong> of "<strong>Assign Listener to All Events</strong>".<br>
+    <strong>(4)</strong> Press the <strong>Assign</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1798.jpg"/>
+    <br>
+    
+    <p>
+    As shown above, you can see that an event listener is commonly assigned to all events.<br>
+    Now all we need to do is set functions for the event.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Validate callback functions</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.1</span></h4>
+    
+    <p>
+    When assigning a function to be called by an event in "Callback" method, the function cannot be called in the following cases.<br>
+    - When the event listener does not exist<br>
+    - When the function with the saved name is not in the event listener<br>
+    - When a function with a saved name is an "Overloading" function<br>
+    </p>
+    <br>
+    
+    <p>
+    Fortunately, invalid callback functions do not cause fatal errors during the game.<br>
+    However, you won't be able to test that the set events are valid by running the game every time.<br>
+    Let's use the function to automatically delete invalid events.<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's assume the event listener has the following callback function defined:<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    private void <strong>OnAnimEvent_A</strong> () { Debug.Log("Event A"); }<br>
+    <br>
+    private void <strong>OnAnimEvent_A</strong> ( <span class="text-danger"><strong>float floatValue</strong></span> ) { Debug.Log("Event A (Overloaded)"); }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    Two functions are "Overloading" with the same name but different parameters.<br>
+    According to the callback rules, these functions are invalid.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1799.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Event listeners and functions including the above code are set. An invalid function ("OnAnimEvent_A") is also set, but hard to verify whether it is valid.<br>
+    <strong>(2)</strong> Click the <strong>Validate Events</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1800.jpg"/>
+    <br>
+    
+    <p>
+    When validation is performed, invalid functions are automatically deleted as above.<br>
     </p>
     <br>
     

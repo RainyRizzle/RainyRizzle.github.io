@@ -71,7 +71,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.4.0</span></h4>
+    <h4><span class="badge badge-secondary">1.4.1</span></h4>
     
     <p>
     ゲームに応じて、アニメーションのある時点で、キャラクターは何らかの相互作用を必要とします。<br>
@@ -608,6 +608,148 @@
     
     <p>
     プリセットとして保存されたアニメーションイベント情報がコピーされ、ターゲットに適用されたことがわかります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>無効なイベント名を修正</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.1</span></h4>
+    
+    <p>
+    アニメーションイベントはスクリプトから呼び出される必要があるため、可能なスクリプト作成規則に合わせて名前を付ける必要があります。<br>
+    - 「アルファベット、数字、アンダースコア（"_"）」の組み合わせでのみ名前を付ける必要があり、スペースは許可されません。<br>
+    - 「空名」は使用できません。<br>
+    - 呼び出し方式が「Send Message」の場合、「オーバーロード」を許可しません。 つまり、異なるパラメータの組み合わせを持つ同じ名前のイベントが2つ以上存在してはいけません。<br>
+    </p>
+    <br>
+    
+    <p>
+    イベントの名前が無効な場合は、名前を自動的に変更する機能を利用できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1796.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> アニメイベントの名前を「Sample Event Name(!)」のように作成しました。 規則によると、この名前は特殊文字とスペースがあるため無効です。<br>
+    <strong>(2)</strong> イベント名が有効でない理由を示すメッセージが表示されます。<br>
+    <strong>(3)</strong> 「<strong>Fix now</strong>」ボタンを押すと自動的に名前が変更されます。 （ただし、有効な文字が1つでもない場合は修正されません。）<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Callback方式では、イベントリスナーを簡単に割り当</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.1</span></h4>
+    
+    <p>
+    「Callback」方式でアニメーションイベントを呼び出すことは、複数のイベントリスナーを設定できるという利点があります。<br>
+    しかし、すべてのイベントにイベントリスナーを割り当てるのは面倒です。<br>
+    この作業を簡単にする機能を利用しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1797.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> AnyPortraitで作成したキャラクターと「イベントリスナー」として機能するGameObjectがシーンに配置されています。<br>
+    <strong>(2)</strong> イベント呼び出し方式を「Callback」に設定しました。<br>
+    <strong>(3)</strong> 「Assign Listener to All Events」の「<strong>Target</strong>」に「イベントリスナー」である「」GameObject」を割り当てます。<br>
+    <strong>(4)</strong> 「<strong>Assign</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1798.jpg"/>
+    <br>
+    
+    <p>
+    上記のように、すべてのイベントに共通のイベントリスナーが割り当てられていることがわかります。<br>
+    これで、イベントに合ったイベントリスナーの関数を設定するだけです。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Callback方式では、関数の検証</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.1</span></h4>
+    
+    <p>
+    「Callback」方式のイベントが呼び出す関数を割り当てるとき、次の場合には設定された関数を呼び出すことはできません。<br>
+    - イベントリスナーが存在しないとき<br>
+    - 保存された名前の関数がイベントリスナーにない場合<br>
+    - 保存された名前の関数が「オーバーロード」関数の場合<br>
+    </p>
+    <br>
+    
+    <p>
+    幸いなことに、無効なコールバック関数によってゲーム中に致命的なエラーが発生するわけではありません。<br>
+    しかし、設定されたイベントが有効であるか、毎回ゲームを実行してテストすることはできません。<br>
+    無効なイベントを自動的に削除する機能を試してみましょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    イベントリスナーに次のコールバック関数が定義されているとしましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    private void <strong>OnAnimEvent_A</strong> () { Debug.Log("Event A"); }<br>
+    <br>
+    private void <strong>OnAnimEvent_A</strong> ( <span class="text-danger"><strong>float floatValue</strong></span> ) { Debug.Log("Event A (Overloaded)"); }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    2つの関数は同じ名前ですが、パラメータが異なる「オーバーロード」関係です。<br>
+    イベントコールバックルールによると、これらの関数は無効です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1799.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 上記のコードを含むイベントリスナーと関数が設定された状態です。 無効な関数（"OnAnimEvent_A"）が設定されていますが、確認するのは難しいです。<br>
+    <strong>(2)</strong> 「<strong>Validate Events</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1800.jpg"/>
+    <br>
+    
+    <p>
+    検証を実行すると、無効な関数は上記のように自動的に削除されます。<br>
     </p>
     <br>
     

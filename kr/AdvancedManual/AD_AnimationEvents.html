@@ -71,7 +71,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.4.0</span></h4>
+    <h4><span class="badge badge-secondary">1.4.1</span></h4>
     
     <p>
     게임에 따라서는 애니메이션의 특정 시점에서 어떤 상호 작용을 해야할 필요가 있습니다.<br>
@@ -603,6 +603,148 @@
     
     <p>
     프리셋으로 저장된 애니메이션 이벤트 정보가 복사되어 대상으로 적용된 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>유효하지 않은 이벤트 이름 수정하기</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.1</span></h4>
+    
+    <p>
+    애니메이션 이벤트는 스크립트에서 호출되어야 하므로, 가능한 스크립트 작성 규칙에 맞게 이름을 지어야 합니다.<br>
+    - <strong>영어 대소문자, 숫자, 밑줄("_")</strong>의 조합으로만 이름을 지어야 하며 공백은 허용되지 않습니다.<br>
+    - <strong>빈 이름</strong>은 허용되지 않습니다.<br>
+    - 호출 방식이 "<strong>Send Message</strong>"인 경우에 "<strong>오버로딩</strong>"을 허용하지 않습니다. 즉, 다른 파라미터 조합을 가진 같은 이름을 가진 이벤트가 2개 이상 존재하면 안됩니다. <br>
+    </p>
+    <br>
+    
+    <p>
+    만약 이벤트의 이름이 유효하지 않다면, 이름을 자동으로 수정해주는 기능을 이용할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1796.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 애니메이션 이벤트의 이름을 "Sample Event Name (!)"과 같이 작성했습니다. 규칙에 의하면 이 이름은 특수 문자와 공백이 있으므로 유효하지 않습니다.<br>
+    <strong>(2)</strong> 이벤트의 이름이 왜 유효하지 않은지 설명하는 메시지가 나타납니다.<br>
+    <strong>(3)</strong> <strong>Fix now</strong> 버튼을 누르면 이름이 자동으로 수정됩니다. (단, 유효한 글자가 하나라도 없다면 수정되지 않습니다.)<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Callback 방식의 이벤트 리스너를 쉽게 할당하기</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.1</span></h4>
+    
+    <p>
+    <strong>Callback</strong> 방식으로 애니메이션 이벤트를 호출하는 것은 여러개의 이벤트 리스너를 설정할 수 있다는 장점이 있습니다.<br>
+    하지만 모든 이벤트들에 대해 이벤트 리스너를 각각 할당하는 것은 귀찮은 일입니다.<br>
+    이 작업을 쉽게 만드는 기능을 이용해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1797.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> AnyPortrait로 만든 캐릭터와 <strong>이벤트 리스너</strong>로 역할을 할 GameObject가 씬에 배치되어 있습니다.<br>
+    <strong>(2)</strong> 이벤트 호출 방식을 "<strong>Callback</strong>"으로 설정했습니다.<br>
+    <strong>(3)</strong> "<strong>Assign Listener to All Events</strong>"의 <strong>Target</strong>에 <strong>이벤트 리스너</strong>인 <strong>GameObject</strong>를 할당합니다.<br>
+    <strong>(4)</strong> <strong>Assign</strong> 버튼을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1798.jpg"/>
+    <br>
+    
+    <p>
+    위와 같이 모든 이벤트에 공통적으로 이벤트 리스너가 할당된 것을 볼 수 있습니다.<br>
+    이제 이벤트에 맞는 이벤트 리스너의 함수들을 설정하기만 하면 되겠습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Callback 방식의 이벤트에 할당된 함수들의 유효성 검사하기</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.1</span></h4>
+    
+    <p>
+    Callback 방식의 이벤트가 호출할 함수를 할당할 때, 다음의 경우엔 설정된 함수를 호출할 수 없습니다.<br>
+    - 이벤트 리스너가 존재하지 않을 때<br>
+    - 저장된 이름의 함수가 이벤트 리스너에 없을 때<br>
+    - 저장된 이름의 함수가 "오버로딩" 함수일 때<br>
+    </p>
+    <br>
+    
+    <p>
+    유효하지 않은 콜백 함수들로 인해서 게임 중에 치명적인 에러가 발생하지는 않습니다.<br>
+    하지만 설정된 이벤트들이 유효한지 매번 게임을 실행하여 테스트해볼 순 없을 것입니다.<br>
+    유효하지 않은 이벤트를 자동으로 삭제하는 기능을 이용해봅시다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이벤트 리스너에 다음과 같은 콜백 함수가 정의되어 있다고 가정해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    private void <strong>OnAnimEvent_A</strong> () { Debug.Log("Event A"); }<br>
+    <br>
+    private void <strong>OnAnimEvent_A</strong> ( <span class="text-danger"><strong>float floatValue</strong></span> ) { Debug.Log("Event A (Overloaded)"); }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <p>
+    두개의 함수는 이름이 같지만 파라미터가 다른 "오버로딩" 관계입니다.<br>
+    이벤트 콜백 규칙에 따르면 이 함수들은 유효하지 않습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1799.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 위의 코드가 포함된 이벤트 리스너와 함수들이 설정된 상태입니다. 유효하지 않은 함수("OnAnimEvent_A")가 설정되어 있지만 확인하기는 어렵습니다.<br>
+    <strong>(2)</strong> <strong>Validate Events</strong> 버튼을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1800.jpg"/>
+    <br>
+    
+    <p>
+    유효성 검사를 시행하면, 유효하지 않은 함수들은 위와 같이 자동으로 삭제됩니다.<br>
     </p>
     <br>
     
