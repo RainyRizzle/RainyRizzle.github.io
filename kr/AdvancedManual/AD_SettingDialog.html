@@ -71,7 +71,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.4.0</span></h4>
+    <h4><span class="badge badge-secondary">1.4.2</span></h4>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
@@ -229,15 +229,17 @@
     : 메시와 버텍스, 외곽선 등의 색상입니다.<br>
     <strong>10. Gizmo Colors</strong><br>
     : FFD 도구의 색상을 설정할 수 있습니다.<br>
-    <strong>11. Appearance of Bones</strong><br>
+    <strong>11. Appearance of Vertices</strong><br>
+    : 작업 공간에서 버텍스 및 핀들이 어떻게 보일지를 설정할 수 있습니다. <strong>(v1.4.2)</strong><br>
+    <strong>12. Appearance of Bones</strong><br>
     : 작업 공간에서 본이 어떻게 보일지를 설정할 수 있습니다.<br>
-    <strong>12. Rigging and Circular Vertices</strong><br>
+    <strong>13. Rigging and Circular Vertices</strong><br>
     : 리깅을 하는 과정에서 버텍스가 어떻게 보여질지 설정할 수 있습니다.<br>
-    <strong>13. Shortcuts Settings</strong><br>
+    <strong>14. Shortcuts Settings</strong><br>
     : 에디터에서의 단축키들을 변경할 수 있습니다. <strong>(v1.3.0)</strong><br>
-    <strong>14. Edit Mode Options</strong><br>
+    <strong>15. Edit Mode Options</strong><br>
     : 편집 모드시 모디파이어의 동작 방식, 작업 공간에서 보여지는 정보들을 설정할 수 있습니다. <strong>(v1.3.0)</strong><br>
-    <strong>15. Advanced Settings</strong><br>
+    <strong>16. Advanced Settings</strong><br>
     : 에디터의 동작을 세부적으로 설정할 수 있습니다.<br>
     옵션의 내용들은 아래와 같습니다.<br>
     - 에디터 시작시 시작 화면 출력 여부<br>
@@ -254,8 +256,12 @@
     - 상황에 따라 편집 모드 실행시 선택 잠금 켤지 여부<br>
     - Bake시 Render Pipeline 옵션이 프로젝트 설정에 맞지 않는 경우 자동으로 변경하는 메시지를 보여줄지 여부 <strong>(v1.3.5 / 유니티 2020부터 적용)</strong><br>
     - 보기 프리셋이 다른 객체를 선택할 때 자동으로 비활성화될 지 여부 <strong>(v1.4.0)</strong><br>
-    <strong>16. Restore 버튼</strong><br>
+    - 객체 선택시 리스트가 자동으로 스크롤될 지 여부 <strong>(v1.4.1)</strong><br>
+    - 객체를 클릭한 이후에 이어서 드래그를 할 경우 기즈모를 클릭하지 않은 상태에서 바로 객체를 이동할 수 있는지 여부 (<strong>v1.4.2</strong>)<br>
+    <strong>17. Restore 버튼</strong><br>
     : 모든 설정을 기본값으로 되돌립니다.<br>
+    <strong>18. Export/Import 버튼</strong><br>
+    : 에디터의 설정을 파일로 내보내거나, 또는 파일에서 에디터의 설정을 가져올 수 있습니다. <strong>(v1.4.2)</strong><br>
     ​<br>
     </p>
     <br>
@@ -330,6 +336,7 @@
     <strong>- Size</strong> : 본의 크기입니다. 값이 증가하면 폭이 넓어집니다.<br>
     <strong>- Scaled by Zoom</strong> : 작업 공간의 확대/축소에 따라 본의 크기가 바뀔지 여부를 결정합니다.<br>
     <strong>- New Bone's Color</strong> : 본을 추가할 때, 부모 본의 색상과 유사한 색상 또는 완전히 다른 색상을 갖게 만들지 선택할 수 있습니다.<br>
+    <strong>- Preview of New Bones</strong> : 본을 생성할 때, 마우스 커서가 있는 위치로 생성될 본의 미리보기 방식을 변경합니다. (v1.4.2)<br>
     ​<br>
     </p>
     <br>
@@ -374,6 +381,16 @@
     
     <p>
     리깅 가중치의 그라데이션 색상입니다. 왼쪽은 <strong>Default</strong> 옵션이 적용되었으며 오른쪽은 <strong>Vivid</strong> 옵션이 적용되었습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1803.jpg"/>
+    <br>
+    
+    <p>
+    본 생성시의 미리보기 외형 중, <strong>Line</strong> 방식은 "<strong>굵은 선</strong>"이 본이 생성될 위치를 보여주며, <strong>Ghost</strong> 방식은 "<strong>반투명한 본</strong>"이 대신 나타납니다.<br>
     </p>
     <br>
     
@@ -446,6 +463,51 @@
     <strong>(1)</strong> <strong>Size of Control Paramter UI</strong> 옵션을 <strong>Large</strong>로 변경해봅시다.<br>
     <strong>(2)</strong> Vector 타입의 컨트롤 파라미터 UI의 높이가 꽤 커진 것을 볼 수 있습니다.<br>
     이제 UI를 이용하기가 편리할 것입니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>버텍스와 핀의 크기</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.2</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1801.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Appearance of Vertices</strong>에서 <strong>Size</strong> 옵션을 변경하여<br>
+    <strong>(2)</strong> 작업 공간에서 보여지는 버텍스나 핀의 크기를 변경할 수 있습니다.<br>
+    이 기능은 AnyPortrait의 기본 해상도인 FHD (1080p) 이상의 해상도에서 버텍스나 핀이 너무 작게 보이는 문제를 해결할 수 있습니다.<br>
+    크기가 증가함에 따라 클릭 범위도 증가하는 것은 물론이고, 만약 고해상도의 화면에서 작업한다면 옵션과 별개로 자동으로 클릭 범위가 조금 더 확장됩니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>에디터 설정을 파일로 내보내기/파일에서 가져오기</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.2</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1804.jpg"/>
+    <br>
+    
+    <p>
+    에디터의 설정을 파일로 내보내서 다른 개발 환경으로 복사하고자 할 수 있습니다.<br>
+    파일로 내보내기 기능은 단축키 설정도 포함합니다.<br>
+    <strong>Editor</strong> 탭의 하단에 <strong>Export</strong> 버튼과 <strong>Import</strong> 버튼이 있습니다.<br>
+    - <strong>Export</strong> : 현재 에디터의 설정을 파일로 내보냅니다.<br>
+    - <strong>Import</strong> : 파일로부터 에디터의 설정을 가져옵니다.<br>
     </p>
     <br>
     

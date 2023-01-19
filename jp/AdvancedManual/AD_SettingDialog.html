@@ -71,7 +71,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.4.0</span></h4>
+    <h4><span class="badge badge-secondary">1.4.2</span></h4>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
@@ -227,15 +227,17 @@
     : メッシと頂点、アウトラインなどの色です。<br>
     <strong>10. Gizmo Colors</strong><br>
     : FFDツールの色を設定することができます。<br>
-    <strong>11. Appearance of Bones</strong><br>
+    <strong>11. Appearance of Vertices</strong><br>
+    : ワークスペースで頂点とピンがどのように見えるかを設定できます。<strong>(v1.4.2)</strong><br>
+    <strong>12. Appearance of Bones</strong><br>
     : ワークスペースで、ボーンがどのように表示されるかを設定することができます。<br>
-    <strong>12. Rigging and Circular Vertices</strong><br>
+    <strong>13. Rigging and Circular Vertices</strong><br>
     : リギングをする過程で、頂点がどのように表示されるかを設定することができます。<br>
-    <strong>13. Shortcuts Settings</strong><br>
+    <strong>14. Shortcuts Settings</strong><br>
     : エディタでのショートカットキーを変更することができます。<strong>（v1.3.0）</strong><br>
-    <strong>14. Edit Mode Options</strong><br>
+    <strong>15. Edit Mode Options</strong><br>
     : 編集モード時のモディファイアの動作方式、ワークスペースに表示される情報等を設定することができます。<strong>（v1.3.0）</strong><br>
-    <strong>15. Advanced Settings</strong><br>
+    <strong>16. Advanced Settings</strong><br>
     : エディタの動作を詳細に設定することができます。<br>
     オプションの内容は以下の通りです。<br>
     - エディタの起動時に「起動画面」出力するかどうか<br>
@@ -252,8 +254,12 @@
     - 「編集モード」を実行時に「選択ロック」をオンにするかどうか<br>
     - Bake時にRender Pipelineオプションがプロジェクト設定に合わない場合に自動的に変更するメッセージを表示するかどうか<strong>（v1.3.5 / Unity 2020以降）</strong><br>
     - 可視性プリセットが別のオブジェクトを選択したときに自動的に無効になるかどうか <strong>(v1.4.0)</strong><br>
-    <strong>16. Restore ボタン</strong><br>
+    - オブジェクト選択時にリストが自動的にスクロールされるかどうか <strong>(v1.4.1)</strong><br>
+    - オブジェクトをクリックした後にドラッグすると、ギズモをクリックせずにオブジェクトを直接移動できるかどうか (<strong>v1.4.2</strong>)<br>
+    <strong>17. Restore ボタン</strong><br>
     : すべての設定をデフォルト値に戻します。<br>
+    <strong>18. Export/Import ボタン</strong><br>
+    : エディタの設定をファイルにエクスポートしたり、ファイルからエディタの設定をインポートしたりできます。 <strong>(v1.4.2)</strong><br>
     ​<br>
     </p>
     <br>
@@ -328,6 +334,7 @@
     <strong>- Size</strong> : 骨の大きさです。値が増加すると幅が広がります。<br>
     <strong>- Scaled by Zoom</strong> : ワークスペースの拡大/縮小に応じて、骨の大きさが変わるかどうかを決定します。<br>
     <strong>- New Bone's Color</strong> : 骨を追加するとき、親の骨の色と「類似色」または「完全に別の色」を持つように作ら選択することができます。<br>
+    <strong>- Preview of New Bones</strong> : ボーンを作成するときは、マウスカーソルがある場所に作成されるボーンのプレビュー方法を変更します。 (v1.4.2)<br>
     ​<br>
     </p>
     <br>
@@ -372,6 +379,16 @@
     
     <p>
     重みのグラデーションの色です。左は「Default」オプションが適用されており、右側は「Vivid」オプションが適用されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1803.jpg"/>
+    <br>
+    
+    <p>
+    プレビュー外形のうち、「<strong>Line</strong>」方式は「太い線」がボーンが生成される位置を示し、「<strong>Ghost</strong>」方式は「半透明なボーン」が代わりに表示されます。<br>
     </p>
     <br>
     
@@ -444,6 +461,50 @@
     <strong>(1)</strong> 「<strong>Size of Control Paramter UI</strong>」オプションを「<strong>Large</strong>」に変更してみましょう。<br>
     <strong>(2)</strong> Vector型の制御パラメータUIの高さがかなり大きくなったことがわかります。<br>
     これでUIを利用するのは便利です。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>頂点とピンのサイズ</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.2</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1801.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Appearance of Vertices</strong>」の「<strong>Size</strong>」オプションを変更することで、 <strong>(2)</strong> ワークスペースに表示される「頂点」または「ピン」のサイズを変更できます。<br>
+    この機能は、AnyPortraitのデフォルト解像度である「FHD（1080p）」以上の解像度で頂点やピンが小さすぎる問題を解決できます。<br>
+    サイズが大きくなるにつれてクリック範囲も大きくなることはもちろんですが、高解像度の画面で作業している場合は、オプションとは別に自動的にクリック範囲がもう少し拡張されます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>エディタ設定をファイルにエクスポート/ファイルからインポート</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.2</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1804.jpg"/>
+    <br>
+    
+    <p>
+    エディタの設定をファイルにエクスポートして、別の開発環境にコピーしたい場合があります。<br>
+    ファイルへのエクスポート機能には、ショートカットキー設定も含まれます。<br>
+    「<strong>Editor</strong>」タブの下部に「<strong>Export</strong>」ボタンと「<strong>Import</strong>」ボタンがあります。<br>
+    - <strong>Export</strong> : 現在のエディタの設定をファイルに書き出します。<br>
+    - <strong>Import</strong> : ファイルからエディタの設定を取得します。<br>
     </p>
     <br>
     

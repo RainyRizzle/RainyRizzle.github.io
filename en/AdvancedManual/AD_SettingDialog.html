@@ -71,7 +71,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.4.0</span></h4>
+    <h4><span class="badge badge-secondary">1.4.2</span></h4>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
@@ -225,15 +225,17 @@
     : The color of the mesh, vertex, and outline.<br>
     <strong>10. Gizmo Colors</strong><br>
     : The color of FFD tool.<br>
-    <strong>11. Appearance of Bones</strong><br>
+    <strong>11. Appearance of Vertices</strong><br>
+    : Settings for how vertices and pins will look in the workspace. <strong>(v1.4.2)</strong><br>
+    <strong>12. Appearance of Bones</strong><br>
     : Settings for how the bones will look in the workspace.<br>
-    <strong>12. Rigging and Circular Vertices</strong><br>
+    <strong>13. Rigging and Circular Vertices</strong><br>
     : Setting how vertices are displayed during rigging<br>
-    <strong>13. Shortcuts Settings</strong><br>
+    <strong>14. Shortcuts Settings</strong><br>
     : Customizing shortcuts in the editor <strong>(v1.3.0)</strong><br>
-    <strong>14. Edit Mode Options</strong><br>
+    <strong>15. Edit Mode Options</strong><br>
     : Options for how the modifier works in edit mode, information displayed in the workspace, etc. <strong>(v1.3.0)</strong><br>
-    <strong>15. Advanced Settings</strong><br>
+    <strong>16. Advanced Settings</strong><br>
     : You can set the actions of the editor.<br>
     The options are as follows.<br>
     - Whether the start screen is displayed when starting the editor<br>
@@ -250,8 +252,12 @@
     - Depending on the situation, whether "Selection Lock" is turned on when editing mode is executed<br>
     - Whether to show a message to automatically change the Render Pipeline option when executing Bake if it does not match the project settings. <strong>(v1.3.5 / From Unity 2020)</strong><br>
     - Whether the Visibility Preset is automatically disabled when selecting another object <strong>(v1.4.0)</strong><br>
-    <strong>16. Restore Button</strong><br>
+    - Whether the list automatically scrolls when selecting an object <strong>(v1.4.1)</strong><br>
+    - Whether the object can be moved immediately without clicking the gizmo when dragging after clicking the object (<strong>v1.4.2</strong>)<br>
+    <strong>17. Restore Button</strong><br>
     : All settings are restored to their default values.<br>
+    <strong>18. Export/Import Buttons</strong><br>
+    : You can export editor settings to a file, or import editor settings from a file. <strong>(v1.4.2)</strong><br>
     ​<br>
     </p>
     <br>
@@ -326,6 +332,7 @@
     <strong>- Size</strong> : The size of the bone. As the value increases, the width increases.<br>
     <strong>- Scaled by Zoom</strong> : Determines whether the size of bones changes depending on the zoom of the workspace.<br>
     <strong>- New Bone's Color</strong> : When adding a bone, you can choose whether to have a color similar to that of the parent bone or have a completely different color.<br>
+    <strong>- Preview of New Bones</strong> : When creating a bone, changes the preview of the bone that will be created with the mouse cursor position. (v1.4.2)<br>
     ​<br>
     </p>
     <br>
@@ -371,6 +378,16 @@
     <p>
     Gradient color for rigging weights. <strong>Default</strong> option is applied on the left and <strong>Vivid</strong> option is applied on the right.<br>
     ​<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1803.jpg"/>
+    <br>
+    
+    <p>
+    Among the preview appearances when creating bones, in the <strong>Line</strong> method, "<strong>Thick line</strong>" shows the position where the bone will be created, and in the <strong>Ghost</strong> method, "<strong>Translucent bone</strong>" appears instead.<br>
     </p>
     <br>
     
@@ -443,6 +460,51 @@
     <strong>(1)</strong> Let's change the <strong>Size of Control Parameter UI</strong> option to <strong>Large</strong>.<br>
     <strong>(2)</strong> You can see that the height of the Vector type Control Parameter UI has grown considerably.<br>
     Now the UI will be convenient to use.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Size of vertices and pins</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.2</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1801.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> By changing the <strong>Size</strong> option in <strong>Appearance of Vertices</strong><br>
+    <strong>(2)</strong> You can change the size of vertices or pins shown in the workspace.<br>
+    This feature can solve the problem of vertices or pins looking too small at resolutions higher than AnyPortrait's native resolution of FHD (1080p).<br>
+    Not only does the click range increase as the size increases, but if you're working on a high-resolution screen, the click range automatically expands a little further, regardless of the option.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Export editor settings to/import from file</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.2</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1804.jpg"/>
+    <br>
+    
+    <p>
+    You may want to export the editor's settings to a file to copy to other development environments.<br>
+    The export to file feature also includes hotkey settings.<br>
+    There are <strong>Export</strong> and <strong>Import</strong> buttons at the bottom of the <strong>Editor</strong> tab.<br>
+    - <strong>Export</strong>: Exports the current editor settings to a file.<br>
+    - <strong>Import</strong>: Imports editor settings from a file.<br>
     </p>
     <br>
     
