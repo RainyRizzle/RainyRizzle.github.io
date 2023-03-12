@@ -328,8 +328,10 @@
     <div class="card">
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
     </h5>
     <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.3</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransformのテクスチャを置き換えます。<br>
@@ -343,6 +345,7 @@
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
     &nbsp;&nbsp;&nbsp;<span class="text-success">Texture2D</span> texture : 置き換えるテクスチャ<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>
     </p>
     
     </div>
@@ -351,13 +354,14 @@
     <!-- 17. 스크립트 설명 박스 -->
     <div class="card">
     <h5 class="card-header">
-<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Color</span> <span class="text-muted">color2X,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
     </h5>
     <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.3</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransformの色を設定します。<br>
-    &nbsp;&nbsp;&nbsp;色は 「2X Multiply」として計算されるので、デフォルトはグレー（0.5、0.5、0.5、1）です。<br>
     &nbsp;&nbsp;&nbsp;色がデフォルトでない場合、「Draw Call」が増加することがあります。<br>
     &nbsp;&nbsp;&nbsp;「_Color」を対象とする場合は、「SetMeshColor」関数を使用してください。<br>
     </p>
@@ -366,8 +370,9 @@
     <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
-    &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> color2X : 置き換える色 (2X Multiply)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> color : 置き換える色<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>
     </p>
     
     </div>
@@ -377,8 +382,10 @@
     <div class="card">
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlpha</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlpha</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
     </h5>
     <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.3</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransformの色のアルファ(透明度)を設定します。<br>
@@ -392,6 +399,7 @@
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> alpha : 置換するアルファ<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>
     </p>
     
     </div>
@@ -401,8 +409,10 @@
     <div class="card">
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloat</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloat</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
     </h5>
     <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.3</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransformのマテリアルの 「Float」プロパティの値を設定します。<br>
@@ -415,6 +425,7 @@
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> floatValue : 「Float」値<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>
     </p>
     
     </div>
@@ -424,8 +435,10 @@
     <div class="card">
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomInt</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomInt</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
     </h5>
     <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.3</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransformのマテリアルの 「Int」プロパティの値を設定します。<br>
@@ -438,6 +451,7 @@
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> intValue : 「Int」値<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>
     </p>
     
     </div>
@@ -447,8 +461,10 @@
     <div class="card">
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
     </h5>
     <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.3</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransformのマテリアルの 「Vector4」プロパティの値を設定します。<br>
@@ -461,6 +477,7 @@
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
     &nbsp;&nbsp;&nbsp;<span class="text-success">Vector4</span> vector4Value : 「Vector4」値<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>
     </p>
     
     </div>
@@ -576,11 +593,16 @@
     &nbsp;&nbsp;&nbsp;<span class="text-primary"><strong>一括変更関数</strong></span><br>
     &nbsp;&nbsp;&nbsp;- SetMeshTextureAll(Texture2D texture)<br>
     &nbsp;&nbsp;&nbsp;- SetCustomImageAll(Texture2D texture, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomImageAll(Texture2D texture, int propertyNameID)<br>
     &nbsp;&nbsp;&nbsp;- SetMeshColorAll(Color color)<br>
     &nbsp;&nbsp;&nbsp;- SetCustomColorAll(Color color, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomColorAll(Color color, int propertyNameID)<br>
     &nbsp;&nbsp;&nbsp;- SetCustomFloatAll(float floatValue, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomFloatAll(float floatValue, int propertyNameID)<br>
     &nbsp;&nbsp;&nbsp;- SetCustomIntAll(int intValue, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomIntAll(int intValue, int propertyNameID)<br>
     &nbsp;&nbsp;&nbsp;- SetCustomVector4All(Vector4 vector4Value, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomVector4All(Vector4 vector4Value, int propertyNameID)<br>
     </p>
     
     <br>
@@ -602,8 +624,10 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImageAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImageAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImageAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
     </h5>
     <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.3</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTextureDataを使用するすべてのメッシュのテクスチャを一括して置き換えます。<br>
@@ -616,6 +640,7 @@
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 参照するapOptTextureの名前。 (エディタのイメージの名)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-success">Texture2D</span> texture : 置き換えるテクスチャ<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>
     </p>
     
     </div>
@@ -627,9 +652,12 @@
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshColorAll</strong> <span class="text-muted">( </span><span class="text-success">Color</span> <span class="text-muted">color2X )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshColorAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Color</span> <span class="text-muted">color2X )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColorAll</strong> <span class="text-muted">( </span><span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColorAll</strong> <span class="text-muted">( </span><span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColorAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColorAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
     </h5>
     <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.3</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;すべてのメッシュの色を一括的に交換します。<br>
@@ -642,8 +670,9 @@
     <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 参照するapOptTextureの名前。 (エディタのイメージの名)<br>
-    &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> <span class="text-success">color2X</span> <span class="text-success">/</span> color : 置き換える色<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> color : 置き換える色<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>
     </p>
     
     </div>
@@ -655,9 +684,12 @@
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">float</span> <span class="text-muted">alpha )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlphaAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
     </h5>
     <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.3</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;すべてのメッシュのアルファ（透明度）を一括して交換します。<br>
@@ -671,6 +703,7 @@
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 参照するapOptTextureの名前。 (エディタのイメージの名)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> alpha : 置換するアルファ<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>
     </p>
     
     </div>
@@ -680,16 +713,15 @@
     <div class="card">
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloatAll</strong> <span class="text-muted">( </span><span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloatAll</strong> <span class="text-muted">( </span><span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloatAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
-<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomIntAll</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
-<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomIntAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
-<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4All</strong> <span class="text-muted">( </span><span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
-<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4All</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloatAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
     </h5>
     <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.3</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
-    &nbsp;&nbsp;&nbsp;すべてのメッシュのプロパティ値を一括で変更します。<br>
+    &nbsp;&nbsp;&nbsp;すべてのメッシュの「Float」タイプのプロパティ値をまとめて変更します。<br>
     &nbsp;&nbsp;&nbsp;optTextureNameを入力すると、そのapOptTextureDataを使用するメッシュを対象にプロパティの値を設定します。<br>
     </p>
     
@@ -698,9 +730,64 @@
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 参照するapOptTextureの名前。 (エディタのイメージの名)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> floatValue : 「Float」値<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomIntAll</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomIntAll</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomIntAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomIntAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;すべてのメッシュの「Int」タイプのプロパティ値をまとめて変更します。<br>
+    &nbsp;&nbsp;&nbsp;optTextureNameを入力すると、そのapOptTextureDataを使用するメッシュを対象にプロパティの値を設定します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 参照するapOptTextureの名前。 (エディタのイメージの名)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> intValue : 「Int」値<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4All</strong> <span class="text-muted">( </span><span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4All</strong> <span class="text-muted">( </span><span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4All</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4All</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">説明</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;すべてのメッシュの「Vector4」タイプのプロパティ値をまとめて変更します。<br>
+    &nbsp;&nbsp;&nbsp;optTextureNameを入力すると、そのapOptTextureDataを使用するメッシュを対象にプロパティの値を設定します。<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 参照するapOptTextureの名前。 (エディタのイメージの名)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-success">Vector4</span> vector4Value : 「Vector4」値<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>
     </p>
     
     </div>
