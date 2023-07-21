@@ -35,6 +35,12 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
 
                 </ul>
 
@@ -329,20 +335,26 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransformのテクスチャを置き換えます。<br>
     &nbsp;&nbsp;&nbsp;テクスチャが置き換えられると、「Draw Call」が増加することがあります。<br>
     &nbsp;&nbsp;&nbsp;「_MainTex」を対象とする場合は、「SetMeshImage」関数を使用してください。<br>
+    &nbsp;&nbsp;&nbsp;optTransformの代わりに、transformNameとrootUnitIndexを入力してターゲットを指定できます。<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「apOptTransform」の名 (エディタ上のメッシュまたはメッシュグループの名前)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-success">Texture2D</span> texture : 置き換えるテクスチャ<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>
@@ -356,20 +368,26 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransformの色を設定します。<br>
     &nbsp;&nbsp;&nbsp;色がデフォルトでない場合、「Draw Call」が増加することがあります。<br>
     &nbsp;&nbsp;&nbsp;「_Color」を対象とする場合は、「SetMeshColor」関数を使用してください。<br>
+    &nbsp;&nbsp;&nbsp;optTransformの代わりに、transformNameとrootUnitIndexを入力してターゲットを指定できます。<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「apOptTransform」の名 (エディタ上のメッシュまたはメッシュグループの名前)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> color : 置き換える色<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>
@@ -383,20 +401,26 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlpha</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlpha</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlpha</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlpha</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransformの色のアルファ(透明度)を設定します。<br>
     &nbsp;&nbsp;&nbsp;デフォルト値は1です。 それ以外の場合は、「Draw Call」が増加することがあります。<br>
     &nbsp;&nbsp;&nbsp;「_Color」を対象とする場合は、「SetMeshAlpha」関数を使用してください。<br>
+    &nbsp;&nbsp;&nbsp;optTransformの代わりに、transformNameとrootUnitIndexを入力してターゲットを指定できます。<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「apOptTransform」の名 (エディタ上のメッシュまたはメッシュグループの名前)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> alpha : 置換するアルファ<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>
@@ -410,19 +434,25 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloat</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloat</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloat</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloat</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransformのマテリアルの 「Float」プロパティの値を設定します。<br>
     &nbsp;&nbsp;&nbsp;この関数が呼び出されると、「Draw Call」が増加することがあります。<br>
+    &nbsp;&nbsp;&nbsp;optTransformの代わりに、transformNameとrootUnitIndexを入力してターゲットを指定できます。<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「apOptTransform」の名 (エディタ上のメッシュまたはメッシュグループの名前)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> floatValue : 「Float」値<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>
@@ -436,19 +466,25 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomInt</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomInt</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomInt</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomInt</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransformのマテリアルの 「Int」プロパティの値を設定します。<br>
     &nbsp;&nbsp;&nbsp;この関数が呼び出されると、「Draw Call」が増加することがあります。<br>
+    &nbsp;&nbsp;&nbsp;optTransformの代わりに、transformNameとrootUnitIndexを入力してターゲットを指定できます。<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「apOptTransform」の名 (エディタ上のメッシュまたはメッシュグループの名前)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> intValue : 「Int」値<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>
@@ -462,19 +498,25 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">説明</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransformのマテリアルの 「Vector4」プロパティの値を設定します。<br>
     &nbsp;&nbsp;&nbsp;この関数が呼び出されると、「Draw Call」が増加することがあります。<br>
+    &nbsp;&nbsp;&nbsp;optTransformの代わりに、transformNameとrootUnitIndexを入力してターゲットを指定できます。<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">パラメーター</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 参照される「apOptTransform」<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 「Root Unit」インデックス (存在しない場合は、すべて検索) <br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 「apOptTransform」の名 (エディタ上のメッシュまたはメッシュグループの名前)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-success">Vector4</span> vector4Value : 「Vector4」値<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : シェーダのプロパティ名<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : シェーダー プロパティID (「Shader.PropertyToID」関数を使用して ID を取得します)<br>

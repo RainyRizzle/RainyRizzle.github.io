@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Non-interpolated Indexed Parameter</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_IndexedParameter.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_IndexedParameter.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_IndexedParameter.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Non-interpolated Indexed Parameter</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Non-interpolated Indexed Parameter</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.5</span></h4>
+    
+    <p>
+    Among the control parameter types, the <strong>"Int"</strong> (integer) type has discontinuous values, unlike the "Float" type.<br>
+    So Int control parameters are mainly used when switching the rendered meshes or images.<br>
+    Although the Int type itself has discrete values, its uses are often for different purposes.<br>
+    The images each mapped to the value of the control parameter may be in <strong>order</strong>, or vice versa.<br>
+    "Eye-blinking sequences" or "Hand-folding sequences" are cases where images or meshes need to be switched in sequence.<br>
+    Conversely, "Facial expression according to emotion" and "Attached accessories" would be the latter, which is far from "order".<br>
+    </p>
+    <br>
+    
+    <p>
+    In any case, "Int" control parameters usually work nicely.<br>
+    But the latter, i.e. <strong>"Switching meshes which haven't order"</strong> causes problems with the animation's <strong>"Interpolation"</strong>.<br>
+    <strong>"Interpolation"</strong> is an arithmetic process where the values change gradually from A to B, and it is not appropriate to gradually change the value of a control parameter switching no-ordered meshes.<br>
+    As the interpolation occurs in an animation playback or between keyframes, it is important whether control parameters temporarily have unintended intermediate values.<br>
+    </p>
+    <br>
+    
+    <p>
+    This page describes the issue and also describes the <strong>"Indexed"</strong> attribute added in v1.4.5 to address this issue.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>About whether images are in order</h3>
+    <br>
+    
+    <p>
+    Let's create and compare the two control parameters responsible for <strong>"meshes which are in order"</strong> and <strong>"meshes which aren't in order"</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1829.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> This page uses the <strong>Color Only (Controller)</strong> modifier.<br>
+    (Issues can occur in common with all modifiers that use control parameters.)<br>
+    <strong>(2)</strong> We created two "Int" control parameters and registered them in the modifier.<br>
+    - <span class="text-primary"><strong>Eye Open</strong></span> : Switching 3 meshes that express <strong>the sequence of closing the eyes</strong>.<br>
+    - <span class="text-danger"><strong>Eye Shape</strong></span> : Switching 4 meshes expressing <strong>emotion</strong>.<br>
+    <strong>(3)</strong> Each mesh is shown or hidden according to the control parameters.<br>
+    </p>
+    <br>
+    
+    <p>
+    Depending on the two control parameters, it is shown as follows.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1830.jpg"/>
+    <br>
+    
+    <p>
+    Adjusting the <span class="text-primary"><strong>"Eye Open"</strong></span> parameter makes the character slowly close her eyes.<br>
+    "Eyes open", "Eyes slightly closed", "Eyes closed" are expressed in order.<br>
+    That means that meshes controlled by the <span class="text-primary"><strong>"Eye Open"</strong></span> parameter <span class="text-primary"><strong>"have order"</strong></span>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1831.jpg"/>
+    <br>
+    
+    <p>
+    By adjusting the <span class="text-danger"><strong>"Eye Shape"</strong></span> parameter, you can see facial expressions based on various emotions.<br>
+    As shown in the picture above, the four expressions are simply mapped to their respective parameter values, and do <span class="text-danger"><strong>"not have order"</strong></span>.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>"Eye Open"</strong> and <strong>"Eye Shape"</strong> are parameters of the same Int type, and control the visibility of meshes.<br>
+    However, whether or not they are in order is different.<br>
+    Recognizing these differences will help you understand the issues covered on this page.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Problems with controlling no-ordered images</h3>
+    <br>
+    
+    <p>
+    The problem covered on this page is that when a control parameter of type Int converts images or meshes, those images have <span class="text-danger"><strong>"no order"</strong></span>.<br>
+    It looks a bit complex, but the example shows that it's a more common problem than you might think.<br>
+    </p>
+    <br>
+    
+    <p>
+    Among the control parameters introduced in the previous example, <strong>"Eye Shape"</strong> corresponds to this case, so let's reproduce the problem with this control parameter.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1832.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> We will create two animations. First, create the first animation, <strong>"Anim1"</strong>.<br>
+    <strong>(2)</strong> Add a <strong>Control Parameters</strong> timeline.<br>
+    <strong>(3)</strong> Register <strong>"Eye Shape"</strong> to the timeline.<br>
+    <strong>(4)</strong> Create a keyframe.<br>
+    <strong>(5)</strong> In this animation, the value of the control parameter is set to <strong>"0"</strong>.<br>
+    The character's "Default face" is shown.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1833.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> We created a second similar animation. Set the name to <strong>"Anim2"</strong>.<br>
+    <strong>(2)</strong> Configure the timeline in the same way and add a keyframe.<br>
+    <strong>(3)</strong> Let's set it to have a value of <strong>"3"</strong>.<br>
+    By changing the value of the parameter, the character's "Smart face" is shown.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now, after Bake, let's play "Anim1" and "Anim2" in sequence in the Unity scene.<br>
+    You can find the problem by using the <strong>CrossFade</strong> function to make the animation transition smoothly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1834.jpg"/>
+    <br>
+    
+    <p>
+    This is the result of an example where "Anim2" is played while "Anim1" is playing in the Unity scene.<br>
+    In the middle of the smooth animation transition from "Anim1" to "Anim2", unintended facial expressions appear.<br>
+    "Default face" should have switched to "Smart face" right away, but the "Surprised face" and "Dizzy face" appeared unintentionally.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1836.jpg"/>
+    <br>
+    
+    <p>
+    This issue is caused by <strong>"Interpolation"</strong> in animation transitions.<br>
+    When an animation playback function such as <strong>CrossFade</strong> is executed, playback starts while gradually switching animations for a certain period of time.<br>
+    In the picture above you can see that there is a short time transition from "Anim1" to "Anim2".<br>
+    The value of the control parameter <strong>"Eye Shape"</strong> is <strong>"0"</strong> in "Anim1", and changes to <strong>"3"</strong> when "Anim2" is played.<br>
+    At this time, during the short time during which the animation is switched, values between <strong>"0"</strong> and <strong>"3"</strong> are interpolated.<br>
+    During the interpolation process, the value is changed as <strong>"0" > "1" > "2" > "3"</strong> sequentially, which is the cause of the problem.<br>
+    </p>
+    <br>
+    
+    <p>
+    This interpolation process itself is not a bug.<br>
+    This is because intermediate poses between motions and intermediate values of control parameters of type "Float" or "Vector" must be interpolated for smooth animation transition effects.<br>
+    However, especially in the case of "Int type control parameter that switches no-ordered images", this interpolation process produces rather incorrect results.<br>
+    </p>
+    <br>
+    
+    <p>
+    To solve this problem, you need to specify "non-interpolated" in the control parameter.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1838.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the <strong>"Eye Shape"</strong> control parameter.<br>
+    <strong>(2)</strong> Confirm that it is set as <strong>Int</strong> type.<br>
+    <strong>(3)</strong> In case of <strong>Int</strong> type, <strong>Integer Processing Method</strong> option appears. This option can take one of the values <span class="text-primary"><strong>Interpolated</strong></span> and <span class="text-danger"><strong>Indexed</strong></span>.<br>
+    <strong>(4)</strong> Choose <span class="text-danger"><strong>Indexed</strong></span>.<br>
+    Now let's bake and test the same in the Unity scene.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1835.jpg"/>
+    <br>
+    
+    <p>
+    When switching from "Anim1" to "Anim2", facial expressions by intermediate values of control parameters do not appear.<br>
+    Thanks to this, only you can see a direct transition from "Default face" to "Smart face" as intended.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1837.jpg"/>
+    <br>
+    
+    <p>
+    If you set the value of the <strong>Integer Processing Method</strong> property to <span class="text-danger"><strong>Indexed</strong></span> in the control parameter, the above calculation is performed during animation interpolation.<br>
+    The bug is solved because the transition from "Anim1" to "Anim2" skips all intermediate values, and only immediately transitions from "start value <strong>(0)</strong>" to "end value <strong>(3)</strong>".<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Comparing during interpolation between keyframes</h3>
+    <br>
+    
+    <p>
+    This phenomenon can be seen not only in animation transitions but also in interpolation between keyframes.<br>
+    Let's see how different results are displayed using the two control parameters.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1839.jpg"/>
+    <br>
+    
+    <p>
+    Let's set the two control parameters described above differently.<br>
+    For <strong>"Eye Open"</strong> where images are switched in sequence, set the value of <strong>Integer Processing Method</strong> to <span class="text-primary"><strong>Interpolated</strong></span> (default).<br>
+    For <strong>"Eye Shape"</strong> where there is no order among images, set to <span class="text-danger"><strong>Indexed</strong></span> as described above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1840.jpg"/>
+    <br>
+    
+    <p>
+    Let's set up an animation for comparison.<br>
+    <strong>(1)</strong> Add all control parameters to the timeline.<br>
+    <strong>(2)</strong> Keyframes have been added as above so that you can see the interpolation process between keyframes.<br>
+    We entered the minimum value of each control parameter in the preceding keyframe and the maximum value in the following keyframe.<br>
+    <strong>(3)</strong> Change the <strong>Animation curve</strong> to <strong>Linear</strong>.<br>
+    For Int-type control parameters, the <strong>Constant</strong> curve is set by default.<br>
+    This is because interpolation can be suppressed, but here we need to check the interpolation process, so let's change it to <strong>Linear</strong>.<br>
+    (For animation curves, check the <a href="../../en/GettingStarted/GS_2_8.html">related page</a>.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1841.jpg"/>
+    <br>
+    
+    <p>
+    For <strong>"Eye Open"</strong> set to <span class="text-primary"><strong>Interpolated</strong></span>, you can see the value of the control parameter gradually change <strong>"0 > 1 > 2"</strong> between keyframes.<br>
+    That is, interpolation has been applied, and the result is very natural because the images were drawn in such a way that they are displayed in order.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1842.jpg"/>
+    <br>
+    
+    <p>
+    For <strong>"Eye Shape"</strong> set to <span class="text-danger"><strong>Indexed</strong></span>, control parameters do not have intermediate values during keyframe interpolation.<br>
+    Only transitions directly from the state at the previous keyframe to the state at the next keyframe, which is very suitable for transitioning images that do not have a sequence.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1843.jpg"/>
+    <br>
+    
+    <p>
+    If it is not set to <strong>Indexed</strong>, the meshes corresponding to the intermediate values will be shown during the keyframe interpolation process as above.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    In other words, it can be seen that problems in interpolation can be avoided by appropriately determining the properties according to whether the images have an order.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_AnimationCurvesInBatch.html">< Setting Animation Curves in batch</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_Mecanim.html">Using Mecanim ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

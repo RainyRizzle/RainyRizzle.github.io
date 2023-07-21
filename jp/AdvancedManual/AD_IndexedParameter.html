@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>非補間インデックス付きパラメータ</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_IndexedParameter.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_IndexedParameter.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_IndexedParameter.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 非補間インデックス付きパラメータ</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">非補間インデックス付きパラメータ</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.5</span></h4>
+    
+    <p>
+    「制御パラメータ」のタイプのうち、「Int」、つまり整数型は、「Float」型とは異なり、不連続な値を持ちます。<br>
+    したがって、「Int」タイプの制御パラメータは、主に表示されるメッシュや画像を切り替えるときに使用されます。<br>
+    「Int」型自体は不連続な値を持ちますが、その使い方はしばしば異なる目的を持っています。<br>
+    制御パラメータの値にそれぞれマッピングされた画像には「順序」があり、逆に「順序」がないこともあります。<br>
+    「目がちらつく画像シーケンス」や「手を折る画像シーケンス」などは、順序に画像やメッシュを交換する必要がある場合です。<br>
+    逆に、「感情による顔の表情」、「付属のアクセサリー」などの場合は、順序に関係のない後者に該当します。<br>
+    </p>
+    <br>
+    
+    <p>
+    いずれにせよ、一般的に「Int」タイプの制御パラメータは一般的にうまく動作します。<br>
+    しかし、後者、つまり「順序のないメッシュを表示する」は、アニメーションの「補間（Interpolation）」プロセスで問題を引き起こします。<br>
+    「補間」は、値が「A」から「B」に徐々に変化する演算過程であり、順序を持たないメッシュを入れ替える制御パラメータの値が徐々に変化してしまうことは適切ではない。<br>
+    アニメーションを再生するか、アニメーション内のキーフレーム間で補間が発生するため、このとき補間に関連する問題が発生する可能性があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページでは、この問題について全体的に説明し、同時にこの問題を解決するために「v1.4.5」で追加された「<strong>Indexed</strong>」属性について説明します。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>画像の「順序」について</h3>
+    <br>
+    
+    <p>
+    「シーケンスを持つメッシュ」と「シーケンスとは無関係のメッシュ」を担当する2つの制御パラメータを生成して比較しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1829.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> このページでは「<strong>Color Only (Controller)</strong>」モディファイアを利用します。<br>
+    （制御パラメータを使用するすべてのモディファイアで共通の問題が発生する可能性があります。）<br>
+    <strong>(2)</strong> 「Int」タイプの制御パラメータを2つ生成し、モディファイアにすべて登録しました。<br>
+    - <span class="text-primary"><strong>Eye Open</strong></span> : 「目を閉じる過程」を表現する3つのメッシュを制御します。<br>
+    - <span class="text-danger"><strong>Eye Shape</strong></span> : 「感情」を表現する4つのメッシュを制御します。<br>
+    <strong>(3)</strong> 制御パラメータによって、各メッシュが表示または非表示になります。<br>
+    </p>
+    <br>
+    
+    <p>
+    2つの制御パラメータによって次のように表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1830.jpg"/>
+    <br>
+    
+    <p>
+    「<span class="text-primary"><strong>Eye Open</strong></span>」パラメータを調整すると、目をゆっくりと巻くキャラクターを見ることができます。<br>
+    「目を開けた状態」、「少し目を閉じた状態」、「目を閉じた状態」が順に表現される。<br>
+    つまり、「<span class="text-primary"><strong>Eye Open</strong></span>」パラメータで制御されるメッシュには「<span class="text-primary">順序</span>」があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1831.jpg"/>
+    <br>
+    
+    <p>
+    「<span class="text-danger"><strong>Eye Shape</strong></span>」パラメーターを調整すると、さまざまな感情に応じた表情を見ることができます。<br>
+    上の図のように、4つの表情は単にそれぞれのパラメータ値にマッピングされているだけで、「<span class="text-danger">順序</span>」を持ちません。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>Eye Open</strong>」と「<strong>Eye Shape</strong>」は同じ「Int」タイプのパラメータであり、メッシュが見えるかどうかを制御する点は同じです。<br>
+    画像が「順序を持っているかどうか」は異なります。<br>
+    この違いを認識している場合は、このページで扱う問題について簡単に理解できます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>順序のない画像を制御するとき</h3>
+    <br>
+    
+    <p>
+    このページで扱う問題は、「Int」タイプの制御パラメータが画像やメッシュを切り替えるとき、その画像が「<span class="text-danger">順序を持たない場合</span>」に発生します。<br>
+    条件は多少複雑に見えますが、例を見ると思ったより一般的に遭遇する可能性がある問題であることがわかります。<br>
+    </p>
+    <br>
+    
+    <p>
+    前の例で紹介した制御パラメータのうち「<strong>Eye Shape</strong>」がこの場合に該当するので、この制御パラメータで問題を再現してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1832.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 2つのアニメーションを作成します。 まず、最初のアニメーション「<strong>Anim1</strong>」を作成します。<br>
+    <strong>(2)</strong> 「<strong>Control Parameters</strong>」タイムラインを追加します。<br>
+    <strong>(3)</strong> 「<strong>Eye Shape</strong>」をタイムラインに登録します。<br>
+    <strong>(4)</strong> キーフレームを1つ生成します。<br>
+    <strong>(5)</strong> このアニメーションでは、制御パラメータの値が「<strong>0</strong>」を持つように設定しました。<br>
+    キャラクターの「基本の表情」が表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1833.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 2番目のアニメーションを作成しました。 名前は「<strong>Anim2</strong>」に設定しました。<br>
+    <strong>(2)</strong> 同様にタイムラインを構成し、キーフレームを追加します。<br>
+    <strong>(3)</strong> 今回は「<strong>3</strong>」の値を持つように設定しました。<br>
+    パラメータの値を変更すると、キャラクターの「スマートな表情」が表示されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    「Bake」の後、Unityシーンで「Anim1」と「Anim2」を順序に再生してみました。<br>
+    「<strong>CrossFade</strong>」関数を使用して、アニメーションをゆっくり切り替えます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1834.jpg"/>
+    <br>
+    
+    <p>
+    Unityシーンで「Anim1」の再生中に「Anim2」が再生されるようにした例の結果です。<br>
+    アニメーションが「Anim1」から「Anim2」にスムーズに切り替わる途中、意図しない表情が現れます。<br>
+    「基本の表情」から「スマートな表情」にすぐに移行することを期待していましたが、「驚いた表情」と「めまいの表情」が真ん中に見えます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1836.jpg"/>
+    <br>
+    
+    <p>
+    この問題は、アニメーション遷移処理中の「<strong>補間（Interpolation）</strong>」で発生します。<br>
+    「<strong>CrossFade</strong>」などのアニメーション再生機能を実行すると、一定時間ゆっくりアニメーション切り替えながら再生が始まります。<br>
+    上の図では、「Anim1」から「Anim2」に切り替える時間があることがわかります。<br>
+    制御パラメータ「<strong>Eye Shape</strong>」の値は「Anim1」では「<strong>0</strong>」で、「Anim2」が再生されると「<strong>3</strong>」に変わります。<br>
+    このとき、アニメーションが切り替わる時間の間、「<strong>0</strong>」から「<strong>3</strong>」の間の値が補間されてしまいます。<br>
+    補間プロセスでは、パラメータは「<strong>0 > 1 > 2 > 3</strong>」の値を順次持つことになります。これが問題の原因です。<br>
+    </p>
+    <br>
+    
+    <p>
+    補間プロセス自体はバグではありません。<br>
+    自然なアニメーション切り替え効果のためには、モーションとモーション間の中間ポーズを計算したり、「Float」や「Vector」タイプの制御パラメータの中間値を計算するためには補間演算が必要だからです。<br>
+    しかし、特に「順序を持たない画像を切り替えるIntタイプの制御パラメータ」の場合には、この補間プロセスがむしろ間違った結果を作ることです。<br>
+    </p>
+    <br>
+    
+    <p>
+    この問題を解決するには、制御パラメータに「補間されない」を指定する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1838.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Eye Shape</strong>」制御パラメータを選択します。<br>
+    <strong>(2)</strong> 「<strong>Int</strong>」タイプに設定されていることを確認してください。<br>
+    <strong>(3)</strong> 「<strong>Int</strong>」タイプの場合、「<strong>Integer Processing Method</strong>」オプションが登場します。<br>
+    このオプションは、「<span class="text-primary"><strong>Interpolated</strong></span>」と「<span class="text-danger"><strong>Indexed</strong></span>」の値から1つを選択できます。<br>
+    <strong>(4)</strong> 「<span class="text-danger"><strong>Indexed</strong></span>」を選択します。<br>
+    それでは、「Bake」をしてUnityシーンで同じようにテストしてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1835.jpg"/>
+    <br>
+    
+    <p>
+    「Anim1」から「Anim2」に切り替えると、制御パラメータの中間値は表示されません。<br>
+    おかげで、「基本の表情」から「スマートな表情」に直接切り替えることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1837.jpg"/>
+    <br>
+    
+    <p>
+    制御パラメータで「<strong>Integer Processing Method</strong>」属性の値を「<span class="text-danger"><strong>Indexed</strong></span>」に設定すると、アニメーション補間時に上記のように演算されます。<br>
+    「Anim1」から「Anim2」に切り替える過程で中間値をすべて省略し、ただ「開始値（0）」から「到着値（3）」に直ちに切り替えられるので、バグが解決されるのです。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>キーフレーム間補間プロセスで比較</h3>
+    <br>
+    
+    <p>
+    この現象はアニメーション切り替えだけでなく、キーフレーム間の補間過程でも見ることができます。<br>
+    2つの制御パラメータを使用して他の結果がどのように見えるかを見てみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1839.jpg"/>
+    <br>
+    
+    <p>
+    上記の2つの制御パラメータを互いに異なるように設定しましょう。<br>
+    順序に画像が切り替わる「<strong>Eye Open</strong>」の場合、「<strong>Integer Processing Method</strong>」の値を「<span class="text-primary"><strong>Interpolated</strong></span>」（デフォルト）に設定します。<br>
+    画像間に順序がない「<strong>Eye Shape</strong>」の場合は、上記のように「<span class="text-danger"><strong>Indexed</strong></span>」に設定してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1840.jpg"/>
+    <br>
+    
+    <p>
+    比較をするためのアニメーションを構成しましょう。<br>
+    <strong>(1)</strong> タイムラインにすべての制御パラメータを追加します。<br>
+    <strong>(2)</strong> キーフレーム間の補間プロセスを見るために、上記のようにキーフレームを追加しました。<br>
+    前のキーフレームには各制御パラメータの最小値、後のキーフレームには最大値を入力しました。<br>
+    <strong>(3)</strong> 「アニメーションカーブ」を「<strong>線形(Linear)</strong>」に変更します。<br>
+    （もともと、「Int」タイプの制御パラメータの基本曲線は「<strong>固定値（Constant）</strong>」方式です。これは補間を防ぐことができるからです。）<br>
+    （アニメーションカーブについては、<a href="../../jp/GettingStarted/GS_2_8.html">関連ページ</a>でご確認ください。)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1841.jpg"/>
+    <br>
+    
+    <p>
+    「<span class="text-primary"><strong>Interpolated</strong></span>」に設定された「<strong>Eye Open</strong>」の場合、キーフレーム間で制御パラメータの値が「<strong>0 > 1 > 2</strong>」に徐々に変化することがわかります。<br>
+    つまり、補間演算が適用され、画像が順序に表示されるように描かれているため、結果は非常に自然です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1842.jpg"/>
+    <br>
+    
+    <p>
+    「<span class="text-danger"><strong>Indexed</strong></span>」に設定された「<strong>Eye Shape</strong>」の場合、キーフレーム補間中に制御パラメータが中間値を持ちません。<br>
+    これは、順序がない画像の切り替えに非常に適しています。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1843.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Indexed</strong>」に設定されていない場合は、上記のようにキーフレーム補間プロセス中に中間値に対応するメッシュが表示されます。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    言い換えれば、制御パラメータによって表される画像が順序に表示されるように描かれているかどうかに応じて、適切に属性を決定することで補間の問題を回避できることがわかる。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_AnimationCurvesInBatch.html">< 一括的にアニメーションカーブを設定</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_Mecanim.html">「Mecanim」利用 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

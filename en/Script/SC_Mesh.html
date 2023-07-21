@@ -35,6 +35,12 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="../../en/Script.html">Script</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
 
                 </ul>
 
@@ -329,20 +335,26 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">Description</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;Replaces the texture of the apOptTransform.<br>
     &nbsp;&nbsp;&nbsp;If the texture is replaced, the draw call may increase.<br>
     &nbsp;&nbsp;&nbsp;When targeting "_MainTex", please use the "SetMeshImage" function.<br>
+    &nbsp;&nbsp;&nbsp;Instead of optTransform, you can specify the target by entering transformName and rootUnitIndex.<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to refer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (if not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the apOptTransform (the name of the mesh or mesh group on the editor)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-success">Texture2D</span> texture : Texture to replace<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : Shader property ID (use the Shader.PropertyToID function to get the ID)<br>
@@ -356,20 +368,26 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">Description</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;Sets the color of the apOptTransform.<br>
     &nbsp;&nbsp;&nbsp;If the color is not the default, the draw call may increase.<br>
     &nbsp;&nbsp;&nbsp;When targeting "_Color", use the "SetMeshColor" function.<br>
+    &nbsp;&nbsp;&nbsp;Instead of optTransform, you can specify the target by entering transformName and rootUnitIndex.<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to refer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (if not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the apOptTransform (the name of the mesh or mesh group on the editor)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> color : Color to replace<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : Shader property ID (use the Shader.PropertyToID function to get the ID)<br>
@@ -383,20 +401,26 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlpha</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlpha</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlpha</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlpha</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">Description</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;Sets the alpha (transparency) of the color of apOptTransform.<br>
     &nbsp;&nbsp;&nbsp;The default value is 1; otherwise, the draw call may increase.<br>
     &nbsp;&nbsp;&nbsp;When targeting "_Color", use the "SetMeshAlpha" function.<br>
+    &nbsp;&nbsp;&nbsp;Instead of optTransform, you can specify the target by entering transformName and rootUnitIndex.<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to refer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (if not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the apOptTransform (the name of the mesh or mesh group on the editor)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> alpha : Alpha to replace<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : Shader property ID (use the Shader.PropertyToID function to get the ID)<br>
@@ -410,19 +434,25 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloat</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloat</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloat</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloat</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">Description</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;Sets the value of the Float property of the material of apOptTransform.<br>
     &nbsp;&nbsp;&nbsp;When this function is called, the draw call may increase.<br>
+    &nbsp;&nbsp;&nbsp;Instead of optTransform, you can specify the target by entering transformName and rootUnitIndex.<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to refer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (if not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the apOptTransform (the name of the mesh or mesh group on the editor)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> floatValue : Float Value<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : Shader property ID (use the Shader.PropertyToID function to get the ID)<br>
@@ -436,19 +466,25 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomInt</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomInt</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomInt</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomInt</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">Description</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;Sets the value of the Int property of the material of apOptTransform.<br>
     &nbsp;&nbsp;&nbsp;When this function is called, the draw call may increase.<br>
+    &nbsp;&nbsp;&nbsp;Instead of optTransform, you can specify the target by entering transformName and rootUnitIndex.<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to refer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (if not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the apOptTransform (the name of the mesh or mesh group on the editor)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> intValue : Int Value<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : Shader property ID (use the Shader.PropertyToID function to get the ID)<br>
@@ -462,19 +498,25 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">Description</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;Sets the value of the Vector4 property of the material of apOptTransform.<br>
     &nbsp;&nbsp;&nbsp;When this function is called, the draw call may increase.<br>
+    &nbsp;&nbsp;&nbsp;Instead of optTransform, you can specify the target by entering transformName and rootUnitIndex.<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : apOptTransform to refer<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : Root Unit Index (if not, search all)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : The name of the apOptTransform (the name of the mesh or mesh group on the editor)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-success">Vector4</span> vector4Value : Vector4 Value<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Shader property name<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : Shader property ID (use the Shader.PropertyToID function to get the ID)<br>

@@ -35,6 +35,12 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="../../kr/Script.html">스크립트</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-kor">동영상</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">게시판</a>
+                </li>
 
                 </ul>
 
@@ -329,20 +335,26 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">Description</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransform의 텍스쳐를 교체합니다.<br>
     &nbsp;&nbsp;&nbsp;텍스쳐가 교체된 경우 드로우콜이 증가할 수 있습니다.<br>
     &nbsp;&nbsp;&nbsp;"_MainTex"를 대상으로 하는 경우 "SetMeshImage" 함수를 이용해주세요.<br>
+    &nbsp;&nbsp;&nbsp;optTransform 대신, transformName과 rootUnitIndex를 입력해서 대상을 지정할 수 있습니다.<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 참조 하는 apOptTransform의 이름 (에디터 상의 메시 이름)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-success">Texture2D</span> texture : 새로 지정될 텍스쳐<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : 텍스쳐가 적용될 쉐이더 속성 이름<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : 텍스쳐가 적용될 쉐이더의 속성 ID (Shader.PropertyToID 함수를 이용하여 ID 획득)<br>
@@ -356,20 +368,26 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomColor</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Color</span> <span class="text-muted">color,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">Description</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransform의 색상을 설정합니다.<br>
     &nbsp;&nbsp;&nbsp;색상이 기본값이 아닌 경우 드로우콜이 증가할 수 있습니다.<br>
     &nbsp;&nbsp;&nbsp;"_Color"를 대상으로 하는 경우 "SetMeshColor" 함수를 이용해주세요.<br>
+    &nbsp;&nbsp;&nbsp;optTransform 대신, transformName과 rootUnitIndex를 입력해서 대상을 지정할 수 있습니다.<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 참조 하는 apOptTransform의 이름 (에디터 상의 메시 이름)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-success">Color</span> color2X : 새로 지정될 색상 (2X Multiply)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : 색상이 적용될 쉐이더 속성 이름<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : 색상이 적용될 쉐이더의 속성 ID (Shader.PropertyToID 함수를 이용하여 ID 획득)<br>
@@ -383,20 +401,26 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlpha</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlpha</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlpha</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomAlpha</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">alpha,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">Description</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransform의 색상 중 알파(투명도)를 설정합니다.<br>
     &nbsp;&nbsp;&nbsp;기본값은 1이며, 그 외의 값을 지정한 경우 드로우콜이 증가할 수 있습니다.<br>
     &nbsp;&nbsp;&nbsp;"_Color"를 대상으로 하는 경우 "SetMeshAlpha" 함수를 이용해주세요.<br>
+    &nbsp;&nbsp;&nbsp;optTransform 대신, transformName과 rootUnitIndex를 입력해서 대상을 지정할 수 있습니다.<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 참조 하는 apOptTransform의 이름 (에디터 상의 메시 이름)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> alpha : 새로 지정될 투명도<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : 색상이 적용될 쉐이더 속성 이름<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : 색상이 적용될 쉐이더의 속성 ID (Shader.PropertyToID 함수를 이용하여 ID 획득)<br>
@@ -410,19 +434,25 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloat</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloat</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloat</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomFloat</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">float</span> <span class="text-muted">floatValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">Description</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransform의 재질의 Float 속성의 값을 설정합니다.<br>
     &nbsp;&nbsp;&nbsp;이 함수가 호출 되면 드로우콜이 증가할 수 있습니다.<br>
+    &nbsp;&nbsp;&nbsp;optTransform 대신, transformName과 rootUnitIndex를 입력해서 대상을 지정할 수 있습니다.<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 참조 하는 apOptTransform의 이름 (에디터 상의 메시 이름)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">float</span> floatValue : Float 값<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Float값이 적용될 쉐이더 속성 이름<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : Float값이 적용될 쉐이더의 속성 ID (Shader.PropertyToID 함수를 이용하여 ID 획득)<br>
@@ -436,19 +466,25 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomInt</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomInt</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomInt</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomInt</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-primary">int</span> <span class="text-muted">intValue,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">Description</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransform의 재질의 Int 속성의 값을 설정합니다.<br>
     &nbsp;&nbsp;&nbsp;이 함수가 호출 되면 드로우콜이 증가할 수 있습니다.<br>
+    &nbsp;&nbsp;&nbsp;optTransform 대신, transformName과 rootUnitIndex를 입력해서 대상을 지정할 수 있습니다.<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 참조 하는 apOptTransform의 이름 (에디터 상의 메시 이름)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> intValue : Int 값<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Int값이 적용될 쉐이더 속성 이름<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : Int값이 적용될 쉐이더의 속성 ID (Shader.PropertyToID 함수를 이용하여 ID 획득)<br>
@@ -462,19 +498,25 @@
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
 <br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomVector4</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Vector4</span> <span class="text-muted">vector4Value,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.4.5</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">Description</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransform의 재질의 Vector4 속성의 값을 설정합니다.<br>
     &nbsp;&nbsp;&nbsp;이 함수가 호출 되면 드로우콜이 증가할 수 있습니다.<br>
+    &nbsp;&nbsp;&nbsp;optTransform 대신, transformName과 rootUnitIndex를 입력해서 대상을 지정할 수 있습니다.<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 참조 하는 apOptTransform의 이름 (에디터 상의 메시 이름)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-success">Vector4</span> vector4Value : Vector4 값<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : Vector4 값이 적용될 쉐이더 속성 이름<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : Vector4 값이 적용될 텍스쳐가 적용될 쉐이더의 속성 ID (Shader.PropertyToID 함수를 이용하여 ID 획득)<br>
