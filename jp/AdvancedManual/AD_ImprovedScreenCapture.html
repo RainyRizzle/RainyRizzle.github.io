@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>改善された画面キャプチャ</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ImprovedScreenCapture.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ImprovedScreenCapture.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_ImprovedScreenCapture.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 改善された画面キャプチャ</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">改善された画面キャプチャ</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.6</span></h4>
+    
+    <p>
+    ユーザーからのフィードバックを受け、「AnyPortrait v1.4.6」で画面キャプチャ機能が改善されました。<br>
+    このマニュアルでは、既存の画面キャプチャ機能で変更された点について説明します。<br>
+    画面キャプチャの機能の使い方は、「<a href="../../jp/AdvancedManual/AD_ScreenCapture.html">画面キャプチャ</a>」のマニュアルで確認してください。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>改善されたキャプチャ機能を使用</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1851.jpg"/>
+    <br>
+    
+    <p>
+    設定ダイアログで、「<strong>Capture> Processor</strong>」のオプションで「<strong>Version 1（Legacy）</strong>」または「<strong>Version 2</strong>」を選択できます。<br>
+    - <strong>Version 1（Legacy）</strong>：以前のバージョンまでのキャプチャコードを使用してキャプチャを実行します。 このオプションを選択すると、以前のバージョンとの一貫性を維持できます。<br>
+    - <strong>Version 2</strong>：改善されたコードを使ってキャプチャを実行します。 「v1.4.6」にアップデートすると、デフォルトでこのオプションが選択されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>Version 2</strong>」を選択すると、内部的に次の変更点があります。<br>
+    - 既存の画像リサイズコードが動作しないため、あまりにぼやけてしまうような問題は発生しません。<br>
+    - レンダリングの基本となるエディターUIのサイズによってレンダー解像度が歪む問題が最小化されました。<br>
+    - キャプチャエリアのコントラスト画像サイズに制限があります。<br>
+    - 処理時間が多少増加し、画像サイズによって時間が大幅に増加することがあります。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>Version 2</strong>」を選択すると、以下の違いを直接確認できます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>フォーカスオフセット</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1852.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Version 2</strong>」オプションで画面をキャプチャすると、新しいオプション「<strong>Focus Offset（px）</strong>」が表示されます。 「300」を試して入力しましょう。<br>
+    <strong>(2)</strong> キャプチャ結果を見ると、キャラクターが従来より「300」ピクセルだけ移動したことがわかります。<br>
+    「<strong>Focus Offset</strong>」はフォーカスを移動させるものですので、入力された値の逆方向にキャラクターが移動する点に注意してください。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>Focus Offset（px）</strong>」オプションは、キャプチャ領域を移動する新しい方法です。<br>
+    キャラクターがキャプチャされる位置に対する3つの方法の違いは、それぞれ次のとおりです。<br>
+    - <strong>Position</strong> : <span class="text-primary">エディタ座標系</span>でキャプチャエリアを移動します。 ワークスペースの青い四角が移動します。<br>
+    - <strong>Focus Offset (px)</strong> : 保存した画像ファイルの<span class="text-success">ピクセル座標系</span>に基づいてキャプチャ領域を移動します。 ピクセル単位で移動するので、正確に移動できます。<br>
+    - <strong>ワークスペースからドラッグ</strong> : キャラクターの位置を移動する方法です。 迅速で直感的な方法で、<span class="text-primary">エディタ座標系</span>を利用します。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>サイズ制限</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1853.jpg"/>
+    <br>
+    
+    <p>
+    これは「<strong>Version 2</strong>」の制限です。<br>
+    画像リサイズコードを使用しない代わりに、画像拡大率に制限がありました。<br>
+    <strong>(1)</strong> <strong>Image Size</strong>の値を非常に大きく設定してみましょう。<br>
+    <strong>(2)</strong> キャプチャを実行できないという警告メッセージが表示され、現在キャプチャ可能な最大解像度が表示されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    このサイズ制限は、「キャプチャ領域のサイズ」と「実行機器のメモリサイズ」によって変わります。<br>
+    画像サイズの絶対的な制限ではなく、キャプチャ領域に対する相対値なので、キャプチャ領域を拡張すると制限を避けてキャプチャを行うことができます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>ピクセルアートスタイルの画像を保存</h3>
+    <br>
+    
+    <p>
+    新しいキャプチャ方式では、過度の画像リサイジングコードは機能しません。<br>
+    そのおかげで、ピクセルアートスタイルの画像をそのままキャプチャすることが可能です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1854.jpg"/>
+    <br>
+    
+    <p>
+    ピクセルアートスタイルで制作されたスライムキャラクターです。<br>
+    PSDインポートを使ってロードしましたが、上記のように若干のぼかしが適用されています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1855.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Unityの「<strong>Assets</strong>」で該当する画像を選択します。<br>
+    <strong>(2)</strong> 「<strong>Filter Mode</strong>」を「<strong>Point(no filter)</strong>」に設定し、「<strong>Compression</strong>」を「<strong>None</strong>」に変更します。 （「<strong>Mipmap</strong>」オプションを無効にすることもお勧めします。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1856.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitエディタに戻ると、スライムキャラクターのピクセルが鮮明に表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1857.jpg"/>
+    <br>
+    
+    <p>
+    この状態でキャプチャを実行すると、上記のようにピクセルアートスタイルの画像を生成することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>ピクセル単位のキャプチャには誤差があります！</h4>
+    <br>
+    
+    <p>
+    AnyPortraitは3DエンジンであるUnity用のツールなので、整数ではなく実数の位置値を持ちます。<br>
+    したがって、ピクセル単位で保存しようとすると、位置誤差が発生し、元のリソースとは異なる結果が生じる可能性があります。<br>
+    これは正確なピクセルアートアニメーションには適していない可能性があるため、注意して使用する必要があります。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>画像サイズによって処理時間が大幅に増加した場合</h3>
+    <br>
+    
+    <p>
+    新しい方法は、画像解像度に応じて処理時間が大幅に増加するという欠点がある。<br>
+    この処理時間はキャプチャ領域のサイズに対する相対値によるものであるため、この特性を理解すると処理時間を大幅に短縮できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1875.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Capture Size</strong>」を「<strong>64x64</strong>」に設定し、「<strong>Image Size</strong>」を「<strong>512x512</strong>」に設定した状態でキャプチャを試みます。<br>
+    <strong>(2)</strong> 処理時間が大幅に増加するという警告メッセージが表示されます。<br>
+    「<strong>Okay</strong>」ボタンを押すとキャプチャが実行されますが、時間がかなりかかります。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>512x512</strong>」という解像度はあまり大きいわけではありませんが、「<strong>64x64</strong>」のキャプチャ領域の大きさに比べて各軸ごとに「8倍」ずつ大きくなるため、拡大率がかなり大きい。<br>
+    新バージョンのスクリーンキャプチャの過程で重要なのは拡大率だからです。<br>
+    </p>
+    <br>
+    
+    <p>
+    この問題を解決するために保存される画像のサイズ、つまり「<strong>Image Size</strong>」を減らすのが最も簡単な方法です。<br>
+    ただし、逆に基準となるキャプチャ領域のサイズ、つまり「<strong>Capture Size</strong>」を大きくして相対的な拡大率を減らすこともお勧めします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1876.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Capture Size</strong>」を「<strong>256x256</strong>」に変更します。 ワークスペースでキャプチャされるフレームが大きくなっていることがわかります。<br>
+    <strong>(2)</strong> キャプチャUIのツールを利用して、拡大されたキャプチャ領域に合わせてキャラクターを精密に移動、拡大します。<br>
+    <strong>(3)</strong> キャプチャエリア フレームに合わせてキャラクターが拡大されたのが見られます。<br>
+    <strong>(4)</strong> キャプチャを実行すると、警告メッセージも表示されず、かなり早く画像が生成されます。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_ScreenCapture.html">< 画面キャプチャ</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_OptimizedBake.html">最適化されたBake ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

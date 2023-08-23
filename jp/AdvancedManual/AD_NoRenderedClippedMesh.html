@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>クリッピングメッシュのレンダリングの問題</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_NoRenderedClippedMesh.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_NoRenderedClippedMesh.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_NoRenderedClippedMesh.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > クリッピングメッシュのレンダリングの問題</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">クリッピングメッシュのレンダリングの問題</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.6</span></h4>
+    
+    <p>
+    私たちのチームが多くのユーザーから受け取った質問の1つは、「クリッピングメッシュが正常にレンダリングされないこと」です。<br>
+    レンダリングの問題は、見かけ上同じ問題であっても、異なる原因によるものである可能性があるため、解決するのは簡単ではありません。<br>
+    クリッピングメッシュに関する問題の場合も、異なる原因が同じ問題を引き起こす可能性があります。<br>
+    このページでは、ユーザーからのフィードバックに基づいて、代表的な原因とその解決策を紹介します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1858.jpg"/>
+    <br>
+    
+    <p>
+    このページで使用されるキャラクターです。<br>
+    目と口のメッシュがクリッピングメッシュに設定されています。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>レンダーパイプライン設定が正しくない場合</h3>
+    <br>
+    
+    <p>
+    これは、主に「<strong>URP</strong>」を使用した場合、または「<strong>Built-In</strong>」レンダリングパイプラインに復元した場合に発生する可能性があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1859.jpg"/>
+    <br>
+    
+    <p>
+    Unityエディタで「<strong>Project Settings > Graphics > Scriptable Render Pipeline Settings</strong>」で「<strong>URP</strong>」を適用しました。<br>
+    続いて、「<strong>URP</strong>」に設定した後、「材質ライブラリ」を用いて「URP用材質」をキャラクターに適用します。 （<a href="../../jp/AdvancedManual/AD_URP.html">関連ページ</a>）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1860.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bake</strong>」をしてゲームを実行しましたが、クリッピングメッシュはレンダリングされません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1861.jpg"/>
+    <br>
+    
+    <p>
+    この場合、「レンダリングパイプライン」設定が現在のプロジェクト設定と一致しないために発生した可能性があります。<br>
+    <strong>(1)</strong> AnyPortraitエディタの「<strong>Bake</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>Render Pipeline</strong>」の設定が現在のプロジェクトの設定に合っていることを確認してください。<br>
+    「URP」の場合は「<strong>Scriptable Render Pipeline</strong>」に設定し、「デフォルトレンダリングパイプライン」を使用する場合は「<strong>Default</strong>」に設定する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1862.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bake</strong>」をしてゲームを実行すると、クリッピングメッシュが正常にレンダリングされることがわかります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>2台以上のカメラがある場合</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1863.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> キャラクターをレンダリングする 2 つのカメラをシーンに配置しました。<br>
+    2つのカメラによって1つのキャラクターが2回レンダリングされるのが見られます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1864.jpg"/>
+    <br>
+    
+    <p>
+    この状態でゲームを実行すると、1つのカメラを除く残りのカメラではクリッピングメッシュが正常にレンダリングされません。<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortraitのクリッピングメッシュは、小さな解像度の「レンダリングテクスチャ」を使用して最適化されたマスクを作成するためにカメラのプロパティを参照します。<br>
+    ところで、2つ以上のカメラがキャラクターをレンダリングしたい場合、クリッピングマスクの最適化機能が誤動作を引き起こすことです。<br>
+    </p>
+    <br>
+    
+    <p>
+    この問題を解決するには、予想外のオプションである「<strong>VR</strong>」サポート機能を使用する必要があります。<br>
+    「<strong>VR</strong>」は基本的に2つのカメラが動作するシステムですが、この場合と同じなので適切な解決策になります。<br>
+    （「<strong>VR</strong>」については、<a href="../../jp/AdvancedManual/AD_VR.html">関連ページ</a>で詳細をご覧いただけます。)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1865.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Bake</strong>ダイアログ」を開きます。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>VR / Multi-Camera</strong>」オプションの値を「<strong>Multiple Cameras</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <p>
+    「Bake」を実行すると問題が解決します。<br>
+    ただし、この状態では残念ながら、クリッピングメッシュの最適化機能は無効になります。<br>
+    そのため、低解像度のクリッピングマスクによってレンダリングクオリティが低くなるという問題が発生する可能性があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1866.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「メッシュグループ」を選択します。<br>
+    <strong>(2)</strong> クリッピングマスクとなるメッシュを選択します。<br>
+    <strong>(3)</strong> 「<strong>Mask Texture Size</strong>」属性の値を変更してクリッピングマスクの解像度を上げます。<br>
+    表示されるメッシュのサイズと品質によって決定する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1867.jpg"/>
+    <br>
+    
+    <p>
+    「Bake」をしてゲームを実行すると、クリッピングメッシュが正しく動作することがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    多数のカメラを配置した状態で、そのカメラが「レンダーテクスチャ」を対象にレンダリングを行う場合には、副次的な課題がさらにあります。<br>
+    この場合は、<a href="../../jp/AdvancedManual/AD_RenderTexture.html">関連ページ</a>で詳細を確認してください。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>スクリプトの実行順序が適切でない場合</h3>
+    <br>
+    
+    <p>
+    AnyPortraitのクリッピングマスクは、更新ルーチンの過程でどのように描画されるかを計算します。<br>
+    その計算は、カメラとキャラクターの位置、属性などを参照します。<br>
+    更新でマスク関連の計算を行うときと実際にレンダリングされたときの関連要素の状態が一致しない場合、クリッピングマスクとメッシュが正常にレンダリングされない可能性があります。<br>
+    特にUnityの「<strong>Cinemachine</strong>」を使用している場合は、この問題に遭遇しやすいです。<br>
+    </p>
+    <br>
+    
+    <p>
+    この問題を扱うマニュアルが別途あるので、それを参照すればよいでしょう。<br>
+    - <a href="../../jp/AdvancedManual/AD_ExecutionOrderProblem.html">他のアセットとの実行順序の問題</a><br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_ExportToProject.html">< 別のプロジェクトにエクスポート</a>
+        <a class="btn btn-light" role="button" href="#"></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

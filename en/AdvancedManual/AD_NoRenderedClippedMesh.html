@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Not rendered Clipped Meshes</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_NoRenderedClippedMesh.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_NoRenderedClippedMesh.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_NoRenderedClippedMesh.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Not rendered Clipped Meshes</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Not rendered Clipped Meshes</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.6</span></h4>
+    
+    <p>
+    One of the most common inquiries our team has received from users is "Clipping meshes are not rendering properly".<br>
+    Rendering problems are not easy to troubleshoot because even seemingly identical problems can have different causes.<br>
+    For issues with clipping meshes, different causes can cause the same issue.<br>
+    This page introduces typical causes and solutions based on user feedback.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1858.jpg"/>
+    <br>
+    
+    <p>
+    This is the character used on this page.<br>
+    The eye and mouth meshes are set as clipping meshes.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Incorrect Render Pipeline settings</h3>
+    <br>
+    
+    <p>
+    This is mostly the case when using <strong>URP</strong>, or when restoring to <strong>Built-In Render Pipeline</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1859.jpg"/>
+    <br>
+    
+    <p>
+    It is set to <strong>URP</strong> in <strong>Project Settings > Graphics > Scriptable Render Pipeline Settings</strong> in Unity Editor.<br>
+    After setting it to <strong>URP</strong>, use the <strong>Material Library</strong> to apply the material for URP. (<a href="../../en/AdvancedManual/AD_URP.html">Related page</a>)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1860.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong> and run the game, but clipping meshes are not rendered.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1861.jpg"/>
+    <br>
+    
+    <p>
+    This is most likely caused by the <strong>Render Pipeline</strong> settings not matching the current project settings.<br>
+    <strong>(1)</strong> Press the <strong>Bake</strong> button in the AnyPortrait editor.<br>
+    <strong>(2)</strong> Select the <strong>Setting</strong> tab.<br>
+    <strong>(3)</strong> Check if the <strong>Render Pipeline</strong> settings match the settings of the current project.<br>
+    In the case of <strong>URP</strong>, it should be set to <strong>Scriptable Render Pipeline</strong>, and if you use the default render pipeline, it should be set to <strong>Default</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1862.jpg"/>
+    <br>
+    
+    <p>
+    If you <strong>Bake</strong> and run the game, you can see that the clipping meshes are rendered normally.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>When there are 2 or more cameras</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1863.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Let's configure the scene to have two cameras that render characters.<br>
+    As above, you can see that one character is rendered twice by two cameras.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1864.jpg"/>
+    <br>
+    
+    <p>
+    If you run the game in this state, clipping meshes will not be rendered normally for cameras other than one.<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortrait's clipping mesh references the properties of the camera to create an optimized mask using a <strong>Render Texture</strong> of moderate resolution.<br>
+    However, if more than one camera is trying to render a character, the optimization of the clipping mask is malfunctioning.<br>
+    </p>
+    <br>
+    
+    <p>
+    In order to solve this problem, you have to use <strong>VR support function</strong> which is a somewhat unexpected option.<br>
+    <strong>VR</strong> is basically a two-camera system, and it's just like this case, so it's an appropriate solution.<br>
+    (You can read more about <strong>VR support</strong> at the <a href="../../en/AdvancedManual/AD_VR.html">Related page</a>.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1865.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the <strong>Bake</strong> dialog.<br>
+    <strong>(2)</strong> Select the <strong>Setting</strong> tab.<br>
+    <strong>(3)</strong> Change the <strong>VR / Multi-Camera</strong> option value to <strong>Multiple Cameras</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now run <strong>Bake</strong> and the problem is solved.<br>
+    Unfortunately, in this state, optimization of the clipping mesh is disabled.<br>
+    Therefore, the problem of lowering the rendering quality due to the lower resolution clipping mask occurs.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1866.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select <strong>Mesh Group</strong>.<br>
+    <strong>(2)</strong> Select a mesh to be the clipping mask.<br>
+    <strong>(3)</strong> Increase the resolution of the clipping mask by changing the value of the <strong>Mask Texture Size</strong> property.<br>
+    It should be decided according to the size and quality of the displayed mesh, but when optimization is off, <strong>512</strong> or <strong>1024</strong> is better in terms of quality.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1867.jpg"/>
+    <br>
+    
+    <p>
+    If you <strong>Bake</strong> and run the game, you can see the clipping mesh is working properly.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    With multiple cameras placed, there are additional issues when the cameras render to <strong>Render Texture</strong>.<br>
+    In this case, check the <a href="../../en/AdvancedManual/AD_RenderTexture.html">Related page</a> for more information.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Script execution order is not appropriate</h3>
+    <br>
+    
+    <p>
+    AnyPortrait's clipping mask is calculated by how it will be drawn during the update routine.<br>
+    That calculation references camera and character positions, attributes, etc.<br>
+    If the states of related elements when calculating the mask in the update and when actually rendering do not match, there is a possibility that the clipping mask and mesh may not be rendered properly.<br>
+    In particular, if you use Unity's <strong>Cinemachine</strong>, you will experience this problem without your knowledge.<br>
+    </p>
+    <br>
+    
+    <p>
+    There is a separate manual dealing with this issue, you can refer to it.<br>
+    - <a href="../../en/AdvancedManual/AD_ExecutionOrderProblem.html">Execution order problem with assets</a><br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ExportToProject.html">< Exporting to another project</a>
+        <a class="btn btn-light" role="button" href="#"></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Improved Screen capture</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_ImprovedScreenCapture.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ImprovedScreenCapture.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ImprovedScreenCapture.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Improved Screen capture</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Improved Screen capture</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.6</span></h4>
+    
+    <p>
+    The screen capture function has been improved in AnyPortrait v1.4.6 based on feedback from users.<br>
+    This manual deals with changes from the previous screen capture function.<br>
+    For how to use the screen capture functions, check the "<a href="../../en/AdvancedManual/AD_ScreenCapture.html">Screen Capture</a>" manual.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Using the enhanced capture feature</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1851.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Version 1 (Legacy)</strong> or <strong>Version 2</strong> can be selected as an option for "<strong>Capture > Processor</strong>" in the settings dialog.<br>
+    - <strong>Version 1 (Legacy)</strong> : Capture is performed using the capture code of the previous version. Select this option to ensure consistency in resource creation.<br>
+    - <strong>Version 2</strong> : Capture is performed using the improved code. Updating to v1.4.6 will select this option by default.<br>
+    </p>
+    <br>
+    
+    <p>
+    If <strong>Version 2</strong> is selected, the following changes are made internally.<br>
+    - Excessive blur problem does not occur because the previous image resizing code does not work.<br>
+    - The problem that the render resolution is distorted depending on the size of the editor UI has been resolved.<br>
+    - There is a limit on the size of the image relative to the capture area.<br>
+    - The processing time has increased slightly, and the time may increase significantly depending on the image size.<br>
+    </p>
+    <br>
+    
+    <p>
+    You can check the differences below by selecting <strong>Version 2</strong>.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Focus Offset</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1852.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> If you try to capture the screen with the <strong>Version 2</strong> option, you can see a new option <strong>Focus Offset (px)</strong>. Let's try entering <strong>300</strong>.<br>
+    <strong>(2)</strong> Looking at the capture result, you can see that the character has moved 300 pixels more than before.<br>
+    Note that <strong>Focus Offset</strong> moves the focus, not the character, so the character moves in the opposite direction of the entered value.<br>
+    </p>
+    <br>
+    
+    <p>
+    The <strong>Focus Offset (px)</strong> option is a new way to move the capture area.<br>
+    The differences between the three methods for where the character is captured are:<br>
+    - <strong>Position option</strong> : Moves the capture area on <span class="text-primary">Editor coordinate system</span>. The blue rectangle in the workspace moves.<br>
+    - <strong>Focus Offset (px)</strong>: Moves the capture area based on <span class="text-success">Pixel coordinate system</span> of the saved image file. Since it is moved in units of pixels, it can be moved precisely.<br>
+    - <strong>Drag in workspace</strong>: This is a method to move the character's position. This is a quick and intuitive method, and uses <span class="text-primary">Editor coordinate system</span>.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Size Limit</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1853.jpg"/>
+    <br>
+    
+    <p>
+    This is a limitation of <strong>Version 2</strong>.<br>
+    The previous image resizing code doesn't work, instead there is a limit to the relative size of the image.<br>
+    <strong>(1)</strong> Let's set the value of <strong>Image Size</strong> very large.<br>
+    <strong>(2)</strong> A warning message indicating that capture cannot be performed informs you of the maximum resolution that can be captured.<br>
+    </p>
+    <br>
+    
+    <p>
+    This size limit can change depending on the "capture area size" and "execution device memory size".<br>
+    Since it is a relative value compared to the capture area, not an absolute limitation of the image size, you can avoid the limitation and capture by expanding the capture area.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Save image in Pixel Art Style</h3>
+    <br>
+    
+    <p>
+    Excessive image resizing code does not work with the new capture method.<br>
+    Thanks to it, it is possible to capture pixel art style images as they are.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1854.jpg"/>
+    <br>
+    
+    <p>
+    Slime character made in pixel art style.<br>
+    It was imported using PSD import, and a little blur is applied as above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1855.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the image from <strong>Assets</strong> in Unity Editor.<br>
+    <strong>(2)</strong> Select "<strong>Point (no filter)</strong>" for the <strong>Filter Mode</strong> property, and change the <strong>Compression</strong> property to "<strong>None</strong>". (Disabling the <strong>Mipmap</strong> attribute is also recommended.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1856.jpg"/>
+    <br>
+    
+    <p>
+    Back in the AnyPortrait editor, you can clearly see the pixels of the slime characters.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1857.jpg"/>
+    <br>
+    
+    <p>
+    If you execute capture in this state, it is possible to create a pixel art style image as above.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>There is an error in pixel-by-pixel capture!</h4>
+    <br>
+    
+    <p>
+    Since AnyPortrait is a tool for Unity, a 3D engine, it has position values of real numbers rather than integers.<br>
+    Therefore, when you try to save in pixel units, a position error may occur, resulting in a different result from the original resource.<br>
+    This may not be suitable for precise pixel art animation, so use with caution.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Processing time greatly increased by image size</h3>
+    <br>
+    
+    <p>
+    The disadvantage of the new method is that the processing time greatly increases depending on the image resolution.<br>
+    Since this processing time is based on the relative value of the size of the capture area, understanding this characteristic can greatly reduce processing time.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1875.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Try capturing with <strong>Capture Size</strong> set to "<strong>64x64</strong>" and <strong>Image Size</strong> set to "<strong>512x512</strong>".<br>
+    <strong>(2)</strong> A warning message appears stating that the processing time will increase significantly.<br>
+    If you press the <strong>Okay</strong> button, capture will be executed, but it will take quite a while.<br>
+    </p>
+    <br>
+    
+    <p>
+    The resolution of "<strong>512x512</strong>" is not very large, but compared to the capture area size of "<strong>64x64</strong>", each axis is 8 times larger, so the magnification ratio is quite large.<br>
+    Because the important thing in the screen capture process in the new version is the relative size.<br>
+    </p>
+    <br>
+    
+    <p>
+    The simplest way to solve this problem is to reduce the size of the saved image, that is, <strong>Image Size</strong>.<br>
+    However, it is also good to reduce the relative magnification by increasing the size of the capture area, that is, <strong>Capture Size</strong>, which is the standard.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1876.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Change <strong>Capture Size</strong> to "<strong>256x256</strong>". You will see the frames being captured in the workspace grow.<br>
+    <strong>(2)</strong> Precisely move and enlarge the character according to the enlarged capture area using the tools of the capture UI.<br>
+    <strong>(3)</strong> You can see that the character has been enlarged to fit the capture area frame.<br>
+    <strong>(4)</strong> If you run the capture now, you can see that the image is created for a short period of time without a warning message appearing.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ScreenCapture.html">< Screen capture</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_OptimizedBake.html">Optimized Bake ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

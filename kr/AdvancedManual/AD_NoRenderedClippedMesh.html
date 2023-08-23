@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>클리핑 메시가 렌더링되지 않는 문제</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-kor">동영상</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">게시판</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_NoRenderedClippedMesh.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_NoRenderedClippedMesh.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_NoRenderedClippedMesh.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > 클리핑 메시가 렌더링되지 않는 문제</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">클리핑 메시가 렌더링되지 않는 문제</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.6</span></h4>
+    
+    <p>
+    저희 팀이 사용자들로부터 많이 받았던 문의 내용 중의 하나는 <strong>클리핑 메시</strong>가 정상적으로 렌더링되지 않는다는 것입니다.<br>
+    렌더링 문제는 겉보기에 동일한 문제라 하더라도 서로 다른 원인에 의한 것일 수 있기 때문에 해결하기가 쉽지 않습니다.<br>
+    클리핑 메시에 관한 문제의 경우도, 서로 다른 원인이 동일한 문제를 야기시킬 수 있습니다.<br>
+    이 페이지에서는 사용자들의 피드백을 바탕으로 대표적인 원인들과 그 해결법을 소개합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1858.jpg"/>
+    <br>
+    
+    <p>
+    이 페이지에서 사용되는 캐릭터입니다.<br>
+    눈과 입의 메시들이 클리핑 메시로 설정되어 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>렌더 파이프라인 설정이 맞지 않는 경우</h3>
+    <br>
+    
+    <p>
+    이 경우는 주로 <strong>URP</strong>를 사용했거나, 또는 <strong>기본(Built-In) 렌더 파이프라인</strong>으로 복구했을 때 겪을 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1859.jpg"/>
+    <br>
+    
+    <p>
+    유니티 에디터에서 <strong>Project Settings > Graphics > Scriptable Render Pipeline Settings</strong>에서 <strong>URP</strong>로 설정한 상태입니다.<br>
+    <strong>URP</strong>로 설정한 후 <strong>재질 라이브러리</strong>를 이용해서 URP용 재질을 적용까지 합니다. (<a href="../../kr/AdvancedManual/AD_URP.html">관련 페이지</a>)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1860.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>를 하고 게임을 실행했는데 클리핑 메시가 렌더링이 되지 않습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1861.jpg"/>
+    <br>
+    
+    <p>
+    이 경우는 <strong>렌더 파이프라인</strong> 설정이 현재 프로젝트 설정과 맞지 않아서 발생했을 가능성이 높습니다.<br>
+    <strong>(1)</strong> AnyPortrait 에디터에서 <strong>Bake</strong> 버튼을 누릅니다.<br>
+    <strong>(2)</strong> <strong>Setting</strong> 탭을 선택합니다.<br>
+    <strong>(3)</strong> <strong>Render Pipeline</strong> 설정을 현재 프로젝트의 설정에 맞는지 확인합니다.<br>
+    <strong>URP</strong>의 경우엔 <strong>Scriptable Render Pipeline</strong>로 설정해야 하고, 기본 렌더 파이프라인을 사용한다면 <strong>Default</strong>로 설정해야 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1862.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>를 하고 게임을 실행하면 클리핑 메시가 정상적으로 렌더링되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>2개 이상의 카메라가 캐릭터를 렌더링하는 경우</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1863.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 씬에 캐릭터를 렌더링하는 카메라가 2개 이상이 되도록 만들었습니다.<br>
+    위와 같이 2개의 카메라에 의해서 한개의 캐릭터가 2번 렌더링되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1864.jpg"/>
+    <br>
+    
+    <p>
+    이 상태로 게임을 실행하면, 하나의 카메라를 제외한 나머지 카메라들에서는 클리핑 메시가 정상적으로 렌더링되지 않습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortrait의 클리핑 메시는 크지 않은 해상도의 <strong>Render Texture</strong>를 이용하여 최적화된 마스크를 생성하기 위해 카메라의 속성을 참조합니다.<br>
+    그런데 만약 2개 이상의 카메라가 캐릭터를 렌더링하고자 한다면, 클리핑 마스크의 최적화 기능이 오작동을 일으키는 것입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이 문제를 해결하기 위해서는 다소 예상 밖의 옵션인 <strong>VR 지원 기능</strong>을 이용해야합니다.<br>
+    <strong>VR</strong>은 기본적으로 2개의 카메라가 동작하는 시스템인데, 마침 이 경우와 같기 때문에 적절한 해결 방법이 됩니다.<br>
+    (<strong>VR 지원</strong>에 대해서는 <a href="../../kr/AdvancedManual/AD_VR.html">관련 페이지</a>에서 자세한 내용을 보실 수 있습니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1865.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Bake</strong> 다이얼로그를 엽니다.<br>
+    <strong>(2)</strong> <strong>Setting</strong> 탭을 선택합니다.<br>
+    <strong>(3)</strong> <strong>VR / Multi-Camera</strong> 옵션의 값을 <strong>Multiple Cameras</strong>로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이제 <strong>Bake</strong>를 실행하면 문제가 해결됩니다.<br>
+    하지만 이 상태에서는 안타깝게도 클리핑 메시의 최적화 기능이 비활성화됩니다.<br>
+    따라서 낮은 해상도의 클리핑 마스크에 의해 렌더링 퀄리티가 낮아지는 문제가 발생합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1866.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>메시 그룹</strong>을 선택합니다.<br>
+    <strong>(2)</strong> 클리핑 마스크가 되는 메시를 선택합니다.<br>
+    <strong>(3)</strong> <strong>Mask Texture Size</strong> 속성의 값을 변경해서 클리핑 마스크의 해상도를 증가시킵니다.<br>
+    보여지는 메시의 크기와 품질에 따라 결정해야하는데, 최적화 기능이 꺼진 경우엔 <strong>512</strong>나 <strong>1024</strong>를 사용하는 것이 퀄리티 측면에서 좋습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1867.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>를 하고 게임을 실행하면 클리핑 메시가 제대로 동작하는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    다중 카메라를 배치한 상태에서, 카메라들이 <strong>Render Texture</strong>를 대상으로 렌더링을 하는 경우엔 부차적인 이슈들이 더 있습니다.<br>
+    이 경우엔 <a href="../../kr/AdvancedManual/AD_RenderTexture.html">관련 페이지</a>에서 자세한 정보를 확인하세요.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>스크립트 실행 순서가 적절하지 않은 경우</h3>
+    <br>
+    
+    <p>
+    AnyPortrait의 클리핑 마스크는 업데이트 루틴 과정에서 어떻게 그려질지 계산됩니다.<br>
+    그 계산은 카메라와 캐릭터의 위치, 속성 등을 참조합니다.<br>
+    만약 업데이트에서 마스크 관련 계산을 할 때와 실제로 렌더링이 될 때의 관련 요소들의 상태가 일치하지 않는다면, 클리핑 마스크 및 메시가 정상적으로 렌더링되지 않을 가능성이 있습니다.<br>
+    특히 유니티의 <strong>Cinemachine</strong>을 사용하는 경우엔 사용자도 모르게 이 문제를 겪게 됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이 문제를 다루는 메뉴얼이 별도로 있으므로, 그것을 참조하면 되겠습니다.<br>
+    - <a href="../../kr/AdvancedManual/AD_ExecutionOrderProblem.html">다른 에셋과 연동시 실행 순서 문제</a><br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_ExportToProject.html">< 다른 프로젝트로 내보내기</a>
+        <a class="btn btn-light" role="button" href="#"></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>
