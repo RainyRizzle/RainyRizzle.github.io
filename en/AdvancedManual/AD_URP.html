@@ -77,7 +77,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.3.5</span></h4>
+    <h4><span class="badge badge-secondary">1.4.7</span></h4>
     
     <p>
     <strong>Universal Render Pipeline (URP)</strong> is a new rendering method introduced in Unity 2019.3.<br>
@@ -816,6 +816,61 @@
     
     <p>
     You can see the same rendering result with the normal map applied.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Clipped mesh issues when rendering with Perspective camera</h3>
+    <br>
+    
+    <p>
+    In URP, it is also possible to render characters at a 3D level using a 3D camera, that is, a "Perspective camera".<br>
+    This is because the "Billboard" function also works in URP. (<a href="../../en/AdvancedManual/AD_BillboardPers.html">Related Page</a>)<br>
+    However, when switching to a perspective camera, the "Clipped mesh" has some rendering problems.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1901.jpg"/>
+    <br>
+    
+    <p>
+    This is a screen rendered with a perspective camera using the billboard option in the URP environment.<br>
+    The clipped mesh for the eyes looks a bit blurry.<br>
+    </p>
+    <br>
+    
+    <p>
+    This is due to the resolution of the render texture for clipping rendering.<br>
+    AnyPortrait has the ability to perform high-quality clipping rendering with a low-resolution render texture.<br>
+    However, in the case of URP, this function only works properly with Orthographic cameras.<br>
+    Therefore, if you are rendering with a perspective camera, you need to increase the quality of the clipping mesh purely by increasing the "<strong>Render Texture Resolution</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1902.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select a Mesh Group.<br>
+    <strong>(2)</strong> Select the mesh that will become the <strong>Clipping Mask</strong>. (In the case above, we select the "EyeWhite" mesh.)<br>
+    <strong>(3)</strong> Change the <strong>Mask Texture Size</strong> option. This option is the resolution of the render texture for clipping rendering. The larger the value, the better the quality of the clipping rendering. Here we selected "<strong>512</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1903.jpg"/>
+    <br>
+    
+    <p>
+    Let’s run Bake and check again.<br>
+    You can see that the problem of blurry eyes with the clipping mesh has almost solved.<br>
     </p>
     <br>
     

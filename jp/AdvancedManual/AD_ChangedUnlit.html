@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>変更された「Unlit」</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_ChangedUnlit.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ChangedUnlit.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_ChangedUnlit.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 変更された「Unlit」</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">変更された「Unlit」</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.7</span></h4>
+    
+    <p>
+    「AnyPortrait」で基本的に提供されている「<strong>Unlitマテリアル</strong>」（光が反映されないマテリアル）は、名前とは異なり、「<strong>Ambient Color</strong>」の影響を受けました。<br>
+    しかし、これは材質の期待される役割とは異なり、「<strong>Point Light</strong>」によるライティングエラーが発生する問題などがありました。<br>
+    そのため、「AnyPortrait v1.4.7」からは「新しく作成されたUnlit材質」がデフォルト値として適用されます。<br>
+    しかし、既存のマテリアルを利用するユーザーのために、私たちは既存のシェーダを変更せずに別々に作成して追加しました。<br>
+    このページでは、「新しいUnlitマテリアル」の内容と適用方法について説明します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary"><strong>メモ</strong></span><br>
+    このページで扱う内容については、次のマニュアルを一緒に見れば役に立ちます。<br>
+    - <a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">マテリアルライブラリ</a><br>
+    - <a href="../../jp/AdvancedManual/AD_LightingScene.html">シーンの照明設定</a><br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>新しいUnlitマテリアル</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1890.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターを作成した後、シーンに様々なライトオブジェクト（Directional Light、Point Light、Ambient Colorなど）を配置して設定しましょう。<br>
+    新しいUnlitマテリアルは、ライトを無視し、テクスチャ画像の元の色をレンダリングするのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1891.jpg"/>
+    <br>
+    
+    <p>
+    「マテリアルライブラリ」を通じてどのような変化があったかを確認しましょう。<br>
+    <strong>(1)</strong> 「<strong>Material Library</strong>」ボタンを押して「マテリアルライブラリ」を開きます。<br>
+    <strong>(2)</strong> デフォルトでは、適用されたマテリアルの名前が「<strong>Unlit (v2)</strong>」であることがわかります。 (既存は「Unlit (Default)」)<br>
+    <strong>(3)</strong> 「マテリアルプリセット」リストを確認すると、以前のバージョンとは異なり、2つの「Unlit」関連プリセットが登録されていることがわかります。<br>
+    - <strong>Unlit (Legacy)</strong> : 以前のバージョンまでデフォルトとして使用されていたマテリアルです。 名前が「Unlit (Default)」から変更されました。<br>
+    - <strong>Unlit (v2)</strong> : 「AnyPortrait v1.4.7」で新しく追加されたマテリアルです。 「Ambient Color」などの影響を受けないように変更されました。<br>
+    </p>
+    <br>
+    
+    <p>
+    この変更点は「AnyPortrait v1.4.7」にアップデートした後、新しいキャラクターにはデフォルトで適用されます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>以前のバージョンで作成したキャラクターに新しいUnlitマテリアルを適用</h3>
+    <br>
+    
+    <p>
+    「AnyPortrait」を更新しても、既存のキャラクターのマテリアルは変わりません。<br>
+    次の方法で既存のキャラクターのマテリアルを「新しいバージョンのUnlit」に置き換えることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1892.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> AnyPortraitエディタを開き、「<strong>Material Library</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 以前のバージョンで作られたキャラクターのマテリアルは「<strong>Unlit (Default)</strong>」で登録されているはずです。<br>
+    <strong>(3)</strong> 新しい「マテリアルセット」を作成するには、「<strong>Make Material Set</strong>」ボタンを押します。<br>
+    <strong>(4)</strong> 「<strong>Unlit (v2)</strong>」を選ぶ。<br>
+    <strong>(5)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1893.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> プリセットから「<strong>Unlit (v2)</strong>」マテリアルセットが追加されました。 追加した「<strong>Unlit (v2)</strong>」を選択してください。<br>
+    <strong>(2)</strong> 「<strong>Default Material</strong>」ボタンを押して「基本マテリアル」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1894.jpg"/>
+    <br>
+    
+    <p>
+    「Bake」を実行します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1895.jpg"/>
+    <br>
+    
+    <p>
+    新しいUnlitマテリアルが適用されました。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_LightingScene.html">< シーンの照明設定</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_MaterialLibrary.html">マテリアルライブラリ ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Play at Low FPS</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_PlayLowFPS.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_PlayLowFPS.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_PlayLowFPS.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Play at Low FPS</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Play at Low FPS</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.7</span></h4>
+    
+    <p>
+    If you recall watching animations shown on TV or in theaters, you will notice that the animations are played at low frames.<br>
+    This may be a limitation due to the classic production method of drawing each frame by hand, but everyone has probably experienced the charm of the low frame at least once.<br>
+    Since AnyPortrait was originally developed for games, the meshes are updated by animation every frame during the game.<br>
+    However, if you reduce the <strong>FPS (Frames per second)</strong> of the animation and play it like a classic animation, you will see interesting results.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1889.jpg"/>
+    <br>
+    
+    <p>
+    Since the game runs at the highest possible FPS, if you want to play the animation at a lower FPS, the processing will have to be done as above.<br>
+    <strong>(1)</strong> Basically, the meshes will be updated to match the animation in every frame of the game.<br>
+    <strong>(2)</strong> In order to play an animation at a low FPS, the mesh must be updated at certain frames of the game, and the previous state must be maintained without being updated at other frames.<br>
+    In other words, controlling the “frequency at which the mesh is updated” is an approach to playing animations at low FPS.<br>
+    This page covers how to reduce FPS using the "<strong>Mesh Update Frequency</strong>" option.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Mesh Update Frequency Option</h3>
+    <br>
+    
+    <p>
+    You can adjust the FPS of the animation using the "<strong>Mesh Update Frequency</strong>" option added in AnyPortrait v1.4.7.<br>
+    There are three ways to change this option:<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1877.jpg"/>
+    <br>
+    
+    <p>
+    The first method is to set options in the “<strong>Bake dialog</strong>”.<br>
+    <strong>(1)</strong> Press the <strong>Bake</strong> button to open the Bake dialog.<br>
+    <strong>(2)</strong> Select the <strong>Setting</strong> tab.<br>
+    <strong>(3)</strong> Change the value of the <strong>Mesh Update Frequency</strong> option.<br>
+    </p>
+    <br>
+    
+    <p>
+    There are three options:<br>
+    - <strong>Every Frame</strong> : The meshes are updated every frame. (default)<br>
+    - <strong>Per Time (Not Sync)</strong> : Meshes are updated at low FPS.<br>
+    - <strong>Per Time (Sync)</strong> : Meshes are updated at a low FPS, and mesh update timing is synchronized between characters with the same option.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1878.jpg"/>
+    <br>
+    
+    <p>
+    Except for <strong>Every Frame</strong>, the two options are the settings for <strong>Play at low FPS</strong> covered on this page.<br>
+    If you set <strong>Per Time (Not Sync)</strong> (or <strong>Per Time (Sync)</strong>) as above, an additional "<strong>FPS</strong>" option appears to set which FPS to play at.<br>
+    If you enter a value lower than the typical video refresh rate of 60, you will be able to create a classic animation feel.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    As the FPS option value, only <span class="text-danger"><strong>Max 30 FPS</strong></span> can be entered.<br>
+    Based on the general screen refresh rate of "60 FPS", if you enter "<strong>a value between 30 and 60 FPS</strong>", "continuously played frames" and "idle frames" will be processed alternately.<br>
+    This does not give good results, so it should be limited to a maximum of <strong>30 FPS</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1879.jpg"/>
+    <br>
+    
+    <p>
+    The second method is to set it in “<strong>Inspector UI</strong>”.<br>
+    <strong>(1)</strong> Select a character in the Unity scene.<br>
+    <strong>(2)</strong> Select the “<strong>General Properties</strong>” tab.<br>
+    <strong>(3)</strong> Set the <strong>Mesh Update Frequency</strong> option in the same way as in the Bake dialog.<br>
+    </p>
+    <br>
+    
+    <p>
+    The third way is to use <strong>Script</strong>.<br>
+    Try using the following functions of apPortrait. (<a href="../../en/Script/SC_Init.html">Script Description Page</a>)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1.</strong> <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetUpdateMeshesEveryFrame</strong><strong>()</strong><br>
+    : Set the mesh update frequency to "<strong>Every Frame</strong>".<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2.</strong> <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetUpdateMeshesPerTime</strong>(<span class="text-primary">int</span> fps, <span class="text-primary">bool</span> isSyncUpdate)<br>
+    : Set the mesh update frequency to "<strong>Per Time</strong>".<br>
+    - <span class="text-primary">int</span> fps : The FPS value corresponding to the refresh rate. Please enter a value less than 30.<br>
+    - <span class="text-primary">bool</span> isSyncUpdate : Entering true will synchronize mesh update timing with other characters.<br>
+    </p>
+    <br>
+    
+    <p>
+    Check out the results of adjusting the FPS of the animation using these options in the video below!<br>
+    You can compare each option and the main FPS.<br>
+    For the <strong>Per Time</strong> option, check the difference in whether or not it is synchronized.<br>
+    </p>
+    <br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/27Hr6HT6Fus" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Performance comparison with Important option</h3>
+    <br>
+    
+    <p>
+    AnyPortrait's "<strong>Important</strong>" option is also an option related to the refresh rate. (<a href="../../en/AdvancedManual/AD_ImportantOption.html">Related Page</a>)<br>
+    <strong>Important</strong> is an option where all functions operate every frame. <strong>Important</strong> can be <span class="text-danger"><strong>Disabled</strong></span> for optimization.<br>
+    With the <strong>Important</strong> option "disabled" you can set the FPS for intermittent updates.<br>
+    So at first glance, "<strong>Disable Important option</strong>" and "<strong>Per Time option for mesh refresh frequency</strong>" seem to be the same.<br>
+    However, since these two options were developed for completely different purposes, there are differences:<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Important Option</strong><br>
+    This feature is an option provided for optimization purposes. (If you disable the Important option)<br>
+    This option lets computations for less important characters be distributed when a large number of characters appear in a scene.<br>
+    FPS is adjusted according to the state of the game, and calculations are distributed so that they are not concentrated on specific frames.<br>
+    Depending on the situation, it may update at a much lower FPS than the specified FPS.<br>
+    Additionally, as the update operates intermittently, heavy and error-expected Physics features (Jiggle Bone, Physics Modifier) are disabled.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Mesh Update Frequency Option</strong><br>
+    This function is only for visual presentation and is not a function for performance optimization.<br>
+    Instead, it has the characteristic that physical functions, etc. work always.<br>
+    </p>
+    <br>
+    
+    <p>
+    The biggest difference between the two options is performance.<br>
+    Let’s check the differences through the following profiling results.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1880.jpg"/>
+    <br>
+    
+    <p>
+    As shown above, we created a scene that duplicates the character 50 times and then plays it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1881.jpg"/>
+    <br>
+    
+    <p>
+    First, with the Important option turned on, the Mesh Update Frequency option was set to Every Frame.<br>
+    This state is also the default for AnyPortrait.<br>
+    When you run the game, you can see through the profiler that the game records approximately 30 FPS.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1882.jpg"/>
+    <br>
+    
+    <p>
+    Next, with the Important option turned on, we set the Mesh Update Frequency option to <strong>Per Time (Sync - 12FPS)</strong>.<br>
+    When running the game, performance values between 30 FPS and 60 FPS are recorded with large variations.<br>
+    The average frame rate appears to have improved slightly, but the variation is large, so the perceived performance improvement will not be significant.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1883.jpg"/>
+    <br>
+    
+    <p>
+    Lastly, <strong>Important option turned off</strong>. (The mesh update frequency option has no effect in this state.)<br>
+    You will see a dramatic increase in game performance.<br>
+    You can also see that the performance deviation is not large because the character's operations are distributed.<br>
+    However, for the sake of game performance, the FPS of each character's animation is significantly lowered.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1884.jpg"/>
+    <br>
+    
+    <p>
+    The profiling results can be summarized as above.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>How the Mesh Update Frequency Option Works</h3>
+    <br>
+    
+    <p>
+    It may seem surprising that the Mesh Update Frequency option does not provide much of a performance boost given that the animation frames are intermittent.<br>
+    The following explanation will help you understand this feature in more detail.<br>
+    Please read while referring to the previous profiling experiment.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1885.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait is updated in the above order when the game runs.<br>
+    First, animations, modifiers, etc. are calculated in batches.<br>
+    Then, the calculation results are applied to the mesh, and the appearance of the mesh changes.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1886.jpg"/>
+    <br>
+    
+    <p>
+    And this process is performed in every frame of the game.<br>
+    The default settings (with Important enabled and the Mesh Update Frequency option set to Every Frame) correspond to this case.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1887.jpg"/>
+    <br>
+    
+    <p>
+    If you change the <strong>Mesh Update Frequency</strong> option to <strong>Per Time</strong> to play the animation at a lower FPS, the processing will change as shown above.<br>
+    While animation and modifier calculations are performed every frame, operations that update the mesh's appearance are performed discontinuously.<br>
+    Animations and modifiers are continuously updated even when the mesh is not updating in frames, so it is ready to react quickly when some changes occur, that playing other animations, toggling the mesh's visibility, controlling your character externally, etc.<br>
+    In other words, contrary to appearance, calculations are continuously carried out in an agile manner and do not affect the game system.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1888.jpg"/>
+    <br>
+    
+    <p>
+    Lastly, <strong>Important option is disabled</strong>.<br>
+    This function performs animation and modifier calculations as well as intermittent mesh updates.<br>
+    Only some operations for performance control are performed in each frame, and most operations are performed discontinuously, which greatly helps improve performance.<br>
+    However, there are disadvantages in that it is difficult to respond quickly in a process where calculations are not made, and continuous calculation processing, such as physical functions, is impossible.<br>
+    </p>
+    <br>
+    
+    <p>
+    Check these differences and use the option that suits your needs.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    When the option is set to <strong>Per Time</strong>, it has the following characteristics.<br>
+    - When changes occur in the root unit, visibility of the mesh, or whether the size of the object is reversed, the mesh is updated immediately regardless of the options.<br>
+    - Since the bone is continuously updated, the socket also moves every frame regardless of the option.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ImportantOption.html">< "Important" option and many objects</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ReversedRiggedMesh.html">Reversed scale of the Rigged Mesh ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

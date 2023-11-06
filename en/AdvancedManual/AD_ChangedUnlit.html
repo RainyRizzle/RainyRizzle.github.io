@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Changed Unlit material</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_ChangedUnlit.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_ChangedUnlit.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_ChangedUnlit.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Changed Unlit material</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Changed Unlit material</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.7</span></h4>
+    
+    <p>
+    <strong>Unlit material</strong> (material that does not reflect light) provided by default in AnyPortrait is influenced by <strong>Ambient Color</strong>, despite its name.<br>
+    However, this was different from the expected role of the material, and there were problems such as lighting errors occurring in <strong>Point Light</strong>.<br>
+    So, starting from AnyPortrait v1.4.7, the newly created Unlit material is applied as the default.<br>
+    However, for users who use existing materials, we did not modify the existing shader, but wrote it separately and added it.<br>
+    This page covers the <strong>New Unlit Material</strong> and how to apply it.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary"><strong>Note</strong></span><br>
+    For the content covered on this page, it may be helpful to read the following manual.<br>
+    - <a href="../../en/AdvancedManual/AD_MaterialLibrary.html">Material Library</a><br>
+    - <a href="../../en/AdvancedManual/AD_LightingScene.html">Lighting settings of the scene</a><br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>New Unlit Material</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1890.jpg"/>
+    <br>
+    
+    <p>
+    After creating a character, let's place and set various light objects (Directional Light, Point Light, Ambient Color, etc.) in the Unity scene.<br>
+    You can see that the new Unlit material ignores lights and renders the original colors of the texture image.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1891.jpg"/>
+    <br>
+    
+    <p>
+    Let’s check what changes have occurred through the material library.<br>
+    <strong>(1)</strong> Click the <strong>Material Library</strong> button to open the material library.<br>
+    <strong>(2)</strong> You can see that the name of the material applied by default is "<strong>Unlit (v2)"</strong>. (Previously “Unlit (Default)”)<br>
+    <strong>(3)</strong> If you check the <strong>Material Preset</strong> list, you can see that two Unlit-related presets are registered, unlike the previous version.<br>
+    - <strong>Unlit (Legacy)</strong> : This material was used as the default until previous versions. Name changed from "Unlit (Default)".<br>
+    - <strong>Unlit (v2)</strong> : This is a new material added in AnyPortrait v1.4.7. Changed so that it is not affected by Ambient Color, etc.<br>
+    </p>
+    <br>
+    
+    <p>
+    This change will be applied by default to new characters after updating to AnyPortrait v1.4.7.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Apply new Unlit material to characters created in previous versions</h3>
+    <br>
+    
+    <p>
+    Even if you update AnyPortrait, the material of existing characters will not change.<br>
+    You can replace an existing character's materials with a new version of Unlit in the following way:<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1892.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the AnyPortrait editor and press the <strong>Material Library</strong> button.<br>
+    <strong>(2)</strong> The material of characters created in previous versions will be registered as “<strong>Unlit (Default)</strong>”.<br>
+    <strong>(3)</strong> Press the <strong>Make Material Set</strong> button to create a new material set.<br>
+    <strong>(4)</strong> Select “<strong>Unlit (v2)</strong>”.<br>
+    <strong>(5)</strong> Press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1893.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Added "<strong>Unlit (v2)</strong>" material set from presets. Select the added “<strong>Unlit (v2)</strong>”.<br>
+    <strong>(2)</strong> Click the <strong>Default Material</strong> button to set it as the default material.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1894.jpg"/>
+    <br>
+    
+    <p>
+    Run Bake and return to the Unity scene.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1895.jpg"/>
+    <br>
+    
+    <p>
+    Unlit material with no lighting errors has now been applied.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_LightingScene.html">< Lighting settings of the scene</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_MaterialLibrary.html">Material Library ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>低いFPSでプレイ</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_PlayLowFPS.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_PlayLowFPS.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_PlayLowFPS.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 低いFPSでプレイ</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">低いFPSでプレイ</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.7</span></h4>
+    
+    <p>
+    テレビや劇場で上映されるアニメーションを見ると、低いフレームで再生されることがわかります。<br>
+    手ですべてのフレームを描いたクラシカルな制作方式による限界でしょうが、その低いフレームが持つ魅力をみんなが一度ずつは感じたはずです。<br>
+    「AnyPortrait」はもともとゲームを目指して開発されたため、ゲーム中は毎フレームごとにアニメーションによってメッシュが更新されます。<br>
+    しかし、アニメーションの「<strong>FPS（Frames per second）</strong>」を減らして、まるで古典的なアニメーションのように再生されれば、面白い結果を作ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1889.jpg"/>
+    <br>
+    
+    <p>
+    ゲームはできるだけ高い「FPS」で動作するため、「低いFPS」でアニメーションを再生したい場合は、別の方法で処理する必要があります。<br>
+    <strong>(1)</strong> 基本的には、ゲームのフレームごとにアニメーションに合わせてメッシュが更新されます。<br>
+    <strong>(2)</strong> 「低いFPS」でアニメーションを再生するためには、ゲームの特定のフレームではメッシュが更新され、その他のフレームでは更新されていないまま前の状態が維持されなければなりません。<br>
+    つまり、「メッシュが更新される頻度」を調整することが低いFPSでアニメーションを再生するためのアプローチです。<br>
+    このページでは、「<strong>Mesh Update Frequency</strong>」オプションを使用して「FPS」を減らす方法について説明します。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Mesh Update Frequency</h3>
+    <br>
+    
+    <p>
+    「AnyPortrait v1.4.7」で追加された「<strong>Mesh Update Frequency</strong>」オプションを使用すると、アニメーションの「FPS」を調整できます。<br>
+    このオプションを変更する3つの方法を試してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1877.jpg"/>
+    <br>
+    
+    <p>
+    最初の方法は「Bakeダイアログ」でオプションを設定することです。<br>
+    <strong>(1)</strong> 「<strong>Bake</strong>」ボタンを押して「Bake」ダイアログを開きます。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>Mesh Update Frequency</strong>」オプションの値を変更します。<br>
+    </p>
+    <br>
+    
+    <p>
+    次の3つの方法のオプションがあります。<br>
+    - <strong>Every Frame</strong> : 毎フレームごとにマッシュが更新されます。 (既定値)<br>
+    - <strong>Per Time (Not Sync)</strong> : 低いFPSでメッシュが更新されます。<br>
+    - <strong>Per Time (Sync)</strong> : 低いFPSでメッシュが更新され、同じオプションのキャラクター間のメッシュ更新タイミングが同期されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1878.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Every Frame</strong>」以外の2つのオプションが、このページで扱う「低いFPSで再生」するための設定です。<br>
+    上記のように「<strong>Per Time（Not Sync）</strong>」（または「<strong>Per Time（Sync）</strong>」）を設定すると、「<strong>FPS</strong>」オプションがさらに登場します。<br>
+    ここで一般的な映像再生率である「60より低い値」を入力すると、古典アニメのような感じを与えることができるでしょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    FPSオプション値として「<span class="text-danger"><strong>最大30 FPS</strong></span>」の値のみ入力できます。<br>
+    一般的な画面再生率である「60 FPS」を基準に、もし「30～60 FPSの間の値」を入力すると、「連続再生されるフレーム」と「休むフレーム」が交互に処理されます。<br>
+    これは良い結果を示さないため、「最大30 FPS」に制限する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1879.jpg"/>
+    <br>
+    
+    <p>
+    2番目の方法は「Inspector UI」で設定することです。<br>
+    <strong>(1)</strong> シーンからキャラクターを選択します。<br>
+    <strong>(2)</strong>「設定」タブを選択します。<br>
+    <strong>(3)</strong> Bakeダイアログと同様に、「<strong>Mesh Update Frequency</strong> 」オプションを設定します。<br>
+    </p>
+    <br>
+    
+    <p>
+    3番目の方法は「スクリプト」を使用することです。<br>
+    「apPortrait」の次の関数を使ってみてください。（<a href="../../jp/Script/SC_Init.html">スクリプトの説明ページ</a>）<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1.</strong> <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetUpdateMeshesEveryFrame</strong><strong>()</strong><br>
+    : メッシュ更新頻度を「<strong>Every Frame</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2.</strong> <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetUpdateMeshesPerTime</strong>(<span class="text-primary">int</span> fps, <span class="text-primary">bool</span> isSyncUpdate)<br>
+    : メッシュ更新頻度を「<strong>Per Time</strong>」に設定します。<br>
+    - <span class="text-primary">int</span> fps : 更新頻度に対応するFPS値。 30以下の値を入力してください。<br>
+    - <span class="text-primary">bool</span> isSyncUpdate : 「true」と入力すると、他のキャラクタとメッシュ更新タイミングが同期されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    これらのオプションを使ってアニメーションのFPSを調整した結果を次の動画で確認してください！<br>
+    それぞれのオプションと主要FPSについて比較しながら見ることができます。<br>
+    「<strong>Per Time</strong>」オプションの場合は、「同期」かどうかの違いも一緒に確認してみてください。<br>
+    </p>
+    <br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/27Hr6HT6Fus" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Importantオプションとのパフォーマンス比較</h3>
+    <br>
+    
+    <p>
+    AnyPortraitの「<strong>Important</strong>」オプションもリフレッシュレート、つまりFPSに関連するオプションです。 (<a href="../../jp/AdvancedManual/AD_ImportantOption.html">関連ページ</a>)<br>
+    最適化のために「<strong>Important</strong>」を「無効にする」ことができ、断続的な更新のために「FPS」を設定できます。<br>
+    そのため、「Important オプションを無効にする」と「Mesh Update Frequency の Per Time オプション」はまったく同じように見えます。<br>
+    ただし、これら2つのオプションはまったく異なる目的で開発されたため、次の違いがあります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Important オプション</strong><br>
+    この機能は最適化のために提供されるオプションです。 (Important オプションを無効にする場合)<br>
+    多数のキャラクターがシーンに登場する場合、比較的あまり重要でないキャラクターの演算を分散させる役割を果たします。<br>
+    ゲームの状態に合わせてFPSを調整し、操作が特定のフレームに集まらないように分散させます。<br>
+    状況によっては、指定されたFPSよりはるかに低いFPSで更新されることもあります。<br>
+    また、アップデートが断続的に動作するにつれて演算エラーが予想される「物理機能」は、一旦無効になる。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Mesh Update Frequency オプション</strong><br>
+    これは視覚的な演出のためだけのものであり、パフォーマンスを最適化するためのものではありません。<br>
+    そして、すべてのオプションで物理機能などが動作するという特徴があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    2つのオプションで最大の違いを示すのはパフォーマンスです。<br>
+    次のプロファイリング結果を通じて違いを確認しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1880.jpg"/>
+    <br>
+    
+    <p>
+    上記のようにキャラクターを50回複製した後、再生するシーンを構成しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1881.jpg"/>
+    <br>
+    
+    <p>
+    まず、「Importantオプションがオンの状態」で、「<strong>Mesh Update Frequency</strong>」オプションを「<strong>Every Frame</strong>」に設定しました。<br>
+    この状態はAnyPortraitのデフォルトでもあります。<br>
+    ゲームを実行すると、プロファイラを通してゲームが約「30 FPS」程度を記録するのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1882.jpg"/>
+    <br>
+    
+    <p>
+    以下は、「Importantオプションがオンの状態」で、「<strong>Mesh Update Frequency</strong>」オプションを「<strong>Per Time (Sync - 12FPS)</strong>」に設定しました。<br>
+    ゲームを実行すると、「30 FPSから60 FPSの間」のパフォーマンス値が大きな偏差で記録されます。<br>
+    平均フレームは少し改善されたように見えますが、偏差が大きいため、体感されるパフォーマンスの向上は大きくはありません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1883.jpg"/>
+    <br>
+    
+    <p>
+    最後に「Importantオプションをオフにした状態」です。 （この状態では「Mesh Update Frequency」オプションは適用されません。）<br>
+    ゲームのパフォーマンスが飛躍的に上昇することがわかります。<br>
+    キャラクターの演算が分散されているため、性能偏差が大きくないことも一緒に見られます。<br>
+    ただし、ゲームの性能のためにキャラクターたちそれぞれのアニメーションのFPSは大きく低くなります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1884.jpg"/>
+    <br>
+    
+    <p>
+    プロファイリング結果を上記のように整理できます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Mesh Update Frequency オプションの動作原理</h3>
+    <br>
+    
+    <p>
+    「Mesh Update Frequency」オプションが断続的なアニメーションフレームを持つという点で、パフォーマンスの向上が大きくないことは少し奇妙に思えるかもしれません。<br>
+    次の説明は、この機能の詳細を理解するのに役立ちます。<br>
+    先のプロファイリング実験を参考にしてお読みください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1885.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitはゲームが実行されると上記と同じ順序で更新されます。<br>
+    まずアニメーション、モディファイアなどが一括で演算になります。<br>
+    そしてその演算結果がメッシュに反映され、メッシュの見た目が変更されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1886.jpg"/>
+    <br>
+    
+    <p>
+    そして、このプロセスはゲームのフレームごとに実行されます。<br>
+    デフォルト設定（「Important」が有効になり、「Mesh Update Frequency」オプションが「Every Frame」に設定されている状態）がこの場合に当てはまります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1887.jpg"/>
+    <br>
+    
+    <p>
+    ここで、「Mesh Update Frequency」オプションを「<strong>Per Time</strong>」に変更して低FPSでアニメーションを再生すると、上記のように処理方法が変更されます。<br>
+    アニメーションとモディファイアの操作はフレームごとに実行されますが、メッシュの外観を更新する操作は不連続に実行されます。<br>
+    継続的に更新されるため、アニメーションの切り替え、サイズ反転などの外部制御に対して素早く反応する準備ができています。<br>
+    言い換えれば、見た目とは異なり、継続的に機敏に操作が行われ、ゲームシステムに影響を与えません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1888.jpg"/>
+    <br>
+    
+    <p>
+    最後に、「Important オプションを無効にした」場合です。<br>
+    この機能は、メッシュの更新を含む、アニメーションとモディファイアの両方の操作まで断続的に実行されます。<br>
+    パフォーマンス制御のための一部の操作だけがフレームごとに動作するだけで、ほとんどの操作が不連続的に行われるため、パフォーマンスの向上に大きく役立ちます。<br>
+    しかし、演算が行われない過程での敏感な反応をすることが難しく、物理機能のように連続的な演算処理が不可能であるという欠点があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    これらの違いを確認して、ニーズに合ったオプションを使用してください。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    「Mesh Update Frequency」オプションを「<strong>Per Time</strong>」に設定すると、以下の特徴があります。<br>
+    - ルートユニット、メッシュの可視性、オブジェクトのサイズ反転の可否の変更が発生すると、オプションに関係なく即時メッシュが更新されます。<br>
+    - ボーンは連続的に更新されるため、「ソケット」もオプションに関係なく毎フレーム移動します。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_ImportantOption.html">< 「Important」と多数のオブジェクト</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_ReversedRiggedMesh.html">リギングが適用されたメッシュの反転サイズ ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

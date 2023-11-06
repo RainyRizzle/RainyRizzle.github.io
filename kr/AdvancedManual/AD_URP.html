@@ -77,7 +77,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.3.5</span></h4>
+    <h4><span class="badge badge-secondary">1.4.7</span></h4>
     
     <p>
     <strong>Universal Render Pipeline (유니버설 렌더 파이프라인)</strong>은 유니티 2019.3부터 도입된 새로운 렌더링 방식입니다.<br>
@@ -815,6 +815,61 @@
     
     <p>
     노멀맵이 적용된 렌더링 결과를 동일하게 확인할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Perspective 카메라로 렌더링할 때의 클리핑 메시 문제</h3>
+    <br>
+    
+    <p>
+    URP에서도 3D 카메라, 즉 Perspective 카메라를 이용하여 3D 레벨에서 캐릭터를 렌더링을 하는 것이 가능합니다.<br>
+    "빌보드" 기능은 URP에서도 동작을 하기 때문입니다. (<a href="../../kr/AdvancedManual/AD_BillboardPers.html">관련 페이지</a>)<br>
+    그렇지만 Perspective 카메라로 전환을 했을 때 "클리핑 메시"는 렌더링에 조금 문제가 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1901.jpg"/>
+    <br>
+    
+    <p>
+    URP 환경에서 빌보드 옵션을 이용해서 Perspective 카메라로 렌더링을 한 화면입니다.<br>
+    눈 부분의 클리핑 메시가 다소 뿌옇게 보입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이것은 클리핑 렌더링을 위한 "렌더 텍스쳐"의 해상도가 원인입니다.<br>
+    AnyPortrait는 낮은 해상도의 렌더 텍스쳐로 고화질의 클리핑 렌더링을 하는 기능을 가지고 있습니다.<br>
+    하지만 이 기능은 URP의 경우엔 Orthographic 타입의 카메라에서만 제대로 동작합니다.<br>
+    따라서 Perspective 카메라로 렌더링을 한다면, 순수하게 "<strong>렌더 텍스쳐의 해상도</strong>"를 증가시켜서 클리핑 메시의 품질을 높일 필요가 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1902.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 메시 그룹을 선택합니다.<br>
+    <strong>(2)</strong> <strong>클리핑 마스크</strong>가 되는 메시를 선택합니다. (위의 경우엔 "EyeWhite" 메시를 선택합니다.)<br>
+    <strong>(3)</strong> <strong>Mask Texture Size</strong> 옵션을 변경합니다. 이 옵션이 클리핑 렌더링을 위한 렌더 텍스쳐의 해상도입니다. 큰 값일 수록 클리핑 렌더링의 품질이 좋아집니다. 여기서는 "<strong>512</strong>"를 선택했습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1903.jpg"/>
+    <br>
+    
+    <p>
+    Bake를 실행하고 다시 확인해봅시다.<br>
+    클리핑 메시였던 눈이 뿌옇게 보여지는 문제가 거의 없어진 것을 볼 수 있습니다.<br>
     </p>
     <br>
     
