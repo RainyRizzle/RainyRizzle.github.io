@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Main Logic Event</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_MainLogicEvent.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MainLogicEvent.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_MainLogicEvent.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Main Logic Event</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Main Logic Event</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.8</span></h4>
+    
+    <p>
+    The Unity engine processes updates and rendering in a specific order.<br>
+    Events in the MonoBehaviour script represent each step.<br>
+    AnyPortrait is not a built-in feature of Unity, so it does not update exactly in the “order in which animations are processed”, but is developed to update at as close a point as possible.<br>
+    (Note: <a href="https://docs.unity3d.com/2022.3/Documentation/Manual/ExecutionOrder.html" target="_sub">Event execution order in Unity engine</a>)<br>
+    </p>
+    <br>
+    
+    <p>
+    However, depending on the script written by the user or the characteristics of other assets, it may be necessary to change the update order of AnyPortrait.<br>
+    You can change the timing at which animation and mesh are updated using the <strong>Main Logic Event</strong> option added in AnyPortrait v1.4.8.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Setting up an event where the Main Logic is called</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1944.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the <strong>Bake dialog</strong>.<br>
+    <strong>(2)</strong> Select the <strong>Setting</strong> tab.<br>
+    <strong>(3)</strong> You can set the event that updates the main logic by changing the value of <strong>Main Logic Event</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    The values of each option are as follows:<br>
+    - <strong>LateUpdate</strong> : The main logic is executed in the MonoBehaviour's "<strong>LateUpdate</strong>" event. This is the default.<br>
+    - <strong>Update</strong> : The main logic is executed in the MonoBehaviour's "<strong>Update</strong>" event.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1945.jpg"/>
+    <br>
+    
+    <p>
+    This option can also be changed in <strong>Inspector</strong>.<br>
+    <strong>(1)</strong> Select the AnyPortrait character in the Unity scene.<br>
+    <strong>(2)</strong> Select the Basic Settings tab.<br>
+    <strong>(3)</strong> You can set <strong>Main Logic Event</strong> options.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>About when to Call the Main Logic</h3>
+    <br>
+    
+    <p>
+    When the main logic is called may or may not be a sensitive issue.<br>
+    If each module in your game operates with loose relationships, this option may not be very important.<br>
+    However, if the order in which each module is processed during one frame of the game is important, the order in which scripts are called becomes very important.<br>
+    For example, the update function for a camera that follows a character would need to be called after the character logic has been processed.<br>
+    The same goes for animation.<br>
+    If the update order is not organized, animation playback requests, etc. may not be processed properly.<br>
+    Therefore, the processing order of general scripts and animations must be clearly established with consistent rules.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1946.jpg"/>
+    <br>
+    
+    <p>
+    This diagram summarizes the sequence of event calls in Unity related to animation.<br>
+    After Awake and Start, which correspond to initialization, the <strong>Update</strong> event is called.<br>
+    And then <strong>Animation</strong> is processed.<br>
+    Finally, when <strong>LateUpdate</strong> is called and then <strong>Rendering</strong> is performed, one cycle is completed.<br>
+    Because the script update and animation processing stages are separated, it can operate without error.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1947.jpg"/>
+    <br>
+    
+    <p>
+    Since AnyPortrait is not a built-in feature of Unity, its processing method cannot be used as is.<br>
+    However, it was developed so that the main logic is executed as above to operate as similar to Unity's animation processing order as possible.<br>
+    In fact, AnyPortrait's main logic is handled by default in "<strong>LateUpdate</strong>".<br>
+    Since users usually write logic in <strong>Update</strong>, this is quite similar to Unity's processing order.<br>
+    However, as shown in the picture above, the limitation of this method is that errors may occur with other scripts within <strong>LateUpdate</strong>.<br>
+    (For problems and solutions based on execution order, check <a href="../../en/AdvancedManual/AD_ExecutionOrderProblem.html">Related Page</a>.)<br>
+    </p>
+    <br>
+    
+    <p>
+    This basic structure generally works well, but those who develop elaborate script execution sequences may need more flexible options.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1948.jpg"/>
+    <br>
+    
+    <p>
+    This is the calling sequence when the value of the <strong>Main Logic Event</strong> option is changed to “<strong>Update</strong>”.<br>
+    AnyPortrait's main logic is processed in <strong>Update</strong> similar to other scripts.<br>
+    Using this method, more complex processing in <strong>LateUpdate</strong> will be easier to implement.<br>
+    Another advantage is that you can receive animation event callbacks quickly.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, problems with other scripts and call order within <strong>Update</strong> are more likely to occur.<br>
+    At a minimum, the script that “requests to play animation” must be executed before the AnyPortrait main logic.<br>
+    Therefore, if you use this method, be sure to check the explanation below for the script execution order.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>When setting the main logic to be executed in the Update event</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1949.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Change the value of <strong>Main Logic Event</strong> to <strong>Update</strong>.<br>
+    <strong>(2)</strong> Open <strong>Project Settings</strong>.<br>
+    <strong>(3)</strong> Select the <strong>Script Execution Order</strong> menu.<br>
+    <strong>(4)</strong> Set <strong>AnyPortrait.apPortrait</strong> to be called later than <strong>Default Time</strong>. If you have other scripts or assets whose execution order is important, you should carefully consider them when setting the execution order.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_RootMotion.html">< Root Motion</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_PSD.html">Importing a PSD File ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

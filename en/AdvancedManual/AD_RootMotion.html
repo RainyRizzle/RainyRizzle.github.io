@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Root Motion</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_RootMotion.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_RootMotion.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_RootMotion.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Root Motion</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Root Motion</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.8</span></h4>
+    
+    <p>
+    When creating skeletal animation using bones, the character is often moved from the starting position.<br>
+    Although the character moves in the animation, the GameObject does not actually move, so it can be a bit awkward in the game.<br>
+    Because the position shown in the animation and the actual position of the character are different, problems such as the character moving through walls occur.<br>
+    This page covers <strong>"Root Motion"</strong>, a function to solve this problem.<br>
+    This page introduces problem, solutions, and options.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    - <strong>Root Motion</strong> operates based on the skeleton, so it cannot be applied to characters without a skeleton.<br>
+    - This page explains how to use "Rigidbody 2D", but you can also use it if you use "Rigidbody", a 3D physics engine, or no physics engine at all.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Situations requiring Root Motion</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1904.jpg"/>
+    <br>
+    
+    <p>
+    Let's recreate a situation requiring root motion using a character from the "Runner" demo provided in the AnyPortrait package.<br>
+    We created a new animation where the character moves from center to right.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1905.jpg"/>
+    <br>
+    
+    <p>
+    As the animation plays, the character leaps to the right.<br>
+    This is an animation created differently than making animations where characters move not too much from the center.<br>
+    Now let's play this animation in our Unity scene.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1906.jpg"/>
+    <br>
+    
+    <p>
+    A typical situation where root motion is needed is when “physics functions” are used together.<br>
+    Let’s create a scene that uses Unity’s 2D physics.<br>
+    <strong>(1)</strong> Place the character created earlier in the scene.<br>
+    <strong>(2)</strong> Place several sprites as a ground and a wall, including the character, in the scene.<br>
+    <strong>(3)</strong> Rigidbody 2D and Collider 2D components were added to characters and sprites.<br>
+    </p>
+    <br>
+    
+    <p>
+    When running the game, the physics component should prevent the character from going over walls.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1907.jpg"/>
+    <br>
+    
+    <p>
+    Let's run the game and play the animation.<br>
+    Regardless of the physics component, the character go through the wall and moves to the other side.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1908.jpg"/>
+    <br>
+    
+    <p>
+    Let’s check this status in the scene view.<br>
+    <strong>(1)</strong> The object with Rigidbody 2D and Collider 2D added is located on the left side of the wall. That is, the GameObject is stationary.<br>
+    <strong>(2)</strong> However, the animation moving to the right makes it appear as if the character has gone over a wall.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Solving Problems Using Root Motion</h3>
+    <br>
+    
+    <p>
+    This problem occurs when there is a significant difference between the actual displayed position of the character and the position of the character's GameObject.<br>
+    Therefore, to solve this problem, we need to make the “Character’s Position” and “GameObject’s Position” the same.<br>
+    This position synchronization process is called <strong>"Root Motion"</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    In order to apply root motion, the following conditions must be met.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Specifying a Bone for Root Motion</strong><br>
+    One bone representing the character's position must be specified for each mesh group that becomes the root unit.<br>
+    The bone must be a root bone that does not have a parent bone.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> <strong>Make apPortrait's object belong to its parent GameObject</strong><br>
+    The "character" unit must start from apPortrait's parent GameObject, not from apPortrait.<br>
+    This is because the basis for correcting the position is the parent GameObject.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1909.jpg"/>
+    <br>
+    
+    <p>
+    First, let's specify a bone for root motion which means "the visible position of the character".<br>
+    <strong>(1)</strong> Select a mesh group. This must be registered as the root unit.<br>
+    <strong>(2)</strong> After selecting the <strong>Bone</strong> tab, select the bone that is the center of the character. In this example, we have chosen the "Pelvis" bone. The bone must be a root bone that does not have a parent bone.<br>
+    <strong>(3)</strong> Press the <strong>Root Motion</strong> button to activate it.<br>
+    </p>
+    <br>
+    
+    <p>
+    This must be done equally for every mesh group that becomes the root unit.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1910.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Bake</strong> button.<br>
+    <strong>(2)</strong> Press the <strong>Setting</strong> tab.<br>
+    <strong>(3)</strong> In <strong>Root Motion Options</strong>, change the value of <strong>Root Motion Method</strong> to <strong>Move Parent Transform</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    The values of the <strong>Root Motion Method</strong> option are as follows:<br>
+    - <strong>None</strong> : Disable root motion.<br>
+    - <strong>Lock to Center</strong> : Forces the character to always be centered on its parent GameObject.<br>
+    - <strong>Move Parent Transform</strong> : Anchors the character to the center of the parent GameObject and moves the parent GameObject's Transform based on the animation instead.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1911.jpg"/>
+    <br>
+    
+    <p>
+    When you activate the root motion option, additional options appear as shown above.<br>
+    After setting as above, execute <strong>Bake</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    Detailed options are as follows.<br>
+    - <strong>Options Per Axis</strong> : Root motion can be set differently for each X and Y axis. You can decide whether the root motion function controls only the "position" or both the "position and velocity of the Rigidbody." You can also apply root motion to only one of the X or Y axes.<br>
+    - <strong>Parent Transform Type</strong> : If the Root Motion Method is <strong>"Move Parent Transform"</strong>, the parent GameObject of apPortrait is moved as the target. In this option, it is possible to target another GameObject that meets the conditions.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1912.jpg"/>
+    <br>
+    
+    <p>
+    Let's go to our Unity scene and modify the scene configuration to match the root motion.<br>
+    <strong>(1)</strong> Configure the character created with AnyPortrait to belong to the parent GameObject.<br>
+    <strong>(2)</strong> Add physics components (Rigidbody 2D, Collider 2D) to the parent GameObject, not the character created with AnyPortrait.<br>
+    <strong>(3)</strong> Adjust the position carefully to make it behave like a single character as shown above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1913.jpg"/>
+    <br>
+    
+    <p>
+    Now let's run the game and play the animation.<br>
+    When the character moves due to animation, the parent GameObject moves together, and you can see that it naturally collides without being able to cross the wall due to the physics component.<br>
+    Using "Root Motion" as shown above can solve the problem by synchronizing the character animation and the GameObject's position.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Principle of Root Motion</h3>
+    <br>
+    
+    <p>
+    Root motion is a feature supported by several game engines, including Unity.<br>
+    In the case of AnyPortrait, we will show you how root motion operates.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1914.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait uses a separate “parent GameObject” to operate the root motion.<br>
+    Controlling the positions of two GameObjects in a parent-child relationship is the core of root motion.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1915.jpg"/>
+    <br>
+    
+    <p>
+    This image shows the process of root motion.<br>
+    Let's take a look at how "<span class="text-primary"><strong>Position of the parent GameObject (blue gizmo above)</strong></span>" and "<span class="text-success"><strong>Position of the character (green gizmo below)</strong></span>" are in sync.<br>
+    (The green gizmo refers to the bone position for the root motion, not the apPortrait's Transform position.)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> This is the default state configured in the scene.<br>
+    If no animation is playing, the character will be positioned and behave as if it were "one object" with its parent.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> This is the state immediately after the animation is played.<br>
+    When the character moves due to animation, there is a difference in the position of the parent GameObject.<br>
+    This is the problem introduced earlier on this page.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> This is the first step, “<strong>Lock to Center</strong>”, where the root motion is applied.<br>
+    This process moves the character in the opposite direction of the animation so that the root bone specified for root motion is centered on the parent GameObject.<br>
+    After this process, the positions of the character and parent GameObject will become the same again.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> The next step of root motion is “<strong>Move Parent Transform</strong>”.<br>
+    The idea is to move the Transform of the parent GameObject, not the character, by the displacement the root bone needs to move due to the animation.<br>
+    Once you've made it to this stage, the root motion will be applied perfectly.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Lock to Center</h3>
+    <br>
+    
+    <p>
+    Among the options in <strong>Root Motion Method</strong>, let's check how it works if you set it to "<strong>Lock to Center</strong>" instead of "<strong>Move Parent Transform</strong>" introduced earlier.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1916.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the <strong>Bake dialog</strong>.<br>
+    <strong>(2)</strong> Set the value of <strong>Root Motion Method</strong> to “<strong>Lock to Center</strong>”.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1917.jpg"/>
+    <br>
+    
+    <p>
+    When you run <strong>Bake</strong> and run the game, you can see that the character does not move at all from the position as shown above.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Applying different options to each Axis</h3>
+    <br>
+    
+    <p>
+    It is possible to apply root motion differently depending on the X and Y axes.<br>
+    You can apply root motion only to specific axes and set different operation methods.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1918.jpg"/>
+    <br>
+    
+    <p>
+    We modified the animation as above to see the results of the root motion operating differently for each X and Y axis.<br>
+    Since the character moves in large amounts on the X and Y axes, it would be good to compare the results.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1919.jpg"/>
+    <br>
+    
+    <p>
+    If you look at "<strong>Options Per Axis</strong>" among the root motion option items, you can specify options for each X and Y axis.<br>
+    The option values that can be set are as follows.<br>
+    - <strong>Disabled</strong> : No root motion is applied on that axis.<br>
+    - <strong>Position Only</strong> : Applies root motion to that axis. For the "Move Parent Transform" method, only the "<strong>Position</strong>" value is controlled.<br>
+    - <strong>Position And Velocity</strong> : Applies root motion to that axis. In the case of the "Move Parent Transform" method, "<strong>Speed Compensation</strong>" processing is added at the same time as controlling the "<strong>Position</strong>" value.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now, let’s apply different options to each axis and check the results.<br>
+    (To apply root motion, set it to "Position Only" or "Position And Velocity". The difference between the two options is explained below.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1920.jpg"/>
+    <br>
+    
+    <p>
+    The above result is the result of “<span class="text-danger"><strong>Apply root motion only to the X axis</strong></span>”.<br>
+    You can see the character and parent GameObject moving to the right together, creating a physics collision.<br>
+    However, you can see that the character's Y-axis position moves independently of the parent GameObject's Y-position.<br>
+    As a result, the parent GameObject moves only along the X axis due to the animation.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1921.jpg"/>
+    <br>
+    
+    <p>
+    Conversely, this is the result of “<span class="text-primary"><strong>Apply root motion only to Y axis</strong></span>”.<br>
+    You can see the Y positions of the character and parent GameObject moving up and down in sync.<br>
+    However, the character's X position is independent of its parent GameObject, so it goes through the wall.<br>
+    </p>
+    <br>
+    
+    <p>
+    You can see that the results change significantly depending on which axis you apply it to.<br>
+    It may seem best to apply root motion to all axes, but considering the "gravity" nature of the physics engine, applying root motion to only the X-axis may be a good approach.<br>
+    Set options appropriately depending on the physics you use, game logic, animation creation method, etc.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Position Only, Position And Velocity</h3>
+    <br>
+    
+    <p>
+    Among the options for applying root motion by axis are "<strong>Position Only</strong>" and "<strong>Position And Velocity</strong>".<br>
+    Both of these options apply root motion and work the same way.<br>
+    However, when using “Physics Engine (2D/3D)”, these two options work a little differently.<br>
+    As you can see from the name, the difference arises in “Velocity” processing.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1922.jpg"/>
+    <br>
+    
+    <p>
+    The easiest way to compare the differences between these options is through "<strong>Gravity</strong>".<br>
+    If the animation moves upward as shown above, the direction of movement of the character in the animation (Up) and the direction of physical movement due to gravity (Down) are opposite to each other.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1923.jpg"/>
+    <br>
+    
+    <p>
+    Let's compare the results by setting the values of <strong>Y-axis Option</strong> in <strong>Options Per Axis</strong> to "<strong>Position Only</strong>" and "<strong>Position And Velocity</strong>" respectively.<br>
+    (Used Rigidbody 2D from Unity’s 2D physics engine.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1926.jpg"/>
+    <br>
+    
+    <p>
+    Before comparing, here is the result of the root motion when no physics engine is applied.<br>
+    You can see that the animation makes the character move up quite high.<br>
+    Now let's turn on the physics engine and see how the trajectory changes with each option.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1924.jpg"/>
+    <br>
+    
+    <p>
+    This is the result when set to “<strong>Position Only</strong>”.<br>
+    You can see that the character quickly falls during the motion.<br>
+    The "<strong>Position Only</strong>" option controls the "<strong>Position</strong>" of the <strong>Rigidbody</strong>, but not the "<strong>Velocity</strong>".<br>
+    So, despite moving upward due to the root motion, only the "downward speed due to gravity" is calculated, causing the character to fall quickly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1925.jpg"/>
+    <br>
+    
+    <p>
+    This time, this is the result set to “<strong>Position And Velocity</strong>”.<br>
+    You can see that the character's trajectory is slightly higher.<br>
+    The difference in trajectory occurs because the "<strong>Position And Velocity</strong>" option controls both "<strong>Position</strong>" and "<strong>Velocity</strong>" of <strong>Rigidbody</strong>.<br>
+    Because gravity is applied, it doesn't go as high as specified in the animation, but it reproduces the animation's trajectory somewhat better than the "<strong>Position Only</strong>" method.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, this option does not control velocity solely based on animation.<br>
+    This option only performs a slight correction if the position movement caused by the root motion and the velocity of the <strong>Rigidbody</strong> differ significantly.<br>
+    So you can see the result of “movement driven by physics engine” and “movement driven by animation” combined.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Specifying another GameObject as the target of Root Motion</h3>
+    <br>
+    
+    <p>
+    If you set the root motion method to <strong>Move Parent Transform</strong>, the movement by animation is transmitted to the parent GameObject and makes it move instead.<br>
+    At this time, it is possible to target a GameObject other than the parent GameObject of apPortrait's GameObject.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    GameObjects that can be specified must be chained in a parent-child relationship with apPortrait's GameObject.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1927.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> The scene composition was modified as above.<br>
+    The character ("Runner") created with AnyPortrait was set to become a child object of the new GameObject "<strong>Parent 2</strong>". ("<strong>Parent 2 > Parent Object > Runner</strong>")<br>
+    If you want to control "<strong>Parent 2</strong>" as a character unit, you will need to change the target of the root motion to "<strong>Parent 2</strong>".<br>
+    (The default root motion targets the "Parent Object", which is the parent GameObject directly above it.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1928.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> In the <strong>Bake dialog</strong>, set the value of <strong>Parent Transform Type</strong> to <strong>Specified Transform</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1929.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> An option to set the target of the root motion will appear.<br>
+    <strong>(2)</strong> Press the <strong>Change</strong> button.<br>
+    <strong>(3)</strong> Transforms of GameObjects that can be specified appear. Select “Parent 2” and press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now the movement of the root motion will be applied to the changed Transform.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Setting Root Motion Options in the Inspector</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1930.jpg"/>
+    <br>
+    
+    <p>
+    Root motion can be set in <strong>Bake dialog</strong> as well as <strong>Inspector</strong>.<br>
+    <strong>(1)</strong> Select a character created with AnyPortrait in the Unity scene.<br>
+    <strong>(2)</strong> Select the Basic Settings tab.<br>
+    <strong>(3)</strong> Root motion options can also be viewed in <strong>Inspector</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    - When operating on a 3D physics engine, the X-axis option determines X- and Z-axis movement.<br>
+    - Movement by root motion operates by detecting changes in the animation's position, so positional movement does not occur in the "first frame" of the animation.<br>
+    - It is applied differently depending on the component (Rigidbody, Rigidbody2D, Transform) added to the parent GameObject.<br>
+    - If there are two or more root units, there must be a bone with root motion set in the mesh group of all root units.<br>
+    - If both X and Y axis options are disabled, root motion will not operate.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_NonUniformScale.html">< Non-Uniform Scale option</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_MainLogicEvent.html">Main Logic Event ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

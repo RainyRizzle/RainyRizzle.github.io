@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Unity 2023でのパフォーマンスの問題</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_Unity2023PerformanceIssue.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_Unity2023PerformanceIssue.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_Unity2023PerformanceIssue.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > Unity 2023でのパフォーマンスの問題</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Unity 2023でのパフォーマンスの問題</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.8</span></h4>
+    
+    <p>
+    「Unity 2023」は、以前のバージョンに比べてデザインや機能が大きく変わったバージョンです。<br>
+    「AnyPortrait」との互換性についても、私たちのチームは注意深く見ています。<br>
+    すべての機能が正常に動作することを望んでいますが、残念ながら私たちのチームはこのバージョンでのみ表示されるパフォーマンスの問題を発見しました。<br>
+    </p>
+    <br>
+    
+    <p>
+    パフォーマンスの問題が発生する条件は次のとおりです。<br>
+    <strong>(1)</strong> AnyPortraitエディタを別々のウィンドウで開きます。<br>
+    <strong>(2)</strong> UnityエディタとAnyPortraitエディタを開いた状態で、別のプログラム（インターネットブラウザなど）を選択してウィンドウフォーカスを移動します。<br>
+    <strong>(3)</strong> もう一度AnyPortraitエディタに戻ると、パフォーマンスが大幅に低下します。<br>
+    </p>
+    <br>
+    
+    <p>
+    私たちのチームはこの問題の原因を正確に把握することはできませんでしたが、パフォーマンスの低下を検出する機能と、この問題を解決する機能をテストを通じて実装しました。<br>
+    このページでパフォーマンスの問題が発生した状況と、この問題を解決する方法を確認してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1931.jpg"/>
+    <br>
+    
+    <p>
+    「Unity 2023」では、デモシーンのキャラクターをAnyPortraitエディタで開いた状態です。<br>
+    この状態でプロファイラを実行してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1932.jpg"/>
+    <br>
+    
+    <p>
+    プロファイラを実行すると、大きなパフォーマンスの問題なしに正常に動作することがわかります。<br>
+    （パフォーマンスの問題を示すために、「Scripts」と「Others」の項目のみを表示するように選択しました。）<br>
+    </p>
+    <br>
+    
+    <p>
+    エディタを閉じていない状態で、外部のプログラムウィンドウをしばらく選択してから戻りましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1933.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitエディタに戻ると、「Others」項目が頻繁に非常に低いパフォーマンスで動作することがわかります。<br>
+    そのエントリは、Unityエディタがスタンバイ状態のときの処理として推定されます。<br>
+    ちなみに、AnyPortraitエディタに戻った後も、まだ大気のサンタへの処理が続くため、パフォーマンスが大幅に低下します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1934.jpg"/>
+    <br>
+    
+    <p>
+    プロファイラで確認した性能低下が検出されると、表示メニューの横に新しい「パフォーマンス回復ボタン」が自動的に表示されます。<br>
+    このボタンは、エディタの待機状態を解消してパフォーマンスの問題を解決する役割を果たします。<br>
+    このボタンを押してプロファイラを確認しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1935.jpg"/>
+    <br>
+    
+    <p>
+    「パフォーマンス回復ボタン」を押すと、再度正常に回復することをプロファイラで確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    「パフォーマンス回復ボタン」は一定時間の性能低下が検出されなければ表示されませんので、ボタンが表示されない場合は少しお待ちください。<br>
+    「パフォーマンス回復ボタン」が頻繁に表示されないように、ボタンを押した後は10秒ほど経ってからボタンが再び登場します。<br>
+    「Unity 2022」以前ではパフォーマンス問題が見つからなかったため、この機能は機能しません。<br>
+    </p>
+    <br>
+    
+    <p>
+    この問題はまだ原因が正確に特定されていません。<br>
+    問題が解決しなかった場合は、チームに連絡してください！<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_NoRenderedClippedMesh.html">< クリッピングメッシュのレンダリングの問題</a>
+        <a class="btn btn-light" role="button" href="#"></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

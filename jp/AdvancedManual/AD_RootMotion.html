@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>ルートモーション</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_RootMotion.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_RootMotion.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_RootMotion.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > ルートモーション</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">ルートモーション</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.8</span></h4>
+    
+    <p>
+    スケルタルアニメーションを作成するとき、キャラクターを開始位置から移動させたりします。<br>
+    アニメではキャラクターが移動をしましたが、実際に「GameObject」が移動するわけではないので、ゲーム上で多少ぎこちないことがあります。<br>
+    「アニメによって見られる位置」と「実際の位置」が異なるため、キャラクターが壁を突き飛ばすなどの問題が発生します。<br>
+    このページでは、この問題を解決するための機能である「<strong>ルートモーション（Root Motion）</strong>」について説明します。<br>
+    問題の状況、回避策、およびオプションを紹介します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>参考</strong></span><br>
+    - 「ルートモーション」はボーンを基準に動作するため、ボーンがないキャラクターには適用できません。<br>
+    - このページでは「Rigidbody 2D」を利用して説明しましたが、3D物理エンジンの「Rigidbody」を使用したり、物理エンジンをまったく使用しない場合にも利用できます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>ルートモーションが必要な状況</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1904.jpg"/>
+    <br>
+    
+    <p>
+    「AnyPortraitパッケージ」で提供される「Runner」デモのキャラクターを利用してルートモーションが必要な状況を再現しましょう。<br>
+    キャラクターが中心から右に移動するアニメーションを新たに制作してみました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1905.jpg"/>
+    <br>
+    
+    <p>
+    アニメーションが再生されると、キャラクターは右に飛躍します。<br>
+    一般に、中心から大きく外れないようにキャラクターアニメーションを作成するのとは異なることがわかります。<br>
+    それでは、このアニメーションをUnityシーンで再生してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1906.jpg"/>
+    <br>
+    
+    <p>
+    ルートモーションが必要な代表的な状況は、「物理機能」を一緒に利用した時です。<br>
+    Unityの「2D物理」を利用するシーンを構成しましょう。<br>
+    <strong>(1)</strong> 先に製作したキャラクターをシーンに配置します。<br>
+    <strong>(2)</strong> シーンにキャラクターを含むいくつかのスプライトを配置します。<br>
+    <strong>(3)</strong> キャラクターとスプライトに「Rigidbody 2D」、「Collider 2D」コンポーネントなどを追加しました。<br>
+    </p>
+    <br>
+    
+    <p>
+    ゲームを実行したとき、物理コンポーネントによってキャラクターは壁を越えてはいけません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1907.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行し、先に制作したアニメーションを再生してみました。<br>
+    物理コンポーネントに関係なく、キャラクターが壁を突き抜けて向かいに移動してしまいます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1908.jpg"/>
+    <br>
+    
+    <p>
+    この状態をシーンビューで確認しましょう。<br>
+    <strong>(1)</strong> 「Rigidbody 2D」と「Collider 2D」が追加されたオブジェクトは、壁の左側に位置します。 つまり、「GameObject」は移動していない状態です。<br>
+    <strong>(2)</strong> しかし、右に移動するアニメーションによってキャラクターがまるで壁を越えたかのように見えるのです。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>ルートモーションで問題を解決</h3>
+    <br>
+    
+    <p>
+    この問題は、「実際に見えるキャラクタの位置」と「キャラクターのGameObjectの位置」が大きく異なるために発生します。<br>
+    したがって、この問題を解決するには、キャラクターの位置とGameObjectの位置が同じになるようにする必要があります。<br>
+    この位置同期処理を「<strong>ルートモーション（Root Motion）</strong>」といいます。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    「ルートモーション」を適用するには、次の条件を満たす必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>ルートモーション用ボーンを指定</strong><br>
+    キャラクターの位置を意味するボーンをルートユニットとなるメッシュグループごとに 1 つずつ指定しなければなりません。<br>
+    このボーンは親ボーンを持たないルートボーンでなければなりません。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> <strong>apPortrait のオブジェクトが親 GameObject に属するように構成</strong><br>
+    「キャラクター」ユニットは、apPortraitではなくapPortraitの「親GameObject」から始まる必要があります。<br>
+    位置を補正する基準が「親 GameObject」だからです。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1909.jpg"/>
+    <br>
+    
+    <p>
+    まず、「キャラクターの見える位置」を意味する「ルートモーションのためのボーン」を指定してみましょう。<br>
+    <strong>(1)</strong> メッシュグループを選択します。 このメッシュグループは、ルートユニットとして登録されるメッシュグループでなければなりません。<br>
+    <strong>(2)</strong> 「<strong>Bone</strong> 」タブを選択した後、キャラクターの中心となるボーンを選択します。 ここでは「Pelvis」ボーンを選択しました。 これは親ボーンを持たないルートボーンでなければなりません。<br>
+    <strong>(3)</strong> 「<strong>Root Motion</strong>」ボタンを押して有効にします。<br>
+    </p>
+    <br>
+    
+    <p>
+    これは、ルートユニットとなるすべてのメッシュグループに対して同じように実行する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1910.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Bake</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを押します。<br>
+    <strong>(3)</strong> 「<strong>Root Motion Options</strong>」で「<strong>Root Motion Method</strong>」の値を「<strong>Move Parent Transform</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    「<strong>Root Motion Method</strong>」オプションの値はそれぞれ次のとおりです。<br>
+    - <strong>None</strong> : ルートモーションを無効にします。<br>
+    - <strong>Lock to Center</strong> : キャラクターが常に親 GameObject の中心に位置するように固定します。<br>
+    - <strong>Move Parent Transform</strong> : キャラクターを親 GameObject の中心に固定し、親 GameObject の Transform をアニメーションに従って代わりに移動させます。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1911.jpg"/>
+    <br>
+    
+    <p>
+    ルートモーションオプションを有効にすると、上記のように追加のオプションが表示されます。<br>
+    上記のように設定した後、「Bake」を実行します。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    追加のオプションは次のとおりです。<br>
+    - <strong>Options Per Axis</strong> : ルートモーションをX、Y軸ごとに異なるように設定できます。 ルートモーション機能が「位置」のみを制御するか、「位置とRigidbodyの速度」の両方を制御するかを決定できます。 X軸とY軸のいずれかにルートモーションを適用することもできます。<br>
+    - <strong>Parent Transform Type</strong> : ルートモーションの方式が <strong>Move Parent Transform</strong> の場合、apPortrait の親 GameObject を対象に移動をさせるのに、このとき条件に合った他の GameObject を対象にすることが可能です。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1912.jpg"/>
+    <br>
+    
+    <p>
+    Unityシーンに行き、シーン構成をルートモーションに合わせて修正しましょう。<br>
+    <strong>(1)</strong> AnyPortrait で制作されたキャラクターが親 GameObject に属するように構成します。<br>
+    <strong>(2)</strong> 物理コンポーネント（Rigidbody 2D、Collider 2D）をAnyPortraitで作成された文字ではなく親GameObjectに追加します。<br>
+    <strong>(3)</strong> 位置をよく調整し、上記のように1つのキャラクターのように動作するようにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1913.jpg"/>
+    <br>
+    
+    <p>
+    それでは、ゲームを実行してアニメーションを再生しましょう。<br>
+    アニメーションによってキャラクターが移動をすると、親 GameObject が実際に一緒に移動することになり、物理コンポーネントによって壁を越えずに自然に衝突するのが見られます。<br>
+    上記のように「ルートモーション」を使用すると、キャラクターアニメーションとGameObjectの位置を同期させることで問題を解決できます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>ルートモーションの動作原理</h3>
+    <br>
+    
+    <p>
+    ルートモーションは、Unityを含む複数のゲームエンジンがサポートする機能です。<br>
+    AnyPortraitの場合は、どのプロセスを通じてルートモーションが動作するかをお見せしましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1914.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitは別の「親GameObject」を利用してルートモーションが動作します。<br>
+    親 - 子関係の2つのGameObjectの位置を制御することがルートモーションの中心です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1915.jpg"/>
+    <br>
+    
+    <p>
+    ルートモーションが動作する過程を示すイメージです。<br>
+    「<span class="text-primary">親GameObjectの位置(上の青いギズモ)</span>」と「<span class="text-success">キャラクターの位置(下の緑のギズモ)</span>」がどのように同期されるか順に確認してみましょう。<br>
+    （緑のギズモは、apPortraitのTransform位置ではなく、ルートモーション用のボーンの位置を意味します。）<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> シーンで構成されたデフォルト状態です。<br>
+    アニメーションが再生されない場合、キャラクターは親と一緒にまるで「一つのオブジェクト」のように配置されて動作します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> アニメーションが再生された直後の状態です。<br>
+    キャラクターがアニメーションによって移動すると、親 GameObject の位置と違いが発生します。<br>
+    このページの前半で紹介した問題がまさにこの段階です。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> ルートモーションが適用される最初のステップである「<strong>Lock to Center</strong>」です。<br>
+    このステップでは、ルートモーション用に指定されたルートボーンが親 GameObject の中心に位置するように、アニメーションの反対方向に文字を移動します。<br>
+    このプロセスを経て、キャラクタと親GameObjectの位置は再び同じになります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> ルートモーションの次のステップである「<strong>Move Parent Transform</strong>」です。<br>
+    アニメーションによってルートボーンが移動しなければならない変位ほど、キャラクターではなく親 GameObject の Transform を移動させることです。<br>
+    この段階まで実行すると、ルートモーションが完全に適用されます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Lock to Center</h3>
+    <br>
+    
+    <p>
+    「<strong>Root Motion Method</strong>」の先に紹介した「<strong>Move Parent Transform</strong>」ではなく「<strong>Lock to Center</strong>」に設定すると、どのように動作するかを確認しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1916.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「Bakeダイアログ」を開きます。<br>
+    <strong>(2)</strong> 「<strong>Root Motion Method</strong>」の値を「<strong>Lock to Center</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1917.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bake</strong>」を実行してゲームを実行すると、上記のようにキャラクターが配置された位置でまったく動かないことがわかります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>軸ごとに他のオプションを適用</h3>
+    <br>
+    
+    <p>
+    ルートモーションをX、Y軸によって異なるように適用することが可能です。<br>
+    特定の軸にのみルートモーションを適用したり、動作方法を異なる方法で設定したりできます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1918.jpg"/>
+    <br>
+    
+    <p>
+    X、Y軸ごとにルートモーションが異なる動作をする結果を見るために、アニメーションを上記のように修正してみました。<br>
+    キャラクターがX軸、Y軸で大幅に動くので、それぞれの結果を比較するのが良いでしょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1919.jpg"/>
+    <br>
+    
+    <p>
+    ルートモーションのオプション項目の中で「<strong>Options Per Axis</strong>」を見ると、X、Y軸ごとにそれぞれオプションを指定できます。<br>
+    設定できるオプション値は次のとおりです。<br>
+    - <strong>Disabled</strong> : その軸ではルートモーションは適用されません。<br>
+    - <strong>Position Only</strong> : その軸にルートモーションを適用します。 「Move Parent Transform」方式の場合、「位置」の値のみを制御します。<br>
+    - <strong>Position And Velocity</strong> : その軸にルートモーションを適用します。 「Move Parent Transform」方式の場合、「位置」値を制御すると同時に「速度補正」処理が追加されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    それでは、軸ごとに異なるオプションを適用して結果を確認しましょう。<br>
+    （ルートモーションを適用するには、「Position Only」または「Position And Velocity」に設定します。2つのオプションの違いについては後述します。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1920.jpg"/>
+    <br>
+    
+    <p>
+    上記の結果は、「<span class="text-danger">X軸のみにルートモーションを適用</span>」した結果です。<br>
+    キャラクターと親 GameObject が一緒に右に移動すると、物理的な衝突が発生することがわかります。<br>
+    しかし、キャラクターのY軸位置は、親GameObjectのY位置とは独立して動くことがわかります。<br>
+    その結果、親 GameObject はアニメーションによって X 軸だけに移動するようになりました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1921.jpg"/>
+    <br>
+    
+    <p>
+    逆に、今回は「<span class="text-primary">Y軸のみにルートモーションを適用</span>」した結果です。<br>
+    キャラクターと親 GameObject の Y 位置が同期して上下に動くのがわかります。<br>
+    しかし、キャラクターのX位置は親GameObjectから離れて一人で動くので壁を通過してしまいました。<br>
+    </p>
+    <br>
+    
+    <p>
+    どの軸に適用するかによって結果が大きく変わることがわかります。<br>
+    簡単に考えると、すべての軸にルートモーションを適用するのが最も良いようですが、「重力」が適用される物理エンジンの特性を考慮すると、X軸にのみルートモーションを適用するのが良いアプローチかもしれません。<br>
+    使用する物理機能、ゲームのロジック、アニメーション制作方法などに応じて適切にオプションを設定してみてください。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Position Only と Position And Velocity</h3>
+    <br>
+    
+    <p>
+    軸ごとにルートモーションを適用するオプションには、「<strong>Position Only</strong>」と「<strong>Position And Velocity</strong>」があります。<br>
+    これらのオプションはすべてルートモーションを適用することであり、基本的に同じ動作を持っています。<br>
+    ただし、「物理エンジン（2D / 3D）」を使用する場合、これら2つのオプションは少し異なる動作をします。<br>
+    名前からわかるように、「速度」処理において違いが発生するのです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1922.jpg"/>
+    <br>
+    
+    <p>
+    このオプションの違いを最も簡単に比較する方法は、「重力」を使用することです。<br>
+    アニメーションが上のように上向きに動くと、アニメーション上でのキャラクターの移動方向（上）と重力による物理的な移動方向（下）が互いに逆になります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1923.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Options Per Axis</strong>」の「<strong>Y-axis Option</strong>」の値を「<strong>Position Only</strong>」と「<strong>Position And Velocity</strong>」にそれぞれ設定してみて、結果を比較してみましょう。<br>
+    （Unity 2D物理エンジンの「Rigidbody 2D」を利用しました。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1926.jpg"/>
+    <br>
+    
+    <p>
+    比較する前に、物理エンジンが適用されなかったときのルートモーションの結果です。<br>
+    アニメーションによってキャラクターがかなり高く上がっているのがわかります。<br>
+    それでは、物理エンジンをオンにして、それぞれのオプションで軌跡がどのように変わるかを見てみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1924.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Position Only</strong>」に設定した結果です。<br>
+    キャラクターが上に上がるモーションの途中ですぐに落ちるのがわかります。<br>
+    「<strong>Position Only</strong>」オプションは<strong>Rigidbody</strong>の「位置」を制御しますが、「速度」は制御しません。<br>
+    したがって、ルートモーションによって上に移動するにもかかわらず、「重力による下方の速度」だけが計算され、キャラクターは急速に低下します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1925.jpg"/>
+    <br>
+    
+    <p>
+    今回は「<strong>Position And Velocity</strong>」に設定した結果です。<br>
+    キャラクターの軌跡が少し高くなったことがわかります。<br>
+    「<strong>Position And Velocity</strong>」オプションは、<strong>Rigidbody</strong>の「位置」と「速度」の両方を制御するため、軌跡の違いが発生したものです。<br>
+    重力が適用されるため、アニメーションで指定されたほど高く上がることはありませんが、「<strong>Position Only</strong>」方式ではなくアニメーションの軌跡をある程度よく再現しています。<br>
+    </p>
+    <br>
+    
+    <p>
+    ただし、このオプションが「速度」をアニメーションに基づいてのみ制御するわけではありません。<br>
+    このオプションは、ルートモーションによる位置移動と「Rigidbody」の速度が非常に大きく異なる場合にのみ、わずかな補正を行います。<br>
+    よって、「物理エンジンによる動き」と「アニメーションによる動き」を合わせた結果を見ることができる。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>他のGameObjectをルートモーションのターゲットとして指定</h3>
+    <br>
+    
+    <p>
+    ルートモーションの方式を「<strong>Move Parent Transform</strong>」に設定すると、アニメーションによる動きを親GameObjectに渡し、代わりに移動させます。<br>
+    このとき、apPortraitのGameObjectの親GameObjectではなく、「他のGameObject」を対象に指定することが可能です。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>参考</strong></span><br>
+    指定可能なGameObjectは、apPortraitのGameObjectの親子関係に連鎖的にリンクする必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1927.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> シーン構成を上記のように修正しました。<br>
+    AnyPortraitで制作されたキャラクター("Runner")が新しいGameObjectである「<strong>Parent 2</strong>」の連鎖的に子オブジェクトになるように設定しました。 （<strong>Parent 2 > Parent Object > Runner</strong>）<br>
+    「<strong>Parent 2</strong>」をキャラクター単位として制御したい場合は、ルートモーションの対象を「<strong>Parent 2</strong>」に変更する必要があります。<br>
+    （ルートモーションのデフォルト値はすぐ上の親 GameObject である「Parent Object」を対象とします。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1928.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「Bake ダイアログ」で「<strong>Parent Transform Type</strong>」の値を「<strong>Specified Transform</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1929.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ルートモーションの対象を設定するオプションが表示されます。<br>
+    <strong>(2)</strong> 「<strong>Change</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> 指定可能な GameObject の Transform が表示されます。 「Parent 2」を選択し、「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <p>
+    これで、ルートモーションの動きが変更された「Transform」に適用されます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Inspectorでルートモーションオプションを設定</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1930.jpg"/>
+    <br>
+    
+    <p>
+    ルートモーションは「Bakeダイアログ」だけでなく「<strong>Inspector</strong>」でも設定できます。<br>
+    <strong>(1)</strong> UnityシーンでAnyPortraitで制作されたキャラクターを選択します。<br>
+    <strong>(2)</strong> 基本設定タブを選択します。<br>
+    <strong>(3)</strong> ルートモーションオプションは「Inspector」でも表示できます。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    - 3D物理エンジンで動作している場合、X軸オプションはX、Z軸の動きを決定します。<br>
+    - ルートモーションによる動きは、アニメーションの位置変化を検出して動作するため、アニメーションの「最初のフレーム」では位置ずれが発生しません。<br>
+    - 親 GameObject に追加されたコンポーネント (Rigidbody, Rigidbody2D, Transform) によって異なる方法で適用されます。<br>
+    - 2つ以上のルートユニットがある場合は、すべてのルートユニットのメッシュグループにルートモーションが設定されたボーンが存在する必要があります。<br>
+    - X、Y軸オプションがすべて無効になっていると、ルートモーションは機能しません。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_NonUniformScale.html">< 「Non-Uniform Scale」オプション</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_MainLogicEvent.html">メインロジックイベント ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

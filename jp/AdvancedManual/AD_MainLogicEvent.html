@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>メインロジックイベント</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_MainLogicEvent.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MainLogicEvent.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_MainLogicEvent.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > メインロジックイベント</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">メインロジックイベント</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.4.8</span></h4>
+    
+    <p>
+    Unityエンジンは、更新とレンダリングが決まった順序で処理されます。<br>
+    MonoBehaviourスクリプトのイベントはそれぞれのステップを意味します。<br>
+    AnyPortrait は Unity に組み込まれた機能ではないため、「アニメーションが処理される順序」では正確に更新されませんが、できるだけ類似した時点で更新されるように開発されました。<br>
+    （<a href="https://docs.unity3d.com/ja/2022.3/Manual/ExecutionOrder.html" target="_sub">Unityエンジンのイベント実行順序</a>）<br>
+    </p>
+    <br>
+    
+    <p>
+    ただし、ユーザーが作成したスクリプトや他のアセットの特性によっては、AnyPortraitの更新時点を変更する必要があるかもしれません。<br>
+    「AnyPortrait v1.4.8」で追加された「<strong>Main Logic Event</strong>」オプションを使用して、アニメーションとメッシュが更新されるタイミングを変更できます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>メインロジックが呼び出されるイベントの設定</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1944.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Bakeダイアログ</strong>」を開きます。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>Main Logic Event</strong>」の値を変更することで、メインロジックが更新されるイベントを設定できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    オプションの値はそれぞれ次のとおりです。<br>
+    - <strong>LateUpdate</strong>：「MonoBehaviour」の「<strong>LateUpdate</strong>」イベントでメインロジックが実行されます。 デフォルトです。<br>
+    - <strong>Update</strong>：「MonoBehaviour」の「<strong>Update</strong>」イベントでメインロジックが実行されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1945.jpg"/>
+    <br>
+    
+    <p>
+    このオプションは「<strong>Inspector</strong>」でも変更できます。<br>
+    <strong>(1)</strong> UnityシーンでAnyPortraitキャラクターを選択します。<br>
+    <strong>(2)</strong> 基本設定タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>Main Logic Event</strong>」オプションを設定できます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>メインロジック呼び出し時について</h3>
+    <br>
+    
+    <p>
+    メインロジックがいつ呼び出されるかは、敏感な問題かもしれません。<br>
+    ゲームの各モジュールがゆるい関係で動作している場合、このオプションはそれほど重要ではないかもしれません。<br>
+    ただし、ゲームの1フレーム中に各モジュールが処理される順序が重要な場合、スクリプトが呼び出される順序は非常に重要になります。<br>
+    たとえば、キャラクターに従うカメラの更新関数は、キャラクターロジックが処理された後に呼び出す必要があります。<br>
+    アニメの場合も同様です。<br>
+    更新順序がクリーンアップされていない場合、アニメーションの再生要求などが正しく処理されない可能性があります。<br>
+    したがって、一般的なスクリプトの処理順序とアニメーションの処理順序は明らかに一貫した規則を持っている必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1946.jpg"/>
+    <br>
+    
+    <p>
+    アニメーションに関して Unity のイベント呼び出し順序をまとめた図です。<br>
+    初期化に対応する「Awake」と「Start」を通過し、「<strong>Update</strong>」イベントが呼び出されます。<br>
+    その後、「<strong>Process Animation</strong>」が実行されます。<br>
+    最後に「<strong>LateUpdate</strong>」が呼び出されてから「<strong>Rendering</strong>」になると、1サイクルが完了します。<br>
+    スクリプトの更新とアニメーションの処理ステップが分離されているため、エラーなく動作できるのです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1947.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitはUnity組み込み機能ではないため、対応する処理方式をそのまま利用することはできません。<br>
+    しかし、できるだけユニティのアニメーション処理シーケンスと同様に動作するように、上記のようにメインロジックが実行されるように開発を行ったのです。<br>
+    実際、AnyPortraitのメインロジックはデフォルトで「<strong>LateUpdate</strong>」で処理されます。<br>
+    ユーザーは主に「<strong>Update</strong>」にロジックを書くので、これはUnityの処理順序とかなり似ています。<br>
+    ただし、上の図に示すように、「<strong>LateUpdate</strong>」内で他のスクリプトとのエラーが発生する可能性があるという点はこの方式の制限です。<br>
+    （実行手順による問題と解決方法は、<a href="../../jp/AdvancedManual/AD_ExecutionOrderProblem.html">関連ページ</a>で確認してください。）<br>
+    </p>
+    <br>
+    
+    <p>
+    この基本的な構造は一般的にうまく機能しますが、スクリプトの実行順序を洗練して設計して開発する人には、もう少し柔軟なオプションを提供する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1948.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Main Logic Event</strong>」オプションの値を「<strong>Update</strong>」に変更したときの呼び出し順序です。<br>
+    AnyPortraitのメインロジックは他のスクリプトと同様に「<strong>Update</strong>」で処理されます。<br>
+    この方法を使用すると、「<strong>LateUpdate</strong>」でより複雑な処理を少し簡単に実装できます。<br>
+    アニメーションイベントコールバックを迅速なタイミングで受け取ることができるのも利点です。<br>
+    </p>
+    <br>
+    
+    <p>
+    しかし、「<strong>Update</strong>」内では、他のスクリプトや呼び出し順序による問題がさらに発生する可能性が高くなります。<br>
+    少なくとも、「アニメーションの再生を要求する」スクリプトは、AnyPortraitのメインロジックではなく、無条件に最初に実行する必要があります。<br>
+    したがって、この方法を使用する場合は、スクリプトの実行順序を以下の説明を必ず確認してください。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>「Update」イベントでメインロジックを実行するように設定する場合</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1949.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Main Logic Event</strong>」の値を「<strong>Update</strong>」に変更します。<br>
+    <strong>(2)</strong> 「<strong>Project Settings</strong>」を開きます。<br>
+    <strong>(3)</strong> 「<strong>Script Execution Order</strong>」メニューを選択します。<br>
+    <strong>(4)</strong> 「<strong>AnyPortrait.apPortrait</strong>」が 「<strong>Default Time</strong>」より後で呼び出されるように設定します。 実行される順序が重要な他のスクリプトやアセットがある場合は、よく考慮して実行順序を設定する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_RootMotion.html">< ルートモーション</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_PSD.html">PSDファイルの読み込み ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>
