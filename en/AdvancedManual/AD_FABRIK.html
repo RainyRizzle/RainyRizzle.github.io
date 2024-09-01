@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Improved IK method: FABRIK</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_FABRIK.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_FABRIK.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_FABRIK.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Improved IK method: FABRIK</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Improved IK method: FABRIK</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.0</span></h4>
+    
+    <p>
+    In <strong>AnyPortrait v1.5.0</strong>, the default algorithm for IK calculations has been changed from "<strong>CCD (Cyclic Coordinate Descent)</strong>" to "<strong>FABRIK (Foward And Backward Reaching Inverse Kinematics)</strong>".<br>
+    The "<strong>FABRIK</strong>" method solves the movement problems shown in the "<strong>CCD</strong>" method in certain situations and has better performance.<br>
+    However, in order to maintain the character animations created using the existing "<strong>CCD</strong>", an option is provided for users to select between "<strong>CCD</strong>" and "<strong>FABRIK</strong>".<br>
+    - Existing characters will operate IK in "<strong>CCD</strong>" mode unless you change the options.<br>
+    - Newly created characters will use "<strong>FABRIK</strong>" as the default.<br>
+    </p>
+    <br>
+    
+    <p>
+    This manual shows you how to set up the added "<strong>FABRIK</strong>" and how the changed algorithm differs.<br>
+    For more detailed explanation of IK, please check the following manuals:<br>
+    - <a href="../../en/AdvancedManual/AD_BoneIK.html">IK Settings</a><br>
+    - <a href="../../en/AdvancedManual/AD_BoneIKController.html">IK Controller</a><br>
+    - <a href="../../en/AdvancedManual/AD_MakeIKIntended.html">Making IK work as intended</a><br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Set to FABRIK</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1966.jpg"/>
+    <br>
+    
+    <p>
+    A simple example using <strong>IK Controller</strong> is prepared as above.<br>
+    The gem is connected to a bone, and the bone moves by keyframe animation.<br>
+    The mechanical arm is made of several bones, and will move automatically to grab the gem only by the IK Controller without animation.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1967.jpg"/>
+    <br>
+    
+    <p>
+    The rigging for the mechanical arm to move by bones has been completed.<br>
+    Then, before setting up the <strong>IK Controller</strong> to move the mechanical arm, connect the main bones of the mechanical arm to the <strong>IK Chain</strong>.<br>
+    <strong>(1)</strong> Select the "<strong>Bone</strong>" tab in the Mesh group.<br>
+    <strong>(2)</strong> Select the bone ("Bone Arm 1") that is the beginning of the IK chain.<br>
+    <strong>(3)</strong> Change the IK method to "<strong>IK Head</strong>".<br>
+    <strong>(4)</strong> Click the "<strong>Change IK Target</strong>" button.<br>
+    <strong>(5)</strong> Select the bone ("Bone Arm End") that is the end of the IK chain, that is, the bone that holds the gem.<br>
+    <strong>(6)</strong> Now, you can see that the bones of the mechanical arm are connected as an IK chain.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1968.jpg"/>
+    <br>
+    
+    <p>
+    Next, set up the <strong>IK Controller</strong>.<br>
+    <strong>(1)</strong> Select the bone ("Bone Arm End") that will grab the gem.<br>
+    <strong>(2)</strong> Change the type of the IK Controller to "<strong>Position</strong>", set "<strong>Effector Bone</strong>" to the bone ("Bone Gem") corresponding to the gem, and set <strong>Default FK/IK Weight</strong> to <span class="text-primary"><strong>1</strong></span>.<br>
+    <strong>(3)</strong> Now, the IK chain from "Bone Arm 1" to "Bone Arm End" will automatically move towards the gem bone ("Bone Gem").<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1969.jpg"/>
+    <br>
+    
+    <p>
+    Let's change the IK method.<br>
+    (If you create a new character after the v1.5.0 update, <strong>FABRIK</strong> will be set as the default.)<br>
+    <strong>(1)</strong> Click the "<strong>Bake</strong>" button.<br>
+    <strong>(2)</strong> Select the "<strong>Setting</strong>" tab.<br>
+    <strong>(3)</strong> In the "<strong>IK Method</strong>" option, you can select "<strong>FABRIK</strong>" or "<strong>CCD</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1970.jpg"/>
+    <br>
+    
+    <p>
+    You can also change the algorithm of the IK controller in the Setting Dialog.<br>
+    <strong>(1)</strong> Open the "<strong>Setting Dialog</strong>".<br>
+    <strong>(2)</strong> Select the "<strong>Portrait</strong>" tab.<br>
+    <strong>(3)</strong> You can change the algorithm in the "<strong>IK Method</strong>" option.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1971.jpg"/>
+    <br>
+    
+    <p>
+    If you create an animation by moving only the "Bone Gem", the arm will move as shown above by the IK Controller.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1972.jpg"/>
+    <br>
+    
+    <p>
+    If you play the same animation in both "<strong>CCD</strong>" and "<strong>FABRIK</strong>" modes, you can see that it moves a little differently, as shown above.<br>
+    Even though the gem's position is the same, you can see that the mechanical arm moves in a different way.<br>
+    </p>
+    <br>
+    
+    <p>
+    As IK does not have a clear answer, it shows different results depending on the algorithm.<br>
+    Since "<strong>FABRIK</strong>" and "<strong>CCD</strong>" each have their own characteristics, it would be better to use the appropriate algorithm depending on the situation.<br>
+    However, in AnyPortrait, the "<strong>FABRIK</strong>" method includes improved tuning, so it shows improved movement compared to the existing "<strong>CCD</strong>" method.<br>
+    The two methods have the following differences due to the differences in the characteristics and tuning of the algorithm.<br>
+    - In "CCD", the beginning of the IK chain moves a lot, while in "FABRIK", the end of the IK chain moves a lot.<br>
+    - The IK error that occurs when the "Effector Bone" is close to the IK chain has been greatly improved in "FABRIK".<br>
+    - In "CCD", the IK is tuned to refer to "the pose in the previous frame" to calculate, but in "FABRIK", the same result is produced in the same situation.<br>
+    - In "CCD", "the pose in the previous frame" and "Prefer Angle" are combined and used as the starting pose for the IK calculation, while in "FABRIK", the user can decide the starting pose for the IK calculation between "FK" and "Prefer Angle". (<a href="../../en/AdvancedManual/AD_MakeIKIntended.html">Related Page</a>)<br>
+    - The execution performance has been slightly improved in "FABRIK".<br>
+    </p>
+    <br>
+    
+    <p>
+    You can also see the difference according to the IK method in the video below.<br>
+    </p>
+    <br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/dyLgOLlEGUQ" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    
+    <br><br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>IK Algorithm of Editor Gizmo</h4>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1973.jpg"/>
+    <br>
+    
+    <p>
+    Separately from the IK algorithm in IK Controller of character animation, you can change the IK algorithm used in "AnyPortrait editor" to <strong>CCD</strong> or <strong>FABRIK</strong>.<br>
+    <strong>(1)</strong> Open the "<strong>Setting Dialog</strong>".<br>
+    <strong>(2)</strong> Select the "<strong>Editor</strong>" tab.<br>
+    <strong>(3)</strong> You can change the "<strong>Processor</strong>" option of "<strong>IK Method of Gizmo</strong>". As described above, you can choose between the "<strong>FABRIK</strong>" and "<strong>CCD (Legacy)</strong>" algorithms.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1974.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> When moving a bone with an IK chain set using the gizmo in the animation editing screen, different IK algorithms are used and calculated according to this option.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_BoneIKController.html">< IK Controller </a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_IKControllerCases.html">Multiple IK Controllers ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

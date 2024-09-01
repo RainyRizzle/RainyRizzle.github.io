@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>意図したとおり、IKが動作するように誘導</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_MakeIKIntended.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MakeIKIntended.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_MakeIKIntended.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 意図したとおり、IKが動作するように誘導</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">意図したとおり、IKが動作するように誘導</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.0</span></h4>
+    
+    <p>
+    IKでは、自動的に動くボーンを制御するのが難しいという欠点があります。<br>
+    このページでは、ワーカーの意図に従ってIKが動作するように誘導するいくつかの方法を紹介します。<br>
+    「IKチェーン」が「IKコントローラ」などによって動くとき、キャラクターが作業者の意図に合わない姿勢をとる場合があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2000.jpg"/>
+    <br>
+    
+    <p>
+    ロボットアームが宝石をつかむことを表現した例です。<br>
+    1つの「End」ボーンを含む5つのボーンで構成される「IKチェーン」があり、宝石（「Bone Gem」）を対象に「<strong>Position</strong>」タイプの「IKコントローラ」が設定されています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2001.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Transform</strong>」モディファイアを使って宝石（「Bone Gem」）を動かします。<br>
+    <strong>(2)</strong> 「IKコントローラ」によってロボットアームが動いて宝石をつかむのが見られます。<br>
+    </p>
+    <br>
+    
+    <p>
+    IKの結果は私たちが期待したものとは異なります。<br>
+    IK操作は成功ですが、その結果は気に入らません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2002.jpg"/>
+    <br>
+    
+    <p>
+    IK技術はその性質上唯一の正解を持っていません。<br>
+    アルゴリズムや制約、属性によってIKの結果が変わります。<br>
+    同じ位置の「<strong>Effector Bone</strong>」について、ロボットアームがさまざまな姿勢を取ることができることがわかります。<br>
+    </p>
+    <br>
+    
+    <p>
+    IK操作の過程でユーザーの意図が反映されるため、これを使用してボーンが意図した形で姿勢をとるようにすることができます。<br>
+    以下の方法を確認し、適切に活用してください。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>制御パラメータを使用したテスト</h4>
+    <br>
+    
+    <p>
+    ボーンのプロパティを変更して「IKコントローラ」の結果を確認するには、「Effector Bone」を動かす必要があります。<br>
+    そのたびにアニメーション編集画面に戻るのは面倒な作業です。<br>
+    このとき、「制御パラメータ」と「<strong>Transform（Controller）</strong>」のモディファイアを使用すると、テストを簡単に試すことができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2003.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> テスト用の「制御パラメータ」を生成します。<br>
+    <strong>(2)</strong> ここでは名前を「IK Test」とし、「<strong>Float</strong>」タイプに設定しました。<br>
+    <strong>(3)</strong> 制御パラメータの範囲を「<strong>0～1</strong>」に設定しました。値が「<strong>1</strong>」のとき、「<strong>Effector Bone</strong>」を動かしてみます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2004.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> メッシュグループを選択して「<strong>Modifier</strong>」タブを選択し、「<strong>Add Modifier</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Transform（Controller）</strong>」モディファイアを選択して追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2005.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Transform（Controller）</strong>」モディファイアが選択された状態で、制御パラメータの値が「<strong>0</strong>、<strong>1</strong>」の状態にそれぞれモディファイアキーを追加し、制御パラメータの値を「<strong>1</strong>」に変更します。<br>
+    <strong>(2)</strong> 「編集モード」をオンにします。<br>
+    <strong>(3)</strong> 「IKコントローラ」の対象となる宝石（「Bone Gem」）を動かします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2006.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> この状態で「<strong>Bone</strong>」タブに切り替えます。<br>
+    <strong>(2)</strong> 「ボーン編集モード」がオフの状態で制御パラメータを調整します。<br>
+    <strong>(3)</strong> 「<strong>Effector Bone</strong>」の宝石が動くと、「IKコントローラ」がどのように動作するかを確認できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    このようにテストすると、IKの動作をすぐに確認しながらボーンを修正できます。<br>
+    テストが完了したら、テスト用に生成した制御パラメータを削除してください。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>回転角度を制限</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2008.jpg"/>
+    <br>
+    
+    <p>
+    最初の方法は、ボーンの回転角度を制限することです。<br>
+    人の腕や脚のように、特定の方向にのみ関節を回転させるには、この方法が不可欠です。<br>
+    <strong>(1)</strong> 「<strong>Bone</strong>」タブを選択します。<br>
+    <strong>(2)</strong> 属性を変更したい「IKチェーン」内のボーンを選択します。<br>
+    <strong>(3)</strong> 「<strong>IK Angle Constraint</strong>」項目の「<strong>Constraint</strong>」ボタンを押して、その属性を有効にします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2009.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 回転角度を制限できるUIが表示されます。 「スライダー」または「<strong>Min、Max</strong>」項目を調整します。この時「<strong>Soft Limit</strong>」項目もあらかじめ確認しておきましょう。<br>
+    <strong>(2)</strong> ワークスペースで選択したボーンの回転範囲を確認できます。<br>
+    <strong>(3)</strong> ボーンの回転角度が制限され、IKの結果が異なることがわかります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意</strong></span><br>
+    「IKコントローラ」の結果を表示するには、「ボーン編集モード」が無効になっている必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2010.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Range、Min、Max</strong>」項目の下にある「<strong>Soft Limit</strong>」プロパティは、回転制限をどのように適用するかを決定します。<br>
+    「<strong>Soft Limit</strong>」をオンにすると、設定範囲を少し超えても動きがスムーズに見えます。<br>
+    一方、「<strong>Soft Limit</strong>」を無効にすると、角度制限を厳しく適用することがわかります。<br>
+    （このオプションは、IK方式が「<strong>FABRIK</strong>」の場合にのみ動作します。）<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>初期ポーズを設定</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2014.jpg"/>
+    <br>
+    
+    <p>
+    「初期ポーズ（Initial Pose）」の設定方法もIKを制御するのに有効です。<br>
+    AnyPortraitのIK演算は上記の手順を経て行われます。<br>
+    まず、「基本ポーズ」から「初期ポーズ」にボーンを移動します。<br>
+    そして、「初期ポーズ」に基づいてIK演算を行います。<br>
+    IKアルゴリズムはボーンを少しずつ動かしながら目標を達成するため、「初期ポーズ」によってその結果が大きく変わります。<br>
+    </p>
+    <br>
+    
+    <p>
+    ユーザーが「初期ポーズ」を設定することは、IKを制御する最も効果的な方法です。<br>
+    以下は、「初期ポーズ」を設定するオプションの説明です。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>初期ポーズオプション 1. Preferred Angle</h3>
+    <br>
+    
+    <p>
+    初期ポーズを設定する最初のオプションは「<strong>Preferred Angle</strong>」です。<br>
+    ボンが設定された角度で回転した状態を「初期ポーズ」とみなします。<br>
+    このオプションはモディファイアやアニメーションに関係なく常に一定のポーズからIK演算が行われます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2011.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ボーンを選択します。<br>
+    <strong>(2)</strong> 「<strong>IK Angle Constraint</strong>」を有効にします。<br>
+    <strong>(3)</strong> 「<strong>Initial Pose</strong>」の値を「<strong>Preferred Angle</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意</strong></span><br>
+    「初期ポーズ」は、IK処理時の回転角度を制限する演算と共に使用される。<br>
+    したがって、回転角度制限を有効にする必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2012.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Preferred</strong>」スライダーを調整します。<br>
+    <strong>(2)</strong> ワークスペースの「緑色の線」から「<strong>Preferred Angle</strong>」を見ることができます。<br>
+    <strong>(3)</strong> 「<strong>Preferred Angle</strong>」の値によってロボットアームのポーズが変わります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2013.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Preferred Angle</strong>」によって、IKの結果がどのように変わるかがわかります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>初期ポーズオプション 2. Keep Current</h3>
+    <br>
+    
+    <p>
+    「<strong>Preferred Angle</strong>」方式は直感的で便利ですが、常に固定されたポーズを基準にするという欠点があります。<br>
+    アニメーションによって関節の特性が変わった場合は、「初期ポーズ」を変更できるはずです。<br>
+    「<strong>Keep Current（FK）</strong>」方式は、IKが演算される直前の「基本ポーズ」を「初期ポーズ」と見なします。<br>
+    つまり、モディファイアやアニメーションから直接「初期ポーズ」を設定できます。<br>
+    （FKを使用するオプションは「<strong>FABRIK</strong>」方式でのみ許可されています。）<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    「<strong>FK</strong>」は「Forward Kinematics」であり、「<strong>IK</strong>（Inverse Kinematics）」の逆です。<br>
+    キーフレームアニメーションでボーンを一つずつ回転させながらアニメーションを作る技術を意味し、AnyPortraitの基本的な作業方法はすべて「<strong>FK</strong>」です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2015.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ボーンを選択します。<br>
+    <strong>(2)</strong> 今回は「<strong>Initial Pose</strong>」の値を「<strong>Keep Current（FK）</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2016.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Keep Current（FK）</strong>」方式を活用するには、「IKチェーン」のボーンをモディファイアやアニメーションを使って直接動かさなければなりません。<br>
+    <strong>(1)</strong> アニメーションを追加または選択します。<br>
+    <strong>(2)</strong> 「<strong>Transform（Animation）</strong>」タイムラインを追加または選択します。<br>
+    <strong>(3)</strong> 「IKチェーン」内のボーンを選択します。<br>
+    <strong>(3)</strong> 対応するボーンをタイムラインに登録します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2017.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> アニメーションの「編集モード」をオンにします。<br>
+    <strong>(2)</strong> ボーンを選択した状態でキーフレームを追加します。<br>
+    <strong>(3)</strong> ボーンを回転させて「初期ポーズ」を作ります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2018.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> アニメーション「編集モード」を解除します。<br>
+    <strong>(2)</strong> キーフレームを通じて設定された「初期ポーズ」に合わせて「IKコントローラ」の結果が上記のように変わったことがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2019.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> アニメーション編集モードでIK結果をプレビューするには、「表示メニュー」の「<strong>Preview Calculated Bones</strong>」（ <kbd>Alt + B</kbd> ）を有効にします。<br>
+    <strong>(2)</strong> ワークスペースに黄色のアウトラインで示されたIK結果を見ることができます。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>初期ポーズオプション 3. Average</h3>
+    <br>
+    
+    <p>
+    最後のオプションは、「<strong>Preferred Angle</strong>」と「<strong>Keep Current（FK）</strong>」の中間値を「初期ポーズ」として利用する「<strong>Average（Preferred+FK）</strong>」オプションです。<br>
+    これは、「<strong>Preferred Angle</strong>」の設定とIKチェーンのボーンのアニメーションの両方をIKに反映するオプションです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2020.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ボーンを選択します。<br>
+    <strong>(2)</strong> 「<strong>Initial Pose</strong>」の値を「<strong>Average（Preferred+FK）</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2021.jpg"/>
+    <br>
+    
+    <p>
+    アニメーション編集画面でボーンを回転させましょう。<br>
+    上記のように、キーフレームアニメーションでは、ボーンが右上を向いています。 （FK）<br>
+    一方、設定された「Preferred Angle」は右下を向いています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2022.jpg"/>
+    <br>
+    
+    <p>
+    「IKコントローラ」の結果は、2つの方向の平均に基づいて計算されます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>中間ボーンにIKコントローラを設定</h3>
+    <br>
+    
+    <p>
+    この方法には、前述の方法とはまったく異なるアプローチがあります。<br>
+    この方法は、「IKチェーン」に2つ以上に「IKコントローラ」を指定してポーズを調整することです。 （<a href="../../jp/AdvancedManual/AD_IKControllerCases.html">関連ページ</a>）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2023.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 新しいボーンである「Bone Helper」を「IKチェーン」の中間頃に追加します。<br>
+    新しいボーンはIKチェーンとは別に置き、自由に動くようにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2024.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> IKチェーンの中央に位置するボーンを選択します。<br>
+    <strong>(2)</strong> 追加した「Bone Helper」を対象に「<strong>Position</strong>」タイプの「IKコントローラ」を設定します。重みを「0」より大きい値に設定します。重みの値によって、全体の「IKコントローラ」への影響が調整されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2025.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> アニメーションを選択します。<br>
+    <strong>(2)</strong> 「Bone Helper」を選択してタイムラインに登録します。<br>
+    <strong>(3)</strong> キーフレームを追加します。<br>
+    <strong>(4)</strong> 「Bone Helper」の位置を変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2026.jpg"/>
+    <br>
+    
+    <p>
+    「Bone Helper」によってロボットアームが異なって動くのがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>FKを使ってIKを制御する際のヒント</h4>
+    <br>
+    
+    <p>
+    「FK」を使用する「<strong>Initial Pose</strong>」のオプションを選択した場合、または中間の「<strong>Effector Bone</strong>」を追加する場合は、キーフレームを追加して「初期ポーズ」を作成する必要があります。<br>
+    この場合、多くのキーフレームを作成する必要はありません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2027.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「IKチェーン」に属するボーンは、最初のフレームにのみキーフレームが生成されています。<br>
+    <strong>(2)</strong> 「<strong>Effector Bone</strong>」を含む他のオブジェクトは通常、アニメーション全体にキーフレームが作成されています。<br>
+    <strong>(3)</strong> キーフレームによって宝石が動き続けます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2028.jpg"/>
+    <br>
+    
+    <p>
+    アニメーションを再生すると、動く宝石に合うようにロボットの腕が適切に動くことがわかります。<br>
+    このように、IK演算のガイド用にキーフレームを作成する場合、最小限のキーフレームだけを作れば楽に作業できます。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_IKControllerCases.html">< 複数のIKコントローラ</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_SaveBoneSettings.html">ボーンの設定をエクスポート/インポート ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

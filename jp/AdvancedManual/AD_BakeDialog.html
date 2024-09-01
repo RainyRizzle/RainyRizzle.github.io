@@ -77,7 +77,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.4.8</span></h4>
+    <h4><span class="badge badge-secondary">1.5.0</span></h4>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
@@ -130,7 +130,7 @@
     （Unity 2019からサポートされているオプションです。）<br>
     このオプションは、クリッピングメッシュが正常に描画されるよう作成されます。<br>
     「Render Pipeline」と「マテリアル」に関する設定は、次のページを参照してください。<br>
-    （<a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">マテリアルライブラリ</a> / <a href="../../jp/AdvancedManual/AD_LWRP.html">Lightweight Render Pipeline</a>）<br>
+    （<a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">マテリアルライブラリ</a> / <a href="../../jp/AdvancedManual/AD_URP.html">Universal Render Pipeline</a>）<br>
     </p>
     <br>
     
@@ -149,12 +149,18 @@
     <p>
     <strong>13. Sorting Layer / Order</strong> <br>
     : メッシュのレンダリング順序を決定するオプションであり、「Sorting Order」を割り当てる方法を決定することができます。 （<a href="../../jp/AdvancedManual/AD_SortingLayer.html">関連ページ</a>）<br>
+    - <strong>Sorting Layer</strong> : レンダリング順序を決定するレイヤーとして、プロジェクト設定で指定されました。<br>
+    - <strong>Sorting Order Option</strong> : メッシュに Sorting Order を割り当てる方法のオプションです。同じ値を入れたり、順序に応じて異なる値を指定したりできます。<br>
+    - <strong>Sorting Order</strong> : メッシュにこのオプションの値を Sorting Order として一括して割り当てます。<br>
+    - <strong>Order Per Depth</strong> : メッシュの Depth の違いに応じて、Sorting Order をどのくらい異なる方法で割り当てるかを決定します。<br>
     </p>
     <br>
     
     <p>
-    <strong>14. Mecanim 設定</strong><br>
-    : 「Mecanim」を使用するかどうかと、「Animator」に含まれる「Animation Clipが生成されるパス」を設定することができます。<br>
+    <strong>14. Mecanim</strong><br>
+    : 「Mecanim」を使うためのオプションです。 （[LINK<AD_메카님>|関連ページ）<br>
+    - <strong>Is Mecanim Animation</strong> : Mecanimを使用するかどうか。<br>
+    - <strong>Animation Clip Export Path</strong> : Animatorに含まれるAnimation Clipアセットが生成されるパスです。<br>
     </p>
     <br>
     
@@ -164,18 +170,22 @@
     - <strong>Main Logic Event</strong> : メインロジックがどのイベントで呼び出されるかを設定します。 （<a href="../../jp/AdvancedManual/AD_MainLogicEvent.html">関連ページ</a>）<br>
     - <strong>Is Important</strong> : 重要でないオブジェクトまたはNPCの場合は、最適化のためにImportantをオフにして更新を制限できます。 （<a href="../../jp/AdvancedManual/AD_ImportantOption.html">関連ページ</a>）<br>
     - <strong>Mesh Update Frequency</strong> : 低FPSでアニメーションを再生するオプションです。 （<a href="../../jp/AdvancedManual/AD_PlayLowFPS.html">関連ページ</a>）<br>
+    - <strong>Invisible Mesh Update</strong> : モディファイアまたはスクリプトによって見えないメッシュを更新するかどうかを設定します。 Physicsモディファイアを適用するなどの場合は、目に見えないメッシュを更新し続けることができます。<br>
     </p>
     <br>
     
     <p>
     <strong>16. Billboard</strong> <br>
     : ビルボードがアクティブになると、パースペクティブカメラを利用することが可能になり、キャラクターを3Dシーンに配置することが可能です。 （<a href="../../jp/AdvancedManual/AD_BillboardPers.html">関連ページ</a>）<br>
+    - <strong>Billboard</strong> : ビルボードを適用するかどうかを決定します。<br>
+    - <strong>Set Sort Mode to Orthographic</strong> : 現在のプロジェクトの「Sort Mode」を強制的に「Orthographic」に設定して、ビルボードのレンダリングをより良くします。<br>
+    - <strong>Parent's Rotation</strong> : 親オブジェクトの回転がビルボードに適用されるかどうか。<br>
     </p>
     <br>
     
     <p>
-    <strong>17. Shadow 設定</strong> <br>
-    : 「Mesh Renderer」の「Shadow設定」を一括して指定することができます。<br>
+    <strong>17. Shadow / Probe</strong> <br>
+    : 生成される「Mesh Renderer」の「Shadow」と「Probe」に関する属性を指定できます。<br>
     （基本的に提供されるShaderでは「Receive Shadows」をつけても影が適用されません。）<br>
     </p>
     <br>
@@ -185,7 +195,10 @@
     : VRを利用したり、複数のカメラを利用する場合のレンダリングオプションです。<br>
     このオプションは、クリッピングメッシュとビルボード計算が実行環境に合わせて作成します。<br>
     VRの説明は、次のページを参照してください。<br>
-    （<a href="../../jp/AdvancedManual/AD_VR.html">VRにビルド</a>）<br>
+    （<a href="../../jp/AdvancedManual/AD_VR.html">VRにビルド</a> / <a href="../../jp/AdvancedManual/AD_MultipleCameras.html">複数のカメラによるレンダリング</a>）<br>
+    - <strong>VR / Multi-Camera</strong> : VRまたはマルチカメラによるレンダリング方法を決定するオプション。<br>
+    - <strong>Mask Texture Size</strong> : VRでクリッピングマスクのレンダリングテクスチャの解像度を調整できます。<br>
+    - <strong>Check Cameras</strong> : ゲーム内のカメラの数を確認する方法に関するオプションです。<br>
     </p>
     <br>
     
@@ -207,23 +220,35 @@
     <p>
     <strong>21. Unspecified value in animation transition</strong><br>
     : 切り替えられる次のアニメーションで、指定されていない値が「デフォルト値に回復」するか、「最後の値が維持」されるかを決定するオプションです。<br>
+    - <strong>Control Parameter</strong> : 制御パラメータが未指定の場合のオプションです。<br>
     </p>
     <br>
     
     <p>
     <strong>22. Teleport Calibration</strong><br>
-    : キャラクターが1フレームの間、そのオプションの距離以上に動く場合、物理効果を一時的に減少させるオプションです。<br>
+    : キャラクターが1フレームの間、該当オプションの距離以上に動く「テレポート」が発生した場合、物理効果を一時的に減少させるオプションです。<br>
+    - <strong>Teleport Calibration</strong> : テレポート発生時に物理効果を一時的に減少させるかどうか。<br>
+    - <strong>Position / Rotation / Scaling</strong> : 1フレーム中に各属性が一定値を超えて変化すると、「テレポート」が発生したと見なされます。<br>
     </p>
     <br>
     
     <p>
     <strong>23. Root Motion Options</strong><br>
     : アニメーションの動きを親 GameObject に適用するオプションです。 （<a href="../../jp/AdvancedManual/AD_RootMotion.html">関連ページ</a>）<br>
+    - <strong>Root Motion Method</strong> : ルートモーションの適用方法です。<br>
+    - <strong>Options Per Axis</strong> : 各軸ごとにルートモーションの適用方法を異なる方法で指定できます。<br>
+    - <strong>Parent Transform Type</strong> : ルートモーションが適用される親オブジェクトのタイプです。<br>
     </p>
     <br>
     
     <p>
-    <strong>24. Save Settings as Default</strong><br>
+    <strong>24. IK Method</strong><br>
+    : IKコントローラがどのアルゴリズムによって動作するかを決定できます。 (<a href="../../jp/AdvancedManual/AD_FABRIK.html">関連ページ</a>)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>25. Save Settings as Default</strong><br>
     : 現在のBake設定を「デフォルト」として保存して、他のキャラクター（Portrait）にもすばやく適用できるようにします。<br>
     ​<br>
     ​<br>
@@ -236,12 +261,7 @@
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1942.jpg"/>
-    <br>
-    
-    <!-- 8. 이미지 (가운데 정렬) -->
-    <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1943.jpg"/>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1954.jpg"/>
     <br>
     
     
@@ -453,7 +473,7 @@
     <br>
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
-        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_RootUnit.html">< 「ルートユニット」の登録と解放</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_RootUnit.html">< ルートユニット</a>
         <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_ScreenCapture.html">画面キャプチャ ></a>
     </nav>
     

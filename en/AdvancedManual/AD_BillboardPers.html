@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <!-- 제목 -->
-        <title>Billboard and Perspective Camera</title>
+        <title>Place on 3D World</title>
         <!-- 파비콘 -->
         <link rel="shortcut icon" href="../../Images/favicon.ico"/>
         <!-- 부트스트랩 -->
@@ -70,14 +70,14 @@
 
     <!-- 여기서부터 페이지 내용이 작성됩니다. -->
     <!-- 1. 페이지 진입 경로 -->
-    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Billboard and Perspective Camera</p>
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Place on 3D World</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
-    <h1 class="display-5">Billboard and Perspective Camera</h1>
+    <h1 class="display-5">Place on 3D World</h1>
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.1.0</span></h4>
+    <h4><span class="badge badge-secondary">1.5.0</span></h4>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
@@ -122,6 +122,7 @@
     <p>
     <span class="text-danger"><strong>Note</strong></span><br>
     If you use the Billboard method, the camera's "<strong>Camera.transparencySortMode</strong>" property will be changed to "<strong>TransparencySortMode.Orthographic</strong>".<br>
+    To prevent the TransparencySortMode from being forcibly changed, uncheck "<strong>Set Sort Mode to Orthographic</strong>" in the Bake dialog.<br>
     </p>
     <br>
     
@@ -170,6 +171,181 @@
     It always looks at the camera.<br>
     Even if the camera has a perspective, it will render normally.<br>
     Unlike the Billboard method, the Y direction of the world coordinate system is fixed, so the camera is skewed as much as it is tilted and rendered.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Rotate Billboard</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.0</span></h4>
+    
+    <p>
+    When rendering using the billboard, the character always faces the camera according to the billboard rule, regardless of the rotation of the GameObject.<br>
+    So it was impossible to rotate the character.<br>
+    However, based on user reports, we learned that there are cases where the billboard needs to be rotated, so we added a new rotation function.<br>
+    </p>
+    <br>
+    
+    <p>
+    A "Parent object" is needed to additionally rotate the character that rotates in a billboard method and faces the camera.<br>
+    Let's learn about two ways to rotate a character by changing the Rotation value of the parent object's Transform.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1955.jpg"/>
+    <br>
+    
+    <p>
+    This is a character placed in 3D space.<br>
+    The billboard has been activated and is being rendered using a Perspective camera.<br>
+    If your character is on level ground, the billboard will render naturally.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1956.jpg"/>
+    <br>
+    
+    <p>
+    Now let's place the character on the ramp.<br>
+    The character should rotate as the ground tilts.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1957.jpg"/>
+    <br>
+    
+    <p>
+    However, when you run the game, no matter how much you rotate the character, the character will stand upright and look at the camera as shown above due to the billboard rules.<br>
+    Since the billboard controls World Rotation, you cannot rotate the character in the current way.<br>
+    Let's use the newly added option.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1958.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the AnyPortrait editor and press the <strong>Bake</strong> button.<br>
+    <strong>(2)</strong> Select the <strong>Setting</strong> tab.<br>
+    <strong>(3)</strong> If the <strong>Billboard</strong> option is set to <strong>Billboard</strong> or <strong>Billboard with fixed Up Vector</strong>, the <strong>Parent's Rotation</strong> option appears.<br>
+    The values ​​for this option are as follows:<br>
+    - <strong>Ignore</strong>: Ignore the Rotation of the parent object and operates in the conventional billboard manner.<br>
+    - <strong>Pitch Yaw Roll (Local)</strong>: Rotate the character by considering the Local Rotation of the parent object as Pitch, Yaw, and Roll rotations.<br>
+    - <strong>Sync Up Vector (World)</strong>: Rotate the character using the Up vector (World) of the parent object.<br>
+    </p>
+    <br>
+    
+    <p>
+    First, select the "<strong>Pitch Yaw Roll (Local)</strong>" option and run <strong>Bake</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1964.jpg"/>
+    <br>
+    
+    <p>
+    You can also set this option in the Inspector.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1959.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> After returning to the Unity scene, create a parent GameObject for the AnyPortrait character.<br>
+    <strong>(2)</strong> Let's change the <strong>Rotation Z value</strong> of the parent GameObject appropriately.<br>
+    <strong>(3)</strong> When you run the game, you can see that the character is rendered tilted to fit the ramp, even though it is rendered as a billboard.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1960.jpg"/>
+    <br>
+    
+    <p>
+    This option adds the <strong>X, Y, Z</strong> values ​​of the parent object's Local Rotation to the billboard and makes it rotate <strong>Pitch, Yaw, Roll</strong> respectively.<br>
+    So it is different from the general Transform operation, and it rotates as above according to the value.<br>
+    - <strong>X</strong> rotation works as <strong>Pitch</strong>, so the character tilts forward and backward.<br>
+    - <strong>Y</strong> rotation works as <strong>Yaw</strong>, so the character tilts left and right.<br>
+    - <strong>Z</strong> rotation works as <strong>Roll</strong>, so the character spins while looking at the camera.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, since rendering errors occur in <strong>Pitch</strong> and <strong>Yaw</strong> due to the difference in Z position according to the Depth of the character meshes, it is common to only use <strong>Roll</strong> according to the Z value.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1961.jpg"/>
+    <br>
+    
+    <p>
+    The second method is to rotate the character using the Up vector of the parent object.<br>
+    It has a different characteristic from the previously explained method in that it can use the World Rotation of the parent object.<br>
+    <strong>(1)</strong> Click the <strong>Bake</strong> button.<br>
+    <strong>(2)</strong> Select the <strong>Setting</strong> tab.<br>
+    <strong>(3)</strong> With the <strong>Billboard</strong> option activated, change the value of <strong>Parent's Rotation</strong> to <strong>Sync Up Vector (World)</strong> and run <strong>Bake</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1962.jpg"/>
+    <br>
+    
+    <p>
+    Back in the Unity scene, let's rotate the parent GameObject.<br>
+    We've written a simple script in advance so that we can see the Up vector of the parent GameObject.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1963.jpg"/>
+    <br>
+    
+    <p>
+    Let's rotate the parent GameObject.<br>
+    If you look at the image above, you can see how this <strong>Sync Up Vector</strong> method works.<br>
+    You can see that the character rotates so that the Up vector in the World coordinate system of the parent GameObject is the character's Up vector.<br>
+    At this time, the character's rotation only works in the <strong>Roll</strong> method.<br>
+    </p>
+    <br>
+    
+    <p>
+    Also, in this method, <strong>Billboard</strong> and <strong>Billboard with fixed Up Vector</strong> among the <strong>Billboard</strong> options behave the same.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Caution</strong></span><br>
+    If the Up vector is parallel to the camera's Forward vector, the character's rotation will behave abnormally.<br>
     </p>
     <br>
     

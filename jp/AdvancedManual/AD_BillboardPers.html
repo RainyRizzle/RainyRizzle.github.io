@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <!-- 제목 -->
-        <title>ビルボードと「Perspective」カメラ</title>
+        <title>3Dワールドに配置</title>
         <!-- 파비콘 -->
         <link rel="shortcut icon" href="../../Images/favicon.ico"/>
         <!-- 부트스트랩 -->
@@ -70,14 +70,14 @@
 
     <!-- 여기서부터 페이지 내용이 작성됩니다. -->
     <!-- 1. 페이지 진입 경로 -->
-    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > ビルボードと「Perspective」カメラ</p>
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 3Dワールドに配置</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
-    <h1 class="display-5">ビルボードと「Perspective」カメラ</h1>
+    <h1 class="display-5">3Dワールドに配置</h1>
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.1.0</span></h4>
+    <h4><span class="badge badge-secondary">1.5.0</span></h4>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
@@ -122,6 +122,7 @@
     <p>
     <span class="text-danger"><strong>注意。</strong></span><br>
     ビルボード方式を使用すると、カメラの「<strong>Camera.transparencySortMode」</strong>プロパティが「<strong>TransparencySortMode.Orthographic</strong>」に自動的に変更されます。<br>
+    「TransparencySortMode」が強制的に変更されないようにするには、「Bakeダイアログ」の「<strong>Set Sort Mode to Orthographic</strong>」のチェックを外してください。<br>
     </p>
     <br>
     
@@ -170,6 +171,181 @@
     常にカメラを見る。<br>
     カメラに遠近感があっても正常に表示されます。<br>
     「Billboard」の方法とは異なり、ワールド座標系のY方向は、固定されているので、カメラは傾いたかのように表示されます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>ビルボードの回転</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.0</span></h4>
+    
+    <p>
+    ビルボード方式でレンダリングを行うと、GameObjectの回転に関係なく、キャラクターが常に定められたルールでカメラを眺めることになります。<br>
+    だからキャラクターを回転させることは不可能でした。<br>
+    ところで、ユーザーの意見でビルボードを回転させなければならない場合があることがわかり、回転機能を新たに追加しました。<br>
+    </p>
+    <br>
+    
+    <p>
+    ビルボードで回転し、カメラを見ているキャラクターをさらに回転させるには、「親オブジェクト」が必要です。<br>
+    親オブジェクトの「Transform」の「Rotation」値を変更してキャラクターを回転させる2つの方法について学びましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1955.jpg"/>
+    <br>
+    
+    <p>
+    3D空間に配置されたキャラクターです。<br>
+    ビルボードがアクティブになり、「Perspective」方式のカメラでレンダリングを行っています。<br>
+    キャラクターが平地にある場合は、ビルボードが自然にレンダリングされます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1956.jpg"/>
+    <br>
+    
+    <p>
+    それでは、キャラクターを傾斜路に配置しましょう。<br>
+    地面が傾いた分、キャラクターが回転しなければなりません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1957.jpg"/>
+    <br>
+    
+    <p>
+    しかし、ゲームを実行するとキャラクターをいくら回転させても、キャラクターはビルボードルールによって上記のようにまっすぐ立ってカメラを眺めます。<br>
+    ビルボード操作が「World Rotation」を制御するため、現在の方法ではキャラクターを回転させることはできません。<br>
+    新しく追加されたオプションを試してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1958.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「AnyPortrait Editor」を開き、「<strong>Bake</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>Billboard</strong>」オプションが「<strong>Billboard</strong>」または「<strong>Billboard with fixed Up Vector</strong>」に設定されている場合、「<strong>Parent's Rotation</strong>」オプションが表示されます。<br>
+    このオプションの値は次のとおりです。<br>
+    - <strong>Ignore</strong> : 親オブジェクトの「Rotation」を無視して、従来のビルボード方式で動作します。<br>
+    - <strong>Pitch Yaw Roll (Local)</strong> : 親オブジェクトの「<strong>Local Rotation</strong>」を「<strong>Pitch、Yaw、Roll</strong>」回転と見なしてキャラクターを回転させます。<br>
+    - <strong>Sync Up Vector (World)</strong> : 親オブジェクトの「<strong>Up Vector(World)</strong>」を使ってキャラクターを回転させます。<br>
+    </p>
+    <br>
+    
+    <p>
+    一度「<strong>Pitch Yaw Roll (Local)</strong>」オプションを選択し、「<strong>Bake</strong>」を行います。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1964.jpg"/>
+    <br>
+    
+    <p>
+    「Inspector」でもこのオプションを設定できます。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1959.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Unity シーンに戻った後、AnyPortrait キャラクターに「親GameObject」を生成します。<br>
+    <strong>(2)</strong> 「親GameObject」の「<strong>Rotation</strong>の<strong>Z</strong>値」を適切に変更してみましょう。<br>
+    <strong>(3)</strong> ゲームを実行すると、キャラクターがビルボード方式でレンダリングされているにもかかわらず、傾斜路に合わせて傾いてレンダリングされることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1960.jpg"/>
+    <br>
+    
+    <p>
+    このオプションは、親オブジェクトの「Local Rotation」の「<strong>X、Y、Z</strong>」値をビルボードに加え、それぞれ「<strong>Pitch、Yaw、Roll</strong>」の回転を行うようにします。<br>
+    したがって、通常の「Transform」操作とは異なり、値に応じて上記のように回転します。<br>
+    - 「<strong>X</strong>」回転は「<strong>Pitch</strong>」で動作し、キャラクターが前後に傾きます。<br>
+    - 「<strong>Y</strong>」回転は「<strong>Yaw</strong>」で動作し、キャラクターが左右に傾きます。<br>
+    - 「<strong>Z</strong>」回転は「<strong>Roll</strong>」で動作し、キャラクターがカメラを見た状態でぐるぐる回転します。<br>
+    </p>
+    <br>
+    
+    <p>
+    ただし、キャラクターのメッシュの「Depth」による「Z位置」の違いにより、「<strong>Pitch</strong>」と「<strong>Yaw</strong>」ではレンダリングエラーが発生するため、「Z値」に応じた「<strong>Roll</strong>」のみを使用するのが一般的でしょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1961.jpg"/>
+    <br>
+    
+    <p>
+    2番目の方法は、親オブジェクトの「<strong>Upベクトル</strong>」を使用してキャラクターを回転させる方法です。<br>
+    親オブジェクトの「World Rotation」を利用できるという点で、前述の方法とは異なる特性があります。<br>
+    <strong>(1)</strong> 「<strong>Bake</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>Billboard</strong>」オプションが有効な状態で、「<strong>Parent's Rotation</strong>」の値を「<strong>Sync Up Vector (World)</strong>」に変更して「<strong>Bake</strong>」を実行します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1962.jpg"/>
+    <br>
+    
+    <p>
+    Unityシーンに戻って親GameObjectを回転させましょう。<br>
+    あらかじめ少しスクリプトを書いて、親GameObjectの「Upベクトル」を見ることができるようにしました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1963.jpg"/>
+    <br>
+    
+    <p>
+    親GameObjectを回転させましょう。<br>
+    上記の画像を見ると、この「<strong>Sync Up Vector</strong>」の仕組みがどのように機能するかがわかります。<br>
+    親 GameObject の World 座標系での「Up ベクトル」をキャラクターが自分の「Up ベクトル」にするように回転するのがわかります。<br>
+    このとき、キャラクターの回転は「<strong>Roll</strong>」だけで動作します。<br>
+    </p>
+    <br>
+    
+    <p>
+    また、この方法では、「Billboard」オプションのうち「<strong>Billboard</strong>」と「<strong>Billboard with fixed Up Vector</strong>」が同じように動作します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意</strong></span><br>
+    「Upベクトル」が「カメラのForwardベクトル」と平行である場合、キャラクターの回転が異常に動作します。<br>
     </p>
     <br>
     

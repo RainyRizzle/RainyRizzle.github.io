@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>複数のIKコントローラ</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_IKControllerCases.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_IKControllerCases.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_IKControllerCases.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 複数のIKコントローラ</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">複数のIKコントローラ</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.0</span></h4>
+    
+    <p>
+    「AnyPortrait v1.5.0」で「IKコントローラ」がより柔軟に使えるように改善されました。<br>
+    おかげで複雑に構成された複数の「IKコントローラ」を自然に動作させることができるようになりました。<br>
+    「IK コントローラ」が複雑に構成される場合は、通常、「IKコントローラが他のIKコントローラに従属している場合」です。<br>
+    このページでは、「IKコントローラ」が従属的に動作するいくつかの状況を紹介します。<br>
+    </p>
+    <br>
+    
+    <p>
+    「IKコントローラ」に対する詳しい説明を次のマニュアルで確認することができます。<br>
+    - <a href="../../jp/AdvancedManual/AD_BoneIK.html">IK設定</a><br>
+    - <a href="../../jp/AdvancedManual/AD_BoneIKController.html">IKコントローラ</a><br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>IKチェーンが階層的に接続されている場合</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1997.jpg"/>
+    <br>
+    
+    <p>
+    「IKコントローラ」が設定された2つの「IKチェーン」が階層的に接続されている場合を確認しましょう。<br>
+    この場合、「子IKチェーン」の「IKコントローラ」は「親IKチェーン」に依存しています。<br>
+    つまり、「親 > 子」の順番で「IK チェーン」の「IK コントローラ」が順番に演算になるはずです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1975.jpg"/>
+    <br>
+    
+    <p>
+    「IKコントローラ」が属する2つの「IKチェーン」が「親子」の関係で連結された例です。<br>
+    このロボットは天井に接続されており、貨物を持って移動します。<br>
+    <strong>(1)</strong> 最初の「IKチェーン」です。紫色の機械の腕によってロボットの胴体が動いており、この機械の腕は天井にぶら下がっている「<strong>1</strong>」が書かれた赤色の対象に接続されます。<br>
+    <strong>(2)</strong> 2番目の「IKチェーン」です。ロボットの胴体に付いている腕は、緑の「<strong>2</strong>」が書かれた貨物をつかむ。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1976.jpg"/>
+    <br>
+    
+    <p>
+    これはロボットの主要なボーンです。<br>
+    「親IKチェーン」に対応する「Bone Parent Arm」と「子IKチェーン」に対応する「Bone Child Arm」があります。<br>
+    これらのチェーンは互いに接続されており、その間に「Bone Body」が存在します。<br>
+    それぞれの「IKコントローラ」の対象となる「Bone Target 1」と「Bone Target 2」もあります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1977.jpg"/>
+    <br>
+    
+    <p>
+    まず、「親IKコントローラ」を設定してみましょう。<br>
+    <strong>(1)</strong> 紫色のマシンアームの「Bone Parent Arm 1」を選択し、「Bone Parent Arm End」までの「IKチェーン」を設定します.<br>
+    <strong>(2)</strong> 紫色の機械アームの最後のボーンである「Bone Parent Arm End」を選択します。<br>
+    <strong>(3)</strong> 「IKコントローラ」のタイプを「<strong>Position</strong>」方式に設定し、「<strong>Effector Bone</strong>」を「Bone Target 1」に設定した後、「<strong>Default FK/IK Weight</strong>」を「<strong>1</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1978.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 赤色のターゲット（「Bone Target 1」）を動かすようにアニメーションを作成します。<br>
+    <strong>(2)</strong> 紫色の機械アームが「IKコントローラ」によって対象にくっつきます。<br>
+    機械の腕に付いているロボットの胴体も一緒に動くようになります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1979.jpg"/>
+    <br>
+    
+    <p>
+    次に、ロボットの腕に対応する「子IKコントローラ」を設定しましょう。<br>
+    <strong>(1)</strong> ロボットの腕の「Bone Child Arm 1」を選択し、「IKチェーン」がロボットの手（「Bone Child Arm End」）につながるように設定します。<br>
+    <strong>(2)</strong> ロボットの手（「Bone Child Arm End」）を選択します。<br>
+    <strong>(3)</strong> 「IKコントローラ」のタイプを「<strong>Position</strong>」方式に設定し、貨物（「Bone Target 2」）が「<strong>Effector Bone</strong>」になるように設定した後、「<strong>Default FK/IK Weight</strong>」を「<strong>1</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1980.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 貨物（「Bone Target 2」）が動くようにアニメーションを作成します。<br>
+    <strong>(2)</strong> 「IKコントローラ」によってロボットの腕が貨物を握ります。<br>
+    同時に、紫色のマシンアームの「IKコントローラ」も動作することがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1981.jpg"/>
+    <br>
+    
+    <p>
+    2つの「<strong>Effector Bone</strong>」だけを動かして、上記のようなアニメーションを作成できます。<br>
+    「IKコントローラ」を持つ「IKチェーン」が互いに「親と子」の関係で接続されている場合は、上記のように特別な設定がなくてもうまく動作することがわかります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>IKチェーン内に2つ以上の「Effector」がある場合</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1998.jpg"/>
+    <br>
+    
+    <p>
+    「IKチェーン」に属する2つ以上のBoneにそれぞれ「IKコントローラ」を設定できます。<br>
+    つまり、単一の「IKチェーン」に2つ以上の「<strong>Effector Bone</strong>」が存在することになります。<br>
+    この場合、末端に位置する「IKコントローラ」が「上位IKコントローラ」の結果に依存します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1982.jpg"/>
+    <br>
+    
+    <p>
+    地面から湧き出たメカニカルクローアームです。<br>
+    この腕は「<strong>2</strong>」と書かれた緑色のボールをつかむつもりです。<br>
+    「IKチェーン」に2つの「IKコントローラ」を設定しましょう。<br>
+    <strong>(1)</strong> メカニカルクローアームです。 1つの「IKチェーン」で構成されています。<br>
+    <strong>(2)</strong> 人差しは「<strong>2</strong>」が書かれた対象を捕まえようとします。<br>
+    <strong>(3)</strong> この腕の真ん中に小さな「ソケット」があります。この「ソケット」は「<strong>1</strong>」が書かれた対象に近づこうとする性質を持ちます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1983.jpg"/>
+    <br>
+    
+    <p>
+    「IKチェーン」を設定しましょう。<br>
+    <strong>(1)</strong> 最初のボーンである「Bone Arm 1」を選択します。<br>
+    <strong>(2)</strong> 「<strong>IK Head</strong>」タイプに変更します。<br>
+    <strong>(2)</strong> 「<strong>Change IK Target</strong>」ボタンを押します。<br>
+    <strong>(4)</strong> 「Bone Arm End」を選択して「IKチェーン」を完成させます。<br>
+    </p>
+    <br>
+    
+    <p>
+    この例は、上記の「階層的に接続されたIKチェーン」の例とは異なります。<br>
+    上記の例では、2つの「IKチェーン」が互いに接続されているのとは異なり、この例では、メカニカルクロアームのすべてのボーンが1つの「IKチェーン」を構成しているためです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1984.jpg"/>
+    <br>
+    
+    <p>
+    それでは、「IKコントローラ」を設定してみましょう。<br>
+    まず、メカニカルクロアームが物体をつかむようにしましょう。<br>
+    <strong>(1)</strong> 「IKチェーン」の最後のボーンである「Bone Arm End」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Position</strong>」タイプの「IKコントローラ」を設定し、「<strong>Effector Bone</strong>」を「Bone Target 2」に設定した後、「<strong>Default FK/IK Weight</strong>」を「<strong>1</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1985.jpg"/>
+    <br>
+    
+    <p>
+    「IKチェーン」の真ん中のボーンにも「IKコントローラ」を指定してみましょう。<br>
+    <strong>(1)</strong> 「IKチェーン」の真ん中にあるボーンを選択します。<br>
+    <strong>(2)</strong> 同様に「<strong>Position</strong>」タイプの「IKコントローラ」を設定します。今回は「Bone Target 1」を対象に設定します。 「<strong>Default FK/IK Weight</strong>」を「<strong>1</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1986.jpg"/>
+    <br>
+    
+    <p>
+    「IKコントローラ」の対象となる2つの「Effector Bone」を動かしてアニメーションを作ると、メカニカルクローアームが上記のように動きます。<br>
+    <strong>(1)</strong> 「IKチェーン」の先端に位置する人差し指は、対象物をつかむ。<br>
+    <strong>(2)</strong> 「IKチェーン」の中央に位置するボーンも対象に向かって移動しますが、移動範囲は制限されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1987.jpg"/>
+    <br>
+    
+    <p>
+    完成したアニメーションです。<br>
+    「IKチェーン」の途中で「IKコントローラ」を追加に設定すると、「<strong>Effector Bone</strong>」に向かって制限的に動くことがわかります。<br>
+    この手法により、「<strong>Effector Bone</strong>」を中間に追加して「IKチェーン」の形状を制御することが可能です。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>「Effector」が別のIKチェーンに属している場合</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1999.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Effector Bone</strong>」が別の「IKチェーン」に属している場合、その「IKコントローラ」は依存して動作します。<br>
+    「<strong>Effector Bone</strong>」を持つ他の「IKチェーン」の演算が完了しなければ、この「IKコントローラ」が正常に演算できるからです。<br>
+    しかし、それが「<strong>Effector Bone</strong>」が属する他の「IKチェーン」との親子関係が形成されない場合、問題が発生します。<br>
+    従属的に動作する「IKコントローラ」は後で処理されるべきです。<br>
+    </p>
+    <br>
+    
+    <p>
+    そのため、この場合は「IKコントローラ」の処理手順を直接指定してください。<br>
+    このとき、「<strong>Depth</strong>」という属性を使用してこの問題を解決できます。<br>
+    より大きな値の「<strong>Depth</strong>」を持つ「IKコントローラ」が後で演算される点を利用して問題を解決しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>IKコントローラの順序</h4>
+    <br>
+    
+    <p>
+    「IKコントローラ」の処理手順は、次の規則によって決定されます。<br>
+    1. 「Depth」属性の値が小さい場合、まず処理されます。同じ「Depth」を持っていれば、それ以外の規則によって決定されます。<br>
+    2. 親ボーンが子ボーンの前に処理されます。<br>
+    3.直接の親子関係を持たないボーンの処理順序は任意に決定され、ユーザーは変更できません。<br>
+    4. ボーンの階層的な深さが処理順序を決定しません。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1988.jpg"/>
+    <br>
+    
+    <p>
+    2つの機械アームを持つロボット。<br>
+    <strong>(1)</strong> 青い機械の腕は宝石に向かいます。このマシンアームは他の「IKコントローラ」に依存しません。<br>
+    <strong>(2)</strong> 緑の機械の腕は青い機械の腕に接続される。したがって、緑色の機械アームは青色の機械アームよりも後で操作する必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    上記の例に示すように、異なる「IKチェーン」の「IKコントローラ」が相互作用する場合、「依存するIKチェーン」は後で操作する必要があります。<br>
+    「<strong>Depth</strong>」が大きいほど、「IKコントローラ」は後で処理されるため、依存する緑色の機械アームの「<strong>Depth</strong>」は大きい値を持つ必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1989.jpg"/>
+    <br>
+    
+    <p>
+    この例の主要なボーンです。<br>
+    「Bone Root」では、「Bone Main Arm」と「Bone Sub Arm」がそれぞれ接続されています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1990.jpg"/>
+    <br>
+    
+    <p>
+    ここで確認する必要があるのは「Bone Sub Target」です。<br>
+    「Bone Sub Target」は、青い腕をなす「Bone Main Arm 3」の子です。<br>
+    そして、このボーンは緑色のマシンアームに接続される「<strong>Effector Bone</strong>」です。<br>
+    つまり、「IKチェーン」の中に他の「IKコントローラ」の対象となるBoneが属する状態です。<br>
+    この点を認識して「IKコントローラ」を設定してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1991.jpg"/>
+    <br>
+    
+    <p>
+    まず、青いマシンアームの「IKコントローラ」を設定します。<br>
+    <strong>(1)</strong> 「Bone Main Arm 1」を選択し、青色の機械アームの「IKチェーン」を設定します。<br>
+    <strong>(2)</strong> 「IKチェーン」の最後のボーンである「Bone Main Arm End」を選択します。<br>
+    <strong>(3)</strong> 「<strong>Position</strong>」タイプの「IKコントローラ」を設定し、そのターゲットを宝石（「Bone Gem」）に設定します。デフォルトの重みも「<strong>1</strong>」に設定します。<br>
+    <strong>(4)</strong> 「<strong>IK Depth</strong>」属性の値をデフォルト値の「<strong>0</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1992.jpg"/>
+    <br>
+    
+    <p>
+    次に、グリーンマシンアームの設定も続けてくれます。<br>
+    <strong>(1)</strong> 「Bone Sub Arm 1」を選択し、緑色の機械アームの「IKチェーン」を設定します。<br>
+    <strong>(2)</strong> 「IKチェーン」の最後のボーンである「Bone Sub Arm End」を選択します。<br>
+    <strong>(3)</strong> 「<strong>Position</strong>」タイプの「IKコントローラ」を設定し、その対象を青色の機械アームに属する「Bone Sub Target」に設定します。重みも<strong>1</strong>に設定します。<br>
+    <strong>(4)</strong> 「<strong>IK Depth</strong>」属性の値を「<span class="text-danger"><strong>1</strong></span>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1993.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 宝石が動くアニメーションを作ります。<br>
+    <strong>(2)</strong> 「IKコントローラー」により、青色のマシンアームが宝石をつかむポーズをとります。<br>
+    <strong>(3)</strong> 同時に、緑色のマシンアームが青色のマシンアームに接続されているように移動します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1994.jpg"/>
+    <br>
+    
+    <p>
+    宝石の動きに応じて、2つのマシンアームが一緒に動作するアニメーションを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>処理順序が間違っている場合</h4>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1995.jpg"/>
+    <br>
+    
+    <p>
+    「IKコントローラ」の処理手順が間違っている場合は、どのように見えるかを見てみましょう。<br>
+    <strong>(1)</strong> 後で計算する「IKコントローラ」のボーンを選択し、「<strong>IK Depth</strong>」の値を「0」より低い「<span class="text-danger"><strong>-1</strong></span>」に変更しましょう。<br>
+    このように設定すると、後で動作する必要があるこの「IKコントローラ」はむしろ最初に処理されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1996.jpg"/>
+    <br>
+    
+    <p>
+    処理順序が間違っており、緑色のマシンアームが青色のマシンアームに正しく接続されていないことがわかります。<br>
+    （緑色のマシンアームが向いている場所は、青色のマシンアームの「IKコントローラ」が適用される前の位置です。）<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    上記の例の結果を次の動画でも確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/x-BSPtORGdE" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_FABRIK.html">< 改善されたIK：FABRIK</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_MakeIKIntended.html">意図したとおり、IKが動作するように誘導 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

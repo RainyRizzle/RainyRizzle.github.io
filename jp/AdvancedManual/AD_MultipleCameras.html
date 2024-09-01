@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>複数のカメラによるレンダリング</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_MultipleCameras.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MultipleCameras.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_MultipleCameras.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 複数のカメラによるレンダリング</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">複数のカメラによるレンダリング</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.0</span></h4>
+    
+    <p>
+    ゲームシーンを構成してみると、技法によっては1つのオブジェクトを2つ以上のカメラでレンダリングすることがあります。<br>
+    AnyPortraitで制作したキャラクターは「<strong>Mesh Renderer</strong>」で構成されているため、一般的には問題ありません。<br>
+    ただし、「クリッピングマスク」はカメラと連動して動作するため、複数のカメラがあるシーンでは誤動作がしやすいです。<br>
+    このページでは、カメラが2つ以上の場合とシーンのカメラ構成が変更されたときにそれぞれレンダリングエラーを解決する方法について説明します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    このページの説明は、カメラの「レンダリングテクスチャ」を利用する手法とも関連しています。<br>
+    レンダリングテクスチャをターゲットにレンダリングするカメラの説明は、<a href="../../jp/AdvancedManual/AD_RenderTexture.html">関連ページ</a>で確認できます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>複数のカメラをお持ちの場合</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2043.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Unity シーンに1つのキャラクターと <strong>(2)</strong> 3つのカメラがあります。<br>
+    <strong>(3)</strong> このうち、2つのカメラがキャラクターをレンダリングしているので、「<strong>Game View</strong>」ではキャラクターが2回レンダリングされます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2044.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、キャラクターの目が正しくレンダリングされないことがわかります。<br>
+    キャラクターの目はクリッピングマスクを利用してレンダリングされます。<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortraitは、メッシュをクリッピングしてレンダリングするために、「レンダーテクスチャ（Render Texture）」と「コマンドバッファ（Command Buffer）」を利用します。<br>
+    「コマンドバッファ」は、カメラに入力される一種のレンダリング要求である。<br>
+    つまり、クリッピングマスク技術のために、キャラクターは自分をレンダリングするカメラを見つけてレンダリング要求をする必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    一般にオブジェクトを1つのカメラがレンダリングするため、AnyPortraitのキャラクターも1つのカメラだけを探すのが基本です。<br>
+    2台以上のカメラでレンダリングしたい場合は、それに関連するオプションを変更する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2045.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> AnyPortraitエディタを開き、「<strong>Bake</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>VR / Multi-Camera</strong>」オプションの値を「<strong>Multiple Cameras</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>VR / Multi-Camera</strong>」は、レンダリング処理時に検出するカメラの最大数のオプションです。<br>
+    オプションの値は次のとおりです。<br>
+    - <strong>None</strong> : 1つのカメラだけがキャラクターをレンダリングすると見なして更新します。<br>
+    - <strong>Single Camera and Eye Textures (Unity VR)</strong> : UnityのVRは1つのカメラで2回レンダリングを行う処理をするので、別途の処理が必要です。 VRについては、<a href="../../jp/AdvancedManual/AD_VR.html">関連ページ</a>を参照してください。<br>
+    - <strong>Multiple Cameras</strong> : 2台以上のカメラがキャラクターをレンダリングする場合は、この値を設定する必要があります。コマンドバッファを生成するために、すべてのカメラを対象に検証します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2046.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bake</strong>」を実行してUnityシーンに戻ってゲームを実行すると、上記のようにすべてのカメラでクリッピングマスクが正常に動作することがわかります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>カメラを追加、削除する場合</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2047.jpg"/>
+    <br>
+    
+    <p>
+    クリッピングマスクのレンダリングの問題は、シーンに配置されたカメラが追加または削除されたときにも発生します。<br>
+    マルチカメラでレンダリングの問題が解決されたとしても、カメラが削除、追加される過程で再レンダリングの問題が発生します。<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortraitがクリッピングマスクをレンダリングするには、カメラを見つけてコマンドバッファを入力する必要があります。<br>
+    新しいカメラがゲーム中に追加された場合、そのカメラをキャラクターが認識してコマンドバッファを追加入力する必要があります。<br>
+    つまり、「新しいカメラが追加されたという事実」をキャラクターが認知させてコマンドバッファが再生成されると、問題は解決されるはずです。<br>
+    </p>
+    <br>
+    
+    <p>
+    このアプローチを実行するには2つの方法があります。<br>
+    最初の方法は「スクリプトを使用してカメラの変更を直接知らせること」、2番目の方法は「キャラクターが常にすべてのカメラを検出しているように設定すること」です。<br>
+    以下の説明をご覧になり、楽な方法を使って問題を解決すればよいでしょう。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>方法 1. スクリプトを作成</h3>
+    <br>
+    
+    <p>
+    カメラの数や情報が変更されると、「<strong>apPortrait</strong>」の「<strong>SetRenderingCameras</strong>」関数を呼び出してレンダリングの問題を解決できます。<br>
+    「<strong>SetRenderingCameras</strong>」関数は、「キャラクターをレンダリングするカメラ」を「apPortrait」に伝える役割を果たします。<br>
+    関数の引数でキャラクターをレンダリングするカメラだけをまとめて入力する必要があります。<br>
+    ただし、この機能には検証テストが含まれているため、シーン内のすべてのカメラ（「<strong>Camera.allCameras</strong>」）を入力できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    以下は、その関数を呼び出すスクリプトの例です。<br>
+    （カメラの追加、削除を行うコードは省略しました。）<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    public class CameraChangeScript : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;// ターゲットであるapPortrait<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Aキーを押すとカメラがシーンに追加されます。<br>
+    &emsp;&emsp;&emsp;&emsp;if ( Input.GetKeyDown( KeyCode.A ) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// カメラを追加します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;AddCamera();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// カメラが変更されたことをキャラクターに通知します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.SetRenderingCameras(Camera.allCameras);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Sキーを押すとカメラが削除されます。<br>
+    &emsp;&emsp;&emsp;&emsp;if ( Input.GetKeyDown( KeyCode.S ) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 追加されたカメラを削除します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;RemoveCamera();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// カメラが変更されたことをキャラクターに通知します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.SetRenderingCameras(Camera.allCameras);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;(省略)<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>方法 2. すべてのカメラを常に検出</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2049.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> AnyPortraitエディタを開き、「<strong>Bake</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>Check Cameras</strong>」オプションを「<strong>All Scene Cameras</strong>」に変更し、「<strong>Bake</strong>」を実行します。<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortraitシステムは、ゲーム中にカメラが変更されると自動的にカメラを再スキャンし、クリッピングマスクをレンダリングする準備をします。<br>
+    ここで重要なのは、「カメラが変化すること」を検出する方法です。<br>
+    「<strong>Check Cameras</strong>」オプションは、シーン内のカメラの変化を検出する方法を決定します。<br>
+    - <strong>Current Camera Mainly</strong> : 現在のカメラが無効になっている場合にのみカメラを再スキャンします。<br>
+    - <strong>All Scene Cameras</strong> : シーンにあるすべてのカメラを各フレームごとに確認します。カメラの変更が頻繁な場合に便利です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2048.jpg"/>
+    <br>
+    
+    <p>
+    上記のいずれかの方法を適用すると、カメラの追加と削除のレンダリングエラーが解決されることがわかります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>クリッピングマスク最適化機能</h3>
+    <br>
+    
+    <p>
+    AnyPortraitはクリッピングマスクを処理するために「レンダリングテクスチャ」を使用します。<br>
+    一般に、高品質のマスク処理には大きな解像度のレンダリングテクスチャが必要です。<br>
+    ただし、AnyPortraitには、低解像度でもマスクの品質を向上させる最適化機能があります。<br>
+    低解像度のレンダリングテクスチャで高品質のレンダリングを可能にする「クリッピングマスク解像度の最適化」機能は、以下の条件がすべて満たされたときに実行されます。<br>
+    <strong>1.</strong> キャラクターをレンダリングするすべてのカメラが<strong>Orthographic</strong>タイプでなければなりません。<br>
+    <strong>2.</strong> キャラクターをレンダリングするすべてのカメラは、キャラクターを正面から見ている必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    上記の条件を満たさない場合、最適化機能は動作せず、レンダリングテクスチャの解像度によってクリッピングマスクの品質が決まります。<br>
+    最適化機能は最大限に動作するように実装されていますが、複数のカメラがあるシーンでは最適化の条件が満たされない場合があります。<br>
+    この問題を経験している場合は、次の方法で問題を解決してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2050.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 複数のカメラのいずれかを選択します。<br>
+    <strong>(2)</strong> カメラを回転させ、「<strong>Perspective</strong>」タイプに変更してみました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2051.jpg"/>
+    <br>
+    
+    <p>
+    クリッピングマスク解像度の最適化が機能しなくなり、キャラクターの目の部分が低品質でレンダリングされることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2052.jpg"/>
+    <br>
+    
+    <p>
+    クリッピングマスクのレンダリングテクスチャ解像度を高めることで、レンダリング品質を向上させることができます。<br>
+    <strong>(1)</strong> 「メッシュグループ」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「クリッピングマスクメッシュ」を選択します。<br>
+    <strong>(4)</strong> 「<strong>Mask Texture Size</strong>」プロパティを変更します。この値はクリッピングレンダリングのレンダリングテクスチャの解像度なので、値が大きいほどレンダリング品質が向上します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2053.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bake</strong>」をしてゲームを実行すると、クリッピングマスクの品質が良くなったことがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_RenderTexture.html">< 「Render Texture」でレンダリング</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_UnityRecorder.html">「Unity Recorder」を使用 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

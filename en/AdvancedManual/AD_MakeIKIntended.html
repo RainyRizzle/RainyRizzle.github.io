@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Making IK work as intended</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_MakeIKIntended.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MakeIKIntended.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_MakeIKIntended.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Making IK work as intended</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Making IK work as intended</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.0</span></h4>
+    
+    <p>
+    When an IK Chain moves with an IK Controller or something, there may be cases where the character takes a pose that does not match the user's intention.<br>
+    IK has the disadvantage of being difficult to control bones that move automatically.<br>
+    This page introduces several methods to induce IK to move according to the user's intention.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2000.jpg"/>
+    <br>
+    
+    <p>
+    This is an example of a robot arm grabbing a gem. There is an <strong>IK Chain</strong> consisting of 5 bones including 1 End bone, and an <strong>IK Controller</strong> of type "<strong>Position</strong>" is set to target the gem ("Bone Gem").<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2001.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Move the gem ("Bone Gem") using the <strong>Transform</strong> modifier.<br>
+    <strong>(2)</strong> You can see the robot arm moving to grab the gem by the <strong>IK Controller</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, the results of IK are not what we expected.<br>
+    The IK operation is successful, but we are not satisfied with the results.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2002.jpg"/>
+    <br>
+    
+    <p>
+    IK technique does not have a clear answer by its nature.<br>
+    The results of IK will vary depending on the algorithm, constraints, and properties.<br>
+    You can see that the robot arm can take various poses for the same <strong>Effector Bone</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    Since the user's intention is reflected in the IK calculation process, you can use this to make the bones take the intended pose.<br>
+    You can check the following methods and use them appropriately.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Test using a Control Parameter</h4>
+    <br>
+    
+    <p>
+    In order to change the properties of a bone and check the results of the IK Controller, you need to move the <strong>Effector Bone</strong>.<br>
+    However, it is a cumbersome task to return to the animation editing screen every time.<br>
+    In this case, you can easily test it by using the <strong>Control Parameter</strong> and the <strong>Transform (Controller)</strong> modifier.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2003.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Create a Control Parameter for testing.<br>
+    <strong>(2)</strong> We named it "IK Test" and set it to "<strong>Float</strong>" type.<br>
+    <strong>(3)</strong> We set the range of the Control Parameter to "<strong>0~1</strong>". We will leave <strong>0</strong> as the default state and move the <strong>Effector Bone</strong> at <strong>1</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2004.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the mesh group, select the <strong>Modifier</strong> tab, and then press the "<strong>Add Modifier</strong>" button.<br>
+    <strong>(2)</strong> Select the "<strong>Transform (Controller)</strong>" modifier to add.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2005.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> With the "<strong>Transform (Controller)</strong>" modifier selected, add modifier keys to the states where the values ​​of the Control Parameter are <strong>0</strong> and <strong>1</strong>, and change the value of the Control Parameter to <strong>1</strong>.<br>
+    <strong>(2)</strong> Turn on <strong>Edit Mode</strong>.<br>
+    <strong>(3)</strong> Move the gem ("Bone Gem") that is the target of the IK Controller.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2006.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Switch to the <strong>Bone</strong> tab in this state.<br>
+    <strong>(2)</strong> Adjust the Control Parameter while "<strong>Editing Bones</strong>" is turned off.<br>
+    <strong>(3)</strong> You can see how the <strong>IK Controller</strong> works as the <strong>Effector Bone</strong> gem moves.<br>
+    </p>
+    <br>
+    
+    <p>
+    Testing like this allows you to check the IK behavior right away and modify the bone.<br>
+    Once testing is complete, delete the Control Parameter you created for testing.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Constraining the rotation angle</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2008.jpg"/>
+    <br>
+    
+    <p>
+    The first method is to constrain the rotation angle of bones.<br>
+    This is essential to make it rotate only in a certain direction, like a human arm or leg.<br>
+    <strong>(1)</strong> Select the <strong>Bone</strong> tab.<br>
+    <strong>(2)</strong> Select the bone within the IK Chain whose properties you want to change.<br>
+    <strong>(3)</strong> Click the "<strong>Constraint</strong>" button of the "<strong>IK Angle Constraint</strong>" item to activate the properties.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2009.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> UIs that can limit the rotation angle will appear. Adjust the <strong>Slider</strong> or "<strong>Min, Max</strong>" items. Let's also check the "<strong>Soft Limit</strong>" property.<br>
+    <strong>(2)</strong> You can see the rotation range of the selected bone in the workspace.<br>
+    <strong>(3)</strong> You can see the IK result changing as the bone's rotation angle is limited.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    To see the results of the IK Controller, "Bone Edit Mode" must be disabled.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2010.jpg"/>
+    <br>
+    
+    <p>
+    The "<strong>Soft Limit</strong>" property determines how the rotation constraints are applied.<br>
+    When "<strong>Soft Limit</strong>" is turned on, the movement will appear smooth even if it slightly exceeds the set range.<br>
+    On the other hand, when "<strong>Soft Limit</strong>" is disabled, you will see that the angle constraints are strictly applied.<br>
+    (This option only works when the IK method is <strong>FABRIK</strong>.)<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Setting the Initial Pose</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2014.jpg"/>
+    <br>
+    
+    <p>
+    Setting the "<strong>Initial Pose</strong>" is also effective in controlling IK.<br>
+    AnyPortrait's IK operation is performed through the above process.<br>
+    First, bones are moved from the "Base Pose" to the "Initial Pose."<br>
+    Then, the IK operation is performed based on the "Initial Pose."<br>
+    Since the IK algorithm achieves the goal by moving the bones little by little, the results vary greatly depending on the "Initial Pose."<br>
+    </p>
+    <br>
+    
+    <p>
+    Setting the <strong>Initial Pose</strong> by the user is the most effective way to control IK.<br>
+    The following is a description of the options for setting the <strong>Initial Pose</strong>.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Initial Pose Option 1. Preferred Angle</h3>
+    <br>
+    
+    <p>
+    The first option to set the Initial Pose is "<strong>Preferred Angle</strong>".<br>
+    When this option is selected, the "Initial Pose" is when the bone is rotated to the set angle.<br>
+    This option causes IK calculations to always be performed from a constant pose, regardless of modifiers or animations.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2011.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the bone.<br>
+    <strong>(2)</strong> Activate "<strong>IK Angle Constraint</strong>".<br>
+    <strong>(3)</strong> Set the value of <strong>Initial Pose</strong> to "<strong>Preferred Angle</strong>".<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    <strong>Initial Pose</strong> is performed with the operation that constrains the rotation angle.<br>
+    Therefore, the rotation angle constraint must be enabled.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2012.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Adjust the <strong>Preferred</strong> slider.<br>
+    <strong>(2)</strong> You can see the <strong>Preferred Angle</strong> through the green line in the workspace.<br>
+    <strong>(3)</strong> The posture of the robot arm changes according to the <strong>Preferred Angle</strong> value.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2013.jpg"/>
+    <br>
+    
+    <p>
+    You can see how the IK result changes depending on the <strong>Preferred Angle</strong>.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Initial Pose Option 2. Keep Current</h3>
+    <br>
+    
+    <p>
+    The "<strong>Preferred Angle</strong>" method is intuitive and convenient, but it has the disadvantage of always being based on a fixed pose.<br>
+    If the joint characteristics change depending on the animation, the "Initial Pose" should be able to be changed.<br>
+    The "<strong>Keep Current (FK)</strong>" method considers the "Base Pose" right before the IK is calculated as the "Initial Pose."<br>
+    In other words, you can set the "Initial Pose" of the bone manually in the modifier or animation.<br>
+    (The option to use FK is only allowed in the <strong>FABRIK</strong> method.)<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    <strong>FK</strong> stands for "Forward Kinematics", which is the opposite of "<strong>IK</strong> (Inverse Kinematics)". It refers to a technique of creating animation by rotating bones one by one in keyframe animation, and the basic working method of AnyPortrait is all <strong>FK</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2015.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the bone.<br>
+    <strong>(2)</strong> Set the value of <strong>Initial Pose</strong> to "<strong>Keep Current (FK)</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2016.jpg"/>
+    <br>
+    
+    <p>
+    To utilize the "<strong>Keep Current (FK)</strong>" method, you have to move the bones of the IK Chain manually using modifiers or animations.<br>
+    <strong>(1)</strong> Add or select an animation.<br>
+    <strong>(2)</strong> Add or select the <strong>Transform (Animation)</strong> timeline.<br>
+    <strong>(3)</strong> Select the bone in the IK chain.<br>
+    <strong>(4)</strong> Register the bone to the timeline.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2017.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Turn on the animation's edit mode.<br>
+    <strong>(2)</strong> Add a keyframe with the bone selected.<br>
+    <strong>(3)</strong> Rotate the bone to modifiy an "Initial Pose".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2018.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Turn off animation editing mode.<br>
+    <strong>(2)</strong> You can see that the result of the IK Controller has changed to match the "Initial Pose" set through the keyframe as shown above.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2019.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> To preview the IK result in the animation editing mode, activate "<strong>Preview Calculated Bones</strong>" ( <kbd>Alt+B</kbd> ) in the <strong>View menu</strong>.<br>
+    <strong>(2)</strong> You can see the IK result displayed in the workspace as a yellow outline.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Initial Pose Option 3. Average</h3>
+    <br>
+    
+    <p>
+    The last option is the "<strong>Average (Preferred+FK)</strong>" option, which uses the middle value between "<strong>Preferred Angle</strong>" and "<strong>Keep Current (FK)</strong>" as the "Initial Pose".<br>
+    This option sets the <strong>Preferred Angle</strong>, and also creates animation for the bones in the IK Chain like regular bones, and applies it to the IK.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2020.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the bone.<br>
+    <strong>(2)</strong> Set the value of <strong>Initial Pose</strong> to "<strong>Average (Preferred+FK)</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2021.jpg"/>
+    <br>
+    
+    <p>
+    Let's rotate the bone in the animation editing screen.<br>
+    In the keyframe animation above, the bone is pointing to the upper right. (FK)<br>
+    On the other hand, the set "Preferred Angle" is pointing to the lower right.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2022.jpg"/>
+    <br>
+    
+    <p>
+    You can see that the result of the IK Controller is calculated based on the average of the two directions.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Setting up an IK controller on the middle bone</h3>
+    <br>
+    
+    <p>
+    This method takes a completely different approach than the previous methods.<br>
+    It uses the ability to assign IK Controllers to more than one IK Chain to control the results of the IK.<br>
+    (<a href="../../en/AdvancedManual/AD_IKControllerCases.html">Related Page</a>)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2023.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Add a new bone ("Bone Helper") on middle of the IK Chain.<br>
+    Make the new bone move freely separately from the IK chain.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2024.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select a bone in the middle of the IK Chain.<br>
+    <strong>(2)</strong> Set an IK Controller of type <strong>Position</strong> to the added bone ("Bone Helper"). Set the weight to a value greater than 0, but the influence on the entire IK Controller will be adjusted according to the weight value.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2025.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the animation.<br>
+    <strong>(2)</strong> Select the added bone ("Bone Helper") and register it on the timeline.<br>
+    <strong>(3)</strong> Add a keyframe.<br>
+    <strong>(4)</strong> Change the position of the "Bone Helper".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2026.jpg"/>
+    <br>
+    
+    <p>
+    You can see the robot arm moving differently depending on the "Bone Helper".<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Tip for controlling IK using FK</h4>
+    <br>
+    
+    <p>
+    If you chose the option of "<strong>Initial Pose</strong>" using FK or if you use the <strong>Effector Bone</strong> in the middle, you will need to add keyframes to create the "Initial Pose".<br>
+    At this time, you don't have to create many keyframes.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2027.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Bones belonging to the IK Chain have keyframes created only in the first frame.<br>
+    <strong>(2)</strong> Other objects including <strong>Effector Bone</strong> have keyframes created normally throughout the animation.<br>
+    <strong>(3)</strong> Only the gem continues to move due to multiple keyframes.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2028.jpg"/>
+    <br>
+    
+    <p>
+    When you play the animation, you can see that the robot arm moves appropriately to match the moving gem.<br>
+    In this way, when creating keyframes to guide IK operations, you can work comfortably by creating only the minimum number of keyframes.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_IKControllerCases.html">< Multiple IK Controllers</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_SaveBoneSettings.html">Export / Import Bone settings ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

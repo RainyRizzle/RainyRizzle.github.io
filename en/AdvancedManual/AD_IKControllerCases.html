@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Multiple IK Controllers</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_IKControllerCases.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_IKControllerCases.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_IKControllerCases.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Multiple IK Controllers</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Multiple IK Controllers</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.0</span></h4>
+    
+    <p>
+    In "AnyPortrait v1.5.0", <strong>IK Controllers</strong> have been improved to be more flexible.<br>
+    This allows for more complexly configured IK Controllers and IK Chains to work naturally.<br>
+    When IK Controllers are complexly configured, it usually means "<strong>IK Controller is dependent on other IK Controllers</strong>".<br>
+    This page introduces some situations where IK Controllers become dependent.<br>
+    </p>
+    <br>
+    
+    <p>
+    For detailed information about <strong>IK Controller</strong>, please refer to the following manuals.<br>
+    - <a href="../../en/AdvancedManual/AD_BoneIK.html">IK Settings</a><br>
+    - <a href="../../en/AdvancedManual/AD_BoneIKController.html">IK Controller </a><br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Hierarchically linked IK Chains</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1997.jpg"/>
+    <br>
+    
+    <p>
+    Let's check the case where two IK Chains with IK Controllers are hierarchically connected.<br>
+    In this case, the IK controller of the child IK Chain is dependent on the parent IK Chain.<br>
+    In other words, the IK Controllers of the IK Chains should be calculated in the order of "Parent > Child".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1975.jpg"/>
+    <br>
+    
+    <p>
+    This is an example of two IK Chains with IK Controllers connected as a parent-child relationship.<br>
+    The robot is connected to the ceiling and grabs and moves a box.<br>
+    <strong>(1)</strong> The first IK Chain. The robot's body is moved by a purple mechanical arm, which is connected to a red target with a "<strong>1</strong>" written on it hanging from the ceiling.<br>
+    <strong>(2)</strong> The second IK Chain. The arm attached to the robot's body grabs a payload with a "<strong>2</strong>" written on it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1976.jpg"/>
+    <br>
+    
+    <p>
+    These are the main bones of this robot.<br>
+    There are "Bone Parent Arm" bones corresponding to the parent IK Chain and "Bone Child Arm" bones corresponding to the child IK Chain.<br>
+    These chains are connected to each other, and there is a "Bone Body" between them.<br>
+    You can also see "Bone Target 1" and "Bone Target 2" which are the targets of each IK Controller.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1977.jpg"/>
+    <br>
+    
+    <p>
+    First, let's set up the "<strong>Parent IK Chain and IK Controller</strong>".<br>
+    <strong>(1)</strong> Select the "Bone Parent Arm 1" of the purple mechanical arm and set up the IK Chain up to the "Bone Parent Arm End".<br>
+    <strong>(2)</strong> Select the last bone, "Bone Parent Arm End", of the purple mechanical arm.<br>
+    <strong>(3)</strong> Set the IK Controller type to <strong>Position</strong>, set "Bone Target 1" as <strong>Effector Bone</strong>, and set "<strong>Default FK/IK Weight</strong>" to <strong>1</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1978.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Create an animation to move the red target ("Bone Target 1").<br>
+    <strong>(2)</strong> The purple mechanical arm is attached to the target by the IK Controller.<br>
+    The robot's body attached to the mechanical arm is also moved.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1979.jpg"/>
+    <br>
+    
+    <p>
+    Next, let's set up the "<strong>Child IK Chain</strong>" corresponding to the robot's arm.<br>
+    <strong>(1)</strong> Select the first bone, "Bone Child Arm 1", of the robot's arm and set up the IK Chain up to the robot's hand ("Bone Child Arm End").<br>
+    <strong>(2)</strong> Select the robot's hand ("Bone Child Arm End").<br>
+    <strong>(3)</strong> Set the IK Controller type to <strong>Position</strong>, set the box ("Bone Target 2") as <strong>Effector Bone</strong>, and set "<strong>Default FK/IK Weight</strong>" to <strong>1</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1980.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Animate the box ("Bone Target 2") to move.<br>
+    <strong>(2)</strong> The robot arm grabs the box with the IK Controller.<br>
+    At the same time, you can see the IK Controller of the purple mechanical arm moving.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1981.jpg"/>
+    <br>
+    
+    <p>
+    You can create an animation like the above using two IK Controllers.<br>
+    If the IK Chains with IK Controllers are connected to each other in a "Parent-Child" relationship, you can see that it works well without any special settings like the above.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Multiple Effectors in an IK Chain</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1998.jpg"/>
+    <br>
+    
+    <p>
+    You can set "<strong>IK Controller</strong>" for each of two or more bones belonging to an IK Chain.<br>
+    That is, there will be multiple <strong>Effector Bones</strong> in a single IK Chain.<br>
+    In this case, the IK Controller located at the end will be dependent on the result of the parent IK Controller.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1982.jpg"/>
+    <br>
+    
+    <p>
+    Here is a claw arm that is sticking out of the ground.<br>
+    This claw arm is trying to catch a green ball with a "2" written on it.<br>
+    Let's set up 2 IK Controllers on one IK Chain.<br>
+    <strong>(1)</strong> This is a long arm with a claw. It forms 1 IK Chain.<br>
+    <strong>(2)</strong> The claw will try to grab the object with "<strong>2</strong>" written on it.<br>
+    <strong>(3)</strong> There is a small socket in the middle of the arm. This socket will try to get closer to the object with "<strong>1</strong>" written on it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1983.jpg"/>
+    <br>
+    
+    <p>
+    Let's set up <strong>IK Chain</strong>.<br>
+    <strong>(1)</strong> Select the first bone of the arm, "Bone Arm 1".<br>
+    <strong>(2)</strong> Change to "<strong>IK Head</strong>" type.<br>
+    <strong>(3)</strong> Press the "<strong>Change IK Target</strong>" button.<br>
+    <strong>(4)</strong> Select the last bone of this claw arm ("Bone Arm End") to complete the IK Chain.<br>
+    </p>
+    <br>
+    
+    <p>
+    This example is different from the "Hierarchically Linked IK Chains" example above.<br>
+    This is because, unlike the above example where there were two IK Chains linked, in this example all the bones that make up the claw arm form a single IK Chain.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1984.jpg"/>
+    <br>
+    
+    <p>
+    Now let's set up the <strong>IK Controller</strong>.<br>
+    First, let's make the claw arm grab the target object.<br>
+    <strong>(1)</strong> Select the last bone in the IK Chain ("Bone Arm End").<br>
+    <strong>(2)</strong> Set up an IK Controller of type <strong>Position</strong>, set <strong>Effector Bone</strong> to "Bone Target 2", and set <strong>Default FK/IK Weight</strong> to <strong>1</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1985.jpg"/>
+    <br>
+    
+    <p>
+    Let's also assign an <strong>IK Controller</strong> to the middle bone of the IK Chain.<br>
+    <strong>(1)</strong> Select the middle bone of the IK Chain.<br>
+    <strong>(2)</strong> Set an IK Controller of the <strong>Position</strong> type in the same way. This time, set "Bone Target 1" as the target. Set <strong>Default FK/IK Weight</strong> to <strong>1</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1986.jpg"/>
+    <br>
+    
+    <p>
+    If you create an animation by moving the two bones that are the targets of the IK Controller, the claw arm moves as shown above.<br>
+    <strong>(1)</strong> The claw at the end of the IK Chain grabs the target object.<br>
+    <strong>(2)</strong> The bone in the middle of the IK Chain also moves toward the target, but the range of movement is limited to the range in which the claw grabs the object.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1987.jpg"/>
+    <br>
+    
+    <p>
+    Above is the completed animation result.<br>
+    If you set the IK Controller in the middle of the IK Chain, you can see that it moves towards the <strong>Effector Bone</strong> with restrictions.<br>
+    Using this technique, it is possible to control the shape of the IK Chain by adding the <strong>Effector Bone</strong> in the middle and moving it with the IK Controller.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Effector belonging to another IK Chain</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1999.jpg"/>
+    <br>
+    
+    <p>
+    If <strong>Effector Bone</strong> belongs to another IK chain, the IK Controller will operate dependently.<br>
+    This is because the calculation of the IK Chain with <strong>Effector Bone</strong> must be completed before this IK Controller can be calculated normally.<br>
+    However, if it is not configured as a parent-child with the other IK Chain that <strong>Effector Bone</strong> belongs to, there is a problem.<br>
+    The dependent IK Controller need to be processed later, and if they are not parent-child IK Chains, the processing order is unknown.<br>
+    </p>
+    <br>
+    
+    <p>
+    So in this case, you need to directly specify the processing order of the IK Controller.<br>
+    At this time, you can solve this problem by using the property called "<strong>Depth</strong>".<br>
+    Let's take advantage that IK Controllers with larger values ​​of <strong>Depth</strong> are computed later.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Processing order of IK Controllers</h4>
+    <br>
+    
+    <p>
+    The processing order of IK Controllers is determined by the following rules:<br>
+    1. If the Depth setting is lower, it is processed first. If they have the same Depth, it is determined by the next rules:<br>
+    2. Parent bones are processed before child bones.<br>
+    3. The processing order of bones that do not have a direct parent-child relationship is determined arbitrarily and cannot be modified by the user.<br>
+    4. The hierarchical depth of the bone does not determine the processing order.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1988.jpg"/>
+    <br>
+    
+    <p>
+    It's a robot with two mechanical arms.<br>
+    <strong>(1)</strong> The blue machine arm points to the gem. This machine arm is not dependent on any other IK Controller.<br>
+    <strong>(2)</strong> The green machine arm is connected to the blue machine arm. Therefore, the green machine arm must be calculated later than the blue machine arm.<br>
+    </p>
+    <br>
+    
+    <p>
+    As you can see in the example above, when the IK Controllers of different IK Chains interact, the dependent IK Chains should be processed later.<br>
+    The larger the <strong>Depth</strong>, the later the IK Controllers are processed, so the <strong>Depth</strong> of the dependent green machine arm should have a larger value.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1989.jpg"/>
+    <br>
+    
+    <p>
+    These are the main bones of this example.<br>
+    "Bone Main Arm" and "Bone Sub Arm" are connected to each other from "Bone Root".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1990.jpg"/>
+    <br>
+    
+    <p>
+    The bone we need to check here is the "Bone Sub Target".<br>
+    The "Bone Sub Target" is a child bone of the "Bone Main Arm 3" that makes up the blue arm.<br>
+    And this bone is also the <strong>Effector Bone</strong> that will be connected to the green machine arm.<br>
+    That means that this bone is the target of another IK Controller in the IK Chain.<br>
+    With this in mind, let's set up the IK Controllers.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1991.jpg"/>
+    <br>
+    
+    <p>
+    First, set up the IK Controller for the blue machine arm.<br>
+    <strong>(1)</strong> Select "Bone Main Arm 1" and set up the IK Chain for the blue machine arm.<br>
+    <strong>(2)</strong> Select the last bone in the IK chain, "Bone Main Arm End".<br>
+    <strong>(3)</strong> Select the IK Controller of type <strong>Position</strong> and set its target to the gem ("Bone Gem"). Also set the default weight to <strong>1</strong>.<br>
+    <strong>(4)</strong> Set the value of the <strong>IK Depth</strong> property to the default value of "<strong>0</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1992.jpg"/>
+    <br>
+    
+    <p>
+    Next, we continue to set up the green machine arm.<br>
+    <strong>(1)</strong> Select "Bone Sub Arm 1" and set up the IK Chain for the green machine arm.<br>
+    <strong>(2)</strong> Select the last bone in the IK chain, "Bone Sub Arm End".<br>
+    <strong>(3)</strong> Select the IK Controller of type <strong>Position</strong> and set its target to the "Bone Sub Target" belonging to the blue machine arm. Set the weight to <strong>1</strong>.<br>
+    <strong>(4)</strong> Change the value of the <strong>IK Depth</strong> property to "<span class="text-danger"><strong>1</strong></span>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1993.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Create an animation of the jewel moving.<br>
+    <strong>(2)</strong> The blue mechanical arm takes a pose to grab the jewel with the IK controller.<br>
+    <strong>(3)</strong> At the same time, the green arm is connected to the blue arm and moves together.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1994.jpg"/>
+    <br>
+    
+    <p>
+    You can see an animation of two mechanical arms working together according to the movement of the gem.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>If the processing order is set incorrectly</h4>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1995.jpg"/>
+    <br>
+    
+    <p>
+    Let's see what it would look like if the order of processing of the IK Controllers was wrong.<br>
+    <strong>(1)</strong> Let's select the bone of the IK Controller that should be calculated later and change the value of <strong>IK Depth</strong> to "<span class="text-danger"><strong>-1</strong></span>" which is lower than 0.<br>
+    With this setting, the IK Controller that should be operated later will be processed first.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1996.jpg"/>
+    <br>
+    
+    <p>
+    You can see that the processing order is wrong, so the green machine arm is not properly connected to the blue machine arm.<br>
+    (Where the green arm is pointing is where the blue machine arm was before the IK Controller was applied.)<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    You can also see the results of the above examples in the following video.<br>
+    </p>
+    <br>
+    
+    <!-- 11. 유튜브 영상 -->
+    <div class="embed-responsive embed-responsive-16by9 mx-auto d-block" style="max-width: 60%;">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/x-BSPtORGdE" allowfullscreen></iframe>
+    </div>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_FABRIK.html">< Improved IK method: FABRIK</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_MakeIKIntended.html">Make IK work as intended ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>

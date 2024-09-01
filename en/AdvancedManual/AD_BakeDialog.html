@@ -77,7 +77,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.4.8</span></h4>
+    <h4><span class="badge badge-secondary">1.5.0</span></h4>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
@@ -126,7 +126,7 @@
     (This option is supported since Unity 2019.)<br>
     This option causes the clipping mesh to render properly.<br>
     See the following pages for a description of the render pipeline and materials.<br>
-    (<a href="../../en/AdvancedManual/AD_MaterialLibrary.html">Material Library</a> / <a href="../../en/AdvancedManual/AD_LWRP.html">Lightweight Render Pipeline</a>)<br>
+    (<a href="../../en/AdvancedManual/AD_MaterialLibrary.html">Material Library</a> / <a href="../../en/AdvancedManual/AD_URP.html">Universal Render Pipeline</a>)<br>
     </p>
     <br>
     
@@ -144,13 +144,19 @@
     
     <p>
     <strong>13. Sorting Layer / Order</strong> <br>
-    : This is an option to determine the rendering order, and you can decide how to assign Sorting Order. (<a href="../../en/AdvancedManual/AD_SortingLayer.html">Related page</a>)<br>
+    : This is an option for how to determine the rendering order of meshes. (<a href="../../en/AdvancedManual/AD_SortingLayer.html">Related page</a>)<br>
+    - <strong>Sorting Layer</strong> : Layers specified in project settings that determine rendering order.<br>
+    - <strong>Sorting Order Option</strong> : This is an option for how to assign Sorting Order to meshes. You can enter the same value or specify different values ​​depending on the order.<br>
+    - <strong>Sorting Order</strong> : The Sorting Order value is assigned to meshes as this value.<br>
+    - <strong>Order Per Depth</strong> : Determine how differently the Sorting Order will be assigned depending on the depth difference between the meshes.<br>
     </p>
     <br>
     
     <p>
-    <strong>14. Mecanim Settings</strong><br>
-    : You can set whether to use Mecanim and the path where the Animation Clip assets to be included in Animator are saved.<br>
+    <strong>14. Mecanim</strong> <br>
+    : This is an option to use Mecanim. (LINK<AD_메카님>|Related page)<br>
+    - <strong>Is Mecanim Animation</strong> : Whether to use Mecanim or not.<br>
+    - <strong>Animation Clip Export Path</strong> : This is the path where Animation Clip assets included in Animator are created.<br>
     </p>
     <br>
     
@@ -160,27 +166,35 @@
     - <strong>Main Logic Event</strong> : Set which event the main logic will be called. (<a href="../../en/AdvancedManual/AD_MainLogicEvent.html">Related page</a>)<br>
     - <strong>Is Important</strong> : For unimportant objects or NPCs, you can turn off Important and limit updates for optimization. (<a href="../../en/AdvancedManual/AD_ImportantOption.html">Related page</a>)<br>
     - <strong>Mesh Update Frequency</strong> : Animations can play at low FPS. (<a href="../../en/AdvancedManual/AD_PlayLowFPS.html">Related page</a>)<br>
+    - <strong>Invisible Mesh Update</strong> : Set whether to update invisible meshes by modifiers or scripts. In some cases, such as applying Physics modifiers, invisible meshes can be made to update continuously.<br>
     </p>
     <br>
     
     <p>
     <strong>16. Billboard</strong> <br>
     : It is possible to use perspective cameras to place characters in a 3D scene. (<a href="../../en/AdvancedManual/AD_BillboardPers.html">Related page</a>)<br>
+    - <strong>Billboard</strong> : Decide whether and how to apply the Billboard feature.<br>
+    - <strong>Set Sort Mode to Orthographic</strong> : This option forces the Sort Mode of the current project to be Orthographic, resulting in better billboard rendering.<br>
+    - <strong>Parent's Rotation</strong> : Whether the parent object's rotation will be applied to the billboard.<br>
     </p>
     <br>
     
     <p>
-    <strong>17. Shadow Settings</strong><br>
-    : You can specify the Shadow settings of the created Mesh Renderer in batch. (Shaders that are shipped by default do not apply shadows when you turn on Receive Shadows.)<br>
+    <strong>17. Shadow / Probe</strong> <br>
+    : You can specify properties related to the shadow and Probe of the created Mesh Renderers at once.<br>
+    (In the default Shader, shadows are not applied even if Receive Shadows is turned on.)<br>
     </p>
     <br>
     
     <p>
-    <strong>18. VR / Multi-Camera Option</strong><br>
+    <strong>18. VR / Multi-Camera</strong><br>
     : It is the rendering option when using VR or using multiple cameras.<br>
     This option makes the clipping mesh and billboard calculations work for your environment.<br>
     Refer to the following page for the description of VR.<br>
-    (<a href="../../en/AdvancedManual/AD_VR.html">Build to VR</a>)<br>
+    (<a href="../../en/AdvancedManual/AD_VR.html">Build to VR</a> / <a href="../../en/AdvancedManual/AD_MultipleCameras.html">Rendering with Multiple Cameras</a>)<br>
+    - <strong>VR / Multi-Camera</strong> : Determine how to render in VR or multi-camera.<br>
+    - <strong>Mask Texture Size</strong> : You can adjust the resolution of the render texture on the clipping mask in VR.<br>
+    - <strong>Check Cameras</strong> : This is a way to check the number of cameras in-game.<br>
     </p>
     <br>
     
@@ -202,23 +216,35 @@
     <p>
     <strong>21. Unspecified value in animation transition</strong><br>
     : This is an option that determine whether specified values are restored to default or retained as last in the next animation that transitions.<br>
+    - <strong>Control Parameter</strong> : This is an option when control parameters are not specified.<br>
     </p>
     <br>
     
     <p>
     <strong>22. Teleport Calibration</strong><br>
-    : This option temporarily reduces the physics effect if the character moves more than the distance of the option for 1 frame.<br>
+    : This is an option that temporarily reduces the physical effect when the character “Teleports” by moving beyond the distance set for 1 frame.<br>
+    - <strong>Teleport Calibration</strong> : Whether to temporarily reduce physical effects when teleportation occurs.<br>
+    - <strong>Position / Rotation / Scaling</strong> : If each property changes more than the set value during one frame, a “teleportation” is considered to have occurred.<br>
     </p>
     <br>
     
     <p>
     <strong>23. Root Motion Options</strong><br>
     : The movement of an animation can be applied to the parent GameObject. (<a href="../../en/AdvancedManual/AD_RootMotion.html">Related page</a>)<br>
+    - <strong>Root Motion Method</strong> : This is the root motion method.<br>
+    - <strong>Options Per Axis</strong> : You can specify a different method for root motion for each axis.<br>
+    - <strong>Parent Transform Type</strong> : The type of parent object to which the root motion is applied.<br>
     </p>
     <br>
     
     <p>
-    <strong>24. Save Settings as Default</strong><br>
+    <strong>24. IK Method</strong><br>
+    : You can decide which algorithm the IK controller operates by. (<a href="../../en/AdvancedManual/AD_FABRIK.html">Related page</a>)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>25. Save Settings as Default</strong><br>
     : Save the current Bake settings as "defaults" so you can quickly apply them to other portraits.<br>
     ​<br>
     ​<br>
@@ -231,12 +257,7 @@
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1942.jpg"/>
-    <br>
-    
-    <!-- 8. 이미지 (가운데 정렬) -->
-    <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1943.jpg"/>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1954.jpg"/>
     <br>
     
     
@@ -447,7 +468,7 @@
     <br>
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
-        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_RootUnit.html">< Register and Release Root Unit</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_RootUnit.html">< Root Unit</a>
         <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ScreenCapture.html">Screen capture ></a>
     </nav>
     

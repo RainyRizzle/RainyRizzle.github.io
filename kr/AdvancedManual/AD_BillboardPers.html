@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <!-- 제목 -->
-        <title>빌보드와 Perspective 카메라</title>
+        <title>3D 공간에 배치하기</title>
         <!-- 파비콘 -->
         <link rel="shortcut icon" href="../../Images/favicon.ico"/>
         <!-- 부트스트랩 -->
@@ -70,14 +70,14 @@
 
     <!-- 여기서부터 페이지 내용이 작성됩니다. -->
     <!-- 1. 페이지 진입 경로 -->
-    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > 빌보드와 Perspective 카메라</p>
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > 3D 공간에 배치하기</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
-    <h1 class="display-5">빌보드와 Perspective 카메라</h1>
+    <h1 class="display-5">3D 공간에 배치하기</h1>
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.1.0</span></h4>
+    <h4><span class="badge badge-secondary">1.5.0</span></h4>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
@@ -122,6 +122,7 @@
     <p>
     <span class="text-danger"><strong>주의</strong></span><br>
     Billboard 방식을 사용할 경우, 카메라의 <strong>"Camera.transparencySortMode"</strong> 속성이 <strong>"TransparencySortMode.Orthographic"</strong>로 강제로 변경됩니다.<br>
+    TransparencySortMode가 강제로 변경되는 것을 막으러면, Bake 다이얼로그에서 "<strong>Set Sort Mode to Orthographic</strong>"의 체크를 해제하세요.<br>
     </p>
     <br>
     
@@ -171,6 +172,181 @@
     항상 카메라를 바라봅니다.<br>
     Perspective라도 정상적으로 렌더링이 됩니다.<br>
     Billboard 방식과 다르게 World 좌표계의 Y 방향은 고정되므로, 카메라가 기울어지는 만큼 반대로 기울어져서 렌더링됩니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>빌보드 회전하기</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.0</span></h4>
+    
+    <p>
+    빌보드 방식으로 렌더링을 하면, 캐릭터는 GameObject의 회전에 관계없이 항상 정해진 규칙으로 카메라를 바라보게 됩니다.<br>
+    그래서 캐릭터를 회전시키는 것이 불가능했습니다.<br>
+    그런데 사용자의 제보로 빌보드를 회전시켜야 하는 경우가 있음을 알게 되어 회전 기능을 새롭게 추가했습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    빌보드 방식으로 회전하며 카메라를 바라보는 캐릭터를 추가적으로 회전시키기 위해서는 "부모 객체"가 필요합니다.<br>
+    부모 객체의 Transform의 Rotation 값을 변경하여 캐릭터를 회전시키는 2가지 방법에 대해서 알아봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1955.jpg"/>
+    <br>
+    
+    <p>
+    3D 공간에 배치된 캐릭터입니다.<br>
+    빌보드가 활성화되었으며 Perspective 방식의 카메라로 렌더링을 하고 있습니다.<br>
+    캐릭터가 평지에 있는 경우에는 빌보드가 자연스럽게 렌더링됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1956.jpg"/>
+    <br>
+    
+    <p>
+    이제 캐릭터를 경사로에 배치해봅시다.<br>
+    땅이 기울어진만큼 캐릭터가 회전되어야 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1957.jpg"/>
+    <br>
+    
+    <p>
+    하지만 게임을 실행하면 캐릭터를 아무리 회전시켜도, 캐릭터는 빌보드 규칙에 의해서 위와 같이 똑바로 서서 카메라를 바라봅니다.<br>
+    빌보드 연산이 World Rotation을 제어하기 때문에, 현재 방식으로는 캐릭터를 회전시킬 수 없습니다.<br>
+    새롭게 추가된 옵션을 이용해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1958.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> AnyPortrait 에디터를 열고, <strong>Bake</strong> 버튼을 누릅니다.<br>
+    <strong>(2)</strong> <strong>Setting</strong> 탭을 선택합니다.<br>
+    <strong>(3)</strong> <strong>Billboard</strong> 옵션이 <strong>Billboard</strong>나 <strong>Billboard with fixed Up Vector</strong>로 설정된 경우, <strong>Parent's Rotation</strong> 옵션이 나타납니다.<br>
+    이 옵션의 값들은 다음과 같습니다.<br>
+    - <strong>Ignore</strong> : 부모 객체의 Rotation을 무시하여 기존의 빌보드 방식으로 동작합니다.<br>
+    - <strong>Pitch Yaw Roll (Local)</strong> : 부모 객체의 Local Rotation을 Pitch, Yaw, Roll 회전으로 간주하여 캐릭터를 회전시킵니다.<br>
+    - <strong>Sync Up Vector (World)</strong> : 부모 객체의 Up 벡터(World)를 이용하여 캐릭터를 회전시킵니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    일단 "<strong>Pitch Yaw Roll (Local)</strong>" 옵션을 선택하고 <strong>Bake</strong>를 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1964.jpg"/>
+    <br>
+    
+    <p>
+    Inspector에서도 이 옵션을 설정할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1959.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 유니티 씬으로 돌아간 후, AnyPortrait 캐릭터에 부모 GameObject를 생성합니다.<br>
+    <strong>(2)</strong> 부모 GameObject의 <strong>Rotation의 Z값</strong>을 적절하게 변경해봅시다.<br>
+    <strong>(3)</strong> 게임을 실행하면 캐릭터가 빌보드 방식으로 렌더링되고 있음에도 경사로에 맞게 기울어져서 렌더링되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1960.jpg"/>
+    <br>
+    
+    <p>
+    이 옵션은 부모 객체의 Local Rotation의 <strong>X, Y, Z</strong> 값을 빌보드에 더하여 각각 <strong>Pitch, Yaw, Roll</strong> 회전을 하도록 만듭니다.<br>
+    그래서 일반적인 Transform 연산과 다르며, 값에 따라 위와 같이 회전합니다.<br>
+    - <strong>X</strong> 회전은 <strong>Pitch</strong>로 동작하여, 캐릭터가 앞뒤로 기울어집니다.<br>
+    - <strong>Y</strong> 회전은 <strong>Yaw</strong>로 동작하여, 캐릭터가 좌우로 기울어집니다.<br>
+    - <strong>Z</strong> 회전은 <strong>Roll</strong>로 동작하여, 캐릭터가 카메라를 바라본 상태로 빙글빙글 회전합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    다만, 캐릭터의 메시들의 Depth에 따른 Z 위치 차이로 인하여, <strong>Pitch</strong>와 <strong>Yaw</strong>에서는 렌더링 오류가 발생하므로, Z값에 따른 <strong>Roll</strong>만 사용하는 것이 일반적일 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1961.jpg"/>
+    <br>
+    
+    <p>
+    두번째 방식은, 부모 객체의 Up 벡터를 이용하여 캐릭터를 회전하는 방식입니다.<br>
+    부모 객체의 World Rotation을 이용할 수 있다는 점에서 앞서 설명한 방식과 다른 특성을 가집니다.<br>
+    <strong>(1)</strong> <strong>Bake</strong> 버튼을 누릅니다.<br>
+    <strong>(2)</strong> <strong>Setting</strong> 탭을 선택합니다.<br>
+    <strong>(3)</strong> <strong>Billboard</strong> 옵션이 활성화된 상태에서 <strong>Parent's Rotation</strong>의 값을 <strong>Sync Up Vector (World)</strong>로 변경하고 <strong>Bake</strong>를 실행합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1962.jpg"/>
+    <br>
+    
+    <p>
+    유니티 씬으로 돌아와서 부모 GameObject를 회전해봅시다.<br>
+    미리 약간의 스크립트를 작성하여 부모 GameObject의 Up 벡터를 볼 수 있도록 만들었습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1963.jpg"/>
+    <br>
+    
+    <p>
+    부모 GameObject를 회전시켜봅시다.<br>
+    위의 이미지를 보시면 이 <strong>Sync Up Vector</strong> 방식이 어떻게 작동하는지 알 수 있습니다.<br>
+    부모 GameObject의 World 좌표계에서의 Up 벡터를 캐릭터가 Up 벡터로 삼도록 회전하는 것을 볼 수 있습니다.<br>
+    이때, 캐릭터의 회전은 오직 <strong>Roll</strong> 방식으로 동작합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    또한 이 방식에서는 <strong>Billboard</strong> 옵션 중 <strong>Billboard</strong>와 <strong>Billboard with fixed Up Vector</strong>이 동일하게 동작합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>주의</strong></span><br>
+    만약 Up 벡터가 카메라의 Forward 벡터와 평행하다면, 캐릭터의 회전이 비정상적으로 동작합니다.<br>
     </p>
     <br>
     

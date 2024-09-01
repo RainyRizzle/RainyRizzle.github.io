@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Rendering with Multiple Cameras</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_MultipleCameras.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MultipleCameras.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_MultipleCameras.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Rendering with Multiple Cameras</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Rendering with Multiple Cameras</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.0</span></h4>
+    
+    <p>
+    When composing a game scene, depending on the technique, there are cases where one object is rendered with multiple cameras.<br>
+    Since characters created with AnyPortrait are composed of <strong>Mesh Renderers</strong>, there is generally no problem.<br>
+    However, since the "<strong>clipping mask</strong>" works in conjunction with cameras, it is easy for it to malfunction in scenes with multiple cameras.<br>
+    This page explains how to resolve clipping mask rendering errors that occur when there are multiple cameras and when the camera configuration in the scene changes.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    The description on this page is also related to the technique of using the camera's render texture.<br>
+    You can find the description of the camera rendering to the render texture at <a href="../../en/AdvancedManual/AD_RenderTexture.html">Related page</a>.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Multiple Cameras in the scene</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2043.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> There is 1 character and <strong>(2)</strong> 3 cameras in the Unity scene.<br>
+    <strong>(3)</strong> Among them, 2 cameras are rendering the character, so the character is rendered twice in the <strong>Game view</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2044.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you will see that the character's eyes are not rendered properly.<br>
+    The character's eyes are rendered using clipping masks, and from the second camera onwards, clipping masks does not work properly.<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortrait uses "Render Texture" and "Command Buffer" to render clipped meshes.<br>
+    "Command Buffer" is a kind of rendering request that is input to the camera.<br>
+    For the clipping mask technique, the character must find cameras rendering it.<br>
+    </p>
+    <br>
+    
+    <p>
+    Since objects are usually rendered by one camera, AnyPortrait's character also looks for only one camera by default.<br>
+    If you want to render with multiple cameras, you need to change the related option.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2045.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the AnyPortrait editor and press the <strong>Bake</strong> button.<br>
+    <strong>(2)</strong> Select the <strong>Setting</strong> tab.<br>
+    <strong>(3)</strong> Change the value of the "<strong>VR / Multi-Camera</strong>" option to "<strong>Multiple Cameras</strong>".<br>
+    </p>
+    <br>
+    
+    <p>
+    "<strong>VR / Multi-Camera</strong>" is an option that tells the character the maximum number of cameras to detect.<br>
+    The values ​​of the option are as follows:<br>
+    - <strong>None</strong>: Only one camera is considered to be rendering the character.<br>
+    - <strong>Single Camera and Eye Textures (Unity VR)</strong>: Unity's VR renders twice with one camera, so separate processing is required. For VR, refer to <a href="../../en/AdvancedManual/AD_VR.html">Related page</a>.<br>
+    - <strong>Multiple Cameras</strong>: This value must be set when two or more cameras are rendering the character. Validity is tested for all cameras to create a command buffer.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2046.jpg"/>
+    <br>
+    
+    <p>
+    If you run <strong>Bake</strong> and go back to the Unity scene and run the game, you can see that the clipping mask is working normally on all cameras as above.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>When a camera is added or removed</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2047.jpg"/>
+    <br>
+    
+    <p>
+    The rendering issue with the clipping mask also occurs when cameras placed in the scene are added or removed.<br>
+    Even if the rendering issue with multiple cameras is resolved by changing the settings in <strong>Bake</strong>, the rendering issue occurs again when cameras are removed and added.<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortrait needs to find cameras and fill command buffers to render clipping masks.<br>
+    If a new camera is added during the game, the character will need to be made aware of that camera and fill additional command buffers.<br>
+    That is, making the character aware of "<strong>a new camera has been added</strong>" and regenerating the command buffers will solve the problem.<br>
+    </p>
+    <br>
+    
+    <p>
+    There are two ways to do this approach.<br>
+    The first way is "using a script to directly notify the camera of changes", and the second way is "setting the character to always detect all cameras".<br>
+    Please refer to the explanation below and use a method that is convenient for you to solve the problem.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Method 1. Write a script</h3>
+    <br>
+    
+    <p>
+    When the number or information of cameras changes, you can solve the rendering problem by calling the "<strong>SetRenderingCameras</strong>" function of <strong>apPortrait</strong>.<br>
+    The "<strong>SetRenderingCameras</strong>" function tells apPortrait the "cameras that render the character".<br>
+    You should input only the cameras that render the character as the function argument.<br>
+    However, since this function includes validation, you can input all cameras in the scene (<strong>Camera.allCameras</strong>).<br>
+    </p>
+    <br>
+    
+    <p>
+    Here is an example script that calls that function.<br>
+    (The code that adds and removes cameras has been omitted.)<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    using UnityEngine;<br>
+    using AnyPortrait;<br>
+    public class CameraChangeScript : MonoBehaviour<br>
+    {<br>
+    &emsp;&emsp;// Target apPortrait<br>
+    &emsp;&emsp;public apPortrait portrait;<br>
+    <br>
+    &emsp;&emsp;void Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Press the A key to add a camera to the scene.<br>
+    &emsp;&emsp;&emsp;&emsp;if ( Input.GetKeyDown( KeyCode.A ) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Add a camera<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;AddCamera();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Notifiy the character that the cameras have changed.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.SetRenderingCameras(Camera.allCameras);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Press the S key to remove the camera.<br>
+    &emsp;&emsp;&emsp;&emsp;if ( Input.GetKeyDown( KeyCode.S ) )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Remove the camera<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;RemoveCamera();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Notifiy the character that the cameras have changed.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.SetRenderingCameras(Camera.allCameras);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;(Omitted..)<br>
+    }<br>
+    <br>
+    </p>
+    </div>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Method 2. Make it check all cameras</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2049.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open AnyPortrait editor and press the <strong>Bake</strong> button.<br>
+    <strong>(2)</strong> Select the <strong>Setting</strong> tab.<br>
+    <strong>(3)</strong> Change the "<strong>Check Cameras</strong>" option to "<strong>All Scene Cameras</strong>" and run <strong>Bake</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortrait system automatically rescans cameras when a camera changes during the game and prepares them for clipping mask rendering.<br>
+    The important thing here is how it detects.<br>
+    The "<strong>Check Cameras</strong>" option determines how it detects a camera change in the scene.<br>
+    - <strong>Current Camera Mainly</strong> : Rescan cameras only if the current camera is disabled.<br>
+    - <strong>All Scene Cameras</strong> : Check all cameras in the scene in every frame. Useful when there are frequent camera changes.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2048.jpg"/>
+    <br>
+    
+    <p>
+    If you apply one of the above methods, you will see that the rendering errors when adding or removing cameras are resolved.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Clipping resolution optimization</h3>
+    <br>
+    
+    <p>
+    AnyPortrait uses "Render Texture" for clipping mask processing.<br>
+    Generally, a large-resolution render texture will be required for high-quality mask processing.<br>
+    However, AnyPortrait has an optimization function that can improve the quality of the mask even at low resolutions.<br>
+    The "Clipping Mask Resolution Optimization" function, which allows high-quality rendering with low-resolution render textures, is performed when all of the following conditions are met.<br>
+    <strong>1.</strong> All camera rendering characters must be of type <strong>Orthographic</strong>.<br>
+    <strong>2.</strong> All camera that renders a character must be looking straight at the character.<br>
+    </p>
+    <br>
+    
+    <p>
+    If the above conditions are not met, the optimization function will not work, and the quality of the clipping mask will be determined by the resolution of the render texture.<br>
+    The optimization function is implemented to work as best as possible, but in scenes with multiple cameras, the conditions for optimization may not be met.<br>
+    If you are experiencing this issue, try the following methods to resolve the issue.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2050.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select one of the several cameras that render the character.<br>
+    <strong>(2)</strong> Rotate the camera and change it to <strong>Perspective</strong> type.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2051.jpg"/>
+    <br>
+    
+    <p>
+    You may notice that the clipping mask resolution optimization is not working, causing the character's eye area to be rendered in low quality.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2052.jpg"/>
+    <br>
+    
+    <p>
+    You can improve the rendering quality by increasing the render texture resolution of the clipping mask.<br>
+    <strong>(1)</strong> Select the mesh group.<br>
+    <strong>(2)</strong> Select the <strong>Setting</strong> tab.<br>
+    <strong>(3)</strong> Select the mesh that is the clipping mask.<br>
+    <strong>(4)</strong> Change the <strong>Mask Texture Size</strong> property. This value is the resolution of the render texture for clipping rendering, so the larger the value, the better the rendering quality.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2053.jpg"/>
+    <br>
+    
+    <p>
+    If you do <strong>Bake</strong> and run the game, you can see that the quality of the clipping mask has improved.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_RenderTexture.html">< Rendering to Render Texture</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_UnityRecorder.html">Using the Unity Recorder ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    </body>
+</html>
