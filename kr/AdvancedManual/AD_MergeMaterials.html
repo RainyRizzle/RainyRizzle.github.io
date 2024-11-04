@@ -361,6 +361,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -732,6 +735,21 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class MergeMaterialScript : MonoBehaviour\n{\n\tpublic apPortrait mainCharacter;\n\tpublic apPortrait costumePrefab;\n\n\tprivate apPortrait _attachedCostume = null;\n\n\tvoid Start() { }\n\n\tvoid Update()\n\t{\n\t\t// Q키를 누르면 의상을 캐릭터에 부착하고 동기화합니다. (함수 설명 생략)\n\t\tif (Input.GetKeyDown(KeyCode.Q))\n\t\t{\t\n\t\t\t// 의상이 부착되면 _attachedCostume 변수에 의상 객체가 할당됩니다.\n\t\t\tAttachCostume();\n\t\t}\n\n\t\t// W키를 누르면 부착된 의상을 제거합니다.\n\t\tif (Input.GetKeyDown(KeyCode.W))\n\t\t{\n\t\t\t// 의상을 제거하기 전에 재질 병합을 해제합니다.\n\t\t\tmainCharacter.UnmergeMaterials();\n\n\t\t\t// 동기화를 해제하고 의상을 제거합니다. (함수 설명 생략)\n\t\t\t// _attachedCostume 변수는 null이 됩니다.\n\t\t\tDetachCostume();\n\t\t}\n\n\t\t// A키를 누르면 부착된 의상과 재질을 병합합니다.\n\t\tif (Input.GetKeyDown(KeyCode.A))\n\t\t{\t\n\t\t\tif(_attachedCostume != null)\n\t\t\t{\n\t\t\t\tmainCharacter.MergeMaterials(_attachedCostume);\n\t\t\t}\n\t\t}\n\n\t\t// S키를 누르면 부착 여부에 상관없이 재질 병합을 해제합니다.\n\t\tif (Input.GetKeyDown(KeyCode.S))\n\t\t{\t\n\t\t\tmainCharacter.UnmergeMaterials();\n\t\t}\n\t}\n\n\t(AttachCostume, DetachCostume 함수에 대한 설명은 생략)\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

@@ -567,6 +567,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -589,6 +592,21 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class PhysicsTest : MonoBehaviour\n{\n\t// Target AnyPortrait Object\n\tpublic apPortrait portrait;\n\t// Touch ID\n\tprivate int _touchID;\n\n\tvoid Start () { }\n\n\tvoid Update ()\n\t{\n\t\t//----------------------------------------\n\t\t// Force Events\n\t\t//----------------------------------------\n\n\t\t// Clear Force\n\t\tif(Input.GetKeyDown(KeyCode.C))\n\t\t{\n\t\t\tportrait.ClearForce();\n\t\t\tDebug.Log(\"Clear Force\");\n\t\t}\n\n\t\t// Add Point Force\n\t\tif(Input.GetKeyDown(KeyCode.P))\n\t\t{\n\t\t\t// Position : (0, 0)\n\t\t\t// Radius : 10\n\t\t\t// Power : 2000\n\t\t\t// Live Time : 10 Sec\n\t\t\tportrait.AddForce_Point(Vector2.zero, 10.0f)\n\t\t\t\t.SetPower(2000)\n\t\t\t\t.EmitOnce(10);\n\t\t\tDebug.Log(\"Add Point Force\");\n\t\t}\n\n\t\t//Add Waved Directional Force\n\t\tif(Input.GetKeyDown(KeyCode.D))\n\t\t{\n\t\t\t// Direction : (1 +- 0.5, 0.5 +- 0.2)\n\t\t\t// Power : 4000 +- 1000\n\t\t\t// Loop\n\t\t\t portrait.AddForce_Direction(new Vector2(1.0f, 0.5f), 0.5f, 0.2f, 5, 10)\n\t\t\t\t.SetPower(4000, 1000, 25)\n\t\t\t\t.EmitLoop();\n\t\t\tDebug.Log(\"Add Waved Directional Force\");\n\t\t}\n\n\t\t//----------------------------------------\n\t\t// Touch Events\n\t\t//----------------------------------------\n\n\t\tVector3 touchPosW = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));\n\t\tVector2 touchPosW2 = new Vector2(touchPosW.x, touchPosW.y);\n\n\t\t//Left Click -> Touch\n\t\tif(Input.GetMouseButtonDown(0))\n\t\t{\n\t\t\t//Start Touch Event\n\t\t\t_touchID = portrait.AddTouch(touchPosW2, 2.0f).TouchID;\n\t\t\tDebug.Log(\"Add Touch (\" + _touchID + \")\");\n\t\t}\n\t\telse if(Input.GetMouseButton(0))\n\t\t{\n\t\t\t//Refresh Touch Position\n\t\t\tportrait.SetTouchPosition(_touchID, touchPosW2);\n\t\t}\n\t\telse if(Input.GetMouseButtonUp(0))\n\t\t{\n\t\t\t//Release Touch Event\n\t\t\tportrait.ClearTouch();\n\t\t\t_touchID = -1;\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

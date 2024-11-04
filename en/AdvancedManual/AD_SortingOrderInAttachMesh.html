@@ -222,6 +222,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -333,6 +336,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -490,6 +496,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -599,6 +608,43 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class RobotDepthSyncScript : MonoBehaviour\n{\t\n\tpublic Transform robotGroup; // The robot's parent GameObject.\n\tpublic apPortrait mainCharacter; // Robot character.\n\tpublic apPortrait equipment; // Equipment character to be attached to the robot.\n\n\tvoid Start()\n\t{\n\t}\n\n\tvoid Update()\n\t{\n\t\t// Press the A key to attach the equipment.\n\t\tif(Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\tAttach();\n\t\t}\n\n\t\t// Press the S key to release the attachment.\n\t\tif(Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\tDetach();\n\t\t}\n\t}\n\n\tprivate void Attach()\n\t{\n\t\t// Registers the equipment as a child of the robot's parent GameObject.\n\t\tequipment.transform.parent = robotGroup;\n\t\tequipment.transform.localPosition = Vector3.zero;\n\n\t\t// Synchronize the bones.\n\t\tequipment.Synchronize(mainCharacter, false, false, false, true, SYNC_BONE_OPTION.MatchFromRoot);\n\t}\n\n\tprivate void Detach()\n\t{\n\t\t// Detach the equipment from the robot's parent GameObject.\n\t\tequipment.transform.parent = null;\n\t\tequipment.transform.position = new Vector3(-5, 0, 0);\n\n\t\t// Disable synchronization.\n\t\tequipment.Unsynchronize();\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class RobotDepthSyncScript : MonoBehaviour\n{\t\n\tpublic Transform robotGroup; // The robot's parent GameObject.\n\tpublic apPortrait mainCharacter; // Robot character.\n\tpublic apPortrait equipment; // Equipment character to be attached to the robot.\n\n\t// Store one of the meshes of the robot arm to reference the Sorting Order value.\n\tprivate apOptTransform targetMesh;\n\n\tvoid Start()\n\t{\n\t\t// Among the arm meshes of the robot, \"the mesh rendered in the most front\" is stored to a variable.\n\t\ttargetMesh = mainCharacter.GetOptTransform(\"HandMidGear\");\n\t}\n\n\tvoid Update()\n\t{\n\t\t// Press the A key to attach the equipment.\n\t\tif(Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\tAttach();\n\t\t}\n\n\t\t// Press the S key to release the attachment.\n\t\tif(Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\tDetach();\n\t\t}\n\t}\n\n\tprivate void Attach()\n\t{\n\t\t// Registers the equipment as a child of the robot's parent GameObject.\n\t\tequipment.transform.parent = robotGroup;\n\t\tequipment.transform.localPosition = Vector3.zero;\n\n\t\t// Synchronize the bones.\n\t\tequipment.Synchronize(mainCharacter, false, false, false, true, SYNC_BONE_OPTION.MatchFromRoot);\n\n\t\t// When equipment is attached to the robot arm, it refreshes the rendering order of the equipment meshes.\n\t\tRefreshMeshDepth();\n\t}\n\n\tprivate void Detach()\n\t{\n\t\t// Detach the equipment from the robot's parent GameObject.\n\t\tequipment.transform.parent = null;\n\t\tequipment.transform.position = new Vector3(-5, 0, 0);\n\n\t\t// Disable synchronization.\n\t\tequipment.Unsynchronize();\n\t}\n\n\t// Refresh the Sorting Order of the equipment meshes.\n\tprivate void RefreshMeshDepth()\n\t{\n\t\t// Gets the Sorting Order of the robot character's arm mesh.\n\t\tint baseSortingOrder = targetMesh.GetSortingOrder();\n\n\t\t// Set the Sorting Order one by one to render in front of the robot character's arm mesh.\n\t\tequipment.SetSortingOrder(\"Equip4\", baseSortingOrder + 1);\n\t\tequipment.SetSortingOrder(\"Equip1\", baseSortingOrder + 2);\n\t\tequipment.SetSortingOrder(\"Equip2\", baseSortingOrder + 3);\n\t\tequipment.SetSortingOrder(\"Equip3\", baseSortingOrder + 4);\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class RobotDepthSyncScript : MonoBehaviour\n{\t\n\tpublic Transform robotGroup; // The robot's parent GameObject.\n\tpublic apPortrait mainCharacter; // Robot character.\n\tpublic apPortrait equipment; // Equipment character to be attached to the robot.\n\n\t// Store one of the meshes of the robot arm to reference the Sorting Order value.\n\tprivate apOptTransform targetMesh;\n\n\t// Variables to check if the rendering order of the arm mesh is updated.\n\tprivate bool isAttached = false; // Whether the equipment is in an attached state.\n\tprivate int prevSortingOrder = -1; // The value of the SortingOrder of the targetMesh in the previous frame.\n\n\tvoid Start()\n\t{\n\t\t// Among the arm meshes of the robot, \"the mesh rendered in the most front\" is stored to a variable.\n\t\ttargetMesh = mainCharacter.GetOptTransform(\"HandMidGear\");\n\t}\n\n\tvoid Update()\n\t{\n\t\t// Press the A key to attach the equipment.\n\t\tif(Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\tAttach();\n\t\t}\n\n\t\t// Press the S key to release the attachment.\n\t\tif(Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\tDetach();\n\t\t}\n\t}\n\n\t// LateUpdate() is used to refer to the Sorting Order value after AnyPortrait character update is processed.\n\tprivate void LateUpdate()\n\t{\n\t\t// Checks if the rendering order of the robot arm mesh is changed when the equipment is attached.\n\t\tif (isAttached)\n\t\t{\n\t\t\tif (targetMesh.GetSortingOrder() != prevSortingOrder)\n\t\t\t{\n\t\t\t\t// If the arm mesh's Sorting Order is different from the previous frame, refresh the attached equipment meshes' Sorting Order.\n\t\t\t\tRefreshMeshDepth();\n\t\t\t\t// After processing is completed, it is updated with the Sorting Order value of the current frame.\n\t\t\t\tprevSortingOrder = targetMesh.GetSortingOrder();\t\t\t\t\n\t\t\t}\n\t\t}\n\t}\n\n\tprivate void Attach()\n\t{\n\t\t// Registers the equipment as a child of the robot's parent GameObject.\n\t\tequipment.transform.parent = robotGroup;\n\t\tequipment.transform.localPosition = Vector3.zero;\n\n\t\t// Synchronize the bones.\n\t\tequipment.Synchronize(mainCharacter, false, false, false, true, SYNC_BONE_OPTION.MatchFromRoot);\n\n\t\t// When equipment is attached to the robot arm, it refreshes the rendering order of the equipment meshes.\n\t\tRefreshMeshDepth();\n\n\t\t// Store the Sorting Order of the arm mesh immediately after attaching, and store that it is attached in the isAttached variable.\n\t\tprevSortingOrder = targetMesh.GetSortingOrder();\n\t\tisAttached = true;\n\t}\n\n\tprivate void Detach()\n\t{\n\t\t// Detach the equipment from the robot's parent GameObject.\n\t\tequipment.transform.parent = null;\n\t\tequipment.transform.position = new Vector3(-5, 0, 0);\n\n\t\t// Disable synchronization.\n\t\tequipment.Unsynchronize();\n\n\t\t// Since the attachment has been released, enter false so that LateUpdate() does not keep checking the rendering order of the arm mesh.\n\t\tisAttached = false;\n\t}\n\n\t// Refresh the Sorting Order of the equipment meshes.\n\tprivate void RefreshMeshDepth()\n\t{\n\t\t// Gets the Sorting Order of the robot character's arm mesh.\n\t\tint baseSortingOrder = targetMesh.GetSortingOrder();\n\n\t\t// Set the Sorting Order one by one to render in front of the robot character's arm mesh.\n\t\tequipment.SetSortingOrder(\"Equip4\", baseSortingOrder + 1);\n\t\tequipment.SetSortingOrder(\"Equip1\", baseSortingOrder + 2);\n\t\tequipment.SetSortingOrder(\"Equip2\", baseSortingOrder + 3);\n\t\tequipment.SetSortingOrder(\"Equip3\", baseSortingOrder + 4);\t\t\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

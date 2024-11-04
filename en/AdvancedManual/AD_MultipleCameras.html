@@ -254,6 +254,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -381,6 +384,21 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\npublic class CameraChangeScript : MonoBehaviour\n{\n\t// Target apPortrait\n\tpublic apPortrait portrait;\n\n\tvoid Update()\n\t{\n\t\t// Press the A key to add a camera to the scene.\n\t\tif ( Input.GetKeyDown( KeyCode.A ) )\n\t\t{\n\t\t\t// Add a camera\n\t\t\tAddCamera();\n\n\t\t\t// Notifiy the character that the cameras have changed.\n\t\t\tportrait.SetRenderingCameras(Camera.allCameras);\n\t\t}\n\n\t\t// Press the S key to remove the camera.\n\t\tif ( Input.GetKeyDown( KeyCode.S ) )\n\t\t{\n\t\t\t// Remove the camera\n\t\t\tRemoveCamera();\n\n\t\t\t// Notifiy the character that the cameras have changed.\n\t\t\tportrait.SetRenderingCameras(Camera.allCameras);\n\t\t}\n\t}\n\t(Omitted..)\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

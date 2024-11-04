@@ -421,6 +421,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -448,6 +451,9 @@
     robot.<strong>SetBonePosition</strong>(<span class="text-danger">"Helper Aim"</span>, aimPosition, <span class="text-success">Space</span>.World);<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -475,6 +481,32 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "RaycastHit2D RaycastHit_RobotFootR = Physics2D.Raycast(FootRaycast_R.position, new Vector2(0.0f, -1.0f), 30);\nif (RaycastHit_RobotFootR && RaycastHit_RobotFootR.collider != null)\n{\n\trobot.SetBonePositionConstraintBySurface(  \"Helper Foot Front R\",\n\t\t\t\t\tFootPosY_Default.position.y,\n\t\t\t\t\tRaycastHit_RobotFootR.point.y,\n\t\t\t\t\tFootPosY_Min.position.y,\n\t\t\t\t\tFootPosY_Max.position.y, \n\t\t\t\t\tConstraintSurface.Ysurface, \n\t\t\t\t\tSpace.World);\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "robot.SetBonePosition(\"Helper Aim\", aimPosition, Space.World);\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

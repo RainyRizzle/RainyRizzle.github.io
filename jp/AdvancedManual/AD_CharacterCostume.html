@@ -534,6 +534,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -675,6 +678,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -782,6 +788,32 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "public class CustomSample : MonoBehaviour\n{\n\t// 対象となるapPortrait\n\tpublic apPortrait portrait;\n\t// 3種のキャラクターテクスチャ\n\tpublic Texture2D image_Basic;\n\tpublic Texture2D image_Casual;\n\tpublic Texture2D image_Knight;\n\tvoid Start () { }\n\tvoid Update ()\n\t{\n\t\t// Q、A、Zキーを押すと、「Hair」メッシュのテクスチャが変更されます。\n\t\tif ( Input.GetKeyDown(KeyCode.Q) )\n\t\t{\n\t\t\tportrait.SetMeshImage( \"Hair\", image_Basic );\n\t\t}\n\t\tif ( Input.GetKeyDown(KeyCode.A) )\n\t\t{\n\t\t\tportrait.SetMeshImage( \"Hair\", image_Casual );\n\t\t}\n\t\tif ( Input.GetKeyDown(KeyCode.Z) )\n\t\t{\n\t\t\tportrait.SetMeshImage( \"Hair\", image_Knight );\n\t\t}\n\t\t// W、S、Xキーを押すと、「Hair」、「Head」以外のメッシュのテクスチャが変更されます。\n\t\tif ( Input.GetKeyDown(KeyCode.W) )\n\t\t{\n\t\t\tportrait.SetMeshImage( \"Body\", image_Basic );\n\t\t\tportrait.SetMeshImage( \"LeftArm\", image_Basic );\n\t\t\tportrait.SetMeshImage( \"RightArm\", image_Basic );\n\t\t\tportrait.SetMeshImage( \"RightHand\", image_Basic );\n\t\t\tportrait.SetMeshImage( \"LeftLeg\", image_Basic );\n\t\t\tportrait.SetMeshImage( \"RightLeg\", image_Basic );\n\t\t}\n\t\tif ( Input.GetKeyDown(KeyCode.S) )\n\t\t{\n\t\t\tportrait.SetMeshImage( \"Body\", image_Casual) ;\n\t\t\tportrait.SetMeshImage( \"LeftArm\", image_Casual );\n\t\t\tportrait.SetMeshImage( \"RightArm\", image_Casual );\n\t\t\tportrait.SetMeshImage( \"RightHand\", image_Casual );\n\t\t\tportrait.SetMeshImage( \"LeftLeg\", image_Casual );\n\t\t\tportrait.SetMeshImage( \"RightLeg\", image_Casual );\n\t\t}\n\t\tif ( Input.GetKeyDown(KeyCode.X) )\n\t\t{\n\t\t\tportrait.SetMeshImage( \"Body\", image_Knight );\n\t\t\tportrait.SetMeshImage( \"LeftArm\", image_Knight );\n\t\t\tportrait.SetMeshImage( \"RightArm\", image_Knight );\n\t\t\tportrait.SetMeshImage( \"RightHand\", image_Knight );\n\t\t\tportrait.SetMeshImage( \"LeftLeg\", image_Knight );\n\t\t\tportrait.SetMeshImage( \"RightLeg\", image_Knight );\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "public class CustomSample : MonoBehaviour\n{\n\t// 対象となるapPortrait\n\tpublic apPortrait portrait;\n\t// 3種のキャラクターテクスチャ\n\tpublic Texture2D image_Basic;\n\tpublic Texture2D image_Casual;\n\tpublic Texture2D image_Knight;\n\t// <追加>剣と盾の親Transformをメンバーとして追加します。\n\tpublic Transform sword;\n\tpublic Transform shield;\n\tvoid Update ()\n\t{\n\t\t（省略...）\n\t\t// <追加> Eキーを押すと、剣と盾を装備します。\n\t\tif ( Input.GetKeyDown(KeyCode.E) )\n\t\t{\n\t\t\t// 二つの骨のソケットを取得します。\n\t\t\tTransform socketR = portrait.GetBoneSocket( \"Bone Weapon R\" );\n\t\t\tTransform socketL = portrait.GetBoneSocket( \"Bone Weapon L\" );\n\t\t\t// 「剣（Weapon_Sword）」を右手の骨のソケットの子として登録します。\n\t\t\tsword.parent = socketR;\n\t\t\tsword.localPosition = Vector3.zero;\n\t\t\tsword.localRotation = Quaternion.identity;\n\t\t\t// 「盾（Weapon_Shield）」を左腕の骨のソケットの子として登録します。\n\t\t\tshield.parent = socketL;\n\t\t\tshield.localPosition = Vector3.zero;\n\t\t\tshield.localRotation = Quaternion.identity;\n\t\t}\n\t\t// <追加> Rキーを押すと、剣と盾の装備を解除します。\n\t\tif ( Input.GetKeyDown(KeyCode.R) )\n\t\t{\n\t\t\tsword.parent = null;\n\t\t\tsword.localPosition = new Vector3(5, 0, 0);\n\t\t\tsword.localRotation = Quaternion.identity;\n\t\t\tshield.parent = null;\n\t\t\tshield.localPosition = new Vector3(3, 0, 0);\n\t\t\tshield.localRotation = Quaternion.identity;\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

@@ -176,6 +176,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -277,6 +280,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -338,6 +344,32 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class WeaponEquipScript : MonoBehaviour\n{\n\tpublic apPortrait portrait;\n\tpublic Transform gunTransform;\t\n\n\tvoid Start()\n\t{\n\t\t//Set the character's right hand bone as the weapon's parent\n\t\tTransform handBone = portrait.GetBoneSocket(\"Bone Hand R\");\n\t\tgunTransform.parent = handBone;\n\n\t\t//Make the position and rotation the same as the socket, and check the sign of the local scale\n\t\tgunTransform.localPosition = Vector3.zero;\n\t\tgunTransform.localRotation = Quaternion.identity;\n\n\t\tVector3 gunScale = gunTransform.localScale;\n\t\tif(gunScale.x < 0) { gunScale.x *= -1; }\n\t\tif(gunScale.y < 0) { gunScale.y *= -1; }\n\t\tgunTransform.localScale = gunScale;\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class WeaponEquipScript : MonoBehaviour\n{\n\tpublic apPortrait portrait;\n\tpublic Transform gunTransform;\n\tpublic MeshRenderer gunMeshRenderer;\n\n\tvoid Start()\n\t{\n\t\t//Set the character's right hand bone as the weapon's parent\n\t\tTransform handBone = portrait.GetBoneSocket(\"Bone Hand R\");\n\t\tgunTransform.parent = handBone;\n\n\t\t//Make the position and rotation the same as the socket, and check the sign of the local scale\n\t\tgunTransform.localPosition = Vector3.zero;\n\t\tgunTransform.localRotation = Quaternion.identity;\n\n\t\tVector3 gunScale = gunTransform.localScale;\n\t\tif(gunScale.x < 0) { gunScale.x *= -1; }\n\t\tif(gunScale.y < 0) { gunScale.y *= -1; }\n\t\tgunTransform.localScale = gunScale;\n\n\t\t//Set to render directly behind the finger mesh\n\t\tint fingerSortingOrder = portrait.GetSortingOrder(\"Hand R Finger\");\n\t\tgunMeshRenderer.sortingOrder = fingerSortingOrder - 1;\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

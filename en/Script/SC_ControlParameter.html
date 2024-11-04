@@ -311,6 +311,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -333,6 +336,21 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class ControlParamTest : MonoBehaviour\n{\n\t// Target AnyPortrait\n\tpublic apPortrait portrait;\n\n\t// Parameter Values\n\tprivate int _eyeShape = 0;\n\tprivate int _mouthShape = 0;\n\tprivate float _verticalPosition = 0.0f;\n\n\tvoid Start () { }\n\n\tvoid Update ()\n\t{\n\t\t// \"Eye Shape\" (0, 1, 2, 3 int)\n\t\tif(Input.GetKeyDown(KeyCode.E))\n\t\t{\n\t\t\t_eyeShape++;\n\t\t\tif(_eyeShape > 3) { _eyeShape = 0; }\n\n\t\t\tportrait.SetControlParamInt(\"Eye Shape\", _eyeShape);\n\t\t}\n\n\t\t// \"Mouth Shape\" (0, 1, 2, int)\n\t\tif(Input.GetKeyDown(KeyCode.M))\n\t\t{\n\t\t\t_mouthShape++;\n\t\t\tif(_mouthShape > 2) { _mouthShape = 0; }\n\n\t\t\tportrait.SetControlParamInt(\"Mouth Shape\", _mouthShape);\n\t\t}\n\n\t\t// \"Vertical Position\" (0 ~ 1 float)\n\t\tif(Input.GetKey(KeyCode.UpArrow))\n\t\t{\n\t\t\t// Move Upward\n\t\t\t_verticalPosition += 2 * Time.deltaTime;\n\t\t\tif(_verticalPosition > 1) { _verticalPosition = 1; }\n\n\t\t\tportrait.SetControlParamFloat(\"Vertical Position\", _verticalPosition);\n\t\t}\n\n\t\telse if(Input.GetKey(KeyCode.DownArrow))\n\t\t{\n\t\t\t// Move Downward\n\t\t\t_verticalPosition -= 2 * Time.deltaTime;\n\t\t\tif(_verticalPosition < 0) { _verticalPosition = 0; }\n\n\t\t\tportrait.SetControlParamFloat(\"Vertical Position\", _verticalPosition);\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

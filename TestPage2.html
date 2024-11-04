@@ -73,12 +73,30 @@
 
         <p>이미지 테스트입니다.</p>
         <p>다음 제목입니다.</p>
+
+        <button id="copybutton" class="btn btn-outline-info">복사 버튼</button>
+        <br>
+        <br>
+        <p>다음 제목입니다.</p>
     </div>
 
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <!--------------->
+
+    <!-- 복사 스크립트 -->
+    <script>
+            document.getElementById("copybutton").addEventListener("click", function() {
+                const textToCopy = "\t탭과\n띄어쓰기가 포함된 텍스트를\n복사했습니다.\"\"";
+
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    alert("텍스트가 클립보드에 복사되었습니다!");
+                }).catch(err => {
+                    console.error("클립보드 복사 실패:", err);
+                });
+            });
+    </script>
 
 </body>
 </html>

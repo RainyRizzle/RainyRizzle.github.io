@@ -172,6 +172,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -403,6 +406,21 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "Stencil\n{\n\tRef 1\n\tComp LEqual\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

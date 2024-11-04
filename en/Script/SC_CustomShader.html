@@ -76,220 +76,770 @@
     <h1 class="display-5">Custom Shader</h1>
     <br>
     
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
+    
     <p>
-    It is a way to create and use the shader yourself, not the shader provided by AnyPortrait.<br>
-    Please refer to the <a href="../../en/AdvancedManual/AD_MeshShader.html">related page</a> for how to apply and bake custom shaders.<br>
-    There are <strong>two ways</strong> to write shader code depending on whether you have a <strong>clipping mask or not</strong>.<br>
+    AnyPortrait provides a variety of commonly used shaders, but depending on the project, you may need to write a custom shader with special effects.<br>
+    You can easily write a custom shader to create great rendering results by following just a few rules of AnyPortrait.<br>
+    This page explains how AnyPortrait's shader basics are structured.<br>
+    Based on this explanation, we hope you will write and apply a custom shader.<br>
+    </p>
+    <br>
+    
+    <p>
+    When you want to apply shaders you wrote, you can use the <strong>Material Library</strong> or change the properties of the mesh.<br>
+    Please check the following manuals for how to change shaders.<br>
+    - <a href="../../en/AdvancedManual/AD_MaterialLibrary.html">Material Library</a><br>
+    - <a href="../../en/AdvancedManual/AD_MeshShader.html">Shader for meshes</a><br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    This page does not cover how to write shaders.<br>
+    For more information, please refer to the Unity documentation, forums, and related sites!<br>
     </p>
     <br>
     
     <br>
     <br>
     <!-- 3. 서브 타이틀 -->
-    <h3>How to create a basic shader</h3>
+    <h3>Shaders in AnyPortrait</h3>
     <br>
     
-    <!-- 23. 코드 예시 -->
-    <div class="alert alert-warning" role="alert">
     <p>
-    <br>
-    Shader <span class="text-danger">"Custom Shader/Sample Transparent"</span><br>
-    {<br>
-    &emsp;&emsp;Properties<br>
-    &emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;<strong>_Color</strong>(<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
-    &emsp;&emsp;&emsp;&emsp;<strong>_MainTex</strong>(<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
-    &emsp;&emsp;}<br>
-    <br>
-    &emsp;&emsp;SubShader<br>
-    &emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType"</span> = <span class="text-danger">"Transparent" "Queue" </span>= <span class="text-danger">"Transparent" "PreviewType"</span> = <span class="text-danger">"Plane"</span> }<br>
-    &emsp;&emsp;&emsp;&emsp;<strong>Blend SrcAlpha OneMinusSrcAlpha</strong><br>
-    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
-    <br>
-    &emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
-    <br>
-    &emsp;&emsp;&emsp;&emsp;#pragma surface surf SimpleColor alpha<br>
-    &emsp;&emsp;&emsp;&emsp;#pragma target 3.0<br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>LightingSimpleColor(SurfaceOutput s, <span class="text-primary">half3 </span>lightDir, <span class="text-primary">half </span>atten)<br>
-    &emsp;&emsp;&emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> c;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb = s.Albedo;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a = s.Alpha;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">return</span> c;<br>
-    &emsp;&emsp;&emsp;&emsp;}<br>
-    <br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span><strong>_Color</strong>;<br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D </span><strong>_MainTex</strong>;<br>
-    <br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct </span>Input<br>
-    &emsp;&emsp;&emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2 </span>uv_MainTex;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4 </span>color : COLOR;<br>
-    &emsp;&emsp;&emsp;&emsp;};<br>
-    <br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">void </span>surf(Input IN, <span class="text-primary">inout</span> SurfaceOutput o)<br>
-    &emsp;&emsp;&emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>c = <strong>tex2D</strong>(_MainTex, IN.uv_MainTex);<br>
-    <br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>c.rgb *= _Color.rgb * 2.0f;</strong><br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.Alpha = c.a * _Color.a;</strong><br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.Albedo = c.rgb;</strong><br>
-    &emsp;&emsp;&emsp;&emsp;}<br>
-    &emsp;&emsp;&emsp;&emsp;ENDCG<br>
-    &emsp;&emsp;}<br>
-    }<br>
-    <br>
+    AnyPortrait does not use a single shader, but rather uses a set of shaders that are appropriate for the situation.<br>
+    A total of 17 shaders are applied as a set based on three factors from which shaders are derived. (<a href="../../en/AdvancedManual/AD_MaterialLibrary.html">Related page</a>)<br>
+    The factors are as follows.<br>
     </p>
-    </div>
     <br>
     
     <p>
-    <strong>1. Properties</strong><br>
-    <strong>_Color</strong>(<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
-    <strong>_MainTex</strong>(<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
-    : By default, AnyPortrait uses only two properties.<br>
-    Declare <strong>_Color</strong> property for color animation and <strong>_MainTex</strong> property to apply texture.<br>
-    Externally controlling these two properties may conflict with the logic of AnyPortrait.<br>
+    <strong>1. Color Space</strong><br>
+    The shader is determined based on the color space of the project.<br>
+    It is written based on <strong>Gamma Space</strong>, and the color calculation formula changes in the case of <strong>Linear Space</strong>.<br>
     </p>
     <br>
     
     <p>
     <strong>2. Blending</strong><br>
-    <strong>Blend SrcAlpha OneMinusSrcAlpha</strong><span class="text-danger"> : Alpha Blend</span><br>
-    <strong>Blend One One</strong><span class="text-danger"> : Additive</span><br>
-    <strong>Blend OneMinusDstColor One</strong><span class="text-danger"> : Soft Additive</span><br>
-    <strong>Blend DstColor SrcColor</strong><span class="text-danger"> : Multiplicative</span><br>
-    : Four blending methods used in AnyPortrait.<br>
-    You can write as above or make other blending declarations as needed.<br>
+    Meshes are rendered using one of four blending methods.<br>
+    The default is <strong>Alpha Blend</strong>, with <strong>Additive</strong>, <strong>Soft Additive</strong>, and <strong>Multiplicative</strong> slightly modifying the blending properties and the code related to alpha calculations.<br>
     </p>
     <br>
     
     <p>
-    <strong>3. Albedo, Alpha</strong><br>
-    <span class="text-primary">half4 </span>c = <strong>tex2D</strong>(_MainTex, IN.uv_MainTex);<br>
-    <strong>c.rgb *= _Color.rgb * 2.0f;</strong><br>
-    <strong>o.Alpha = c.a * _Color.a;</strong><br>
-    <strong>o.Albedo = c.rgb;</strong><br>
-    : The color calculation applies 2X Multiply by default.<br>
-    RGB is doubled, and Alpha is multiplied and applied.<br>
-    You can change it as needed, but it may appear different from the render results in the editor.<br>
+    <strong>3. Clipping</strong><br>
+    The mesh being clipped receives mask texture and performs additional alpha calculations.<br>
+    There is also one shader that generates the mask, but it is a functional shader that performs a fixed role.<br>
     </p>
+    <br>
+    
+    <p>
+    The above factors are combined to apply a total of 17 shaders to the character.<br>
+    However, when you want to write a custom shader, you don't necessarily have to write all of them.<br>
+    Just check the following and write only the shaders that fit the situation of your project.<br>
+    </p>
+    <br>
+    
+    <p>
+    - Write only one type of shader, either <strong>Gamma</strong> or <strong>Linear</strong>, depending on the color space of the project.<br>
+    - If you do not use the blending option, you only need to write the <strong>Alpha Blend</strong> shader as default.<br>
+    - If there is no clipped mesh, you do not need to write a clipping shader.<br>
+    - The <strong>Alpha Mask</strong> shader, which creates a clipping mask, only performs a fixed role, so you do not need to create it as a custom shader.<br>
+    </p>
+    <br>
+    
+    <p>
+    This page first explains the rules and method for writing an "Alpha Blend" shader in the default "Gamma Space".<br>
+    Then it explains the parts that need to be modified depending on the factors that determine the shader.<br>
+    </p>
+    <br>
+    
+    <p>
+    It might also be helpful to check out the shader codes built into the AnyPortrait package.<br>
+    The shader assets are located by default in "<strong>Assets/AnyPortrait/Assets/Shaders</strong>".<br>
+    It might be convenient to duplicate the provided shaders and modify the necessary parts.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>When creating with Shader Graphs</h4>
+    <br>
+    
+    <p>
+    If you want to create a custom shader with Shader Graph, you can write it in the format of a Shader Graph by following the rules described on this page.<br>
+    For more information, see the <a href="../../en/AdvancedManual/AD_ShaderGraph.html">Related page</a><br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
     <br>
     
     <br>
     <br>
     <!-- 3. 서브 타이틀 -->
-    <h3>How to Create a Clipping Mask Shader</h3>
+    <h3>How to write a basic shader</h3>
+    <br>
+    
+    <p>
+    AnyPortrait's default shader is not much different from Unity's default Transparent shader.<br>
+    The following code is the default shader for "Alpha Blend" in "Gamma Space", and you can add your own custom code based on it.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    AnyPortrait supports both <strong>Surface Shader</strong>, <strong>Fragment Shader</strong>, and <strong>Shader Graph</strong>.<br>
+    This page explains based on the code of <strong>Fragment Shader</strong>, and you can apply the rules explained here appropriately according to the situation.<br>
+    </p>
     <br>
     
     <!-- 23. 코드 예시 -->
     <div class="alert alert-warning" role="alert">
     <p>
     <br>
-    Shader <span class="text-danger">"Custom Shader/Sample Clipping Transparent"</span><br>
+    Shader <span class="text-danger">"Sample Shader/Gamma Space - Normal - AlphaBlend"</span><br>
     {<br>
     &emsp;&emsp;Properties<br>
     &emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;_Color(<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
-    &emsp;&emsp;&emsp;&emsp;_MainTex(<span class="text-danger">"Base Texture (RGBA)"</span>, 2D) = "white" {}<br>
-    &emsp;&emsp;&emsp;&emsp;<strong>_MaskTex</strong>(<span class="text-danger">"Mask Texture (A)"</span>, 2D) = "white" {}<br>
-    &emsp;&emsp;&emsp;&emsp;<strong>_MaskScreenSpaceOffset</strong>(<span class="text-danger">"Mask Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_Color</strong> (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MainTex</strong> (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = <span class="text-danger">"white"</span> {}<br>
     &emsp;&emsp;}<br>
     <br>
     &emsp;&emsp;SubShader<br>
     &emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;Tags{ <span class="text-danger">"RenderType"</span> = <span class="text-danger">"Transparent" "Queue"</span> = <span class="text-danger">"Transparent" "PreviewType"</span> = <span class="text-danger">"Plane"</span>}<br>
-    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger"><strong>"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</strong></span> }<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>Blend SrcAlpha OneMinusSrcAlpha</strong><br>
     &emsp;&emsp;&emsp;&emsp;LOD 200<br>
     <br>
-    &emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
-    <br>
-    &emsp;&emsp;&emsp;&emsp;#pragma surface surf SimpleColor alpha<br>
-    &emsp;&emsp;&emsp;&emsp;#pragma target 3.0<br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>LightingSimpleColor(SurfaceOutput s, <span class="text-primary">half3 </span>lightDir, <span class="text-primary">half </span>atten)<br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
     &emsp;&emsp;&emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>c;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb = s.Albedo;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a = s.Alpha;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">return </span>c;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger"><strong>"LightMode" = "ForwardBase"</strong></span> }<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>ZWrite Off</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> <strong>_MainTex</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> <strong>_MainTex_ST</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> <strong>_Color</strong>;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert (<span class="text-primary">appdata</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb *= _Color.rgb * 2.0f;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a *= _Color.a;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>return col;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
     &emsp;&emsp;&emsp;&emsp;}<br>
     <br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>_Color;<br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D </span>_MainTex;<br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> <strong>_MaskTex</strong>;<br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4 </span><strong>_MaskScreenSpaceOffset</strong>;<br>
-    <br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> Input<br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
     &emsp;&emsp;&emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv_MainTex;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4 </span><strong>screenPos</strong>;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4 </span>color : COLOR;<br>
-    &emsp;&emsp;&emsp;&emsp;};<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger"><strong>"LightMode" = "ShadowCaster"</strong></span> }<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>ZWrite On</strong><br>
     <br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">void </span>surf(Input IN, <span class="text-primary">inout </span>SurfaceOutput o)<br>
-    &emsp;&emsp;&emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>c = tex2D(_MainTex, IN.uv_MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma multi_compile_shadowcaster<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
     <br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb *= _Color.rgb * 2.0f;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2 </span><strong>screenUV </strong>= IN.screenPos.xy / IN.screenPos.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
     <br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV </strong>-= <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x</strong> *= _MaskScreenSpaceOffset.z;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.y</strong> *= _MaskScreenSpaceOffset.w;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x</strong> += _MaskScreenSpaceOffset.x * _MaskScreenSpaceOffset.z;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.y</strong> += _MaskScreenSpaceOffset.y * _MaskScreenSpaceOffset.w;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV </strong>+= <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float </span><strong>mask </strong>= tex2D(_MaskTex, screenUV).r;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{ <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;V2F_SHADOW_CASTER;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
     <br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>c.a *= mask;</strong><br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Alpha = c.a * _Color.a;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Albedo = c.rgb;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert(<span class="text-primary">appdata_base</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;TRANSFER_SHADOW_CASTER_NORMALOFFSET(o)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> frag(<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a *= _Color.a;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>if(col.a < 0.05f)</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>{</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>discard;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>}</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>SHADOW_CASTER_FRAGMENT(i)</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
     &emsp;&emsp;&emsp;&emsp;}<br>
-    &emsp;&emsp;&emsp;&emsp;ENDCG<br>
     &emsp;&emsp;}<br>
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
     <p>
-    <strong>1.Properties</strong><br>
-    <strong>_MaskTex</strong>(<span class="text-danger">"Mask Texture (A)"</span>, 2D) = "white" {}<br>
-    <strong>_MaskScreenSpaceOffset</strong>(<span class="text-danger">"Mask Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
-    : Add a mask texture to the property for clipping mask processing.<br>
-    AnyPortrait automatically handles the clipping rendering by adding the above properties.<br>
-    <strong>_MaskScreenSpaceOffset</strong> is a property for applying the clipping mask relative to the screen space (screen space).<br>
+    Let's take a look at the main parts of the shader code.<br>
     </p>
     <br>
     
     <p>
-    <strong>2. Screen Space Semantic</strong><br>
-    <span class="text-primary">struct</span> Input<br>
+    <strong>1. Properties</strong><br>
+    <strong>_Color</strong> (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    <strong>_MainTex</strong> (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = <span class="text-danger">"white"</span> {}<br>
+    <br>
+    These are the properties used in the default Transparent shader of Unity and the properties used in AnyPortrait.<br>
+    In general cases where the mesh is not clipped, only these properties are used.<br>
+    Therefore, in custom shaders, all codes related to these two properties must be written as is.<br>
+    Also, since the AnyPortrait system controls these properties, you should not modify these properties with other scripts.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Basic Pass</strong><br>
+    Pass<br>
     {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="text-primary">float2</span> uv_MainTex;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="text-primary">float4 </span><strong>screenPos</strong>;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="text-primary">float4 </span>color : COLOR;<br>
-    };<br>
-    : The clipping mask is processed in the screen space.<br>
-    Therefore, you must pass the screenPos variable used by Unity to the Fragment Shader or the Surface Shader.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Tags { <span class="text-danger"><strong>"LightMode" = "ForwardBase"</strong></span> }<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>ZWrite Off</strong><br>
+        ...<br>
+    : Here is the code for the basic rendering pass.<br>
+    The basic pass is specified as above because there is a separate pass for shadow casting.<br>
+    If you do not write a shadow pass, you can omit the "Tags { <span class="text-danger"><strong>"LightMode" = "ForwardBase"</strong></span> }" part.<br>
+    Since we do not do <strong>Z Write</strong>, we set this value to <strong>Off</strong>.<br>
     </p>
     <br>
     
     <p>
-    <strong>3. Mask</strong><br>
-    <span class="text-primary">float2 </span><strong>screenUV </strong>= IN.screenPos.xy / IN.screenPos.w;<br>
-    <strong>screenUV </strong>-= <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
-    <strong>screenUV.x</strong> *= _MaskScreenSpaceOffset.z;<br>
-    <strong>screenUV.y</strong> *= _MaskScreenSpaceOffset.w;<br>
-    <strong>screenUV.x</strong> += _MaskScreenSpaceOffset.x * _MaskScreenSpaceOffset.z;<br>
-    <strong>screenUV.y</strong> += _MaskScreenSpaceOffset.y * _MaskScreenSpaceOffset.w;<br>
-    <strong>screenUV </strong>+= <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
-    <span class="text-primary">float </span><strong>mask </strong>= tex2D(_MaskTex, screenUV).r;<br>
-    <strong>c.a *= mask;</strong><br>
-    : An expression that calculates the clipping mask and applies it to the alpha channel.<br>
-    This expression must be <strong>written in the same way</strong> to be processed normally.<br>
+    <strong>3. Blending</strong><br>
+    <strong>Blend SrcAlpha OneMinusSrcAlpha</strong><br>
+    : Blending code for the "Alpha Blend" shader.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>4. Color calculation</strong><br>
+    <span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <strong>col.rgb *= _Color.rgb * 2.0f;</strong><br>
+    <strong>col.a *= _Color.a;</strong><br>
+    <strong>return col;</strong><br>
+    : AnyPortrait's color operation formula is "<strong>2X Multiply</strong>".<br>
+    So RGB needs to be multiplied by 2 additionally.<br>
+    This code changes depending on blending.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>5. Shadow Pass</strong><br>
+    Pass<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Tags { <span class="text-danger"><strong>"LightMode" = "ShadowCaster"</strong></span> }<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>ZWrite On</strong><br>
+        ...<br>
+    }<br>
+    : For the "Alpha Blend" mesh, you need to be able to generate shadows depending on the option.<br>
+    Therefore, you need to write a "<strong>ShadowCaster</strong>" pass that generates shadows.<br>
+    This pass only plays a role in generating shadows, so you can write it as in the example above.<br>
+    If you write it in the <strong>Surface Shader</strong> way, you don't need to write this pass.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Shaders in Linear Space</h3>
+    <br>
+    
+    <p>
+    The above example is shader code in <strong>Gamma Space</strong>, if the color space of the project is <strong>Linear Space</strong>, you need to modify the "<strong>Color calculation</strong>" part.<br>
+    In the above basic code, let's modify the <strong>frag</strong> function of the basic pass ("<strong>ForwardBase</strong>") as follows.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;...<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>col.rgb *= _Color.rgb * 4.595f;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>col.rgb = pow(col.rgb, 2.2f);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    In <strong>Linear Space</strong>, if a value raised to the power of 2.2 is applied to the color compared to <strong>Gamma Space</strong>, it appears closer to the original image color.<br>
+    So, even though it is the "<strong>2X Multiply</strong>" operation rule as above, we multiply it by "<strong>4.595</strong>" instead of "2", and the final RGB is also raised to the power of "2.2".<br>
+    This change should be applied regardless of the blending type.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Shaders based on Blending options</h3>
+    <br>
+    
+    <p>
+    By changing the mesh options, you can render in the "<strong>Alpha Blend</strong>", "<strong>Additive</strong>", "<strong>Soft Additive</strong>", and "<strong>Multiplicative</strong>" methods in addition to the default blending method.<br>
+    You need to write a shader for each blending method, but you can easily write it by slightly modifying the code of "<strong>Alpha Blend</strong>" above.<br>
+    Blending options other than "<strong>Alpha Blend</strong>" are mainly for visual effects, so it is recommended not to write a pass that generates shadows.<br>
+    </p>
+    <br>
+    
+    <p>
+    For the three types of blending, you just need to modify some codes in the shader, "<strong>Blend</strong>" and "<strong>frag function</strong>".<br>
+    Also, unlike <strong>Alpha Blend</strong>, we omit the shadow generation pass, so you can delete the "LightMode" designation code.<br>
+    The following example includes the codes for all three types of blending, so you can check the comments and compile the necessary codes.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    &emsp;&emsp;...<br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// --- Select and write according to the blending type ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>Blend One One // Additive</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>Blend OneMinusDstColor One // Soft Additive</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>Blend DstColor SrcColor // Multiplicative</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// --- Delete Pass Tags ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>// Tags { "LightMode" = "ForwardBase" }</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>ZWrite Off</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;...<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// --- Additive 또는 Soft Additive ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>col.rgb *= col.a;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>col.a = 1.0f;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// ---------------------------------</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// --- Multiplicative ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>col.rgb = col.rgb * (col.a) + float4(0.5f, 0.5f, 0.5f, 1.0f) * (1.0f - col.a);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>col.a = 1.0f;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// ----------------------</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>return col;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// Delete Shadow Generation Pass</strong><br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    <strong>1. Blending Options</strong><br>
+    <span class="text-danger"><strong>Blend One One // Additive</strong></span><br>
+    <span class="text-danger"><strong>Blend OneMinusDstColor One // Soft Additive</strong></span><br>
+    <span class="text-danger"><strong>Blend DstColor SrcColor // Multiplicative</strong></span><br>
+    : Depending on your mesh's blending options, you can choose one of the above codes.<br>
+    (Soft Additive may not be supported if you use Shader Graph.)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Delete Multi Pass</strong><br>
+    <span class="text-danger"><strong>// Tags { "LightMode" = "ForwardBase" }</strong></span><br>
+    : Since the shadow generation pass is gone, you can delete the code related to the multi-pass.<br>
+    Also delete the shadow generation pass code.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. Modify Color calculation</strong><br>
+    <strong>(1)</strong> Additive or Soft Additive<br>
+    <span class="text-danger"><strong>col.rgb *= col.a;</strong></span><br>
+    <span class="text-danger"><strong>col.a = 1.0f;</strong></span><br>
+    <br>
+    <strong>(2)</strong> Multiplicative<br>
+    <span class="text-danger"><strong>col.rgb = col.rgb * (col.a) + float4(0.5f, 0.5f, 0.5f, 1.0f) * (1.0f - col.a);</strong></span><br>
+    <span class="text-danger"><strong>col.a = 1.0f;</strong></span><br>
+    <br>
+    : Change the final color to match the blending, and change the Alpha value to 1.<br>
+    The color calculation formulas for <strong>Additive</strong> and <strong>Soft Additive</strong> are the same.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Shader applied to the Clipped meshes</h3>
+    <br>
+    
+    <p>
+    The Clipped meshes are rendered by a separate shader.<br>
+    The shader for clipping receives the rendering result of the mesh that creates the clipping mask in texture format and adds an operation to prevent some of it from being rendered.<br>
+    You can add the clipping property and the clipping operation to the basic shader.<br>
+    Also, the clipping shader does not need to generate shadows in <strong>Alpha Blend</strong>, so you can write it as a single pass.<br>
+    This is because it is included in the shadow of the mask mesh.<br>
+    The following example is a shader for <strong>Alpha Blend</strong> in <strong>Gamma Space</strong>, and can be modified to match the explanation above.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Sample Shader/Gamma Space - Clipped - AlphaBlend"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// --- Clipping properties ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskTex</strong></span> (<span class="text-danger">"Mask Texture (A)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskScreenSpaceOffset</strong></span> (<span class="text-danger">"Mask Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// --- Screen Position for Clipping Operations ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>float4 screenPos : TEXCOORD1;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// --- Property variables for Clipping ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>sampler2D _MaskTex;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>float4 _MaskScreenSpaceOffset;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert (<span class="text-primary">appdata</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// --- Calculating Screen Position for Clipping ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>o.screenPos = ComputeScreenPos(o.vertex);</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (v2f i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// --- Set Alpha channel by Clipping mask ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>float2 screenUV = i.screenPos.xy / max(i.screenPos.w, 0.0001f);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>screenUV -= float2(0.5f, 0.5f);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>screenUV.x *= _MaskScreenSpaceOffset.z;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>screenUV.y *= _MaskScreenSpaceOffset.w;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>screenUV.x += _MaskScreenSpaceOffset.x * _MaskScreenSpaceOffset.z;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>screenUV.y += _MaskScreenSpaceOffset.y * _MaskScreenSpaceOffset.w;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>screenUV += float2(0.5f, 0.5f);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>col.a *= tex2D(_MaskTex, screenUV).r;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton3" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    <strong>1. Properties</strong><br>
+    <span class="text-danger"><strong>_MaskTex</strong></span> (<span class="text-danger">"Mask Texture (A)"</span>, 2D) = "white" {}<br>
+    <span class="text-danger"><strong>_MaskScreenSpaceOffset</strong></span> (<span class="text-danger">"Mask Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
+    : Add a mask texture to the property for clipping mask processing.<br>
+    If you add a property like the above, AnyPortrait will automatically handle clipping rendering.<br>
+    <strong>_MaskScreenSpaceOffset</strong> is a property to apply the clipping mask based on the screen coordinate system.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>sampler2D _MaskTex;</strong></span><br>
+    <span class="text-danger"><strong>float4 _MaskScreenSpaceOffset;</strong></span><br>
+    : You also need to add variables to match the added properties.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Screen Space Position Semantic</strong><br>
+    <span class="text-danger"><strong>float4 screenPos : TEXCOORD1;</strong></span><br>
+    : Clipping masks are processed in screen space.<br>
+    Therefore, the position of the vertex in screen space must be calculated in the vertex shader and passed to the fragment shader.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>o.screenPos = ComputeScreenPos(o.vertex);</strong></span><br>
+    : Add code to calculate the position in screen coordinates in the vertex shader.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. Setting alpha channel value by mask</strong><br>
+    <span class="text-danger"><strong>float2 screenUV = i.screenPos.xy / max(i.screenPos.w, 0.0001f);</strong></span><br>
+    <span class="text-danger"><strong>screenUV -= float2(0.5f, 0.5f);</strong></span><br>
+    <span class="text-danger"><strong>screenUV.x *= _MaskScreenSpaceOffset.z;</strong></span><br>
+    <span class="text-danger"><strong>screenUV.y *= _MaskScreenSpaceOffset.w;</strong></span><br>
+    <span class="text-danger"><strong>screenUV.x += _MaskScreenSpaceOffset.x * _MaskScreenSpaceOffset.z;</strong></span><br>
+    <span class="text-danger"><strong>screenUV.y += _MaskScreenSpaceOffset.y * _MaskScreenSpaceOffset.w;</strong></span><br>
+    <span class="text-danger"><strong>screenUV += float2(0.5f, 0.5f);</strong></span><br>
+    <span class="text-danger"><strong>col.a *= tex2D(_MaskTex, screenUV).r;</strong></span><br>
+    : This is the formula for calculating the clipping mask and applying it to the alpha channel.<br>
+    Please write it as it is, as it is a unique formula used in the AnyPortrait system.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Using Keywords in Shaders</h3>
+    <br>
+    
+    <p>
+    You can use keywords to compile a single shader code into multiple versions.<br>
+    You can use keywords in shaders using the features added in AnyPortrait v1.5.1.<br>
+    You can see related information about keywords in the following official Unity documentation.<br>
+    - <a href="https://docs.unity3d.com/2022.3/Documentation/Manual/SL-MultipleProgramVariants.html" target="_sub">Unity Manual</a><br>
+    </p>
+    <br>
+    
+    <p>
+    Here's an example shader where color operations change based on the keyword "<strong>SPECIAL_COLOR</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Shader Example/Gamma Space - Normal - AlphaBlend (Keyword)"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>#pragma multi_compile __ SPECIAL_COLOR</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert (<span class="text-primary">appdata</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>#ifdef SPECIAL_COLOR</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>col.rgb *= fixed3(0.0f, 1.0f, 0.0f);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>#endif</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton4" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    <strong>1. Declaring keywords</strong><br>
+    <span class="text-danger"><strong>#pragma multi_compile __ SPECIAL_COLOR</strong></span><br>
+    : Declare keywords using the <strong>#pragma multi_compile</strong> syntax.<br>
+    In this example, a new keyword called "<strong>SPECIAL_COLOR</strong>" is declared.<br>
+    You can use keywords in Unity using the "<strong>multi_compile</strong>" and "<strong>shader_feature</strong>" directives that generate shader variants, or the "<strong>dynamic_branch</strong>" directive that generates dynamic branches.<br>
+    However, since AnyPortrait generates materials dynamically, you cannot use "<strong>shader_feature</strong>" that compiles shader variants based on assets.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Writing code branches</strong><br>
+    <span class="text-danger"><strong>#ifdef SPECIAL_COLOR</strong></span><br>
+    <span class="text-danger"><strong>col.rgb *= fixed3(0.0f, 1.0f, 0.0f);</strong></span><br>
+    <span class="text-danger"><strong>#endif</strong></span><br>
+    : Write to behave differently depending on the keyword.<br>
+    If you use "<strong>multi_compile</strong>", use the "#ifdef, #else, #elif, #endif" directives, and if you use "<strong>dynamic_branch</strong>", use the "if ( )" statement.<br>
+    In this example, if the "<strong>SPECIAL_COLOR</strong>" keyword is enabled, only the color of the green channel is rendered.<br>
+    </p>
+    <br>
+    
+    <p>
+    To use keywords, you need to set them in <strong>Material Library</strong>.<br>
+    For more information, please refer to the <a href="../../en/AdvancedManual/AD_MaterialLibrary.html">Related page</a>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2055.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the Material Library.<br>
+    <strong>(2)</strong> Add a property option named "<strong>SPECIAL_COLOR</strong>", set it to "<strong>Keyword</strong>" type, and set it to "<strong>Enable</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2056.jpg"/>
+    <br>
+    
+    <p>
+    If you bake and run it, you can see that the rendering result changes depending on whether the keyword is activated or not, as shown above.<br>
     </p>
     <br>
     
@@ -312,6 +862,65 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "Shader \"Sample Shader/Gamma Space - Normal - AlphaBlend\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tTags { \"LightMode\" = \"ForwardBase\" }\n\t\t\tZWrite Off\n\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\n\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\t\t\t\t\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\n\t\tPass\n\t\t{\n\t\t\tTags { \"LightMode\" = \"ShadowCaster\" }\n\t\t\tZWrite On\n\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\n\t\t\t#pragma multi_compile_shadowcaster\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{ \n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tV2F_SHADOW_CASTER;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\tv2f vert(appdata_base v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\tTRANSFER_SHADOW_CASTER_NORMALOFFSET(o)\n\t\t\t\to.uv = TRANSFORM_TEX(v.texcoord, _MainTex);\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\tfloat4 frag(v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\tif(col.a < 0.05f)\n\t\t\t\t{\n\t\t\t\t\tdiscard;\n\t\t\t\t}\n\t\t\t\tSHADOW_CASTER_FRAGMENT(i)\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "\t\t\t...\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\tcol.rgb *= _Color.rgb * 4.595f;\n\t\t\t\tcol.rgb = pow(col.rgb, 2.2f);\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\t...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "\t...\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\n\t\t// --- Select and write according to the blending type ---\n\t\tBlend One One // Additive\n\t\tBlend OneMinusDstColor One // Soft Additive\n\t\tBlend DstColor SrcColor // Multiplicative\n\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\t// --- Delete Pass Tags ---\n\t\t\t// Tags { \"LightMode\" = \"ForwardBase\" }\n\t\t\tZWrite Off\n\n\t\t\tCGPROGRAM\n\t\t\t...\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\t// --- Additive 또는 Soft Additive ---\n\t\t\t\tcol.rgb *= col.a;\n\t\t\t\tcol.a = 1.0f;\n\t\t\t\t// ---------------------------------\n\n\t\t\t\t// --- Multiplicative ---\n\t\t\t\tcol.rgb = col.rgb * (col.a) + float4(0.5f, 0.5f, 0.5f, 1.0f) * (1.0f - col.a);\n\t\t\t\tcol.a = 1.0f;\n\t\t\t\t// ----------------------\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t\t// Delete Shadow Generation Pass\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton3").addEventListener("click", function() {
+    const textToCopy = "Shader \"Sample Shader/Gamma Space - Clipped - AlphaBlend\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\n\t\t// --- Clipping properties ---\n\t\t_MaskTex (\"Mask Texture (A)\", 2D) = \"white\" {}\n\t\t_MaskScreenSpaceOffset (\"Mask Screen Space Offset (XY_Scale)\", Vector) = (0, 0, 0, 1)\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tZWrite Off\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\n\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\n\t\t\t\t// --- Screen Position for Clipping Operations ---\n\t\t\t\tfloat4 screenPos : TEXCOORD1;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\t// --- Property variables for Clipping ---\n\t\t\tsampler2D _MaskTex;\n\t\t\tfloat4 _MaskScreenSpaceOffset;\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\n\t\t\t\t// --- Calculating Screen Position for Clipping ---\n\t\t\t\to.screenPos = ComputeScreenPos(o.vertex);\n\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\t\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\t// --- Set Alpha channel by Clipping mask ---\n\t\t\t\tfloat2 screenUV = i.screenPos.xy / max(i.screenPos.w, 0.0001f);\n\t\t\t\tscreenUV -= float2(0.5f, 0.5f);\n\t\t\t\tscreenUV.x *= _MaskScreenSpaceOffset.z;\n\t\t\t\tscreenUV.y *= _MaskScreenSpaceOffset.w;\n\t\t\t\tscreenUV.x += _MaskScreenSpaceOffset.x * _MaskScreenSpaceOffset.z;\n\t\t\t\tscreenUV.y += _MaskScreenSpaceOffset.y * _MaskScreenSpaceOffset.w;\n\t\t\t\tscreenUV += float2(0.5f, 0.5f);\n\t\t\t\tcol.a *= tex2D(_MaskTex, screenUV).r;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton4").addEventListener("click", function() {
+    const textToCopy = "Shader \"Shader Example/Gamma Space - Normal - AlphaBlend (Keyword)\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tZWrite Off\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\n\n\t\t\t#pragma multi_compile __ SPECIAL_COLOR\n\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\t\t\t\t\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\t#ifdef SPECIAL_COLOR\n\t\t\t\tcol.rgb *= fixed3(0.0f, 1.0f, 0.0f);\n\t\t\t\t#endif\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

@@ -361,6 +361,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -732,6 +735,21 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class MergeMaterialScript : MonoBehaviour\n{\n\tpublic apPortrait mainCharacter;\n\tpublic apPortrait costumePrefab;\n\n\tprivate apPortrait _attachedCostume = null;\n\n\tvoid Start() { }\n\n\tvoid Update()\n\t{\n\t\t// Qキーを押すと、服をキャラクターに付けて同期します。 (関数の説明を省略)\n\t\tif (Input.GetKeyDown(KeyCode.Q))\n\t\t{\t\n\t\t\t// 服が装着されると、_attachedCostume変数に対応するオブジェクトが割り当てられます。\n\t\t\tAttachCostume();\n\t\t}\n\n\t\t// Wキーを押すと、装着されている服を取り外します。\n\t\tif (Input.GetKeyDown(KeyCode.W))\n\t\t{\n\t\t\t// 服を削除する前に、マテリアルのマージを解除します。\n\t\t\tmainCharacter.UnmergeMaterials();\n\n\t\t\t// 同期を解除して服を削除します。 (関数の説明を省略)\n\t\t\t// _attachedCostume変数はnullになります。\n\t\t\tDetachCostume();\n\t\t}\n\n\t\t// Aキーを押すとマテリアルをマージします。\n\t\tif (Input.GetKeyDown(KeyCode.A))\n\t\t{\t\n\t\t\tif(_attachedCostume != null)\n\t\t\t{\n\t\t\t\tmainCharacter.MergeMaterials(_attachedCostume);\n\t\t\t}\n\t\t}\n\n\t\t// Sキーを押すと、服装着の有無にかかわらずマテリアルマージを解除します。\n\t\tif (Input.GetKeyDown(KeyCode.S))\n\t\t{\t\n\t\t\tmainCharacter.UnmergeMaterials();\n\t\t}\n\t}\n\n\t（AttachCostume、DetachCostume関数の説明は省略）\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

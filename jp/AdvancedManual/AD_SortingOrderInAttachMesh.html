@@ -222,6 +222,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -333,6 +336,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -490,6 +496,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -599,6 +608,43 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class RobotDepthSyncScript : MonoBehaviour\n{\t\n\tpublic Transform robotGroup; // ロボットの親GameObjectです。\n\tpublic apPortrait mainCharacter; // ロボットキャラクターです。\n\tpublic apPortrait equipment; // ロボットに取り付けること装置です。\n\n\tvoid Start()\n\t{\n\t}\n\n\tvoid Update()\n\t{\n\t\t// Aキーを押すと、装置が付きます。\n\t\tif(Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\tAttach();\n\t\t}\n\n\t\t// Sキーを押すと、付着が解除されます。\n\t\tif(Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\tDetach();\n\t\t}\n\t}\n\n\tprivate void Attach()\n\t{\n\t\t// 装置をロボットの親GameObjectの子として登録します。\n\t\tequipment.transform.parent = robotGroup;\n\t\tequipment.transform.localPosition = Vector3.zero;\n\n\t\t// ボーンを同期します。\n\t\tequipment.Synchronize(mainCharacter, false, false, false, true, SYNC_BONE_OPTION.MatchFromRoot);\n\t}\n\n\tprivate void Detach()\n\t{\n\t\t// 装置をロボットの親GameObjectから分離します。\n\t\tequipment.transform.parent = null;\n\t\tequipment.transform.position = new Vector3(-5, 0, 0);\n\n\t\t// 同期をオフにします。\n\t\tequipment.Unsynchronize();\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class RobotDepthSyncScript : MonoBehaviour\n{\t\n\tpublic Transform robotGroup; // ロボットの親GameObjectです。\n\tpublic apPortrait mainCharacter; // ロボットキャラクターです。\n\tpublic apPortrait equipment; // ロボットに取り付けること装置です。\n\n\t// Sorting Order値を参照するロボットアームのメッシュです。\n\tprivate apOptTransform targetMesh;\n\n\tvoid Start()\n\t{\n\t\t// 装置が取り付けられるロボットのアームメッシュの中「最も前にレンダリングされるメッシュ」を変数に格納します。\n\t\ttargetMesh = mainCharacter.GetOptTransform(\"HandMidGear\");\n\t}\n\n\tvoid Update()\n\t{\n\t\t// Aキーを押すと、装置が付きます。\n\t\tif(Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\tAttach();\n\t\t}\n\n\t\t// Sキーを押すと、付着が解除されます。\n\t\tif(Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\tDetach();\n\t\t}\n\t}\n\n\tprivate void Attach()\n\t{\n\t\t// 装置をロボットの親GameObjectの子として登録します。\n\t\tequipment.transform.parent = robotGroup;\n\t\tequipment.transform.localPosition = Vector3.zero;\n\n\t\t// ボーンを同期します。\n\t\tequipment.Synchronize(mainCharacter, false, false, false, true, SYNC_BONE_OPTION.MatchFromRoot);\n\n\t\t// 装置がロボットアームに取り付けたときに、装置のメッシュのレンダリング順序を更新します。\n\t\tRefreshMeshDepth();\n\t}\n\n\tprivate void Detach()\n\t{\n\t\t// 装置をロボットの親GameObjectから分離します。\n\t\tequipment.transform.parent = null;\n\t\tequipment.transform.position = new Vector3(-5, 0, 0);\n\n\t\t// 同期をオフにします。\n\t\tequipment.Unsynchronize();\n\t}\n\n\t// 装置のメッシュのSorting Orderを更新します。\n\tprivate void RefreshMeshDepth()\n\t{\n\t\t// ロボットキャラクターの腕メッシュのSorting Orderを取得します。\n\t\tint baseSortingOrder = targetMesh.GetSortingOrder();\n\n\t\t// ロボットキャラクターの腕メッシュより前のレンダリングされるようにSorting Orderを一つずつ設定します。\n\t\tequipment.SetSortingOrder(\"Equip4\", baseSortingOrder + 1);\n\t\tequipment.SetSortingOrder(\"Equip1\", baseSortingOrder + 2);\n\t\tequipment.SetSortingOrder(\"Equip2\", baseSortingOrder + 3);\n\t\tequipment.SetSortingOrder(\"Equip3\", baseSortingOrder + 4);\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class RobotDepthSyncScript : MonoBehaviour\n{\t\n\tpublic Transform robotGroup; // ロボットの親GameObjectです。\n\tpublic apPortrait mainCharacter; // ロボットキャラクターです。\n\tpublic apPortrait equipment; // ロボットに取り付けること装置です。\n\n\t// Sorting Order値を参照するロボットアームのメッシュです。\n\tprivate apOptTransform targetMesh;\n\n\t// 腕メッシュのレンダリング順序が更新されることを確認するための変数です。\n\tprivate bool isAttached = false; // 装置が接続されているかどうかです。\n\tprivate int prevSortingOrder = -1; // 前のフレームからのtargetMeshのSortingOrderの値です。\n\n\tvoid Start()\n\t{\n\t\t// 装置が取り付けられるロボットのアームメッシュの中「最も前にレンダリングされるメッシュ」を変数に格納します。\n\t\ttargetMesh = mainCharacter.GetOptTransform(\"HandMidGear\");\n\t}\n\n\tvoid Update()\n\t{\n\t\t// Aキーを押すと、装置が付きます。\n\t\tif(Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\tAttach();\n\t\t}\n\n\t\t// Sキーを押すと、付着が解除されます。\n\t\tif(Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\tDetach();\n\t\t}\n\t}\n\n\t// AnyPortraitキャラクターのアップデートが処理された後にSorting Orderの値を参照するためにLateUpdate()を利用します。\n\tprivate void LateUpdate()\n\t{\n\t\t// 装置が付着した状態のとき、ロボットアームメッシュのレンダリング順序が変わったのか確認します。\n\t\tif (isAttached)\n\t\t{\n\t\t\tif (targetMesh.GetSortingOrder() != prevSortingOrder)\n\t\t\t{\n\t\t\t\t// 腕メッシュのSorting Orderが前のフレームと異なる場合、付着された装置のメッシュのSorting Orderを更新します。\n\t\t\t\tRefreshMeshDepth();\n\t\t\t\t// 処理が完了した後、現在のフレームのSorting Order値に更新します。\n\t\t\t\tprevSortingOrder = targetMesh.GetSortingOrder();\t\t\t\t\n\t\t\t}\n\t\t}\n\t}\n\n\tprivate void Attach()\n\t{\n\t\t// 装置をロボットの親GameObjectの子として登録します。\n\t\tequipment.transform.parent = robotGroup;\n\t\tequipment.transform.localPosition = Vector3.zero;\n\n\t\t// ボーンを同期します。\n\t\tequipment.Synchronize(mainCharacter, false, false, false, true, SYNC_BONE_OPTION.MatchFromRoot);\n\n\t\t// 装置がロボットアームに取り付けたときに、装置のメッシュのレンダリング順序を更新します。\n\t\tRefreshMeshDepth();\n\n\t\t// 付着直後に腕メッシュのSorting Orderを保存したり、付着したことをisAttached変数に格納します。\n\t\tprevSortingOrder = targetMesh.GetSortingOrder();\n\t\tisAttached = true;\n\t}\n\n\tprivate void Detach()\n\t{\n\t\t// 装置をロボットの親GameObjectから分離します。\n\t\tequipment.transform.parent = null;\n\t\tequipment.transform.position = new Vector3(-5, 0, 0);\n\n\t\t// 同期をオフにします。\n\t\tequipment.Unsynchronize();\n\n\t\t// 付着が解除されたので、LateUpdate()で腕メッシュのレンダリング順序を続けるチェックしないようにfalseを入力します。\n\t\tisAttached = false;\n\t}\n\n\t// 装置のメッシュのSorting Orderを更新します。\n\tprivate void RefreshMeshDepth()\n\t{\n\t\t// ロボットキャラクターの腕メッシュのSorting Orderを取得します。\n\t\tint baseSortingOrder = targetMesh.GetSortingOrder();\n\n\t\t// ロボットキャラクターの腕メッシュより前のレンダリングされるようにSorting Orderを一つずつ設定します。\n\t\tequipment.SetSortingOrder(\"Equip4\", baseSortingOrder + 1);\n\t\tequipment.SetSortingOrder(\"Equip1\", baseSortingOrder + 2);\n\t\tequipment.SetSortingOrder(\"Equip2\", baseSortingOrder + 3);\n\t\tequipment.SetSortingOrder(\"Equip3\", baseSortingOrder + 4);\t\t\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

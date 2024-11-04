@@ -590,6 +590,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -757,6 +760,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -862,6 +868,32 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class BoneSyncScript : MonoBehaviour\n{\n\tpublic Transform characterGroup;\n\tpublic apPortrait mainCharacter;\n\n\tpublic apPortrait costume1;\n\tpublic apPortrait costume2;\n\tpublic apPortrait costume3;\n\n\tvoid Start() { }\n\n\tvoid Update()\n\t{\n\t\t//QやWキーを押して、ボディのキャラクターのアニメーションを再生します。\n\t\tif(Input.GetKeyDown(KeyCode.Q)) { mainCharacter.Play(\"Idle\"); }\n\t\tif(Input.GetKeyDown(KeyCode.W)) { mainCharacter.Play(\"Walk\"); }\n\n\t\t//数字キー1を押すと、すべてのコスチュームの付着が解除され、コスチューム1が付きます。\n\t\tif(Input.GetKeyDown(KeyCode.Alpha1))\n\t\t{\n\t\t\tDetachCostumes();\n\t\t\tAttachCostume1();\n\t\t}\n\n\t\t//数字キー2を押すと、すべてのコスチュームの付着が解除され、コスチューム2が付きます。\n\t\tif(Input.GetKeyDown(KeyCode.Alpha2))\n\t\t{\n\t\t\tDetachCostumes();\n\t\t\tAttachCostume2();\n\t\t}\n\n\t\t//数字キー3を押すと、すべてのコスチュームの付着が解除され、コスチューム3が付きます。\n\t\tif(Input.GetKeyDown(KeyCode.Alpha3))\n\t\t{\n\t\t\tDetachCostumes();\n\t\t\tAttachCostume3();\n\t\t}\n\n\t\t//数字キー4を押すと、すべてのコスチュームの付着が解除されます。\n\t\tif(Input.GetKeyDown(KeyCode.Alpha4))\n\t\t{\n\t\t\tDetachCostumes();\n\t\t}\n\t}\n\n\t//コスチュームの付着をすべて解除する関数\n\tprivate void DetachCostumes()\n\t{\n\t\t//Unsynchronize関数を呼び出して、この同期をオフにします。\n\t\tcostume1.Unsynchronize();\n\t\tcostume2.Unsynchronize();\n\t\tcostume3.Unsynchronize();\n\n\t\t//親GameObjectから独立させます。（位置は見事に適切に分散させた。）\n\t\tcostume1.transform.parent = null;\n\t\tcostume1.transform.position = new Vector3(0, 0, 0);\n\t\tcostume2.transform.parent = null;\n\t\tcostume2.transform.position = new Vector3(4, 0, 0);\n\t\tcostume3.transform.parent = null;\n\t\tcostume3.transform.position = new Vector3(8, 0, 0);\n\t}\n\n\t//コスチューム1（Costume1）をCharacter Groupの子として登録し、\n\t//ボディキャラクターのボーンの動きと同期をします。\n\tprivate void AttachCostume1()\n\t{\n\t\t// Character Groupの子として登録し、Local位置を初期化します。\n\t\tcostume1.transform.parent = characterGroup;\n\t\tcostume1.transform.localPosition = Vector3.zero;\n\n\t\t// Synchronize関数を用いて、ボーンの動きを同期させることができます。\n\t\tcostume1.Synchronize(mainCharacter, false, false, false, true, SYNC_BONE_OPTION.MatchFromRoot);\n\t}\n\n\t//コスチューム2（Costume2）をCharacter Groupの子として登録し、\n\t//ボディキャラクターのボーンの動きと同期をします。\n\tprivate void AttachCostume2()\n\t{\n\t\t// Character Groupの子として登録し、Local位置を初期化します。\n\t\tcostume2.transform.parent = characterGroup;\n\t\tcostume2.transform.localPosition = Vector3.zero;\n\n\t\t// Synchronize関数を用いて、ボーンの動きを同期させることができます。\n\t\tcostume2.Synchronize(mainCharacter, false, false, false, true, SYNC_BONE_OPTION.MatchFromRoot);\n\t}\n\n\t//コスチューム3（Costume3）をCharacter Groupの子として登録し、\n\t//ボディキャラクターのボーンの動きと同期をします。\n\tprivate void AttachCostume3()\n\t{\n\t\t// Character Groupの子として登録し、Local位置を初期化します。\n\t\tcostume3.transform.parent = characterGroup;\n\t\tcostume3.transform.localPosition = Vector3.zero;\n\n\t\t// Synchronize関数を用いて、ボーンの動きを同期させることができます。\n\t\tcostume3.Synchronize(mainCharacter, false, false, false, true, SYNC_BONE_OPTION.MatchFromRoot);\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "\t（前略）\n\t//コスチューム1（Costume1）をCharacter Groupの子として登録し、\n\t//ボディキャラクターのボーンの動きと同期をします。\n\tprivate void AttachCostume1()\n\t{\n\t\t// Character Groupの子として登録し、Local位置を初期化します。\n\t\tcostume1.transform.parent = characterGroup;\n\t\tcostume1.transform.localPosition = Vector3.zero;\n\n\t\t// Synchronize関数を用いて、ボーンの動きを同期させることができます。\n\t\tcostume1.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);\n\n\t\t//コスチューム1メッシュのレンダリングの順序（Sorting Order）をボディのメッシュに基づいて変更します。\n\t\tcostume1.SetSortingOrder(\"HairFront\", mainCharacter.GetSortingOrder(\"Head\") + 1);\n\t\tcostume1.SetSortingOrder(\"LeftArm\", mainCharacter.GetSortingOrder(\"LeftArm\") + 1);\n\t\tcostume1.SetSortingOrder(\"Body\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 2);\n\t\tcostume1.SetSortingOrder(\"LeftShoe\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 1);\n\t\tcostume1.SetSortingOrder(\"RightShoe\", mainCharacter.GetSortingOrder(\"RightLeg\") + 1);\n\t\tcostume1.SetSortingOrder(\"HairSide\", mainCharacter.GetSortingOrder(\"RightArm\") + 1);\n\t\tcostume1.SetSortingOrder(\"HairBack\", mainCharacter.GetSortingOrder(\"RightArm\") - 10);\n\t}\n\n\t//コスチューム2（Costume2）をCharacter Groupの子として登録し、\n\t//ボディキャラクターのボーンの動きと同期をします。\n\tprivate void AttachCostume2()\n\t{\n\t\t// Character Groupの子として登録し、Local位置を初期化します。\n\t\tcostume2.transform.parent = characterGroup;\n\t\tcostume2.transform.localPosition = Vector3.zero;\n\n\t\t// Synchronize関数を用いて、ボーンの動きを同期させることができます。\n\t\tcostume2.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);\n\n\t\t//コスチューム2メッシュのレンダリングの順序（Sorting Order）をボディのメッシュに基づいて変更します。\n\t\tcostume2.SetSortingOrder(\"HairFront\", mainCharacter.GetSortingOrder(\"Head\") + 1);\n\t\tcostume2.SetSortingOrder(\"HairSide\", mainCharacter.GetSortingOrder(\"Head\") - 1);\n\t\tcostume2.SetSortingOrder(\"LeftArm\", mainCharacter.GetSortingOrder(\"LeftArm\") + 1);\n\t\tcostume2.SetSortingOrder(\"Body\", mainCharacter.GetSortingOrder(\"Body\") + 1);\n\t\tcostume2.SetSortingOrder(\"BeltFront\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 4);\n\t\tcostume2.SetSortingOrder(\"Pants_LeftLeg\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 3);\n\t\tcostume2.SetSortingOrder(\"BeltBack\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 2);\n\t\tcostume2.SetSortingOrder(\"LeftShoe\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 1);\n\t\tcostume2.SetSortingOrder(\"RightLeg\", mainCharacter.GetSortingOrder(\"RightLeg\") + 2);\n\t\tcostume2.SetSortingOrder(\"RightShoe\", mainCharacter.GetSortingOrder(\"RightLeg\") + 1);\n\t\tcostume2.SetSortingOrder(\"RightArm\", mainCharacter.GetSortingOrder(\"RightArm\") + 1);\n\t\tcostume2.SetSortingOrder(\"RightArm\", mainCharacter.GetSortingOrder(\"RightArm\") + 1);\n\t\tcostume2.SetSortingOrder(\"HairBack\", mainCharacter.GetSortingOrder(\"RightArm\") - 10);\n\t\tcostume2.SetSortingOrder(\"HairAcc\", mainCharacter.GetSortingOrder(\"RightArm\") - 11);\n\t\tcostume2.SetSortingOrder(\"HairTail\", mainCharacter.GetSortingOrder(\"RightArm\") - 12);\n\t}\n\n\t//コスチューム3（Costume3）をCharacter Groupの子として登録し、\n\t//ボディキャラクターのボーンの動きと同期をします。\n\tprivate void AttachCostume3()\n\t{\n\t\t// Character Groupの子として登録し、Local位置を初期化します。\n\t\tcostume3.transform.parent = characterGroup;\n\t\tcostume3.transform.localPosition = Vector3.zero;\n\n\t\t// Synchronize関数を用いて、ボーンの動きを同期させることができます。\n\t\tcostume3.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);\n\n\t\t//コスチューム3メッシュのレンダリングの順序（Sorting Order）をボディのメッシュに基づいて変更します。\n\t\tcostume3.SetSortingOrder(\"Hat\", mainCharacter.GetSortingOrder(\"Head\") + 2);\n\t\tcostume3.SetSortingOrder(\"HairFront\", mainCharacter.GetSortingOrder(\"Head\") + 1);\n\t\tcostume3.SetSortingOrder(\"LeftArmFront\", mainCharacter.GetSortingOrder(\"LeftArm\") + 4);\n\t\tcostume3.SetSortingOrder(\"LeftHand\", mainCharacter.GetSortingOrder(\"LeftArm\") + 3);\n\t\tcostume3.SetSortingOrder(\"RightArmFront\", mainCharacter.GetSortingOrder(\"LeftArm\") + 2);\n\t\tcostume3.SetSortingOrder(\"Neck\", mainCharacter.GetSortingOrder(\"LeftArm\") + 1);\n\t\tcostume3.SetSortingOrder(\"LeftArmBack\", mainCharacter.GetSortingOrder(\"LeftArm\") - 1);\n\t\tcostume3.SetSortingOrder(\"BodyFront\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 3);\n\t\tcostume3.SetSortingOrder(\"Skirt\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 2);\n\t\tcostume3.SetSortingOrder(\"LeftShoe\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 1);\n\t\tcostume3.SetSortingOrder(\"RightShoe\", mainCharacter.GetSortingOrder(\"RightLeg\") + 1);\n\t\tcostume3.SetSortingOrder(\"BodyBack\", mainCharacter.GetSortingOrder(\"RightLeg\") - 1);\n\t\tcostume3.SetSortingOrder(\"RightHand\", mainCharacter.GetSortingOrder(\"RightArm\") + 1);\n\t\tcostume3.SetSortingOrder(\"RightArmBack\", mainCharacter.GetSortingOrder(\"RightArm\") - 1);\n\t\tcostume3.SetSortingOrder(\"HairBack\", mainCharacter.GetSortingOrder(\"RightArm\") - 10);\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

@@ -335,6 +335,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -950,6 +953,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -1026,6 +1032,32 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class MultiRootUnitController : MonoBehaviour\n{\n\t// 대상이 되는 AnyPortrait 캐릭터\n\tpublic apPortrait portrait;\n\n\tvoid Start() { }\n\n\tvoid Update()\n\t{\n\t\tif(Input.GetKeyDown(KeyCode.Alpha1))\n\t\t{\n\t\t\t// 숫자 1키를 누르면 \"정면\"의 걷기 애니메이션이 재생됩니다.\n\t\t\tportrait.Play(\"Walk_Front\");\n\t\t}\n\t\tif(Input.GetKeyDown(KeyCode.Alpha2))\n\t\t{\n\t\t\t// 숫자 2키를 누르면 \"측면\"의 걷기 애니메이션이 재생됩니다.\n\t\t\tportrait.Play(\"Walk_Side\");\n\t\t}\n\t\tif(Input.GetKeyDown(KeyCode.Alpha3))\n\t\t{\n\t\t\t// 숫자 3키를 누르면 \"후면\"의 걷기 애니메이션이 재생됩니다.\n\t\t\tportrait.Play(\"Walk_Back\");\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class GetRootPoseScript : MonoBehaviour\n{\n\tpublic apPortrait portrait;\n\n\t// Root Pose 컨트롤 파라미터 변수\n\tprivate apControlParam rootPose;\n\n\t// GUI에서 확인할 현재 캐릭터 방향의 이름\n\tprivate string poseName = \"\";\n\n\tvoid Start()\n\t{\n\t\t// Root Pose 컨트롤 파라미터를 가져와서 변수로 저장합니다.\n\t\trootPose = portrait.GetControlParam(\"Root Pose\");\n\t}\n\n\t//값을 확인하는 것은 Update가 아닌 LateUpdate여야 합니다.\n\tvoid LateUpdate()\n\t{\n\t\t// 현재의 컨트롤 파라미터의 값을 확인합니다. Root Pose가 Int 타입이었으므로 Int 값을 가져옵니다.\n\t\tint currentPose = rootPose.IntValue;\n\n\t\t// 컨트롤 파라미터의 값에 할당된 캐릭터의 방향을 문자열로 저장합니다.\n\t\tswitch (currentPose)\n\t\t{\n\t\t\tcase -1: poseName = \"Back\"; break;\n\t\t\tcase 0: poseName = \"Side\"; break;\n\t\t\tcase 1: poseName = \"Front\"; break;\n\t\t}\n\t}\n\n\tprivate void OnGUI()\n\t{\n\t\t// 문자열로 저장된 캐릭터의 방향을 유니티 화면에 출력합니다.\n\t\tGUI.Label(new Rect(10, 10, 500, 20), \"Current Pose : \" + poseName);\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

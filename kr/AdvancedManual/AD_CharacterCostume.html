@@ -534,6 +534,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -675,6 +678,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -783,6 +789,32 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "public class CustomSample : MonoBehaviour\n{\n\t// 대상이 되는 apPortrait\n\tpublic apPortrait portrait;\n\t// 3종의 캐릭터 텍스쳐\n\tpublic Texture2D image_Basic;\n\tpublic Texture2D image_Casual;\n\tpublic Texture2D image_Knight;\n\tvoid Start () { }\n\tvoid Update ()\n\t{\n\t\t// Q, A, Z 키를 누르면 \"Hair\" 메시의 텍스쳐가 바뀝니다.\n\t\tif ( Input.GetKeyDown(KeyCode.Q) )\n\t\t{\n\t\t\tportrait.SetMeshImage( \"Hair\", image_Basic );\n\t\t}\n\t\tif ( Input.GetKeyDown(KeyCode.A) )\n\t\t{\n\t\t\tportrait.SetMeshImage( \"Hair\", image_Casual );\n\t\t}\n\t\tif ( Input.GetKeyDown(KeyCode.Z) )\n\t\t{\n\t\t\tportrait.SetMeshImage( \"Hair\", image_Knight );\n\t\t}\n\t\t// W, S, X 키를 누르면 \"Hair\", \"Head\" 외의 다른 메시들의 텍스쳐가 바뀝니다.\n\t\tif ( Input.GetKeyDown(KeyCode.W) )\n\t\t{\n\t\t\tportrait.SetMeshImage( \"Body\", image_Basic );\n\t\t\tportrait.SetMeshImage( \"LeftArm\", image_Basic );\n\t\t\tportrait.SetMeshImage( \"RightArm\", image_Basic );\n\t\t\tportrait.SetMeshImage( \"RightHand\", image_Basic );\n\t\t\tportrait.SetMeshImage( \"LeftLeg\", image_Basic );\n\t\t\tportrait.SetMeshImage( \"RightLeg\", image_Basic );\n\t\t}\n\t\tif ( Input.GetKeyDown(KeyCode.S) )\n\t\t{\n\t\t\tportrait.SetMeshImage( \"Body\", image_Casual) ;\n\t\t\tportrait.SetMeshImage( \"LeftArm\", image_Casual );\n\t\t\tportrait.SetMeshImage( \"RightArm\", image_Casual );\n\t\t\tportrait.SetMeshImage( \"RightHand\", image_Casual );\n\t\t\tportrait.SetMeshImage( \"LeftLeg\", image_Casual );\n\t\t\tportrait.SetMeshImage( \"RightLeg\", image_Casual );\n\t\t}\n\t\tif ( Input.GetKeyDown(KeyCode.X) )\n\t\t{\n\t\t\tportrait.SetMeshImage( \"Body\", image_Knight );\n\t\t\tportrait.SetMeshImage( \"LeftArm\", image_Knight );\n\t\t\tportrait.SetMeshImage( \"RightArm\", image_Knight );\n\t\t\tportrait.SetMeshImage( \"RightHand\", image_Knight );\n\t\t\tportrait.SetMeshImage( \"LeftLeg\", image_Knight );\n\t\t\tportrait.SetMeshImage( \"RightLeg\", image_Knight );\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "public class CustomSample : MonoBehaviour\n{\n\t// 대상이 되는 apPortrait\n\tpublic apPortrait portrait;\n\t// 3종의 캐릭터 텍스쳐\n\tpublic Texture2D image_Basic;\n\tpublic Texture2D image_Casual;\n\tpublic Texture2D image_Knight;\n\t// <추가> 검과 방패의 부모 Transform을 멤버로 추가합니다.\n\tpublic Transform sword;\n\tpublic Transform shield;\n\tvoid Update ()\n\t{\n\t\t(생략됨...)\n\t\t// <추가> E 키를 누르면 검과 방패를 장착합니다.\n\t\tif ( Input.GetKeyDown(KeyCode.E) )\n\t\t{\n\t\t\t// 앞서 만든 두개의 본의 소켓을 가져옵니다.\n\t\t\tTransform socketR = portrait.GetBoneSocket( \"Bone Weapon R\" );\n\t\t\tTransform socketL = portrait.GetBoneSocket( \"Bone Weapon L\" );\n\t\t\t// 검 (Weapon_Sword)을 오른손 본의 소켓의 자식으로 등록합니다.\n\t\t\tsword.parent = socketR;\n\t\t\tsword.localPosition = Vector3.zero;\n\t\t\tsword.localRotation = Quaternion.identity;\n\t\t\t// 방패 (Weapon_Shield)를 왼팔 본의 소켓의 자식으로 등록합니다.\n\t\t\tshield.parent = socketL;\n\t\t\tshield.localPosition = Vector3.zero;\n\t\t\tshield.localRotation = Quaternion.identity;\n\t\t}\n\t\t// <추가> R 키를 누르면 검과 방패의 장착을 해제합니다.\n\t\tif ( Input.GetKeyDown(KeyCode.R) )\n\t\t{\n\t\t\tsword.parent = null;\n\t\t\tsword.localPosition = new Vector3(5, 0, 0);\n\t\t\tsword.localRotation = Quaternion.identity;\n\t\t\tshield.parent = null;\n\t\t\tshield.localPosition = new Vector3(3, 0, 0);\n\t\t\tshield.localRotation = Quaternion.identity;\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

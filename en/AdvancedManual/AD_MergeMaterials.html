@@ -360,6 +360,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -733,6 +736,21 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class MergeMaterialScript : MonoBehaviour\n{\n\tpublic apPortrait mainCharacter;\n\tpublic apPortrait costumePrefab;\n\n\tprivate apPortrait _attachedCostume = null;\n\n\tvoid Start() { }\n\n\tvoid Update()\n\t{\n\t\t// Press Q key to attach and sync the costume to the character. (Function description is skipped)\n\t\tif( Input.GetKeyDown( KeyCode.Q ) )\n\t\t{\t\n\t\t\t// When a cloth is attached, the cloth object is assigned to the _attachedCostume variable.\n\t\t\tAttachCostume();\n\t\t}\n\n\t\t// Press W key to remove the attached costume.\n\t\tif (Input.GetKeyDown(KeyCode.W))\n\t\t{\n\t\t\t// Unmerge materials before removing the costume.\n\t\t\tmainCharacter.UnmergeMaterials();\n\n\t\t\t// Unsynchronize and remove the costume. (Function description is skipped)\n\t\t\t// The _attachedCostume variable will be null.\n\t\t\tDetachCostume();\n\t\t}\n\n\t\t// Press A key to merge materials with the attached costume.\n\t\tif (Input.GetKeyDown(KeyCode.A))\n\t\t{\t\n\t\t\tif(_attachedCostume != null)\n\t\t\t{\n\t\t\t\tmainCharacter.MergeMaterials(_attachedCostume);\n\t\t\t}\n\t\t}\n\n\t\t// Press S key to unmerge materials whether attached or not.\n\t\tif (Input.GetKeyDown(KeyCode.S))\n\t\t{\t\n\t\t\tmainCharacter.UnmergeMaterials();\n\t\t}\n\t}\n\n\t(Description of AttachCostume and DetachCostume functions is skipped)\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

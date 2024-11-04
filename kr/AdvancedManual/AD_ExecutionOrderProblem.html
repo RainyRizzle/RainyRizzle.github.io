@@ -77,15 +77,76 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
     
     <p>
-    AnyPortrait와 다른 에셋을 같이 사용하여 게임 등을 만들 때 완벽하게 호환되지 않는 문제가 있을 수 있습니다.<br>
-    에셋마다 독특한 특징이 있기 때문에, 모든 에셋과 AnyPortrait가 서로 호환된다고 볼 수는 없습니다.<br>
-    다만, 저희 팀은 유니티의 기능을 이용하는 에셋들과의 호환성을 염두에 두고 개발하기 때문에,<br>
-    몇가지 상황에 대해서는 적절한 해결 방법을 통해서 호환성 문제를 해결할 수 있습니다.<br>
-    이 페이지에서는 <strong>"스크립트 실행 순서 (Script Execution Order)"</strong>에 의한 문제를 해결하는 방법에 대해서 설명합니다.<br>
-    Unity에서 제공하는 <strong>Cinemachine</strong>이라는 에셋을 예시로 들었습니다.<br>
+    AnyPortrait와 다른 에셋 또는 스크립트가 같이 동작하면서 오작동을 일으키는 경우가 있습니다.<br>
+    AnyPortrait가 "애니메이션"과 "렌더링"을 처리하므로, 스크립트의 실행 순서에 민감하기 때문입니다.<br>
+    이 특성은 유니티의 물리나 애니메이션 시스템이 별도의 단계에서 처리되는 것과 같은 맥락입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    일반적인 구현 방식으로 스크립트를 작성한다면 이 규칙을 인지하지 않더라도 큰 문제없이 AnyPortrait를 다룰 수 있습니다.<br>
+    반대로 이 규칙을 위반하는 특정 상황에서는 AnyPortrait가 제대로 동작하지 않을 수 있습니다.<br>
+    "<strong>클리핑 메시</strong>"가 비정상적으로 렌더링되는 것은 이 이슈의 대표적인 현상입니다.<br>
+    이 페이지에서는 시각적으로 확인하기 쉬운 "<strong>클리핑 메시의 렌더링 오류</strong>"를 예로 들어서 실행 순서에 대한 문제를 확인하고, 이에 대한 해결 방법을 알아봅니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>안내</strong></span><br>
+    이 페이지에서는 "<strong>Cinemachine</strong>"과 "<strong>UniTask</strong>"을 예시로 설명을 합니다.<br>
+    이 에셋들이 아니더라도, 유사한 작동 방식을 가지는 스크립트에 의해서 문제를 겪고 계시다면 이 페이지의 설명이 도움이 될 것입니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>AnyPortrait가 정상적으로 동작하기 위한 실행 순서</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2069.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait의 핵심 스크립트인 "<strong>apPortrait</strong>"는 다른 스크립트가 실행된 이후에 실행이 되어야 합니다.<br>
+    이것은 크게 다음의 두가지 주요 이유 때문입니다.<br>
+    - "애니메이션 재생"과 같은 스크립트 함수가 실행된 이후에 애니메이션 시스템이 동작해야 안정적인 결과를 볼 수 있습니다.<br>
+    - 클리핑 메시 및 재질 제어와 같은 렌더링 처리를 위해서는 렌더링과 관련된 객체들의 동작이 완료된 상태여야 합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    일반적으로 대부분의 스크립트들이 <strong>Update</strong> 함수에서 동작하므로, 이 규칙을 지키기 위해서 AnyPortrait는 "<strong>LateUpdate</strong>"에서 동작합니다.<br>
+    하지만 AnyPortrait의 동작에 영향을 주는 스크립트의 로직이 <strong>Update</strong>가 아닌 곳에서 실행된다면 문제가 발생할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>외부 에셋이 LateUpdate에서 실행되는 경우</h3>
+    <br>
+    
+    <p>
+    AnyPortrait의 스크립트인 "<strong>apPortrait</strong>"는 기본적으로 <strong>LateUpdate</strong>에서 동작합니다.<br>
+    그래서 <strong>Update</strong>에서 실행되는 대부분의 다른 스크립트보다 항상 나중에 실행되기 때문에 안정적으로 동작합니다.<br>
+    그런데 만약 메인 로직이 <strong>LateUpdate</strong>에서 동작하는 스크립트가 있다면, 실행 순서에 의한 문제가 발생할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2070.jpg"/>
+    <br>
+    
+    <p>
+    카메라를 제어하는 유니티 에셋인 "<strong>Cinemachine</strong>"은 <strong>LateUpdate</strong>에서 동작하기 때문에, "<strong>클리핑 메시 렌더링 문제</strong>"가 발생하기 쉽습니다.<br>
+    따라서 문제를 해결하기 위해서는 "<strong>스크립트 실행 순서 (Script Execution Order)</strong>" 옵션을 변경하여 오른쪽의 그림처럼 동작하도록 만들어야 합니다.<br>
     </p>
     <br>
     
@@ -95,8 +156,8 @@
     <br>
     
     <p>
-    AnyPortrait의 데모에 Cinemachine을 연동한 화면입니다.<br>
-    Cinemachine으로 카메라를 제어할 수 있습니다.<br>
+    AnyPortrait의 데모에 <strong>Cinemachine</strong>을 연동한 화면입니다.<br>
+    <strong>Cinemachine</strong>으로 카메라를 제어할 수 있습니다.<br>
     </p>
     <br>
     
@@ -107,10 +168,10 @@
     
     <p>
     게임을 실행하면 AnyPortrait로 만든 캐릭터의 눈이 이상하게 렌더링됩니다.<br>
-    AnyPortrait의 <strong>클리핑 마스크(Clipping Mask)</strong> 기능이 제대로 동작하지 않는 것입니다.<br>
+    AnyPortrait의 <strong>클리핑 마스크 (Clipping Mask)</strong> 기능이 제대로 동작하지 않는 것입니다.<br>
     AnyPortrait는 카메라의 위치, 방향, 설정에 따라서 렌더링을 어떻게 해야할지 결정합니다.<br>
     클리핑 마스크, 빌보드, Perspective 연산 등이 여기에 해당합니다.<br>
-    그러나 Cinemachine으로 카메라를 제어하는 로직과 AnyPortrait의 카메라 계산 로직이 충돌하여 제대로 렌더링이 되지 않는 것입니다.<br>
+    그러나 <strong>Cinemachine</strong>으로 카메라를 제어하는 로직과 AnyPortrait의 카메라 계산 로직이 충돌하여 제대로 렌더링이 되지 않는 것입니다.<br>
     유사한 로직이 서로 충돌하는 경우, 대체로 AnyPortrait의 스크립트가 더 나중에 실행되도록 만들면 문제가 해결될 수 있습니다.<br>
     </p>
     <br>
@@ -133,8 +194,8 @@
     
     <p>
     다른 에셋이 설치되었다면 <strong>Script Execution Order</strong> 화면에서 <strong>Default Time </strong>외에 <strong>해당 에셋의 실행 순서</strong>가 추가되어 있을 수 있습니다.<br>
-    Cinemachine의 스크립트가 Default Time보다 이후에 실행되도록 설정된 것을 위 화면에서 볼 수 있습니다.<br>
-    AnyPortrait는 Cinemachine보다 나중에 스크립트가 실행되어야 합니다.<br>
+    <strong>Cinemachine</strong>의 스크립트가 <strong>Default Time</strong>보다 이후에 실행되도록 설정된 것을 위 화면에서 볼 수 있습니다.<br>
+    AnyPortrait는 <strong>Cinemachine</strong>보다 나중에 스크립트가 실행되어야 합니다.<br>
     <strong>(1)</strong> <strong>+ 버튼</strong>을 누릅니다.<br>
     </p>
     <br>
@@ -171,8 +232,129 @@
     </p>
     <br>
     
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>외부 에셋이 LateUpdate보다 나중에 실행되는 경우</h3>
+    <br>
     
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
+    
+    <p>
+    <strong>MonoBehaviour</strong>의 기본 방식으로 스크립트가 실행이 된다면, 대부분 <strong>Update</strong>나 <strong>LateUpdate</strong>에서 로직이 실행될 것입니다.<br>
+    그런데 비동기로 실행되는 스크립트나 에셋의 경우, 로직이 실행되는 시점을 <strong>MonoBehaviour</strong>의 생명 주기와 다르게 만들 수 있습니다.<br>
+    "<strong>UniTask</strong>" 같은 라이브러리 및 이를 이용하는 에셋들("<strong>Naninovel</strong>" 등)이 여기에 해당합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2071.jpg"/>
+    <br>
+    
+    <p>
+    왼쪽의 이미지를 보시면, 비동기로 동작하는 스크립트의 로직이 <strong>LateUpdate</strong>보다 나중에 실행되는 경우를 볼 수 있습니다.<br>
+    <strong>apPortrait</strong>보다 나중에 실행되기 때문에 실행 순서에 의한 문제가 발생할 것입니다.<br>
+    이 경우엔 <strong>apPortrait</strong>가 해당 스크립트보다 더 뒤에 실행되도록 설정할 수 없기 때문에 문제를 해결하기가 쉽지 않습니다.<br>
+    다만 발생하는 문제가 "<strong>클리핑 메시의 렌더링 오류</strong>"에 한정된다면 오른쪽과 같이 문제를 해결할 수 있습니다.<br>
+    AnyPortrait v1.5.1에 추가된 옵션을 이용하여 "<strong>렌더링 직전</strong>"에 클리핑 메시를 갱신하도록 만들 수 있기 때문입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    다음은 비동기 스크립트 라이브러리 중 하나인 "<strong>UniTask</strong>"를 이용한 스크립트의 일부입니다.<br>
+    - <a href="https://github.com/Cysharp/UniTask" target="_sub">UniTask GitHub 페이지</a><br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">void</span> Start()<br>
+    {<br>
+    &emsp;&emsp;<strong>MoveCamera();</strong><br>
+    <br>
+    &emsp;&emsp;<strong>AsyncUpdateCamera().Forget();</strong><br>
+    }<br>
+    <br>
+    <span class="text-primary">private async</span> <span class="text-success">UniTaskVoid</span> <strong>AsyncUpdateCamera()</strong><br>
+    {&nbsp;&nbsp;&nbsp;<br>
+    &emsp;&emsp;<span class="text-primary">while</span> ( <span class="text-success">Application</span>.isPlaying && gameObject.activeInHierarchy)<br>
+    &emsp;&emsp;{&nbsp;&nbsp;&nbsp;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">await</span> <span class="text-success">UniTask</span>.Yield(<span class="text-success">PlayerLoopTiming</span><strong>.PostLateUpdate</strong>);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>MoveCamera();</strong><br>
+    &emsp;&emsp;}&emsp;&emsp;<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">클립보드로 복사</button>
     <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    위 스크립트 예제는 <strong>LateUpdate</strong>보다 늦은 시점인 <strong>PostLateUpdate</strong>에서 카메라를 반복해서 움직이는 내용을 담고 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2067.jpg"/>
+    <br>
+    
+    <p>
+    위의 스크립트가 카메라를 움직이면, 실행 순서 규칙에 의해서 위와 같이 클리핑 메시가 비정상적으로 렌더링됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2068.jpg"/>
+    <br>
+    
+    <p>
+    이 문제를 해결하기 위해서는 <strong>PostLateUpdate</strong>보다 더 늦은 시점에 클리핑 연산을 하도록 설정해야합니다.<br>
+    <strong>(1)</strong> <strong>Bake</strong> 버튼을 누릅니다.<br>
+    <strong>(2)</strong> <strong>Setting</strong> 탭을 선택합니다.<br>
+    <strong>(3)</strong> <strong>Clipping Process</strong> 옵션의 값을 "<strong>Before Rendering</strong>"으로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이 옵션은 업데이트 로직 중에서 "클리핑 연산"만 분리하여 따로 실행할지 여부를 결정합니다.<br>
+    - <strong>In Update (Default)</strong> : 업데이트 로직 중에 클리핑 연산을 함께 수행합니다. 기본값입니다.<br>
+    - <strong>Before Rendering</strong> : 모든 스크립트 업데이트가 완료된 후 렌더링 직전에 클리핑 연산을 수행합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2072.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>를 하고 게임을 실행하면 클리핑 메시가 정상적으로 렌더링되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    <strong>Before Rendering</strong> 옵션은 문제를 해결하는 가장 쉽고 확실한 방법이지만, 권장되는 옵션은 아닙니다.<br>
+    <strong>Before Rendering</strong> 단계는 업데이트가 아닌 렌더링에 해당하는 이벤트이며, 이때 실행되는 코드는 렌더링의 성능에 영향을 줍니다.<br>
+    유니티에서 업데이트와 렌더링은 1:1로 대응되어 실행되는 것이 아니며, 렌더링 단계에서 불필요하게 많은 코드가 실행되면 입력 지연과 같은 문제가 발생합니다.<br>
+    불가피한 상황이 아니라면 게임 로직은 업데이트 단계에서 실행되도록 만들어야 합니다.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
     
     <!-- 12. 참고 박스 시작 -->
     <div class="alert alert-info" role="alert">
@@ -214,6 +396,21 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "void Start()\n{\n\tMoveCamera();\n\n\tAsyncUpdateCamera().Forget();\n}\n\nprivate async UniTaskVoid AsyncUpdateCamera()\n{   \n\twhile ( Application.isPlaying && gameObject.activeInHierarchy)\n\t{   \n\t\tawait UniTask.Yield(PlayerLoopTiming.PostLateUpdate);\n\n\t\tMoveCamera();\n\t}\t\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

@@ -77,7 +77,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.1.2</span></h4>
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
     
     <p>
     AnyPortraitを使用すると、画面を直接キャプチャすることができます。<br>
@@ -499,6 +499,34 @@
     
     <!-- 가로 배치 종료 -->
     
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2065.jpg"/>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
+    
+    <p>
+    スプライトシートのエクスポート時に同様の名前のアニメーションを選択しやすくするための検索機能が追加されました。<br>
+    <strong>(1)</strong> 検索ボックスに文字を入力します。<br>
+    <strong>(2)</strong> 検索されたアニメーションクリップのみが表示されます。<br>
+    このとき、「<strong>Select All</strong>」ボタンを押すと、検索されたすべてのアニメーションを選択できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    すべてのアニメーションを見たい場合は、検索ボックスのすべての文字を消去して「Enter」キーを押します。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
     <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_190.jpg"/>
@@ -655,6 +683,9 @@
     &lt;/Content&gt;<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -700,6 +731,9 @@
     &lt;/Content&gt;<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -747,6 +781,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -788,6 +825,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton3" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -835,6 +875,9 @@
     =========================================================================<br>
     <br>
     </p>
+    <button id="scriptcopybutton4" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -879,6 +922,9 @@
     =========================================================================<br>
     <br>
     </p>
+    <button id="scriptcopybutton5" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -960,6 +1006,27 @@
     </p>
     <br>
     
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>設定のエクスポート/インポート</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2066.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Export</strong>」ボタンと「<strong>Import</strong>」ボタンを押すと、キャプチャ設定をファイルにエクスポートまたはインポートできます。<br>
+    一貫した画面キャプチャを繰り返し実行すると便利です。<br>
+    すべてのキャプチャモードの設定は一度にファイルとして保存されます。<br>
+    </p>
+    <br>
+    
     <!-- 5. 바닥 네비바 -->
     <br>
     <br>
@@ -979,6 +1046,76 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n<Content>\n  <AnimationClip>\n\t<Clip Index=\"0\" Name=\"Idle\" FPS=\"30\" Frames=\"130\" />\n\t<Clip Index=\"1\" Name=\"Run\" FPS=\"40\" Frames=\"24\" />\n\t<Clip Index=\"2\" Name=\"Jump\" FPS=\"60\" Frames=\"59\" />\n  </AnimationClip>\n  <FrameImage>\n\t<Image AnimationClipIndex=\"0\" Frame=\"0\" SpriteIndex=\"0\" X=\"4\" Y=\"4\" Width=\"200\" Height=\"200\" />\n\t<Image AnimationClipIndex=\"0\" Frame=\"1\" SpriteIndex=\"0\" X=\"208\" Y=\"4\" Width=\"200\" Height=\"200\" />\n\t<Image AnimationClipIndex=\"0\" Frame=\"2\" SpriteIndex=\"0\" X=\"412\" Y=\"4\" Width=\"200\" Height=\"200\" />\n\t<Image AnimationClipIndex=\"0\" Frame=\"3\" SpriteIndex=\"0\" X=\"616\" Y=\"4\" Width=\"200\" Height=\"200\" />\n\t<Image AnimationClipIndex=\"0\" Frame=\"4\" SpriteIndex=\"0\" X=\"820\" Y=\"4\" Width=\"200\" Height=\"200\" />\n\t....\n  </FrameImage>\n</Content>\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n<Content>\n  <AnimationClip>\n\t<Clip Index=\"0\" Name=\"Idle\" FPS=\"30\" Frames=\"130\" />\n\t<Clip Index=\"1\" Name=\"Run\" FPS=\"40\" Frames=\"24\" />\n\t<Clip Index=\"2\" Name=\"Jump\" FPS=\"60\" Frames=\"59\" />\n  </AnimationClip>\n  <FrameImage>\n\t<Image AnimationClipIndex=\"0\" Frame=\"0\" FileName=\"Sequence_2018415_182230_Idle__0.png\" />\n\t<Image AnimationClipIndex=\"0\" Frame=\"1\" FileName=\"Sequence_2018415_182230_Idle__1.png\" />\n\t<Image AnimationClipIndex=\"0\" Frame=\"2\" FileName=\"Sequence_2018415_182230_Idle__2.png\" />\n\t....\n  </FrameImage>\n</Content>\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "{\n\t\"AnimationClip\":[\n\t{ \"Index\":0, \"Name\":\"Idle\", \"FPS\":30, \"Frames\":130 },\n\t{ \"Index\":1, \"Name\":\"Run\", \"FPS\":40, \"Frames\":24 },\n\t{ \"Index\":2, \"Name\":\"Jump\", \"FPS\":60, \"Frames\":59 }\n\t],\n\t\"FrameImage\":[\n\t{ \"AnimationClipIndex\":0, \"Frame\":0, \"SpriteIndex\":0, \"X\":4, \"Y\":4, \"Width\":200, \"Height\":200 },\n\t{ \"AnimationClipIndex\":0, \"Frame\":1, \"SpriteIndex\":0, \"X\":208, \"Y\":4, \"Width\":200, \"Height\":200 },\n\t{ \"AnimationClipIndex\":0, \"Frame\":2, \"SpriteIndex\":0, \"X\":412, \"Y\":4, \"Width\":200, \"Height\":200 },\n\t....\n\t]\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton3").addEventListener("click", function() {
+    const textToCopy = "{\n\t\"AnimationClip\":[\n\t{ \"Index\":0, \"Name\":\"Idle\", \"FPS\":30, \"Frames\":130 },\n\t{ \"Index\":1, \"Name\":\"Run\", \"FPS\":40, \"Frames\":24 },\n\t{ \"Index\":2, \"Name\":\"Jump\", \"FPS\":60, \"Frames\":59 }\n\t],\n\t\"FrameImage\":[\n\t{ \"AnimationClipIndex\":0, \"Frame\":0, \"FileName\":\"Sequence_2018415_182230_Idle__0.png\" },\n\t{ \"AnimationClipIndex\":0, \"Frame\":1, \"FileName\":\"Sequence_2018415_182230_Idle__1.png\" },\n\t{ \"AnimationClipIndex\":0, \"Frame\":2, \"FileName\":\"Sequence_2018415_182230_Idle__2.png\" },\n\t....\n\t]\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton4").addEventListener("click", function() {
+    const textToCopy = "=========================================================================\n\t\t\t\t\t\t\t\t\t\t\t\tAnyPortrait Sprite Sheet Data\t\t\t\t\t  \n=========================================================================\nAnimationClip : 3\nIndex\t\t\tName\t\t\tFPS\t\t\tFrames\n0\t\t\t\t  Idle\t\t\t  30\t\t\t  130\n1\t\t\t\t  Run\t\t\t  40\t\t\t  24\n2\t\t\t\t  Jump\t\t\t60\t\t\t  59\n=========================================================================\nFrameImage : 213\nClipIndex\t   Frame\t\t   SpriteIndex\t\tX\t\tY\t\tWidth\t Height\n0\t\t\t\t  0\t\t\t\t 0\t\t\t\t\t4\t\t 4\t\t200\t\t200\n0\t\t\t\t  1\t\t\t\t 0\t\t\t\t\t208\t  4\t\t200\t\t200\n0\t\t\t\t  2\t\t\t\t 0\t\t\t\t\t412\t  4\t\t200\t\t200\n....\n=========================================================================\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton5").addEventListener("click", function() {
+    const textToCopy = "=========================================================================\n\t\t\t\t\t\t\t\t\t\t\t\tAnyPortrait Sprite Sheet Data\t\t\t\t\t  \n=========================================================================\nAnimationClip : 3\nIndex\t\t\tName\t\t\tFPS\t\t\tFrames\n0\t\t\t\t  Idle\t\t\t  30\t\t\t  130\n1\t\t\t\t  Run\t\t\t  40\t\t\t  24\n2\t\t\t\t  Jump\t\t\t60\t\t\t  59\n=========================================================================\nFrameImage : 213\nClipIndex\t   Frame\t  FileName\n0\t\t\t\t 0\t\t\t Sequence_2018415_182230_Idle__0.png\n0\t\t\t\t 1\t\t\t Sequence_2018415_182230_Idle__1.png\n0\t\t\t\t 2\t\t\t Sequence_2018415_182230_Idle__2.png\n....\n=========================================================================\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

@@ -182,6 +182,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -309,6 +312,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -436,6 +442,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -495,6 +504,43 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class SyncPlaySample : MonoBehaviour\n{\n\tpublic apPortrait character;\n\tpublic apPortrait hairband;\n\n\tvoid Update()\n\t{\n\t\t//Aキーを押すと、hairbandがcharacterに同期します。\n\t\tif(Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\thairband.Synchronize(character, true, true);\n\t\t\thairband.transform.position = character.transform.position;\n\t\t}\n\n\t\t//Sキーを押すと、hairbandの同期が解除されます。\n\t\tif(Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\thairband.Unsynchronize();\n\t\t\thairband.StopAll();\n\t\t\thairband.transform.position = new Vector3(10.0f, 0.0f, 0.0f);\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class SyncPlaySample : MonoBehaviour\n{\n\tpublic apPortrait character;\n\tpublic apPortrait hairband;\n\n\tvoid Update()\n\t{\n\t\t//Aキーを押すと、hairbandがcharacterに同期します。\n\t\tif(Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\thairband.Synchronize(character, true, true);\n\t\t\thairband.transform.position = character.transform.position;\n\n\t\t\t//「Flower Pin」メッシは「Front Hair」メッシュよりも前にあります。\n\t\t\thairband.SetSortingOrder(\"Flower Pin\", character.GetSortingOrder(\"Front Hair\") + 1);\n\t\t\t//「Ribbon」メッシは「Body」メッシュよりも前にあります。\n\t\t\thairband.SetSortingOrder(\"Ribbon\", character.GetSortingOrder(\"Body\") + 1);\n\t\t\t//「Hairband」メッシは「Back Hair」メッシュよりも前にあります。\n\t\t\thairband.SetSortingOrder(\"Hairband\", character.GetSortingOrder(\"Back Hair\") + 1);\n\t\t}\n\n\t\t//Sキーを押すと、hairbandの同期が解除されます。\n\t\tif(Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\thairband.Unsynchronize();\n\t\t\thairband.StopAll();\n\t\t\thairband.transform.position = new Vector3(10.0f, 0.0f, 0.0f);\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class RootUnitSync : MonoBehaviour\n{\n\t//アニメーションが再生されているキャラクター\n\tpublic apPortrait mainCharacter;\n\t//メインキャラクターに同期をするキャラクター\n\tpublic apPortrait syncCharacter;\n\n\tvoid Start() { }\n\n\tvoid Update()\n\t{\n\t\t//数字キーを入力すると、メインキャラクターのアニメーションが再生され、該当のルートユニットに切り替えます。\n\t\tif(Input.GetKeyDown(KeyCode.Alpha1)) { mainCharacter.Play(\"Anim0\"); }\n\t\tif(Input.GetKeyDown(KeyCode.Alpha2)) { mainCharacter.Play(\"Anim1\"); }\n\t\tif(Input.GetKeyDown(KeyCode.Alpha3)) { mainCharacter.Play(\"Anim2\"); }\n\n\t\t//ルートユニットを同期します。\n\t\tif(Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\tsyncCharacter.Synchronize(mainCharacter, false, false, true);\n\t\t}\n\n\t\t//同期をオフにします。\n\t\tif(Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\tsyncCharacter.Unsynchronize();\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

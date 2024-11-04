@@ -335,6 +335,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -950,6 +953,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -1026,6 +1032,32 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class MultiRootUnitController : MonoBehaviour\n{\n\t// Target AnyPortrait character\n\tpublic apPortrait portrait;\n\n\tvoid Start() { }\n\n\tvoid Update()\n\t{\n\t\tif(Input.GetKeyDown(KeyCode.Alpha1))\n\t\t{\n\t\t\t// Press the number 1 key to play the \"Front\" walking animation.\n\t\t\tportrait.Play(\"Walk_Front\");\n\t\t}\n\t\tif(Input.GetKeyDown(KeyCode.Alpha2))\n\t\t{\n\t\t\t// Press the number 2 key to play the \"Side\" walking animation.\n\t\t\tportrait.Play(\"Walk_Side\");\n\t\t}\n\t\tif(Input.GetKeyDown(KeyCode.Alpha3))\n\t\t{\n\t\t\t// Press the number 3 key to play the \"Back\" walking animation.\n\t\t\tportrait.Play(\"Walk_Back\");\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class GetRootPoseScript : MonoBehaviour\n{\n\tpublic apPortrait portrait;\n\n\t// Root Pose Control Parameter Variable\n\tprivate apControlParam rootPose;\n\n\t// The name of the current character direction to check in the GUI\n\tprivate string poseName = \"\";\n\n\tvoid Start()\n\t{\n\t\t// Get the Root Pose control parameter and store it as a variable.\n\t\trootPose = portrait.GetControlParam(\"Root Pose\");\n\t}\n\n\t// Checking the value should be LateUpdate, not Update.\n\tvoid LateUpdate()\n\t{\n\t\t// Check the value of the current control parameter. Since the Root Pose was of type Int, it gets an Int value.\n\t\tint currentPose = rootPose.IntValue;\n\n\t\t// Stores the character direction assigned to the value of the control parameter as a string.\n\t\tswitch (currentPose)\n\t\t{\n\t\t\tcase -1: poseName = \"Back\"; break;\n\t\t\tcase 0: poseName = \"Side\"; break;\n\t\t\tcase 1: poseName = \"Front\"; break;\n\t\t}\n\t}\n\n\tprivate void OnGUI()\n\t{\n\t\t// The direction of the character stored as a string is displayed on the Unity screen.\n\t\tGUI.Label(new Rect(10, 10, 500, 20), \"Current Pose : \" + poseName);\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

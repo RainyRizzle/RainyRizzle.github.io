@@ -669,6 +669,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -691,6 +694,21 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class AnimationTest : MonoBehaviour\n{\n\t// Target AnyPortrait Object\n\tpublic apPortrait portrait;\n\n\tvoid Start () { }\n\n\tvoid Update ()\n\t{\n\t\t// CrossFade \"Idle\" Animation Clip\n\t\tif(Input.GetKeyDown(KeyCode.I))\n\t\t{\n\t\t\tif(portrait.CrossFade(\"Idle\", 0.4f) == null)\n\t\t\t{\n\t\t\t\tDebug.LogError(\"Faild [Idle]\");\n\t\t\t}\n\t\t\tDebug.Log(\"CrossFade [Idle]\");\n\t\t}\n\n\t\t// Play \"Action\" Animation Clip\n\t\tif(Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\tif(portrait.Play(\"Action\") == null)\n\t\t\t{\n\t\t\t\tDebug.LogError(\"Faild [Action]\");\n\t\t\t}\n\t\t\tDebug.Log(\"Play [Action]\");\n\t\t}\n\n\t\t// Pause Animations in All Layers\n\t\tif(Input.GetKeyDown(KeyCode.P))\n\t\t{\n\t\t\tportrait.PauseAll();\n\t\t\tDebug.Log(\"Pause All\");\n\t\t}\n\n\t\t// Stop Animations in All Layers\n\t\tif(Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\tportrait.StopAll(0.3f);\n\t\t\tDebug.Log(\"Stop All\");\n\t\t}\n\n\t\t// Resume Animations in All Layers\n\t\tif(Input.GetKeyDown(KeyCode.R))\n\t\t{\n\t\t\tportrait.ResumeAll();\n\t\t\tDebug.Log(\"Resume All\");\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

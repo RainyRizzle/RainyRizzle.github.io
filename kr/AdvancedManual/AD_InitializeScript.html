@@ -131,6 +131,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -202,6 +205,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -299,6 +305,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -327,6 +336,43 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "public class InitializeSample : MonoBehaviour\n{\n\t// 대상이 되는 apPortrait\n\tpublic apPortrait portrait;\n\n\tvoid Start () { }\n\n\tvoid Update ()\n\t{\n\t\tif ( Input.GetKeyDown(KeyCode.Space) )\n\t\t{\n\t\t\t// GameObject를 Instantiate로 복사하기\n\t\t\tGameObject newGameObject = Instantiate<GameObject>(portrait.gameObject);\n\n\t\t\t// 위치 이동\n\t\t\tnewGameObject.transform.position = new Vector3(8, 0, 0);\n\n\t\t\t// 복제된 GameObject에서 apPortrait 컴포넌트 얻기\n\t\t\tapPortrait newPortrait = newGameObject.GetComponent<apPortrait>();\n\n\t\t\t//  Move 애니메이션 \n\t\t\tnewPortrait.Play(\"Move\");\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "public class InitializeSample : MonoBehaviour\n{\n\tpublic apPortrait portrait;\n\n\tvoid Start () { }\n\n\tvoid Update ()\n\t{\n\t\tif ( Input.GetKeyDown(KeyCode.Space) )\n\t\t{\n\t\t\tGameObject newGameObject = Instantiate<GameObject>(portrait.gameObject);\n\t\t\tnewGameObject.transform.position = new Vector3(8, 0, 0);\n\t\t\tapPortrait newPortrait = newGameObject.GetComponent<apPortrait>();\n\n\t\t\t// 바로 초기화를 하기 위해 Initialize 함수 호출 후 Move 애니메이션 재생\n\t\t\tnewPortrait.Initialize(); \n\n\t\t\tnewPortrait.Play(\"Move\");\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "public class InitializeSample : MonoBehaviour\n{\n\tpublic apPortrait portrait;\n\n\tvoid Start () { }\n\n\tvoid Update ()\n\t{\n\t\tif ( Input.GetKeyDown(KeyCode.Space) )\n\t\t{\n\t\t\tGameObject newGameObject = Instantiate<GameObject>(portrait.gameObject);\n\t\t\tnewGameObject.transform.position = new Vector3(8, 0, 0);\n\t\t\tapPortrait newPortrait = newGameObject.GetComponent<apPortrait>();\n\n\t\t\t// 비동기 초기화 함수 호출\n\t\t\tnewPortrait.AsyncInitialize(OnAsyncPortraitIntialized);\n\n\t\t\t// 또는 이렇게 작성해도 됩니다.\n\t\t\t// newPortrait.AsyncInitialize(100, OnAsyncPortraitIntialized);\n\t\t}\n\t}\n\n\t// 초기화가 완료되면 호출되는 이벤트\n\tvoid OnAsyncPortraitIntialized(apPortrait portrait)\n\t{\n\t\tportrait.Play(\"Move\");\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

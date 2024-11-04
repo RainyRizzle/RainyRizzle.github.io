@@ -589,6 +589,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -753,6 +756,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -858,6 +864,32 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class BoneSyncScript : MonoBehaviour\n{\n\tpublic Transform characterGroup;\n\tpublic apPortrait mainCharacter;\n\n\tpublic apPortrait costume1;\n\tpublic apPortrait costume2;\n\tpublic apPortrait costume3;\n\n\tvoid Start() { }\n\n\tvoid Update()\n\t{\n\t\t//Press the Q or W key to play the main character's animation.\n\t\tif(Input.GetKeyDown(KeyCode.Q)) { mainCharacter.Play(\"Idle\"); }\n\t\tif(Input.GetKeyDown(KeyCode.W)) { mainCharacter.Play(\"Walk\"); }\n\n\t\t//If you press the number key 1, all costumes will be detached, and costume 1 will be attached.\n\t\tif(Input.GetKeyDown(KeyCode.Alpha1))\n\t\t{\n\t\t\tDetachCostumes();\n\t\t\tAttachCostume1();\n\t\t}\n\n\t\t//If you press the number key 2, all costumes will be detached, and costume 2 will be attached.\n\t\tif(Input.GetKeyDown(KeyCode.Alpha2))\n\t\t{\n\t\t\tDetachCostumes();\n\t\t\tAttachCostume2();\n\t\t}\n\n\t\t//If you press the number key 3, all costumes will be detached, and costume 3 will be attached.\n\t\tif(Input.GetKeyDown(KeyCode.Alpha3))\n\t\t{\n\t\t\tDetachCostumes();\n\t\t\tAttachCostume3();\n\t\t}\n\n\t\t//If you press the number key 4, all costumes will be detached.\n\t\tif(Input.GetKeyDown(KeyCode.Alpha4))\n\t\t{\n\t\t\tDetachCostumes();\n\t\t}\n\t}\n\n\t//Function to detach all costumes\n\tprivate void DetachCostumes()\n\t{\n\t\t//Unsynchronize the bones by calling the Unsynchronize function.\n\t\tcostume1.Unsynchronize();\n\t\tcostume2.Unsynchronize();\n\t\tcostume3.Unsynchronize();\n\n\t\t//Separates the costumes from the parent GameObject.\n\t\t//(Positions are assigned to be nicely distributed appropriately.)\n\t\tcostume1.transform.parent = null;\n\t\tcostume1.transform.position = new Vector3(0, 0, 0);\n\t\tcostume2.transform.parent = null;\n\t\tcostume2.transform.position = new Vector3(4, 0, 0);\n\t\tcostume3.transform.parent = null;\n\t\tcostume3.transform.position = new Vector3(8, 0, 0);\n\t}\n\n\t//Register Costume 1 as a child of the Character Group, and synchronize it with the bone movement of the main character.\n\tprivate void AttachCostume1()\n\t{\n\t\t//Register as a child of Character Group and initialize Local location.\n\t\tcostume1.transform.parent = characterGroup;\n\t\tcostume1.transform.localPosition = Vector3.zero;\n\n\t\t//Synchronize bone movements.\n\t\tcostume1.Synchronize(mainCharacter, false, false, false, true, SYNC_BONE_OPTION.MatchFromRoot);\n\t}\n\n\t//Register Costume 2 as a child of the Character Group, and synchronize it with the bone movement of the main character.\n\tprivate void AttachCostume2()\n\t{\n\t\t//Register as a child of Character Group and initialize Local location.\n\t\tcostume2.transform.parent = characterGroup;\n\t\tcostume2.transform.localPosition = Vector3.zero;\n\n\t\t//Synchronize bone movements.\n\t\tcostume2.Synchronize(mainCharacter, false, false, false, true, SYNC_BONE_OPTION.MatchFromRoot);\n\t}\n\n\t//Register Costume 3 as a child of the Character Group, and synchronize it with the bone movement of the main character.\n\tprivate void AttachCostume3()\n\t{\n\t\t//Register as a child of Character Group and initialize Local location.\n\t\tcostume3.transform.parent = characterGroup;\n\t\tcostume3.transform.localPosition = Vector3.zero;\n\n\t\t//Synchronize bone movements.\n\t\tcostume3.Synchronize(mainCharacter, false, false, false, true, SYNC_BONE_OPTION.MatchFromRoot);\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "\t(Code from the previous part omitted)\n\t//Register Costume 1 as a child of the Character Group, and synchronize it with the bone movement of the main character.\n\tprivate void AttachCostume1()\n\t{\n\t\t//Register as a child of Character Group and initialize Local location.\n\t\tcostume1.transform.parent = characterGroup;\n\t\tcostume1.transform.localPosition = Vector3.zero;\n\n\t\t//Synchronize bone movements.\n\t\tcostume1.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);\n\n\t\t//Modify the sorting order of the Costume 1 meshes based on the meshes of the Main Character.\n\t\tcostume1.SetSortingOrder(\"HairFront\", mainCharacter.GetSortingOrder(\"Head\") + 1);\n\t\tcostume1.SetSortingOrder(\"LeftArm\", mainCharacter.GetSortingOrder(\"LeftArm\") + 1);\n\t\tcostume1.SetSortingOrder(\"Body\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 2);\n\t\tcostume1.SetSortingOrder(\"LeftShoe\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 1);\n\t\tcostume1.SetSortingOrder(\"RightShoe\", mainCharacter.GetSortingOrder(\"RightLeg\") + 1);\n\t\tcostume1.SetSortingOrder(\"HairSide\", mainCharacter.GetSortingOrder(\"RightArm\") + 1);\n\t\tcostume1.SetSortingOrder(\"HairBack\", mainCharacter.GetSortingOrder(\"RightArm\") - 10);\n\t}\n\n\t//Register Costume 2 as a child of the Character Group, and synchronize it with the bone movement of the main character.\n\tprivate void AttachCostume2()\n\t{\n\t\t//Register as a child of Character Group and initialize Local location.\n\t\tcostume2.transform.parent = characterGroup;\n\t\tcostume2.transform.localPosition = Vector3.zero;\n\n\t\t//Synchronize bone movements.\n\t\tcostume2.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);\n\n\t\t//Modify the sorting order of the Costume 2 meshes based on the meshes of the Main Character.\n\t\tcostume2.SetSortingOrder(\"HairFront\", mainCharacter.GetSortingOrder(\"Head\") + 1);\n\t\tcostume2.SetSortingOrder(\"HairSide\", mainCharacter.GetSortingOrder(\"Head\") - 1);\n\t\tcostume2.SetSortingOrder(\"LeftArm\", mainCharacter.GetSortingOrder(\"LeftArm\") + 1);\n\t\tcostume2.SetSortingOrder(\"Body\", mainCharacter.GetSortingOrder(\"Body\") + 1);\n\t\tcostume2.SetSortingOrder(\"BeltFront\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 4);\n\t\tcostume2.SetSortingOrder(\"Pants_LeftLeg\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 3);\n\t\tcostume2.SetSortingOrder(\"BeltBack\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 2);\n\t\tcostume2.SetSortingOrder(\"LeftShoe\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 1);\n\t\tcostume2.SetSortingOrder(\"RightLeg\", mainCharacter.GetSortingOrder(\"RightLeg\") + 2);\n\t\tcostume2.SetSortingOrder(\"RightShoe\", mainCharacter.GetSortingOrder(\"RightLeg\") + 1);\n\t\tcostume2.SetSortingOrder(\"RightArm\", mainCharacter.GetSortingOrder(\"RightArm\") + 1);\n\t\tcostume2.SetSortingOrder(\"RightArm\", mainCharacter.GetSortingOrder(\"RightArm\") + 1);\n\t\tcostume2.SetSortingOrder(\"HairBack\", mainCharacter.GetSortingOrder(\"RightArm\") - 10);\n\t\tcostume2.SetSortingOrder(\"HairAcc\", mainCharacter.GetSortingOrder(\"RightArm\") - 11);\n\t\tcostume2.SetSortingOrder(\"HairTail\", mainCharacter.GetSortingOrder(\"RightArm\") - 12);\n\t}\n\n\t//Register Costume 3 as a child of the Character Group, and synchronize it with the bone movement of the main character.\n\tprivate void AttachCostume3()\n\t{\n\t\t//Register as a child of Character Group and initialize Local location.\n\t\tcostume3.transform.parent = characterGroup;\n\t\tcostume3.transform.localPosition = Vector3.zero;\n\n\t\t//Synchronize bone movements.\n\t\tcostume3.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);\n\n\t\t//Modify the sorting order of the Costume 3 meshes based on the meshes of the Main Character.\n\t\tcostume3.SetSortingOrder(\"Hat\", mainCharacter.GetSortingOrder(\"Head\") + 2);\n\t\tcostume3.SetSortingOrder(\"HairFront\", mainCharacter.GetSortingOrder(\"Head\") + 1);\n\t\tcostume3.SetSortingOrder(\"LeftArmFront\", mainCharacter.GetSortingOrder(\"LeftArm\") + 4);\n\t\tcostume3.SetSortingOrder(\"LeftHand\", mainCharacter.GetSortingOrder(\"LeftArm\") + 3);\n\t\tcostume3.SetSortingOrder(\"RightArmFront\", mainCharacter.GetSortingOrder(\"LeftArm\") + 2);\n\t\tcostume3.SetSortingOrder(\"Neck\", mainCharacter.GetSortingOrder(\"LeftArm\") + 1);\n\t\tcostume3.SetSortingOrder(\"LeftArmBack\", mainCharacter.GetSortingOrder(\"LeftArm\") - 1);\n\t\tcostume3.SetSortingOrder(\"BodyFront\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 3);\n\t\tcostume3.SetSortingOrder(\"Skirt\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 2);\n\t\tcostume3.SetSortingOrder(\"LeftShoe\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 1);\n\t\tcostume3.SetSortingOrder(\"RightShoe\", mainCharacter.GetSortingOrder(\"RightLeg\") + 1);\n\t\tcostume3.SetSortingOrder(\"BodyBack\", mainCharacter.GetSortingOrder(\"RightLeg\") - 1);\n\t\tcostume3.SetSortingOrder(\"RightHand\", mainCharacter.GetSortingOrder(\"RightArm\") + 1);\n\t\tcostume3.SetSortingOrder(\"RightArmBack\", mainCharacter.GetSortingOrder(\"RightArm\") - 1);\n\t\tcostume3.SetSortingOrder(\"HairBack\", mainCharacter.GetSortingOrder(\"RightArm\") - 10);\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

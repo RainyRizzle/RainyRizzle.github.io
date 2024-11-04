@@ -418,6 +418,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -440,6 +443,21 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class BoneTest : MonoBehaviour\n{\n\tpublic apPortrait portrait;\n\n\tvoid Start () { }\n\n\tvoid Update ()\n\t{\n\t\tif(Input.GetMouseButtonDown(0))\n\t\t{\n\t\t\tVector3 touchPosWorld = Camera.main.ScreenToWorldPoint(\n\t\t\t\t\tnew Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));\n\n\t\t\tportrait.SetBoneIK(0, \"Bone Hand R\", touchPosWorld, Space.World, 1.0f, true);\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

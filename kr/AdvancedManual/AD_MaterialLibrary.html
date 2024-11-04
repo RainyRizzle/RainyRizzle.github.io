@@ -77,7 +77,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.5.0</span></h4>
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
     
     <p>
     AnyPortrait의 기본적인 렌더링 목표는 "빛이 적용되지 않고 일러스트의 원색을 표현하는 것"입니다.<br>
@@ -577,6 +577,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -693,6 +696,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -708,7 +714,6 @@
     <p>
     ​이 페이지에서 설명된 모든 재질들을 동영상으로 보실 수 있습니다.<br>
     또한, 이 페이지에서 설명된 텍스쳐는 아래와 같습니다.<br>
-    ​<br>
     </p>
     <br>
     
@@ -717,8 +722,114 @@
     <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_602.jpg"/>
     <br>
     
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
     
-    <br><br>
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>리스트에서 프로퍼티 추가하기</h4>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2057.jpg"/>
+    <br>
+    
+    <p>
+    프로퍼티를 추가할 때, 리스트에서 찾아서 추가할 수 있습니다.<br>
+    <strong>(1)</strong> <strong>Add Property from List</strong> 버튼을 누릅니다.<br>
+    <strong>(2)</strong> 리스트에서 프로퍼티를 선택하여 쉽게 추가할 수 있습니다.<br>
+     <kbd>Ctrl</kbd>&nbsp;&nbsp;(Mac에서는&nbsp;&nbsp;<kbd>Command</kbd> ) 또는  <kbd>Shift</kbd> 를 눌러서 여러개의 프로퍼티들을 선택하여 추가할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>참조 재질을 이용하여 프로퍼티를 설정하기</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
+    
+    <p>
+    커스텀 쉐이더의 프로퍼티들이 많다면, 재질 라이브러리에서 일일이 추가하고 설정하는 것은 불편할 것입니다.<br>
+    특히, 많은 캐릭터들이 공통된 쉐이더를 공유한다면, 이 작업을 일일이 수행하는 것은 귀찮은 일입니다.<br>
+    AnyPortrait v1.5.1에서 추가된 기능을 이용하면, 일일이 프로퍼티를 지정하는 대신 특정 재질 에셋을 참조하도록 설정하여 작업을 훨씬 편하게 할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2058.jpg"/>
+    <br>
+    
+    <p>
+    3개의 프로퍼티가 더 추가된 커스텀 쉐이더를 만들었다는 가정하에 재질 세트를 설정해봅시다.<br>
+    <strong>(1)</strong> <strong>재질 에셋(Material Asset)</strong>을 생성하고 선택합니다.<br>
+    <strong>(2)</strong> 재질의 쉐이더를 캐릭터에 적용되는 커스텀 쉐이더로 변경합니다.<br>
+    <strong>(3)</strong> "_Color"와 "_MainTex"를 제외한 커스텀 프로퍼티에 값을 할당합니다. 여기서는 흑백 패턴의 텍스쳐와 색상 및 Float 값을 설정했습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2059.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 재질 라이브러리에서 <strong>Reference Material</strong> 항목을 선택하여 <strong>(2)</strong> 앞서 만든 재질 에셋을 할당합니다.<br>
+    이제 커스텀 프로퍼티들의 값이 재질 에셋을 참조하여 자동으로 설정됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2060.jpg"/>
+    <br>
+    
+    <p>
+    Bake를 하고 게임을 실행하면 참조된 재질 에셋의 값이 캐릭터에 적용된 것을 볼 수 있습니다.<br>
+    이 기능은 많은 캐릭터들이 커스텀 쉐이더와 프로퍼티를 공유할 때 유용합니다.<br>
+    그런데, 경우에 따라선 특정 캐릭터에 일부 프로퍼티의 값을 다르게 할당해야할 필요도 있을 것입니다.<br>
+    이때는 직접 커스텀 프로퍼티를 지정하면 됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2061.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 재질 라이브러리에서 참조 재질 에셋이 할당된 상태입니다.<br>
+    <strong>(2)</strong> 이 상태에서 커스텀 프로퍼티 일부의 값을 다르게 설정해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2062.jpg"/>
+    <br>
+    
+    <p>
+    Bake를 하고 게임을 실행하면 직접 지정한 프로퍼티의 값이 참조 재질의 값보다 우선되어 적용된 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>주의</strong></span><br>
+    참조 재질은 런타임이 아닌 Bake시 참조됩니다.<br>
+    따라서 참조 재질의 값이 바뀌었다면 해당 에셋이 적용된 모든 캐릭터들을 다시 Bake해야합니다.<br>
+    또한, 런타임에 참조 재질의 값이 바뀌어도 캐릭터는 이를 인식하지 못합니다.<br>
+    </p>
+    <br>
     
     <br>
     <br>
@@ -977,6 +1088,43 @@
     </p>
     <br>
     
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>키워드 타입의 프로퍼티</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
+    
+    <p>
+    AnyPortrait v1.5.1에서 "<strong>키워드 (Keyword)</strong>"를 커스텀 프로퍼티로서 제어할 수 있게 되었습니다.<br>
+    키워드를 활용하는 커스텀 쉐이더의 작성 방법은 <a href="../../kr/Script/SC_CustomShader.html">관련 페이지</a>를 참고해주세요.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2063.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 커스텀 프로퍼티에서 "<strong>Keyword</strong>" 타입으로 변경한 후, <strong>Enable</strong> 또는 <strong>Disable</strong>로 설정하여 키워드를 사용할지 여부를 결정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2064.jpg"/>
+    <br>
+    
+    <p>
+    키워드들이 많다면 프로퍼티 옵션을 일일이 설정하는 것이 번거로우므로, 위와 같이 설정하는 것이 편리합니다.<br>
+    <strong>(1)</strong> <strong>Add Property from List</strong> 버튼을 누릅니다.<br>
+    <strong>(2)</strong> 일반적인 프로퍼티와 함께 "키워드"들도 리스트에 나타나는 것을 볼 수 있습니다. 여기서 선택하여 추가하면 쉽게 설정할 수 있습니다.<br>
+    </p>
+    <br>
+    
     <!-- 5. 바닥 네비바 -->
     <br>
     <br>
@@ -996,6 +1144,32 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "Shader \"CustomShader/Character FX\"\n{\n\tProperties\n\t{\n\t\t_Color(\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex(\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\t\t_BumpMap(\"Bump Texture (Normalmap)\", 2D) = \"bump\" {}\n\t\t_RampMap(\"Ramp Gradient Map (RGB)\", 2D) = \"white\" {}\n\t\t_NoiseMap(\"Gray Noise Map (Gray)\", 2D) = \"white\" {}\n\t\t_FadeValue(\"Fade Value (0~1)\", Float) = 0\n\t\t_FadeColor1(\"Fade Color 1 (RGB)\", Color) = (0, 0, 0, 1)\n\t\t_FadeColor2(\"Fade Color 2 (RGB)\", Color) = (1, 1, 0, 1)\n\t}\t\n\tSubShader\n\t{\n\t\tTags{ \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tLOD 200\t\t\t\t\t  \n\t\tCGPROGRAM\n\t\t#pragma surface surf SimpleColor alpha\n\t\t#pragma target 3.0\t\t\t\t\t  \n\t\thalf4 _Color;\n\t\tsampler2D _MainTex;\n\t\tsampler2D _BumpMap;\n\t\tsampler2D _RampMap;\n\t\t// Custom Code\n\t\t//--------------------------------\n\t\tsampler2D _NoiseMap;\n\t\tfloat _FadeValue;\n\t\thalf4 _FadeColor1;\n\t\thalf4 _FadeColor2;\n\t\t//--------------------------------\n\t\tstruct Input\n\t\t{\n\t\t\tfloat2 uv_MainTex;\n\t\t\tfloat2 uv_BumpMap;\n\t\t\tfloat4 color : COLOR;\n\t\t};\n\t\thalf4 LightingSimpleColor(SurfaceOutput s, half3 lightDir, half atten)\n\t\t{\n\t\t\thalf4 c;\n\t\t\thalf nl = max(0, dot(s.Normal, lightDir));\n\t\t\thalf halfDiff = (nl * 0.5f) + 0.5f;\n\t\t\thalf3 rampColor = tex2D(_RampMap, float2(halfDiff, 0.5f)).rgb;\n\t\t\tc.rgb = saturate(s.Albedo * _LightColor0.rgb * (rampColor * atten));\n\t\t\tc.rgb + s.Emission;\n\t\t\tc.a = s.Alpha;\n\t\t\treturn c;\n\t\t}\n\t\tvoid surf(Input IN, inout SurfaceOutput o)\n\t\t{\n\t\t\thalf4 c = tex2D(_MainTex, IN.uv_MainTex);\n\t\t\tc.rgb *= _Color.rgb * 2.0f;\n\t\t\to.Alpha = c.a * _Color.a;\n\t\t\to.Albedo = c.rgb;\n\t\t\to.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));\t\t\t\n\t\t\t// Custom Code\n\t\t\t//---------------------------------------------------\n\t\t\to.Emission = half4(0, 0, 0, 0);\n\t\t\thalf noise = tex2D(_NoiseMap, IN.uv_MainTex).r;\n\t\t\tif (noise < _FadeValue - 0.03f)\n\t\t\t{\n\t\t\t\to.Alpha = 0.0f;\n\t\t\t}\t\t\t\n\t\t\thalf smoothFade = (noise - _FadeValue) / 0.6f;\n\t\t\tif (noise < _FadeValue)\n\t\t\t{\n\t\t\t\to.Emission = _FadeColor2.rgb;\n\t\t\t}\n\t\t\telse if (noise < _FadeValue + 0.6f)\n\t\t\t{\n\t\t\t\to.Albedo = (o.Albedo * _FadeColor1.rgb) * (1.0f - smoothFade) + o.Albedo * smoothFade;\n\t\t\t}\n\t\t\t//---------------------------------------------------\n\t\t}\n\t\tENDCG\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n​\npublic class CharacterFadeTester : MonoBehaviour\n{\n\t\t   public apPortrait portrait;\n\t\t   public float fadeValue = 0.5f;\n​\n\t\t   void Update ()\n\t\t   {\n\t\t\t\t\t  if ( Input.GetKey(KeyCode.A) )\n\t\t\t\t\t  {\n\t\t\t\t\t\t\t\t fadeValue -= Time.deltaTime * 0.5f;\n\t\t\t\t\t\t\t\t portrait.SetMeshCustomFloatAll(fadeValue, \"_FadeValue\");\n\t\t\t\t\t  }\n\t\t\t\t\t  if ( Input.GetKey(KeyCode.S) )\n\t\t\t\t\t  {\n\t\t\t\t\t\t\t\t fadeValue += Time.deltaTime * 0.5f;\n\t\t\t\t\t\t\t\t portrait.SetMeshCustomFloatAll(fadeValue, \"_FadeValue\");\n\t\t\t\t\t  }\n\t\t   }\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

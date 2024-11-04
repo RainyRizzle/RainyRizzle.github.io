@@ -486,6 +486,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -508,6 +511,21 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class CmdBufferExample : MonoBehaviour\n{\n \t// Target Objects\n\tpublic apPortrait portrait;\n\tpublic Camera targetCamera;\n\n\t\n   \t// Custom Command Buffer\n\tprivate apCustomCommandBuffer _commandBuffer = null;\n\n\tvoid Start()\n\t{\n\t\tif (_commandBuffer == null)\n\t\t{\n\t\t\tportrait.Initialize();\n\t\t\t_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, \"Custom Command Buffer\");\n\t\t\t_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.AfterForwardAlpha);\n\t\t}\n\t}\n\n\tvoid OnDestroy()\n\t{\n\t\tif (_commandBuffer != null)\n\t\t{\n\t\t\t_commandBuffer.Destory();\n\t\t\t_commandBuffer = null;\n\t\t}\n\t}\n\n\t\n\tvoid LateUpdate()\n\t{\n\t\tif (_commandBuffer != null)\n\t\t{\n\t\t\t_commandBuffer.ClearCommands();\n\t\t\t_commandBuffer.SetViewMatrix();\n\t\t\t_commandBuffer.SetProjectionMatrix();\n\t\t\t_commandBuffer.DrawAllMeshes(true, true);\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

@@ -77,7 +77,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.5.0</span></h4>
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
     
     <p>
     <strong>This applies from v1.1.7.</strong>The basic rendering goal of AnyPortrait is "to express the original color of the illustration without applying light".<br>
@@ -582,6 +582,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -698,6 +701,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -722,8 +728,114 @@
     <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_602.jpg"/>
     <br>
     
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
     
-    <br><br>
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Adding a property from a list</h4>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2057.jpg"/>
+    <br>
+    
+    <p>
+    When adding a property, you can find it in the list and add it.<br>
+    <strong>(1)</strong> Click the <strong>Add Property from List</strong> button.<br>
+    <strong>(2)</strong> You can easily add a property by selecting it from the list.<br>
+    You can select and add multiple properties by pressing&nbsp;&nbsp;<kbd>Ctrl</kbd>&nbsp;&nbsp;( <kbd>Command</kbd>&nbsp;&nbsp;on Mac) or  <kbd>Shift</kbd> .<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Setting properties using the Reference Material</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
+    
+    <p>
+    If your custom shader has many properties, it can be inconvenient to add and set them one by one from the material library.<br>
+    Especially if many characters share a common shader, it can be a hassle to do this work.<br>
+    With the addition of a feature in AnyPortrait v1.5.1, you can make your work much easier by setting a specific material asset to reference instead of specifying properties one by one.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2058.jpg"/>
+    <br>
+    
+    <p>
+    Let's set up a material set, assuming that we've created a custom shader with 3 more properties.<br>
+    <strong>(1)</strong> Create and select <strong>Material Asset</strong>.<br>
+    <strong>(2)</strong> Change the shader of the material to the custom shader applied to the character.<br>
+    <strong>(3)</strong> Assign values ​​to the custom properties except "_Color" and "_MainTex". Here, we've set a texture with a grayscale pattern and a color and float value.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2059.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select <strong>Reference Material</strong> from the material library and <strong>(2)</strong> assign the material asset you created earlier.<br>
+    Now, the values ​​of the custom properties will be automatically set by referencing the material asset.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2060.jpg"/>
+    <br>
+    
+    <p>
+    When you bake and run the game, you will see the values ​​of the referenced material asset applied to the character.<br>
+    This feature is useful when many characters share custom shaders and properties.<br>
+    However, sometimes you may need to assign different values ​​for some properties to specific characters.<br>
+    In this case, you can specify custom properties directly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2061.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> The reference material asset is assigned from the material library.<br>
+    <strong>(2)</strong> In this state, let's set some custom properties to different values.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2062.jpg"/>
+    <br>
+    
+    <p>
+    When you bake and run the game, you can see that the values ​​of the properties you specified are applied with priority over the values ​​of the reference material.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    Referenced materials are referenced at Bake, not at runtime.<br>
+    So if the value of the referenced material changes, you will need to re-bake all characters with that asset applied.<br>
+    Also, if the value of the referenced material changes at runtime, the character will not be aware of this.<br>
+    </p>
+    <br>
     
     <br>
     <br>
@@ -980,6 +1092,43 @@
     </p>
     <br>
     
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Property of Keyword type</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
+    
+    <p>
+    AnyPortrait v1.5.1 now allows you to control "<strong>Keyword</strong>" as a custom property.<br>
+    For instructions on how to write a custom shader that utilizes keywords, please refer to the <a href="../../en/Script/SC_CustomShader.html">Related page</a>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2063.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Change the type to "<strong>Keyword</strong>" in the custom property, then set it to <strong>Enable</strong> or <strong>Disable</strong> to determine whether to use the keyword.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2064.jpg"/>
+    <br>
+    
+    <p>
+    If there are many keywords, it is cumbersome to set the property options one by one, so it is convenient to set them as above.<br>
+    <strong>(1)</strong> Click the <strong>Add Property from List</strong> button.<br>
+    <strong>(2)</strong> You can see that "keywords" appear in the list along with general properties. You can easily set them by selecting and adding them here.<br>
+    </p>
+    <br>
+    
     <!-- 5. 바닥 네비바 -->
     <br>
     <br>
@@ -999,6 +1148,32 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "Shader \"CustomShader/Character FX\"\n{\n\tProperties\n\t{\n\t\t_Color(\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex(\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\t\t_BumpMap(\"Bump Texture (Normalmap)\", 2D) = \"bump\" {}\n\t\t_RampMap(\"Ramp Gradient Map (RGB)\", 2D) = \"white\" {}\n\t\t_NoiseMap(\"Gray Noise Map (Gray)\", 2D) = \"white\" {}\n\t\t_FadeValue(\"Fade Value (0~1)\", Float) = 0\n\t\t_FadeColor1(\"Fade Color 1 (RGB)\", Color) = (0, 0, 0, 1)\n\t\t_FadeColor2(\"Fade Color 2 (RGB)\", Color) = (1, 1, 0, 1)\n\t}\t\n\tSubShader\n\t{\n\t\tTags{ \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tLOD 200\t\t\t\t\t  \n\t\tCGPROGRAM\n\t\t#pragma surface surf SimpleColor alpha\n\t\t#pragma target 3.0\t\t\t\t\t  \n\t\thalf4 _Color;\n\t\tsampler2D _MainTex;\n\t\tsampler2D _BumpMap;\n\t\tsampler2D _RampMap;\n\t\t// Custom Code\n\t\t//--------------------------------\n\t\tsampler2D _NoiseMap;\n\t\tfloat _FadeValue;\n\t\thalf4 _FadeColor1;\n\t\thalf4 _FadeColor2;\n\t\t//--------------------------------\n\t\tstruct Input\n\t\t{\n\t\t\tfloat2 uv_MainTex;\n\t\t\tfloat2 uv_BumpMap;\n\t\t\tfloat4 color : COLOR;\n\t\t};\n\t\thalf4 LightingSimpleColor(SurfaceOutput s, half3 lightDir, half atten)\n\t\t{\n\t\t\thalf4 c;\n\t\t\thalf nl = max(0, dot(s.Normal, lightDir));\n\t\t\thalf halfDiff = (nl * 0.5f) + 0.5f;\n\t\t\thalf3 rampColor = tex2D(_RampMap, float2(halfDiff, 0.5f)).rgb;\n\t\t\tc.rgb = saturate(s.Albedo * _LightColor0.rgb * (rampColor * atten));\n\t\t\tc.rgb + s.Emission;\n\t\t\tc.a = s.Alpha;\n\t\t\treturn c;\n\t\t}\n\t\tvoid surf(Input IN, inout SurfaceOutput o)\n\t\t{\n\t\t\thalf4 c = tex2D(_MainTex, IN.uv_MainTex);\n\t\t\tc.rgb *= _Color.rgb * 2.0f;\n\t\t\to.Alpha = c.a * _Color.a;\n\t\t\to.Albedo = c.rgb;\n\t\t\to.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));\t\t\t\n\t\t\t// Custom Code\n\t\t\t//---------------------------------------------------\n\t\t\to.Emission = half4(0, 0, 0, 0);\n\t\t\thalf noise = tex2D(_NoiseMap, IN.uv_MainTex).r;\n\t\t\tif (noise < _FadeValue - 0.03f)\n\t\t\t{\n\t\t\t\to.Alpha = 0.0f;\n\t\t\t}\t\t\t\n\t\t\thalf smoothFade = (noise - _FadeValue) / 0.6f;\n\t\t\tif (noise < _FadeValue)\n\t\t\t{\n\t\t\t\to.Emission = _FadeColor2.rgb;\n\t\t\t}\n\t\t\telse if (noise < _FadeValue + 0.6f)\n\t\t\t{\n\t\t\t\to.Albedo = (o.Albedo * _FadeColor1.rgb) * (1.0f - smoothFade) + o.Albedo * smoothFade;\n\t\t\t}\n\t\t\t//---------------------------------------------------\n\t\t}\n\t\tENDCG\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n​\npublic class CharacterFadeTester : MonoBehaviour\n{\n\t\t   public apPortrait portrait;\n\t\t   public float fadeValue = 0.5f;\n​\n\t\t   void Update ()\n\t\t   {\n\t\t\t\t\t  if ( Input.GetKey(KeyCode.A) )\n\t\t\t\t\t  {\n\t\t\t\t\t\t\t\t fadeValue -= Time.deltaTime * 0.5f;\n\t\t\t\t\t\t\t\t portrait.SetMeshCustomFloatAll(fadeValue, \"_FadeValue\");\n\t\t\t\t\t  }\n\t\t\t\t\t  if ( Input.GetKey(KeyCode.S) )\n\t\t\t\t\t  {\n\t\t\t\t\t\t\t\t fadeValue += Time.deltaTime * 0.5f;\n\t\t\t\t\t\t\t\t portrait.SetMeshCustomFloatAll(fadeValue, \"_FadeValue\");\n\t\t\t\t\t  }\n\t\t   }\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

@@ -588,6 +588,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -752,6 +755,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -856,6 +862,32 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class BoneSyncScript : MonoBehaviour\n{\n\tpublic Transform characterGroup;\n\tpublic apPortrait mainCharacter;\n\n\tpublic apPortrait costume1;\n\tpublic apPortrait costume2;\n\tpublic apPortrait costume3;\n\n\tvoid Start() { }\n\n\tvoid Update()\n\t{\n\t\t//Q나 W키를 눌러서 본체 캐릭터의 애니메이션을 재생합니다.\n\t\tif(Input.GetKeyDown(KeyCode.Q)) { mainCharacter.Play(\"Idle\"); }\n\t\tif(Input.GetKeyDown(KeyCode.W)) { mainCharacter.Play(\"Walk\"); }\n\n\t\t//숫자키 1을 누르면 모든 의상의 부착이 해제되고, 의상 1이 부착됩니다.\n\t\tif(Input.GetKeyDown(KeyCode.Alpha1))\n\t\t{\n\t\t\tDetachCostumes();\n\t\t\tAttachCostume1();\n\t\t}\n\n\t\t//숫자키 2를 누르면 모든 의상의 부착이 해제되고, 의상 2가 부착됩니다.\n\t\tif(Input.GetKeyDown(KeyCode.Alpha2))\n\t\t{\n\t\t\tDetachCostumes();\n\t\t\tAttachCostume2();\n\t\t}\n\n\t\t//숫자키 3을 누르면 모든 의상의 부착이 해제되고, 의상 3이 부착됩니다.\n\t\tif(Input.GetKeyDown(KeyCode.Alpha3))\n\t\t{\n\t\t\tDetachCostumes();\n\t\t\tAttachCostume3();\n\t\t}\n\n\t\t//숫자키 4를 누르면 모든 의상의 부착이 해제됩니다.\n\t\tif(Input.GetKeyDown(KeyCode.Alpha4))\n\t\t{\n\t\t\tDetachCostumes();\n\t\t}\n\t}\n\n\t//의상들의 부착을 모두 해제하는 함수\n\tprivate void DetachCostumes()\n\t{\n\t\t//Unsynchronize 함수를 호출하여 본 동기화를 해제합니다.\n\t\tcostume1.Unsynchronize();\n\t\tcostume2.Unsynchronize();\n\t\tcostume3.Unsynchronize();\n\n\t\t//부모 GameObject로 부터 독립을 시킵니다. (위치는 보기 좋게 적절히 분산시켰습니다.)\n\t\tcostume1.transform.parent = null;\n\t\tcostume1.transform.position = new Vector3(0, 0, 0);\n\t\tcostume2.transform.parent = null;\n\t\tcostume2.transform.position = new Vector3(4, 0, 0);\n\t\tcostume3.transform.parent = null;\n\t\tcostume3.transform.position = new Vector3(8, 0, 0);\n\t}\n\n\t//의상 1(Costume1)을 Character Group의 자식으로 등록하고, 본체 캐릭터의 본 움직임과 동기화를 합니다.\n\tprivate void AttachCostume1()\n\t{\n\t\t//Character Group의 자식으로 등록하고, Local 위치를 초기화합니다.\n\t\tcostume1.transform.parent = characterGroup;\n\t\tcostume1.transform.localPosition = Vector3.zero;\n\n\t\t//Synchronize 함수를 이용하여 본 움직임을 동기화할 수 있습니다.\n\t\tcostume1.Synchronize(mainCharacter, false, false, false, true, SYNC_BONE_OPTION.MatchFromRoot);\n\t}\n\n\t//의상 2(Costume2)를 Character Group의 자식으로 등록하고, 본체 캐릭터의 본 움직임과 동기화를 합니다.\n\tprivate void AttachCostume2()\n\t{\n\t\t//Character Group의 자식으로 등록하고, Local 위치를 초기화합니다.\n\t\tcostume2.transform.parent = characterGroup;\n\t\tcostume2.transform.localPosition = Vector3.zero;\n\n\t\t//Synchronize 함수를 이용하여 본 움직임을 동기화할 수 있습니다.\n\t\tcostume2.Synchronize(mainCharacter, false, false, false, true, SYNC_BONE_OPTION.MatchFromRoot);\n\t}\n\n\t//의상 3(Costume3)을 Character Group의 자식으로 등록하고, 본체 캐릭터의 본 움직임과 동기화를 합니다.\n\tprivate void AttachCostume3()\n\t{\n\t\t//Character Group의 자식으로 등록하고, Local 위치를 초기화합니다.\n\t\tcostume3.transform.parent = characterGroup;\n\t\tcostume3.transform.localPosition = Vector3.zero;\n\n\t\t//Synchronize 함수를 이용하여 본 움직임을 동기화할 수 있습니다.\n\t\tcostume3.Synchronize(mainCharacter, false, false, false, true, SYNC_BONE_OPTION.MatchFromRoot);\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "\t(앞부분 생략)\n\t//의상 1(Costume1)을 Character Group의 자식으로 등록하고, 본체 캐릭터의 본 움직임과 동기화를 합니다.\n\tprivate void AttachCostume1()\n\t{\n\t\t//Character Group의 자식으로 등록하고, Local 위치를 초기화합니다.\n\t\tcostume1.transform.parent = characterGroup;\n\t\tcostume1.transform.localPosition = Vector3.zero;\n\n\t\t//Synchronize 함수를 이용하여 본 움직임을 동기화할 수 있습니다.\n\t\tcostume1.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);\n\n\t\t//의상 1 메시들의 렌더링 순서(Sorting Order)를 본체의 메시를 기준으로 수정합니다.\n\t\tcostume1.SetSortingOrder(\"HairFront\", mainCharacter.GetSortingOrder(\"Head\") + 1);\n\t\tcostume1.SetSortingOrder(\"LeftArm\", mainCharacter.GetSortingOrder(\"LeftArm\") + 1);\n\t\tcostume1.SetSortingOrder(\"Body\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 2);\n\t\tcostume1.SetSortingOrder(\"LeftShoe\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 1);\n\t\tcostume1.SetSortingOrder(\"RightShoe\", mainCharacter.GetSortingOrder(\"RightLeg\") + 1);\n\t\tcostume1.SetSortingOrder(\"HairSide\", mainCharacter.GetSortingOrder(\"RightArm\") + 1);\n\t\tcostume1.SetSortingOrder(\"HairBack\", mainCharacter.GetSortingOrder(\"RightArm\") - 10);\n\t}\n\n\t//의상 2(Costume2)를 Character Group의 자식으로 등록하고, 본체 캐릭터의 본 움직임과 동기화를 합니다.\n\tprivate void AttachCostume2()\n\t{\n\t\t//Character Group의 자식으로 등록하고, Local 위치를 초기화합니다.\n\t\tcostume2.transform.parent = characterGroup;\n\t\tcostume2.transform.localPosition = Vector3.zero;\n\n\t\t//Synchronize 함수를 이용하여 본 움직임을 동기화할 수 있습니다.\n\t\tcostume2.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);\n\n\t\t//의상 2 메시들의 렌더링 순서(Sorting Order)를 본체의 메시를 기준으로 수정합니다.\n\t\tcostume2.SetSortingOrder(\"HairFront\", mainCharacter.GetSortingOrder(\"Head\") + 1);\n\t\tcostume2.SetSortingOrder(\"HairSide\", mainCharacter.GetSortingOrder(\"Head\") - 1);\n\t\tcostume2.SetSortingOrder(\"LeftArm\", mainCharacter.GetSortingOrder(\"LeftArm\") + 1);\n\t\tcostume2.SetSortingOrder(\"Body\", mainCharacter.GetSortingOrder(\"Body\") + 1);\n\t\tcostume2.SetSortingOrder(\"BeltFront\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 4);\n\t\tcostume2.SetSortingOrder(\"Pants_LeftLeg\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 3);\n\t\tcostume2.SetSortingOrder(\"BeltBack\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 2);\n\t\tcostume2.SetSortingOrder(\"LeftShoe\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 1);\n\t\tcostume2.SetSortingOrder(\"RightLeg\", mainCharacter.GetSortingOrder(\"RightLeg\") + 2);\n\t\tcostume2.SetSortingOrder(\"RightShoe\", mainCharacter.GetSortingOrder(\"RightLeg\") + 1);\n\t\tcostume2.SetSortingOrder(\"RightArm\", mainCharacter.GetSortingOrder(\"RightArm\") + 1);\n\t\tcostume2.SetSortingOrder(\"RightArm\", mainCharacter.GetSortingOrder(\"RightArm\") + 1);\n\t\tcostume2.SetSortingOrder(\"HairBack\", mainCharacter.GetSortingOrder(\"RightArm\") - 10);\n\t\tcostume2.SetSortingOrder(\"HairAcc\", mainCharacter.GetSortingOrder(\"RightArm\") - 11);\n\t\tcostume2.SetSortingOrder(\"HairTail\", mainCharacter.GetSortingOrder(\"RightArm\") - 12);\n\t}\n\n\t//의상 3(Costume3)을 Character Group의 자식으로 등록하고, 본체 캐릭터의 본 움직임과 동기화를 합니다.\n\tprivate void AttachCostume3()\n\t{\n\t\t//Character Group의 자식으로 등록하고, Local 위치를 초기화합니다.\n\t\tcostume3.transform.parent = characterGroup;\n\t\tcostume3.transform.localPosition = Vector3.zero;\n\n\t\t//Synchronize 함수를 이용하여 본 움직임을 동기화할 수 있습니다.\n\t\tcostume3.Synchronize(mainCharacter, false, false, true, SYNC_BONE_OPTION.MatchFromRoot, false);\n\n\t\t//의상 3 메시들의 렌더링 순서(Sorting Order)를 본체의 메시를 기준으로 수정합니다.\n\t\tcostume3.SetSortingOrder(\"Hat\", mainCharacter.GetSortingOrder(\"Head\") + 2);\n\t\tcostume3.SetSortingOrder(\"HairFront\", mainCharacter.GetSortingOrder(\"Head\") + 1);\n\t\tcostume3.SetSortingOrder(\"LeftArmFront\", mainCharacter.GetSortingOrder(\"LeftArm\") + 4);\n\t\tcostume3.SetSortingOrder(\"LeftHand\", mainCharacter.GetSortingOrder(\"LeftArm\") + 3);\n\t\tcostume3.SetSortingOrder(\"RightArmFront\", mainCharacter.GetSortingOrder(\"LeftArm\") + 2);\n\t\tcostume3.SetSortingOrder(\"Neck\", mainCharacter.GetSortingOrder(\"LeftArm\") + 1);\n\t\tcostume3.SetSortingOrder(\"LeftArmBack\", mainCharacter.GetSortingOrder(\"LeftArm\") - 1);\n\t\tcostume3.SetSortingOrder(\"BodyFront\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 3);\n\t\tcostume3.SetSortingOrder(\"Skirt\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 2);\n\t\tcostume3.SetSortingOrder(\"LeftShoe\", mainCharacter.GetSortingOrder(\"LeftLeg\") + 1);\n\t\tcostume3.SetSortingOrder(\"RightShoe\", mainCharacter.GetSortingOrder(\"RightLeg\") + 1);\n\t\tcostume3.SetSortingOrder(\"BodyBack\", mainCharacter.GetSortingOrder(\"RightLeg\") - 1);\n\t\tcostume3.SetSortingOrder(\"RightHand\", mainCharacter.GetSortingOrder(\"RightArm\") + 1);\n\t\tcostume3.SetSortingOrder(\"RightArmBack\", mainCharacter.GetSortingOrder(\"RightArm\") - 1);\n\t\tcostume3.SetSortingOrder(\"HairBack\", mainCharacter.GetSortingOrder(\"RightArm\") - 10);\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

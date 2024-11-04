@@ -735,6 +735,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -757,6 +760,21 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "public class PrefabTest : MonoBehaviour\n{\n\tvoid Start () { }\n\tvoid Update ()\n\t{\n\t\tif(Input.GetKeyUp(KeyCode.P))\n\t\t{\n\t\t\tGameObject swordGirl = Resources.Load<GameObject>(\"TestPrefab/SwordGirl\");\n\t\t\tswordGirl = Instantiate<GameObject>(swordGirl);\n\t\t\tapPortrait swordGirlPortrait = swordGirl.GetComponent<apPortrait>();\n\t\t\tswordGirlPortrait.transform.parent = this.transform;\n\t\t\tswordGirlPortrait.transform.localPosition = Vector3.zero;\n\t\t\tswordGirlPortrait.AsyncInitialize(OnPortraitLoadAsync);\n\t\t}\n\t}\n\n\tvoid OnPortraitLoadAsync(apPortrait portrait)\n\t{\n\t\tportrait.Play(\"Idle\");\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

@@ -254,6 +254,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -381,6 +384,21 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\npublic class CameraChangeScript : MonoBehaviour\n{\n\t// ターゲットであるapPortrait\n\tpublic apPortrait portrait;\n\n\tvoid Update()\n\t{\n\t\t// Aキーを押すとカメラがシーンに追加されます。\n\t\tif ( Input.GetKeyDown( KeyCode.A ) )\n\t\t{\n\t\t\t// カメラを追加します。\n\t\t\tAddCamera();\n\n\t\t\t// カメラが変更されたことをキャラクターに通知します。\n\t\t\tportrait.SetRenderingCameras(Camera.allCameras);\n\t\t}\n\n\t\t// Sキーを押すとカメラが削除されます。\n\t\tif ( Input.GetKeyDown( KeyCode.S ) )\n\t\t{\n\t\t\t// 追加されたカメラを削除します。\n\t\t\tRemoveCamera();\n\n\t\t\t// カメラが変更されたことをキャラクターに通知します。\n\t\t\tportrait.SetRenderingCameras(Camera.allCameras);\n\t\t}\n\t}\n\t(省略)\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

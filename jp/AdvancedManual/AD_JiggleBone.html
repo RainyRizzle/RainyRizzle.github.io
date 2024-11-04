@@ -352,6 +352,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -460,6 +463,21 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class WeightedJiggleBoneSample : MonoBehaviour\n{\n\t// 対象となるapPortrait\n\tpublic apPortrait portrait;\n\n\tvoid Update()\n\t{\n\t\t// 数字キーを押すと、制御パラメータの値が0.0、0.5、1.0に変わります。\n\t\tif (Input.GetKeyDown(KeyCode.Alpha1))\n\t\t{\n\t\t\tportrait.SetControlParamFloat(\"WeightValue\", 0.0f);\n\t\t}\n\n\t\tif (Input.GetKeyDown(KeyCode.Alpha2))\n\t\t{\n\t\t\tportrait.SetControlParamFloat(\"WeightValue\", 0.5f);\n\t\t}\n\n\t\tif (Input.GetKeyDown(KeyCode.Alpha3))\n\t\t{\n\t\t\tportrait.SetControlParamFloat(\"WeightValue\", 1.0f);\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

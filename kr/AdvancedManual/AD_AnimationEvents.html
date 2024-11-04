@@ -172,6 +172,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -237,6 +240,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -337,6 +343,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -826,6 +835,9 @@
     private void <strong>OnAnimEvent_A</strong> ( <span class="text-danger"><strong>float floatValue</strong></span> ) { Debug.Log("Event A (Overloaded)"); }<br>
     <br>
     </p>
+    <button id="scriptcopybutton3" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -875,6 +887,54 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\npublic class AnimEventListener : MonoBehaviour\n{\n\tvoid Start() { }\n\tvoid SampleAnimEvent()\n\t{\n\t\tDebug.Log(\"Sample Anim Event\");\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\npublic class AnimEventListener : MonoBehaviour\n{\n\tvoid Start() { }\n\tvoid SampleAnimEvent(float floatValue)\n\t{\n\t\tDebug.Log(\"Sample Anim Event - \" + floatValue);\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\npublic class AnimEventListener : MonoBehaviour\n{\n\tvoid Start() { }\n\tvoid MultipleParamAnimEvent(object[] multipleParams)\n\t{\n\t\tint intParam = (int)multipleParams[0];\n\t\tfloat floatParam = (float)multipleParams[1];\n\t\tVector2 vector2Param = (Vector2)multipleParams[2];\n\t\tDebug.Log(\"Multiple Param Anim Event\");\n\t\tDebug.Log(\"Param 1 : \" + intParam);\n\t\tDebug.Log(\"Param 2 : \" + floatParam);\n\t\tDebug.Log(\"Param 3 : \" + vector2Param);\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton3").addEventListener("click", function() {
+    const textToCopy = "private void OnAnimEvent_A () { Debug.Log(\"Event A\"); }\n\nprivate void OnAnimEvent_A ( float floatValue ) { Debug.Log(\"Event A (Overloaded)\"); }\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

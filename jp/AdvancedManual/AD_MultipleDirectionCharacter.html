@@ -335,6 +335,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -951,6 +954,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -1027,6 +1033,32 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class MultiRootUnitController : MonoBehaviour\n{\n\t// 対象キャラクター\n\tpublic apPortrait portrait;\n\n\tvoid Start() { }\n\n\tvoid Update()\n\t{\n\t\tif(Input.GetKeyDown(KeyCode.Alpha1))\n\t\t{\n\t\t\t// 数字1キーを押すと、「Front」のウォーキングアニメーションが再生されます。\n\t\t\tportrait.Play(\"Walk_Front\");\n\t\t}\n\t\tif(Input.GetKeyDown(KeyCode.Alpha2))\n\t\t{\n\t\t\t// 数字2キーを押すと、「Side」のウォーキングアニメーションが再生されます。\n\t\t\tportrait.Play(\"Walk_Side\");\n\t\t}\n\t\tif(Input.GetKeyDown(KeyCode.Alpha3))\n\t\t{\n\t\t\t// 数字3キーを押すと、「Back」のウォーキングアニメーションが再生されます。\n\t\t\tportrait.Play(\"Walk_Back\");\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class GetRootPoseScript : MonoBehaviour\n{\n\tpublic apPortrait portrait;\n\n\t// Root Pose 制御パラメータ変数\n\tprivate apControlParam rootPose;\n\n\t// GUIで確認する現在のキャラクター方向の名前\n\tprivate string poseName = \"\";\n\n\tvoid Start()\n\t{\n\t\t// 「Root Pose」制御パラメータを取得し、変数として保存します。\n\t\trootPose = portrait.GetControlParam(\"Root Pose\");\n\t}\n\n\t// 値を確認するのは、Updateではなく「LateUpdate」でなければなりません。\n\tvoid LateUpdate()\n\t{\n\t\t// 現在の制御パラメータの値を確認します。 Root PoseがInt型だったので、「Int」値を取得します。\n\t\tint currentPose = rootPose.IntValue;\n\n\t\t// 制御パラメータの値に割り当てられたキャラクターの方向を文字列として格納します。\n\t\tswitch (currentPose)\n\t\t{\n\t\t\tcase -1: poseName = \"Back\"; break;\n\t\t\tcase 0: poseName = \"Side\"; break;\n\t\t\tcase 1: poseName = \"Front\"; break;\n\t\t}\n\t}\n\n\tprivate void OnGUI()\n\t{\n\t\t// 文字列として保存されたキャラクターの方向を Unity 画面に出力します。\n\t\tGUI.Label(new Rect(10, 10, 500, 20), \"Current Pose : \" + poseName);\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

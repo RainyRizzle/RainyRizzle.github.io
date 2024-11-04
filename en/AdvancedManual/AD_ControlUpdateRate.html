@@ -130,6 +130,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -173,6 +176,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -235,6 +241,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -289,6 +298,43 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "void Update()\n{\n\t// Press Q to return the game's speed to default (1).\n\tif (Input.GetKeyDown(KeyCode.Q))\n\t{\n\t\tTime.timeScale = 1.0f;\n\t}\n\n\t// Press W to make the game 3x faster.\n\tif (Input.GetKeyDown(KeyCode.W))\n\t{\n\t\tTime.timeScale = 3.0f;\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "void Update()\n{\n\t// (Skipped)\n\t// Press A to reset all speed options.\n\tif (Input.GetKeyDown(KeyCode.A))\n\t{\n\t\tportraitA.SetUpdateTimeMethod(false);\n\t\tportraitB.SetUpdateTimeMethod(false);\n\t\tportraitC.SetUpdateTimeMethod(false);\n\t\tportraitD.SetUpdateTimeMethod(false);\n\t}\n\n\t// Press the S key to specify each speed ratio using multipliers.\n\tif (Input.GetKeyDown(KeyCode.S))\n\t{\n\t\tportraitA.SetUpdateTimeMethod(false);\n\t\tportraitB.SetUpdateTimeMethod(false, 1.5f);\n\t\tportraitC.SetUpdateTimeMethod(true);\n\t\tportraitD.SetUpdateTimeMethod(true, 1.5f);\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "void Update()\n{\n\t// (Skipped)\n\t// When the D key is pressed, the playback speed is changed by a callback function.\n\tif (Input.GetKeyDown(KeyCode.D))\n\t{\n\t\tportraitA.SetUpdateTimeMethod(OnDeltaTimeRequested, portraitA);\n\t\tportraitB.SetUpdateTimeMethod(OnDeltaTimeRequested, portraitB);\n\t\tportraitC.SetUpdateTimeMethod(OnDeltaTimeRequested, portraitC);\n\t\tportraitD.SetUpdateTimeMethod(OnDeltaTimeRequested, portraitD);\n\t}\n}\n\n// This is a callback function that returns the playback speed for each apPortrait.\nprivate float OnDeltaTimeRequested(object savedObject)\n{\n\t// Returns a different playback speed depending on the stored object.\n\tif (savedObject == (object)portraitA)\n\t{\n\t\treturn Time.deltaTime / 2.0f;\n\t}\n\telse if (savedObject == (object)portraitB)\n\t{\n\t\treturn Time.deltaTime * 3.0f;\n\t}\n\telse if (savedObject == (object)portraitC)\n\t{\n\t\treturn Time.unscaledDeltaTime / 2.0f;\n\t}\n\telse if (savedObject == (object)portraitD)\n\t{\n\t\treturn Time.unscaledDeltaTime * 3.0f;\n\t}\n\treturn Time.deltaTime;\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

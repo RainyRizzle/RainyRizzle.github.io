@@ -523,6 +523,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -1125,6 +1128,21 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "Pass\n{\n\t// ステンシルに値を設定する「Pass」です。\n\t// 「Renderer Data」で「Overrides」設定でステンシルを指定するので、ここでステンシルコードは作成しません。\n\n\t// 「Light Mode」の名前を利用してマルチパスを実装します。\n\t// 「SetStencilPass」という名前を覚えておいてください。\n\tTags { \"LightMode\" = \"SetStencilPass\" }\n\tBlend SrcAlpha OneMinusSrcAlpha\n\n\t// 「ColorMask」を「A」に設定すると、ステンシルが設定されてもレンダリングされません。\n\tZWrite Off\n\tColorMask A\n\n\tHLSLPROGRAM\n\t#pragma vertex vert\n\t#pragma fragment frag\n\t#include \"Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl\"\t\t\t\n\n\tstruct Attributes\n\t{\n\t\tfloat4 positionOS : POSITION;\n\t\tfloat2 uv : TEXCOORD0;\n\t};\n\tstruct Varyings\n\t{\n\t\tfloat4 positionHCS : SV_POSITION;\n\t\tfloat2 uv : TEXCOORD0;\n\t};\n\n\tTEXTURE2D(_MainTex);\n\tSAMPLER(sampler_MainTex);\n\n\t// シェーダのプロパティのコードをここに書きます。\n\t// レンダリングを最適化するために「SRP Batcher」を動作させるには、次の「CBUFFER」構文を他の「Pass」と同じにする必要があります。\n\tCBUFFER_START(UnityPerMaterial)\n\t\tfloat4 _MainTex_TexelSize;\n\t\tfloat4 _MainTex_ST;\n\t\tfloat4 _Color;\n\t\tfloat _LineThickness;\n\tCBUFFER_END\n\n\tVaryings vert(Attributes IN)\n\t{\n\t\tVaryings OUT;\n\t\tOUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);\n\t\tOUT.uv = TRANSFORM_TEX(IN.uv, _MainTex);\n\t\treturn OUT;\n\t}\n\n\thalf4 frag(Varyings IN) : SV_Target\n\t{\n\t\t// 「_LineThickness」の長さだけ離れて位置するピクセルの透明度をチェックします。\n\t\tfloat offset1 = _LineThickness;\n\t\tfloat offset2 = _LineThickness * 0.7f;\n\n\t\tfloat alpha_0 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv).a;\n\n\t\t// 周囲の8つのピクセルの透明度をチェックします。\n\t\tfloat alpha_1 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(offset1, 0)).a;\n\t\tfloat alpha_2 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(-offset1, 0)).a;\n\t\tfloat alpha_3 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(0, offset1)).a;\n\t\tfloat alpha_4 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(0, -offset1)).a;\n\t\tfloat alpha_5 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(offset2, offset2)).a;\n\t\tfloat alpha_6 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(-offset2, offset2)).a;\n\t\tfloat alpha_7 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(-offset2, -offset2)).a;\n\t\tfloat alpha_8 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(offset2, -offset2)).a;\n\n\t\thalf totalAlpha = alpha_0 + alpha_1 + alpha_2 + alpha_3 + alpha_4 + alpha_5 + alpha_6 + alpha_7 + alpha_8;\n\n\t\tfloat4 c = float4(0, 0, 0, 0);\t\t\t\t\n\t\tc.a = saturate(totalAlpha * _Color.a);\n\n\t\t// 「discard」が呼び出されると、ステンシルが更新されない点を使用して、アウトラインである部分だけがステンシル値を格納するようにします。\n\n\t\t// ピクセルが不透明な場合、アウトラインではなく画像の内側に対応します。\n\t\tif (alpha_0 > 0.5f)\n\t\t{\n\t\t\tdiscard;\n\t\t}\n\n\t\t// 周囲に不透明なピクセルがない場合は、アウトラインではなくマージンに対応します。\n\t\tif (c.a < 0.02f)\n\t\t{\n\t\t\tdiscard;\n\t\t}\n\n\t\treturn c;\n\t}\n\tENDHLSL\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

@@ -198,6 +198,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -344,6 +347,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -422,6 +428,32 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom/Ghost Clipping Shader\"\n{\n\tProperties\n\t{\n\t\t_Color(\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex(\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\t}\n\tSubShader\n\t{\n\t\tTags{ \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tLOD 200\n\n\t\tCGPROGRAM\n\t\t#pragma surface surf SimpleColor alpha\n\t\t#pragma target 3.0\n\n\t\thalf4 LightingSimpleColor(SurfaceOutput s, half3 lightDir, half atten)\n\t\t{\n\t\t\thalf4 c;\n\t\t\tc.rgb = s.Albedo;\n\t\t\tc.a = s.Alpha;\n\t\t\treturn c;\n\t\t}\n\n\t\thalf4 _Color;\n\t\tsampler2D _MainTex;\n\n\t\tstruct Input\n\t\t{\n\t\t\tfloat2 uv_MainTex;\n\t\t\tfloat4 color : COLOR;\n\t\t};\n\n\t\tvoid surf(Input IN, inout SurfaceOutput o)\n\t\t{\n\t\t\to.Alpha = 0;\n\t\t\to.Albedo = half3(0, 0, 0);\n\t\t}\n\t\tENDCG\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom/Invert Clipped Shader\"\n{\n\tProperties\n\t{\n\t\t_Color(\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex(\"Base Texture (RGBA)\", 2D) = \"white\" {}\n\t\t_MaskTex(\"Mask Texture (A)\", 2D) = \"white\" {}\n\t\t_MaskScreenSpaceOffset(\"Mask Screen Space Offset (XY_Scale)\", Vector) = (0, 0, 0, 1)\n\t}\n\tSubShader\n\t{\n\t\tTags{ \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\"}\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tLOD 200\n\n\t\tCGPROGRAM\n\t\t#pragma surface surf SimpleColor alpha\n\t\t#pragma target 3.0\n\n\t\thalf4 LightingSimpleColor(SurfaceOutput s, half3 lightDir, half atten)\n\t\t{\n\t\t\thalf4 c;\n\t\t\tc.rgb = s.Albedo;\n\t\t\tc.a = s.Alpha;\n\t\t\treturn c;\n\t\t}\n\n\t\thalf4 _Color;\n\t\tsampler2D _MainTex;\n\t\tsampler2D _MaskTex;\n\t\tfloat4 _MaskScreenSpaceOffset;\n\n\t\tstruct Input\n\t\t{\n\t\t\tfloat2 uv_MainTex;\n\t\t\tfloat4 screenPos;\n\t\t\tfloat4 color : COLOR;\n\t\t};\n\n\t\tvoid surf(Input IN, inout SurfaceOutput o)\n\t\t{\n\t\t\thalf4 c = tex2D(_MainTex, IN.uv_MainTex);\n\t\t\tc.rgb *= _Color.rgb * 2.0f;\n\n\t\t\tfloat2 screenUV = IN.screenPos.xy / max(IN.screenPos.w, 0.0001f);\n\t\t\tscreenUV -= float2(0.5f, 0.5f);\n\t\t\tscreenUV.x *= _MaskScreenSpaceOffset.z;\n\t\t\tscreenUV.y *= _MaskScreenSpaceOffset.w;\n\t\t\tscreenUV.x += _MaskScreenSpaceOffset.x * _MaskScreenSpaceOffset.z;\n\t\t\tscreenUV.y += _MaskScreenSpaceOffset.y * _MaskScreenSpaceOffset.w;\n\t\t\tscreenUV += float2(0.5f, 0.5f);\n\n\t\t\tfloat mask = tex2D(_MaskTex, screenUV).r;\n\t\t\tmask = 1 - mask;\n\n\t\t\tc.a *= mask;\n\n\t\t\to.Alpha = c.a * _Color.a;\n\t\t\to.Albedo = c.rgb;\n\t\t}\n\t\tENDCG\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

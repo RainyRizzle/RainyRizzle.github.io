@@ -76,11 +76,109 @@
     <h1 class="display-5">カスタムシェーダー</h1>
     <br>
     
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
+    
     <p>
-    AnyPortraitが提供するシェーダではなく、ユーザごとにシェーダを作成して使用する方法です。<br>
-    カスタムシェーダの適用方法とベーキング方法については、<a href="../../jp/AdvancedManual/AD_MeshShader.html">関連ページ</a>を参照してください。<br>
-    クリッピングマスクがあるかどうかによってシェーダコードを書く方法は2通りあります。<br>
+    AnyPortraitは一般的に使用されるさまざまなシェーダを提供しますが、プロジェクトによっては特殊な効果を加えたカスタムシェーダを作成する必要もあります。<br>
+    AnyPortraitのわずかな規則に準拠している場合は、カスタムシェーダを簡単に作成して素晴らしいレンダリング結果を作成できます。<br>
+    このページでは、AnyPortraitのシェーダ基本型がどのように設定されているかについて説明します。<br>
+    この説明に基づいてカスタムシェーダを作成して適用してください。<br>
     </p>
+    <br>
+    
+    <p>
+    作成したシェーダを適用したい場合は、「マテリアルライブラリ」を利用するか、メッシュのプロパティを変更するだけです。<br>
+    シェーダを変更する方法については、次のマニュアルを確認してください。<br>
+    - <a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">マテリアルライブラリ</a><br>
+    - <a href="../../jp/AdvancedManual/AD_MeshShader.html">メッシュ用シェーダ(Shader)</a><br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    このページでは、シェーダの作成方法については説明しません。<br>
+    関連する内容については、Unityドキュメントやフォーラム、関連サイトをご覧ください！<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>AnyPortraitで使用されるシェーダの種類</h3>
+    <br>
+    
+    <p>
+    AnyPortraitは、1つのシェーダを使用するのではなく、複数のシェーダのうちの状況に合ったシェーダを使用します。<br>
+    シェーダが派生する3つの要因に応じて、合計17個のシェーダが1つのセットを成して適用されます。 （<a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">関連ページ</a>）<br>
+    その要因は次のとおりです。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. カラースペース(Color Space)</strong><br>
+    プロジェクトの色空間によってシェーダが決まります。<br>
+    「<strong>Gamma Space</strong>」に基づいて作成され、「<strong>Linear Space</strong>」の場合は色演算式が変更されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. ブレンディング(Blending)</strong><br>
+    メッシュは、4種類のブレンドのいずれかの方法でレンダリングされます。<br>
+    デフォルトの「<strong>Alpha Blend</strong>」に基づいて作成され、「<strong>Additive</strong>」、「<strong>Soft Additive</strong>」、「<strong>Multiplicative</strong>」では、ブレンド属性とアルファ値演算に関連するコードが少し変更されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. クリッピング(Clipping)</strong><br>
+    クリッピングメッシュはマスクテクスチャ情報を受け取り、アルファ演算をさらに実行します。<br>
+    マスクを生成する1つのシェーダも含まれていますが、これは固定された役割を果たす機能性シェーダです。<br>
+    </p>
+    <br>
+    
+    <p>
+    上記の要因が組み合わせられ、合計17個のシェーダがキャラクターに適用されます。<br>
+    しかし、カスタムシェーダーを作成したい場合は、あえてすべてのシェーダーを作成する必要はありません。<br>
+    次の点をチェックして、あなたのプロジェクトの状況に合ったシェーダーだけを作成します。<br>
+    </p>
+    <br>
+    
+    <p>
+    - プロジェクトの色空間に応じて、<strong>Gamma</strong>や<strong>Linear</strong>のいずれかのタイプのシェーダーのみ作成してください。<br>
+    - ブレンディングオプションを使用しない場合は、基本的な方法である<strong>Alpha Blend</strong>シェーダーを作成するだけです。<br>
+    - クリッピングメッシュがない場合は、クリッピングシェーダを作成する必要はありません。<br>
+    - クリッピングマスクを作る<strong>Alpha Mask</strong>シェーダは固定された役割のみを行うので、カスタムシェーダで制作する必要はありません。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページでは、デフォルトの「Gamma Space」で「Alpha Blend」シェーダを作成するための規則と方法について最初に説明します。<br>
+    そして、シェーダを決定する要因に応じて修正する必要がある部分をそれぞれ説明します。<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortraitパッケージに組み込まれているシェーダコードを確認しておくと便利です。<br>
+    シェーダーアセットはデフォルトで「<strong>Assets/AnyPortrait/Assets/Shaders</strong>」にあります。<br>
+    提供されるシェーダを複製して必要な部分を修正すると便利です。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>シェーダーグラフで作成する場合</h4>
+    <br>
+    
+    <p>
+    シェーダグラフでカスタムシェーダを作成したい場合は、このページで説明するルールをシェーダグラフの形式で作成します。<br>
+    詳細については、<a href="../../jp/AdvancedManual/AD_ShaderGraph.html">関連ページ</a>をご覧ください。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
     <br>
     
     <br>
@@ -89,207 +187,659 @@
     <h3>基本シェーダの作成方法</h3>
     <br>
     
+    <p>
+    AnyPortraitのデフォルトシェーダは、UnityのデフォルトのTransparentシェーダとは大きく変わりません。<br>
+    次のコードは「Gamma Space」の「Alpha Blend」の基本シェーダであり、これを元にカスタムコードを追加すればよいでしょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    AnyPortraitは「<strong>Surface Shader</strong>」と「<strong>Fragment Shader</strong>」と「<strong>シェーダーグラフ」</strong>の両方をサポートしています。<br>
+    このページでは「<strong>Fragment Shader</strong>」のコードに基づいて説明し、ここで説明するルールを状況に合わせて適切に適用すればよいでしょう。<br>
+    </p>
+    <br>
+    
     <!-- 23. 코드 예시 -->
     <div class="alert alert-warning" role="alert">
     <p>
     <br>
-    Shader <span class="text-danger">"Custom Shader/Sample Transparent"</span><br>
+    Shader <span class="text-danger">"Sample Shader/Gamma Space - Normal - AlphaBlend"</span><br>
     {<br>
     &emsp;&emsp;Properties<br>
     &emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;<strong>_Color</strong>(<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
-    &emsp;&emsp;&emsp;&emsp;<strong>_MainTex</strong>(<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_Color</strong> (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MainTex</strong> (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = <span class="text-danger">"white"</span> {}<br>
     &emsp;&emsp;}<br>
     <br>
     &emsp;&emsp;SubShader<br>
     &emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType"</span> = <span class="text-danger">"Transparent" "Queue" </span>= <span class="text-danger">"Transparent" "PreviewType"</span> = <span class="text-danger">"Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger"><strong>"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</strong></span> }<br>
     &emsp;&emsp;&emsp;&emsp;<strong>Blend SrcAlpha OneMinusSrcAlpha</strong><br>
     &emsp;&emsp;&emsp;&emsp;LOD 200<br>
     <br>
-    &emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
-    <br>
-    &emsp;&emsp;&emsp;&emsp;#pragma surface surf SimpleColor alpha<br>
-    &emsp;&emsp;&emsp;&emsp;#pragma target 3.0<br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>LightingSimpleColor(SurfaceOutput s, <span class="text-primary">half3 </span>lightDir, <span class="text-primary">half </span>atten)<br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
     &emsp;&emsp;&emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> c;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb = s.Albedo;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a = s.Alpha;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">return</span> c;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger"><strong>"LightMode" = "ForwardBase"</strong></span> }<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>ZWrite Off</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> <strong>_MainTex</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> <strong>_MainTex_ST</strong>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> <strong>_Color</strong>;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert (<span class="text-primary">appdata</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb *= _Color.rgb * 2.0f;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a *= _Color.a;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>return col;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
     &emsp;&emsp;&emsp;&emsp;}<br>
     <br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span><strong>_Color</strong>;<br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D </span><strong>_MainTex</strong>;<br>
-    <br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct </span>Input<br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
     &emsp;&emsp;&emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2 </span>uv_MainTex;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4 </span>color : COLOR;<br>
-    &emsp;&emsp;&emsp;&emsp;};<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger"><strong>"LightMode" = "ShadowCaster"</strong></span> }<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>ZWrite On</strong><br>
     <br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">void </span>surf(Input IN, <span class="text-primary">inout</span> SurfaceOutput o)<br>
-    &emsp;&emsp;&emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>c = <strong>tex2D</strong>(_MainTex, IN.uv_MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma multi_compile_shadowcaster<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
     <br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>c.rgb *= _Color.rgb * 2.0f;</strong><br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.Alpha = c.a * _Color.a;</strong><br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.Albedo = c.rgb;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{ <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;V2F_SHADOW_CASTER;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert(<span class="text-primary">appdata_base</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;TRANSFER_SHADOW_CASTER_NORMALOFFSET(o)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> frag(<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a *= _Color.a;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>if(col.a < 0.05f)</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>{</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>discard;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>}</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>SHADOW_CASTER_FRAGMENT(i)</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
     &emsp;&emsp;&emsp;&emsp;}<br>
-    &emsp;&emsp;&emsp;&emsp;ENDCG<br>
     &emsp;&emsp;}<br>
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
     <p>
-    <strong>1. Properties</strong><br>
-    <strong>_Color</strong>(<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
-    <strong>_MainTex</strong>(<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
-    : デフォルトでAnyPortraitは2つのプロパティーしか使用しません。<br>
-    カラーアニメーションの 「<strong>_Color</strong>」プロパティとテクスチャを適用する 「<strong>_MainTex</strong>」プロパティを宣言します。<br>
-    これらの2つのプロパティを外部的に制御すると、AnyPortraitのロジックと競合する可能性があります。<br>
+    シェーダコードの主要部分を見てみましょう。<br>
     </p>
     <br>
     
     <p>
-    <strong>2. Blending</strong><br>
-    <strong>Blend SrcAlpha OneMinusSrcAlpha</strong><span class="text-danger"> : Alpha Blend</span><br>
-    <strong>Blend One One</strong><span class="text-danger"> : Additive</span><br>
-    <strong>Blend OneMinusDstColor One</strong><span class="text-danger"> : Soft Additive</span><br>
-    <strong>Blend DstColor SrcColor</strong><span class="text-danger"> : Multiplicative</span><br>
-    : AnyPortraitで使用される4つの「ブレンド (Blending)」メソッド。<br>
-    上記のように記述したり、必要に応じて他のブレンド宣言を行うことができます。<br>
+    <strong>1. プロパティ</strong><br>
+    <strong>_Color</strong> (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    <strong>_MainTex</strong> (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = <span class="text-danger">"white"</span> {}<br>
+    <br>
+    Unityのデフォルトの「Transparent」シェーダで使用されるプロパティであり、AnyPortraitで使用されるプロパティです。<br>
+    クリッピングされるメッシュではなく一般的な場合は、これらのプロパティのみを使用します。<br>
+    したがって、カスタムシェーダでは、これら2つのプロパティに関連するすべてのコードをそのまま作成する必要があります。<br>
+    また、AnyPortraitのシステムはこれらのプロパティを制御するため、他のスクリプトでこれらのプロパティを変更しないでください。<br>
     </p>
     <br>
     
     <p>
-    <strong>3. Albedo, Alpha</strong><br>
-    <span class="text-primary">half4 </span>c = <strong>tex2D</strong>(_MainTex, IN.uv_MainTex);<br>
-    <strong>c.rgb *= _Color.rgb * 2.0f;</strong><br>
-    <strong>o.Alpha = c.a * _Color.a;</strong><br>
-    <strong>o.Albedo = c.rgb;</strong><br>
-    : 色の計算は、デフォルトで「2X Multiply」を適用します。<br>
-    RGBが2倍になり、アルファが乗算されて適用されます。<br>
-    必要に応じて変更することはできますが、エディタのレンダリング結果と異なる場合があります。<br>
+    <strong>2. 基本パス</strong><br>
+    Pass<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Tags { <span class="text-danger"><strong>"LightMode" = "ForwardBase"</strong></span> }<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>ZWrite Off</strong><br>
+        ...<br>
+    : 基本レンダリングパスのコードです。<br>
+    上記のようにパスを明示したのは、影生成のためのパスが別途存在するためです。<br>
+    シャドウパスを作成しない場合は、タグ「{ <span class="text-danger"><strong>"LightMode" = "ForwardBase"</strong></span>}」を省略してください。<br>
+    「<strong>Z Write</strong>」をしないので、この値を「<strong>Off</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. ブレンディング</strong><br>
+    <strong>Blend SrcAlpha OneMinusSrcAlpha</strong><br>
+    : 「Alpha Blend」シェーダのブレンディングコードです。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>4. 色演算</strong><br>
+    <span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <strong>col.rgb *= _Color.rgb * 2.0f;</strong><br>
+    <strong>col.a *= _Color.a;</strong><br>
+    <strong>return col;</strong><br>
+    : AnyPortraitの色演算式は「<strong>2X Multiply</strong>」です。<br>
+    したがって、RGBにはさらに2を掛ける必要があります。<br>
+    このコードはブレンドによって変わります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>5. シャドウパス</strong><br>
+    Pass<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Tags { <span class="text-danger"><strong>"LightMode" = "ShadowCaster"</strong></span> }<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<strong>ZWrite On</strong><br>
+        ...<br>
+    }<br>
+    : 「Alpha Blend」メッシュの場合は、オプションに応じてシャドウを作成できるはずです。<br>
+    したがって、影を生成する「<strong>ShadowCaster</strong>」パスを作成する必要があります。<br>
+    このパスはシャドウを生成する役割のみを行うため、上記の例のように作成するだけです。<br>
+    「<strong>Surface Shader</strong>」方式で作成する場合は、このパスを作成する必要はありません。<br>
     </p>
     <br>
     
     <br>
     <br>
     <!-- 3. 서브 타이틀 -->
-    <h3>クリッピングマスクシェーダを作成する方法</h3>
+    <h3>「Linear Space」のシェーダー</h3>
+    <br>
+    
+    <p>
+    上記の例は「<strong>Gamma Space</strong>」のシェーダーコードです。<br>
+    上記の基本コードで、基本パス（「<strong>ForwardBase</strong>」）の「<strong>frag</strong>」関数を次のように修正しましょう。<br>
+    </p>
     <br>
     
     <!-- 23. 코드 예시 -->
     <div class="alert alert-warning" role="alert">
     <p>
     <br>
-    Shader <span class="text-danger">"Custom Shader/Sample Clipping Transparent"</span><br>
-    {<br>
-    &emsp;&emsp;Properties<br>
-    &emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;_Color(<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
-    &emsp;&emsp;&emsp;&emsp;_MainTex(<span class="text-danger">"Base Texture (RGBA)"</span>, 2D) = "white" {}<br>
-    &emsp;&emsp;&emsp;&emsp;<strong>_MaskTex</strong>(<span class="text-danger">"Mask Texture (A)"</span>, 2D) = "white" {}<br>
-    &emsp;&emsp;&emsp;&emsp;<strong>_MaskScreenSpaceOffset</strong>(<span class="text-danger">"Mask Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
-    &emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;...<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
     <br>
-    &emsp;&emsp;SubShader<br>
-    &emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;Tags{ <span class="text-danger">"RenderType"</span> = <span class="text-danger">"Transparent" "Queue"</span> = <span class="text-danger">"Transparent" "PreviewType"</span> = <span class="text-danger">"Plane"</span>}<br>
-    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
-    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>col.rgb *= _Color.rgb * 4.595f;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>col.rgb = pow(col.rgb, 2.2f);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
     <br>
-    &emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
-    <br>
-    &emsp;&emsp;&emsp;&emsp;#pragma surface surf SimpleColor alpha<br>
-    &emsp;&emsp;&emsp;&emsp;#pragma target 3.0<br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>LightingSimpleColor(SurfaceOutput s, <span class="text-primary">half3 </span>lightDir, <span class="text-primary">half </span>atten)<br>
-    &emsp;&emsp;&emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>c;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb = s.Albedo;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.a = s.Alpha;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">return </span>c;<br>
-    &emsp;&emsp;&emsp;&emsp;}<br>
-    <br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>_Color;<br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D </span>_MainTex;<br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> <strong>_MaskTex</strong>;<br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4 </span><strong>_MaskScreenSpaceOffset</strong>;<br>
-    <br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> Input<br>
-    &emsp;&emsp;&emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv_MainTex;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4 </span><strong>screenPos</strong>;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4 </span>color : COLOR;<br>
-    &emsp;&emsp;&emsp;&emsp;};<br>
-    <br>
-    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">void </span>surf(Input IN, <span class="text-primary">inout </span>SurfaceOutput o)<br>
-    &emsp;&emsp;&emsp;&emsp;{<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4 </span>c = tex2D(_MainTex, IN.uv_MainTex);<br>
-    <br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;c.rgb *= _Color.rgb * 2.0f;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2 </span><strong>screenUV </strong>= IN.screenPos.xy / IN.screenPos.w;<br>
-    <br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV </strong>-= <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x</strong> *= _MaskScreenSpaceOffset.z;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.y</strong> *= _MaskScreenSpaceOffset.w;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x</strong> += _MaskScreenSpaceOffset.x * _MaskScreenSpaceOffset.z;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.y</strong> += _MaskScreenSpaceOffset.y * _MaskScreenSpaceOffset.w;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV </strong>+= <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float </span><strong>mask </strong>= tex2D(_MaskTex, screenUV).r;<br>
-    <br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>c.a *= mask;</strong><br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Alpha = c.a * _Color.a;<br>
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.Albedo = c.rgb;<br>
-    &emsp;&emsp;&emsp;&emsp;}<br>
-    &emsp;&emsp;&emsp;&emsp;ENDCG<br>
-    &emsp;&emsp;}<br>
-    }<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;...<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
     <p>
-    <strong>1.Properties</strong><br>
-    <strong>_MaskTex</strong>(<span class="text-danger">"Mask Texture (A)"</span>, 2D) = "white" {}<br>
-    <strong>_MaskScreenSpaceOffset</strong>(<span class="text-danger">"Mask Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
-    : クリッピングマスク処理のためにプロパティにマスクテクスチャを追加します。<br>
-    AnyPortraitは自動的に上記のプロパティを追加してクリッピングレンダリングを処理します。<br>
-    「<strong>_MaskScreenSpaceOffset</strong>」は、「Screen Space」に対してクリッピングマスクを適用するためのプロパティです<br>
+    「<strong>Linear Space</strong>」では、「<strong>Gamma Space</strong>」と比較して、色に「2.2」の二乗を加えた値が適用されると、元の画像の色に近づいて表示されます。<br>
+    そのため、上記のように「<strong>2X Multiply</strong>」演算規則であるにもかかわらず、「2」ではなく「<strong>4.595</strong>」を掛け、最終RGBも「2.2」の二乗をしてくれます。<br>
+    この変更点はブレンディングの種類に関係なく適用する必要があります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>ブレンディングオプションによるシェーダー</h3>
+    <br>
+    
+    <p>
+    メッシュのオプションを変更すると、デフォルトのブレンド「<strong>Alpha Blend</strong>」に加えて、「<strong>Additive</strong>」、「<strong>Soft Additive</strong>」、「<strong>Multiplicative</strong>」の方法でレンダリングできます。<br>
+    ブレンディング方式によってシェーダをそれぞれ作成する必要がありますが、上記の「<strong>Alpha Blend</strong>」のコードを少し修正して楽に作成できます。<br>
+    「<strong>Alpha Blend</strong>」以外のブレンドオプションは主に「視覚効果」のためであるため、影を生成するパスを作成しないことをお勧めします。<br>
     </p>
     <br>
     
     <p>
-    <strong>2. Screen Space Semantic</strong><br>
-    <span class="text-primary">struct</span> Input<br>
+    3種類のブレンディングについては、シェーダ内の「<strong>Blend</strong>」と「<strong>frag</strong>」関数の一部のコードを修正すればよい。<br>
+    また、「<strong>Alpha Blend</strong>」とは異なり、シャドウ生成パスを省略するので、「<strong>LightMode</strong>」コードを削除するだけです。<br>
+    次の例には3つのブレンドのコードがすべて含まれているので、コメントを確認して必要なコードをまとめるだけです。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    &emsp;&emsp;...<br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// --- ブレンディングの種類に応じて選択して作成 ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>Blend One One // Additive</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>Blend OneMinusDstColor One // Soft Additive</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>Blend DstColor SrcColor // Multiplicative</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// --- パス指定コードの削除 ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>// Tags { "LightMode" = "ForwardBase" }</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>ZWrite Off</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;...<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// --- Additive または Soft Additive ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>col.rgb *= col.a;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>col.a = 1.0f;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// ---------------------------------</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// --- Multiplicative ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>col.rgb = col.rgb * (col.a) + float4(0.5f, 0.5f, 0.5f, 1.0f) * (1.0f - col.a);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>col.a = 1.0f;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// ----------------------</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>return col;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// シャドウ生成パスコードの削除</strong><br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    <strong>1. ブレンディングオプション</strong><br>
+    <span class="text-danger"><strong>Blend One One // Additive</strong></span><br>
+    <span class="text-danger"><strong>Blend OneMinusDstColor One // Soft Additive</strong></span><br>
+    <span class="text-danger"><strong>Blend DstColor SrcColor // Multiplicative</strong></span><br>
+    : メッシュのブレンドオプションに応じて、上記のコードのいずれかを選択できます。<br>
+    （シェーダグラフを使用している場合は、「Soft Additive」がサポートされない場合があります。）<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. マルチパスコードの削除</strong><br>
+    <span class="text-danger"><strong>// Tags { "LightMode" = "ForwardBase" }</strong></span><br>
+    : 影生成パスがなくなるので、マルチパスに関連するコードは削除してもよい。<br>
+    シャドウ生成パスコードも削除します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. 色演算式の修正</strong><br>
+    <strong>(1)</strong> Additive, Soft Additive<br>
+    <span class="text-danger"><strong>col.rgb *= col.a;</strong></span><br>
+    <span class="text-danger"><strong>col.a = 1.0f;</strong></span><br>
+    <br>
+    <strong>(2)</strong> Multiplicative<br>
+    <span class="text-danger"><strong>col.rgb = col.rgb * (col.a) + float4(0.5f, 0.5f, 0.5f, 1.0f) * (1.0f - col.a);</strong></span><br>
+    <span class="text-danger"><strong>col.a = 1.0f;</strong></span><br>
+    <br>
+    : ブレンドに合わせて最終的な色を変更し、Alphaの値を1に変更します。<br>
+    <strong>Additive</strong>と<strong>Soft Additive</strong>の色演算式は互いに同じです。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>クリッピングメッシュに適用されるシェーダ</h3>
+    <br>
+    
+    <p>
+    クリッピングされるメッシュは別のシェーダによってレンダリングされます。<br>
+    クリッピング用シェーダには、クリッピングマスクを生成するメッシュのレンダリング結果をテクスチャ形式で受け取り、一部がレンダリングされないようにする演算が追加されます。<br>
+    クリッピング用のプロパティとクリッピング操作を基本シェーダに追加するだけです。<br>
+    また、クリッピングシェーダは「<strong>Alpha Blend</strong>」でもシャドウを生成する必要はありませんので、シングルパスでのみ作成してください。<br>
+    マスクメッシュの影の中に含まれるからです。<br>
+    以下の例は、「<strong>Gamma Space</strong>」の「<strong>Alpha Blend</strong>」の場合のシェーダであり、上記の説明に合わせて変更できます。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Sample Shader/Gamma Space - Clipped - AlphaBlend"</span><br>
     {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="text-primary">float2</span> uv_MainTex;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="text-primary">float4 </span><strong>screenPos</strong>;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="text-primary">float4 </span>color : COLOR;<br>
-    };<br>
-    : クリッピングマスクは「Screen Space」で処理されます。<br>
-    したがって、Unityが使用する 「screenPos」変数を 「Fragment Shader」または 「Surface Shader」に渡す必要があります。<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// --- クリッピングプロパティ ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskTex</strong></span> (<span class="text-danger">"Mask Texture (A)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskScreenSpaceOffset</strong></span> (<span class="text-danger">"Mask Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// --- クリッピング操作のための「Screen Position」 ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>float4 screenPos : TEXCOORD1;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// --- クリッピング用のプロパティ変数 ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>sampler2D _MaskTex;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>float4 _MaskScreenSpaceOffset;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert (<span class="text-primary">appdata</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// --- クリッピング用「Screen Position」の計算 ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>o.screenPos = ComputeScreenPos(o.vertex);</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (v2f i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// --- クリッピングマスクによるアルファチャンネル演算 ---</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>float2 screenUV = i.screenPos.xy / max(i.screenPos.w, 0.0001f);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>screenUV -= float2(0.5f, 0.5f);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>screenUV.x *= _MaskScreenSpaceOffset.z;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>screenUV.y *= _MaskScreenSpaceOffset.w;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>screenUV.x += _MaskScreenSpaceOffset.x * _MaskScreenSpaceOffset.z;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>screenUV.y += _MaskScreenSpaceOffset.y * _MaskScreenSpaceOffset.w;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>screenUV += float2(0.5f, 0.5f);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>col.a *= tex2D(_MaskTex, screenUV).r;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton3" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    <strong>1. プロパティ</strong><br>
+    <span class="text-danger"><strong>_MaskTex</strong></span> (<span class="text-danger">"Mask Texture (A)"</span>, 2D) = "white" {}<br>
+    <span class="text-danger"><strong>_MaskScreenSpaceOffset</strong></span> (<span class="text-danger">"Mask Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
+    : クリッピングマスク処理のために、マスクテクスチャをプロパティに追加します。<br>
+    上記のようにプロパティを追加すると、AnyPortraitは自動的にクリッピングレンダリングを処理します。<br>
+    「<strong>_MaskScreenSpaceOffset</strong>」は、クリッピングマスクを「画面座標系（Screen Space）」を基準に適用するためのプロパティです。<br>
     </p>
     <br>
     
     <p>
-    <strong>3. Mask</strong><br>
-    <span class="text-primary">float2 </span><strong>screenUV </strong>= IN.screenPos.xy / IN.screenPos.w;<br>
-    <strong>screenUV </strong>-= <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
-    <strong>screenUV.x</strong> *= _MaskScreenSpaceOffset.z;<br>
-    <strong>screenUV.y</strong> *= _MaskScreenSpaceOffset.w;<br>
-    <strong>screenUV.x</strong> += _MaskScreenSpaceOffset.x * _MaskScreenSpaceOffset.z;<br>
-    <strong>screenUV.y</strong> += _MaskScreenSpaceOffset.y * _MaskScreenSpaceOffset.w;<br>
-    <strong>screenUV </strong>+= <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
-    <span class="text-primary">float </span><strong>mask </strong>= tex2D(_MaskTex, screenUV).r;<br>
-    <strong>c.a *= mask;</strong><br>
-    : クリッピングマスクを計算してアルファチャンネルに適用する式。<br>
-    この式は、通常どおり処理するのと同じ方法で記述する必要があります。<br>
+    <span class="text-danger"><strong>sampler2D _MaskTex;</strong></span><br>
+    <span class="text-danger"><strong>float4 _MaskScreenSpaceOffset;</strong></span><br>
+    : 追加されたプロパティに合わせて変数も追加する必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Screen Space Position</strong><br>
+    <span class="text-danger"><strong>float4 screenPos : TEXCOORD1;</strong></span><br>
+    : クリッピングマスクは画面座標系で処理されます。<br>
+    したがって、頂点の画面座標系の位置を頂点シェーダで計算し、フラグメントシェーダに渡す必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>o.screenPos = ComputeScreenPos(o.vertex);</strong></span><br>
+    : 頂点シェーダで画面座標系の位置を計算するコードを追加します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. マスクによるアルファチャンネル値の計算</strong><br>
+    <span class="text-danger"><strong>float2 screenUV = i.screenPos.xy / max(i.screenPos.w, 0.0001f);</strong></span><br>
+    <span class="text-danger"><strong>screenUV -= float2(0.5f, 0.5f);</strong></span><br>
+    <span class="text-danger"><strong>screenUV.x *= _MaskScreenSpaceOffset.z;</strong></span><br>
+    <span class="text-danger"><strong>screenUV.y *= _MaskScreenSpaceOffset.w;</strong></span><br>
+    <span class="text-danger"><strong>screenUV.x += _MaskScreenSpaceOffset.x * _MaskScreenSpaceOffset.z;</strong></span><br>
+    <span class="text-danger"><strong>screenUV.y += _MaskScreenSpaceOffset.y * _MaskScreenSpaceOffset.w;</strong></span><br>
+    <span class="text-danger"><strong>screenUV += float2(0.5f, 0.5f);</strong></span><br>
+    <span class="text-danger"><strong>col.a *= tex2D(_MaskTex, screenUV).r;</strong></span><br>
+    : クリッピングマスクを計算してアルファチャンネルに適用する式です。<br>
+    AnyPortrait システムで使用する固有の演算式ですのでそのまま作成してください。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>キーワードを使用する場合</h3>
+    <br>
+    
+    <p>
+    「キーワード」を使用して、1つのシェーダコードを複数のバージョンにコンパイルするようにして利用できます。<br>
+    「AnyPortrait v1.5.1」に追加された機能を利用して、シェーダのキーワードを利用できます。<br>
+    キーワードについては、次の Unity 公式文書に関する情報をご覧いただけます。<br>
+    - <a href="https://docs.unity3d.com/ja/current/Manual/SL-MultipleProgramVariants.html" target="_sub">Unityのマニュアル</a><br>
+    </p>
+    <br>
+    
+    <p>
+    以下は、「<strong>SPECIAL_COLOR</strong>」というキーワードによって色演算が変わるシェーダの例です。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Shader Example/Gamma Space - Normal - AlphaBlend (Keyword)"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>#pragma multi_compile __ SPECIAL_COLOR</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert (<span class="text-primary">appdata</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>#ifdef SPECIAL_COLOR</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>col.rgb *= fixed3(0.0f, 1.0f, 0.0f);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>#endif</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton4" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    <strong>1. キーワード宣言</strong><br>
+    <span class="text-danger"><strong>#pragma multi_compile __ SPECIAL_COLOR</strong></span><br>
+    : 「<strong>#pragma multi_compile</strong>」構文を使用してキーワードを宣言します。<br>
+    この例では、「<strong>SPECIAL_COLOR</strong>」というキーワードを新しく宣言しました。<br>
+    Unityでシェーダバリアントを生成する「<strong>multi_compile</strong>」と「<strong>shader_feature</strong>」ディレクティブを使用するか、動的ブランチを生成する「<strong>dynamic_branch</strong>」ディレクティブを使用してキーワードを利用できます。<br>
+    ただし、AnyPortraitはマテリアルを動的に生成するため、アセットベースでシェーダバリアントをコンパイルする「<strong>shader_feature</strong>」は利用できません。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. コード分​​岐の作成</strong><br>
+    <span class="text-danger"><strong>#ifdef SPECIAL_COLOR</strong></span><br>
+    <span class="text-danger"><strong>col.rgb *= fixed3(0.0f, 1.0f, 0.0f);</strong></span><br>
+    <span class="text-danger"><strong>#endif</strong></span><br>
+    : キーワードによって異なる動作をするように作成します。<br>
+    「<strong>multi_compile</strong>」を使用した場合は「#ifdef、#else、#elif、#endif」ディレクティブを使用し、「<strong>dynamic_branch</strong>」を使用した場合は「if（）」文を使用します。<br>
+    この例では、キーワード「<strong>SPECIAL_COLOR</strong>」が有効な場合、緑色のチャンネルの色のみをレンダリングするように作成しました。<br>
+    </p>
+    <br>
+    
+    <p>
+    キーワードを使用するには、「マテリアルライブラリ」で設定する必要があります。<br>
+    詳細は<a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">関連ページ</a>で確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2055.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> マテリアルライブラリを開きます。<br>
+    <strong>(2)</strong> 「<strong>SPECIAL_COLOR</strong>」という名前のプロパティオプションを追加し、「<strong>Keyword</strong>」タイプに設定してから「<strong>Enable</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2056.jpg"/>
+    <br>
+    
+    <p>
+    「Bake」をして実行すると、上記のようにキーワードが有効かどうかによってレンダリング結果が変わることがわかります。<br>
     </p>
     <br>
     
@@ -312,6 +862,65 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "Shader \"Sample Shader/Gamma Space - Normal - AlphaBlend\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tTags { \"LightMode\" = \"ForwardBase\" }\n\t\t\tZWrite Off\n\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\n\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\t\t\t\t\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\n\t\tPass\n\t\t{\n\t\t\tTags { \"LightMode\" = \"ShadowCaster\" }\n\t\t\tZWrite On\n\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\n\t\t\t#pragma multi_compile_shadowcaster\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{ \n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tV2F_SHADOW_CASTER;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\tv2f vert(appdata_base v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\tTRANSFER_SHADOW_CASTER_NORMALOFFSET(o)\n\t\t\t\to.uv = TRANSFORM_TEX(v.texcoord, _MainTex);\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\tfloat4 frag(v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\tif(col.a < 0.05f)\n\t\t\t\t{\n\t\t\t\t\tdiscard;\n\t\t\t\t}\n\t\t\t\tSHADOW_CASTER_FRAGMENT(i)\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "\t\t\t...\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\tcol.rgb *= _Color.rgb * 4.595f;\n\t\t\t\tcol.rgb = pow(col.rgb, 2.2f);\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\t...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "\t...\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\n\t\t// --- ブレンディングの種類に応じて選択して作成 ---\n\t\tBlend One One // Additive\n\t\tBlend OneMinusDstColor One // Soft Additive\n\t\tBlend DstColor SrcColor // Multiplicative\n\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\t// --- パス指定コードの削除 ---\n\t\t\t// Tags { \"LightMode\" = \"ForwardBase\" }\n\t\t\tZWrite Off\n\n\t\t\tCGPROGRAM\n\t\t\t...\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\t// --- Additive または Soft Additive ---\n\t\t\t\tcol.rgb *= col.a;\n\t\t\t\tcol.a = 1.0f;\n\t\t\t\t// ---------------------------------\n\n\t\t\t\t// --- Multiplicative ---\n\t\t\t\tcol.rgb = col.rgb * (col.a) + float4(0.5f, 0.5f, 0.5f, 1.0f) * (1.0f - col.a);\n\t\t\t\tcol.a = 1.0f;\n\t\t\t\t// ----------------------\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t\t// シャドウ生成パスコードの削除\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton3").addEventListener("click", function() {
+    const textToCopy = "Shader \"Sample Shader/Gamma Space - Clipped - AlphaBlend\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\n\t\t// --- クリッピングプロパティ ---\n\t\t_MaskTex (\"Mask Texture (A)\", 2D) = \"white\" {}\n\t\t_MaskScreenSpaceOffset (\"Mask Screen Space Offset (XY_Scale)\", Vector) = (0, 0, 0, 1)\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tZWrite Off\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\n\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\n\t\t\t\t// --- クリッピング操作のための「Screen Position」 ---\n\t\t\t\tfloat4 screenPos : TEXCOORD1;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\t// --- クリッピング用のプロパティ変数 ---\n\t\t\tsampler2D _MaskTex;\n\t\t\tfloat4 _MaskScreenSpaceOffset;\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\n\t\t\t\t// --- クリッピング用「Screen Position」の計算 ---\n\t\t\t\to.screenPos = ComputeScreenPos(o.vertex);\n\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\t\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\t// --- クリッピングマスクによるアルファチャンネル演算 ---\n\t\t\t\tfloat2 screenUV = i.screenPos.xy / max(i.screenPos.w, 0.0001f);\n\t\t\t\tscreenUV -= float2(0.5f, 0.5f);\n\t\t\t\tscreenUV.x *= _MaskScreenSpaceOffset.z;\n\t\t\t\tscreenUV.y *= _MaskScreenSpaceOffset.w;\n\t\t\t\tscreenUV.x += _MaskScreenSpaceOffset.x * _MaskScreenSpaceOffset.z;\n\t\t\t\tscreenUV.y += _MaskScreenSpaceOffset.y * _MaskScreenSpaceOffset.w;\n\t\t\t\tscreenUV += float2(0.5f, 0.5f);\n\t\t\t\tcol.a *= tex2D(_MaskTex, screenUV).r;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton4").addEventListener("click", function() {
+    const textToCopy = "Shader \"Shader Example/Gamma Space - Normal - AlphaBlend (Keyword)\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tZWrite Off\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\n\n\t\t\t#pragma multi_compile __ SPECIAL_COLOR\n\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\t\t\t\t\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\t#ifdef SPECIAL_COLOR\n\t\t\t\tcol.rgb *= fixed3(0.0f, 1.0f, 0.0f);\n\t\t\t\t#endif\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

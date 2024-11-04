@@ -77,7 +77,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.5.0</span></h4>
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
     
     <p>
     <strong>v1.1.7から適用される機能です。</strong>AnyPortraitの基本的なレンダリング目的は、「光が適用されず、イラストの元の色を表現すること」です。<br>
@@ -581,6 +581,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -697,6 +700,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -721,8 +727,114 @@
     <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_602.jpg"/>
     <br>
     
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
     
-    <br><br>
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>リストからプロパティを追加</h4>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2057.jpg"/>
+    <br>
+    
+    <p>
+    プロパティを追加するときは、リストで検索して追加できます。<br>
+    <strong>(1)</strong> 「<strong>Add Property from List</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> リストからプロパティを選択して簡単に追加できます。<br>
+     <kbd>Ctrl</kbd> （「Mac」では <kbd>Command</kbd> ）または <kbd>Shift</kbd> を押して、複数のプロパティを選択して追加できます。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>参照マテリアルを使用してプロパティを設定</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
+    
+    <p>
+    カスタムシェーダのプロパティが多い場合は、マテリアルライブラリで毎日追加して設定するのは不便です。<br>
+    特に、多くのキャラクターが共通のシェーダを共有している場合、これを毎日行うのは面倒です。<br>
+    AnyPortrait v1.5.1で追加された機能を使用すると、プロパティを指定するのではなく、特定のマテリアルアセットを参照するように設定することで操作をはるかに簡単にできます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2058.jpg"/>
+    <br>
+    
+    <p>
+    3つのプロパティが追加されたカスタムシェーダを作成したと仮定して、マテリアルセットを設定しましょう。<br>
+    <strong>(1)</strong> 「マテリアルアセット」を作成して選択します。<br>
+    <strong>(2)</strong> マテリアルのシェーダをキャラクターに適用されるカスタムシェーダに変更します。<br>
+    <strong>(3)</strong> 「_Color」と「_MainTex」以外のカスタムプロパティに値を割り当てます。ここでは、白黒パターンのテクスチャと色とFloat値を設定しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2059.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> マテリアルライブラリの「<strong>Reference Material</strong>」項目を選択して、<strong>(2)</strong> 先に作成したマテリアルアセットを割り当てます。<br>
+    カスタムプロパティの値は、マテリアルアセットを参照して自動的に設定されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2060.jpg"/>
+    <br>
+    
+    <p>
+    「Bake」をしてゲームを実行すると、参照されたマテリアルアセットの値がキャラクターに適用されたことがわかります。<br>
+    この機能は、多くのキャラクターがカスタムシェーダとプロパティを共有するときに便利です。<br>
+    ところが、場合によっては、特定のキャラクタに一部のプロパティの値を異なるように割り当てる必要もあるでしょう。<br>
+    このときは、直接カスタムプロパティを指定すればよい。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2061.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> マテリアルライブラリから参照マテリアルアセットが割り当てられた状態です。<br>
+    <strong>(2)</strong> この状態でカスタムプロパティの一部の値を異なるように設定してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2062.jpg"/>
+    <br>
+    
+    <p>
+    「Bake」をしてゲームを実行すると、直接指定したプロパティの値が参照マテリアルの値より優先され、適用されたことがわかります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    参照マテリアルは、ランタイムではなく「Bake」で参照されます。<br>
+    したがって、参照マテリアルの値が変わった場合は、そのアセットが適用されたすべてのキャラクターを再び「Bake」する必要があります。<br>
+    また、実行時に参照マテリアルの値が変わってもキャラクターはこれを認識しません。<br>
+    </p>
+    <br>
     
     <br>
     <br>
@@ -980,6 +1092,43 @@
     </p>
     <br>
     
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>キーワードタイプのプロパティ</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.5.1</span></h4>
+    
+    <p>
+    AnyPortrait v1.5.1で「<strong>キーワード(Keyword)</strong>」をカスタムプロパティとして制御できるようになりました。<br>
+    キーワードを活用するカスタムシェーダの作成方法は、<a href="../../jp/Script/SC_CustomShader.html">関連ページ</a>を参照してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2063.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> カスタムプロパティを「<strong>Keyword</strong>」タイプに変更した後、「<strong>Enable</strong>」または「<strong>Disable</strong>」に設定してキーワードを使用するかどうかを決定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2064.jpg"/>
+    <br>
+    
+    <p>
+    キーワードが多い場合は、プロパティオプションを毎日設定するのが面倒なので、上記のように設定するのが便利です。<br>
+    <strong>(1)</strong> 「<strong>Add Property from List</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 一般的なプロパティとともに、「キーワード」もリストに表示されることがわかります。ここで選択して追加すると簡単に設定できます。<br>
+    </p>
+    <br>
+    
     <!-- 5. 바닥 네비바 -->
     <br>
     <br>
@@ -999,6 +1148,32 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "Shader \"CustomShader/Character FX\"\n{\n\tProperties\n\t{\n\t\t_Color(\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex(\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\t\t_BumpMap(\"Bump Texture (Normalmap)\", 2D) = \"bump\" {}\n\t\t_RampMap(\"Ramp Gradient Map (RGB)\", 2D) = \"white\" {}\n\t\t_NoiseMap(\"Gray Noise Map (Gray)\", 2D) = \"white\" {}\n\t\t_FadeValue(\"Fade Value (0~1)\", Float) = 0\n\t\t_FadeColor1(\"Fade Color 1 (RGB)\", Color) = (0, 0, 0, 1)\n\t\t_FadeColor2(\"Fade Color 2 (RGB)\", Color) = (1, 1, 0, 1)\n\t}\t\n\tSubShader\n\t{\n\t\tTags{ \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tLOD 200\t\t\t\t\t  \n\t\tCGPROGRAM\n\t\t#pragma surface surf SimpleColor alpha\n\t\t#pragma target 3.0\t\t\t\t\t  \n\t\thalf4 _Color;\n\t\tsampler2D _MainTex;\n\t\tsampler2D _BumpMap;\n\t\tsampler2D _RampMap;\n\t\t// Custom Code\n\t\t//--------------------------------\n\t\tsampler2D _NoiseMap;\n\t\tfloat _FadeValue;\n\t\thalf4 _FadeColor1;\n\t\thalf4 _FadeColor2;\n\t\t//--------------------------------\n\t\tstruct Input\n\t\t{\n\t\t\tfloat2 uv_MainTex;\n\t\t\tfloat2 uv_BumpMap;\n\t\t\tfloat4 color : COLOR;\n\t\t};\n\t\thalf4 LightingSimpleColor(SurfaceOutput s, half3 lightDir, half atten)\n\t\t{\n\t\t\thalf4 c;\n\t\t\thalf nl = max(0, dot(s.Normal, lightDir));\n\t\t\thalf halfDiff = (nl * 0.5f) + 0.5f;\n\t\t\thalf3 rampColor = tex2D(_RampMap, float2(halfDiff, 0.5f)).rgb;\n\t\t\tc.rgb = saturate(s.Albedo * _LightColor0.rgb * (rampColor * atten));\n\t\t\tc.rgb + s.Emission;\n\t\t\tc.a = s.Alpha;\n\t\t\treturn c;\n\t\t}\n\t\tvoid surf(Input IN, inout SurfaceOutput o)\n\t\t{\n\t\t\thalf4 c = tex2D(_MainTex, IN.uv_MainTex);\n\t\t\tc.rgb *= _Color.rgb * 2.0f;\n\t\t\to.Alpha = c.a * _Color.a;\n\t\t\to.Albedo = c.rgb;\n\t\t\to.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));\t\t\t\n\t\t\t// Custom Code\n\t\t\t//---------------------------------------------------\n\t\t\to.Emission = half4(0, 0, 0, 0);\n\t\t\thalf noise = tex2D(_NoiseMap, IN.uv_MainTex).r;\n\t\t\tif (noise < _FadeValue - 0.03f)\n\t\t\t{\n\t\t\t\to.Alpha = 0.0f;\n\t\t\t}\t\t\t\n\t\t\thalf smoothFade = (noise - _FadeValue) / 0.6f;\n\t\t\tif (noise < _FadeValue)\n\t\t\t{\n\t\t\t\to.Emission = _FadeColor2.rgb;\n\t\t\t}\n\t\t\telse if (noise < _FadeValue + 0.6f)\n\t\t\t{\n\t\t\t\to.Albedo = (o.Albedo * _FadeColor1.rgb) * (1.0f - smoothFade) + o.Albedo * smoothFade;\n\t\t\t}\n\t\t\t//---------------------------------------------------\n\t\t}\n\t\tENDCG\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n​\npublic class CharacterFadeTester : MonoBehaviour\n{\n\t\t   public apPortrait portrait;\n\t\t   public float fadeValue = 0.5f;\n​\n\t\t   void Update ()\n\t\t   {\n\t\t\t\t\t  if ( Input.GetKey(KeyCode.A) )\n\t\t\t\t\t  {\n\t\t\t\t\t\t\t\t fadeValue -= Time.deltaTime * 0.5f;\n\t\t\t\t\t\t\t\t portrait.SetMeshCustomFloatAll(fadeValue, \"_FadeValue\");\n\t\t\t\t\t  }\n\t\t\t\t\t  if ( Input.GetKey(KeyCode.S) )\n\t\t\t\t\t  {\n\t\t\t\t\t\t\t\t fadeValue += Time.deltaTime * 0.5f;\n\t\t\t\t\t\t\t\t portrait.SetMeshCustomFloatAll(fadeValue, \"_FadeValue\");\n\t\t\t\t\t  }\n\t\t   }\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

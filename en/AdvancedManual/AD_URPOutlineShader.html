@@ -525,6 +525,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -1128,6 +1131,21 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "Pass\n{\n\t// A Pass that sets values to the Stencil.\n\t// We won't write any stencil code here, as we'll be specifying the stencil as a material override setting in the Renderer Data.\n\n\t// Multi-pass is implemented using the name of Light Mode.\n\t// Remember the name \"SetStencilPass\".\n\tTags { \"LightMode\" = \"SetStencilPass\" }\n\tBlend SrcAlpha OneMinusSrcAlpha\n\n\t// If the ColorMask is set to A, no rendering will occur even if the stencil is set.\n\tZWrite Off\n\tColorMask A\n\n\tHLSLPROGRAM\n\t#pragma vertex vert\n\t#pragma fragment frag\n\t#include \"Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl\"\t\t\t\n\n\tstruct Attributes\n\t{\n\t\tfloat4 positionOS : POSITION;\n\t\tfloat2 uv : TEXCOORD0;\n\t};\n\tstruct Varyings\n\t{\n\t\tfloat4 positionHCS : SV_POSITION;\n\t\tfloat2 uv : TEXCOORD0;\n\t};\n\n\tTEXTURE2D(_MainTex);\n\tSAMPLER(sampler_MainTex);\n\n\t// Write shader properties here.\n\t// To execute \"SRP Batcher\" for rendering optimization, the following \"CBUFFER\" syntax must be written the same as other passes.\n\tCBUFFER_START(UnityPerMaterial)\n\t\tfloat4 _MainTex_TexelSize;\n\t\tfloat4 _MainTex_ST;\n\t\tfloat4 _Color;\n\t\tfloat _LineThickness;\n\tCBUFFER_END\n\n\tVaryings vert(Attributes IN)\n\t{\n\t\tVaryings OUT;\n\t\tOUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);\n\t\tOUT.uv = TRANSFORM_TEX(IN.uv, _MainTex);\n\t\treturn OUT;\n\t}\n\n\thalf4 frag(Varyings IN) : SV_Target\n\t{\n\t\t// Check the transparency of pixels located at a distance of \"_LineThickness\".\n\t\tfloat offset1 = _LineThickness;\n\t\tfloat offset2 = _LineThickness * 0.7f;\n\n\t\tfloat alpha_0 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv).a;\n\n\t\t// Check the transparency of the surrounding 8 pixels.\n\t\tfloat alpha_1 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(offset1, 0)).a;\n\t\tfloat alpha_2 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(-offset1, 0)).a;\n\t\tfloat alpha_3 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(0, offset1)).a;\n\t\tfloat alpha_4 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(0, -offset1)).a;\n\t\tfloat alpha_5 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(offset2, offset2)).a;\n\t\tfloat alpha_6 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(-offset2, offset2)).a;\n\t\tfloat alpha_7 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(-offset2, -offset2)).a;\n\t\tfloat alpha_8 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + float2(offset2, -offset2)).a;\n\n\t\thalf totalAlpha = alpha_0 + alpha_1 + alpha_2 + alpha_3 + alpha_4 + alpha_5 + alpha_6 + alpha_7 + alpha_8;\n\n\t\tfloat4 c = float4(0, 0, 0, 0);\t\t\t\t\n\t\tc.a = saturate(totalAlpha * _Color.a);\n\n\t\t// Using the point that the stencil is not updated when \"discard\" is called, only the outline part makes the stencil value to be set.\n\n\t\t// When a pixel is opaque, it corresponds to the inside of the image, not the outline.\n\t\tif (alpha_0 > 0.5f)\n\t\t{\n\t\t\tdiscard;\n\t\t}\n\n\t\t// If there are no opaque pixels around it, it's a margin, not an outline.\n\t\tif (c.a < 0.02f)\n\t\t{\n\t\t\tdiscard;\n\t\t}\n\n\t\treturn c;\n\t}\n\tENDHLSL\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

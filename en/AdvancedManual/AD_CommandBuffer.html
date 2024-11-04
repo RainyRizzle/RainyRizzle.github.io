@@ -239,6 +239,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -259,6 +262,9 @@
     <span class="text-danger"><strong>private apCustomCommandBuffer _commandBuffer = null;</strong></span><br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -283,6 +289,9 @@
     <strong>_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.AfterForwardAlpha);</strong><br>
     <br>
     </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -303,6 +312,9 @@
     <strong>_commandBuffer.Destory();</strong><br>
     <br>
     </p>
+    <button id="scriptcopybutton3" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -326,6 +338,9 @@
     <strong>_commandBuffer.DrawAllMeshes(true, true);</strong><br>
     <br>
     </p>
+    <button id="scriptcopybutton4" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -406,6 +421,9 @@
     &emsp;&emsp;}<br>
     <br>
     </p>
+    <button id="scriptcopybutton5" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -506,6 +524,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton6" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -569,6 +590,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton7" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -713,6 +737,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton8" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -754,6 +781,9 @@
     (The following code is the same as the previous one.)<br>
     <br>
     </p>
+    <button id="scriptcopybutton9" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -892,6 +922,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton10" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -975,6 +1008,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton11" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -1197,6 +1233,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton12" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -1263,6 +1302,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton13" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -1339,6 +1381,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton14" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -1449,6 +1494,175 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class CmdBufferExample : MonoBehaviour\n{\n\t// Target objects\n\tpublic apPortrait portrait;\n\tpublic Camera targetCamera;\n\n\t// Command Buffer for apPortrait\n\tprivate apCustomCommandBuffer _commandBuffer = null;\n\n\tvoid Start()\n\t{\n\t\t// Create a command buffer.\n\t\tif (_commandBuffer == null)\n\t\t{\n\t\t\t// If apPortrait is not initialized, initialize it directly here.\n\t\t\tportrait.Initialize();\n\n\t\t\t// Create a command buffer instance using apPortrait and camera.\n\t\t\t_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, \"Custom Command Buffer\");\n\n\t\t\t// Register the command buffer in the camera by setting the rendering point. (functions for the built-in render pipeline)\n\t\t\t_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.AfterForwardAlpha);\n\t\t}\n\t}\n\n\tvoid OnDestroy()\n\t{\n\t\t// Remove the command buffer.\n\t\tif (_commandBuffer != null)\n\t\t{\n\t\t\t_commandBuffer.Destory();\n\t\t\t_commandBuffer = null;\n\t\t}\n\t}\n\n\tvoid LateUpdate()\n\t{\n\t\t// Each update refreshes the buffer content again.\n\t\tif (_commandBuffer != null)\n\t\t{\n\t\t\t// Clear the contents of the command buffer and start to rewrite it.\n\t\t\t_commandBuffer.ClearCommands();\n\n\t\t\t// Puts the camera's Matrix into the command buffer. (Functions that must be called in Unity 2019 and later)\n\t\t\t_commandBuffer.SetViewMatrix();\n\t\t\t_commandBuffer.SetProjectionMatrix();\n\n\t\t\t// Request to render meshes of apPortrait.\n\t\t\t_commandBuffer.DrawAllMeshes(true, true);\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "// (1) Target objects\npublic apPortrait portrait;\npublic Camera targetCamera;\n\n// (2) Command Buffer for apPortrait\nprivate apCustomCommandBuffer _commandBuffer = null;\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "// (1) If apPortrait is not initialized, initialize it directly here.\nportrait.Initialize();\n\n// (2) Create a command buffer instance using apPortrait and camera.\n_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, \"Custom Command Buffer\");\n\n// (3) Register the command buffer in the camera by setting the rendering point. (functions for the built-in render pipeline)\n_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.AfterForwardAlpha);\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton3").addEventListener("click", function() {
+    const textToCopy = "_commandBuffer.Destory();\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton4").addEventListener("click", function() {
+    const textToCopy = "// (1) Clear the contents of the command buffer and start to rewrite it.\n_commandBuffer.ClearCommands();\n\n// (2) Puts the camera's Matrix into the command buffer. (Functions that must be called in Unity 2019 and later)\n_commandBuffer.SetViewMatrix();\n_commandBuffer.SetProjectionMatrix();\n\n// (3) Request to render meshes of apPortrait.\n_commandBuffer.DrawAllMeshes(true, true);\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton5").addEventListener("click", function() {
+    const textToCopy = "\t(Skipped)\n\tvoid LateUpdate()\n\t{\n\t\tif (_commandBuffer != null)\n\t\t{\n\t\t\t_commandBuffer.ClearCommands();\n\n\t\t\t// Initializes the color or depth value of the render target.\n\t\t\t_commandBuffer.ClearRenderTarget(true, true, Color.magenta);\n\n\t\t\t_commandBuffer.SetViewMatrix();\n\t\t\t_commandBuffer.SetProjectionMatrix();\n\n\t\t\t_commandBuffer.DrawAllMeshes(true, true);\n\t\t}\n\t}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton6").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom Command Buffer Example/Grayscale\"\n{\n\tProperties\n\t{\n\t\t_MainTex(\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\t\t_Color(\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tZWrite Off\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\t// It uses the average value of RGB colors to make it a single color.\n\t\t\t\tcol.rgb = (col.r + col.g + col.b) / 3.0f;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton7").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class CmdBufferExample : MonoBehaviour\n{\n\tpublic apPortrait portrait;\n\tpublic Camera targetCamera;\n\n\t// Add a variable so that you can apply a separate material.\n\tpublic Material alternativeMaterial;\n\n\tprivate apCustomCommandBuffer _commandBuffer = null;\n\n\tvoid Start()\n\t{\n\t\tif (_commandBuffer == null)\n\t\t{\n\t\t\tportrait.Initialize();\n\t\t\t_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, \"Custom Command Buffer\");  \n\t\t\t_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.AfterForwardAlpha);\n\n\t\t\t// Calls a function that inputs and copies the material in the command buffer variable so that a separate material is rendered.\n\t\t\t_commandBuffer.CreateAlternativeMaterials(alternativeMaterial);\n\t\t}\n\t}\n\n\tvoid OnDestroy()\n\t{\n\t\tif (_commandBuffer != null)\n\t\t{\n\t\t\t_commandBuffer.Destory();\n\t\t\t_commandBuffer = null;\n\t\t}\n\t}\n\n\tvoid LateUpdate()\n\t{\n\t\tif (_commandBuffer != null)\n\t\t{\n\t\t\t_commandBuffer.ClearCommands();\n\t\t\t_commandBuffer.SetViewMatrix();\n\t\t\t_commandBuffer.SetProjectionMatrix();\n\n\t\t\t// Request to render meshes using the external material registered during initialization.\n\t\t\t_commandBuffer.DrawAllMeshesWithAlternativeMaterials(true, true);\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton8").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom Command Buffer Example/Outline\"\n{\n\tProperties\n\t{\n\t\t_MainTex(\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\t\t_Color(\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\n\t\t// You can set the thickness of the outline using the distance at which the UV is sampled.\n\t\t_UVThickness(\"Line Thickness (UV Based)\", Range(0, 0.2)) = 0.01\n\n\t\t// The color of the outline.\n\t\t_LineColor(\"Line Color\", Color) = (0, 0, 0, 1)\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tZWrite Off\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\t\t\tfloat _UVThickness;\n\t\t\thalf4 _LineColor;\n\n\t\t\tv2f vert(appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\tfixed4 frag(v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\t\n\t\t\t\t// Accumulate Alpha values by sampling the surroundings.\n\t\t\t\tfixed sumAlpha = col.a;\n\t\t\t\tsumAlpha += tex2D(_MainTex, i.uv + float2(_UVThickness, 0.0f)).a;\n\t\t\t\tsumAlpha += tex2D(_MainTex, i.uv + float2(-_UVThickness, 0.0f)).a;\n\t\t\t\tsumAlpha += tex2D(_MainTex, i.uv + float2(0.0f, _UVThickness)).a;\n\t\t\t\tsumAlpha += tex2D(_MainTex, i.uv + float2(0.0f, -_UVThickness)).a;\n\t\t\t\tsumAlpha += tex2D(_MainTex, i.uv + float2(_UVThickness * 0.7f, _UVThickness * 0.7f)).a;\n\t\t\t\tsumAlpha += tex2D(_MainTex, i.uv + float2(_UVThickness * 0.7f, -_UVThickness * 0.7f)).a;\n\t\t\t\tsumAlpha += tex2D(_MainTex, i.uv + float2(-_UVThickness * 0.7f, _UVThickness * 0.7f)).a;\n\t\t\t\tsumAlpha += tex2D(_MainTex, i.uv + float2(-_UVThickness * 0.7f, -_UVThickness * 0.7f)).a;\n\n\t\t\t\t// Calculates the transparency and color of the outline and reflects it in the result.\n\t\t\t\tsumAlpha = saturate(sumAlpha);\n\t\t\t\tcol.rgb = _LineColor;\n\t\t\t\tcol.a = _LineColor.a * _Color.a * sumAlpha;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton9").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class CmdBufferExample : MonoBehaviour\n{\n\tpublic apPortrait portrait;\n\tpublic Camera targetCamera;\n\n\tpublic Material alternativeMaterial;\n\n\tprivate apCustomCommandBuffer _commandBuffer = null;\n\n\tvoid Start()\n\t{\n\t\tif (_commandBuffer == null)\n\t\t{\n\t\t\tportrait.Initialize();\n\t\t\t_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, \"Custom Command Buffer\");  \n\n\t\t\t// Change the setting so that it is drawn before \"when we render a normal mesh\".\n\t\t\t_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.BeforeForwardAlpha);\n\t\t\t_commandBuffer.CreateAlternativeMaterials(alternativeMaterial);\n\t\t}\n\t}\n(The following code is the same as the previous one.)\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton10").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom Command Buffer Example/Secondary\"\n{\n\tProperties\n\t{\n\t\t_MainTex(\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\t\t_Color(\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\n\t\t// A secondary texture to multiply by color.\n\t\t_SecondaryTex(\"Secondary Texture (RGB)\", 2D) = \"white\" {}\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tZWrite Off\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\t\t\tsampler2D _SecondaryTex;\n\n\t\t\tv2f vert(appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\tfixed4 frag(v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\t// Take the color of the secondary texture and multiply it to RGB.\n\t\t\t\tfixed4 secondaryCol = tex2D(_SecondaryTex, i.uv);\n\t\t\t\tcol.rgb *= secondaryCol.rgb;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton11").addEventListener("click", function() {
+    const textToCopy = "// This is a package for using Dictionary variables.\nusing System.Collections.Generic;\n\nusing UnityEngine;\nusing AnyPortrait;\n\npublic class CmdBufferExample : MonoBehaviour\n{\n\tpublic apPortrait portrait;\n\tpublic Camera targetCamera;\n\n\t// Create a variable in the form of an array to assign an image name and corresponding material to each.\n\tpublic string[] imageNames;\n\tpublic Material[] alternativeMaterials;\n\n\tprivate apCustomCommandBuffer _commandBuffer = null;\n\n\tvoid Start()\n\t{\n\t\tif (_commandBuffer == null)\n\t\t{\n\t\t\tportrait.Initialize();\n\t\t\t_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, \"Custom Command Buffer\");\n\t\t\t_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.BeforeForwardAlpha);\n\n\t\t\t// Using an array variable, create a Dictionary variable that connects \"image name - alternative material\" and pass it to \"_commandBuffer\".\n\t\t\tDictionary<string, Material> imageNamesToMaterial = new Dictionary<string, Material>();\n\n\t\t\tfor (int i = 0; i < imageNames.Length; i++)\n\t\t\t{\n\t\t\t\timageNamesToMaterial.Add(imageNames[i], alternativeMaterials[i]);\n\t\t\t}\n\n\t\t\t_commandBuffer.CreateAlternativeMaterials(imageNamesToMaterial, alternativeMaterials[0]);\n\t\t}\n\t}\n\n\tvoid OnDestroy()\n\t{\n\t\tif (_commandBuffer != null)\n\t\t{\n\t\t\t_commandBuffer.Destory();\n\t\t\t_commandBuffer = null;\n\t\t}\n\t}\n\n\tvoid LateUpdate()\n\t{\n\t\tif (_commandBuffer != null)\n\t\t{\n\t\t\t_commandBuffer.ClearCommands();\n\t\t\t_commandBuffer.SetViewMatrix();\n\t\t\t_commandBuffer.SetProjectionMatrix();\n\t\t\t_commandBuffer.DrawAllMeshesWithAlternativeMaterials(true, true);\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton12").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom Command Buffer Example/White Mask\"\n{\n\tProperties\n\t{\n\t\t_MainTex(\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\t\t_Color(\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Opaque\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\n\t\t// Because opacity is cumulative, change the blending method to Additive.\n\t\tBlend One One\n\n\t\tZWrite Off\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\tv2f vert(appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\tfixed4 frag(v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\t// Change the Alpha value to RGB, and set Alpha to 1.\n\t\t\t\tcol.rgb = saturate(col.a * _Color.a);\n\t\t\t\tcol.a = 1.0f;\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton13").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class CmdBufferExample : MonoBehaviour\n{\n\tpublic apPortrait portrait;\n\tpublic Camera targetCamera;\n\n\tpublic Material alternativeMaterial;\n\n\t// A Mask Render Texture which is used as a Render Target.\n\tpublic RenderTexture maskRenderTexture;\n\n\tprivate apCustomCommandBuffer _commandBuffer = null;\n\n\tvoid Start()\n\t{\n\t\tif (_commandBuffer == null)\n\t\t{\n\t\t\tportrait.Initialize();\n\t\t\t_commandBuffer = new apCustomCommandBuffer(targetCamera, portrait, \"Custom Command Buffer\");\n\t\t\t_commandBuffer.AddToCamera(UnityEngine.Rendering.CameraEvent.BeforeForwardAlpha);\n\t\t\t_commandBuffer.CreateAlternativeMaterials(alternativeMaterial);\n\t\t}\n\t}\n\n\tvoid OnDestroy()\n\t{\n\t\tif (_commandBuffer != null)\n\t\t{\n\t\t\t_commandBuffer.Destory();\n\t\t\t_commandBuffer = null;\n\t\t}\n\t}\n\n\tvoid LateUpdate()\n\t{\n\t\tif (_commandBuffer != null)\n\t\t{\n\t\t\t_commandBuffer.ClearCommands();\n\n\t\t\t// Set the Render Texture as the Render Target and initialize the background to Black.\n\t\t\t_commandBuffer.SetRenderTarget(maskRenderTexture);\n\t\t\t_commandBuffer.ClearRenderTarget(true, true, Color.black);\n\n\t\t\t_commandBuffer.SetViewMatrix();\n\t\t\t_commandBuffer.SetProjectionMatrix();\n\t\t\t_commandBuffer.DrawAllMeshesWithAlternativeMaterials(true, true);\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton14").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom Command Buffer Example/Merge RT and Mask\"\n{\n\tProperties\n\t{\n\t\t// Create properties to receive two Render Textures.\n\t\t_MainTex(\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\t\t_MaskTex(\"Mask Texture (Grayscale)\", 2D) = \"white\" {}\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tZWrite Off\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\tsampler2D _MaskTex;\n\n\t\t\tv2f vert(appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\tfixed4 frag(v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\t// Use the color stored in the Mask Render Texture as Alpha.\n\t\t\t\tfixed4 mask = tex2D(_MaskTex, i.uv);\n\t\t\t\tcol.a = mask.r;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>

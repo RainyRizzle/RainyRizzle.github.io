@@ -182,6 +182,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -309,6 +312,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -436,6 +442,9 @@
     }<br>
     <br>
     </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
     </div>
     <br>
     
@@ -495,6 +504,43 @@
     <!-- 부트스트랩 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class SyncPlaySample : MonoBehaviour\n{\n\tpublic apPortrait character;\n\tpublic apPortrait hairband;\n\n\tvoid Update()\n\t{\n\t\t//A키를 누르면 hairband가 character에 동기화합니다.\n\t\tif(Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\thairband.Synchronize(character, true, true);\n\t\t\thairband.transform.position = character.transform.position;\n\t\t}\n\n\t\t//S키를 누르면 hairband의 동기화가 해제됩니다.\n\t\tif(Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\thairband.Unsynchronize();\n\t\t\thairband.StopAll();\n\t\t\thairband.transform.position = new Vector3(10.0f, 0.0f, 0.0f);\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class SyncPlaySample : MonoBehaviour\n{\n\tpublic apPortrait character;\n\tpublic apPortrait hairband;\n\n\tvoid Update()\n\t{\n\t\t//A키를 누르면 hairband가 character에 동기화합니다.\n\t\tif(Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\thairband.Synchronize(character, true, true);\n\t\t\thairband.transform.position = character.transform.position;\n\n\t\t\t//Flower Pin 메시는 Front Hair 메시보다 앞에 위치합니다.\n\t\t\thairband.SetSortingOrder(\"Flower Pin\", character.GetSortingOrder(\"Front Hair\") + 1);\n\t\t\t//Ribbon 메시는 Body 메시보다 앞에 위치합니다.\n\t\t\thairband.SetSortingOrder(\"Ribbon\", character.GetSortingOrder(\"Body\") + 1);\n\t\t\t//Hairband 메시는 Back Hair 메시보다 앞에 위치합니다.\n\t\t\thairband.SetSortingOrder(\"Hairband\", character.GetSortingOrder(\"Back Hair\") + 1);\n\t\t}\n\n\t\t//S키를 누르면 hairband의 동기화가 해제됩니다.\n\t\tif(Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\thairband.Unsynchronize();\n\t\t\thairband.StopAll();\n\t\t\thairband.transform.position = new Vector3(10.0f, 0.0f, 0.0f);\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class RootUnitSync : MonoBehaviour\n{\n\t//애니메이션이 재생되는 캐릭터\n\tpublic apPortrait mainCharacter;\n\t//메인 캐릭터에 동기화를 할 캐릭터\n\tpublic apPortrait syncCharacter;\n\n\tvoid Start() { }\n\n\tvoid Update()\n\t{\n\t\t//숫자키를 입력하면 메인 캐릭터의 애니메이션이 재생되어 루트 유닛이 전환됩니다.\n\t\tif(Input.GetKeyDown(KeyCode.Alpha1)) { mainCharacter.Play(\"Anim0\"); }\n\t\tif(Input.GetKeyDown(KeyCode.Alpha2)) { mainCharacter.Play(\"Anim1\"); }\n\t\tif(Input.GetKeyDown(KeyCode.Alpha3)) { mainCharacter.Play(\"Anim2\"); }\n\n\t\t//루트 유닛을 동기화합니다.\n\t\tif(Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\tsyncCharacter.Synchronize(mainCharacter, false, false, true);\n\t\t}\n\n\t\t//동기화를 해제합니다.\n\t\tif(Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\tsyncCharacter.Unsynchronize();\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+
     <!--------------->
 
     </body>
