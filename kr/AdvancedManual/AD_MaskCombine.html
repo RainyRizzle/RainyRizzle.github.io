@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>마스크 조합하기</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-kor">동영상</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">게시판</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_MaskCombine.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_MaskCombine.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_MaskCombine.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > 마스크 조합하기</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">마스크 조합하기</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <p>
+    <strong>AnyPortrait v1.6.0</strong>에서 개선된 <strong>마스크</strong>를 이용하면, 1개의 클리핑 마스크와 4개의 채널별 알파 마스크를 조합하여 클리핑 렌더링에 적용할 수 있습니다.<br>
+    특히, 알파 마스크를 조합하여 적용할 때의 연산 방식을 옵션으로서 설정할 수 있습니다.<br>
+    이 페이지에서는 2개 이상의 마스크를 클리핑 메시에 전달하여 조합하는 방법을 다룹니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>참고</strong></span><br>
+    <strong>마스크</strong>에 대해서 다음의 메뉴얼을 먼저 읽어보실 것을 권장합니다.<br>
+    이 페이지에서 다루는 내용과 유사한 동작을 하는 <strong>공유 텍스쳐 (Shared Texture)</strong>도 다음의 메뉴얼에서 확인해보실 수 있습니다.<br>
+    - <a href="../../kr/AdvancedManual/AD_Mask.html">마스크</a><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2151.jpg"/>
+    <br>
+    
+    <p>
+    2개의 마스크 메시("<strong>Mask Circle</strong>", "<strong>Mask Rect</strong>")와 클리핑될 1개의 메시("<strong>Clipped Star</strong>")가 있습니다.<br>
+    2개의 마스크를 생성하여 1개의 메시에 동시에 적용해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2152.jpg"/>
+    <br>
+    
+    <p>
+    <strong>마스크 설정 다이얼로그</strong>를 열고 마스크를 설정해봅시다.<br>
+    <strong>(1)</strong> 첫번째 마스크 메시("<strong>Mask Circle</strong>")에 대한 <strong>마스크 데이터</strong>를 생성합니다.<br>
+    <strong>(2)</strong> 마스크를 받을 대상 메시("<strong>Clipped Star</strong>")를 등록합니다.<br>
+    <strong>(3)</strong> "<strong>Alpha Mask Preset</strong>" 타입의 프로퍼티를 등록합니다.<br>
+    여기서는 <strong>Channel</strong>의 값을 "<strong>Channel_1</strong>"로 설정하고, <strong>Mask Operation</strong>을 "<strong>And</strong>"로 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2153.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 두번째 마스크 메시("<strong>Mask Rect</strong>")에 대한 <strong>마스크 데이터</strong>를 생성합니다.<br>
+    <strong>(2)</strong> 이전과 동일 메시("<strong>Clipped Star</strong>")를 클리핑 대상으로 등록합니다.<br>
+    <strong>(3)</strong> "<strong>Alpha Mask Preset</strong>" 타입의 프로퍼티를 등록합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2154.jpg"/>
+    <br>
+    
+    <p>
+    두개의 마스크가 동일한 메시를 대상으로 한다면, 각각의 마스크가 서로 다른 프로퍼티에 입력되도록 만들어야 합니다.<br>
+    "<strong>Alpha Mask Preset</strong>"의 경우는 이것을 "<strong>채널 (Channel)</strong>"로 구분합니다.<br>
+    <strong>(1)</strong> 두번째 마스크 데이터의 프로퍼티에서 <strong>Channel</strong>의 값을 "<strong>Channel_2</strong>"로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2158.jpg"/>
+    <br>
+    
+    <p>
+    "<strong>Alpha Mask Preset</strong>"은 "<strong>채널</strong>" 단위로 프로퍼티를 구분하여 마스크 데이터를 전달합니다.<br>
+    이 특성 덕분에 2개 이상의 마스크 메시가 동일한 메시를 대상으로 클리핑을 하는 것이 가능합니다.<br>
+    클리핑 연산 순서는 기존의 "클리핑 마스크"가 가장 먼저 연산되며, "알파 마스크"는 "<strong>채널 1</strong>"부터 순서대로 연산이 됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2155.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>마스크 설정 다이얼로그</strong>를 닫으면 두개의 클리핑 마스크가 하나의 메시 ("<strong>Clipped Star</strong>")에 적용된 것을 볼 수 있습니다.<br>
+    <strong>(2)</strong> 오른쪽의 <strong>Hierarchy UI</strong>에서 메시의 아이콘을 통해서 두개의 마스크가 하나의 메시로 전달되는 것을 알 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    현재는 두개의 마스크 메시의 "<strong>공통 영역</strong>"으로 클리핑이 되고 있는 것을 볼 수 있습니다.<br>
+    이것은 "알파 마스크"의 연산 방식 값이 <strong>And</strong>로 설정되었기 때문입니다.<br>
+    연산 방식을 변경하면 마스크가 조합되는 결과가 어떻게 바뀔지 확인해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2156.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Channel_2</strong>로 전송되는 "<strong>Mask Rect</strong>" 메시에 대한 <strong>마스크 데이터</strong>를 선택합니다.<br>
+    <strong>(2)</strong> <strong>Mask Operation</strong>의 값을 하나씩 변경하면서 결과를 비교해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2157.jpg"/>
+    <br>
+    
+    <p>
+    연산 방식에 따라 클리핑 마스크의 조합 결과가 달라지는 것을 볼 수 있습니다.<br>
+    - <strong>And</strong> : 이전 채널에서의 마스크와의 공통의 영역을 마스킹합니다.<br>
+    - <strong>Or</strong> : 이전 채널에서의 마스크와 현재 마스크를 더한 전체 영역을 마스킹합니다.<br>
+    - <strong>Inverse And</strong> : 알파 마스크를 반전한 값으로 <strong>And</strong> 연산을 수행합니다.<br>
+    - <strong>Inverse Or</strong> : 알파 마스크를 반전한 값으로 <strong>Or</strong> 연산을 수행합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>참고</strong></span><br>
+    마스크 조합의 결과는 채널에 따른 마스크 연산 순서의 영향을 받습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_MaskCustomShader.html">< 마스크와 커스텀 쉐이더</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_MaskChain.html">마스크 체인 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

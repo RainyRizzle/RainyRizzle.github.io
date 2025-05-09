@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Mask and Custom Shader</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_MaskCustomShader.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MaskCustomShader.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_MaskCustomShader.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Mask and Custom Shader</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Mask and Custom Shader</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <p>
+    Using the <strong>Mask</strong> function, you can create various effects in addition to the basic <strong>Clipped by Alpha Mask</strong>.<br>
+    Let's learn how to replace the shader used in mask processing or write it yourself.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Change the shader that generates the mask</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2112.jpg"/>
+    <br>
+    
+    <p>
+    In the process of creating a mask, <strong>Alpha Mask Shader</strong> is used by default.<br>
+    If you change the shader, <strong>Render Texture</strong> will be created differently.<br>
+    Let's check how the render texture changes depending on the shader.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2113.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> This is a prepared mesh for testing the mask render texture.<br>
+    <strong>(2)</strong> Add the <strong>Color Only (Controller)</strong> modifier to check the change in the render texture according to the modifier.<br>
+    <strong>(3)</strong> The color of the mesh changes according to the control parameter.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2114.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the <strong>Mask Setting Dialog</strong> and create <strong>Mask Data</strong> for the prepared mesh.<br>
+    <strong>(2)</strong> We will test by selecting the values ​​of the <strong>Shader Type</strong> option one by one.<br>
+    For now, let's select the default value, "<strong>Alpha Mask</strong>".<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's do <strong>Bake</strong> and test it in the Unity scene.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2115.jpg"/>
+    <br>
+    
+    <p>
+    In this example, let's check the generated render texture through <strong>Frame Debugger</strong> rather than viewing the clipping result.<br>
+    <strong>(1)</strong> Run <strong>Window > Analysis > Frame Debugger</strong> from the Unity menu.<br>
+    (The menu path may be different depending on the Unity version.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2116.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Run the game.<br>
+    <strong>(2)</strong> Change the color of the mesh by adjusting the control parameter.<br>
+    <strong>(3)</strong> Press the <strong>Enable</strong> button in <strong>Frame Debugger</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2117.jpg"/>
+    <br>
+    
+    <p>
+    The game will pause and you can check each stage of rendering.<br>
+    <strong>(1)</strong> Since the mask is generated through the command buffer, find and select the item that the command buffer operates on during the rendering process.<br>
+    The command buffer is named <strong>AP + Root Unit name + Mesh name + Mask processing method</strong>, then you can find this.<br>
+    <strong>(2)</strong> If you check the result of the command buffer, you can see that the mask is rendered to the render texture.<br>
+    </p>
+    <br>
+    
+    <p>
+    Earlier, since we selected <strong>Alpha Mask</strong> as the <strong>Shader Type</strong> of the mask, the render texture is rendered as a black and white image.<br>
+    Then now, let's check how the render texture changes when we change the <strong>Shader Type</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2118.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the <strong>Mask Setting Dialog</strong> again, select <strong>Mask Data</strong>, then select <strong>Shader Type</strong> once each as "<strong>Main Texture With Color</strong>" and "<strong>Main Texture Only</strong>" and check the results.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2119.jpg"/>
+    <br>
+    
+    <p>
+    If you run the game and run the Frame Debugger to view the output of the command buffer, you will see that the mask is rendered differently, as shown above.<br>
+    </p>
+    <br>
+    
+    <p>
+    To summarize, you can see that each <strong>Shader Type</strong> works as follows:<br>
+    - <strong>Alpha Mask</strong>: The value of the Alpha channel of the result including the color operation of the modifier is rendered in grayscale.<br>
+    - <strong>Main Texture With Color</strong>: The color operation of the modifier is applied to the render texture. It is the same as what is rendered on the screen.<br>
+    - <strong>Main Texture Only</strong>: The operation of the modifier is ignored, and only the color of the original image is reflected in the render texture.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Custom Mask Shader</h3>
+    <br>
+    
+    <p>
+    We saw in the previous example that changing the shader that generates the mask causes the render texture to be rendered differently.<br>
+    This time, let's look at the situation and method of writing a custom shader ourselves.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2120.jpg"/>
+    <br>
+    
+    <p>
+    The basic process of rendering a render texture as a mask is as above.<br>
+    The mask mesh is rendered with <strong>Normal Shader</strong>, while the <strong>Render Texture</strong> is rendered with <strong>Alpha Mask Shader</strong>.<br>
+    In order for <strong>Alpha Mask Shader</strong> to work, values ​​must be entered for the "_Color" and "_MainTex" properties.<br>
+    Since these values ​​can change in real time due to the influence of modifiers and animations, the values ​​applied to <strong>Normal Shader</strong> are copied and applied as is for each update.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2121.jpg"/>
+    <br>
+    
+    <p>
+    Let's say you're rendering a mesh with a custom shader using <strong>Material library</strong>(<a href="../../en/AdvancedManual/AD_MaterialLibrary.html">Related page</a>).<br>
+    If the result of this custom shader affects the mask, then the <strong>Alpha Mask Shader</strong> will need to be rewritten accordingly.<br>
+    In particular, if the custom shader is rendered by additional properties, then the <strong>Alpha Mask Shader</strong> should also receive those properties.<br>
+    </p>
+    <br>
+    
+    <p>
+    Therefore, in order for the mask generation shader to work properly, it must copy the values ​​of the properties from the original shader.<br>
+    The following example covers the process of applying a custom shader to a mesh and additionally writing a <strong>Custom Mask Shader</strong> to match it.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    <strong>Custom Mask Shader</strong> does not always require <strong>Normal Shader</strong> to be written as a custom shader.<br>
+    The following example required two custom shaders to demonstrate a situation where additional properties other than the basic properties ("_Color", "_MainTex") need to be copied.<br>
+    Applying custom shaders to <strong>Normal Shader</strong> and <strong>Mask Shader</strong> depends on the situation and can be used freely.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2122.jpg"/>
+    <br>
+    
+    <p>
+    We have prepared one mesh for the mask ("<strong>Mask Square</strong>") and one mesh for clipping ("<strong>Clipped Star</strong>").<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2123.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the <strong>Mask Setting Dialog</strong> and add <strong>Mask Data</strong> for "<strong>Mask Square</strong>" as the mask mesh.<br>
+    <strong>(2)</strong> Set <strong>Shader Type</strong> to the default value "<strong>Alpha Mask</strong>".<br>
+    <strong>(3)</strong> Add "<strong>Clipped Star</strong>" as the target mesh.<br>
+    <strong>(4)</strong> Add "<strong>Alpha Mask Preset</strong>" as the passed property.<br>
+    </p>
+    <br>
+    
+    <p>
+    Once this process is done, normal alpha mask clipping will be performed.<br>
+    Now let's make "<strong>Mask Square</strong>" be rendered by <strong>Custom Shader</strong>.<br>
+    The following shader code is based on the basic "Unlit" shader, and contains "the content of the pattern texture that is mapped through the screen coordinate to affect the Alpha value."<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    For information on how to write a custom shader, please refer to the <a href="../../en/Script/SC_CustomShader.html">Related page</a>.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Custom Shader/Screen Space Pattern (Alpha Blend)"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_Color</strong> (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MainTex</strong> (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// Pattern texture and scroll speed for screen effects</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_PatternTex</strong></span> (<span class="text-danger">"Pattern Texture (Grayscale)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_PatternRepeat</strong></span> (<span class="text-danger">"Pattern Repeat"</span>, float) = 1.0<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_ScrollSpeed</strong></span> (<span class="text-danger">"Scroll Speed"</span>, float) = 0.2<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"LightMode" = "ForwardBase"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Screen coordinate system for screen effects</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 screenUV : TEXCOORD1;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Pattern texture and scroll speed variables</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _PatternTex;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float _ScrollSpeed;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert (<span class="text-primary">appdata</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Calculating Screen UV</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.screenUV = ComputeScreenPos(o.vertex);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    #if UNITY_COLORSPACE_GAMMA<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    #else<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 4.595f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb = pow(col.rgb, 2.2f);<br>
+    #endif&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Pattern texture that moves sideways over time</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float2 screenUV = i.screenUV.xy / i.screenUV.w;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x *= _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.y *= _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x += _Time.y * _ScrollSpeed;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>fixed pattern = tex2D(_PatternTex, screenUV).r;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a *= pattern;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2124.jpg"/>
+    <br>
+    
+    <p>
+    Let's apply the custom shader we wrote.<br>
+    <strong>(1)</strong> Select a <strong>Root Unit</strong>.<br>
+    <strong>(2)</strong> Click the <strong>Material Library</strong> button.<br>
+    <strong>(3)</strong> Select <strong>Unlit Material Set</strong>.<br>
+    <strong>(4)</strong> Click the <strong>Duplicate</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2125.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select <strong>Duplicated Material Set</strong>.<br>
+    <strong>(2)</strong> Change the name of the Material Set appropriately.<br>
+    <strong>(3)</strong> Click the <strong>Default Material</strong> button to change it to <strong>ON</strong>.<br>
+    <strong>(4)</strong> Change the <strong>Alpha Blend</strong> shader to the <strong>Custom Shader</strong> you created above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2126.jpg"/>
+    <br>
+    
+    <p>
+    You need to add the properties of the custom shader to the Material Set.<br>
+    <strong>(1)</strong> Scroll down and press the <strong>Add Property from List</strong> button.<br>
+    <strong>(2)</strong> Select all the properties <strong>"_PatternTex", "_PatternRepeat", "_ScrollSpeed"</strong> written in the custom shader by pressing the  <kbd>Ctrl</kbd>  key.<br>
+    <strong>(3)</strong> Press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2127.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Enter the pattern texture, pattern repetition value, and scroll speed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2128.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Custom shaders do not work in the AnyPortrait editor.<br>
+    <strong>(2)</strong> Let's run <strong>Bake</strong> and check it in the Unity scene.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2129.jpg"/>
+    <br>
+    
+    <p>
+    You can see that the pattern texture is applied to the mesh by the custom shader.<br>
+    However, you can see that the part that is transparent with a wave pattern by this pattern texture is not reflected in the clipping.<br>
+    This is because the pattern-related code of the custom shader does not exist in <strong>Alpha Mask Shader</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    In order to reflect the contents of the custom shader to the mask, <strong>Alpha Mask Shader</strong> must also be rewritten by <strong>Custom Shader</strong>.<br>
+    Let's write <strong>Custom Mask Shader</strong> as follows.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Custom Shader/Screen Space Pattern (Alpha Mask)"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_Color</strong> (<span class="text-danger">"Color (Alpha)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MainTex</strong> (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_PatternTex</strong></span> (<span class="text-danger">"Pattern Texture (Grayscale)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_PatternRepeat</strong></span> (<span class="text-danger">"Pattern Repeat"</span>, float) = 1.0<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_ScrollSpeed</strong></span> (<span class="text-danger">"Scroll Speed"</span>, float) = 0.2<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType"="Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;Cull Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Screen coordinate system for screen effects</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 screenUV : TEXCOORD1;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Pattern texture and scroll speed variables</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _PatternTex;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float _ScrollSpeed;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert (<span class="text-primary">appdata</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Calculate Screen UV</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.screenUV = ComputeScreenPos(o.vertex);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Alpha Mask Operation (White + Alpha)</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = fixed3(1.0f, 1.0f, 1.0f);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a = saturate(col.a * _Color.a);</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Pattern texture that moves sideways over time</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float2 screenUV = i.screenUV.xy / i.screenUV.w;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x *= _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.y *= _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x += _Time.y * _ScrollSpeed;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>fixed pattern = tex2D(_PatternTex, screenUV).r;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a *= pattern;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    If you look at the above alpha mask shader written as a custom shader, it looks similar to the content of a regular shader.<br>
+    The difference is that the result of the RGB channels is <strong>White (1, 1, 1)</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now let's apply this <strong>Custom Mask Shader</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2130.jpg"/>
+    <br>
+    
+    <p>
+    Custom shaders that are not very special can also be set in the <strong>Material Library</strong> instead of the <strong>Mask Setting Dialog</strong>.<br>
+    If it is a shader that will be applied to all clipping meshes in common, you can input the shader in the "<strong>Alpha Mask</strong>" item of the <strong>Material Library</strong> as shown above.<br>
+    If you set it this way, the shader will be used when <strong>Shader Type</strong> is set to "<strong>Alpha Mask</strong>" in the <strong>Mask Setting Dialog</strong>.<br>
+    However, this method is not covered on this page.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2131.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the <strong>Mask Setting Dialog</strong> and select <strong>Mask Data</strong>.<br>
+    <strong>(2)</strong> Change the value of <strong>Shader Type</strong> to "<strong>Custom Shader</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2132.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> If you change <strong>Shader Type</strong> to "<strong>Custom Shader</strong>", an option called <strong>Shader Asset</strong> will appear.<br>
+    Enter the <strong>Custom Mask Shader</strong> you created earlier.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2133.jpg"/>
+    <br>
+    
+    <p>
+    You need to copy the values ​​of the custom properties "_PatternTex", "_PatternRepeat", and "_ScrollSpeed" from the original shader and input them into the <strong>Custom Mask Shader</strong>.<br>
+    <strong>(1)</strong> Click the <strong>Add Property from List</strong> button.<br>
+    <strong>(2)</strong> Hold down the&nbsp;&nbsp;<kbd>Ctrl</kbd>&nbsp;&nbsp;key and select all of <strong>"_PatternTex", "_PatternRepeat", and "_ScrollSpeed"</strong>.<br>
+    <strong>(3)</strong> Click the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    If the property you want to add is not in the list, it may be because the <strong>Material Set</strong> to which the shader is applied is not set as the <strong>Default Material</strong>.<br>
+    Please check the <strong>Material Library</strong>.<br>
+    Alternatively, you can click the <strong>Add Property</strong> button and enter the property name directly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2134.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> You can see that the properties to be copied from the general shader are registered. Each item consists of "Property Name", "Value Type", and "Remove Button".<br>
+    <strong>(2)</strong> This custom shader uses "<strong>Screen Coordinate System</strong>", so <strong>Clipping Mask Optimization Function</strong> should not be used. (<a href="../../en/AdvancedManual/AD_Mask.html">Related page</a>)<br>
+    Uncheck <strong>Optimized Render</strong> and change <strong>Texture Size</strong> to a reasonably large value.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2135.jpg"/>
+    <br>
+    
+    <p>
+    If you do <strong>Bake</strong> and check it in the Unity scene, you can see that the pattern texture effect of the custom shader is also applied to the mask.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Custom Clipped Shader</h3>
+    <br>
+    
+    <p>
+    The previous process was "Applying a custom shader during the mask generation process."<br>
+    In this explanation, we will write a custom shader and apply it to "<strong>the process of receiving the generated mask and rendering the clipped mesh</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2136.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Mask Render Texture</strong> is passed to the target mesh to be clipped, and this is received by the "<strong>Clipped Shader</strong>" and performs clipping processing.<br>
+    Here, it is also possible to write the <strong>Clipped Shader</strong> as a <strong>Custom Shader</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    Typically, setting up a <strong>Custom Clipped Shader</strong> is done in the <strong>Material Library</strong>.<br>
+    One thing to consider here is if your <strong>Custom Clipped Shader</strong> requires special property values ​​related to the mask.<br>
+    In the <strong>Material Library</strong>, you can set up a custom property to pass a value unrelated to the mask data.<br>
+    However, in order to pass a value related to the mask data, you need to set it in the <strong>Mask Setting Dialog</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    In this example, we will create and apply a <strong>Custom Clipped Shader</strong> that has the effect of "taking a mask and changing the color outside the mask without changing the Alpha."<br>
+    In particular, we will write the shader assuming that the user creates all the properties related to clipping arbitrarily.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2137.jpg"/>
+    <br>
+    
+    <p>
+    Here are the meshes used in this example.<br>
+    In front is the "<strong>Character</strong>" mesh with a pretty character drawn on it, and behind it is the sky-blue "<strong>Circle Mask</strong>" mesh.<br>
+    Let's make it so that the "<strong>Circle Mask</strong>" behind creates a mask and passes it to the "<strong>Character</strong>" mesh, and the color of the part that doesn't overlap with the mask of the "<strong>Character</strong>" mesh changes.<br>
+    </p>
+    <br>
+    
+    <p>
+    To create this effect, let's write a <strong>Custom Clipped Shader</strong> as follows:<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Custom Shader/Reverse Color"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_Color</strong> (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MainTex</strong> (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// Custom mask and color</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_CustomMask</strong></span> (<span class="text-danger">"Custom Mask (A)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_CustomMaskSSOffset</strong></span> (<span class="text-danger">"Custom Mask Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_CustomColor</strong></span> (<span class="text-danger">"Custom Color by Mask (RGB)"</span>, Color) = (1, 1, 1, 1)<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Screen coordinate system for clipping operations</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 screenPos : TEXCOORD1;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Custom Mask Property Variables</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _CustomMask;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 _CustomMaskSSOffset;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 _CustomColor;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Mask Function: Compute Render Texture UVs</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> GetMaskScreenUV (<span class="text-primary">float2</span> screenUV, <span class="text-primary">float4</span> offset)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> result = screenUV - <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.x *= offset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.y *= offset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.x += offset.x * offset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.y += offset.y * offset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result += <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return result;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert (<span class="text-primary">appdata</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Screen coordinate system for clipping mask UV calculations</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.screenPos = ComputeScreenPos(o.vertex);</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    #if UNITY_COLORSPACE_GAMMA<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    #else<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 4.595f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb = pow(col.rgb, 2.2f);<br>
+    #endif<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Calculating custom clipped</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float2 screenUV = i.screenPos.xy / max(i.screenPos.w, 0.0001f);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float alphaMask = tex2D(_CustomMask, GetMaskScreenUV(screenUV, _CustomMaskSSOffset)).r;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// After mask inversion, interpolate with specified color</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>alphaMask = saturate(1.0f - alphaMask);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = lerp(col.rgb, _CustomColor.rgb, alphaMask);</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    This custom shader takes mask data as <strong>"_CustomMask", "_CustomMaskSSOffset", "_CustomColor"</strong> properties and renders it.<br>
+    It takes the value of the alpha mask and stores it in the "alphaMask" variable, and uses it as an interpolation value for color calculations without multiplying it by the alpha channel.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2139.jpg"/>
+    <br>
+    
+    <p>
+    Let's apply the <strong>Custom Clipped Shader</strong> that was created.<br>
+    <strong>(1)</strong> Open the <strong>Material Library</strong> and create or duplicate a <strong>Material Set</strong> to apply the clipping shader to.<br>
+    <strong>(2)</strong> Select the <strong>Material Set</strong> and set its name.<br>
+    <strong>(3)</strong> Click the <strong>Default Material</strong> button to make it <strong>ON</strong>.<br>
+    <strong>(4)</strong> Enter the custom shader that was created earlier in the shader of the <strong>Alpha Blend</strong> item of <strong>Clipping Rendering</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2140.jpg"/>
+    <br>
+    
+    <p>
+    Now let's create mask data.<br>
+    <strong>(1)</strong> Open the <strong>Mask Setting Dialog</strong> and press the <strong>Add Mask</strong> button.<br>
+    <strong>(2)</strong> Select the "<strong>Circle Mask</strong>" mesh that will be the mask mesh.<br>
+    <strong>(3)</strong> Press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2141.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the generated <strong>Mask Data</strong>.<br>
+    <strong>(2)</strong> Set <strong>Texture Size</strong> appropriately.<br>
+    <strong>(3)</strong> Register the "<strong>Character</strong>" mesh to be clipped.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2142.jpg"/>
+    <br>
+    
+    <p>
+    Now we need to add a property to pass the mask data to the target mesh.<br>
+    In the previous example, we used the property of "<strong>Alpha Mask Preset</strong>" style, but here we need to set it according to the property of the custom shader.<br>
+    <strong>(1)</strong> Click the <strong>Add Property from List</strong> button.<br>
+    <strong>(2)</strong> Select all the properties of the custom shader <strong>"_CustomMask", "_CustomMaskSSOffset", "_CustomColor"</strong> by pressing the  <kbd>Ctrl</kbd>  key.<br>
+    <strong>(3)</strong> Click the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2143.jpg"/>
+    <br>
+    
+    <p>
+    The selected properties have been registered in the mask data.<br>
+    Now, the mask data will be transferred to the clipping mesh through the registered properties.<br>
+    Currently, only the name and type of each property are set, and the value to be transferred has not been set.<br>
+    Before setting the property values, let's check how this UI is structured.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2144.jpg"/>
+    <br>
+    
+    <p>
+    <strong>1. Preset Type</strong>: You can configure property information in the form of a preset. Since we will set it for each individual property here, it is set in the "<strong>Custom</strong>" format.<br>
+    <strong>2. Property Name</strong>: The name of the property defined in the shader.<br>
+    <strong>3. Remove Button</strong>: Remove the property information.<br>
+    <strong>4. Property Type and Value</strong>: Set the type of the property value and specify the value to be passed. Depending on the type, an automatically generated value is passed.<br>
+    <strong>5. Linked Control Parameter</strong>: Some property types can control the value in real time by linking a control parameter.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2145.jpg"/>
+    <br>
+    
+    <p>
+    Set the type and value of the property appropriately.<br>
+    In this example, each property is set as follows:<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1.</strong> <span class="text-danger"><strong>_CustomMask</strong></span><br>
+    : Set to <strong>Render Texture</strong> type.<br>
+    <strong>Render Texture</strong> type passes the <strong>Mask Render Texture</strong> to the clipping mesh.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2.</strong> <span class="text-danger"><strong>_CustomMaskSSOffset</strong></span><br>
+    : Set to <strong>Screen Space Offset</strong> type.<br>
+    <strong>Screen Space Offset</strong> type passes the value of <strong>Vector</strong> type generated to calculate UV of <strong>Mask Render Texture</strong> to the clipping mesh.<br>
+    For code utilizing <strong>Screen Space Offset</strong> value, please refer to "<strong>GetMaskScreenUV</strong>" function of <strong>Custom Clipped Shader</strong> above.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3.</strong> <span class="text-danger"><strong>_CustomColor</strong></span><br>
+    : Set to <strong>Color</strong> type, and set the color value to pink.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2146.jpg"/>
+    <br>
+    
+    <p>
+    If you do <strong>Bake</strong> and check it in the Unity scene, you can see the result as above.<br>
+    You can see a pretty result where "the outside of the clipping area is rendered in pink" by the custom shader.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_Mask.html">< Mask</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_MaskCombine.html">Combining Masks ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom Shader/Screen Space Pattern (Alpha Blend)\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\t\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\n\t\t// Pattern texture and scroll speed for screen effects\n\t\t_PatternTex (\"Pattern Texture (Grayscale)\", 2D) = \"white\" {}\n\t\t_PatternRepeat (\"Pattern Repeat\", float) = 1.0\n\t\t_ScrollSpeed (\"Scroll Speed\", float) = 0.2\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\t\t\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tTags { \"LightMode\" = \"ForwardBase\" }\n\t\t\tZWrite Off\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\t\t\t\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\n\t\t\t\t// Screen coordinate system for screen effects\n\t\t\t\tfloat4 screenUV : TEXCOORD1;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\t// Pattern texture and scroll speed variables\n\t\t\tsampler2D _PatternTex;\n\t\t\tfloat _PatternRepeat;\n\t\t\tfloat _ScrollSpeed;\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\n\t\t\t\t// Calculating Screen UV\n\t\t\t\to.screenUV = ComputeScreenPos(o.vertex);\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\t\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n#if UNITY_COLORSPACE_GAMMA\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n#else\n\t\t\t\tcol.rgb *= _Color.rgb * 4.595f;\n\t\t\t\tcol.rgb = pow(col.rgb, 2.2f);\n#endif\t\t\t\t\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\t// Pattern texture that moves sideways over time\n\t\t\t\tfloat2 screenUV = i.screenUV.xy / i.screenUV.w;\n\t\t\t\tscreenUV.x *= _PatternRepeat;\n\t\t\t\tscreenUV.y *= _PatternRepeat;\n\t\t\t\tscreenUV.x += _Time.y * _ScrollSpeed;\n\t\t\t\tfixed pattern = tex2D(_PatternTex, screenUV).r;\n\t\t\t\tcol.a *= pattern;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom Shader/Screen Space Pattern (Alpha Mask)\"\n{\n\tProperties\n\t{\n\t\t_Color (\"Color (Alpha)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\n\t\t_PatternTex (\"Pattern Texture (Grayscale)\", 2D) = \"white\" {}\n\t\t_PatternRepeat (\"Pattern Repeat\", float) = 1.0\n\t\t_ScrollSpeed (\"Scroll Speed\", float) = 0.2\n\t}\n\tSubShader\n\t{\n\t\tTags { \"RenderType\"=\"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tZWrite Off\n\t\tCull Off\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\t\t\t\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\n\t\t\t\t// Screen coordinate system for screen effects\n\t\t\t\tfloat4 screenUV : TEXCOORD1;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\tfloat4 _Color;\n\n\t\t\t// Pattern texture and scroll speed variables\n\t\t\tsampler2D _PatternTex;\n\t\t\tfloat _PatternRepeat;\n\t\t\tfloat _ScrollSpeed;\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\n\t\t\t\t// Calculate Screen UV\n\t\t\t\to.screenUV = ComputeScreenPos(o.vertex);\n\t\t\t\treturn o;\n\t\t\t}\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\t// Alpha Mask Operation (White + Alpha)\n\t\t\t\tcol.rgb = fixed3(1.0f, 1.0f, 1.0f);\n\t\t\t\tcol.a = saturate(col.a * _Color.a);\n\n\t\t\t\t// Pattern texture that moves sideways over time\n\t\t\t\tfloat2 screenUV = i.screenUV.xy / i.screenUV.w;\n\t\t\t\tscreenUV.x *= _PatternRepeat;\n\t\t\t\tscreenUV.y *= _PatternRepeat;\n\t\t\t\tscreenUV.x += _Time.y * _ScrollSpeed;\n\t\t\t\tfixed pattern = tex2D(_PatternTex, screenUV).r;\n\t\t\t\tcol.a *= pattern;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom Shader/Reverse Color\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\t\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\n\t\t// Custom mask and color\n\t\t_CustomMask (\"Custom Mask (A)\", 2D) = \"white\" {}\n\t\t_CustomMaskSSOffset (\"Custom Mask Screen Space Offset (XY_Scale)\", Vector) = (0, 0, 0, 1)\n\t\t_CustomColor (\"Custom Color by Mask (RGB)\", Color) = (1, 1, 1, 1)\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tZWrite Off\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\t\t\t\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\n\t\t\t\t// Screen coordinate system for clipping operations\n\t\t\t\tfloat4 screenPos : TEXCOORD1;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\t// Custom Mask Property Variables\n\t\t\tsampler2D _CustomMask;\n\t\t\tfloat4 _CustomMaskSSOffset;\n\t\t\tfloat4 _CustomColor;\n\n\t\t\t// Mask Function: Compute Render Texture UVs\n\t\t\tfloat2 GetMaskScreenUV (float2 screenUV, float4 offset)\n\t\t\t{\n\t\t\t\tfloat2 result = screenUV - float2(0.5f, 0.5f);\n\t\t\t\tresult.x *= offset.z;\n\t\t\t\tresult.y *= offset.w;\n\t\t\t\tresult.x += offset.x * offset.z;\n\t\t\t\tresult.y += offset.y * offset.w;\n\t\t\t\tresult += float2(0.5f, 0.5f);\n\t\t\t\treturn result;\n\t\t\t}\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\n\t\t\t\t// Screen coordinate system for clipping mask UV calculations\n\t\t\t\to.screenPos = ComputeScreenPos(o.vertex);\n\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n#if UNITY_COLORSPACE_GAMMA\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n#else\n\t\t\t\tcol.rgb *= _Color.rgb * 4.595f;\n\t\t\t\tcol.rgb = pow(col.rgb, 2.2f);\n#endif\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\t// Calculating custom clipped\n\t\t\t\tfloat2 screenUV = i.screenPos.xy / max(i.screenPos.w, 0.0001f);\n\t\t\t\tfloat alphaMask = tex2D(_CustomMask, GetMaskScreenUV(screenUV, _CustomMaskSSOffset)).r;\n\n\t\t\t\t// After mask inversion, interpolate with specified color\n\t\t\t\talphaMask = saturate(1.0f - alphaMask);\n\t\t\t\tcol.rgb = lerp(col.rgb, _CustomColor.rgb, alphaMask);\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
+    <!--------------->
+
+    </body>
+</html>

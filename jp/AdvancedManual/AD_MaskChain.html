@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>マスクチェーン</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_MaskChain.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MaskChain.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_MaskChain.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > マスクチェーン</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">マスクチェーン</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2159.jpg"/>
+    <br>
+    
+    <p>
+    クリッピングレンダリングが必要な場合の中で、クリッピングレンダリングを連続して行う必要がある場合もあります。<br>
+    つまり、このページで扱うのは、「クリッピングされたメッシュ」が別のメッシュへの「マスクメッシュ」になる場合です。<br>
+    上の画像から見ると、「Mesh 1」がマスクメッシュとして「Mesh 2」をクリッピングし、クリッピングされた「Mesh 2」がマスクとして「Mesh 3」をクリッピングしています。<br>
+    マスク処理が連続して行われるこれを「AnyPortrait」では「<strong>マスクチェーン（Mask Chain）</strong>」と呼ぶ。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページでは、「マスクチェーン」が必要な理由と「マスクレンダリングの順序」について説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2161.jpg"/>
+    <br>
+    
+    <p>
+    クリッピングマスクが連続的に適用される場合を再現するために、上記の例を用意しました。<br>
+    上記の例は、「星型の模様を含むテキストが描かれた時計」です。<br>
+    まず、時計板メッシュ（「<strong>Clock Face</strong>」）をマスクにして、テキストメッシュ（「<strong>Text Mask</strong>」）をクリッピングします。<br>
+    その後、クリッピングされたテキストメッシュ（「<strong>Text Mask</strong>」）がマスクされ、星型メッシュ（「<strong>Clipped Star</strong>」）をクリッピングします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2162.jpg"/>
+    <br>
+    
+    <p>
+    これをどのように実装するかしばらく考えてみると、既存の「クリッピングマスク」を利用すればきれいな時計が実装になりそうです。<br>
+    「クリッピングマスク」を使って製作をすると、どのように見えるか試してみましょう。<br>
+    <strong>(1)</strong> 「<strong>Text Mask</strong>」メッシュを選択します。<br>
+    <strong>(2)</strong> 「クリッピングマスク」ボタンを押して「<strong>Clock Face</strong>」メッシュからクリッピングするようにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2163.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 次に「<strong>Clipped Star</strong>」メッシュを選択します。<br>
+    <strong>(2)</strong> 「クリッピングマスク」ボタンを押して連続クリッピングになるように設定します。<br>
+    <strong>(3)</strong> 完成した結果を見ると、「<strong>Clipped Star</strong>」メッシュがテキストではなく時計板全体にクリッピングされることがわかります。<br>
+    </p>
+    <br>
+    
+    <p>
+    意図したのは「星柄のあるテキストが時計板に描かれたもの」でしたが、この方法では正しく実装されません。<br>
+    この場合、「マスクチェーン」が必要です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2164.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Clipped Star</strong>」メッシュの「クリッピングマスク」を解除し、「<strong>Text Mask</strong>」メッシュのみ「<strong>Clock Face</strong>」メッシュへのクリッピングになるように設定します。<br>
+    <strong>(2)</strong> 「<strong>Open Mask Settings</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2165.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Clock Face</strong>」メッシュの「クリッピングマスクデータ」が登録されていることがわかります。<br>
+    <strong>(2)</strong> 「<strong>Add Mask</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> 2番目のマスクとなる「<strong>Text Mask</strong>」メッシュを選択します。<br>
+    <strong>(4)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2166.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Add Destination</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Clipped Star</strong>」メッシュを選択します。<br>
+    <strong>(3)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2167.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Add Property</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Alpha Mask Preset</strong>」タイプのプロパティが追加されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2168.jpg"/>
+    <br>
+    
+    <p>
+    これで「<strong>Clock Face</strong> > <strong>Text Mask</strong> > <strong>Clipped Star</strong>」につながる連続したマスクデータが完成しました。<br>
+    この状態が「マスクチェーン」であり、「<strong>Text Mask</strong>」メッシュは「チェーンされたマスク」になります。<br>
+    <strong>(1)</strong> ところで「<strong>Text Mask</strong>」メッシュのマスクデータ項目に「警告アイコン」が登場しました。<br>
+    この「警告アイコン」は、「マスクチェーン」が発生するが正常に動作しない可能性があることを意味する。<br>
+    </p>
+    <br>
+    
+    <p>
+    「マスクチェーン」で考慮すべき最も重要なのは、「マスクがレンダリングされる順序」です。<br>
+    この例では、通常のケースは、「<strong>Clock Face</strong>> <strong>Text Mask</strong>> <strong>Clipped Star</strong>」の順にマスクを作成して渡すことです。<br>
+    ただし、順序が間違って「<strong>Text Mask</strong>> <strong>Clipped Star</strong>」が最初に実行され、「<strong>Clock Face</strong>> <strong>Text Mask</strong>」が後で実行されると、クリッピングエラーが発生する可能性があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> これを解決するために「マスクデータ」を選択し、「<strong>Render Order</strong>」の値を「<strong>Phase 2</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2169.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> リストから「マスクデータ」が「<strong>Phase 2</strong>」に移動し、警告アイコンが「チェーン」アイコンに変わったことがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2170.jpg"/>
+    <br>
+    
+    <p>
+    「マスク設定ダイアログ」を閉じてレンダリング結果を確認しましょう。<br>
+    意図したとおりにレンダリングされ、きれいな時計が完成したことがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2171.jpg"/>
+    <br>
+    
+    <p>
+    Unityシーンでテストすると、レンダリングは正常になりますが、マスクの品質が低いことがわかります。<br>
+    これは、「マスクチェーン」が発生した場合、クリッピングマスクの「レンダリングテクスチャ品質の最適化」機能は機能しません。 （<a href="../../jp/AdvancedManual/AD_Mask.html">関連ページ</a>）<br>
+    これは、レンダリングテクスチャからレンダリングテクスチャへのレンダリングが発生するため、「品質の最適化」プロセスで必要な「画面座標系」が一定ではないためです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2172.jpg"/>
+    <br>
+    
+    <p>
+    この場合、マスク品質を向上させるためには、「マスクチェーン」に関連する全ての「マスクデータ」のレンダリングテクスチャ解像度を調整する必要がある。<br>
+    <strong>(1)</strong> 「マスク設定ダイアログ」を開き、「マスクチェーン」の先頭に対応する「<strong>Clock Face</strong>」の「クリッピングマスク」項目を選択します。<br>
+    <strong>(2)</strong> 「<strong>Texture Size</strong>」の値を適度に大きい値に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2173.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 次に、「<strong>Text Mask</strong>」メッシュの「マスクデータ」を選択します。<br>
+    <strong>(2)</strong> 同様に、「<strong>Texture Size</strong>」の値を適度に大きい値として選択します。<br>
+    ここでは「<strong>Optimized Render</strong>」がチェックされていますが、「マスクチェーン」が発生した「マスクデータ」ではそのオプションは無視されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2174.jpg"/>
+    <br>
+    
+    <p>
+    Unityシーンに戻ると、マスクの品質が良くなったことがわかります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>マスクの処理手順</h3>
+    <br>
+    
+    <p>
+    「マスクデータ」は「コマンドバッファ」によって実行され、「レンダリングテクスチャ」でレンダリングを実行します。<br>
+    「コマンドバッファが実行される順序」は、まもなく「マスクデータが実行される順序」でもあります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2160.jpg"/>
+    <br>
+    
+    <p>
+    マスクが処理される時点、すなわちコマンドバッファが実行される時点は、レンダリング手順の特定のイベントに合わせて区別される。<br>
+    AnyPortraitのメッシュは「Transparent」シェーダーとしてレンダリングされるため、以前のレンダーイベント「Before Forward Opaque」、「After Forward Opaque」、「Before Forward Alpha」のいずれかでマスクが処理されます。<br>
+    「フェーズ（Phase）」オプションは、この3つのレンダーイベントを指します。<br>
+    同じ「フェーズ」内では、コマンドバッファの実行順序が意味をなさないため、「マスクチェーン」のレンダリング順序エラーが発生する可能性があります。<br>
+    そのため、レンダリング順序エラーを解決するためには「フェイズ」を明確に指定する必要があるのです。<br>
+    </p>
+    <br>
+    
+    <p>
+    従来の「クリッピングマスク」は、「マスクデータ」の「フェーズ 1（Phase 1）」と同じ時点である「Before Forward Opaque」で実行されます。<br>
+    したがって、「クリッピングマスク」との「マスクチェーン」が発生した場合は、少なくとも「フェーズ 2（Phase 2）」で実行するように設定する必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    ただし、上記の仕様は「Built-Inレンダリングパイプライン」に対応し、「URP」では「Before Rendering」イベントに統合されます。<br>
+    このとき、内部でマスク処理の順序が「フェーズ」単位で毎回ソートされます。<br>
+    結果は同じです。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    マスクが更新されるのとレンダリングテクスチャでレンダリングされるのは内部的に異なる動作です。<br>
+    マスクが更新されるのはモディファイアおよびアニメーションの更新ロジックに関連し、レンダリングテクスチャでレンダリングされ、マスクデータが送信されることはレンダリングイベントに関連します。<br>
+    そのため、マスクに関する問題が発生した場合、「更新」による問題と「レンダリング」による問題は区別されなければなりません。<br>
+    このページで扱う問題は「レンダリング」に関する問題です。<br>
+    他のスクリプトとの更新順序による問題は、次のマニュアルで取り上げています。<br>
+    - <a href="../../jp/AdvancedManual/AD_ExecutionOrderProblem.html">他のアセットとの実行順序の問題</a><br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>マスクチェーンの順序が正しくない場合</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2175.jpg"/>
+    <br>
+    
+    <p>
+    「マスクチェーン」の「<strong>Render Order</strong>」の値が適切ではないとしても、意外にもレンダリング結果はかなりまともに見えるかもしれません。<br>
+    レンダリングは毎フレームごとに行われるため、「前フレームでのレンダーテクスチャ」が反映されてレンダリングエラーが見えにくいです。<br>
+    しかし、レンダリングエラーは明らかに存在し、これはメッシュが登場する瞬間やメッシュが速く動くアニメーションで見つけることができます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>共有テクスチャでレンダリング順序が一致しない場合</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2176.jpg"/>
+    <br>
+    
+    <p>
+    「共有テクスチャ（Shared Texture）」（<a href="../../jp/AdvancedManual/AD_Mask.html">関連ページ</a>）で、各マスクデータの「<strong>Render Order</strong>」が一致しない場合、何が起こるかを見てみましょう。<br>
+    <strong>(1)</strong> 4つのマスクメッシュがある例です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2177.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 4つのメッシュのそれぞれに「マスクデータ」があります。<br>
+    <strong>(2)</strong> この「マスクデータ」の「<strong>Shared Texture</strong>」オプションが有効になり、同じ「共有テクスチャ」をターゲットにマスクをレンダリングします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2178.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ところで、この「マスクデータ」の一部の「<strong>Render Order</strong>」が他の「マスクデータ」と一致しない場合、上記のように「警告アイコン」が発生します。<br>
+    「共有テクスチャ」は同じ「フェイズ」でマスクを一括生成する必要があります。<br>
+    <strong>(2)</strong> 問題を解決するために、「マスクデータ」のいずれかを選択して「<strong>Render Order</strong>」を設定します。<br>
+    <strong>(3)</strong> 「<strong>Sync Sh​​ared Texture Options</strong>」ボタンを押します。<br>
+    <strong>(4)</strong> 同期メッセージが表示されたら、「<strong>Sync All Options</strong>」ボタンを押すか、「<strong>Sync Except Shader</strong>」ボタンを押して、「共有テクスチャ」のすべての「マスクデータ」のオプションを一致させます。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_MaskCombine.html">< マスクの組み合わせ</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_OnlyMaskMesh.html">マスク専用メッシュ ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

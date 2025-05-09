@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>マスクの組み合わせ</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_MaskCombine.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MaskCombine.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_MaskCombine.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > マスクの組み合わせ</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">マスクの組み合わせ</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <p>
+    「AnyPortrait v1.6.0」で改善された「マスク」を使用すると、1つの「クリッピングマスク」と4つの「チャンネル別アルファマスク」を組み合わせてクリッピングレンダリングに適用できます。<br>
+    特に、「アルファマスク」を組み合わせて適用する際の演算方式をオプションとして設定できます。<br>
+    このページでは、複数のマスクをクリッピングメッシュに渡して組み合わせる方法について説明します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    「マスク」について、次のマニュアルをまず読んでみることをお勧めします。<br>
+    このページで扱う内容と同様の動作をする「共有テクスチャ（Shared Texture）」も、次のマニュアルで確認できます。<br>
+    - <a href="../../jp/AdvancedManual/AD_Mask.html">マスク</a><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2151.jpg"/>
+    <br>
+    
+    <p>
+    2つのマスクメッシュ（「<strong>Mask Circle</strong>」、「<strong>Mask Rect</strong>」）とクリッピングされる1つのメッシュ（「<strong>Clipped Star</strong>」）があります。<br>
+    2つのマスクを作成して1つのメッシュに同時に適用しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2152.jpg"/>
+    <br>
+    
+    <p>
+    「マスク設定ダイアログ」を開き、マスクを設定しましょう。<br>
+    <strong>(1)</strong> 最初のマスクメッシュ（「<strong>Mask Circle</strong>」）の「マスクデータ」を作成します。<br>
+    <strong>(2)</strong> マスクを受ける「対象メッシュ」（「<strong>Clipped Star</strong>」）を登録します。<br>
+    <strong>(3)</strong> 「<strong>Alpha Mask Preset</strong>」タイプのプロパティを登録します。<br>
+    ここでは、「<strong>Channel</strong>」の値を「<strong>Channel_1</strong>」に設定し、「<strong>Mask Operation</strong>」を「<strong>And</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2153.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 2番目のマスクメッシュ（「<strong>Mask Rect</strong>」）の「マスクデータ」を作成します。<br>
+    <strong>(2)</strong> 以前と同じメッシュ（「<strong>Clipped Star</strong>」）をクリッピング先として登録します。<br>
+    <strong>(3)</strong> 「<strong>Alpha Mask Preset</strong>」タイプのプロパティを登録します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2154.jpg"/>
+    <br>
+    
+    <p>
+    2つのマスクが同じメッシュをターゲットにしている場合は、各マスクが異なるプロパティに入力されるようにする必要があります。<br>
+    「<strong>Alpha Mask Preset</strong>」の場合は、これを「<strong>Channel</strong>」で区切ります。<br>
+    <strong>(1)</strong> 2 番目のマスクデータのプロパティで「<strong>Channel</strong>」の値を「<strong>Channel_2</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2158.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Alpha Mask Preset</strong>」は、「<strong>Channel</strong>」単位でプロパティを区切ってマスクデータを渡します。<br>
+    この特性のおかげで、2つ以上のマスクメッシュが同じメッシュを対象にクリッピングを行うことが可能です。<br>
+    クリッピング演算シーケンスは既存の「クリッピングマスク」が最初に演算され、「アルファマスク」は「<strong>Channel 1</strong>」から順に演算になります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2155.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「マスク設定ダイアログ」を閉じると、2つのクリッピングマスクが1つのメッシュ（「<strong>Clipped Star</strong>」）に適用されていることがわかります。<br>
+    <strong>(2)</strong> 右側の「<strong>Hierarchy UI</strong>」から、メッシュのアイコンから2つのマスクが1つのメッシュに渡されることがわかります。<br>
+    </p>
+    <br>
+    
+    <p>
+    現在は2つのマスクメッシュの「共通領域」でクリッピングになっているのがわかります。<br>
+    これは、「アルファマスク」の演算方式値が「<strong>And</strong>」に設定されているためである。<br>
+    演算方式を変更したら、マスクの組み合わせ結果がどのように変わるかを確認しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2156.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Channel_2</strong>」に送信される「<strong>Mask Rect</strong>」メッシュの「マスクデータ」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Mask Operation</strong>」の値を一つずつ変更しながら結果を比較しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2157.jpg"/>
+    <br>
+    
+    <p>
+    演算方式によってクリッピングマスクの組み合わせ結果が異なることがわかる。<br>
+    - <strong>And</strong> : 前のチャンネルのマスクと共通の領域にクリッピングします。<br>
+    - <strong>Or</strong> : 前のチャンネルのマスクと現在のマスクを加えた領域全体にクリッピングします。<br>
+    - <strong>Inverse And</strong> : アルファマスクを反転した値で「<strong>And</strong>」演算を行います。<br>
+    - <strong>Inverse Or</strong> : アルファマスクを反転した値で「<strong>Or</strong>」演算を行います。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    マスクの組み合わせの結果は、チャネルによるマスク操作の順序の影響を受けます。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_MaskCustomShader.html">< マスクとカスタムシェーダー</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_MaskChain.html">マスクチェーン ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

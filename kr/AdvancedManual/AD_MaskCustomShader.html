@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>마스크와 커스텀 쉐이더</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-kor">동영상</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">게시판</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_MaskCustomShader.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_MaskCustomShader.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_MaskCustomShader.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > 마스크와 커스텀 쉐이더</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">마스크와 커스텀 쉐이더</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <p>
+    <strong>마스크</strong> 기능을 활용하면 기본적인 <strong>알파 마스크에 의한 클리핑</strong> 외에도 다양한 효과를 만드는 것이 가능합니다.<br>
+    마스크 처리 과정에서 사용되는 쉐이더를 교체하거나 직접 작성하는 방법에 대해서 알아봅시다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>마스크를 생성하는 쉐이더를 변경하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2112.jpg"/>
+    <br>
+    
+    <p>
+    마스크를 생성하는 과정에서는 기본적으로 <strong>알파 마스크 쉐이더(Alpha Mask Shader)</strong>가 사용됩니다.<br>
+    만약, 쉐이더를 변경하면 <strong>렌더 텍스쳐</strong>가 다르게 생성됩니다.<br>
+    쉐이더에 따라서 렌더 텍스쳐가 어떻게 바뀌는지 확인해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2113.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 마스크 렌더 텍스쳐를 테스트해보기 위해서 메시를 준비했습니다.<br>
+    <strong>(2)</strong> 모디파이어에 따른 렌더 텍스쳐의 변화를 확인해보기 위해서 <strong>Color Only (Controller)</strong> 모디파이어를 추가했습니다.<br>
+    <strong>(3)</strong> 컨트롤 파라미터에 따라 메시의 색상이 바뀝니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2114.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>마스크 설정 다이얼로그</strong>를 열고 준비된 메시에 대한 <strong>마스크 데이터</strong>를 생성합니다.<br>
+    <strong>(2)</strong> <strong>Shader Type</strong> 옵션의 값을 하나씩 선택하여 테스트해볼 것입니다. 일단 기본값인 "<strong>Alpha Mask</strong>"를 선택해봅시다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>를 하고 유니티 씬에서 테스트를 해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2115.jpg"/>
+    <br>
+    
+    <p>
+    이 예제에서는 클리핑 결과를 보기보다 생성된 렌더 텍스쳐를 프레임 디버거를 통해서 확인해봅시다.<br>
+    <strong>(1)</strong> 유니티 메뉴에서 <strong>Window > Analysis > Frame Debugger</strong>를 실행합니다.<br>
+    (유니티 버전에 따라 메뉴 경로가 다를 수 있습니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2116.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 게임을 실행합니다.<br>
+    <strong>(2)</strong> 컨트롤 파라미터를 조절하여 메시의 색상을 변경합니다.<br>
+    <strong>(3)</strong> <strong>Frame Debugger</strong>에서 <strong>Enable</strong> 버튼을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2117.jpg"/>
+    <br>
+    
+    <p>
+    게임이 일시정지되며 렌더링의 각 단계를 확인해볼 수 있습니다.<br>
+    <strong>(1)</strong> 마스크는 커맨드 버퍼를 통해서 생성되므로, 렌더링 과정 중의 커맨드 버퍼가 동작하는 항목을 찾아서 선택합니다.<br>
+    커맨드 버퍼의 이름이 <strong>AP + Root Unit 이름 + 메시 이름 + 마스크 처리 방식</strong>으로 명명되었으므로, 이것을 찾으면 될 것입니다.<br>
+    <strong>(2)</strong> 커맨드 버퍼의 결과를 확인하면 렌더 텍스쳐를 대상으로 마스크가 렌더링된 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    앞서, 마스크의 <strong>Shader Type</strong>을 <strong>Alpha Mask</strong>로 선택했기 때문에 렌더 텍스쳐가 흑백의 이미지로 렌더링됩니다.<br>
+    그렇다면, <strong>Shader Type</strong>을 변경하면 렌더 텍스쳐가 어떻게 변할지 확인해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2118.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 다시 <strong>마스크 설정 다이얼로그</strong>를 열고 <strong>마스크 데이터</strong>를 선택한 뒤, <strong>Shader Type</strong>을 "<strong>Main Texture With Color</strong>"와 "<strong>Main Texture Only</strong>"로 한번씩 선택하고 결과를 확인해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2119.jpg"/>
+    <br>
+    
+    <p>
+    게임을 실행하고 프레임 디버거를 실행하여 커맨드 버퍼의 결과를 확인하면 위와 같이 마스크가 다르게 렌더링되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    정리하자면, 각각의 <strong>Shader Type</strong>은 다음과 같이 동작하는 것을 알 수 있습니다.<br>
+    - <strong>Alpha Mask</strong> : 모디파이어의 색상 연산을 포함한 결과의 Alpha 채널의 값이 그레이스케일(Grayscale)로 렌더링됩니다.<br>
+    - <strong>Main Texture With Color</strong> : 렌더 텍스쳐에 모디파이어의 색상 연산이 적용됩니다. 화면에 렌더링되는 것과 동일합니다.<br>
+    - <strong>Main Texture Only</strong> : 모디파이어의 연산은 무시되며 오직 원본 이미지의 색상만 렌더 텍스쳐에 반영됩니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>커스텀 마스크 쉐이더</h3>
+    <br>
+    
+    <p>
+    마스크를 생성하는 쉐이더를 변경하면 렌더 텍스쳐가 다르게 렌더링된다는 것을 앞의 예제에서 확인했습니다.<br>
+    이번에는 커스텀 쉐이더를 직접 작성하는 상황과 그 방법을 알아봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2120.jpg"/>
+    <br>
+    
+    <p>
+    마스크로서의 렌더 텍스쳐를 렌더링하는 기본적인 과정은 위와 같습니다.<br>
+    마스크 메시가 <strong>일반 쉐이더(Normal Shader)</strong>로 렌더링을 함과 동시에 <strong>알파 마스크 쉐이더(Alpha Mask Shader)</strong>로 <strong>렌더 텍스쳐</strong>를 렌더링합니다.<br>
+    <strong>알파 마스크 쉐이더</strong>가 동작하기 위해서는 "_Color"와 "_MainTex" 프로퍼티에 값을 입력해야 합니다.<br>
+    이 값들은 모디파이어와 애니메이션 등의 영향을 받기 때문에 실시간으로 바뀔 수 있으므로, 매 업데이트마다 <strong>일반 쉐이더</strong>에 적용되는 값을 그대로 복사하여 적용합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2121.jpg"/>
+    <br>
+    
+    <p>
+    만약 <strong>재질 라이브러리</strong>(<a href="../../kr/AdvancedManual/AD_MaterialLibrary.html">관련 페이지</a>)를 이용해서 메시를 <strong>커스텀 쉐이더</strong>로 렌더링한다고 가정해봅시다.<br>
+    이 커스텀 쉐이더의 결과가 마스크에 영향을 준다면, <strong>알파 마스크 쉐이더</strong>도 이에 맞게 다시 작성되어야 할 것입니다.<br>
+    특히, <strong>커스텀 쉐이더</strong>가 추가적인 프로퍼티에 의해서 렌더링이 된다면, <strong>알파 마스크 쉐이더</strong>도 해당 프로퍼티들을 받아야 합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    따라서, 마스크 생성 쉐이더가 정상적으로 동작하기 위해서는 원본 쉐이더로부터 프로퍼티의 값을 복사받아야 합니다.<br>
+    다음의 예제에서는 <strong>커스텀 쉐이더</strong>를 메시에 적용하고, 이에 맞게 <strong>커스텀 마스크 쉐이더</strong>를 추가로 작성하는 과정을 다룹니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>안내</strong></span><br>
+    <strong>커스텀 마스크 쉐이더</strong>를 위해서 <strong>일반 쉐이더</strong>가 항상 커스텀 쉐이더로 작성될 필요는 없습니다.<br>
+    다음의 예제는 기본 프로퍼티("_Color", "_MainTex") 외의 추가적인 프로퍼티가 복사되어야 상황을 보여드리기 위해서 두개의 <strong>커스텀 쉐이더</strong>가 필요했습니다.<br>
+    <strong>일반 쉐이더</strong>와 <strong>마스크 쉐이더</strong>에 <strong>커스텀 쉐이더</strong>를 적용하는 것은 상황에 따라 다르며 자유롭게 활용하면 되겠습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2122.jpg"/>
+    <br>
+    
+    <p>
+    1개의 마스크용 메시("<strong>Mask Square</strong>")와 1개의 클리핑되는 메시("<strong>Clipped Star</strong>")를 준비했습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2123.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>마스크 설정 다이얼로그</strong>를 열어서 마스크 메시인 "<strong>Mask Square</strong>"에 대한 <strong>마스크 데이터</strong>를 추가합니다.<br>
+    <strong>(2)</strong> <strong>Shader Type</strong>은 일단 기본값인 "<strong>Alpha Mask</strong>"로 설정합니다.<br>
+    <strong>(3)</strong> 대상 메시로서 "<strong>Clipped Star</strong>"를 추가합니다.<br>
+    <strong>(4)</strong> 전달되는 프로퍼티로서 "<strong>Alpha Mask Preset</strong>"을 추가합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이 과정까지 완료되면, 일반적인 알파 마스크 클리핑이 수행될 것입니다.<br>
+    이제 "<strong>Mask Square</strong>"가 <strong>커스텀 쉐이더</strong>에 의해서 렌더링되도록 만들어봅시다.<br>
+    다음의 쉐이더 코드는 기본적인 "Unlit" 쉐이더를 바탕으로 작성되었으며, "화면 좌표계를 통해 매핑되는 패턴 텍스쳐가 Alpha 값에 영향을 주는 내용"을 담고 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>참고</strong></span><br>
+    커스텀 쉐이더 작성 방법에 대해서는 <a href="../../kr/Script/SC_CustomShader.html">관련 페이지</a>를 참고해주세요.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Custom Shader/Screen Space Pattern (Alpha Blend)"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_Color</strong> (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MainTex</strong> (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// 화면 효과를 위한 패턴 텍스쳐 및 스크롤 속도</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_PatternTex</strong></span> (<span class="text-danger">"Pattern Texture (Grayscale)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_PatternRepeat</strong></span> (<span class="text-danger">"Pattern Repeat"</span>, float) = 1.0<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_ScrollSpeed</strong></span> (<span class="text-danger">"Scroll Speed"</span>, float) = 0.2<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"LightMode" = "ForwardBase"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 화면 효과를 위한 화면 좌표계</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 screenUV : TEXCOORD1;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 패턴 텍스쳐와 스크롤 속도 변수</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _PatternTex;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float _ScrollSpeed;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert (<span class="text-primary">appdata</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 화면 좌표계 계산</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.screenUV = ComputeScreenPos(o.vertex);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    #if UNITY_COLORSPACE_GAMMA<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    #else<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 4.595f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb = pow(col.rgb, 2.2f);<br>
+    #endif&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 시간에 따라 옆으로 움직이는 패턴 텍스쳐</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float2 screenUV = i.screenUV.xy / i.screenUV.w;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x *= _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.y *= _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x += _Time.y * _ScrollSpeed;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>fixed pattern = tex2D(_PatternTex, screenUV).r;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a *= pattern;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2124.jpg"/>
+    <br>
+    
+    <p>
+    작성한 커스텀 쉐이더를 적용해봅시다.<br>
+    <strong>(1)</strong> <strong>루트 유닛</strong>을 선택합니다.<br>
+    <strong>(2)</strong> <strong>Material Library</strong> 버튼을 누릅니다.<br>
+    <strong>(3)</strong> <strong>Unlit 재질 세트</strong>를 선택합니다.<br>
+    <strong>(4)</strong> <strong>Duplicate</strong> 버튼을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2125.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>복제된 재질 세트</strong>를 선택합니다.<br>
+    <strong>(2)</strong> 재질 세트의 이름을 적절히 변경합니다.<br>
+    <strong>(3)</strong> <strong>Default Material</strong> 버튼을 눌러서 <strong>ON</strong> 상태로 변경합니다.<br>
+    <strong>(4)</strong> <strong>Alpha Blend</strong> 쉐이더를 앞서 작성한 <strong>커스텀 쉐이더</strong>로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2126.jpg"/>
+    <br>
+    
+    <p>
+    커스텀 쉐이더의 프로퍼티들을 재질 세트에 추가해야합니다.<br>
+    <strong>(1)</strong> 아래로 스크롤을 하여 <strong>Add Property from List</strong> 버튼을 누릅니다.<br>
+    <strong>(2)</strong> 커스텀 쉐이더에서 작성된 <strong>"_PatternTex", "_PatternRepeat", "_ScrollSpeed"</strong> 프로퍼티들을  <kbd>Ctrl</kbd>  키를 눌러서 모두 선택합니다.<br>
+    <strong>(3)</strong> <strong>Select</strong> 버튼을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2127.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 패턴 텍스쳐 및 패턴 반복 값, 스크롤 속도를 입력합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2128.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> AnyPortrait 에디터에서는 커스텀 쉐이더가 동작하지 않습니다.<br>
+    <strong>(2)</strong> <strong>Bake</strong>를 실행하여 유니티 씬에서 확인해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2129.jpg"/>
+    <br>
+    
+    <p>
+    커스텀 쉐이더에 의해서 패턴 텍스쳐가 메시에 적용된 것을 볼 수 있습니다.<br>
+    그런데 이 패턴 텍스쳐에 의해 물결 무늬로 투명해진 부분이 클리핑에는 반영되지 않는 것을 볼 수 있습니다.<br>
+    커스텀 쉐이더의 패턴 관련 코드가 <strong>알파 마스크 쉐이더</strong>에는 존재하지 않기 때문입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    커스텀 쉐이더의 내용을 마스크에도 반영하기 위해서는 <strong>알파 마스크 쉐이더</strong>도 <strong>커스텀 쉐이더</strong>로 다시 작성해야합니다.<br>
+    <strong>커스텀 마스크 쉐이더</strong>를 다음과 같이 작성해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Custom Shader/Screen Space Pattern (Alpha Mask)"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_Color</strong> (<span class="text-danger">"Color (Alpha)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MainTex</strong> (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_PatternTex</strong></span> (<span class="text-danger">"Pattern Texture (Grayscale)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_PatternRepeat</strong></span> (<span class="text-danger">"Pattern Repeat"</span>, float) = 1.0<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_ScrollSpeed</strong></span> (<span class="text-danger">"Scroll Speed"</span>, float) = 0.2<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType"="Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;Cull Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 화면 효과를 위한 화면 좌표계</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 screenUV : TEXCOORD1;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 패턴 텍스쳐와 스크롤 속도 변수</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _PatternTex;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float _ScrollSpeed;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert (<span class="text-primary">appdata</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 화면 좌표계 계산</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.screenUV = ComputeScreenPos(o.vertex);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 알파 마스크 연산 ( White + Alpha )</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = fixed3(1.0f, 1.0f, 1.0f);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a = saturate(col.a * _Color.a);</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 시간에 따라 옆으로 움직이는 패턴 텍스쳐</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float2 screenUV = i.screenUV.xy / i.screenUV.w;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x *= _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.y *= _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x += _Time.y * _ScrollSpeed;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>fixed pattern = tex2D(_PatternTex, screenUV).r;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a *= pattern;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    커스텀 쉐이더로 작성된 위의 알파 마스크 쉐이더를 보면 일반 쉐이더의 내용과 유사해보입니다.<br>
+    차이점은 RGB 채널의 결과가 <strong>흰색 (1, 1, 1)</strong>이라는 점입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이제 이 <strong>커스텀 마스크 쉐이더</strong>를 적용해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2130.jpg"/>
+    <br>
+    
+    <p>
+    아주 특수하지 않은 커스텀 쉐이더는 <strong>마스크 설정 다이얼로그</strong>가 아닌 <strong>재질 라이브러리</strong>에서 설정하는 것도 가능합니다.<br>
+    모든 클리핑 메시에 공통으로 적용될 쉐이더라면 위와 같이 <strong>재질 라이브러리</strong>의 "<strong>Alpha Mask</strong>" 항목에 쉐이더를 입력하면 됩니다.<br>
+    이렇게 설정하면 <strong>마스크 설정 다이얼로그</strong>에서 <strong>Shader Type</strong>을 "<strong>Alpha Mask</strong>"로 설정했을 때 해당 쉐이더가 사용됩니다.<br>
+    다만, 이 페이지에서는 이 방법에 대해서는 다루지 않습니다.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2131.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>마스크 설정 다이얼로그</strong>를 열고 <strong>마스크 데이터</strong>를 선택합니다.<br>
+    <strong>(2)</strong> <strong>Shader Type</strong>의 값을 "<strong>Custom Shader</strong>"로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2132.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Shader Type</strong>을 "<strong>Custom Shader</strong>"로 변경하면 <strong>Shader Asset</strong>이라는 옵션이 등장합니다.<br>
+    여기에 앞서 작성한 <strong>커스텀 마스크 쉐이더</strong>를 입력합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2133.jpg"/>
+    <br>
+    
+    <p>
+    커스텀 프로퍼티인 "_PatternTex", "_PatternRepeat", "_ScrollSpeed"의 값을 원래의 쉐이더에서 복사하여 <strong>커스텀 마스크 쉐이더</strong>로 입력해야합니다.<br>
+    <strong>(1)</strong> <strong>Add Property from List</strong> 버튼을 누릅니다.<br>
+    <strong>(2)</strong>&nbsp;&nbsp;<kbd>Ctrl</kbd>&nbsp;&nbsp;키를 누른 상태로 <strong>"_PatternTex", "_PatternRepeat", "_ScrollSpeed"</strong>를 모두 선택합니다.<br>
+    <strong>(3)</strong> <strong>Select</strong> 버튼을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>안내</strong></span><br>
+    만약 추가하고자 하는 프로퍼티가 목록에 없다면, 해당 쉐이더가 적용된 <strong>재질 세트</strong>가 <strong>Default Material</strong>로서 설정되지 않았기 때문일 수 있습니다.<br>
+    <strong>재질 라이브러리</strong>에서 확인해보시길 바랍니다.<br>
+    또는, <strong>Add Property</strong> 버튼을 눌러서 프로퍼티 이름을 직접 입력하는 것도 가능합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2134.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 일반 쉐이더로부터 복사 받을 프로퍼티가 등록된 것을 볼 수 있습니다. 각 항목은 "프로퍼티의 이름"과 "값의 타입", "삭제 버튼"으로 구성됩니다.<br>
+    <strong>(2)</strong> 이 커스텀 쉐이더는 "<strong>화면 좌표계</strong>"를 이용하므로 <strong>클리핑 마스크 최적화 기능</strong>을 사용하면 안됩니다. (<a href="../../kr/AdvancedManual/AD_Mask.html">관련 페이지</a>)<br>
+    <strong>Optimized Render</strong>의 체크를 해제하고, <strong>Texture Size</strong>가 적당히 큰 값을 가지도록 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2135.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>를 하고 유니티 씬에서 확인해보면, 커스텀 쉐이더의 패턴 텍스쳐 효과가 마스크에도 적용된 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>커스텀 클리핑 쉐이더</h3>
+    <br>
+    
+    <p>
+    이전까지의 과정은 "마스크 생성 과정에서 커스텀 쉐이더를 적용"하는 것이었습니다.<br>
+    이번에는 "<strong>생성된 마스크를 받아서 클리핑 렌더링을 하는 과정</strong>"에 커스텀 쉐이더를 작성하여 적용해보겠습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2136.jpg"/>
+    <br>
+    
+    <p>
+    <strong>마스크 렌더 텍스쳐</strong>는 클리핑 되는 대상 메시에 전달되는데, 이를 "<strong>클리핑 쉐이더(Clipped Shader)</strong>"가 받아서 클리핑 처리를 수행합니다.<br>
+    여기서, <strong>클리핑 쉐이더</strong>를 <strong>커스텀 쉐이더</strong>로 작성하는 것도 가능합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    일반적으로 <strong>커스텀 클리핑 쉐이더</strong>를 설정하는 작업은 <strong>재질 라이브러리</strong>에서 수행되어 완료됩니다.<br>
+    여기서 고려해야하는 것은 <strong>커스텀 클리핑 쉐이더</strong>가 마스크와 관련된 특수한 프로퍼티 값을 필요로 하는 경우입니다.<br>
+    <strong>재질 라이브러리</strong>에서는 마스크 데이터와 무관한 값이 커스텀 프로퍼티에 전달하도록 설정할 수 있습니다.<br>
+    그렇지만, 마스크 데이터와 관련된 값을 전달하기 위해서는 <strong>마스크 설정 다이얼로그</strong>에서 설정해야합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이번 예제에서는 "마스크를 받아서 Alpha를 바꾸지는 않고 마스크의 외부에 지정된 색으로 변경"하는 효과를 가진 <strong>커스텀 클리핑 쉐이더</strong>를 만들어서 적용해보겠습니다.<br>
+    특히, 클리핑과 관련된 모든 프로퍼티를 사용자가 임의로 만든다는 가정하에 쉐이더를 작성해보겠습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2137.jpg"/>
+    <br>
+    
+    <p>
+    이번 예제에서 사용되는 메시들입니다.<br>
+    앞쪽에는 예쁜 캐릭터가 그려진 "<strong>Character</strong>" 메시가 있고, 뒤에는 하늘색의 "<strong>Circle Mask</strong>" 메시가 있습니다.<br>
+    뒤의 "<strong>Circle Mask</strong>"가 마스크를 생성하여 "<strong>Character</strong>" 메시에 전달하면, "<strong>Character</strong>" 메시의 마스크와 겹치지 않는 곳의 색이 바뀌도록 만들어보겠습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이러한 효과를 만들기 위해서 <strong>커스텀 클리핑 쉐이더</strong>를 다음과 같이 작성해보았습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Custom Shader/Reverse Color"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_Color</strong> (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MainTex</strong> (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// 커스텀 마스크와 색상</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_CustomMask</strong></span> (<span class="text-danger">"Custom Mask (A)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_CustomMaskSSOffset</strong></span> (<span class="text-danger">"Custom Mask Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_CustomColor</strong></span> (<span class="text-danger">"Custom Color by Mask (RGB)"</span>, Color) = (1, 1, 1, 1)<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 클리핑 연산을 위한 화면 좌표계</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 screenPos : TEXCOORD1;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 커스텀 마스크 프로퍼티 변수</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _CustomMask;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 _CustomMaskSSOffset;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 _CustomColor;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 마스크 함수 : 렌더 텍스쳐 UV 계산</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> GetMaskScreenUV (<span class="text-primary">float2</span> screenUV, <span class="text-primary">float4</span> offset)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> result = screenUV - <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.x *= offset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.y *= offset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.x += offset.x * offset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.y += offset.y * offset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result += <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return result;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert (<span class="text-primary">appdata</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 클리핑 마스크 UV 계산을 위한 화면 좌표계</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.screenPos = ComputeScreenPos(o.vertex);</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    #if UNITY_COLORSPACE_GAMMA<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    #else<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 4.595f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb = pow(col.rgb, 2.2f);<br>
+    #endif<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 커스텀 클리핑 마스크 계산</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float2 screenUV = i.screenPos.xy / max(i.screenPos.w, 0.0001f);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float alphaMask = tex2D(_CustomMask, GetMaskScreenUV(screenUV, _CustomMaskSSOffset)).r;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 마스크 반전 후, 지정된 색상으로 보간</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>alphaMask = saturate(1.0f - alphaMask);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = lerp(col.rgb, _CustomColor.rgb, alphaMask);</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    이 커스텀 쉐이더는 <strong>"_CustomMask", "_CustomMaskSSOffset", "_CustomColor"</strong> 프로퍼티로 마스크 데이터를 받아서 렌더링을 합니다.<br>
+    알파 마스크의 값을 받아서 "alphaMask" 변수에 저장한 후, 이것을 Alpha 채널에 곱하지 않고 색상 연산의 보간값으로 사용했습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2139.jpg"/>
+    <br>
+    
+    <p>
+    작성된 <strong>커스텀 클리핑 쉐이더</strong>를 적용해봅시다.<br>
+    <strong>(1)</strong> <strong>재질 라이브러리</strong>를 열고 클리핑 쉐이더를 적용하기 위한 <strong>재질 세트</strong>를 새로 만들거나 복제합니다.<br>
+    <strong>(2)</strong> <strong>재질 세트</strong>를 선택하고 이름을 설정합니다.<br>
+    <strong>(3)</strong> <strong>Default Material</strong> 버튼을 눌러서 <strong>ON</strong> 상태로 만듭니다.<br>
+    <strong>(4)</strong> <strong>Clipping Rendering</strong>의 <strong>Alpha Blend</strong> 항목의 쉐이더에 앞서 만든 커스텀 쉐이더를 입력합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2140.jpg"/>
+    <br>
+    
+    <p>
+    이제 마스크 데이터를 만들어봅시다.<br>
+    <strong>(1)</strong> <strong>마스크 설정 다이얼로그</strong>를 열고 <strong>Add Mask</strong> 버튼을 누릅니다.<br>
+    <strong>(2)</strong> 마스크 메시가 될 "<strong>Circle Mask</strong>" 메시를 선택합니다.<br>
+    <strong>(3)</strong> <strong>Select</strong> 버튼을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2141.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 생성된 <strong>마스크 데이터</strong>를 선택합니다.<br>
+    <strong>(2)</strong> <strong>Texture Size</strong>를 적절하게 설정합니다.<br>
+    <strong>(3)</strong> 클리핑이 될 "<strong>Character</strong>" 메시를 등록합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2142.jpg"/>
+    <br>
+    
+    <p>
+    이제 대상 메시로 마스크 데이터를 전달하기 위해 프로퍼티를 추가해야합니다.<br>
+    이전의 예제에서는 "<strong>Alpha Mask Preset</strong>" 방식의 프로퍼티를 이용했지만, 여기서는 커스텀 쉐이더의 프로퍼티에 맞게 설정을 해야합니다.<br>
+    <strong>(1)</strong> <strong>Add Property from List</strong> 버튼을 누릅니다.<br>
+    <strong>(2)</strong> 커스텀 쉐이더의 프로퍼티인 <strong>"_CustomMask", "_CustomMaskSSOffset", "_CustomColor"</strong>를  <kbd>Ctrl</kbd>  키를 눌러서 모두 선택합니다.<br>
+    <strong>(3)</strong> <strong>Select</strong> 버튼을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2143.jpg"/>
+    <br>
+    
+    <p>
+    선택했던 프로퍼티들이 마스크 데이터에 등록되었습니다.<br>
+    이제 등록된 프로퍼티들을 통해서 마스크 데이터가 클리핑 메시로 전달이 될 것입니다.<br>
+    현재는 각 프로퍼티의 이름과 타입만 설정된 상태이며, 어떤 값이 전달될 지는 설정되지 않은 상태입니다.<br>
+    프로퍼티의 값을 설정하기 전에 이 UI가 어떻게 구성되어 있는지 확인해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2144.jpg"/>
+    <br>
+    
+    <p>
+    <strong>1. 프리셋 타입</strong> : 프로퍼티 정보를 프리셋 형태로 구성할 수 있습니다. 여기서는 개별 프로퍼티에 대해 설정할 것이므로 "<strong>Custom</strong>" 방식으로 설정됩니다.<br>
+    <strong>2. 프로퍼티 이름</strong> : 쉐이더 내에 정의된 프로퍼티의 이름입니다.<br>
+    <strong>3. 삭제 버튼</strong> : 프로퍼티 정보를 삭제합니다.<br>
+    <strong>4. 프로퍼티의 타입과 값</strong> : 프로퍼티의 값의 타입을 설정하고 전달되는 값을 지정합니다. 타입에 따라서는 자동으로 생성된 값이 전달됩니다.<br>
+    <strong>5. 연동된 컨트롤 파라미터</strong> : 일부 프로퍼티 타입은 컨트롤 파라미터를 연결하여 값을 실시간으로 제어할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2145.jpg"/>
+    <br>
+    
+    <p>
+    프로퍼티의 타입과 값을 적절히 설정합니다.<br>
+    이 예제에서는 각 프로퍼티별로 다음과 같이 설정했습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1.</strong> <span class="text-danger"><strong>_CustomMask</strong></span><br>
+    : <strong>Render Texture</strong> 타입으로 설정했습니다.<br>
+    <strong>Render Texture</strong> 타입은 <strong>마스크 렌더 텍스쳐</strong>를 클리핑 메시에 전달합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2.</strong> <span class="text-danger"><strong>_CustomMaskSSOffset</strong></span><br>
+    : <strong>Screen Space Offset</strong> 타입으로 설정했습니다.<br>
+    <strong>Screen Space Offset</strong> 타입은 <strong>마스크 렌더 텍스쳐</strong>의 UV를 계산하기 위해 생성된 <strong>Vector</strong> 타입의 값을 클리핑 메시에 전달합니다.<br>
+    <strong>Screen Space Offset</strong> 값을 활용하는 코드는 위의 <strong>커스텀 클리핑 쉐이더</strong>의 "<strong>GetMaskScreenUV</strong>" 함수를 참고해주세요.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3.</strong> <span class="text-danger"><strong>_CustomColor</strong></span><br>
+    : <strong>Color</strong> 타입으로 설정하고, 색상 값은 분홍색을 설정했습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2146.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>를 하고 유니티 씬에서 확인하면 위와 같은 결과를 볼 수 있습니다.<br>
+    커스텀 쉐이더에 의해서 "클리핑 영역이 아닌 부분이 분홍색으로 렌더링"된 예쁜 결과를 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_Mask.html">< 마스크</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_MaskCombine.html">마스크 조합하기 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom Shader/Screen Space Pattern (Alpha Blend)\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\t\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\n\t\t// 화면 효과를 위한 패턴 텍스쳐 및 스크롤 속도\n\t\t_PatternTex (\"Pattern Texture (Grayscale)\", 2D) = \"white\" {}\n\t\t_PatternRepeat (\"Pattern Repeat\", float) = 1.0\n\t\t_ScrollSpeed (\"Scroll Speed\", float) = 0.2\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\t\t\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tTags { \"LightMode\" = \"ForwardBase\" }\n\t\t\tZWrite Off\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\t\t\t\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\n\t\t\t\t// 화면 효과를 위한 화면 좌표계\n\t\t\t\tfloat4 screenUV : TEXCOORD1;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\t// 패턴 텍스쳐와 스크롤 속도 변수\n\t\t\tsampler2D _PatternTex;\n\t\t\tfloat _PatternRepeat;\n\t\t\tfloat _ScrollSpeed;\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\n\t\t\t\t// 화면 좌표계 계산\n\t\t\t\to.screenUV = ComputeScreenPos(o.vertex);\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\t\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n#if UNITY_COLORSPACE_GAMMA\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n#else\n\t\t\t\tcol.rgb *= _Color.rgb * 4.595f;\n\t\t\t\tcol.rgb = pow(col.rgb, 2.2f);\n#endif\t\t\t\t\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\t// 시간에 따라 옆으로 움직이는 패턴 텍스쳐\n\t\t\t\tfloat2 screenUV = i.screenUV.xy / i.screenUV.w;\n\t\t\t\tscreenUV.x *= _PatternRepeat;\n\t\t\t\tscreenUV.y *= _PatternRepeat;\n\t\t\t\tscreenUV.x += _Time.y * _ScrollSpeed;\n\t\t\t\tfixed pattern = tex2D(_PatternTex, screenUV).r;\n\t\t\t\tcol.a *= pattern;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom Shader/Screen Space Pattern (Alpha Mask)\"\n{\n\tProperties\n\t{\n\t\t_Color (\"Color (Alpha)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\n\t\t_PatternTex (\"Pattern Texture (Grayscale)\", 2D) = \"white\" {}\n\t\t_PatternRepeat (\"Pattern Repeat\", float) = 1.0\n\t\t_ScrollSpeed (\"Scroll Speed\", float) = 0.2\n\t}\n\tSubShader\n\t{\n\t\tTags { \"RenderType\"=\"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tZWrite Off\n\t\tCull Off\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\t\t\t\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\n\t\t\t\t// 화면 효과를 위한 화면 좌표계\n\t\t\t\tfloat4 screenUV : TEXCOORD1;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\tfloat4 _Color;\n\n\t\t\t// 패턴 텍스쳐와 스크롤 속도 변수\n\t\t\tsampler2D _PatternTex;\n\t\t\tfloat _PatternRepeat;\n\t\t\tfloat _ScrollSpeed;\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\n\t\t\t\t// 화면 좌표계 계산\n\t\t\t\to.screenUV = ComputeScreenPos(o.vertex);\n\t\t\t\treturn o;\n\t\t\t}\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\t// 알파 마스크 연산 ( White + Alpha )\n\t\t\t\tcol.rgb = fixed3(1.0f, 1.0f, 1.0f);\n\t\t\t\tcol.a = saturate(col.a * _Color.a);\n\n\t\t\t\t// 시간에 따라 옆으로 움직이는 패턴 텍스쳐\n\t\t\t\tfloat2 screenUV = i.screenUV.xy / i.screenUV.w;\n\t\t\t\tscreenUV.x *= _PatternRepeat;\n\t\t\t\tscreenUV.y *= _PatternRepeat;\n\t\t\t\tscreenUV.x += _Time.y * _ScrollSpeed;\n\t\t\t\tfixed pattern = tex2D(_PatternTex, screenUV).r;\n\t\t\t\tcol.a *= pattern;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom Shader/Reverse Color\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\t\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\n\t\t// 커스텀 마스크와 색상\n\t\t_CustomMask (\"Custom Mask (A)\", 2D) = \"white\" {}\n\t\t_CustomMaskSSOffset (\"Custom Mask Screen Space Offset (XY_Scale)\", Vector) = (0, 0, 0, 1)\n\t\t_CustomColor (\"Custom Color by Mask (RGB)\", Color) = (1, 1, 1, 1)\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tZWrite Off\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\t\t\t\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\n\t\t\t\t// 클리핑 연산을 위한 화면 좌표계\n\t\t\t\tfloat4 screenPos : TEXCOORD1;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\t// 커스텀 마스크 프로퍼티 변수\n\t\t\tsampler2D _CustomMask;\n\t\t\tfloat4 _CustomMaskSSOffset;\n\t\t\tfloat4 _CustomColor;\n\n\t\t\t// 마스크 함수 : 렌더 텍스쳐 UV 계산\n\t\t\tfloat2 GetMaskScreenUV (float2 screenUV, float4 offset)\n\t\t\t{\n\t\t\t\tfloat2 result = screenUV - float2(0.5f, 0.5f);\n\t\t\t\tresult.x *= offset.z;\n\t\t\t\tresult.y *= offset.w;\n\t\t\t\tresult.x += offset.x * offset.z;\n\t\t\t\tresult.y += offset.y * offset.w;\n\t\t\t\tresult += float2(0.5f, 0.5f);\n\t\t\t\treturn result;\n\t\t\t}\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\n\t\t\t\t// 클리핑 마스크 UV 계산을 위한 화면 좌표계\n\t\t\t\to.screenPos = ComputeScreenPos(o.vertex);\n\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n#if UNITY_COLORSPACE_GAMMA\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n#else\n\t\t\t\tcol.rgb *= _Color.rgb * 4.595f;\n\t\t\t\tcol.rgb = pow(col.rgb, 2.2f);\n#endif\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\t// 커스텀 클리핑 마스크 계산\n\t\t\t\tfloat2 screenUV = i.screenPos.xy / max(i.screenPos.w, 0.0001f);\n\t\t\t\tfloat alphaMask = tex2D(_CustomMask, GetMaskScreenUV(screenUV, _CustomMaskSSOffset)).r;\n\n\t\t\t\t// 마스크 반전 후, 지정된 색상으로 보간\n\t\t\t\talphaMask = saturate(1.0f - alphaMask);\n\t\t\t\tcol.rgb = lerp(col.rgb, _CustomColor.rgb, alphaMask);\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+
+    <!--------------->
+
+    </body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>See-Through Effect</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_SeeThrough.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_SeeThrough.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_SeeThrough.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > See-Through Effect</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">See-Through Effect</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2192.jpg"/>
+    <br>
+    
+    <p>
+    The image above is an "illustration of a character with front hair covering one eye."<br>
+    When trying to express a character with this design beautifully, like the middle image, "a cartoonish presentation where the eye is slightly visible through the hair" is often used.<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's think about how to express this in animation tools including AnyPortrait.<br>
+    The easiest way is to make part of the "hair" layer slightly transparent.<br>
+    However, there is a clear difference between what was intended (middle image) and the result of making the hair slightly transparent (right image).<br>
+    When the "hair" layer becomes semi-transparent, not only the "eye" layers but also the "head" and "other hair" layers are all visible in overlapping areas, resulting in a somewhat messy expression.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2193.jpg"/>
+    <br>
+    
+    <p>
+    Implementing this is not as easy as it sounds.<br>
+    Because the "Eye" layers are positioned behind the "Hair" layers, they cannot be rendered in front of the opaque "Hair" layers.<br>
+    In this case, you can express what you intended by using the "<strong>See-Through Effect</strong>" added in <strong>AnyPortrait v1.6.0</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2191.jpg"/>
+    <br>
+    
+    <p>
+    The improved <strong>Mask</strong> feature allows you to use the "<strong>Normal Shader</strong>" instead of the existing "<strong>Alpha Mask Shader</strong>" when generating a render texture.<br>
+    When the shader changes, it is rendered to the render texture similar to what is displayed on the screen.<br>
+    Then, when passing this render texture to the target mesh, set it to "<strong>Color interpolation operation of RGB channels</strong>" instead of "Alpha clipping operation in Alpha channel".<br>
+    Using the <strong>Mask</strong> feature in this way allows you to create a <strong>See-Through Effect</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    The examples presented on this page utilize not only the <strong>See-Through Effect</strong>, but also <strong>Shared Texture</strong>, <strong>Change Mask Shader</strong>, and <strong>Mask Chain</strong>.<br>
+    For more information, please refer to the following manuals.<br>
+    - <a href="../../en/AdvancedManual/AD_Mask.html">Mask</a><br>
+    - <a href="../../en/AdvancedManual/AD_MaskCustomShader.html">Mask and Custom Shader</a><br>
+    - <a href="../../en/AdvancedManual/AD_MaskChain.html">Mask Chain</a><br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    The processing results of the <strong>See-Through effect</strong> and the general <strong>Clipping Mask</strong> processing seem to be opposite to each other.<br>
+    This is because, in the <strong>See-Through Effect</strong>, the mesh that creates the mask appears to be clipped and rendered.<br>
+    So it is better to view the <strong>See-Through Effect</strong> as a "utilized example of how masks work" rather than a "variation of the clipping mask."<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2194.jpg"/>
+    <br>
+    
+    <p>
+    Above is the character illustration imported into the AnyPortrait editor.<br>
+    Let's make the "<strong>Eye</strong>..." meshes visible through the 4 "<strong>Front Hair</strong>..." meshes.<br>
+    Before that, please also check that the "<strong>Eye Iris L/R</strong>" meshes are set to clip to the "<strong>Eye White L/R</strong>" mesh.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2195.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select one of the "<strong>Eye</strong>..." meshes.<br>
+    <strong>(2)</strong> Press the <strong>Open Mask Settings</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2196.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Add Mask</strong> button.<br>
+    <strong>(2)</strong> Select all the "<strong>Eye</strong>" meshes to which you want to apply the See-Through effect by pressing the  <kbd>Ctrl</kbd>  key.<br>
+    <strong>(3)</strong> Press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2197.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Mask Data</strong> for the selected "<strong>Eye</strong>" meshes have been generated.<br>
+    <strong>(1)</strong> Select one of the <strong>Mask Data</strong>.<br>
+    <strong>(2)</strong> Change the value of <strong>Shader Type</strong> to "<strong>Main Texture With Color</strong>".<br>
+    The value of this option makes the mask render texture be rendered with the same shader as the one rendered to the screen.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2198.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> As previously confirmed, the "<strong>Eye Iris L/R</strong>" meshes were clipping from the "<strong>Eye White L/R</strong>" meshes, which caused <strong>Mask Chain</strong> and <strong>Render Order Issues</strong>. (<a href="../../en/AdvancedManual/AD_MaskChain.html">Related page</a>)<br>
+    <strong>(2)</strong> To solve the render order issue, change the value of <strong>Render Order</strong> of the selected <strong>Mask Data</strong> to "<strong>Phase 2</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2199.jpg"/>
+    <br>
+    
+    <p>
+    Change the render texture options as above.<br>
+    - Change <strong>Texture Size</strong> to a fairly large value. When <strong>Mask Chain</strong> occurs or <strong>Shared Texture</strong> is used, you should consider setting a high resolution for mask quality.<br>
+    - Enable <strong>Shared Texture</strong> and specify an <strong>ID</strong>. This is to make the "<strong>Eye</strong>" meshes render to a common render texture. (We entered "<strong>0</strong>" as the <strong>ID</strong> value.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2200.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Add Destination</strong> button.<br>
+    <strong>(2)</strong> Select all "<strong>Front Hair</strong>..." meshes by pressing the  <kbd>Ctrl</kbd>  key.<br>
+    <strong>(3)</strong> Press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2201.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Add Property</strong> button.<br>
+    <strong>(2)</strong> Change the preset type of the added property to "<strong>See Through Preset</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2202.jpg"/>
+    <br>
+    
+    <p>
+    In the See-Through effect preset, you can set the "Alpha value" as an auxiliary parameter.<br>
+    <strong>(1)</strong> Enter a value between "<strong>0~1</strong>" (here, "<strong>0.5</strong>") in the <strong>Float</strong> type additional parameter.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now we have the <strong>Mask Data</strong> setup for the <strong>See-Through Effect</strong>.<br>
+    In this example, we need to have multiple "<strong>Eye</strong>..." meshes see-through at once.<br>
+    So let's continue setting up the other <strong>Mask Data</strong> to render to the same <strong>Shared Texture</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2203.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select another <strong>Mask Data</strong>.<br>
+    <strong>(2)</strong> Check <strong>Shared Texture</strong> and enter the same value (here, "<strong>0</strong>") in the <strong>ID</strong> field.<br>
+    Set the same for all remaining <strong>Mask Data</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2204.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> When the task of setting <strong>Shared Texture</strong> for all <strong>Mask Data</strong> is completed, numerous warning icons may be displayed as shown above.<br>
+    This is because options such as <strong>Shader Type</strong> and <strong>Render Order</strong> are not yet synchronized in addition to the <strong>Shared Texture</strong> option.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2205.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Re-select the <strong>Mask Data</strong> you initially selected.<br>
+    <strong>(2)</strong> Press the <strong>Sync Shared Texture Options</strong> button.<br>
+    <strong>(3)</strong> When the message appears, press the <strong>Sync All Options</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2206.jpg"/>
+    <br>
+    
+    <p>
+    The See-Through effect settings for all <strong>Mask Data</strong> of the "<strong>Eye</strong>..." meshes have been completed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2207.jpg"/>
+    <br>
+    
+    <p>
+    Let's close the <strong>Mask Setting Dialog</strong> and check the result.<br>
+    You can see that the eye meshes are rendered through the front hair.<br>
+    Since we entered <strong>0.5</strong> for the Alpha value, it is about <strong>50%</strong> transparent.<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's also learn how to control the alpha value using the <strong>Control Parameter</strong> instead of fixed values.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2208.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Create a new <strong>Control Parameter</strong>.<br>
+    <strong>(2)</strong> Set the name of the control parameter and set it to <strong>Float</strong> type.<br>
+    <strong>(3)</strong> Set the value range to "<strong>0 ~ 1</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2209.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the <strong>Mask Setting Dialog</strong> and select <strong>Mask Data</strong> with properties.<br>
+    <strong>(2)</strong> Check <strong>Control Parameter</strong> among the property options and press the <strong>Set</strong> button.<br>
+    <strong>(3)</strong> Select the <strong>Control Parameter</strong> you created earlier.<br>
+    <strong>(4)</strong> Press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2210.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Now let's adjust the <strong>Control Parameter</strong>.<br>
+    <strong>(2)</strong> You can see the degree of the see-through effect of the "<strong>Eye</strong>..." mesh changing.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2211.jpg"/>
+    <br>
+    
+    <p>
+    Let's do <strong>Bake</strong> and check it in the Unity scene.<br>
+    As you adjust the <strong>Control Parameter</strong>, you can see the degree to which the character's eyes are rendered through the hair changes.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_OnlyMaskMesh.html">< Mask Only Mesh</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_URPOutlineShader.html">Creating a URP Outline Shader ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

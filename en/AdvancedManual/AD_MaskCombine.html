@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Combining Masks</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_MaskCombine.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MaskCombine.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_MaskCombine.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Combining Masks</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Combining Masks</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <p>
+    <strong>AnyPortrait v1.6.0</strong> improved <strong>Mask</strong>, which allows you to combine one clipping mask and four alpha masks for each channel to apply to clipping rendering.<br>
+    In particular, you can optionally set the operation method when applying the alpha mask to the clipped mesh.<br>
+    This page covers how to combine multiple masks by passing them to the clipped mesh.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    For <strong>Mask</strong>, we recommend that you first read the following manual.<br>
+    You can also check out <strong>Shared Texture</strong>, which has a similar behavior to what is covered on this page, in the following manual.<br>
+    - <a href="../../en/AdvancedManual/AD_Mask.html">Mask</a><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2151.jpg"/>
+    <br>
+    
+    <p>
+    There are two meshes ("<strong>Mask Circle</strong>", "<strong>Mask Rect</strong>") and one mesh to be clipped ("<strong>Clipped Star</strong>").<br>
+    Let's create two masks and apply them to one mesh at the same time.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2152.jpg"/>
+    <br>
+    
+    <p>
+    Let's open the <strong>Mask Setting Dialog</strong> and set the mask.<br>
+    <strong>(1)</strong> Create <strong>Mask Data</strong> for the first mask mesh ("<strong>Mask Circle</strong>").<br>
+    <strong>(2)</strong> Register the target mesh to receive the mask ("<strong>Clipped Star</strong>").<br>
+    <strong>(3)</strong> Register a property of type "<strong>Alpha Mask Preset</strong>".<br>
+    Here, set the value of <strong>Channel</strong> to "<strong>Channel_1</strong>" and set <strong>Mask Operation</strong> to "<strong>And</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2153.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Create <strong>Mask Data</strong> for the second mask mesh ("<strong>Mask Rect</strong>").<br>
+    <strong>(2)</strong> Register the same mesh as before ("<strong>Clipped Star</strong>") as the clipping target.<br>
+    <strong>(3)</strong> Register a property of type "<strong>Alpha Mask Preset</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2154.jpg"/>
+    <br>
+    
+    <p>
+    If two masks target the same mesh, you need to make sure that each mask is input to a different property.<br>
+    In the case of "<strong>Alpha Mask Preset</strong>", this is distinguished as "<strong>Channel</strong>".<br>
+    <strong>(1)</strong> In the property of the second mask data, change the value of <strong>Channel</strong> to "<strong>Channel_2</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2158.jpg"/>
+    <br>
+    
+    <p>
+    "<strong>Alpha Mask Preset</strong>" transmits mask data by dividing properties by "<strong>Channel</strong>" units.<br>
+    Thanks to this characteristic, it is possible for two or more mask meshes to clip the same mesh.<br>
+    The clipping operation order is that the existing "clipping mask" is calculated first, and the alpha mask is calculated in order starting from "<strong>Channel 1</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2155.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> When you close the <strong>Mask Setting Dialog</strong>, you can see that two clipping masks are applied to one mesh (“Clipped Star”).<br>
+    <strong>(2)</strong> In the <strong>Hierarchy UI</strong> on the right, you can see that the two masks are transferred to one mesh through icons.<br>
+    </p>
+    <br>
+    
+    <p>
+    Currently, you can see that the two mask meshes are clipped to the "<strong>common area</strong>".<br>
+    This is because the calculation method value of "Alpha Mask" is set to "<strong>And</strong>".<br>
+    Let's see how the result of combining the masks changes when the calculation method is changed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2156.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the <strong>Mask Data</strong> for the "<strong>Mask Rect</strong>" mesh sent to "<strong>Channel_2</strong>".<br>
+    <strong>(2)</strong> Let's change the values ​​of <strong>Mask Operation</strong> one by one and compare the results.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2157.jpg"/>
+    <br>
+    
+    <p>
+    You can see that the combined results of the clipping masks change depending on the operation method.<br>
+    - <strong>And</strong> : Clip to the common area with the mask in the previous channel.<br>
+    - <strong>Or</strong> : Clip to the entire area including the mask from the previous channel and the current mask.<br>
+    - <strong>Inverse And</strong> : Perform <strong>And</strong> operation with the inverted value of the alpha mask.<br>
+    - <strong>Inverse Or</strong> : Perform <strong>Or</strong> operation with the inverted value of the alpha mask.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    The result of a mask combination is affected by the order of mask operations on the channels.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_MaskCustomShader.html">< Mask and Custom Shader</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_MaskChain.html">Mask Chain ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

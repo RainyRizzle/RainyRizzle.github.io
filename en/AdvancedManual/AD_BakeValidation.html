@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Bake Validation</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_BakeValidation.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_BakeValidation.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_BakeValidation.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Bake Validation</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Bake Validation</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <p>
+    Depending on the project settings or the state of the scene, AnyPortrait may need to be set up differently.<br>
+    In particular, if the options related to rendering are not set appropriately for the project, the character may not be rendered properly.<br>
+    For those who are not familiar with Unity and AnyPortrait, it is not easy to find the cause and solution of these problems.<br>
+    The manual on the homepage covers the problems, but it may not be easy to find and read the manual one by one.<br>
+    </p>
+    <br>
+    
+    <p>
+    For these people, the <strong>Bake Validation</strong> feature has been added to easily resolve the issues that most people encounter when baking.<br>
+    We hope that this auxiliary feature will be helpful to those who are new to Unity and AnyPortrait.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Check the Bake options to quickly fix them</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2074.jpg"/>
+    <br>
+    
+    <p>
+    Many of the difficulties users experience with the Bake option are related to the render pipeline.<br>
+    If you have created a project in the latest version of Unity and installed AnyPortrait, you may see demo scenes that do not render properly.<br>
+    Since AnyPortrait was developed to work with older versions of Unity, the default materials were written for the <strong>Built-In</strong> render pipeline.<br>
+    However, the default render pipeline has been changed to <strong>URP</strong> in the latest version of Unity, which is why the above problems occurred.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2075.jpg"/>
+    <br>
+    
+    <p>
+    If you are familiar with rendering issues, you will easily know how to solve the problem.<br>
+    However, if you are not familiar with Unity or AnyPortrait, you may find it difficult to solve these problems.<br>
+    Let's take a look at the process of experiencing and solving the problem from the perspective of a beginner.<br>
+    <strong>(1)</strong> Assuming that a rendering issue has occurred, open the AnyPortrait editor and press the <strong>Bake</strong> button.<br>
+    <strong>(2)</strong> Press the <strong>Bake</strong> button in the <strong>Bake dialog</strong>.<br>
+    <strong>(3)</strong> If a message appears saying that some options are not set appropriately for the current project settings or scene state, press the <strong>Fix Issues</strong> button.<br>
+    </p>
+    <br>
+    
+    <p>
+    The above warning message appears when some of the Bake options are not suitable for your project.<br>
+    In this message, each button performs the following function:<br>
+    - <strong>Fix Issues</strong> : Stop the Bake and open the <strong>Bake Validation Dialog</strong> to resolve the issue.<br>
+    - <strong>Ignore and Bake</strong> : Ignore the message and continue with Bake.<br>
+    - <strong>Cancel</strong> : Stop baking.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2076.jpg"/>
+    <br>
+    
+    <p>
+    A dialog box appears to check the validity of the Bake options.<br>
+    This dialog box mainly checks the validity of "Bake options and materials according to the Render Pipeline", "Color Space", and "Camera".<br>
+    If each item is set to be valid, a green check icon is displayed, and if a problem is identified, an exclamation mark icon is displayed.<br>
+    If a problem occurs, a button to solve it appears.<br>
+    In addition, a description of each item and a button to open the manual are provided to help you understand the issue.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2077.jpg"/>
+    <br>
+    
+    <p>
+    Currently, you can see that the issues are occurring in <strong>Render Pipeline</strong>, <strong>Shaders</strong>, and <strong>Color Space</strong> items among all items.<br>
+    You can see exactly what the issue is by checking the text description.<br>
+    You can change the Bake options directly according to the description, but you can quickly resolve the issue in this dialog.<br>
+    <strong>(1)</strong> In the <strong>Render Pipeline</strong> item, you can see that you need to change the options according to <strong>URP</strong>. Let's click the <strong>Fix now</strong> button.<br>
+    <strong>(2)</strong> In the <strong>Color Space</strong> item, you can see that you need to change the options according to <strong>Linear Space</strong>, which is the color space of the project. Let's click the <strong>Fix now</strong> button as well.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2078.jpg"/>
+    <br>
+    
+    <p>
+    Clicking the button will tell you that the issue has been resolved for each item.<br>
+    You can read the description of each item or open the manual to see more detailed information about how the issue was resolved.<br>
+    </p>
+    <br>
+    
+    <p>
+    Occasionally, a warning message is displayed even though no issue has occurred.<br>
+    For example, in the screen above, you can see that additional descriptions related to VR are added to the <strong>Camera</strong> item.<br>
+    In cases where the issue check function only works in a limited way or in special situations such as VR, the user must check and resolve it themselves.<br>
+    Therefore, in addition to the <strong>Fix now</strong> button, we recommend that you carefully check the information provided by this dialog.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2079.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> In particular, in the <strong>Shader</strong> section, the <strong>Open Material Library</strong> button appears instead of the <strong>Fix now</strong> button.<br>
+    <strong>(2)</strong> Clicking this button will launch the <strong>Material Library</strong>.<br>
+    Since this issue is related to materials, not Bake options, you need to resolve the issue directly in the <strong>Material Library</strong>.<br>
+    You can find detailed information about the <strong>Material Library</strong> in <a href="../../en/AdvancedManual/AD_MaterialLibrary.html">Related Page</a>, and this page will briefly show you how to resolve the Bake issue.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2080.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Since the current Bake issue is caused by <strong>URP</strong>, create and apply a Material Set for <strong>URP</strong>.<br>
+    (You can check the detailed process in <a href="../../en/AdvancedManual/AD_URP.html">Universal Render Pipeline Linkage</a>.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2081.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Close the Material Library and Bake Validation dialogs and press the <strong>Bake</strong> button again.<br>
+    If all Bake options have been properly modified, the warning message displayed above will not occur and Bake will be performed normally.<br>
+    <strong>(2)</strong> In some cases, additional messages related to <strong>Color Space</strong>, etc. may occur as shown above.<br>
+    Check the contents and press the button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2082.jpg"/>
+    <br>
+    
+    <p>
+    If the Bake options are set properly, you should see the character rendered normally as shown above.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Open in the Bake dialog</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2083.jpg"/>
+    <br>
+    
+    <p>
+    Even if there is no option problem, you can open the dialog directly.<br>
+    <strong>(1)</strong> Clicking the <strong>Validate Options</strong> button at the bottom of the Bake dialog will open the validation dialog.<br>
+    <strong>(2)</strong> You can also uncheck the checkbox at the bottom of the validation dialog to prevent messages related to the validity of options from appearing when baking.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_BakeDialog.html">< Bake Dialog</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_OptimizedBake.html">Optimized Bake ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

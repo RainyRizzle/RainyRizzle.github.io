@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Mask Only Mesh</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_OnlyMaskMesh.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_OnlyMaskMesh.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_OnlyMaskMesh.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Mask Only Mesh</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Mask Only Mesh</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <p>
+    You can create some interesting effects by using the mesh only as a <strong>Mask</strong> without rendering it.<br>
+    This page shows you how to set up a <strong>Mask Only Mesh</strong> that works only as a mask, and an interesting example using it.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Setting Mask Only Mesh</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2180.jpg"/>
+    <br>
+    
+    <p>
+    A simple example where we have a mesh to be used as a mask ("<strong>Mask</strong>") and a mesh to be clipped ("<strong>Clipped</strong>").<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2181.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the "<strong>Clipped</strong>" mesh.<br>
+    <strong>(2)</strong> Click the <strong>Clipping Mask</strong> button to set it to be clipped from the "<strong>Mask</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2182.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the "<strong>Mask</strong>" mesh.<br>
+    <strong>(2)</strong> Click the "<strong>As Mask Only</strong>" button on the right UI.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2183.jpg"/>
+    <br>
+    
+    <p>
+    You can see that the "<strong>Mask</strong>" mesh is rendered in green.<br>
+    This means that the "<strong>Mask</strong>" mesh is not actually rendered, but is only providing a mask to the "<strong>Clipped</strong>" mesh.<br>
+    It should not be rendered, but it is shown in green in the editor as shown above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2184.jpg"/>
+    <br>
+    
+    <p>
+    Let's make the Mask Only Meshes invisible in the editor.<br>
+    <strong>(1)</strong> In the View menu, press "<strong>Show Meshes Without Mask</strong>" (shortcut:  <kbd>M</kbd> ).<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2185.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> You can see that the "<strong>Mask</strong>" mesh is not rendered in the editor, and only clipping rendering works.<br>
+    <strong>(2)</strong> You can check whether the Mask Only Meshes are rendered through the icon.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    Pressing the  <kbd>M</kbd>  key will toggle the state in the workspace between "All meshes visible", "All meshes visible except mask-only meshes", and "No meshes visible".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2186.jpg"/>
+    <br>
+    
+    <p>
+    If you check in the Unity scene, you can see that only the mesh that is clipped as above is rendered.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Creating a Portal effect</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2187.jpg"/>
+    <br>
+    
+    <p>
+    Let's create a portal effect using <strong>Mask Only Mesh</strong>.<br>
+    <strong>(1)</strong> To create an effect where two portals ("<strong>Portal</strong>") are penetrated by an arrow mesh ("<strong>Arrow</strong>"), we placed the mask mesh ("<strong>Mask</strong>") as shown above.<br>
+    <strong>(2)</strong> Select the "<strong>Mask</strong>" mesh and press the <strong>Open Mask Settings</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2188.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Create <strong>Mask Data</strong> for the "<strong>Mask</strong>" mesh.<br>
+    <strong>(2)</strong> Register the "<strong>Arrow</strong>" mesh as the target mesh.<br>
+    <strong>(3)</strong> Add a property of type "<strong>Alpha Mask Preset</strong>".<br>
+    <strong>(4)</strong> Change the value of <strong>Mask Operation</strong> to "<strong>Inverse And</strong>".<br>
+    This will invert the mask area.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2189.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Close the <strong>Mask Setting Dialog</strong> and move the "<strong>Arrow</strong>" mesh.<br>
+    It will look like it is disappearing between the portals.<br>
+    <strong>(2)</strong> Select the "<strong>Mask</strong>" mesh.<br>
+    <strong>(3)</strong> Press the <strong>As Mask Only</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2190.jpg"/>
+    <br>
+    
+    <p>
+    As the "<strong>Mask</strong>" mesh becomes a <strong>Mask Only Mesh</strong>, the effect of an "Arrow mesh penetrating portals" is completed as shown above.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_MaskChain.html">< Mask Chain</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_SeeThrough.html">See-Through Effect ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

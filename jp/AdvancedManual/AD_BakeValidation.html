@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Bakeオプションの検証</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_BakeValidation.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_BakeValidation.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_BakeValidation.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > Bakeオプションの検証</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Bakeオプションの検証</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <p>
+    プロジェクトの設定やシーンの状態によっては、「AnyPortrait」が異なる動作をするように設定が必要な場合があります。<br>
+    特に、レンダリングに関連するオプションをプロジェクトに合わせて適切に設定しなかった場合、キャラクターが正しくレンダリングされない可能性があります。<br>
+    「Unity」と「AnyPortrait」に慣れていない人にとっては、これらの問題の原因と解決策を見つけるのは簡単ではありません。<br>
+    ホームページのマニュアルで問題を扱っていますが、マニュアルをいちいち見つけて読むのも簡単なことではないでしょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    これらの人々のために、「Bake」の時に主に遭遇する問題を簡単に解決する「Bakeオプションの検証」機能が追加されました。<br>
+    この補助機能が「Unity」と「AnyPortrait」の入門者に役立つことを期待しています。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>オプションを確認してすばやく修正</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2074.jpg"/>
+    <br>
+    
+    <p>
+    「Bake」オプションに関してユーザーが遭遇する困難の多くは、「レンダリングパイプライン」に関連しています。<br>
+    「Unity」 最新バージョンでプロジェクトを作成して「AnyPortrait」をインストールした場合は、レンダリングが正しくないデモシーンを見ることができます。<br>
+    「AnyPortrait」は以前のバージョンの「Unity」でも動作するように開発されたため、基本マテリアルは「<strong>Built-In</strong> レンダーパイプライン」に合わせて作成されました。<br>
+    しかし、Unityの最新バージョンでは、デフォルトのレンダリングパイプラインが「<strong>URP</strong>」に変わり、上記の問題が発生しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2075.jpg"/>
+    <br>
+    
+    <p>
+    レンダリング問題に精通している人なら、トラブルシューティング方法を簡単に知ることができます。<br>
+    しかし、「Unity」や「AnyPortrait」に慣れていない人は、これらの問題を解決するのをやめます。<br>
+    これらの入門者の時点で問題を経験して解決するプロセスを見てみましょう。<br>
+    <strong>(1)</strong> レンダリング問題が発生したと仮定して「AnyPortrait Editor」を開き、「<strong>Bake</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「Bakeダイアログ」の「<strong>Bake</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> 一部のオプションが現在のプロジェクト設定やシーン状態に適していないことを知らせるメッセージが表示された場合は、「<strong>Fix Issues</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <p>
+    上記の警告メッセージは、「Bake」オプションの一部がプロジェクトに適していない場合に表示されます。<br>
+    このメッセージでは、各ボタンは次の役割を果たします。<br>
+    - <strong>Fix Issues</strong>：「Bake」を中止し、「Bakeオプション検証」ダイアログを開いて問題を解決します。<br>
+    - <strong>Ignore and Bake</strong> : メッセージの内容を無視し、「Bake」を続けて実行します。<br>
+    - <strong>Cancel</strong>：「Bake」を中止します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2076.jpg"/>
+    <br>
+    
+    <p>
+    「Bake」オプションを検証するダイアログが表示されます。<br>
+    このダイアログは、主に「レンダリングパイプラインによるBakeオプションとマテリアル」、「カラースペース」、「カメラ」に対して検証します。<br>
+    そして、各項目に対して有効に設定されている場合は緑色のチェックアイコンを出力し、問題が確認された場合は感嘆符アイコンが表示されます。<br>
+    問題が発生した場合は、それを解決するボタンが登場します。<br>
+    また、各項目の説明とマニュアルを開くボタンを通して、問題を理解するのに役立ちます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2077.jpg"/>
+    <br>
+    
+    <p>
+    現在の項目全体の中で、「Render Pipeline」、「Shaders」、および「Color Space」項目で問題が発生していることがわかります。<br>
+    テキストの説明を確認すると、どのような問題があるかを正確に知ることができます。<br>
+    説明に合わせて直接「Bake」オプションを変更することもできますが、このダイアログで素早く問題を解決できます。<br>
+    <strong>(1)</strong> 「<strong>Render Pipeline</strong>」項目では、「<strong>URP</strong>」に合わせてオプションを変更する必要があることがわかります。 「<strong>Fix now</strong>」ボタンを押してみましょう。<br>
+    <strong>(2)</strong> 「<strong>Color Space</strong>」項目では、プロジェクトの色空間「<strong>Linear Space</strong>」に合わせてオプションを変更する必要があることがわかります。同様に「<strong>Fix now</strong>」ボタンを押してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2078.jpg"/>
+    <br>
+    
+    <p>
+    ボタンを押すと、各項目の問題が解決されたことがわかります。<br>
+    各項目の説明を読んだり、マニュアルを開いて、問題がどのように解決されたかについての詳細な説明を表示できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    時々、問題は発生しませんでしたが、注意フレーズが出力されることもあります。<br>
+    たとえば、上記の画面で「<strong>Camera</strong>」項目の「VR」に関連する追加の説明が追加されていることがわかります。<br>
+    問題をチェックする機能が限定的にしか動作しない場合や、「VR」などの特殊な状況では、ユーザーが直接確認して解決する必要があります。<br>
+    そのため、「<strong>Fix now</strong>」ボタンに加えて、このダイアログが提供する情報を注意深く確認してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2079.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 特に、「<strong>Shaders</strong>」項目では「<strong>Fix now</strong>」ボタンの代わりに「<strong>Open Material Library</strong>」ボタンが登場します。<br>
+    <strong>(2)</strong> このボタンを押すと「マテリアルライブラリ（Material Library）」が起動します。<br>
+    この問題は「Bake」オプションではなく「マテリアル」に関連しているため、「マテリアルライブラリ」で問題を直接解決する必要があります。<br>
+    「マテリアルライブラリ」の説明は、<a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">関連ページ</a>で詳しく確認することができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2080.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 現在の「Bake」問題が「<strong>URP</strong>」によって発生したため、「<strong>URP</strong>」用のマテリアルセットを作成して適用します。<br>
+    （詳細は「<a href="../../jp/AdvancedManual/AD_URP.html">Universal Render Pipeline</a>」で確認できます。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2081.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「マテリアルライブラリ」と「Bakeオプションの確認」ダイアログを閉じて、もう一度「<strong>Bake</strong>」ボタンを押します。<br>
+    「Bake」オプションをすべて適切に変更した場合、以前に出力された警告メッセージは発生せず、「Bake」は正常に実行されます。<br>
+    <strong>(2)</strong> 場合によっては、上記のように「<strong>Color Space</strong>」などに関連する追加メッセージが発生することがあります。内容を確認してボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2082.jpg"/>
+    <br>
+    
+    <p>
+    「Bake」オプションが適切に設定されている場合は、上記のようにキャラクターが正常にレンダリングされることがわかります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>「Bake」ダイアログで開く</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2083.jpg"/>
+    <br>
+    
+    <p>
+    オプションに問題がない場合でも、そのダイアログを直接開くことができます。<br>
+    <strong>(1)</strong> 「Bake」ダイアログの下部にある「<strong>Validate Options</strong>」ボタンを押すと、「Bakeオプションの確認」ダイアログが開きます。<br>
+    <strong>(2)</strong> また、「Bakeオプションチェック」ダイアログの下部のチェックボックスをオフにすると、「Bake」時にオプションの有効性に関するメッセージが表示されないように設定することもできます。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_BakeDialog.html">< Bakeダイアログ</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_OptimizedBake.html">最適化されたBake ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

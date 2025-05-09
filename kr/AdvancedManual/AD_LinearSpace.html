@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <!-- 제목 -->
-        <title>Linear Color Space와 Asset 설정</title>
+        <title>Linear 색상 공간</title>
         <!-- 파비콘 -->
         <link rel="shortcut icon" href="../../Images/favicon.ico"/>
         <!-- 부트스트랩 -->
@@ -70,101 +70,109 @@
 
     <!-- 여기서부터 페이지 내용이 작성됩니다. -->
     <!-- 1. 페이지 진입 경로 -->
-    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > Linear Color Space와 Asset 설정</p>
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > Linear 색상 공간</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
-    <h1 class="display-5">Linear Color Space와 Asset 설정</h1>
+    <h1 class="display-5">Linear 색상 공간</h1>
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.0.1</span></h4>
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>색상 공간 변경하기</h3>
+    <br>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_157.jpg"/>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2215.jpg"/>
     <br>
     
     <p>
-    이미지의 Asset 설정을 AnyPortrait에서 바로 변경할 수 있습니다.<br>
+    Player Settings에서 프로젝트의 <strong>색상 공간(Color Space)</strong>을 변경할 수 있습니다.<br>
+    색상 공간에 관한 자세한 내용은 <a href="https://learn.unity.com/tutorial/introduction-to-lighting-and-rendering-2019-3" target="_sub">관련 페이지</a>에서 확인할 수 있습니다.<br>
     </p>
     <br>
     
     <p>
-    <strong>1. Color Space</strong> : 프로젝트의 렌더링 설정에 따라 이미지의 Color Space 설정을 변경합니다. Gamma 또는 Linear 값을 가집니다.<br>
-    <strong>2. Compression</strong> : 이미지의 압축 방식을 설정합니다. 3단계의 압축 방식과 비 압축 방식이 제공됩니다.<br>
-    <strong>3. Use Mipmap</strong> : 밉맵을 적용할지 여부를 설정합니다.<br>
+    일반적으로는 <strong>Gamma</strong> 색상 공간을 기본적으로 사용하지만, 프로젝트 생성시 어떤 템플릿을 선택했느냐에 따라선 <strong>Linear</strong> 색상 공간이 기본값이 되기도 합니다.<br>
+    AnyPortrait에서의 기본 색상 공간은 <strong>Gamma</strong> 색상 공간이기 때문에, 만약 프로젝트가 <strong>Linear</strong> 색상 공간으로 설정되어 있다면 색상 연산에 문제가 발생합니다.<br>
+    물론, 그 반대가 될 수도 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2216.jpg"/>
+    <br>
+    
+    <p>
+    렌더링에서의 색상을 계산하는 방식은 색상 공간에 따라 결정됩니다.<br>
+    만약 리소스나 쉐이더가 프로젝트의 색상 공간에 적합하지 않다면, 위와 같이 의도하지 않은 렌더링 결과를 볼 수 있습니다.<br>
+    따라서, 이미지 리소스의 속성과 Bake 옵션을 프로젝트의 색상 공간에 맞게 설정해야 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2217.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 이미지를 선택합니다.<br>
+    <strong>(2)</strong> 이미지의 <strong>Color Space</strong>의 값을 현재의 프로젝트에 맞게 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2218.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Bake</strong> 버튼을 눌러서 <strong>Bake 다이얼로그</strong>를 엽니다.<br>
+    <strong>(2)</strong> <strong>Setting</strong> 탭을 선택합니다.<br>
+    <strong>(3)</strong> <strong>Color Space</strong>의 값을 현재의 프로젝트에 맞게 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2219.jpg"/>
+    <br>
+    
+    <p>
+    간혹 <strong>Bake</strong> 버튼을 누르면 위와 같은 메시지가 보여질 수도 있습니다.<br>
+    일부 이미지의 속성이 <strong>Bake 옵션</strong>에서의 색상 공간과 일치하지 않기 때문에 위 메시지가 나타나는 것입니다.<br>
+    여기서 <strong>Okay</strong> 버튼을 누르면 모든 이미지의 색상 공간이 <strong>Bake 옵션</strong>과 동일하게 일괄 변경됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2220.jpg"/>
+    <br>
+    
+    <p>
+    색상 공간이 적절하게 설정되었다면, 유니티 씬에서 캐릭터의 색상이 정상적으로 렌더링되는 것을 볼 수 있습니다.<br>
     </p>
     <br>
     
     <br>
     <br>
     <!-- 3. 서브 타이틀 -->
-    <h3>1. Color Space 변경하기</h3>
+    <h3>색상 공간에 따른 쉐이더 에셋</h3>
     <br>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_156.jpg"/>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2221.jpg"/>
     <br>
     
     <p>
-    Player Settings에서 프로젝트의 Color Space를 변경할 수 있습니다.<br>
-    Color Space에 관한 자세한 내용은 <a href="https://unity3d.com/kr/learn/tutorials/topics/graphics/choosing-color-space" target="_sub">관련 페이지</a>에서 확인할 수 있습니다.<br>
-    </p>
-    <br>
-    
-    <!-- 8. 이미지 (가운데 정렬) -->
-    <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_155.jpg"/>
-    <br>
-    
-    <p>
-    Color Space에 따라서 렌더링 결과가 다릅니다.<br>
-    따라서, 프로젝트의 Color Space에 맞게 설정을 변경해야 합니다.<br>
-    </p>
-    <br>
-    
-    <!-- 8. 이미지 (가운데 정렬) -->
-    <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_158.jpg"/>
-    <br>
-    
-    <p>
-    모든 이미지의 Color Space를 변경합니다.<br>
-    </p>
-    <br>
-    
-    <!-- 8. 이미지 (가운데 정렬) -->
-    <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_160.jpg"/>
-    <br>
-    
-    <p>
-    Bake 다이얼로그에서 Color Space를 선택합니다.<br>
-    </p>
-    <br>
-    
-    <br>
-    <br>
-    <!-- 3. 서브 타이틀 -->
-    <h3>2. 이미지 압축 방식 변경하기</h3>
-    <br>
-    
-    <!-- 8. 이미지 (가운데 정렬) -->
-    <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_159.jpg"/>
-    <br>
-    
-    <p>
-    이미지의 압축 방식을 변경할 수 있습니다.<br>
-    기본적으로는 이미지를 압축하여 사용하도록 권장하지만,<br>
-    2D 캐릭터라는 특성상 비압축 방식으로 선명한 이미지를 사용할 수도 있습니다.<br>
-    </p>
-    <br>
-    
-    <p>
-    2D 게임이므로 밉맵이 필요하지 않을 수 있습니다.<br>
-    밉맵을 해제하는 것을 권장합니다.<br>
+    색상 공간에 따라 색상 계산식이 다르므로, 색상 공간에 적절한 쉐이더가 캐릭터에 적용이 되어야 합니다.<br>
+    <strong>재질 라이브러리</strong>(<a href="../../kr/AdvancedManual/AD_MaterialLibrary.html">관련 페이지</a>)에서는 색상 공간에 따라 다른 쉐이더 에셋이 적용될 수 있도록 설정할 수 있습니다.<br>
+    <strong>재질 세트</strong>나 <strong>재질 프리셋</strong>의 내용을 확인해보면 색상 공간(Gamma, Linear)에 따라 다른 쉐이더 에셋들이 적용되는 것을 볼 수 있습니다.<br>
     </p>
     <br>
     
@@ -174,8 +182,8 @@
     <br>
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
-        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_HQImage.html">< 고품질 이미지 사용</a>
-        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_ChangeImageSize.html">이미지 크기 변경하기 ></a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_MainLogicEvent.html">< 메인 로직 이벤트</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_RootUnit.html">루트 유닛 ></a>
     </nav>
     
     <!-- 페이지 내용 끝! -->

@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>マスク</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_Mask.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_Mask.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_Mask.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > マスク</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">マスク</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <p>
+    「AnyPortrait v1.6.0」では、従来の「クリッピングマスク」機能がさらに拡張されました。<br>
+    大幅に強化された「マスク」機能は、メッシュのレンダリング順序とは無関係にマスクを作成して他のメッシュに渡すことができます。<br>
+    また、マスク生成方式や渡されるプロパティなどをユーザーが自由に設定できます。<br>
+    これにより、ユーザーは別々のシェーダやスクリプトを書かなくてもさまざまな表現が可能になります。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページでは、「マスク」機能の基本的な仕組みと基本的な使い方について説明します。<br>
+    また、新しく追加された「共有テクスチャ」についても説明します。<br>
+    このページで取り上げられていないさまざまな機能とさまざまな活用方法を以下のマニュアルで一緒に確認してください。<br>
+    - <a href="../../jp/AdvancedManual/AD_MaskCustomShader.html">マスクとカスタムシェーダー</a><br>
+    - <a href="../../jp/AdvancedManual/AD_MaskCombine.html">マスクの組み合わせ</a><br>
+    - <a href="../../jp/AdvancedManual/AD_MaskChain.html">マスクチェーン</a><br>
+    - <a href="../../jp/AdvancedManual/AD_OnlyMaskMesh.html">マスク専用メッシュ</a><br>
+    - <a href="../../jp/AdvancedManual/AD_SeeThrough.html">シースルー効果</a><br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>マスクが動作するプロセス</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2084.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitはマスクを実装するために「レンダリングテクスチャ（Render Texture）」を使用します。<br>
+    マスクを作成してレンダリングに利用するプロセスを概略的に表現すると、上記の画像と同じです。<br>
+    マスクとして機能するメッシュは「アルファマスクレンダリングテクスチャ」を生成し、生成された「レンダリングテクスチャ」はターゲットメッシュに渡されます。<br>
+    ターゲットメッシュがレンダリングされると、「レンダリングテクスチャ」を利用して画像の一部がクリッピングされます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2085.jpg"/>
+    <br>
+    
+    <p>
+    先ほど取り上げたマスク動作に関するコンセプトをもとに、「AnyPortrait」では、どのようにこれを実装したのか、もう少し調べてみましょう。<br>
+    縦方向はカメラへの一般的なレンダリングプロセスを意味し、横方向はマスクデータを転送するプロセスを意味します。<br>
+    マスクメッシュがシェーダーを介してレンダリングする過程で、「アルファマスクシェーダー」を使った「レンダーテクスチャ」レンダリングも同様に行います。<br>
+    「アルファマスクシェーダ」を使用してレンダリングを行う場合、基本レンダリング時に使用されるプロパティ値が利用されます。<br>
+    「アルファマスクシェーダ」は「コマンドバッファ」を介して動作し、この過程で生成された「アルファマスクレンダテクスチャ（Alpha Mask Render Texture）」はターゲットメッシュに渡されます。<br>
+    ターゲットメッシュは、「レンダーテクスチャ」を含む「マスクデータ」を受け取り、クリッピング機能を持つシェーダを介して画面にレンダリングされます。<br>
+    </p>
+    <br>
+    
+    <p>
+    要約すると、マスクをレンダリングするには、次の2つの手順を実行します。<br>
+    <strong>(1)</strong> 「アルファマスクシェーダー」を使用して「レンダーテクスチャ」をレンダリングします。<br>
+    <strong>(2)</strong> 「レンダリングテクスチャ」を含む「マスクデータ」をターゲットメッシュに渡してレンダリングします。<br>
+    </p>
+    <br>
+    
+    <p>
+    この方法を理解したら、「マスク」機能のさまざまなオプションがどのような役割を果たしているのかを簡単に知ることができます。<br>
+    それでは、「マスク」を試してみましょう。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>簡単なマスクの例</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2086.jpg"/>
+    <br>
+    
+    <p>
+    マスクをテストするために準備した簡単な例です。<br>
+    「黄色の円形メッシュ（Yellow Circle）」をマスクとして、これを「赤い星形のメッシュ（Re​​d Star）」に適用してみましょう。<br>
+    従来のクリッピングマスクとは異なり、2つのメッシュの間には「青い四角メッシュ」があります。<br>
+    <strong>(1)</strong> 「メッシュグループ」を選択し、「<strong>設定</strong>」タブを選択します。<br>
+    <strong>(2)</strong> マスクの役割をするメッシュを選択します。 （任意のメッシュを選択できます。）<br>
+    <strong>(3)</strong> メッシュを選択すると、マスクに関連するボタンが登場します。ボタンの中から「<strong>Open Mask Settings</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    マスク機能に関連するボタンは次の役割を果たします。<br>
+    - <strong>Open Mask Settings</strong>：「マスク設定ダイアログ」を開きます。<br>
+    - <strong>As Mask Only</strong>：選択したメッシュを「マスク専用メッシュ」に設定します。 （<a href="../../jp/AdvancedManual/AD_OnlyMaskMesh.html">関連ページ</a>）<br>
+    - <strong>Clip to Below Mesh</strong> : 選択したメッシュを下のレイヤーに位置するメッシュによってクリッピングするように設定します。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2087.jpg"/>
+    <br>
+    
+    <p>
+    「AnyPortrait v1.6.0」で新しく追加された「マスク設定ダイアログ」が開きます。<br>
+    このダイアログで、現在編集中のメッシュグループのすべてのマスク設定を編集できます。<br>
+    <strong>1.</strong> マスクデータリスト：メッシュのマスクデータをすべて表示します。マスクデータは、レンダリング順に「フェーズ（Phase）」単位で囲まれて表示されます。<br>
+    <strong>2.</strong> マスク生成オプション：マスク生成オプションです。<br>
+    <strong>3.</strong> ターゲットメッシュリスト：選択されたマスクデータが渡され、到着するターゲットメッシュが表示されます。<br>
+    <strong>4.</strong> 渡されるプロパティリスト：マスクデータは、レンダリングテクスチャを含むプロパティの組み合わせの形でターゲットメッシュに渡されます。この項目で渡されるプロパティを設定します。<br>
+    </p>
+    <br>
+    
+    <p>
+    各項目の詳細な説明は、以下で再度確認できます。<br>
+    今はマスクを生成する基本過程について確認しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2088.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Add Mask</strong>」ボタンを押して新しいマスクデータを作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2089.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> マスクデータは「マスクを生成するメッシュ」を基準に作成されるので、マスクを生成するメッシュ（ここでは「Yellow Circle」）を選択します。<br>
+    <strong>(3)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    このウィンドウでは、2つ以上のメッシュを選択して同時に追加できます。<br>
+    複数のメッシュを追加した場合は、その数のマスクデータが生成されます。<br>
+    マスクデータはメッシュごとに生成されるためです。<br>
+    メッシュごとに2つ以上のマスクデータを持つことは可能です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2090.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「Yellow Circle」メッシュのマスクデータが作成され、リストに追加されました。このデータをクリックして選択します。<br>
+    <strong>(2)</strong> このマスクデータは「Alpha」チャンネルによるクリッピングを行うので、「<strong>Shader Type</strong>」の値を「<strong>Alpha Mask</strong>」に設定します。<br>
+    <strong>(3)</strong> このマスクデータを受け取るメッシュを指定する必要があるので、「<strong>Add Destination</strong>」ボタンを押します。<br>
+    <strong>(4)</strong> 「Red Star」メッシュを選択します。<br>
+    <strong>(5)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2091.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> マスクを受け取る対象として「Red Star」が登録されていることがわかります。<br>
+    <strong>(2)</strong> マスクデータがどのプロパティの形式で渡されるかを設定する必要があります。<br>
+    「<strong>Add Property</strong>」ボタンを押してプロパティ情報を設定しましょう。<br>
+    シェーダの特定のプロパティを選択して設定したい場合は、「<strong>Add Property from List</strong>」ボタンを押すことをお勧めします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2092.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> 新しいプロパティ情報が追加されました。<br>
+    プロパティ情報のデフォルト値は「<strong>Alpha Mask Preset</strong>」タイプです。<br>
+    これは、「<strong>Alpha Mask</strong>」を使った一般的なクリッピングレンダリングのためのプロパティをプリセットとして構成したものです。<br>
+    この例では「<strong>Alpha Mask</strong>」をテストしたいので、デフォルト値をそのまま使用します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2093.jpg"/>
+    <br>
+    
+    <p>
+    「マスク設定ダイアログ」を閉じてレンダリング結果を確認しましょう。<br>
+    <strong>(1)</strong> 「黄色の円形メッシュ」をマスクとして「赤い星形メッシュ」がクリッピングされていることがわかります。<br>
+    <strong>(2)</strong> 右側の「Hierarchy UI」を見ると、「マスクの送信／受信可否」によってアイコンが変わったことがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2094.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bake</strong>」を行い、Unityシーンでクリッピングレンダリング結果を見ることができます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>マスク設定ダイアログ</h3>
+    <br>
+    
+    <p>
+    マスク設定ダイアログの各項目は次のとおりです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2095.jpg"/>
+    <br>
+    
+    <p>
+    <strong>1.</strong> マスクデータ：マスクデータがリスト形式で出力されます。各項目は、「シェーダ、共有テクスチャ、チェーンの有無に応じたアイコン」、「マスクを生成するメッシュの名前」、「マスクを受け取るメッシュの名前」、「削除ボタン」で構成されます。<br>
+    <strong>2.</strong> マスクデータ削除ボタン：このボタンを押すと、マスクデータを削除できます。<br>
+    <strong>3.</strong> 選択したメッシュ名：選択したマスクデータが属するメッシュの名前です。<br>
+    <strong>4.</strong> シェーダー情報：マスク用のレンダーテクスチャをレンダリングするシェーダーの種類と、実行される「Pass」を設定します。<br>
+    <strong>5.</strong> プロパティコピー情報：レンダリングテクスチャを生成するシェーダは、マスク生成メッシュの基本シェーダプロパティの一部をコピーして利用します。コピーされるプロパティをユーザーが追加できます。<br>
+    <strong>6.</strong>レンダリング順序：レンダリングテクスチャをレンダリングする順序を「フェーズ（Phase）」単位で指定できます。 （<a href="../../jp/AdvancedManual/AD_MaskChain.html">関連ページ</a>）<br>
+    <strong>7.</strong> レンダーテクスチャのプロパティ：レンダリングテクスチャに作成するためのオプションです。 「テクスチャのサイズ」、「最適化されたレンダリングの有無」、「共有テクスチャの有無」を設定できます。<br>
+    <strong>8.</strong> ターゲットメッシュ：マスクデータを受け取るメッシュをリスト形式で表示できます。各項目の「削除ボタン」を押して除外できます。<br>
+    <strong>9.</strong> 渡されるプロパティ：マスクデータがどのプロパティとしてターゲットメッシュに渡されるかを設定する項目です。事前設定されたプリセットを使用するか、カスタムプロパティに渡すように設定できます。<br>
+    <strong>10.</strong> プロパティプリセットタイプ：マスクデータを転送するときに2つ以上のプロパティを介して転送しますが、これをプリセットとして設定すれば便利に設定できます。<br>
+    <strong>11.</strong> プロパティ名またはチャンネル：シェーダのプロパティ名を設定します。プリセットによっては、名前の代わりにチャンネルを設定できます。<br>
+    <strong>12.</strong> プロパティ値のタイプ：渡されるプロパティの値がどのタイプであるかを設定します。そのタイプはシェーダーのタイプと同じでなければなりません。特殊なデータ値を取得するタイプもあります。<br>
+    <strong>13.</strong> プロパティの値：シェーダに渡される実際の値です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2096.jpg"/>
+    <br>
+    
+    <p>
+    渡されるプロパティは、プリセットの種類によって大きく3つの方法に分けられます。<br>
+    <strong>1. Alpha Mask Preset</strong> : 「Alpha」値によるクリッピングレンダリングを行うデフォルトプリセットです。 4つのチャンネルとマスクの組み合わせ演算子を設定できます。 （<a href="../../jp/AdvancedManual/AD_MaskCombine.html">関連ページ</a>）<br>
+    <strong>2. Custom</strong> : これは、ユーザーがプロパティを1つずつ直接設定する方法です。プロパティの名前と値のタイプ、渡される値を直接設定する必要があります。<br>
+    <strong>3. See Through Preset</strong> : 「シースルー効果（See-Through）」のための特殊プリセットです。色と透過率を渡します。（<a href="../../jp/AdvancedManual/AD_SeeThrough.html">関連ページ</a>）<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>プリセットのプロパティ</h4>
+    <br>
+    
+    <p>
+    「マスク設定ダイアログ」では、シェーダーを知らないユーザーも簡単に使用できるように、マスクのプロパティをプリセット形式に設定できます。<br>
+    シェーダを作成したい人がいる場合は、マスクのプロパティプリセットがどのプロパティをターゲットにしているのかを知る必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>Alpha Mask Preset</strong>」の場合は、4つのチャンネルで区切られたプロパティにデータを渡します。<br>
+    （各プロパティ名の最後のxは1〜4のチャンネル値を代入します。）<br>
+    - <strong>_MaskRatio_x</strong>：これは、そのチャンネルを使用している場合は1、そうでない場合は0の値を持ちます。<br>
+    - <strong>_MaskTex_x</strong>：アルファマスクレンダリングテクスチャが渡されるプロパティです。<br>
+    - <strong>_MaskScreenSpaceOffset_x</strong>：レンダーテクスチャのUVを計算するための属性です。<br>
+    - <strong>_MaskOp_x</strong>：アルファマスクを組み合わせるときに使用される演算方式です。 0から3の値を持ち、それぞれ「AND」、「OR」、「Inverse AND」、「Inverse OR」を意味します。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>See Through Preset</strong>」の場合は、透過度を決定する Alpha 値とともにプロパティを渡します。<br>
+    - <strong>_SeeThroughRatio</strong>：シースルー効果が使用されている場合は1、そうでない場合は0の値を持ちます。<br>
+    - <strong>_SeeThroughTex</strong>：レンダーテクスチャが渡されるプロパティです。このレンダリングテクスチャは通常、デフォルトのシェーダを介してレンダリングされます。<br>
+    - <strong>_SeeThroughScreenSpaceOffset</strong>：レンダーテクスチャのUVを計算するための属性です。<br>
+    - <strong>_SeeThroughAlpha</strong>：透過度に対応する値として、0～1の間の値を持ちます。制御パラメータと連動することが可能です。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>Custom</strong>」の場合、ユーザーは個々のプロパティを直接指定して値を渡します。<br>
+    プロパティのタイプと渡される値を設定できます。<br>
+    設定可能なプロパティのタイプは次のとおりです。<br>
+    - <strong>Render Texture</strong>：マスクとして作成されたレンダーテクスチャが割り当てられます。<br>
+    - <strong>Screen Space Offset</strong>：レンダリングテクスチャのUVを計算するために自動的に生成される「Vector」タイプの値が割り当てられます。<br>
+    - <strong>Mask Operation</strong>：アルファマスク演算方式です。「Enum」タイプに設定でき、実際には「0、1、2、3」の「Float」の値が割り当てられます。<br>
+    - <strong>Mesh Color</strong>：モディファイアなどによって計算されたメッシュの色値です。<br>
+    - <strong>Float, Integer, Vector</strong>：ユーザーが設定した値をタイプに合わせて渡します。制御パラメータと連動することもできます。<br>
+    - <strong>Texture</strong>：ユーザーが設定したテクスチャをプロパティに渡します。<br>
+    - <strong>Color</strong>：ユーザーが設定した色値をプロパティに渡します。<br>
+    - <strong>Render Texture VR EyeLeft / EyeRight</strong>：「VR」環境でマスクとして生成されたレンダリングテクスチャです。 「左、右」のペアをすべて指定する必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    これらのプロパティーがシェーダー内でどのように処理されるかは、「<a href="../../jp/Script/SC_CustomShader.html">カスタムシェーダー</a>」のマニュアルで見ることができます。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>複数のメッシュが共通のマスクを作成</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2111.jpg"/>
+    <br>
+    
+    <p>
+    従来のクリッピングマスクは、1つのメッシュが作成したマスクを1つまたは複数のメッシュに渡すように動作しました。<br>
+    改善された「マスク」機能に追加された「共有テクスチャ（Shared Texture）」オプションを使用して、複数のメッシュが共通のマスクを作成することが可能になりました。<br>
+    </p>
+    <br>
+    
+    <p>
+    「共有テクスチャ」オプションを有効にすると、メッシュは同じレンダリングテクスチャをターゲットにレンダリングします。<br>
+    （このとき、レンダリングテクスチャとしてレンダリングするための各メッシュのシェーダは、異なる設定にすることができます。）<br>
+    このように作成された「共有レンダリングテクスチャ」は、一括してターゲットメッシュに渡されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2097.jpg"/>
+    <br>
+    
+    <p>
+    共有テクスチャを試すために、上記の例を用意しました。<br>
+    <strong>(1)</strong> 4つのパズルピース形状のマスク用メッシュがあります。<br>
+    <strong>(2)</strong> キャラクターイラストが描かれた1つのメッシュにマスクを適用してみます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2098.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> メッシュグループを選択し、「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(2)</strong> マスクとなるメッシュのいずれかを選択します。（他のメッシュを選択しても関係ありません。）<br>
+    <strong>(3)</strong> 「<strong>Open Mask Settings</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2099.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Add Mask</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 4つのパズルピースメッシュがマスクを作成するので、 <kbd>Ctrl</kbd> キーを押しながらクリックして4つのメッシュを選択します。<br>
+    <strong>(3)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2100.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 追加した4つのマスクデータの1つを選択します。<br>
+    <strong>(2)</strong> 「<strong>Shared Texture</strong>」オプションのチェックボックスを押して有効にし、「<strong>ID</strong>」を指定します。ここではデフォルトの「0」をそのまま使用しました。<br>
+    </p>
+    <br>
+    
+    <p>
+    「共有テクスチャ」は「ID」値によって参照されます。<br>
+    したがって、同じレンダリングテクスチャをレンダリングするには、そのメッシュのレンダリングテクスチャを作成するオプションが同じ「ID」値を持つ必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2101.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 残りのマスクデータを1つずつ選択します。<br>
+    <strong>(2)</strong> 同じように「<strong>Shared Texture</strong>」を有効にし、同じ「<strong>ID</strong>」値を持つように設定します。 （ここでは「0」）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2102.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「共有テクスチャ」でマスクを作成すると、上記のアイコンがリストに表示されます。<br>
+    また、同じ「ID」を持つマスクデータのリスト項目の背景色が同じになります。<br>
+    <strong>(2)</strong> マスクデータのいずれかを選択します。<br>
+    <strong>(3)</strong> 「<strong>Add Destination</strong>」ボタンを押します。<br>
+    <strong>(4)</strong> マスクを受け取るメッシュ（ここでは「Character」）を選択します。<br>
+    <strong>(5)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2103.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「Character」メッシュがマスク転送対象リストに登録されました。<br>
+    <strong>(2)</strong> 「<strong>Add Property</strong>」ボタンを押してプロパティ情報を生成します。<br>
+    <strong>(3)</strong> 「<strong>Alpha Mask Preset</strong>」タイプのプロパティ情報が追加されました。<br>
+    <strong>(4)</strong> これで、「共有テクスチャ」を使用してクリッピングレンダリングの準備ができました。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    「共有テクスチャ」を使用する場合、マスク転送に関連するオプションと情報を設定する作業は、基本的にマスクデータの1つだけを実行できます。<br>
+    マスクデータの設定をまとめて一括してデータをターゲットに渡すからです。<br>
+    メッシュごとに持つ特別なプロパティ値（メッシュの色など）を渡したい場合にのみ、マスクデータごとにプロパティ情報を設定できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2104.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「マスク設定ダイアログ」を閉じて、「Hierarchy UI」を確認すると、4つのメッシュがマスクを作成し、1つのメッシュがマスクを受け取ることがわかります。<br>
+    <strong>(2)</strong> マスク結果を確認するために「<strong>Edit Default Transform</strong>」ボタンを押して「Character」メッシュを横に移動してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2105.jpg"/>
+    <br>
+    
+    <p>
+    4つのパズルピースメッシュをマスクにしてクリッピングになるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2106.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bake</strong>」をしてUnityシーンでも確認してみましょう。<br>
+    「AnyPortrait」エディタと同様の結果が表示されます。<br>
+    ただし、マスクの品質がやや低いようです。<br>
+    「共有テクスチャ」を使用すると、通常よりもマスクとなる範囲が大き くなる傾向があり、これによりマスクとしての「レンダ ルテクスチャ」解像度が品質に影響を与えます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2107.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「マスク設定ダイアログ」を開き、マスクデータの1つを選択します。<br>
+    <strong>(2)</strong> 「<strong>Texture Size</strong>」オプションの値が現在「<strong>256</strong>」になっています。<br>
+    これは、マスクとしての「レンダリングテクスチャ」の解像度が「<strong>256x256</strong>」という意味です。<br>
+    AnyPortraitの最適化機能により、低解像度のレンダーテクスチャでもかなり良い品質のマスクレンダリングになりますが、この場合にはそれが十分ではないようです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2108.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Texture Size</strong>」の値を今より大きい値に変更します。<br>
+    </p>
+    <br>
+    
+    <p>
+    オプションの値は次のとおりです。<br>
+    - <strong>64〜1024</strong>：各軸ごとの数字のサイズと同じ正方形のテクスチャ<br>
+    - <strong>Full Screen</strong>：画面サイズと同じサイズのテクスチャ<br>
+    - <strong>Half Screen / Quarter Screen</strong>：画面サイズから各軸あたり50％、25％に縮小されたテクスチャ<br>
+    - <strong>FHD Size or Less / HD Size or Less</strong>：テクスチャの短軸の長さが最大1080、720の範囲内で可能な画面サイズと同じテクスチャ<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2109.jpg"/>
+    <br>
+    
+    <p>
+    「レンダリングテクスチャ作成オプション」は、マスクデータごとにそれぞれ設定できますが、この場合は、すべてのマスクデータが同じオプション値を持つ必要があります。<br>
+    <strong>(1)</strong> 「<strong>Sync Sh​​ared Texture Options</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> オプション同期に関するメッセージが表示されます。 「<strong>Sync All Option</strong>」ボタンを押して、レンダーテクスチャの作成に関するすべてのオプションを別のマスクデータにコピーします。<br>
+    「<strong>Sync Except Shader</strong>」ボタンを押すと、レンダリングテクスチャをレンダリングするシェーダ情報はコピーされません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2110.jpg"/>
+    <br>
+    
+    <p>
+    もう一度「<strong>Bake</strong>」をしてUnityシーンに戻りましょう。<br>
+    これで、マスクの品質がかなり改善されていることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>レンダーテクスチャの品質最適化</h4>
+    <br>
+    
+    <p>
+    「マスクデータ」のオプションのうち「<strong>Optimized Render</strong>」項目をチェックすると、低解像度でもかなり良質のマスクがレンダリングされることがわかります。<br>
+    このオプションが有効になっていると、マスクとなるメッシュの範囲を計算して、フルスクリーンでそのメッシュに対応する部分のみをクロップしてレンダリングテクスチャを作成およびレンダリングします。<br>
+    これにより、マスクメッシュが画面で占める割合が大きくない限り、低解像度のレンダーテクスチャでも十分に良質のマスクレンダリングが可能です。<br>
+    既存の「クリッピングマスク」の場合、このオプションは常に有効になっています。<br>
+    </p>
+    <br>
+    
+    <p>
+    ただし、次の場合、この最適化機能は機能しません。<br>
+    - キャラクターをレンダリングするカメラが「Perspective」方式で、キャラクターのビルボード設定が有効になっていない場合<br>
+    - 2つ以上のカメラがキャラクターをレンダリングしているとき、一部のカメラが「Perspective」方式の場合<br>
+    - 2つ以上のカメラがキャラクターをレンダリングしているとき、一部のカメラがキャラクターを正面から見ていない場合<br>
+    - 「VR」環境の場合<br>
+    - 「マスクチェーン」が発生した場合（送信、受信データともに該当）<br>
+    </p>
+    <br>
+    
+    <p>
+    次の場合は、最適化機能が動作してもオプションを無効にすることをお勧めします。<br>
+    - マスクを送受信するシェーダが「画面座標系（Screen Space）」の値を利用する場合<br>
+    - メッシュのサイズが大きく、レンダリングテクスチャの解像度が大きくなければならず、そのため最適化が不要な場合<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>クリッピングマスク</h3>
+    <br>
+    
+    <p>
+    隣接するメッシュでマスクを設定する従来の「クリッピングマスク」機能も同様に設定して使用できます。<br>
+    「クリッピングマスク」を設定したら、「マスク設定ダイアログ」でどのように見えるかを確認しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2147.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> キャラクターの口部分のメッシュです。<br>
+    <strong>(2)</strong> 「Teeth」メッシュと「Tongue」メッシュが「Mouth」メッシュからクリッピングされなければなりません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2148.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「Tongue」メッシュを選択します。<br>
+    <strong>(2)</strong> 「Hierarchy UI」の下にあるメッシュから「クリッピングを受けるボタン」を押します。<br>
+    <strong>(3)</strong> 右側の「<strong>Clip to Below Mesh</strong>」ボタンを押しても同じに設定されます。<br>
+    「Teeth」メッシュについても同様に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2149.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> クリッピングが正しく設定されていると、キャラクターの口の形が正常にレンダリングされます。<br>
+    <strong>(2)</strong> 「Hierarchy UI」では、メッシュのアイコンが上記のように変更され、クリッピングされていることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2150.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Open Mask Settings</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Clipping</strong>」カテゴリにクリッピングマスク情報が追加されていることがわかります。<br>
+    <strong>(3)</strong> レンダーテクスチャオプションのほとんどは設定できません。「<strong>Texture Size</strong>」オプションのみを設定できます。<br>
+    <strong>(4)</strong> クリッピングされるターゲットメッシュがリストに表示されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    クリッピングマスクは、「隣接メッシュにのみマスクを渡す」という特別なルールが適用されます。<br>
+    このルールによってレンダリング順序に関連する追加の動作があるため、「マスク設定ダイアログ」では追加/削除はできません。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_CustomClippingMask.html">< カスタムクリッピングマスク</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_MaskCustomShader.html">マスクとカスタムシェーダー ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

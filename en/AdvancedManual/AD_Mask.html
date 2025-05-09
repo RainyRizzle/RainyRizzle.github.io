@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Mask</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_Mask.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_Mask.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_Mask.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Mask</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Mask</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <p>
+    <strong>AnyPortrait v1.6.0</strong> has greatly improved the existing <strong>Clipping Mask</strong> function.<br>
+    The greatly enhanced <strong>Mask</strong> function can create a mask regardless of the rendering order of the mesh and transfer it to another mesh.<br>
+    In addition, users can freely set the method of creating the mask and the properties transferred.<br>
+    By utilizing this, users will be able to create various expressions without having to write separate shaders or scripts.<br>
+    </p>
+    <br>
+    
+    <p>
+    This page covers the basic operation and basic usage of the <strong>Mask</strong> feature.<br>
+    It also covers the newly added <strong>Shared Texture</strong>.<br>
+    Please check out the following manual for various functions and various usage methods that are not covered on this page.<br>
+    - <a href="../../en/AdvancedManual/AD_MaskCustomShader.html">Mask and Custom Shader</a><br>
+    - <a href="../../en/AdvancedManual/AD_MaskCombine.html">Combining Masks</a><br>
+    - <a href="../../en/AdvancedManual/AD_MaskChain.html">Mask Chain</a><br>
+    - <a href="../../en/AdvancedManual/AD_OnlyMaskMesh.html">Mask Only Mesh</a><br>
+    - <a href="../../en/AdvancedManual/AD_SeeThrough.html">See-Through Effect</a><br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>How the mask works</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2084.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait uses <strong>Render Texture</strong> to implement masks.<br>
+    The process of creating a mask and using it for rendering is roughly expressed as in the image above.<br>
+    The mesh that acts as the mask creates an <strong>Alpha Mask Render Texture</strong>, and the created <strong>Alpha Mask Render Texture</strong> is passed to the target mesh.<br>
+    When the target mesh is rendered, a part of the image is clipped using the <strong>Alpha Mask Render Texture</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2085.jpg"/>
+    <br>
+    
+    <p>
+    Based on the concept of mask operation discussed above, let's take a closer look at how AnyPortrait implements it.<br>
+    The vertical direction means the general rendering process to the camera, and the horizontal direction means the process of transferring mask data.<br>
+    When the mask mesh is rendered through the shader, <strong>Render Texture</strong> rendering using <strong>Alpha Mask Shader</strong> is also performed.<br>
+    When rendering using <strong>Alpha Mask Shader</strong>, the property values ​​used in the basic rendering are utilized.<br>
+    <strong>Alpha Mask Shader</strong> operates through <strong>Command Buffer</strong>, and the <strong>Alpha Mask Render Texture</strong> generated through this process is transferred to the target mesh.<br>
+    The target mesh receives <strong>Mask Data</strong> including <strong>Render Texture</strong> and is rendered to the screen through a shader with a clipping function.<br>
+    </p>
+    <br>
+    
+    <p>
+    In summary, we can summarize that the following two steps must be performed to render a mask.<br>
+    <strong>(1)</strong> <strong>Render texture</strong> is rendered using <strong>Alpha Mask Shader</strong>.<br>
+    <strong>(2)</strong> <strong>Mask Data</strong> including <strong>Render Texture</strong> is passed to the target mesh for rendering.<br>
+    </p>
+    <br>
+    
+    <p>
+    If you understand this method, you can easily understand what each option of the <strong>Mask</strong> function does.<br>
+    Let's apply <strong>Mask</strong>.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>How to use a mask</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2086.jpg"/>
+    <br>
+    
+    <p>
+    Here is a simple example I prepared to test the mask.<br>
+    Let's use "<strong>Yellow Circle</strong>" as a mask and apply it to "<strong>Red Star</strong>".<br>
+    There is a Blue Square mesh between the two meshes.<br>
+    This is to show that masking is possible in this case, unlike the existing clipping mask.<br>
+    <strong>(1)</strong> Select the mesh group and select the <strong>Setting</strong> tab.<br>
+    <strong>(2)</strong> Select the mesh that will act as the mask. (You can select any mesh.)<br>
+    <strong>(3)</strong> When you select the mesh, buttons related to the mask will appear. Among the buttons, click the <strong>Open Mask Settings</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    Buttons related to the mask function perform the following functions:<br>
+    - <strong>Open Mask Settings</strong>: Open the <strong>Mask Setting Dialog</strong>.<br>
+    - <strong>As Mask Only</strong>: Set the selected mesh as a <strong>Mask Only Mesh</strong>. (<a href="../../en/AdvancedManual/AD_OnlyMaskMesh.html">Related Page</a>)<br>
+    - <strong>Clip to Below Mesh</strong>: Set the selected mesh to be clipped by the mesh located in the layer below.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2087.jpg"/>
+    <br>
+    
+    <p>
+    <strong>AnyPortrait v1.6.0</strong> opens the new <strong>Mask Setting Dialog</strong>.<br>
+    You can edit all mask settings of the currently edited mesh group in this dialog.<br>
+    <strong>1. Mask Data List</strong>: Mask data of the meshes. Mask Data are grouped by <strong>Phase</strong> according to the render order and shown.<br>
+    <strong>2. Mask Options</strong>: Options for creating masks.<br>
+    <strong>3. Target Mesh List</strong>: Target meshes to which the selected mask data will be transferred.<br>
+    <strong>4. Transferred Property List</strong>: Mask data is transferred to the target mesh in the form of a combination of properties including the render texture. Set the properties transferred in this item.<br>
+    </p>
+    <br>
+    
+    <p>
+    You can check out more detailed explanations for each item below.<br>
+    First, let's learn about the basic process of creating a mask.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2088.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Click the <strong>Add Mask</strong> button to create new mask data.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2089.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> Since the mask data is created based on the "mesh that creates the mask", select the mesh that creates the mask (here, <strong>Yellow Circle</strong>).<br>
+    <strong>(3)</strong> Press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    In this window, you can select two or more meshes and add them at the same time.<br>
+    If you add multiple meshes, the number of mask data will be generated.<br>
+    This is because mask data is generated per mesh.<br>
+    It is possible to have more than two mask data per mesh.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2090.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Mask data for the "<strong>Yellow Circle</strong>" mesh has been created and added to the list. Click on this data to select it.<br>
+    <strong>(2)</strong> This mask data will perform clipping by the Alpha channel, so set the value of <strong>Shader Type</strong> to <strong>Alpha Mask</strong>.<br>
+    <strong>(3)</strong> You need to specify the mesh that will receive this mask data, so click the <strong>Add Destination</strong> button.<br>
+    <strong>(4)</strong> Select the "<strong>Red Star</strong>" mesh.<br>
+    <strong>(5)</strong> Click the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2091.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> You can see that "<strong>Red Star</strong>" is registered as the target to receive the mask.<br>
+    <strong>(2)</strong> Now, we need to set the type of property in which the mask data will be transmitted.<br>
+    Let's configure the property information by pressing the <strong>Add Property</strong> button.<br>
+    If you want to select and set a specific property of the shader, you can also press the <strong>Add Property from List</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2092.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> New property information has been added.<br>
+    The default value of the property information is "<strong>Alpha Mask Preset</strong>" type.<br>
+    This is a preset configuration of properties for general clipping rendering using <strong>Alpha Mask</strong>.<br>
+    In this example, we wanted to test <strong>Alpha Mask</strong>, so we will use the default value.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2093.jpg"/>
+    <br>
+    
+    <p>
+    Let's close the <strong>Mask Setting Dialog</strong> and check the rendering result.<br>
+    <strong>(1)</strong> You can see that the Red Star mesh is clipped by using the Yellow Circle mesh as a mask.<br>
+    <strong>(2)</strong> If you look at the Hierarchy UI on the right, you can see that the icon changes depending on whether the mask is transmitted or received.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2094.jpg"/>
+    <br>
+    
+    <p>
+    You can do <strong>Bake</strong> and see the clipping rendering results in your Unity scene.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Mask Setting Dialog</h3>
+    <br>
+    
+    <p>
+    Each item in the Mask Setting Dialog is as follows:<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2095.jpg"/>
+    <br>
+    
+    <p>
+    <strong>1. Mask Data</strong>: Mask data is output in list format. Each item consists of <strong>Icons according to shader, shared texture, and chain</strong>, <strong>Name of the mesh that creates the mask</strong>, <strong>Names of the meshes that receive the mask</strong>, and <strong>Remove button</strong>.<br>
+    <strong>2. Remove Button</strong>: You can remove the mask data by pressing this button.<br>
+    <strong>3. Selected Mesh Name</strong>: The name of the mesh to which the selected mask data belongs.<br>
+    <strong>4. Shader Information</strong>: Set the type of shader that renders the render texture for the mask and the pass that is executed.<br>
+    <strong>5. Copied Property Information for Render Texture Generation</strong>: The shader that generates the render texture copies and utilizes some of the basic shader properties of the mask generation mesh. Users can add the copied properties.<br>
+    <strong>6. Render Order</strong>: You can specify the order of rendering the render texture in <strong>Phase</strong> units. (<a href="../../en/AdvancedManual/AD_MaskChain.html">Related Page</a>)<br>
+    <strong>7. Render Texture Options</strong>: Options for generation in the render texture. You can set <strong>Texture Size</strong>, <strong>Whether Optimized Rendering</strong>, and <strong>Whether Shared Texture</strong>.<br>
+    <strong>8. Target Meshes</strong>: You can view the meshes that will receive the mask data in a list format. You can exclude each item by clicking the <strong>Remove</strong> button.<br>
+    <strong>9. Transmitted property information</strong>: This is the item that sets which property the mask data is transmitted as to the target mesh. You can set it to be transmitted using a pre-configured preset or a user-defined property.<br>
+    <strong>10. Property preset type</strong>: When transmitting mask data, it is often transmitted through two or more properties, and you can conveniently set it by configuring it as a preset.<br>
+    <strong>11. Property name or channel</strong>: Set the property name of the shader. Depending on the preset, you can set the channel instead of the name.<br>
+    <strong>12. Property value type</strong>: Set the type of the value of the transmitted property. The type must be the same as the shader type. There are also types that bring in special data values.<br>
+    <strong>13. Property value</strong>: The actual value transmitted to the shader.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2096.jpg"/>
+    <br>
+    
+    <p>
+    The properties being passed are divided into three types depending on the preset type.<br>
+    <strong>1. Alpha Mask Preset</strong>: This is a basic preset that performs clipping rendering by Alpha value. You can set 4 channels and mask combination operator. (<a href="../../en/AdvancedManual/AD_MaskCombine.html">Related Page</a>)<br>
+    <strong>2. Custom</strong>: This is a method in which users directly set properties one by one. They must directly set the property name, the type of the value, and the value being passed.<br>
+    <strong>3. See Through Preset</strong>: Special preset for See-Through effect. Transmits color and transparency. (<a href="../../en/AdvancedManual/AD_SeeThrough.html">Related Page</a>)<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Properties of presets</h4>
+    <br>
+    
+    <p>
+    <strong>Mask Setting Dialog</strong> allows you to set the properties of the mask in the form of presets so that even users who are not familiar with shaders can easily use it.<br>
+    If you are planning to write a shader, you will need to know which properties the mask property presets target.<br>
+    </p>
+    <br>
+    
+    <p>
+    In the case of <strong>Alpha Mask Preset</strong>, data is transmitted as properties divided into 4 channels.<br>
+    (The last x of each property name is assigned a channel value from 1 to 4.)<br>
+    - <strong>_MaskRatio_x</strong>: If the channel is used, the value is 1, otherwise, the value is 0.<br>
+    - <strong>_MaskTex_x</strong>: This is the property through which the alpha mask render texture is passed.<br>
+    - <strong>_MaskScreenSpaceOffset_x</strong>: This is the property for calculating UVs of the render texture.<br>
+    - <strong>_MaskOp_x</strong>: This is the operation used when combining alpha masks. It has values ​​from 0 to 3, which mean "AND", "OR", "Inverse AND", and "Inverse OR" respectively.<br>
+    </p>
+    <br>
+    
+    <p>
+    For <strong>See Through Preset</strong>, the properties are passed along with an Alpha value that determines the degree of transparency.<br>
+    - <strong>_SeeThroughRatio</strong>: If the effect is used, it has a value of 1, otherwise it has a value of 0.<br>
+    - <strong>_SeeThroughTex</strong>: This is the property that the render texture is passed to. This render texture is usually rendered via the default shader.<br>
+    - <strong>_SeeThroughScreenSpaceOffset</strong>: This is the property for calculating the UV of the render texture.<br>
+    - <strong>_SeeThroughAlpha</strong>: It is a value corresponding to the degree of penetration and has a value between 0 and 1. It can be linked with the control parameter.<br>
+    </p>
+    <br>
+    
+    <p>
+    In the case of <strong>Custom</strong>, the user directly specifies individual properties and passes values.<br>
+    You can set the type of the property value and the value to be passed.<br>
+    The types of properties that can be set are as follows.<br>
+    - <strong>Render Texture</strong>: A render texture generated as a mask is assigned.<br>
+    - <strong>Screen Space Offset</strong>: A value of type Vector is assigned that is automatically generated to calculate the UV of the render texture.<br>
+    - <strong>Mask Operation</strong>: This is how the alpha mask is calculated. It can be set as an Enum type, and in reality, Float values ​​of 0, 1, 2, and 3 are assigned.<br>
+    - <strong>Mesh Color</strong>: The color value of the mesh calculated by AnyPortrait's modifiers, etc.<br>
+    - <strong>Float, Integer, Vector</strong>: Pass the user-defined value according to the type. Can also be linked to control parameters.<br>
+    - <strong>Texture</strong>: Pass the texture set by the user as a property.<br>
+    - <strong>Color</strong>: Pass the color value set by the user as a property.<br>
+    - <strong>Render Texture VR EyeLeft / EyeRight</strong>: A render texture created as a mask in a VR environment. Both Left and Right pairs must be specified.<br>
+    </p>
+    <br>
+    
+    <p>
+    How these properties are handled within shaders can be found in the <a href="../../en/Script/SC_CustomShader.html">Custom Shader</a> manual.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Shared Texture with multiple meshes</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2111.jpg"/>
+    <br>
+    
+    <p>
+    The existing clipping mask worked by passing the mask generated by one mesh to meshes.<br>
+    "<strong>Shared Texture</strong>" option is added to the improved <strong>Mask</strong> function, which allows multiple meshes to create a common mask.<br>
+    </p>
+    <br>
+    
+    <p>
+    When the <strong>Shared Texture</strong> option is enabled, the meshes will render to the same render texture.<br>
+    (At this time, the shaders of each mesh for rendering to the render texture can be set differently.)<br>
+    The <strong>Shared Render Texture</strong> created in this way is transferred to the target meshes in batches.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2097.jpg"/>
+    <br>
+    
+    <p>
+    Here is an example prepared to use shared textures.<br>
+    <strong>(1)</strong> There are 4 meshes for the mask in the shape of puzzle pieces.<br>
+    <strong>(2)</strong> We will apply the mask to one mesh with a character illustration drawn on it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2098.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the mesh group and select the <strong>Setting</strong> tab.<br>
+    <strong>(2)</strong> Select one of the meshes to be the mask. (You can select any mesh.)<br>
+    <strong>(3)</strong> Click the <strong>Open Mask Settings</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2099.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Click the <strong>Add Mask</strong> button.<br>
+    <strong>(2)</strong> Since the four puzzle piece meshes will create the mask, hold down the  <kbd>Ctrl</kbd>  key and click to select the four meshes.<br>
+    <strong>(3)</strong> Click the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2100.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select one of the four added mask data.<br>
+    <strong>(2)</strong> Check the box for the <strong>Shared Texture</strong> option to activate it and specify the <strong>ID</strong>.<br>
+    In this example, the default value <strong>0</strong> is used.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>Shared textures</strong> are referenced by their ID values.<br>
+    Therefore, in order to render to the same render texture, the render texture generation options for those meshes must have the same ID value.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2101.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the remaining mask data one by one.<br>
+    <strong>(2)</strong> Activate <strong>Shared Texture</strong> in the same way and set it to have the same <strong>ID</strong> value. (Here, 0)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2102.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> If you create a mask with <strong>Shared Texture</strong>, an icon like the one above will appear in the list.<br>
+    Also, the background colors of the list items of mask data with the same ID will be the same.<br>
+    <strong>(2)</strong> Select one of the mask data.<br>
+    <strong>(3)</strong> Click the <strong>Add Destination</strong> button.<br>
+    <strong>(4)</strong> Select the mesh (here, "<strong>Character</strong>") to receive the mask.<br>
+    <strong>(5)</strong> Click the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2103.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> The "<strong>Character</strong>" mesh has been registered in the mask transfer target list.<br>
+    <strong>(2)</strong> Click the <strong>Add Property</strong> button to create property information.<br>
+    <strong>(3)</strong> Property information of the <strong>Alpha Mask Preset</strong> type has been added.<br>
+    <strong>(4)</strong> Now, clipping rendering using <strong>Shared Texture</strong> is ready.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    When using <strong>Shared Texture</strong>, the work of setting options and information related to mask transmission basically only needs to be performed on one of the mask data.<br>
+    This is because the settings of the mask data are collected and the data is transmitted to the target in batches.<br>
+    If you want to transmit special property values ​​for each mesh (e.g., mesh color), you need to configure the property information for each mask data.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2104.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Close the <strong>Mask Setting Dialog</strong> and check the <strong>Hierarchy UI</strong>.<br>
+    You can see that 4 meshes are creating masks and 1 mesh is receiving the mask.<br>
+    <strong>(2)</strong> To check the mask result, press the <strong>Edit Default Transform</strong> button to move the "<strong>Character</strong>" mesh to the side.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2105.jpg"/>
+    <br>
+    
+    <p>
+    You can see the clipping done using the 4 puzzle piece meshes as a mask.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2106.jpg"/>
+    <br>
+    
+    <p>
+    Let's do <strong>Bake</strong> and check it in the Unity scene.<br>
+    You can see similar results as in the AnyPortrait editor.<br>
+    However, the mask quality seems to be somewhat low.<br>
+    When using <strong>Shared Texture</strong>, the mask area tends to be larger than usual, and this is because the resolution of the <strong>Render Texture</strong> as a mask affects the quality.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2107.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the <strong>Mask Setting Dialog</strong> and select one of the mask data.<br>
+    <strong>(2)</strong> The value of the <strong>Texture Size</strong> option is currently <strong>256</strong>.<br>
+    This means that the resolution of the <strong>Render Texture</strong> as a mask is <strong>256x256</strong>.<br>
+    Due to AnyPortrait's optimization function, even with a low-resolution render texture, the mask rendering is quite good, but in this case, it seems to be insufficient.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2108.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Change the value of <strong>Texture Size</strong> to a larger value than the current value.<br>
+    </p>
+    <br>
+    
+    <p>
+    The values ​​for the options are as follows:<br>
+    - <strong>64 ~ 1024</strong>: Square textures the size of the numbers for each axis<br>
+    - <strong>Full Screen</strong>: Textures the same size as the screen size<br>
+    - <strong>Half Screen / Quarter Screen</strong>: Textures scaled down by 50% / 25% of the screen size for each axis<br>
+    - <strong>FHD Size or Less / HD Size or Less</strong>: Textures the same size as the screen size, within the range of up to 1080 / 720 for the length of the short axis of the texture<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2109.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Render Texture Options</strong> can be set individually for each mask data, but in this case, all mask data must have the same option value.<br>
+    <strong>(1)</strong> Click the <strong>Sync Shared Texture Options</strong> button.<br>
+    <strong>(2)</strong> A message related to option synchronization appears.<br>
+    Click the <strong>Sync All Options</strong> button to copy all options related to render texture generation to other mask data.<br>
+    If you click the <strong>Sync Except Shader</strong> button, the shader options that renders the render texture will not be copied.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2110.jpg"/>
+    <br>
+    
+    <p>
+    Let's do <strong>Bake</strong> again and go back to the Unity scene.<br>
+    You can see that the quality of the mask has improved quite a bit.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Optimization for Render textures</h4>
+    <br>
+    
+    <p>
+    If you check the <strong>Optimized Render</strong> item in the <strong>Mask Data</strong> options, you can see that a mask is rendered with pretty good quality even at low resolutions.<br>
+    When this option is enabled, the range of the mesh that becomes the mask is calculated, and only the part corresponding to the mesh is cropped from the entire screen to generate and render a render texture.<br>
+    As a result, as long as the mask mesh does not occupy a large portion of the screen, mask rendering with good quality is possible even with a low resolution render texture.<br>
+    In the case of the existing <strong>Clipping Mask</strong>, this option is always enabled.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, this optimization does not work in the following cases:<br>
+    - When the camera rendering the character is in Perspective mode and the character's billboard setting is not enabled<br>
+    - When two or more cameras are rendering the character, and some of the cameras are in Perspective mode<br>
+    - When two or more cameras are rendering the character, and some of the cameras are not looking straight at the character<br>
+    - When in a VR environment<br>
+    - When a mask chain exists (for transmitted and received data both)<br>
+    </p>
+    <br>
+    
+    <p>
+    In the following cases, it is recommended to disable the option even if the optimization function is enabled:<br>
+    - When the shader that passes or receives the mask uses values ​​in "Screen Space"<br>
+    - When the mesh is large and the render texture resolution is large, making optimization unnecessary<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Clipping Mask</h3>
+    <br>
+    
+    <p>
+    You can also use the existing <strong>Clipping Mask</strong> function, which sets a mask with an adjacent mesh, by setting it in the same way.<br>
+    After setting the <strong>Clipping Mask</strong>, let's check how it looks in the <strong>Mask Setting Dialog</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2147.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> These are the meshes for the character's mouth.<br>
+    <strong>(2)</strong> The "<strong>Teeth</strong>" mesh and the "<strong>Tongue</strong>" mesh should be clipped by the "<strong>Mouth</strong>" mesh.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2148.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the "<strong>Tongue</strong>" mesh.<br>
+    <strong>(2)</strong> Click the button in the Hierarchy UI to receive clipping from the mesh below.<br>
+    <strong>(3)</strong> Clicking the <strong>Clip to Below Mesh</strong> button on the right will do the same.<br>
+    Do the same for the "<strong>Teeth</strong>" mesh.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2149.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> When clipping is set properly, the character's mouth shape is rendered normally.<br>
+    <strong>(2)</strong> In the Hierarchy UI, the mesh's icon changes as shown above, indicating that it is being clipped.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2150.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Click the <strong>Open Mask Settings</strong> button.<br>
+    <strong>(2)</strong> You can see that the clipping mask information has been added to the <strong>Clipping</strong> category.<br>
+    <strong>(3)</strong> Most of the render texture options cannot be set, and only the <strong>Texture Size</strong> option can be set.<br>
+    <strong>(4)</strong> The target meshes to be clipped are shown in the list.<br>
+    </p>
+    <br>
+    
+    <p>
+    Clipping masks have a special rule that "only pass the mask to adjacent meshes".<br>
+    Because of this rule, they cannot be added/removed in the <strong>Mask Setting Dialog</strong> because they have additional behavior related to rendering order.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_CustomClippingMask.html">< Custom Clipping Mask</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_MaskCustomShader.html">Mask and Custom Shader ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>マスクとカスタムシェーダー</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_MaskCustomShader.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MaskCustomShader.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_MaskCustomShader.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > マスクとカスタムシェーダー</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">マスクとカスタムシェーダー</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <p>
+    「マスク」機能を活用すれば、基本的な「アルファマスクによるクリッピング」だけでなく、さまざまな効果を作ることが可能です。<br>
+    マスク処理中に使用されるシェーダを置き換えたり、自分で作成する方法を学びましょう。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>マスクを生成するシェーダを変更</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2112.jpg"/>
+    <br>
+    
+    <p>
+    マスクを作成するプロセスでは、デフォルトでは「アルファマスクシェーダー（Alpha Mask Shader）」が使用されます。<br>
+    シェーダーを変更すると、「レンダーテクスチャ」が異なるように生成されます。<br>
+    シェーダーによってレンダーテクスチャがどのように変わるかを確認しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2113.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> マスクレンダリングテクスチャをテストするためにメッシュを準備しました。<br>
+    <strong>(2)</strong> モディファイアによるレンダリングテクスチャの変化を確認するために「<strong>Color Only（Controller）</strong>」モディファイアを追加しました。<br>
+    <strong>(3)</strong> 制御パラメータによってメッシュの色が変わります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2114.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「マスク設定ダイアログ」を開き、作成したメッシュの「マスクデータ」を作成します。<br>
+    <strong>(2)</strong> 「<strong>Shader Type</strong>」オプションの値を1つずつ選択してテストします。デフォルトの「<strong>Alpha Mask</strong>」を選択してみましょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>Bake</strong>」をしてUnityシーンでテストをしましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2115.jpg"/>
+    <br>
+    
+    <p>
+    この例では、生成されたレンダリングテクスチャを「フレームデバッガ」で確認しましょう。<br>
+    <strong>(1)</strong> Unityメニューから「<strong>Window > Analysis > Frame Debugger</strong>」を実行します。<br>
+    （Unityバージョンによってメニューパスが異なる場合があります。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2116.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ゲームを実行します。<br>
+    <strong>(2)</strong> 制御パラメータを調整してメッシュの色を変更します。<br>
+    <strong>(3)</strong> 「Frame Debugger」の「<strong>Enable</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2117.jpg"/>
+    <br>
+    
+    <p>
+    ゲームが一時停止し、レンダリングの各ステップを確認できます。<br>
+    <strong>(1)</strong> マスクは「コマンドバッファ」を介して生成されるため、レンダリング処理中の「コマンドバッファ」が動作する項目を見つけて選択します。<br>
+    「コマンドバッファ」の名前が「AP + Root Unit Name + Mesh Name + Mask Processing」と命名されているので、これを見つけることができます。<br>
+    <strong>(2)</strong> 「コマンドバッファ」の結果を確認すると、「レンダリングテクスチャ」をターゲットにマスクがレンダリングされたことがわかります。<br>
+    </p>
+    <br>
+    
+    <p>
+    先ず、マスクの「<strong>Shader Type</strong>」を「<strong>Alpha Mask</strong>」として選択したため、レンダリングテクスチャは白黒の画像としてレンダリングされる。<br>
+    その場合は、「<strong>Shader Type</strong>」を変更してレンダリングテクスチャがどのように変わるかを確認しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2118.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 再度「マスク設定ダイアログ」を開き、「マスクデータ」を選択した後、「<strong>Shader Type</strong>」を「<strong>Main Texture With Color</strong>」と「<strong>Main Texture Only</strong>」に一度選択して結果を確認しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2119.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行してフレームデバッガを実行してコマンドバッファの結果を確認すると、上記のようにマスクが異なるようにレンダリングされることがわかります。<br>
+    </p>
+    <br>
+    
+    <p>
+    まとめると、各「<strong>Shader Type</strong>」は次のように動作することがわかります。<br>
+    - <strong>Alpha Mask</strong>：モディファイアの色演算を含む結果のAlphaチャンネルの値がグレースケール（Grayscale）でレンダリングされます。<br>
+    - <strong>Main Texture With Color</strong>：レンダーテクスチャにモディファイアの色演算が適用されます。画面にレンダリングされるのと同じです。<br>
+    - <strong>Main Texture Only</strong>：モディファイアの操作は無視され、元の画像の色だけがレンダーテクスチャに反映されます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>カスタムマスクシェーダー</h3>
+    <br>
+    
+    <p>
+    マスクを作成するシェーダを変更すると、レンダリングテクスチャが異なるようにレンダリングされることを前の例で確認しました。<br>
+    今回はカスタムシェーダを直接作成する状況とその方法を見てみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2120.jpg"/>
+    <br>
+    
+    <p>
+    マスクとしてレンダリングテクスチャをレンダリングする基本的なプロセスは上記のとおりです。<br>
+    マスクメッシュは「ノーマルシェーダー（Normal Shader）」でレンダリングし、同時に「アルファマスクシェーダー（Alpha Mask Shader）」で「レンダーテクスチャ」をレンダリングします。<br>
+    「アルファマスクシェーダ」が動作するには、「_Color」と「_MainTex」プロパティに値を入力する必要があります。<br>
+    これらの値は、モディファイアやアニメーションなどの影響を受けるため、リアルタイムで変更される可能性があるため、更新ごとに「通常シェーダ」に適用される値をそのままコピーして適用します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2121.jpg"/>
+    <br>
+    
+    <p>
+    もし「マテリアルライブラリ」（<a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">関連ページ</a>）を使ってメッシュを「カスタムシェーダ」にレンダリングするとしましょう。<br>
+    このカスタムシェーダの結果がマスクに影響を与える場合、「アルファマスクシェーダ」もそれに合わせて書き直す必要があります。<br>
+    特に、「カスタムシェーダ」が追加のプロパティによってレンダリングされる場合、「アルファマスクシェーダ」もそのプロパティを受け取る必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    したがって、マスク生成シェーダが正常に動作するためには、元のシェーダからプロパティの値をコピーする必要があります。<br>
+    次の例では、「カスタムシェーダ」をメッシュに適用し、それに合わせて「カスタムマスクシェーダ」をさらに作成するプロセスについて説明します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    「カスタムマスクシェーダ」のために、「ノーマルシェーダ」を常にカスタムシェーダとして作成する必要はありません。<br>
+    次の例では、デフォルトプロパティ（ 「_Color」、 「_MainTex」）以外の追加プロパティをコピーする必要がある状況を示すために、2つの「カスタムシェーダ」が必要でした。<br>
+    「ノーマルシェーダ」と「マスクシェーダ」に「カスタムシェーダ」を適用することは状況によって異なり、自由に活用できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2122.jpg"/>
+    <br>
+    
+    <p>
+    1つのマスク用メッシュ(「<strong>Mask Square</strong>」)と1つのクリッピングされるメッシュ(「<strong>Clipped Star</strong>」)を用意しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2123.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「マスク設定ダイアログ」を開き、マスクメッシュ「<strong>Mask Square</strong>」の「マスクデータ」を追加します。<br>
+    <strong>(2)</strong> 「<strong>Shader Type</strong>」は、デフォルトの「<strong>Alpha Mask</strong>」に設定されます。<br>
+    <strong>(3)</strong> 対象メッシュとして「<strong>Clipped Star</strong>」を追加します。<br>
+    <strong>(4)</strong> 渡されるプロパティとして「<strong>Alpha Mask Preset</strong>」を追加します。<br>
+    </p>
+    <br>
+    
+    <p>
+    このプロセスまで完了すると、通常のアルファマスククリッピングが実行されます。<br>
+    それでは、「<strong>Mask Square</strong>」が「カスタムシェーダー」によってレンダリングされるようにしましょう。<br>
+    次のシェーダコードは、基本的な「Unlit」シェーダに基づいて作成されており、「画面座標系を介してマッピングされるパターンテクスチャがAlpha値に影響する内容」が含まれています。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    カスタムシェーダの作成方法については、「<a href="../../jp/Script/SC_CustomShader.html">関連ページ</a>」を参照してください。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Custom Shader/Screen Space Pattern (Alpha Blend)"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_Color</strong> (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MainTex</strong> (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// スクリーン効果のためのパターンテクスチャとスクロール速度</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_PatternTex</strong></span> (<span class="text-danger">"Pattern Texture (Grayscale)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_PatternRepeat</strong></span> (<span class="text-danger">"Pattern Repeat"</span>, float) = 1.0<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_ScrollSpeed</strong></span> (<span class="text-danger">"Scroll Speed"</span>, float) = 0.2<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"LightMode" = "ForwardBase"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 画面効果のための画面座標系</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 screenUV : TEXCOORD1;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// スクリーン効果のためのUV</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _PatternTex;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float _ScrollSpeed;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert (<span class="text-primary">appdata</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 画面UVの計算</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.screenUV = ComputeScreenPos(o.vertex);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;fixed4 col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    #if UNITY_COLORSPACE_GAMMA<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    #else<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 4.595f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb = pow(col.rgb, 2.2f);<br>
+    #endif&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 時間とともに横に動くパターン画像</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float2 screenUV = i.screenUV.xy / i.screenUV.w;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x *= _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.y *= _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x += _Time.y * _ScrollSpeed;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>fixed pattern = tex2D(_PatternTex, screenUV).r;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a *= pattern;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2124.jpg"/>
+    <br>
+    
+    <p>
+    作成した「カスタムシェーダ」を適用しましょう。<br>
+    <strong>(1)</strong> 「ルートユニット」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Material Library</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> 「Unlit マテリアルセット」を選択します。<br>
+    <strong>(4)</strong> 「<strong>Duplicate</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2125.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「複製されたマテリアルセット」を選択します。<br>
+    <strong>(2)</strong> マテリアルセットの名前を適切に変更します。<br>
+    <strong>(3)</strong> 「<strong>Default Material</strong>」ボタンを押して「<strong>ON</strong>」状態に切り替えます。<br>
+    <strong>(4)</strong> 「<strong>Alpha Blend</strong>」シェーダを、先ほど作成した「カスタムシェーダ」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2126.jpg"/>
+    <br>
+    
+    <p>
+    「カスタムシェーダ」のプロパティを「マテリアルセット」に追加する必要があります。<br>
+    <strong>(1)</strong> 下にスクロールして「<strong>Add Property from List</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> カスタムシェーダで作成された「<strong>_PatternTex、_PatternRepeat、_ScrollSpeed</strong>」プロパティを <kbd>Ctrl</kbd> キーを押してすべてを選択します。<br>
+    <strong>(3)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2127.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> パターンテクスチャとパターン繰り返し値、スクロール速度を入力します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2128.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> AnyPortrait エディタではカスタムシェーダが動作しません。<br>
+    <strong>(2)</strong> 「<strong>Bake</strong>」を実行してUnityシーンで確認してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2129.jpg"/>
+    <br>
+    
+    <p>
+    カスタムシェーダによってパターンテクスチャがメッシュに適用されたことがわかります。<br>
+    ところで、このパターンテクスチャによって波状に透明になった部分がクリッピングには反映されないことがわかります。<br>
+    これは、カスタムシェーダのパターン関連コードが「アルファマスクシェーダ」には存在しないためです。<br>
+    </p>
+    <br>
+    
+    <p>
+    カスタムシェーダの内容をマスクに反映するためには、「アルファマスクシェーダ」も「カスタムシェーダ」として書き換える必要があります。<br>
+    「カスタムマスクシェーダ」を次のように作成しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Custom Shader/Screen Space Pattern (Alpha Mask)"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_Color</strong> (<span class="text-danger">"Color (Alpha)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MainTex</strong> (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_PatternTex</strong></span> (<span class="text-danger">"Pattern Texture (Grayscale)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_PatternRepeat</strong></span> (<span class="text-danger">"Pattern Repeat"</span>, float) = 1.0<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_ScrollSpeed</strong></span> (<span class="text-danger">"Scroll Speed"</span>, float) = 0.2<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType"="Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;Cull Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// スクリーン効果のためのUV</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 screenUV : TEXCOORD1;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// パターンテクスチャとスクロール速度変数</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _PatternTex;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float _ScrollSpeed;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert (<span class="text-primary">appdata</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 画面UVの計算</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.screenUV = ComputeScreenPos(o.vertex);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// アルファマスク演算（White + Alpha）</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = fixed3(1.0f, 1.0f, 1.0f);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a = saturate(col.a * _Color.a);</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 時間とともに横に動くパターン画像</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float2 screenUV = i.screenUV.xy / i.screenUV.w;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x *= _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.y *= _PatternRepeat;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>screenUV.x += _Time.y * _ScrollSpeed;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>fixed pattern = tex2D(_PatternTex, screenUV).r;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.a *= pattern;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    カスタムシェーダーで作成された上記の「アルファマスクシェーダー」を見ると、通常のシェーダーの内容と似ています。<br>
+    違いは、RGBチャンネルの結果が「<strong>白(1、1、1)</strong>」であることです。<br>
+    </p>
+    <br>
+    
+    <p>
+    それでは、この「カスタムマスクシェーダー」を適用してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2130.jpg"/>
+    <br>
+    
+    <p>
+    非常に特殊でないカスタムシェーダは、「マスク設定ダイアログ」ではなく「マテリアルライブラリ」で設定することも可能です。<br>
+    すべてのクリッピングメッシュに共通に適用されるシェーダの場合は、上記のように「マテリアルライブラリ」の「<strong>Alpha Mask</strong>」項目にシェーダを入力します。<br>
+    設定すると、「マスク設定ダイアログ」で「<strong>Shader Type</strong>」を「<strong>Alpha Mask</strong>」に設定したときに、そのシェーダが使用されます。<br>
+    ただし、このページではこの方法については扱いません。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2131.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「マスク設定ダイアログ」を開き、「マスクデータ」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Shader Type</strong>」の値を「<strong>Custom Shader</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2132.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Shader Type</strong>」を「<strong>Custom Shader</strong>」に変更すると、「<strong>Shader Asset</strong>」というオプションが登場します。<br>
+    ここに先ほど作成した「カスタムマスクシェーダ」を入力します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2133.jpg"/>
+    <br>
+    
+    <p>
+    カスタムプロパティ「_PatternTex」、「_PatternRepeat」、「_ScrollSpeed」の値を元のシェーダからコピーし、「カスタムマスクシェーダ」として入力する必要があります。<br>
+    <strong>(1)</strong> 「<strong>Add Property from List</strong>」ボタンを押します。<br>
+    <strong>(2)</strong>&nbsp;&nbsp;<kbd> Ctrl</kbd> キーを押しながら「<strong>_PatternTex、_PatternRepeat、_ScrollSpeed</strong>」をすべて選択します。<br>
+    <strong>(3)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    追加したいプロパティがリストにない場合は、そのシェーダが適用された「マテリアルセット」が「<strong>Default Material</strong>」として設定されていない可能性があります。<br>
+    「マテリアルライブラリ」でご確認ください。<br>
+    あるいは、「<strong>Add Property</strong>」ボタンを押してプロパティ名を直接入力することもできます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2134.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 一般シェーダからコピーされるプロパティが登録されていることがわかります。各項目は、「プロパティ名」と「値の種類」、「削除ボタン」で構成されます。<br>
+    <strong>(2)</strong> このカスタムシェーダは「画面座標系」を利用するため、「クリッピングマスク最適化機能」を使用しないでください。 （<a href="../../jp/AdvancedManual/AD_Mask.html">関連ページ</a>）<br>
+    「<strong>Optimized Render</strong>」のチェックを外し、「<strong>Texture Size</strong>」が適度に大きい値になるように変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2135.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bake</strong>」をしてUnityシーンで確認してみると、カスタムシェーダのパターンテクスチャ効果がマスクにも適用されたことがわかります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>カスタムクリッピングシェーダー</h3>
+    <br>
+    
+    <p>
+    これまでのプロセスは、「マスク作成プロセスでカスタムシェーダを適用する」ことでした。<br>
+    今回は「生成されたマスクを受けてクリッピングレンダリングを行う過程」にカスタムシェーダを作成して適用しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2136.jpg"/>
+    <br>
+    
+    <p>
+    「マスクレンダーテクスチャ」は、クリッピングされるターゲットメッシュに渡され、これを「クリッピングシェーダ（Clipped Shader）」が受け取り、クリッピング処理を実行します。<br>
+    ここでは、「クリッピングシェーダ」を「カスタムシェーダ」として作成することも可能です。<br>
+    </p>
+    <br>
+    
+    <p>
+    通常、「カスタムクリッピングシェーダ」を設定する作業は、「マテリアルライブラリ」で行われ、完了します。<br>
+    ここで考慮する必要があるのは、「カスタムクリッピングシェーダ」がマスクに関連する特別なプロパティ値を必要とする場合です。<br>
+    「マテリアルライブラリ」では、マスクデータとは無関係の値がカスタムプロパティに渡されるように設定できます。<br>
+    ただし、マスクデータに関連する値を渡すには、「マスク設定ダイアログ」で設定する必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    今回の例では、「マスクを受けてAlphaを変えずにマスクの外側に指定された色に変更」する効果を持つ「カスタムクリッピングシェーダ」を作成して適用してみます。<br>
+    具体的には、クリッピングに関連するすべてのプロパティをユーザーがランダムにするという前提でシェーダを作成しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2137.jpg"/>
+    <br>
+    
+    <p>
+    この例で使用されるメッシュです。<br>
+    フロントにはきれいなキャラクターが描かれた「<strong>Character</strong>」メッシュがあり、後ろには水色の「<strong>Circle Mask</strong>」メッシュがあります。<br>
+    後ろの「<strong>Circle Mask</strong>」がマスクを作成して「<strong>Character</strong>」メッシュに渡すと、マスクと重ならないところの色が変わるようにしましょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    このような効果を作るために、「カスタムクリッピングシェーダ」を次のように作成してみました。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Custom Shader/Reverse Color"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_Color</strong> (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_MainTex</strong> (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// カスタムマスクと色</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_CustomMask</strong></span> (<span class="text-danger">"Custom Mask (A)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_CustomMaskSSOffset</strong></span> (<span class="text-danger">"Custom Mask Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_CustomColor</strong></span> (<span class="text-danger">"Custom Color by Mask (RGB)"</span>, Color) = (1, 1, 1, 1)<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// クリッピング操作のためのUV</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 screenPos : TEXCOORD1;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// カスタムマスクプロパティ変数</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>sampler2D _CustomMask;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 _CustomMaskSSOffset;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float4 _CustomColor;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// マスク関数:レンダリングテクスチャUV計算</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> GetMaskScreenUV (<span class="text-primary">float2</span> screenUV, <span class="text-primary">float4</span> offset)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> result = screenUV - <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.x *= offset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.y *= offset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.x += offset.x * offset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.y += offset.y * offset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result += <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return result;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert (<span class="text-primary">appdata</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// クリッピングマスクUV計算のための画面UV</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.screenPos = ComputeScreenPos(o.vertex);</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    #if UNITY_COLORSPACE_GAMMA<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    #else<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 4.595f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb = pow(col.rgb, 2.2f);<br>
+    #endif<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// カスタムクリッピングマスクの計算</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float2 screenUV = i.screenPos.xy / max(i.screenPos.w, 0.0001f);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>float alphaMask = tex2D(_CustomMask, GetMaskScreenUV(screenUV, _CustomMaskSSOffset)).r;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// マスク反転後、指定された色で補間</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>alphaMask = saturate(1.0f - alphaMask);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = lerp(col.rgb, _CustomColor.rgb, alphaMask);</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    このカスタムシェーダは、「<strong>_CustomMask、_CustomMaskSSOffset、_CustomColor</strong>」プロパティでマスクデータを受け取り、レンダリングします。<br>
+    アルファマスクの値を受け取り、「alphaMask」変数に保存した後、これをAlphaチャンネルに乗算せずに色演算の補間値として使用しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2139.jpg"/>
+    <br>
+    
+    <p>
+    作成した「カスタムクリッピングシェーダ」を適用しましょう。<br>
+    <strong>(1)</strong> 「マテリアルライブラリ」を開き、クリッピングシェーダを適用するための「マテリアルセット」を作成または複製します。<br>
+    <strong>(2)</strong> 「マテリアルセット」を選択し、名前を設定します。<br>
+    <strong>(3)</strong> 「<strong>Default Material</strong>」ボタンを押して「<strong>ON</strong>」状態にします。<br>
+    <strong>(4)</strong> 「<strong>Clipping Rendering</strong>」の「<strong>Alpha Blend</strong>」項目のシェーダーの前に作成した「カスタムシェーダー」を入力します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2140.jpg"/>
+    <br>
+    
+    <p>
+    それでは、「マスクデータ」を作成しましょう。<br>
+    <strong>(1)</strong> 「マスク設定ダイアログ」を開き、「<strong>Add Mask</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> マスクメッシュとなる「<strong>Circle Mask</strong>」メッシュを選択します。<br>
+    <strong>(3)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2141.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 作成した「マスクデータ」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Texture Size</strong>」を適切に設定します。<br>
+    <strong>(3)</strong> クリッピングとなる「<strong>Character</strong>」メッシュを登録します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2142.jpg"/>
+    <br>
+    
+    <p>
+    これで、ターゲットメッシュにマスクデータを渡すためにプロパティを追加する必要があります。<br>
+    前の例では「<strong>Alpha Mask Preset</strong>」方式のプロパティを利用していましたが、ここではカスタムシェーダのプロパティに合わせて設定する必要があります。<br>
+    <strong>(1)</strong> 「<strong>Add Property from List</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> カスタムシェーダのプロパティ「<strong>_CustomMask、_CustomMaskSSOffset、_CustomColor</strong>」を <kbd>Ctrl</kbd> キーを押してすべてを選択します。<br>
+    <strong>(3)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2143.jpg"/>
+    <br>
+    
+    <p>
+    選択したプロパティがマスクデータに登録されました。<br>
+    これで、登録されたプロパティを介してマスクデータがクリッピングメッシュに渡されます。<br>
+    現在は各プロパティの名前とタイプだけが設定されており、どの値が渡されるかは設定されていません。<br>
+    プロパティの値を設定する前に、このUIがどのように設定されているかを見てみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2144.jpg"/>
+    <br>
+    
+    <p>
+    <strong>1.</strong> プリセットタイプ：プロパティ情報をプリセット形式で設定できます。<br>
+    <strong>2.</strong> プロパティ名：シェーダ内で定義されたプロパティの名前です。<br>
+    <strong>3.</strong> 削除ボタン：プロパティ情報を削除します。<br>
+    <strong>4.</strong> プロパティのタイプと値：プロパティの値のタイプを設定し、渡される値を指定します。<br>
+    <strong>5.</strong> 連動制御パラメータ：一部のプロパティタイプは制御パラメータを連結して値をリアルタイムで制御できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2145.jpg"/>
+    <br>
+    
+    <p>
+    プロパティのタイプと値を適切に設定します。<br>
+    この例では、プロパティごとに次のように設定しました。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1.</strong> <span class="text-danger"><strong>_CustomMask</strong></span><br>
+    ：「<strong>Render Texture</strong>」タイプに設定しました。<br>
+    「<strong>Render Texture</strong>」タイプは、「マスクレンダーテクスチャ」をクリッピングメッシュに渡します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2.</strong> <span class="text-danger"><strong>_CustomMaskSSOffset</strong></span><br>
+    ：「<strong>Screen Space Offset</strong>」タイプに設定しました。<br>
+    「<strong>Screen Space Offset</strong>」タイプは、「マスクレンダーテクスチャ」の「UV」を計算するために生成された「Vector」タイプの値をクリッピングメッシュに渡します。<br>
+    「<strong>Screen Space Offset</strong>」の値を利用するコードについては、上記の「カスタムクリッピングシェーダ」の「GetMaskScreenUV」関数を参照してください。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3.</strong> <span class="text-danger"><strong>_CustomColor</strong></span><br>
+    ：「<strong>Color</strong>」タイプに設定し、カラー値は「ピンク」を設定しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2146.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bake</strong>」をしてUnityシーンで確認すると、上記のような結果を見ることができます。<br>
+    カスタムシェーダによって、「クリッピング領域ではない部分がピンク色でレンダリング」された結果が表示されます。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_Mask.html">< マスク</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_MaskCombine.html">マスクの組み合わせ ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom Shader/Screen Space Pattern (Alpha Blend)\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\t\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\n\t\t// スクリーン効果のためのパターンテクスチャとスクロール速度\n\t\t_PatternTex (\"Pattern Texture (Grayscale)\", 2D) = \"white\" {}\n\t\t_PatternRepeat (\"Pattern Repeat\", float) = 1.0\n\t\t_ScrollSpeed (\"Scroll Speed\", float) = 0.2\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\t\t\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tTags { \"LightMode\" = \"ForwardBase\" }\n\t\t\tZWrite Off\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\t\t\t\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\n\t\t\t\t// 画面効果のための画面座標系\n\t\t\t\tfloat4 screenUV : TEXCOORD1;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\t// スクリーン効果のためのUV\n\t\t\tsampler2D _PatternTex;\n\t\t\tfloat _PatternRepeat;\n\t\t\tfloat _ScrollSpeed;\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\n\t\t\t\t// 画面UVの計算\n\t\t\t\to.screenUV = ComputeScreenPos(o.vertex);\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\t\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n#if UNITY_COLORSPACE_GAMMA\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n#else\n\t\t\t\tcol.rgb *= _Color.rgb * 4.595f;\n\t\t\t\tcol.rgb = pow(col.rgb, 2.2f);\n#endif\t\t\t\t\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\t// 時間とともに横に動くパターン画像\n\t\t\t\tfloat2 screenUV = i.screenUV.xy / i.screenUV.w;\n\t\t\t\tscreenUV.x *= _PatternRepeat;\n\t\t\t\tscreenUV.y *= _PatternRepeat;\n\t\t\t\tscreenUV.x += _Time.y * _ScrollSpeed;\n\t\t\t\tfixed pattern = tex2D(_PatternTex, screenUV).r;\n\t\t\t\tcol.a *= pattern;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom Shader/Screen Space Pattern (Alpha Mask)\"\n{\n\tProperties\n\t{\n\t\t_Color (\"Color (Alpha)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\n\t\t_PatternTex (\"Pattern Texture (Grayscale)\", 2D) = \"white\" {}\n\t\t_PatternRepeat (\"Pattern Repeat\", float) = 1.0\n\t\t_ScrollSpeed (\"Scroll Speed\", float) = 0.2\n\t}\n\tSubShader\n\t{\n\t\tTags { \"RenderType\"=\"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tZWrite Off\n\t\tCull Off\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\t\t\t\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\n\t\t\t\t// スクリーン効果のためのUV\n\t\t\t\tfloat4 screenUV : TEXCOORD1;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\tfloat4 _Color;\n\n\t\t\t// パターンテクスチャとスクロール速度変数\n\t\t\tsampler2D _PatternTex;\n\t\t\tfloat _PatternRepeat;\n\t\t\tfloat _ScrollSpeed;\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\n\t\t\t\t// 画面UVの計算\n\t\t\t\to.screenUV = ComputeScreenPos(o.vertex);\n\t\t\t\treturn o;\n\t\t\t}\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\t// アルファマスク演算（White + Alpha）\n\t\t\t\tcol.rgb = fixed3(1.0f, 1.0f, 1.0f);\n\t\t\t\tcol.a = saturate(col.a * _Color.a);\n\n\t\t\t\t// 時間とともに横に動くパターン画像\n\t\t\t\tfloat2 screenUV = i.screenUV.xy / i.screenUV.w;\n\t\t\t\tscreenUV.x *= _PatternRepeat;\n\t\t\t\tscreenUV.y *= _PatternRepeat;\n\t\t\t\tscreenUV.x += _Time.y * _ScrollSpeed;\n\t\t\t\tfixed pattern = tex2D(_PatternTex, screenUV).r;\n\t\t\t\tcol.a *= pattern;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom Shader/Reverse Color\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\t\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\n\t\t// カスタムマスクと色\n\t\t_CustomMask (\"Custom Mask (A)\", 2D) = \"white\" {}\n\t\t_CustomMaskSSOffset (\"Custom Mask Screen Space Offset (XY_Scale)\", Vector) = (0, 0, 0, 1)\n\t\t_CustomColor (\"Custom Color by Mask (RGB)\", Color) = (1, 1, 1, 1)\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tZWrite Off\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\t\t\t\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\n\t\t\t\t// クリッピング操作のためのUV\n\t\t\t\tfloat4 screenPos : TEXCOORD1;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\t// カスタムマスクプロパティ変数\n\t\t\tsampler2D _CustomMask;\n\t\t\tfloat4 _CustomMaskSSOffset;\n\t\t\tfloat4 _CustomColor;\n\n\t\t\t// マスク関数:レンダリングテクスチャUV計算\n\t\t\tfloat2 GetMaskScreenUV (float2 screenUV, float4 offset)\n\t\t\t{\n\t\t\t\tfloat2 result = screenUV - float2(0.5f, 0.5f);\n\t\t\t\tresult.x *= offset.z;\n\t\t\t\tresult.y *= offset.w;\n\t\t\t\tresult.x += offset.x * offset.z;\n\t\t\t\tresult.y += offset.y * offset.w;\n\t\t\t\tresult += float2(0.5f, 0.5f);\n\t\t\t\treturn result;\n\t\t\t}\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\n\t\t\t\t// クリッピングマスクUV計算のための画面UV\n\t\t\t\to.screenPos = ComputeScreenPos(o.vertex);\n\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n#if UNITY_COLORSPACE_GAMMA\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n#else\n\t\t\t\tcol.rgb *= _Color.rgb * 4.595f;\n\t\t\t\tcol.rgb = pow(col.rgb, 2.2f);\n#endif\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\t// カスタムクリッピングマスクの計算\n\t\t\t\tfloat2 screenUV = i.screenPos.xy / max(i.screenPos.w, 0.0001f);\n\t\t\t\tfloat alphaMask = tex2D(_CustomMask, GetMaskScreenUV(screenUV, _CustomMaskSSOffset)).r;\n\n\t\t\t\t// マスク反転後、指定された色で補間\n\t\t\t\talphaMask = saturate(1.0f - alphaMask);\n\t\t\t\tcol.rgb = lerp(col.rgb, _CustomColor.rgb, alphaMask);\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
+    <!--------------->
+
+    </body>
+</html>

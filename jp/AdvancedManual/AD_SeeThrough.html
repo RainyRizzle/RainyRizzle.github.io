@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>シースルー効果</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-jp">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-jp">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_SeeThrough.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_SeeThrough.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_SeeThrough.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > シースルー効果</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">シースルー効果</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2192.jpg"/>
+    <br>
+    
+    <p>
+    「前髪が片目を覆ったキャラクターイラスト」です。<br>
+    このようなデザインのキャラクターをきれいに表現したいとき、中の絵のように、「髪の毛に目がそっと映っている漫画的演出」が活用されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    これを「AnyPortrait」を含む「アニメーションツール」でどのように表現するかを考えてみましょう。<br>
+    最も簡単な方法は、「髪の毛」レイヤーの一部を少し透明にすることです。<br>
+    しかし、意図したもの（真ん中の絵）と髪を少し透明にした結果（右の絵）は、明らかに違いがあります。<br>
+    「髪」レイヤーが半透明になると、「目」レイヤーだけでなく、「顔」、「内側の髪」レイヤーもすべて見え、きれいにレンダリングされません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2193.jpg"/>
+    <br>
+    
+    <p>
+    実際、これを実装することは思ったより簡単ではありません。<br>
+    これは、「目」レイヤーが「髪の毛」レイヤーの後ろにある状態で、不透明な「髪の毛」の前にレンダリングできないためです。<br>
+    このとき、「AnyPortrait v1.6.0」に追加された「<strong>シースルー効果（See-Through）</strong>」を利用すれば意図したものを表現できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2191.jpg"/>
+    <br>
+    
+    <p>
+    改善された「マスク」機能では、レンダリングテクスチャを作成するときに、従来の「アルファマスクシェーダ（Alpha Mask Shader）」の代わりに「ノーマルシェーダ（Normal Shader）」を使用することもできます。<br>
+    シェーダが変更されると、画面に出力されるのと同様にレンダリングテクスチャにレンダリングされます。<br>
+    次に、このレンダリングテクスチャをターゲットメッシュに渡すときに、「Alphaチャンネルでのアルファクリッピング演算」ではなく、「RGBチャンネルのカラー補間演算」を行うように設定します。<br>
+    このように「マスク」機能を活用すると、「<strong>シースルー効果</strong>」を作成できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    このページで紹介する例では、「シースルー効果」だけでなく、「共有テクスチャ」、「シェーダの変更」、「マスクチェーン」がすべて活用されています。<br>
+    詳細については、次のマニュアルを参照してください。<br>
+    - <a href="../../jp/AdvancedManual/AD_Mask.html">マスク</a><br>
+    - <a href="../../jp/AdvancedManual/AD_MaskCustomShader.html">マスクとカスタムシェーダー</a><br>
+    - <a href="../../jp/AdvancedManual/AD_MaskChain.html">マスクチェーン</a><br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    「シースルー効果」の処理結果と一般的な「クリッピングマスク」の処理結果は、互いに反対のように見える。<br>
+    「シースルー効果」では、マスクを生成するメッシュがむしろクリッピングされてレンダリングされるように見えるからです。<br>
+    そのため、「シースルー効果」を「クリッピングマスクの変形」ではなく、「マスクの仕組みを活用した例」と見るのが、このページの説明を理解するのに良いでしょう。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2194.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターイラストを「AnyPortrait」にインポートした状態です。<br>
+    いくつかの「<strong>Eye</strong>...」メッシュが4つの「<strong>Front Hair</strong>...」メッシュに映って見えるようにしましょう。<br>
+    作業を始める前に、「<strong>Eye Iris L / R</strong>」メッシュは、「<strong>Eye White L / R</strong>」メッシュへのクリッピングが設定されていることを覚えておいてください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2195.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Eye</strong> ...」メッシュの1つを選択します。<br>
+    <strong>(2)</strong> 「<strong>Open Mask Settings</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2196.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Add Mask</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「シースルー効果」を適用する「<strong>Eye</strong>」メッシュを <kbd>Ctrl</kbd> キーを押してすべて選択します。<br>
+    <strong>(3)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2197.jpg"/>
+    <br>
+    
+    <p>
+    選択した「<strong>Eye</strong>」メッシュの「マスクデータ」が作成されました。<br>
+    <strong>(1)</strong> 「マスクデータ」のいずれかを選択します。<br>
+    <strong>(2)</strong> 「<strong>Shader Type</strong>」の値を「<strong>Main Texture With Color</strong>」に変更します。<br>
+    このオプションの値は、「画面にレンダリングするのと同じシェーダー」で「マスクレンダーテクスチャ」をレンダリングします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2198.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 先ほど確認したように、「<strong>Eye Iris L/R</strong>」メッシュが「<strong>Eye White L/R</strong>」メッシュからクリッピングされていたため、「マスクチェーン」および「レンダリング順序問題」が発生してしまいました。 （<a href="../../jp/AdvancedManual/AD_MaskChain.html">関連ページ</a>）<br>
+    <strong>(2)</strong> レンダリング順序の問題を解決するために、選択した「マスクデータ」の「<strong>Render Order</strong>」の値を「<strong>Phase 2</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2199.jpg"/>
+    <br>
+    
+    <p>
+    レンダーテクスチャの作成オプションを上記のように変更します。<br>
+    - 「<strong>Texture Size</strong>」をかなり大きな値に変更します。 「マスクチェーン」が発生した場合や「共有テクスチャ」を利用する場合は、マスク品質のために高解像度を設定することを考慮する必要があります。<br>
+    - 「<strong>Shared Texture</strong>」を有効にし、「<strong>ID</strong>」を指定します。 「<strong>Eye</strong>」メッシュが共通のレンダーテクスチャでレンダリングを行うようにするためです。 （ここでは「<strong>ID</strong>」の値として「<strong>0</strong>」を入力しました。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2200.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Add Destination</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> すべての「<strong>Front Hair</strong> ...」メッシュを <kbd>Ctrl</kbd> キーを押してすべてを選択します。<br>
+    <strong>(3)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2201.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Add Property</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 追加されたプロパティのプリセットタイプを「<strong>See Through Preset</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2202.jpg"/>
+    <br>
+    
+    <p>
+    シースルー効果プリセットでは、補助パラメータとして「シースルー比率」を設定できます。<br>
+    <strong>(1)</strong> 「<strong>Float</strong>」型の追加パラメータに「<strong>0～1</strong>」の間の値（ここでは「<strong>0.5</strong>」）を入力します。<br>
+    </p>
+    <br>
+    
+    <p>
+    これで、「シースルー効果」の「マスクデータ」の設定が完了しました。<br>
+    この例では、複数の「<strong>Eye</strong>...」メッシュを一度に透過する必要があります。<br>
+    したがって、他の「マスクデータ」が同じ「共有テクスチャ」でレンダリングされるように設定を続けましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2203.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 別の「マスクデータ」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Shared Texture</strong>」をチェックし、「<strong>ID</strong>」項目に同じ値（ここでは「<strong>0</strong>」）を入力します。<br>
+    残りのすべての「マスクデータ」についても同じことを行います。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2204.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 全ての「マスクデータ」の「共有テクスチャ」の設定が完了すると、上記のような多数の警告アイコンが表示されます。<br>
+    「<strong>Shared Texture</strong>」オプションに加えて、まだ「<strong>Shader Type</strong>」や「<strong>Render Order</strong>」などのオプションがまだ同期されていないためです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2205.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 最初に選択した「マスクデータ」を再度選択します。<br>
+    <strong>(2)</strong> 「<strong>Sync Sh​​ared Texture Options</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> メッセージが表示されたら、「<strong>Sync All Options</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2206.jpg"/>
+    <br>
+    
+    <p>
+    すべての「<strong>Eye</strong>...」メッシュの「マスクデータ」のシースルー効果の設定が完了しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2207.jpg"/>
+    <br>
+    
+    <p>
+    「マスク設定ダイアログ」を閉じて結果を確認しましょう。<br>
+    目のメッシュが前髪を透過してレンダリングされるのを見ることができます。<br>
+    シースルー比率に「<strong>0.5</strong>」を入力したため、「50%」程度透過しています。<br>
+    </p>
+    <br>
+    
+    <p>
+    シースルー比を「制御パラメータ」を用いて制御する方法も見てみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2208.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 新しい「制御パラメータ」を生成します。<br>
+    <strong>(2)</strong> 「制御パラメータ」の「名前」を設定し、「<strong>Float</strong>」タイプに設定します。<br>
+    <strong>(3)</strong> 値の範囲を「<strong>0～1</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2209.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「マスク設定ダイアログ」を開き、プロパティのある「マスクデータ」を選択します。<br>
+    <strong>(2)</strong> プロパティのオプションの中で「<strong>Control Parameter</strong>」をチェックし、「<strong>Set</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> 先ほど作成した「制御パラメータ」を選択します。<br>
+    <strong>(4)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2210.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 次に「制御パラメータ」を調整してみましょう。<br>
+    <strong>(2)</strong> 「<strong>Eye</strong>…」 メッシュのシースルー効果の度合いが変わることがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2211.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bake</strong>」をしてUnityシーンで確認しましょう。<br>
+    「制御パラメータ」を調整すると、キャラクターの目が髪をゆっくりと透過してレンダリングされるのがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_OnlyMaskMesh.html">< マスク専用メッシュ</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_URPOutlineShader.html">URPアウトラインシェーダーの作成 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Mask Chain</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-eng">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-eng">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_MaskChain.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MaskChain.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_MaskChain.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Mask Chain</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Mask Chain</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2159.jpg"/>
+    <br>
+    
+    <p>
+    When you want to do clipping rendering, there may be cases where the clipping rendering process that passes the mask is performed continuously.<br>
+    In other words, what this page deals with is the case where the "Clipped Mesh" becomes the "Mask Mesh" for another mesh.<br>
+    In the image above, "Mesh 1" clips "Mesh 2" as a mask mesh, and the clipped "Mesh 2" clips "Mesh 3" as a mask.<br>
+    This continuous masking process is called "<strong>Mask Chain</strong>" in AnyPortrait.<br>
+    </p>
+    <br>
+    
+    <p>
+    This page explains why <strong>Mask Chain</strong> is needed and <strong>Mask Render Order</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2161.jpg"/>
+    <br>
+    
+    <p>
+    In order to reproduce the case where the clipping mask is applied continuously, we prepared an example like the one above.<br>
+    The example above is a "clock with text drawn with a star-shaped pattern."<br>
+    First, the clock face mesh ("<strong>Clock Face</strong>") is used as a mask to clip the text mesh ("<strong>Text Mask</strong>").<br>
+    Then, the clipped text mesh ("<strong>Text Mask</strong>") becomes a mask to clip the star-shaped mesh ("<strong>Clipped Star</strong>").<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2162.jpg"/>
+    <br>
+    
+    <p>
+    If you think about how to implement this for a moment, it seems like a pretty clock could be implemented if you use the existing <strong>Clipping Mask</strong>.<br>
+    Let's try to see what it would look like if we made it using <strong>Clipping Mask</strong>.<br>
+    <strong>(1)</strong> Select the "<strong>Text Mask</strong>" mesh.<br>
+    <strong>(2)</strong> Click the <strong>Clipping Mask</strong> button to make it clip from the "<strong>Clock Face</strong>" mesh.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2163.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Then select the "<strong>Clipped Star</strong>" mesh.<br>
+    <strong>(2)</strong> Click the <strong>Clipping Mask</strong> button to set continuous clipping.<br>
+    <strong>(3)</strong> When you look at the finished result, you can see that the "<strong>Clipped Star</strong>" mesh clips the entire clock face area, not just the text.<br>
+    </p>
+    <br>
+    
+    <p>
+    The intention was to have "text with a star pattern drawn on the clock face", but this method does not work properly.<br>
+    In this case, <strong>Mask Chain</strong> is required.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2164.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Uncheck the <strong>Clipping Mask</strong> of the "<strong>Clipped Star</strong>" mesh, and set only the "<strong>Text Mask</strong>" mesh to be clipped to the "<strong>Clock Face</strong>" mesh.<br>
+    <strong>(2)</strong> Click the <strong>Open Mask Settings</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2165.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> You can see that the <strong>Clipping Mask Data</strong> of the "<strong>Clock Face</strong>" mesh is already registered.<br>
+    <strong>(2)</strong> Click the <strong>Add Mask</strong> button.<br>
+    <strong>(3)</strong> Select the "<strong>Text Mask</strong>" mesh, which will be the second mask.<br>
+    <strong>(4)</strong> Click the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2166.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Click the <strong>Add Destination</strong> button.<br>
+    <strong>(2)</strong> Select the "<strong>Clipped Star</strong>" mesh.<br>
+    <strong>(3)</strong> Click the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2167.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Click the <strong>Add Property</strong> button.<br>
+    <strong>(2)</strong> A property of type "<strong>Alpha Mask Preset</strong>" is added.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2168.jpg"/>
+    <br>
+    
+    <p>
+    Now, the continuous mask data from "<strong>Clock Face</strong> > <strong>Text Mask</strong> > <strong>Clipped Star</strong>" is completed.<br>
+    This state is <strong>Mask Chain</strong>, and the "<strong>Text Mask</strong>" mesh becomes "<strong>Chained Mask</strong>".<br>
+    <strong>(1)</strong> However, a warning icon has appeared in the mask data item of the "<strong>Text Mask</strong>" mesh.<br>
+    This warning icon means that the <strong>Mask Chain</strong> may not operate properly even though it is generated.<br>
+    </p>
+    <br>
+    
+    <p>
+    The most important thing to consider in <strong>Mask Chain</strong> is the "order in which the masks are rendered".<br>
+    In this example, the normal case is that the masks are generated and passed in the order of "<strong>Clock Face</strong> > <strong>Text Mask</strong> > <strong>Clipped Star</strong>".<br>
+    However, if the order is wrong and "<strong>Text Mask</strong> > <strong>Clipped Star</strong>" is performed first and "<strong>Clock Face</strong> > <strong>Text Mask</strong>" is performed later, there is a possibility of clipping errors.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> To solve this, select <strong>Mask Data</strong> and change the value of <strong>Render Order</strong> to "<strong>Phase 2</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2169.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> You can see that <strong>Mask Data</strong> has moved to "<strong>Phase 2</strong>" in the list, and the warning icon has changed to a "Chain" icon.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2170.jpg"/>
+    <br>
+    
+    <p>
+    Let's close the <strong>Mask Setting Dialog</strong> and check the rendering result.<br>
+    You can see that the rendering was done as intended and a pretty clock was completed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2171.jpg"/>
+    <br>
+    
+    <p>
+    When testing in a Unity scene, you can see that the rendering is normal, but the mask quality is low.<br>
+    This is because the "<strong>Optimize Render Texture Quality</strong>" feature of the clipping mask does not work when <strong>Mask Chain</strong> occurs. (<a href="../../en/AdvancedManual/AD_Mask.html">Related page</a>)<br>
+    This is because the "screen coordinate system" required for the "<strong>Optimize Quality</strong>" process is not constant, since rendering occurs from render texture to render texture.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2172.jpg"/>
+    <br>
+    
+    <p>
+    In this case, to improve the mask quality, you need to adjust the render texture resolution of all <strong>Mask Data</strong> related to <strong>Mask Chain</strong>.<br>
+    <strong>(1)</strong> Open the <strong>Mask Setting Dialog</strong> and select the <strong>Clipping Mask</strong> item of "<strong>Clock Face</strong>" corresponding to the front part of <strong>Mask Chain</strong>.<br>
+    <strong>(2)</strong> Set the value of <strong>Texture Size</strong> to an appropriately large value.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2173.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Next, select the <strong>Mask Data</strong> of the "<strong>Text Mask</strong>" mesh.<br>
+    <strong>(2)</strong> Similarly, select a reasonably large value for <strong>Texture Size</strong>.<br>
+    Even if <strong>Optimized Render</strong> is checked, the option is ignored in the <strong>Mask Data</strong> where the <strong>Mask Chain</strong> occurs.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2174.jpg"/>
+    <br>
+    
+    <p>
+    Back in the Unity scene, you can see that the quality of the mask has improved.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Mask Rendering Order</h3>
+    <br>
+    
+    <p>
+    <strong>Mask data</strong> is executed by "<strong>Command Buffer</strong>" and renders to <strong>Render Texture</strong>.<br>
+    The "order in which the command buffer is executed" is also the "order in which the mask data is executed."<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2160.jpg"/>
+    <br>
+    
+    <p>
+    When the mask is processed, that is, when the command buffer is executed, is determined by a specific event in the rendering procedure.<br>
+    Since AnyPortrait's meshes are rendered with the "Transparent" shader, the mask is processed in one of the previous render events: "Before Forward Opaque", "After Forward Opaque", or "Before Forward Alpha".<br>
+    The "<strong>Phase</strong>" option refers to these three render events.<br>
+    The order of execution of command buffers within the same <strong>Phase</strong> is ambiguous, which can cause render order errors in <strong>Mask Chains</strong>. Therefore, to resolve render order errors, it is necessary to clearly specify <strong>Phase</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    The existing <strong>Clipping Mask</strong> is executed at the same point as <strong>Phase 1</strong> of <strong>Mask Data</strong>, "Before Forward Opaque".<br>
+    Therefore, if a <strong>Mask Chain</strong> with <strong>Clipping Mask</strong> occurs, it must be set to execute at least at <strong>Phase 2</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, the above specification is for "<strong>Built-In Render Pipeline</strong>", and is integrated into the "Before Rendering" event in "<strong>URP</strong>".<br>
+    In this case, the mask processing order is sorted internally by <strong>Phase</strong> each time.<br>
+    The result is the same.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    Updating a mask and rendering to a render texture are internally different behaviors.<br>
+    Updating a mask is related to the update logic of modifiers and animations, while rendering to a render texture and sending mask data is related to the rendering event.<br>
+    So when an issue with a mask occurs, it is important to distinguish between an issue due to "Update" and an issue due to "Rendering".<br>
+    The issue covered on this page is an issue regarding "Rendering".<br>
+    Issues due to the order of updates with other scripts are covered in the following manual.<br>
+    - <a href="../../en/AdvancedManual/AD_ExecutionOrderProblem.html">Execution order problem with assets</a><br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>If the Mask Chain order is incorrect</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2175.jpg"/>
+    <br>
+    
+    <p>
+    Even if the <strong>Render Order</strong> value in <strong>Mask Chain</strong> is not appropriate, the rendering result may surprisingly look quite good.<br>
+    Since rendering is performed every frame, it may be difficult to find rendering errors because "<strong>Render Texture from previous frame</strong>" is used.<br>
+    However, rendering errors definitely exist, and they can be found at the moment when the mesh appears or in animations where the mesh moves quickly.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>If the render order does not match in Shared Texture</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2176.jpg"/>
+    <br>
+    
+    <p>
+    Let's see what happens if the <strong>Render Order</strong> of each mask data does not match in <strong>Shared Texture</strong> (<a href="../../en/AdvancedManual/AD_Mask.html">Related page</a>).<br>
+    <strong>(1)</strong> This is an example with 4 mask meshes.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2177.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> There is <strong>Mask Data</strong> for each of the four meshes.<br>
+    <strong>(2)</strong> The <strong>Shared Texture</strong> option of these <strong>Mask Data</strong> is activated, so the masks are rendered targeting the same <strong>Shared Texture</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2178.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> However, if the <strong>Render Order</strong> of some of these <strong>Mask Data</strong> does not match with other <strong>Mask Data</strong>, a warning icon will appear as shown above.<br>
+    <strong>Shared Texture</strong> must generate masks in batches in the same <strong>Phase</strong>, but having different <strong>Phases</strong> for each <strong>Mask Data</strong> makes the operation ambiguous.<br>
+    <strong>(2)</strong> To solve the problem, select one of the <strong>Mask Data</strong> and set the <strong>Render Order</strong>.<br>
+    <strong>(3)</strong> Press the <strong>Sync Shared Texture Options</strong> button.<br>
+    <strong>(4)</strong> When the synchronization message appears, press the <strong>Sync All Options</strong> button or the <strong>Sync Except Shader</strong> button to match the options of all <strong>Mask Data</strong> of the <strong>Shared Texture</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_MaskCombine.html">< Combining Masks</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_OnlyMaskMesh.html">Mask Only Mesh ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

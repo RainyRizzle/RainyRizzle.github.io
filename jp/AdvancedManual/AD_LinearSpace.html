@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <!-- 제목 -->
-        <title>「Linear Color Space」と「Asset」設定</title>
+        <title>「Linear」カラースペース</title>
         <!-- 파비콘 -->
         <link rel="shortcut icon" href="../../Images/favicon.ico"/>
         <!-- 부트스트랩 -->
@@ -70,101 +70,109 @@
 
     <!-- 여기서부터 페이지 내용이 작성됩니다. -->
     <!-- 1. 페이지 진입 경로 -->
-    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 「Linear Color Space」と「Asset」設定</p>
+    <p><a href="https://www.rainyrizzle.com/anyportrait-jp"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 「Linear」カラースペース</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
-    <h1 class="display-5">「Linear Color Space」と「Asset」設定</h1>
+    <h1 class="display-5">「Linear」カラースペース</h1>
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.0.1</span></h4>
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>カラースペースの変更</h3>
+    <br>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_157.jpg"/>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2215.jpg"/>
     <br>
     
     <p>
-    AnyPortraitでイメージアセットの設定を変更することができます。<br>
+    「Player Settings」でプロジェクトの「カラースペース」を変更できます。<br>
+    カラースペースの詳細については、<a href="https://learn.unity.com/tutorial/introduction-to-lighting-and-rendering-2019-3" target="_sub">関連ページ</a>をご覧ください。<br>
     </p>
     <br>
     
     <p>
-    <strong>1. Color Space</strong> : プロジェクトのレンダリング設定に従って、画像の「Color Space(色空間)」設定を変更します。 「Gamma」または「Linear」を選択できます。<br>
-    <strong>2. Compression</strong> : イメージの圧縮方法を設定することができます。3段階の圧縮と非圧縮を提供します。<br>
-    <strong>3. Use Mipmap</strong> : 「Mip Map」を適用するかどうかを設定します。<br>
+    一般的には「<strong>Gamma</strong>」カラースペースをデフォルトで使用しますが、プロジェクト作成時にどのテンプレートを選択したかによっては、「<strong>Linear</strong>」カラースペースがデフォルト値になることもあります。<br>
+    「AnyPortrait」のデフォルトのカラースペースは「<strong>Gamma</strong>」カラースペースなので、プロジェクトが「<strong>Linear</strong>」カラースペースに設定されていると、カラー操作に問題が発生します。<br>
+    もちろん、その逆になることもできます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2216.jpg"/>
+    <br>
+    
+    <p>
+    レンダリングで色を計算する方法は、カラースペースによって決まります。<br>
+    リソースやシェーダがプロジェクトのカラースペースに適していない場合は、上記のように意図しないレンダリング結果を見ることができます。<br>
+    したがって、イメージリソースのプロパティと「Bakeオプション」をプロジェクトのカラースペースに合わせて設定する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2217.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 画像を選択します。<br>
+    <strong>(2)</strong> 画像の「<strong>Color Space</strong>」の値を現在のプロジェクトに合わせて設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2218.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Bake</strong>」ボタンを押して「Bakeダイアログ」を開きます。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>Color Space</strong>」の値を現在のプロジェクトに合わせて設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2219.jpg"/>
+    <br>
+    
+    <p>
+    場合によっては、「<strong>Bake</strong>」ボタンを押すと上記のメッセージが表示されることがあります。<br>
+    一部の画像のプロパティが「Bakeオプション」のカラースペースと一致しないため、上記のメッセージが表示されます。<br>
+    ここで「<strong>Okay</strong>」ボタンを押すと、すべての画像のカラースペースが<strong>Bakeオプション</strong>と同じように一括変更されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2220.jpg"/>
+    <br>
+    
+    <p>
+    カラースペースが適切に設定されている場合は、ユニティシーンでキャラクターの色が正常にレンダリングされることがわかります。<br>
     </p>
     <br>
     
     <br>
     <br>
     <!-- 3. 서브 타이틀 -->
-    <h3>1. Color Spaceの変更</h3>
+    <h3>カラースペースとシェーダーアセット</h3>
     <br>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_156.jpg"/>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2221.jpg"/>
     <br>
     
     <p>
-    「Player Settings」でプロジェクトの「Color Space」を変更することができます。<br>
-    「Color Space」の詳細については、<a href="https://unity3d.com/kr/learn/tutorials/topics/graphics/choosing-color-space" target="_sub">関連ページ</a>を参照してください。<br>
-    </p>
-    <br>
-    
-    <!-- 8. 이미지 (가운데 정렬) -->
-    <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_155.jpg"/>
-    <br>
-    
-    <p>
-    「Color Space」によっては、レンダリングの結果が異なります。<br>
-    したがって、プロジェクトの「Color Space」に合わせて設定を変更する必要があります。<br>
-    </p>
-    <br>
-    
-    <!-- 8. 이미지 (가운데 정렬) -->
-    <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_158.jpg"/>
-    <br>
-    
-    <p>
-    すべての画像の「Color Space」を変更します。<br>
-    </p>
-    <br>
-    
-    <!-- 8. 이미지 (가운데 정렬) -->
-    <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_160.jpg"/>
-    <br>
-    
-    <p>
-    「Bake」ダイアログで、「Color Space」を選択します。<br>
-    </p>
-    <br>
-    
-    <br>
-    <br>
-    <!-- 3. 서브 타이틀 -->
-    <h3>2.画像圧縮方式の変更</h3>
-    <br>
-    
-    <!-- 8. 이미지 (가운데 정렬) -->
-    <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_159.jpg"/>
-    <br>
-    
-    <p>
-    イメージの圧縮方法を変更することができます。<br>
-    ほとんどの場合、イメージを圧縮して使用することをお勧めしますが、<br>
-    イメージが2Dキャラクタを対象とする場合、非圧縮メソッドで得られた高品質のイメージが必要になることがあります。<br>
-    </p>
-    <br>
-    
-    <p>
-    それは2Dゲームなので、「Mipmap(ミップマップ)」は必要ないかもしれません。<br>
-    「Mipmap」をオフにすることをお勧めします。<br>
+    カラースペースによって色の計算式が異なるため、カラースペースに適したシェーダを文字に適用する必要があります。<br>
+    「マテリアルライブラリ」（<a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">関連ページ</a>）では、カラースペースに応じて他のシェーダアセットを適用できるように設定できます。<br>
+    「マテリアルセット」や「マテリアルプリセット」の内容を確認すると、「カラースペース（Gamma, Linear）」によって他のシェーダアセットが適用されることがわかります。<br>
     </p>
     <br>
     
@@ -174,8 +182,8 @@
     <br>
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
-        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_HQImage.html">< 高品質の画像</a>
-        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_ChangeImageSize.html">画像のサイズを変更 ></a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_MainLogicEvent.html">< メインロジックイベント</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_RootUnit.html">ルートユニット ></a>
     </nav>
     
     <!-- 페이지 내용 끝! -->

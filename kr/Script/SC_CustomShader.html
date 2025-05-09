@@ -701,6 +701,504 @@
     <br>
     <br>
     <!-- 3. 서브 타이틀 -->
+    <h3>v16 재질 세트에서의 클리핑 쉐이더와 알파 마스크 쉐이더</h3>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <p>
+    <strong>AnyPortrait v1.6.0</strong>에서는 마스크 기능이 크게 개선되었습니다.<br>
+    추가된 마스크 기능을 지원하기 위해서는 클리핑 쉐이더 및 알파 마스크 쉐이더가 변경되어야 합니다.<br>
+    마스크 기능에 대해서는 <a href="../../kr/AdvancedManual/AD_Mask.html">관련 페이지</a>를 참고해주세요.<br>
+    <strong>AnyPortrait v1.6.0</strong>부터 기본적으로 제공되는 <strong>v16 재질 세트</strong>는 이전 버전과 비교하여 클리핑 관련 코드가 많이 변경되었습니다.<br>
+    <strong>v16 재질 세트</strong>에서의 클리핑 쉐이더 및 알파 마스크 쉐이더 코드를 확인해보고 커스텀 쉐이더를 작성할 때 활용해보세요.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"AnyPortrait/Unlit (v16)/AlphaBlend Clipped"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// 기본 클리핑 프로퍼티</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskTex</strong></span> (<span class="text-danger">"Mask Texture (A)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskScreenSpaceOffset</strong></span> (<span class="text-danger">"Mask Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskRatio</strong></span> (<span class="text-danger">"Mask Ratio"</span>, Range(0, 1)) = 0<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// 4개의 마스크 채널</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskRatio_1</strong></span> (<span class="text-danger">"Mask Ratio Ch1"</span>, Range(0, 1)) = 0<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskTex_1</strong></span> (<span class="text-danger">"Mask Texture Ch1"</span>, 2D) = "black" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskScreenSpaceOffset_1</strong></span> (<span class="text-danger">"Mask Screen Space Offset Ch1"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskOp_1</strong></span> (<span class="text-danger">"Mask Operation Ch1"</span>, Range(0, 3)) = 0<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskRatio_2</strong></span> (<span class="text-danger">"Mask Ratio Ch2"</span>, Range(0, 1)) = 0<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskTex_2</strong></span> (<span class="text-danger">"Mask Texture Ch2"</span>, 2D) = "black" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskScreenSpaceOffset_2</strong></span> (<span class="text-danger">"Mask Screen Space Offset Ch2"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskOp_2</strong></span> (<span class="text-danger">"Mask Operation Ch2"</span>, Range(0, 3)) = 0<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskRatio_3</strong></span> (<span class="text-danger">"Mask Ratio Ch3"</span>, Range(0, 1)) = 0<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskTex_3</strong></span> (<span class="text-danger">"Mask Texture Ch3"</span>, 2D) = "black" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskScreenSpaceOffset_3</strong></span> (<span class="text-danger">"Mask Screen Space Offset Ch3"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskOp_3</strong></span> (<span class="text-danger">"Mask Operation Ch3"</span>, Range(0, 3)) = 0<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskRatio_4</strong></span> (<span class="text-danger">"Mask Ratio Ch4"</span>, Range(0, 1)) = 0<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskTex_4</strong></span> (<span class="text-danger">"Mask Texture Ch4"</span>, 2D) = "black" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskScreenSpaceOffset_4</strong></span> (<span class="text-danger">"Mask Screen Space Offset Ch4"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskOp_4</strong></span> (<span class="text-danger">"Mask Operation Ch4"</span>, Range(0, 3)) = 0<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// 투과 효과 (See-Through) </strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_SeeThroughRatio</strong></span> (<span class="text-danger">"See-Through Ratio"</span>, Range(0, 1)) = 0.0<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_SeeThroughTex</strong></span> (<span class="text-danger">"See-Through Texture"</span>, 2D) = "black" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_SeeThroughScreenSpaceOffset</strong></span> (<span class="text-danger">"See-Through Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_SeeThroughAlpha</strong></span> (<span class="text-danger">"See-Through Alpha"</span>, Range(0, 1)) = 0.0<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags{ <span class="text-danger">"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 클리핑 연산을 위한 Screen Position</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> screenPos : TEXCOORD1;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 기본 클리핑 프로퍼티 변수</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MaskTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MaskScreenSpaceOffset;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskRatio;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 4개의 마스크 채널 프로퍼티 변수</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskRatio_1;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MaskTex_1;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MaskScreenSpaceOffset_1;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskOp_1;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskRatio_2;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MaskTex_2;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MaskScreenSpaceOffset_2;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskOp_2;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskRatio_3;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MaskTex_3;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MaskScreenSpaceOffset_3;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskOp_3;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskRatio_4;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MaskTex_4;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MaskScreenSpaceOffset_4;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskOp_4;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 투과 효과 (See-Through) 프로퍼티 변수</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _SeeThroughRatio;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _SeeThroughTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _SeeThroughScreenSpaceOffset;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _SeeThroughAlpha;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 마스크 함수 : 클리핑 마스크 알파 계산하기</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half</span> <strong>GetMaskAlpha</strong> (<span class="text-primary">float</span> alpha, <span class="text-primary">float</span> ratio)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return saturate((alpha * ratio) + (1.0f * (1.0f - ratio)));<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 마스크 함수 : 연산자에 따른 채널별 마스크 계산하기</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half</span> <strong>GetMaskAlphaByOp</strong> (<span class="text-primary">float</span> prevMask, <span class="text-primary">float</span> alpha, <span class="text-primary">float</span> ratio, <span class="text-primary">float</span> op)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> opWeight_And = saturate(1.0f - abs(op - 0.0f));//AND<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> opWeight_Or = saturate(1.0f - abs(op - 1.0f));//OR<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> opWeight_InvAnd = saturate(1.0f - abs(op - 2.0f));//Inverse AND<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> opWeight_InvOr = saturate(1.0f - abs(op - 3.0f));//Inverse OR<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> inverseAlpha = 1.0f - alpha;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> nextAlpha_And = saturate(prevMask * alpha);//Multiply<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> nextAlpha_Or = saturate(prevMask + (alpha * (1.0f - prevMask)));//Add Blended<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> nextAlpha_InvAnd = saturate(prevMask * inverseAlpha);//Multiply (Inverse)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> nextAlpha_InvAOr = saturate(prevMask + (inverseAlpha * (1.0f - prevMask)));//Add Blended (Inverse)<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> resultMask = (nextAlpha_And * opWeight_And) + (nextAlpha_Or * opWeight_Or) + (nextAlpha_InvAnd * opWeight_InvAnd) + (nextAlpha_InvAOr * opWeight_InvOr);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return saturate((resultMask * ratio) + (prevMask * (1.0f - ratio)));<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 마스크 함수 : 마스크 렌더 텍스쳐의 UV를 계산하기</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> <strong>GetMaskScreenUV</strong> (<span class="text-primary">float2</span> screenUV, <span class="text-primary">float4</span> offset)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> result = screenUV - <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.x *= offset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.y *= offset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.x += offset.x * offset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.y += offset.y * offset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result += <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return result;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 마스크 함수 : 투과 효과 계산하기</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half3</span> <strong>GetSeeThroughColor</strong> (<span class="text-primary">half3</span> mainColor, <span class="text-primary">half4</span> seeThroughColor)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> stAlpha = saturate(seeThroughColor.a * _SeeThroughAlpha * _SeeThroughRatio);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return (mainColor * (1.0f - stAlpha)) + (seeThroughColor.rgb * stAlpha);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert (<span class="text-primary">appdata</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 클리핑용 Screen Position 계산</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.screenPos = ComputeScreenPos(o.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 클리핑 마스크를 위한 Screen Position</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> screenUV = i.screenPos.xy / max(i.screenPos.w, 0.0001f);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 투과 효과 (See-Through)</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> seeThroughColor = tex2D(_SeeThroughTex, GetMaskScreenUV(screenUV, _SeeThroughScreenSpaceOffset));<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb = GetSeeThroughColor(col.rgb, seeThroughColor);<br>
+    <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    #if UNITY_COLORSPACE_GAMMA<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 색상 연산 (Gamma Space)</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 2.0f;<br>
+    #else<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 색상 연산 (Linear Space)</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb *= _Color.rgb * 4.595f;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb = pow(col.rgb, 2.2f);<br>
+    #endif<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 알파 마스크 계산 코드</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;float maskResult = 1.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 1. 클리핑 마스크</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half</span> maskClipped = tex2D(_MaskTex, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset)).r;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;maskResult *= GetMaskAlpha(saturate(maskClipped), saturate(_MaskRatio));<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 2. 4개의 채널별 마스크</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> maskCh1 = tex2D(_MaskTex_1, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset_1)).r;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> maskCh2 = tex2D(_MaskTex_2, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset_2)).r;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> maskCh3 = tex2D(_MaskTex_3, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset_3)).r;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> maskCh4 = tex2D(_MaskTex_4, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset_4)).r;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;maskResult = GetMaskAlphaByOp(maskResult, saturate(maskCh1), saturate(_MaskRatio_1), _MaskOp_1);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;maskResult = GetMaskAlphaByOp(maskResult, saturate(maskCh2), saturate(_MaskRatio_2), _MaskOp_2);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;maskResult = GetMaskAlphaByOp(maskResult, saturate(maskCh3), saturate(_MaskRatio_3), _MaskOp_3);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;maskResult = GetMaskAlphaByOp(maskResult, saturate(maskCh4), saturate(_MaskRatio_4), _MaskOp_4);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= maskResult;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;(Shadow Caster Pass는 생략)<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton4" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    위 쉐이더는 <strong>v16 재질 세트</strong>에 포함되는 클리핑 쉐이더의 기본 코드입니다.<br>
+    이전에 비해서 마스크 관련 프로퍼티가 많이 추가되었습니다.<br>
+    또한 그림자를 생성하는 Pass가 추가되었습니다.<br>
+    다만, 여기서는 그림자 생성 Pass에 대한 설명은 생략합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. 프로퍼티</strong><br>
+    <span class="text-danger"><strong>_MaskTex</strong></span> (<span class="text-danger">"Mask Texture (A)"</span>, 2D) = "white" {}<br>
+    <span class="text-danger"><strong>_MaskScreenSpaceOffset</strong></span> (<span class="text-danger">"Mask Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
+    <span class="text-danger"><strong>_MaskRatio</strong></span> (<span class="text-danger">"Mask Ratio"</span>, Range(0, 1)) = 0<br>
+    <span class="text-danger"><strong>_MaskRatio_1</strong></span> (<span class="text-danger">"Mask Ratio Ch1"</span>, Range(0, 1)) = 0<br>
+    <span class="text-danger"><strong>_MaskTex_1</strong></span> (<span class="text-danger">"Mask Texture Ch1"</span>, 2D) = "black" {}<br>
+    <span class="text-danger"><strong>_MaskScreenSpaceOffset_1</strong></span> (<span class="text-danger">"Mask Screen Space Offset Ch1"</span>, Vector) = (0, 0, 0, 1)<br>
+    <span class="text-danger"><strong>_MaskOp_1</strong></span> (<span class="text-danger">"Mask Operation Ch1"</span>, Range(0, 3)) = 0<br>
+    : 알파 마스크 연산을 위한 프로퍼티가 이전 버전에 비해 증가하였습니다.<br>
+    기존과 동일한 <strong>_MaskTex</strong>, <strong>_MaskScreenSpaceOffset</strong>에 더해서, 해당 채널(클리핑과 4개의 추가 채널)의 마스크 사용 여부를 결정하는 <strong>_MaskRatio</strong> 프로퍼티가 추가되었습니다.<br>
+    또한 4개의 채널은 연산 옵션이 추가되어 AND, OR 등의 마스크 조합이 가능해졌습니다.<br>
+    이를 위한 <strong>_MaskOp_n</strong> 프로퍼티와 관련된 코드도 확인해보세요.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>_SeeThroughRatio</strong></span> (<span class="text-danger">"See-Through Ratio"</span>, Range(0, 1)) = 0.0<br>
+    <span class="text-danger"><strong>_SeeThroughTex</strong></span> (<span class="text-danger">"See-Through Texture"</span>, 2D) = "black" {}<br>
+    <span class="text-danger"><strong>_SeeThroughScreenSpaceOffset</strong></span> (<span class="text-danger">"See-Through Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
+    <span class="text-danger"><strong>_SeeThroughAlpha</strong></span> (<span class="text-danger">"See-Through Alpha"</span>, Range(0, 1)) = 0.0<br>
+    : 투과 효과(See-Through) 기능이 추가되었습니다.<br>
+    알파 마스크와 유사하지만, RGBA 채널을 모두 사용하며, RGB 채널 값에 오버랩되는 특성이 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. 마스크 연산 함수</strong><br>
+    <span class="text-primary">half</span> <strong>GetMaskAlpha</strong> (<span class="text-primary">float</span> alpha, <span class="text-primary">float</span> ratio)<br>
+    : 클리핑 마스크를 연산하는 함수입니다. _MaskRatio에 따라 Alpha 적용 정도를 조절합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary">half</span> <strong>GetMaskAlphaByOp</strong> (<span class="text-primary">float</span> prevMask, <span class="text-primary">float</span> alpha, <span class="text-primary">float</span> ratio, <span class="text-primary">float</span> op)<br>
+    : 4개의 채널별 마스크를 연산하는 함수입니다.<br>
+    연산 옵션에 따라 다른 수식이 적용됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary">float2</span> <strong>GetMaskScreenUV</strong> (<span class="text-primary">float2</span> screenUV, <span class="text-primary">float4</span> offset)<br>
+    : Screen Space를 활용하는 마스크를 참조하기 위해서 UV 연산을 하는 함수입니다.<br>
+    각 마스크별로 별도의 UV 최적화 값(MaskScreenSpaceOffset)을 가지므로, 이 함수를 이용하여 UV를 변환해야 합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-primary">half3</span> <strong>GetSeeThroughColor</strong> (<span class="text-primary">half3</span> mainColor, <span class="text-primary">half4</span> seeThroughColor)<br>
+    : 투과 효과를 연산하는 함수입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"AnyPortrait/Unlit (v16)/AlphaMask"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = "white" {}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// 마스크 체인에 따른 클리핑 프로퍼티</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskTex</strong></span> (<span class="text-danger">"Mask Texture (A)"</span>, 2D) = "white" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskScreenSpaceOffset</strong></span> (<span class="text-danger">"Mask Screen Space Offset (XY_Scale)"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskRatio</strong></span> (<span class="text-danger">"Mask Ratio"</span>, Range(0, 1)) = 0<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// 마스크 체인에 따른 4개의 마스크 채널</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskRatio_1</strong></span> (<span class="text-danger">"Mask Ratio Ch1"</span>, Range(0, 1)) = 0<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskTex_1</strong></span> (<span class="text-danger">"Mask Texture Ch1"</span>, 2D) = "black" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskScreenSpaceOffset_1</strong></span> (<span class="text-danger">"Mask Screen Space Offset Ch1"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskOp_1</strong></span> (<span class="text-danger">"Mask Operation Ch1"</span>, Range(0, 3)) = 0<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskRatio_2</strong></span> (<span class="text-danger">"Mask Ratio Ch2"</span>, Range(0, 1)) = 0<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskTex_2</strong></span> (<span class="text-danger">"Mask Texture Ch2"</span>, 2D) = "black" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskScreenSpaceOffset_2</strong></span> (<span class="text-danger">"Mask Screen Space Offset Ch2"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskOp_2</strong></span> (<span class="text-danger">"Mask Operation Ch2"</span>, Range(0, 3)) = 0<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskRatio_3</strong></span> (<span class="text-danger">"Mask Ratio Ch3"</span>, Range(0, 1)) = 0<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskTex_3</strong></span> (<span class="text-danger">"Mask Texture Ch3"</span>, 2D) = "black" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskScreenSpaceOffset_3</strong></span> (<span class="text-danger">"Mask Screen Space Offset Ch3"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskOp_3</strong></span> (<span class="text-danger">"Mask Operation Ch3"</span>, Range(0, 3)) = 0<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskRatio_4</strong></span> (<span class="text-danger">"Mask Ratio Ch4"</span>, Range(0, 1)) = 0<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskTex_4</strong></span> (<span class="text-danger">"Mask Texture Ch4"</span>, 2D) = "black" {}<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskScreenSpaceOffset_4</strong></span> (<span class="text-danger">"Mask Screen Space Offset Ch4"</span>, Vector) = (0, 0, 0, 1)<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_MaskOp_4</strong></span> (<span class="text-danger">"Mask Operation Ch4"</span>, Range(0, 3)) = 0<br>
+    &emsp;&emsp;}<br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"RenderType"="Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha<br>
+    &emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;Cull Off<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 클리핑 연산을 위한 Screen Position</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> screenPos : TEXCOORD1;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 기본 클리핑 프로퍼티 변수</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MaskTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MaskScreenSpaceOffset;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskRatio;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 4개의 마스크 채널 프로퍼티 변수</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskRatio_1;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MaskTex_1;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MaskScreenSpaceOffset_1;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskOp_1;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskRatio_2;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MaskTex_2;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MaskScreenSpaceOffset_2;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskOp_2;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskRatio_3;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MaskTex_3;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MaskScreenSpaceOffset_3;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskOp_3;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskRatio_4;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MaskTex_4;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MaskScreenSpaceOffset_4;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> _MaskOp_4;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 마스크 함수 : 클리핑 마스크 알파 계산하기</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half</span> <strong>GetMaskAlpha</strong> (<span class="text-primary">float</span> alpha, <span class="text-primary">float</span> ratio)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return saturate((alpha * ratio) + (1.0f * (1.0f - ratio)));<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 마스크 함수 : 연산자에 따른 채널별 마스크 계산하기</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half</span> <strong>GetMaskAlphaByOp</strong> (<span class="text-primary">float</span> prevMask, <span class="text-primary">float</span> alpha, <span class="text-primary">float</span> ratio, <span class="text-primary">float</span> op)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> opWeight_And = saturate(1.0f - abs(op - 0.0f));//AND<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> opWeight_Or = saturate(1.0f - abs(op - 1.0f));//OR<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> opWeight_InvAnd = saturate(1.0f - abs(op - 2.0f));//Inverse AND<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> opWeight_InvOr = saturate(1.0f - abs(op - 3.0f));//Inverse OR<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> inverseAlpha = 1.0f - alpha;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> nextAlpha_And = saturate(prevMask * alpha);//Multiply<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> nextAlpha_Or = saturate(prevMask + (alpha * (1.0f - prevMask)));//Add Blended<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> nextAlpha_InvAnd = saturate(prevMask * inverseAlpha);//Multiply (Inverse)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> nextAlpha_InvAOr = saturate(prevMask + (inverseAlpha * (1.0f - prevMask)));//Add Blended (Inverse)<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> resultMask = (nextAlpha_And * opWeight_And) + (nextAlpha_Or * opWeight_Or) + (nextAlpha_InvAnd * opWeight_InvAnd) + (nextAlpha_InvAOr * opWeight_InvOr);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return saturate((resultMask * ratio) + (prevMask * (1.0f - ratio)));<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 마스크 함수 : 마스크 렌더 텍스쳐의 UV를 계산하기</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> <strong>GetMaskScreenUV</strong> (<span class="text-primary">float2</span> screenUV, <span class="text-primary">float4</span> offset)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> result = screenUV - <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.x *= offset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.y *= offset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.x += offset.x * offset.z;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result.y += offset.y * offset.w;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;result += <span class="text-primary">float2</span>(0.5f, 0.5f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return result;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert (<span class="text-primary">appdata</span> v)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos(v.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX(v.uv, _MainTex);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 클리핑용 Screen Position 계산</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.screenPos = ComputeScreenPos(o.vertex);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag (<span class="text-primary">v2f</span> i) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D(_MainTex, i.uv);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.rgb = fixed3(1.0f, 1.0f, 1.0f);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a = saturate(col.a * _Color.a);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 마스크 체인을 위한 마스크 연산</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> screenUV = i.screenPos.xy / max(i.screenPos.w, 0.0001f);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> maskResult = 1.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 1. 클리핑 마스크</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half</span> maskClipped = tex2D(_MaskTex, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset)).r;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;maskResult *= GetMaskAlpha(saturate(maskClipped), saturate(_MaskRatio));<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 2. 4개의 채널별 마스크</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> maskCh1 = tex2D(_MaskTex_1, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset_1)).r;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> maskCh2 = tex2D(_MaskTex_2, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset_2)).r;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> maskCh3 = tex2D(_MaskTex_3, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset_3)).r;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> maskCh4 = tex2D(_MaskTex_4, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset_4)).r;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;maskResult = GetMaskAlphaByOp(maskResult, saturate(maskCh1), saturate(_MaskRatio_1), _MaskOp_1);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;maskResult = GetMaskAlphaByOp(maskResult, saturate(maskCh2), saturate(_MaskRatio_2), _MaskOp_2);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;maskResult = GetMaskAlphaByOp(maskResult, saturate(maskCh3), saturate(_MaskRatio_3), _MaskOp_3);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;maskResult = GetMaskAlphaByOp(maskResult, saturate(maskCh4), saturate(_MaskRatio_4), _MaskOp_4);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= maskResult;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton5" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    위 쉐이더는 <strong>v16 재질 세트</strong>의 알파 마스크 쉐이더의 기본 코드입니다.<br>
+    기존에는 단순히 흰색에 Alpha 채널만 연산하는 역할만 수행했는데, AnyPortrait v1.6.0에서는 마스크 관련 코드가 추가되었습니다.<br>
+    이것은 <strong>마스크 체인</strong> 기능을 지원하기 위함입니다. (<a href="../../kr/AdvancedManual/AD_MaskChain.html">관련 페이지</a>)<br>
+    클리핑 관련 코드는 클리핑 쉐이더와 동일하며, Alpha 채널과 관련이 없는 투과 효과는 이 쉐이더에서 제외됩니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
     <h3>키워드를 사용하는 경우</h3>
     <br>
     
@@ -789,7 +1287,7 @@
     }<br>
     <br>
     </p>
-    <button id="scriptcopybutton4" class="btn btn-info float-right">클립보드로 복사</button>
+    <button id="scriptcopybutton6" class="btn btn-info float-right">클립보드로 복사</button>
     <br><br>
     
     </div>
@@ -911,6 +1409,28 @@
     
     <script>
     document.getElementById("scriptcopybutton4").addEventListener("click", function() {
+    const textToCopy = "Shader \"AnyPortrait/Unlit (v16)/AlphaBlend Clipped\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\n\t\t// 기본 클리핑 프로퍼티\n\t\t_MaskTex (\"Mask Texture (A)\", 2D) = \"white\" {}\n\t\t_MaskScreenSpaceOffset (\"Mask Screen Space Offset (XY_Scale)\", Vector) = (0, 0, 0, 1)\n\t\t_MaskRatio (\"Mask Ratio\", Range(0, 1)) = 0\n\n\t\t// 4개의 마스크 채널\n\t\t_MaskRatio_1 (\"Mask Ratio Ch1\", Range(0, 1)) = 0\n\t\t_MaskTex_1 (\"Mask Texture Ch1\", 2D) = \"black\" {}\n\t\t_MaskScreenSpaceOffset_1 (\"Mask Screen Space Offset Ch1\", Vector) = (0, 0, 0, 1)\n\t\t_MaskOp_1 (\"Mask Operation Ch1\", Range(0, 3)) = 0\n\n\t\t_MaskRatio_2 (\"Mask Ratio Ch2\", Range(0, 1)) = 0\n\t\t_MaskTex_2 (\"Mask Texture Ch2\", 2D) = \"black\" {}\n\t\t_MaskScreenSpaceOffset_2 (\"Mask Screen Space Offset Ch2\", Vector) = (0, 0, 0, 1)\n\t\t_MaskOp_2 (\"Mask Operation Ch2\", Range(0, 3)) = 0\n\n\t\t_MaskRatio_3 (\"Mask Ratio Ch3\", Range(0, 1)) = 0\n\t\t_MaskTex_3 (\"Mask Texture Ch3\", 2D) = \"black\" {}\n\t\t_MaskScreenSpaceOffset_3 (\"Mask Screen Space Offset Ch3\", Vector) = (0, 0, 0, 1)\n\t\t_MaskOp_3 (\"Mask Operation Ch3\", Range(0, 3)) = 0\n\n\t\t_MaskRatio_4 (\"Mask Ratio Ch4\", Range(0, 1)) = 0\n\t\t_MaskTex_4 (\"Mask Texture Ch4\", 2D) = \"black\" {}\n\t\t_MaskScreenSpaceOffset_4 (\"Mask Screen Space Offset Ch4\", Vector) = (0, 0, 0, 1)\n\t\t_MaskOp_4 (\"Mask Operation Ch4\", Range(0, 3)) = 0\n\n\t\t// 투과 효과 (See-Through) \n\t\t_SeeThroughRatio (\"See-Through Ratio\", Range(0, 1)) = 0.0\n\t\t_SeeThroughTex (\"See-Through Texture\", 2D) = \"black\" {}\n\t\t_SeeThroughScreenSpaceOffset (\"See-Through Screen Space Offset (XY_Scale)\", Vector) = (0, 0, 0, 1)\n\t\t_SeeThroughAlpha (\"See-Through Alpha\", Range(0, 1)) = 0.0\n\t}\n\tSubShader\n\t{\n\t\tTags{ \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tZWrite Off\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\n\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\n\t\t\t\t// 클리핑 연산을 위한 Screen Position\n\t\t\t\tfloat4 screenPos : TEXCOORD1;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\t// 기본 클리핑 프로퍼티 변수\n\t\t\tsampler2D _MaskTex;\n\t\t\tfloat4 _MaskScreenSpaceOffset;\n\t\t\tfloat _MaskRatio;\n\n\t\t\t// 4개의 마스크 채널 프로퍼티 변수\n\t\t\tfloat _MaskRatio_1;\n\t\t\tsampler2D _MaskTex_1;\n\t\t\tfloat4 _MaskScreenSpaceOffset_1;\n\t\t\tfloat _MaskOp_1;\n\n\t\t\tfloat _MaskRatio_2;\n\t\t\tsampler2D _MaskTex_2;\n\t\t\tfloat4 _MaskScreenSpaceOffset_2;\n\t\t\tfloat _MaskOp_2;\n\n\t\t\tfloat _MaskRatio_3;\n\t\t\tsampler2D _MaskTex_3;\n\t\t\tfloat4 _MaskScreenSpaceOffset_3;\n\t\t\tfloat _MaskOp_3;\n\n\t\t\tfloat _MaskRatio_4;\n\t\t\tsampler2D _MaskTex_4;\n\t\t\tfloat4 _MaskScreenSpaceOffset_4;\n\t\t\tfloat _MaskOp_4;\n\n\t\t\t// 투과 효과 (See-Through) 프로퍼티 변수\n\t\t\tfloat _SeeThroughRatio;\n\t\t\tsampler2D _SeeThroughTex;\n\t\t\tfloat4 _SeeThroughScreenSpaceOffset;\n\t\t\tfloat _SeeThroughAlpha;\n\n\t\t\t// 마스크 함수 : 클리핑 마스크 알파 계산하기\n\t\t\thalf GetMaskAlpha (float alpha, float ratio)\n\t\t\t{\n\t\t\t\treturn saturate((alpha * ratio) + (1.0f * (1.0f - ratio)));\n\t\t\t}\n\n\t\t\t// 마스크 함수 : 연산자에 따른 채널별 마스크 계산하기\n\t\t\thalf GetMaskAlphaByOp (float prevMask, float alpha, float ratio, float op)\n\t\t\t{\n\t\t\t\tfloat opWeight_And = saturate(1.0f - abs(op - 0.0f));//AND\n\t\t\t\tfloat opWeight_Or = saturate(1.0f - abs(op - 1.0f));//OR\n\t\t\t\tfloat opWeight_InvAnd = saturate(1.0f - abs(op - 2.0f));//Inverse AND\n\t\t\t\tfloat opWeight_InvOr = saturate(1.0f - abs(op - 3.0f));//Inverse OR\n\n\t\t\t\tfloat inverseAlpha = 1.0f - alpha;\n\n\t\t\t\tfloat nextAlpha_And = saturate(prevMask * alpha);//Multiply\n\t\t\t\tfloat nextAlpha_Or = saturate(prevMask + (alpha * (1.0f - prevMask)));//Add Blended\n\t\t\t\tfloat nextAlpha_InvAnd = saturate(prevMask * inverseAlpha);//Multiply (Inverse)\n\t\t\t\tfloat nextAlpha_InvAOr = saturate(prevMask + (inverseAlpha * (1.0f - prevMask)));//Add Blended (Inverse)\n\n\t\t\t\tfloat resultMask = (nextAlpha_And * opWeight_And) + (nextAlpha_Or * opWeight_Or) + (nextAlpha_InvAnd * opWeight_InvAnd) + (nextAlpha_InvAOr * opWeight_InvOr);\n\n\t\t\t\treturn saturate((resultMask * ratio) + (prevMask * (1.0f - ratio)));\n\t\t\t}\n\n\t\t\t// 마스크 함수 : 마스크 렌더 텍스쳐의 UV를 계산하기\n\t\t\tfloat2 GetMaskScreenUV (float2 screenUV, float4 offset)\n\t\t\t{\n\t\t\t\tfloat2 result = screenUV - float2(0.5f, 0.5f);\n\t\t\t\tresult.x *= offset.z;\n\t\t\t\tresult.y *= offset.w;\n\t\t\t\tresult.x += offset.x * offset.z;\n\t\t\t\tresult.y += offset.y * offset.w;\n\t\t\t\tresult += float2(0.5f, 0.5f);\n\t\t\t\treturn result;\n\t\t\t}\n\n\t\t\t// 마스크 함수 : 투과 효과 계산하기\n\t\t\thalf3 GetSeeThroughColor (half3 mainColor, half4 seeThroughColor)\n\t\t\t{\n\t\t\t\tfloat stAlpha = saturate(seeThroughColor.a * _SeeThroughAlpha * _SeeThroughRatio);\n\t\t\t\treturn (mainColor * (1.0f - stAlpha)) + (seeThroughColor.rgb * stAlpha);\n\t\t\t}\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\n\t\t\t\t// 클리핑용 Screen Position 계산\n\t\t\t\to.screenPos = ComputeScreenPos(o.vertex);\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\t\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\t// 클리핑 마스크를 위한 Screen Position\n\t\t\t\tfloat2 screenUV = i.screenPos.xy / max(i.screenPos.w, 0.0001f);\n\n\t\t\t\t// 투과 효과 (See-Through)\n\t\t\t\thalf4 seeThroughColor = tex2D(_SeeThroughTex, GetMaskScreenUV(screenUV, _SeeThroughScreenSpaceOffset));\n\t\t\t\tcol.rgb = GetSeeThroughColor(col.rgb, seeThroughColor);\n\n\t\t\t\t\n#if UNITY_COLORSPACE_GAMMA\n\t\t\t\t// 색상 연산 (Gamma Space)\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n#else\n\t\t\t\t// 색상 연산 (Linear Space)\n\t\t\t\tcol.rgb *= _Color.rgb * 4.595f;\n\t\t\t\tcol.rgb = pow(col.rgb, 2.2f);\n#endif\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\t// 알파 마스크 계산 코드\n\t\t\t\tfloat maskResult = 1.0f;\n\n\t\t\t\t// 1. 클리핑 마스크\n\t\t\t\thalf maskClipped = tex2D(_MaskTex, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset)).r;\n\t\t\t\tmaskResult *= GetMaskAlpha(saturate(maskClipped), saturate(_MaskRatio));\n\n\t\t\t\t// 2. 4개의 채널별 마스크\n\t\t\t\tfloat maskCh1 = tex2D(_MaskTex_1, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset_1)).r;\n\t\t\t\tfloat maskCh2 = tex2D(_MaskTex_2, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset_2)).r;\n\t\t\t\tfloat maskCh3 = tex2D(_MaskTex_3, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset_3)).r;\n\t\t\t\tfloat maskCh4 = tex2D(_MaskTex_4, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset_4)).r;\n\n\t\t\t\tmaskResult = GetMaskAlphaByOp(maskResult, saturate(maskCh1), saturate(_MaskRatio_1), _MaskOp_1);\n\t\t\t\tmaskResult = GetMaskAlphaByOp(maskResult, saturate(maskCh2), saturate(_MaskRatio_2), _MaskOp_2);\n\t\t\t\tmaskResult = GetMaskAlphaByOp(maskResult, saturate(maskCh3), saturate(_MaskRatio_3), _MaskOp_3);\n\t\t\t\tmaskResult = GetMaskAlphaByOp(maskResult, saturate(maskCh4), saturate(_MaskRatio_4), _MaskOp_4);\n\n\t\t\t\tcol.a *= maskResult;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t(Shadow Caster Pass는 생략)\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton5").addEventListener("click", function() {
+    const textToCopy = "Shader \"AnyPortrait/Unlit (v16)/AlphaMask\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\n\t\t// 마스크 체인에 따른 클리핑 프로퍼티\n\t\t_MaskTex (\"Mask Texture (A)\", 2D) = \"white\" {}\n\t\t_MaskScreenSpaceOffset (\"Mask Screen Space Offset (XY_Scale)\", Vector) = (0, 0, 0, 1)\n\t\t_MaskRatio (\"Mask Ratio\", Range(0, 1)) = 0\n\n\t\t// 마스크 체인에 따른 4개의 마스크 채널\n\t\t_MaskRatio_1 (\"Mask Ratio Ch1\", Range(0, 1)) = 0\n\t\t_MaskTex_1 (\"Mask Texture Ch1\", 2D) = \"black\" {}\n\t\t_MaskScreenSpaceOffset_1 (\"Mask Screen Space Offset Ch1\", Vector) = (0, 0, 0, 1)\n\t\t_MaskOp_1 (\"Mask Operation Ch1\", Range(0, 3)) = 0\n\n\t\t_MaskRatio_2 (\"Mask Ratio Ch2\", Range(0, 1)) = 0\n\t\t_MaskTex_2 (\"Mask Texture Ch2\", 2D) = \"black\" {}\n\t\t_MaskScreenSpaceOffset_2 (\"Mask Screen Space Offset Ch2\", Vector) = (0, 0, 0, 1)\n\t\t_MaskOp_2 (\"Mask Operation Ch2\", Range(0, 3)) = 0\n\n\t\t_MaskRatio_3 (\"Mask Ratio Ch3\", Range(0, 1)) = 0\n\t\t_MaskTex_3 (\"Mask Texture Ch3\", 2D) = \"black\" {}\n\t\t_MaskScreenSpaceOffset_3 (\"Mask Screen Space Offset Ch3\", Vector) = (0, 0, 0, 1)\n\t\t_MaskOp_3 (\"Mask Operation Ch3\", Range(0, 3)) = 0\n\n\t\t_MaskRatio_4 (\"Mask Ratio Ch4\", Range(0, 1)) = 0\n\t\t_MaskTex_4 (\"Mask Texture Ch4\", 2D) = \"black\" {}\n\t\t_MaskScreenSpaceOffset_4 (\"Mask Screen Space Offset Ch4\", Vector) = (0, 0, 0, 1)\n\t\t_MaskOp_4 (\"Mask Operation Ch4\", Range(0, 3)) = 0\n\t}\n\tSubShader\n\t{\n\t\tTags { \"RenderType\"=\"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tZWrite Off\n\t\tCull Off\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\n\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\n\t\t\t\t// 클리핑 연산을 위한 Screen Position\n\t\t\t\tfloat4 screenPos : TEXCOORD1;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\t// 기본 클리핑 프로퍼티 변수\n\t\t\tsampler2D _MaskTex;\n\t\t\tfloat4 _MaskScreenSpaceOffset;\n\t\t\tfloat _MaskRatio;\n\n\t\t\t// 4개의 마스크 채널 프로퍼티 변수\n\t\t\tfloat _MaskRatio_1;\n\t\t\tsampler2D _MaskTex_1;\n\t\t\tfloat4 _MaskScreenSpaceOffset_1;\n\t\t\tfloat _MaskOp_1;\n\n\t\t\tfloat _MaskRatio_2;\n\t\t\tsampler2D _MaskTex_2;\n\t\t\tfloat4 _MaskScreenSpaceOffset_2;\n\t\t\tfloat _MaskOp_2;\n\n\t\t\tfloat _MaskRatio_3;\n\t\t\tsampler2D _MaskTex_3;\n\t\t\tfloat4 _MaskScreenSpaceOffset_3;\n\t\t\tfloat _MaskOp_3;\n\n\t\t\tfloat _MaskRatio_4;\n\t\t\tsampler2D _MaskTex_4;\n\t\t\tfloat4 _MaskScreenSpaceOffset_4;\n\t\t\tfloat _MaskOp_4;\n\n\t\t\t// 마스크 함수 : 클리핑 마스크 알파 계산하기\n\t\t\thalf GetMaskAlpha (float alpha, float ratio)\n\t\t\t{\n\t\t\t\treturn saturate((alpha * ratio) + (1.0f * (1.0f - ratio)));\n\t\t\t}\n\n\t\t\t// 마스크 함수 : 연산자에 따른 채널별 마스크 계산하기\n\t\t\thalf GetMaskAlphaByOp (float prevMask, float alpha, float ratio, float op)\n\t\t\t{\n\t\t\t\tfloat opWeight_And = saturate(1.0f - abs(op - 0.0f));//AND\n\t\t\t\tfloat opWeight_Or = saturate(1.0f - abs(op - 1.0f));//OR\n\t\t\t\tfloat opWeight_InvAnd = saturate(1.0f - abs(op - 2.0f));//Inverse AND\n\t\t\t\tfloat opWeight_InvOr = saturate(1.0f - abs(op - 3.0f));//Inverse OR\n\n\t\t\t\tfloat inverseAlpha = 1.0f - alpha;\n\n\t\t\t\tfloat nextAlpha_And = saturate(prevMask * alpha);//Multiply\n\t\t\t\tfloat nextAlpha_Or = saturate(prevMask + (alpha * (1.0f - prevMask)));//Add Blended\n\t\t\t\tfloat nextAlpha_InvAnd = saturate(prevMask * inverseAlpha);//Multiply (Inverse)\n\t\t\t\tfloat nextAlpha_InvAOr = saturate(prevMask + (inverseAlpha * (1.0f - prevMask)));//Add Blended (Inverse)\n\n\t\t\t\tfloat resultMask = (nextAlpha_And * opWeight_And) + (nextAlpha_Or * opWeight_Or) + (nextAlpha_InvAnd * opWeight_InvAnd) + (nextAlpha_InvAOr * opWeight_InvOr);\n\n\t\t\t\treturn saturate((resultMask * ratio) + (prevMask * (1.0f - ratio)));\n\t\t\t}\n\n\t\t\t// 마스크 함수 : 마스크 렌더 텍스쳐의 UV를 계산하기\n\t\t\tfloat2 GetMaskScreenUV (float2 screenUV, float4 offset)\n\t\t\t{\n\t\t\t\tfloat2 result = screenUV - float2(0.5f, 0.5f);\n\t\t\t\tresult.x *= offset.z;\n\t\t\t\tresult.y *= offset.w;\n\t\t\t\tresult.x += offset.x * offset.z;\n\t\t\t\tresult.y += offset.y * offset.w;\n\t\t\t\tresult += float2(0.5f, 0.5f);\n\t\t\t\treturn result;\n\t\t\t}\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\n\t\t\t\t// 클리핑용 Screen Position 계산\n\t\t\t\to.screenPos = ComputeScreenPos(o.vertex);\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\tcol.rgb = fixed3(1.0f, 1.0f, 1.0f);\n\t\t\t\tcol.a = saturate(col.a * _Color.a);\n\n\t\t\t\t// 마스크 체인을 위한 마스크 연산\n\t\t\t\tfloat2 screenUV = i.screenPos.xy / max(i.screenPos.w, 0.0001f);\n\n\t\t\t\tfloat maskResult = 1.0f;\n\n\t\t\t\t// 1. 클리핑 마스크\n\t\t\t\thalf maskClipped = tex2D(_MaskTex, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset)).r;\n\t\t\t\tmaskResult *= GetMaskAlpha(saturate(maskClipped), saturate(_MaskRatio));\n\n\t\t\t\t// 2. 4개의 채널별 마스크\n\t\t\t\tfloat maskCh1 = tex2D(_MaskTex_1, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset_1)).r;\n\t\t\t\tfloat maskCh2 = tex2D(_MaskTex_2, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset_2)).r;\n\t\t\t\tfloat maskCh3 = tex2D(_MaskTex_3, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset_3)).r;\n\t\t\t\tfloat maskCh4 = tex2D(_MaskTex_4, GetMaskScreenUV(screenUV, _MaskScreenSpaceOffset_4)).r;\n\n\t\t\t\tmaskResult = GetMaskAlphaByOp(maskResult, saturate(maskCh1), saturate(_MaskRatio_1), _MaskOp_1);\n\t\t\t\tmaskResult = GetMaskAlphaByOp(maskResult, saturate(maskCh2), saturate(_MaskRatio_2), _MaskOp_2);\n\t\t\t\tmaskResult = GetMaskAlphaByOp(maskResult, saturate(maskCh3), saturate(_MaskRatio_3), _MaskOp_3);\n\t\t\t\tmaskResult = GetMaskAlphaByOp(maskResult, saturate(maskCh4), saturate(_MaskRatio_4), _MaskOp_4);\n\n\t\t\t\tcol.a *= maskResult;\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton6").addEventListener("click", function() {
     const textToCopy = "Shader \"Shader Example/Gamma Space - Normal - AlphaBlend (Keyword)\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\t}\n\n\tSubShader\n\t{\n\t\tTags { \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\n\t\tLOD 200\n\n\t\tPass\n\t\t{\n\t\t\tZWrite Off\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\n\n\t\t\t#pragma multi_compile __ SPECIAL_COLOR\n\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\t\t\t\t\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\tv2f vert (appdata v)\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos(v.vertex);\n\t\t\t\to.uv = TRANSFORM_TEX(v.uv, _MainTex);\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\tfixed4 frag (v2f i) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D(_MainTex, i.uv);\n\n\t\t\t\tcol.rgb *= _Color.rgb * 2.0f;\n\t\t\t\tcol.a *= _Color.a;\n\n\t\t\t\t#ifdef SPECIAL_COLOR\n\t\t\t\tcol.rgb *= fixed3(0.0f, 1.0f, 0.0f);\n\t\t\t\t#endif\n\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
     navigator.clipboard.writeText(textToCopy).then(() => {
         alert("스크립트가 클립보드에 복사되었습니다.");

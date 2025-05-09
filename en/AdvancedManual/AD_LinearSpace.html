@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <!-- 제목 -->
-        <title>Linear Color Space and Asset Settings</title>
+        <title>Linear Color Space</title>
         <!-- 파비콘 -->
         <link rel="shortcut icon" href="../../Images/favicon.ico"/>
         <!-- 부트스트랩 -->
@@ -70,97 +70,109 @@
 
     <!-- 여기서부터 페이지 내용이 작성됩니다. -->
     <!-- 1. 페이지 진입 경로 -->
-    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Linear Color Space and Asset Settings</p>
+    <p><a href="https://www.rainyrizzle.com/anyportrait-eng"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Linear Color Space</p>
     
     <!-- 2. 페이지 메인 타이틀 -->
-    <h1 class="display-5">Linear Color Space and Asset Settings</h1>
+    <h1 class="display-5">Linear Color Space</h1>
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.0.1</span></h4>
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <!-- 3. 서브 타이틀 -->
+    <h3>Change Color Space</h3>
+    <br>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_157.jpg"/>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2215.jpg"/>
     <br>
     
     <p>
-    You can change the image's asset settings in AnyPortrait.<br>
-    <strong>1. Color Space</strong> : Change the color space setting of the image according to the rendering settings of the project. Gamma or Linear can be selected.<br>
-    <strong>2. Compression</strong> : The image compression method can be set. Three levels of compression and non-compression are provided.<br>
-    <strong>3. Use Mipmap</strong> : Set whether or not to apply mipmap.<br>
+    You can change the <strong>Color Space</strong> of your project in Player Settings.<br>
+    For more information about color spaces, see the <a href="https://learn.unity.com/tutorial/introduction-to-lighting-and-rendering-2019-3" target="_sub">related page</a>.<br>
+    </p>
+    <br>
+    
+    <p>
+    Normally, <strong>Gamma</strong> color space is used by default, but depending on which template you choose when creating a project, <strong>Linear</strong> color space may be the default.<br>
+    Since the default color space in AnyPortrait is <strong>Gamma</strong> color space, if the project is set to <strong>Linear</strong> color space, there will be problems with color calculations.<br>
+    Of course, the opposite can also be true.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2216.jpg"/>
+    <br>
+    
+    <p>
+    The way colors are calculated in rendering is determined by the color space.<br>
+    If the resource or shader is not suitable for the color space of the project, you may see unintended rendering results like the one above.<br>
+    Therefore, you need to set the properties of the image resource and the Bake option to match the color space of the project.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2217.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select an image.<br>
+    <strong>(2)</strong> Set the value of <strong>Color Space</strong> of the image to match the current project.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2218.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Click the <strong>Bake</strong> button to open the <strong>Bake Dialog</strong>.<br>
+    <strong>(2)</strong> Select the <strong>Setting</strong> tab.<br>
+    <strong>(3)</strong> Set the value of <strong>Color Space</strong> to match the current project.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2219.jpg"/>
+    <br>
+    
+    <p>
+    Sometimes, when you press the <strong>Bake</strong> button, you may see a message like the one above.<br>
+    The above message appears because the properties of some images do not match the Color Space in <strong>Bake Options</strong>.<br>
+    If you press the <strong>Okay</strong> button here, the color space of all images will be changed to the same as in <strong>Bake Options</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2220.jpg"/>
+    <br>
+    
+    <p>
+    If the Color Space is set properly, you will see the character's colors being rendered normally in the Unity scene.<br>
     </p>
     <br>
     
     <br>
     <br>
     <!-- 3. 서브 타이틀 -->
-    <h3>1. Changing the Color Space</h3>
+    <h3>Shader Assets according to Color Space</h3>
     <br>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_156.jpg"/>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2221.jpg"/>
     <br>
     
     <p>
-    You can change the color space of your project in Player Settings.<br>
-    More information on Color Space can be found on the <a href="https://unity3d.com/kr/learn/tutorials/topics/graphics/choosing-color-space" target="_sub">related page</a>.<br>
-    </p>
-    <br>
-    
-    <!-- 8. 이미지 (가운데 정렬) -->
-    <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_155.jpg"/>
-    <br>
-    
-    <p>
-    Depending on the Color Space, the rendering results are different.<br>
-    Therefore, you must change the setting to match the project's Color Space.<br>
-    </p>
-    <br>
-    
-    <!-- 8. 이미지 (가운데 정렬) -->
-    <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_158.jpg"/>
-    <br>
-    
-    <p>
-    Change the Color Space of all images.<br>
-    </p>
-    <br>
-    
-    <!-- 8. 이미지 (가운데 정렬) -->
-    <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_160.jpg"/>
-    <br>
-    
-    <p>
-    In the Bake dialog, select Color Space.<br>
-    </p>
-    <br>
-    
-    <br>
-    <br>
-    <!-- 3. 서브 타이틀 -->
-    <h3>2. Changing the image compression method</h3>
-    <br>
-    
-    <!-- 8. 이미지 (가운데 정렬) -->
-    <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_159.jpg"/>
-    <br>
-    
-    <p>
-    You can change the compression method of the image.<br>
-    In most cases, it is recommended that you compress and use the image,<br>
-    when an image is targeted to a 2D character, you may need a high quality image that is obtained in an uncompressed method.<br>
-    </p>
-    <br>
-    
-    <p>
-    Because it is a 2D game, mipmaps may not be needed.<br>
-    It is recommended to turn off the mipmap.<br>
+    Since the color calculation formula is different depending on the color space, the appropriate shaders for the color space must be applied to the character.<br>
+    In the <strong>Material Library</strong>(<a href="../../en/AdvancedManual/AD_MaterialLibrary.html">Related Page</a>), you can set different shader assets to be applied depending on the color space.<br>
+    If you check the contents of <strong>Material Set</strong> or <strong>Material Preset</strong>, you can see that different shader assets are applied depending on the Color Space (Gamma, Linear).<br>
     </p>
     <br>
     
@@ -170,8 +182,8 @@
     <br>
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
-        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_HQImage.html">< High-quality image asset</a>
-        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ChangeImageSize.html">Changing the image size ></a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_MainLogicEvent.html">< Main Logic Event</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_RootUnit.html">Root Unit ></a>
     </nav>
     
     <!-- 페이지 내용 끝! -->

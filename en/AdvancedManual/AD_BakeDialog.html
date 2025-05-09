@@ -77,11 +77,11 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.5.1</span></h4>
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1636.jpg"/>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2212.jpg"/>
     <br>
     
     <p>
@@ -102,26 +102,25 @@
     <p>
     <strong>[ Bake Tab ]</strong><br>
     <strong>1. Portrait</strong> : The apPortrait currently being edited.<br>
-    <strong>2. Bake Scale</strong> : Since the coordinate system of AnyPortrait is different from the coordinate system of Unity, it is the ratio of size to fit this.<br>
-    <strong>3. Z Per Depth</strong> : The Z interval of each mesh. Too small may cause Z-Fighting problems.<br>
-    <strong>4. Bake </strong>: Bake to Unity scene.<br>
-    <strong>5. Optimized Baking Target</strong><br>
-    <strong>6. Optimized Bake </strong>: Optimized Bake to Unity scene.<br>
-    <strong>7. Save scenes after Bake</strong> : Save the current scene when baking to ensure that your work is safely saved.<br>
+    <strong>2. Bake</strong> : Bake to Unity scene.<br>
+    <strong>3. Optimized Baking Target</strong><br>
+    <strong>4. Optimized Bake</strong> : Optimized Bake to Unity scene.<br>
+    <strong>5. Validate Options</strong> : Opens a dialog that checks whether the Bake options are valid for the current project's settings. (<a href="../../en/AdvancedManual/AD_BakeValidation.html">Related page</a>)<br>
+    <strong>6. Save scenes after Bake</strong> : Save the current scene when baking to ensure that your work is safely saved.<br>
     </p>
     <br>
     
     <p>
     <strong>[ Setting Tab ]</strong><br>
-    <strong>8. </strong><span class="text-primary"><strong>Project Category</strong></span><br>
+    <strong>7. </strong><span class="text-primary"><strong>Project Category</strong></span><br>
     : The following settings are changed and saved per project.<br>
-    <strong>9. Color Space</strong> <br>
-    : Bake according to Color space. (Gamma / Linear)<br>
+    <strong>8. Color Space</strong> <br>
+    : Bake according to Color space. (Gamma / Linear) (<a href="../../en/AdvancedManual/AD_LinearSpace.html">Related page</a>)<br>
     </p>
     <br>
     
     <p>
-    <strong>10. Render Pipeline</strong><br>
+    <strong>9. Render Pipeline</strong><br>
     : This option can be set according to the project's Render Pipeline (Default / Scriptable Render Pipeline).<br>
     (This option is supported since Unity 2019.)<br>
     This option causes the clipping mesh to render properly.<br>
@@ -131,19 +130,25 @@
     <br>
     
     <p>
-    <strong>11. Set Ambient Light to Black color</strong><br>
+    <strong>10. Set Ambient Light to Black color</strong><br>
     : This makes the Unity scene's Ambient color black to prevent characters from rendering too bright.<br>
     </p>
     <br>
     
     <p>
-    <strong>12. </strong><span class="text-success"><strong>Portrait Category</strong></span><br>
+    <strong>11. </strong><span class="text-success"><strong>Portrait Category</strong></span><br>
     : The following settings are saved per portrait.<br>
     </p>
     <br>
     
     <p>
-    <strong>13. Sorting Layer / Order</strong> <br>
+    <strong>12. Bake Scale</strong> : Since the coordinate system of AnyPortrait is different from the coordinate system of Unity, it is the ratio of size to fit this.<br>
+    <strong>13. Z Per Depth</strong> : The Z interval of each mesh. Too small may cause Z-Fighting problems.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>14. Sorting Layer / Order</strong> <br>
     : This is an option for how to determine the rendering order of meshes. (<a href="../../en/AdvancedManual/AD_SortingLayer.html">Related page</a>)<br>
     - <strong>Sorting Layer</strong> : Layers specified in project settings that determine rendering order.<br>
     - <strong>Sorting Order Option</strong> : This is an option for how to assign Sorting Order to meshes. You can enter the same value or specify different values ​​depending on the order.<br>
@@ -153,7 +158,7 @@
     <br>
     
     <p>
-    <strong>14. Mecanim</strong> <br>
+    <strong>15. Mecanim</strong> <br>
     : This is an option to use Mecanim. (LINK<AD_메카님>|Related page)<br>
     - <strong>Is Mecanim Animation</strong> : Whether to use Mecanim or not.<br>
     - <strong>Animation Clip Export Path</strong> : This is the path where Animation Clip assets included in Animator are created.<br>
@@ -161,7 +166,7 @@
     <br>
     
     <p>
-    <strong>15. Update Options</strong><br>
+    <strong>16. Update Options</strong><br>
     : These are options for how updates are handled when playing the game.<br>
     - <strong>Main Logic Event</strong> : Set which event the main logic will be called. (<a href="../../en/AdvancedManual/AD_MainLogicEvent.html">Related page</a>)<br>
     - <strong>Is Important</strong> : For unimportant objects or NPCs, you can turn off Important and limit updates for optimization. (<a href="../../en/AdvancedManual/AD_ImportantOption.html">Related page</a>)<br>
@@ -172,7 +177,7 @@
     <br>
     
     <p>
-    <strong>16. Billboard</strong> <br>
+    <strong>17. Billboard</strong> <br>
     : It is possible to use perspective cameras to place characters in a 3D scene. (<a href="../../en/AdvancedManual/AD_BillboardPers.html">Related page</a>)<br>
     - <strong>Billboard</strong> : Decide whether and how to apply the Billboard feature.<br>
     - <strong>Set Sort Mode to Orthographic</strong> : This option forces the Sort Mode of the current project to be Orthographic, resulting in better billboard rendering.<br>
@@ -181,14 +186,14 @@
     <br>
     
     <p>
-    <strong>17. Shadow / Probe</strong> <br>
+    <strong>18. Shadow / Probe</strong> <br>
     : You can specify properties related to the shadow and Probe of the created Mesh Renderers at once.<br>
     (In the default Shader, shadows are not applied even if Receive Shadows is turned on.)<br>
     </p>
     <br>
     
     <p>
-    <strong>18. VR / Multi-Camera</strong><br>
+    <strong>19. VR / Multi-Camera</strong><br>
     : It is the rendering option when using VR or using multiple cameras.<br>
     This option makes the clipping mesh and billboard calculations work for your environment.<br>
     Refer to the following page for the description of VR.<br>
@@ -200,7 +205,7 @@
     <br>
     
     <p>
-    <strong>19. Flipped Mesh</strong><br>
+    <strong>20. Flipped Mesh</strong><br>
     : This is an option about making meshes to render normally when their scale is inverted.<br>
     Depending on the option, the rigged mesh will also be included in this processing.<br>
     (<a href="../../en/AdvancedManual/AD_ReversedRiggedMesh.html">Related page</a>)<br>
@@ -208,21 +213,21 @@
     <br>
     
     <p>
-    <strong>20. Scale of Root Bone</strong><br>
+    <strong>21. Scale of Root Bone</strong><br>
     : This is an option for calculating the scale of the child mesh group and the root bone of that mesh group.<br>
     (<a href="../../en/AdvancedManual/AD_NonUniformScale.html">Related page</a>)<br>
     </p>
     <br>
     
     <p>
-    <strong>21. Unspecified value in animation transition</strong><br>
+    <strong>22. Unspecified value in animation transition</strong><br>
     : This is an option that determine whether specified values are restored to default or retained as last in the next animation that transitions.<br>
     - <strong>Control Parameter</strong> : This is an option when control parameters are not specified.<br>
     </p>
     <br>
     
     <p>
-    <strong>22. Teleport Calibration</strong><br>
+    <strong>23. Teleport Calibration</strong><br>
     : This is an option that temporarily reduces the physical effect when the character “Teleports” by moving beyond the distance set for 1 frame.<br>
     - <strong>Teleport Calibration</strong> : Whether to temporarily reduce physical effects when teleportation occurs.<br>
     - <strong>Position / Rotation / Scaling</strong> : If each property changes more than the set value during one frame, a “teleportation” is considered to have occurred.<br>
@@ -230,7 +235,7 @@
     <br>
     
     <p>
-    <strong>23. Root Motion Options</strong><br>
+    <strong>24. Root Motion Options</strong><br>
     : The movement of an animation can be applied to the parent GameObject. (<a href="../../en/AdvancedManual/AD_RootMotion.html">Related page</a>)<br>
     - <strong>Root Motion Method</strong> : This is the root motion method.<br>
     - <strong>Options Per Axis</strong> : You can specify a different method for root motion for each axis.<br>
@@ -239,13 +244,13 @@
     <br>
     
     <p>
-    <strong>24. IK Method</strong><br>
+    <strong>25. IK Method</strong><br>
     : You can decide which algorithm the IK controller operates by. (<a href="../../en/AdvancedManual/AD_FABRIK.html">Related page</a>)<br>
     </p>
     <br>
     
     <p>
-    <strong>25. Save Settings as Default</strong><br>
+    <strong>26. Save Settings as Default</strong><br>
     : Save the current Bake settings as "defaults" so you can quickly apply them to other portraits.<br>
     ​<br>
     ​<br>
@@ -258,7 +263,7 @@
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2073.jpg"/>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2213.jpg"/>
     <br>
     
     
@@ -469,8 +474,8 @@
     <br>
     <br>
     <nav class="navbar fixed-bottom navbar-light bg-light">
-        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_RootUnit.html">< Root Unit</a>
-        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ScreenCapture.html">Screen capture ></a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_EditingPrefabs.html">< Editing Prefabs</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_BakeValidation.html">Bake Validation ></a>
     </nav>
     
     <!-- 페이지 내용 끝! -->

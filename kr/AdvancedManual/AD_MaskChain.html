@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>마스크 체인</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://www.rainyrizzle.com/anyportrait-kor">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-videotutorial-kor">동영상</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.rainyrizzle.com/ap-forum">게시판</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_MaskChain.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_MaskChain.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_MaskChain.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://www.rainyrizzle.com/anyportrait-kor"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > 마스크 체인</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">마스크 체인</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2159.jpg"/>
+    <br>
+    
+    <p>
+    클리핑 렌더링을 하고자 할 때, 마스크를 전달하여 클리핑 렌더링을 하는 처리 과정이 연속으로 수행되어야 하는 경우도 있을 것입니다.<br>
+    다시 말해, 이 페이지에서 다루는 것은 "클리핑된 메시"가 또 다른 메시로의 "마스크 메시"가 되는 경우입니다.<br>
+    위 이미지에서 보면, "Mesh 1"이 마스크 메시로서 "Mesh 2"를 클리핑하는데, 클리핑된 "Mesh 2"가 마스크로서 "Mesh 3"를 클리핑하고 있습니다.<br>
+    마스크 처리 과정이 연속적으로 수행되는 이것을 AnyPortrait에서는 "<strong>마스크 체인 (Mask Chain)</strong>"이라고 부릅니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이 페이지는 <strong>마스크 체인</strong>이 필요한 이유와 <strong>마스크 렌더 순서</strong>에 대해서 설명합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2161.jpg"/>
+    <br>
+    
+    <p>
+    클리핑 마스크가 연속적으로 적용이 되는 경우를 재현하기 위해서 위와 같은 예제를 준비했습니다.<br>
+    위 예제는 "별모양 문양이 들어간 텍스트가 그려진 시계"입니다.<br>
+    먼저, 시계판 메시("<strong>Clock Face</strong>")를 마스크로 삼아서 텍스트 메시("<strong>Text Mask</strong>")가 클리핑됩니다.<br>
+    그리고 이어서 클리핑된 텍스트 메시("<strong>Text Mask</strong>")가 마스크가 되어서 별 모양 메시("<strong>Clipped Star</strong>")를 클리핑합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2162.jpg"/>
+    <br>
+    
+    <p>
+    이것을 어떻게 구현할지 잠시 생각을 해보면, 기존의 <strong>클리핑 마스크</strong>를 하면 예쁜 시계가 구현이 될 것 같기도 합니다.<br>
+    <strong>클리핑 마스크</strong>를 이용하여 제작을 하면 어떻게 보여질지 시도해봅시다.<br>
+    <strong>(1)</strong> "<strong>Text Mask</strong>" 메시를 선택합니다.<br>
+    <strong>(2)</strong> <strong>클리핑 마스크</strong> 버튼을 눌러서 "<strong>Clock Face</strong>" 메시로부터 클리핑이 되도록 만듭니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2163.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 이어서 "<strong>Clipped Star</strong>" 메시를 선택합니다.<br>
+    <strong>(2)</strong> <strong>클리핑 마스크</strong> 버튼을 눌러서 중첩된 클리핑이 되도록 설정합니다.<br>
+    <strong>(3)</strong> 완성된 결과를 보면 "<strong>Clipped Star</strong>" 메시가 텍스트가 아닌 시계판 전체 영역으로 클리핑이 되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    의도한 것은 "별 무늬가 있는 텍스트가 시계판에 그려진 것"이었지만, 이 방법으로는 제대로 구현이 되지 않습니다.<br>
+    이 경우에 <strong>마스크 체인</strong>이 필요합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2164.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> "<strong>Clipped Star</strong>" 메시의 <strong>클리핑 마스크</strong>를 해제하고, 오직 "<strong>Text Mask</strong>" 메시만 "<strong>Clock Face</strong>" 메시로의 클리핑이 되도록 설정합니다.<br>
+    <strong>(2)</strong> <strong>Open Mask Settings</strong> 버튼을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2165.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> "<strong>Clock Face</strong>" 메시가 마스크가 되는 <strong>클리핑 마스크 데이터</strong>가 등록되어 있는 것을 볼 수 있습니다.<br>
+    <strong>(2)</strong> <strong>Add Mask</strong> 버튼을 누릅니다.<br>
+    <strong>(3)</strong> 두번째 마스크가 되는 "<strong>Text Mask</strong>" 메시를 선택합니다.<br>
+    <strong>(4)</strong> <strong>Select</strong> 버튼을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2166.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Add Destination</strong> 버튼을 누릅니다.<br>
+    <strong>(2)</strong> "<strong>Clipped Star</strong>" 메시를 선택합니다.<br>
+    <strong>(3)</strong> <strong>Select</strong> 버튼을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2167.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Add Property</strong> 버튼을 누릅니다.<br>
+    <strong>(2)</strong> "<strong>Alpha Mask Preset</strong>" 타입의 프로퍼티가 추가되었습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2168.jpg"/>
+    <br>
+    
+    <p>
+    이제 "<strong>Clock Face</strong> > <strong>Text Mask</strong> > <strong>Clipped Star</strong>"로 이어지는 연속된 마스크 데이터가 완성되었습니다.<br>
+    이 상태가 <strong>마스크 체인</strong>이며, "<strong>Text Mask</strong>" 메시는 "<strong>체인된 마스크</strong>"가 됩니다.<br>
+    <strong>(1)</strong> 그런데 "<strong>Text Mask</strong>" 메시의 마스크 데이터 항목에 경고 아이콘이 등장했습니다.<br>
+    이 경고 아이콘은 <strong>마스크 체인</strong>이 발생지만 정상적으로 동작하지 않을 수 있다는 것을 의미합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>마스크 체인</strong>에서 고려해야하는 가장 중요한 것은 "마스크가 렌더링 되는 순서"입니다.<br>
+    이 예제에서 정상적인 경우는 "<strong>Clock Face</strong> > <strong>Text Mask</strong> > <strong>Clipped Star</strong>" 순서대로 마스크가 생성되어 전달되는 것입니다.<br>
+    그런데 순서가 잘못되어 "<strong>Text Mask</strong> > <strong>Clipped Star</strong>"가 먼저 수행되고 "<strong>Clock Face</strong> > <strong>Text Mask</strong>"가 나중에 수행되면 클리핑 오류가 발생할 가능성이 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(2)</strong> 이것을 해결하기 위해서 <strong>마스크 데이터</strong>를 선택하여 <strong>Render Order</strong>의 값을 "<strong>Phase 2</strong>"로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2169.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 리스트에서 <strong>마스크 데이터</strong>가 "<strong>Phase 2</strong>"로 이동했으며, 경고 아이콘이 "체인" 아이콘으로 바뀐 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2170.jpg"/>
+    <br>
+    
+    <p>
+    <strong>마스크 설정 다이얼로그</strong>를 닫고 렌더링 결과를 확인해봅시다.<br>
+    의도한 대로 렌더링이 되어 예쁜 시계가 완성된 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2171.jpg"/>
+    <br>
+    
+    <p>
+    유니티 씬에서 테스트를 하면, 렌더링은 정상적으로 되지만 마스크의 품질이 낮은 것을 볼 수 있습니다.<br>
+    이것은 <strong>마스크 체인</strong>이 발생하면 클리핑 마스크의 "<strong>렌더 텍스쳐 품질 최적화</strong>" 기능이 동작하지 않습니다. (<a href="../../kr/AdvancedManual/AD_Mask.html">관련 페이지</a>)<br>
+    렌더 텍스쳐에서 렌더 텍스쳐로의 렌더링이 발생하기 때문에 "<strong>품질 최적화</strong>" 과정에서 필요한 "화면 좌표계"가 일정하지 않기 때문입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2172.jpg"/>
+    <br>
+    
+    <p>
+    이 경우, 마스크 품질을 높이기 위해서는 <strong>마스크 체인</strong>과 관련된 모든 <strong>마스크 데이터</strong>의 렌더 텍스쳐 해상도를 조절할 필요가 있습니다.<br>
+    <strong>(1)</strong> <strong>마스크 설정 다이얼로그</strong>를 열고 <strong>마스크 체인</strong>의 앞 부분에 해당하는 "<strong>Clock Face</strong>"의 <strong>클리핑 마스크</strong> 항목을 선택합니다.<br>
+    <strong>(2)</strong> <strong>Texture Size</strong>의 값을 적당히 큰 값으로 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2173.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 이어서, "<strong>Text Mask</strong>" 메시의 <strong>마스크 데이터</strong>를 선택합니다.<br>
+    <strong>(2)</strong> 마찬가지로 <strong>Texture Size</strong>의 값을 적당히 큰 값으로 선택합니다.<br>
+    여기서는 <strong>Optimized Render</strong>가 체크되어 있지만, <strong>마스크 체인</strong>이 발생한 <strong>마스크 데이터</strong>에서는 해당 옵션이 무시됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2174.jpg"/>
+    <br>
+    
+    <p>
+    유니티 씬으로 돌아가면 마스크의 품질이 좋아진 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>마스크가 렌더링되는 순서</h3>
+    <br>
+    
+    <p>
+    <strong>마스크 데이터</strong>는 "<strong>커맨드 버퍼(Command Buffer)</strong>"에 의해서 실행되어 <strong>렌더 텍스쳐</strong>로 렌더링을 수행합니다.<br>
+    "커맨드 버퍼가 실행되는 순서"가 곧 "마스크 데이터가 실행되는 순서"이기도 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2160.jpg"/>
+    <br>
+    
+    <p>
+    마스크가 처리되는 시점, 즉 커맨드 버퍼가 실행되는 시점은 렌더링 절차의 특정 이벤트에 맞추어 구분됩니다.<br>
+    AnyPortrait의 메시들은 "Transparent" 쉐이더로 렌더링되므로, 그 이전의 렌더 이벤트인 "Before Forward Opaque", "After Forward Opaque", "Before Forward Alpha" 중 하나에서 마스크가 처리됩니다.<br>
+    "<strong>페이즈 (Phase)</strong>" 옵션은 이 3개의 렌더 이벤트를 지칭합니다.<br>
+    동일한 <strong>페이즈</strong> 내에서는 커맨드 버퍼의 실행 순서가 모호하기 때문에 <strong>마스크 체인</strong>의 렌더 순서 오류가 발생할 수 있습니다.<br>
+    그래서 렌더 순서 오류를 해결하기 위해서는 <strong>페이즈</strong>를 명확히 지정할 필요가 있는 것입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    기존의 <strong>클리핑 마스크</strong>는 <strong>마스크 데이터</strong>의 <strong>페이즈 1</strong>과 동일한 시점인 "Before Forward Opaque"에서 실행됩니다.<br>
+    따라서 <strong>클리핑 마스크</strong>와의 <strong>마스크 체인</strong>이 발생했다면, 최소한 <strong>페이즈 2</strong>에서 실행되도록 설정해야합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    다만, 위 사양은 "<strong>Built-In 렌더 파이프라인</strong>"에 해당하며, "<strong>URP</strong>"에서는 "Before Rendering" 이벤트로 통합됩니다.<br>
+    이때는 내부에서 마스크 처리 순서가 <strong>페이즈</strong> 단위로 매번 정렬됩니다.<br>
+    결과는 동일합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    마스크가 업데이트 되는 것과 렌더 텍스쳐로 렌더링이 되는 것은 내부적으로 서로 다른 동작입니다.<br>
+    마스크가 업데이트 되는 것은 모디파이어 및 애니메이션의 업데이트 로직과 관련이 있으며, 렌더 텍스쳐로 렌더링되고 마스크 데이터가 전송되는 것은 렌더링 이벤트와 관련이 있습니다.<br>
+    그래서 마스크와 관련된 이슈가 발생했을 때, "업데이트"에 의한 이슈와 "렌더링"에 의한 이슈는 구분되어야 합니다.<br>
+    이 페이지에서 다루는 문제는 "렌더링"에 대한 이슈입니다.<br>
+    다른 스크립트와의 업데이트 순서에 의한 이슈는 다음의 메뉴얼에서 다루고 있습니다.<br>
+    - <a href="../../kr/AdvancedManual/AD_ExecutionOrderProblem.html">다른 에셋과 연동시 실행 순서 문제</a><br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>마스크 체인 순서가 올바르지 않는 경우</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2175.jpg"/>
+    <br>
+    
+    <p>
+    <strong>마스크 체인</strong>에서 <strong>Render Order</strong>값이 적절하지 않다 하더라도 의외로 렌더링 결과는 꽤 괜찮아보일 수 있습니다.<br>
+    렌더링은 매프레임마다 수행되기 때문에, "<strong>이전 프레임에서의 렌더 텍스쳐</strong>"가 반영되어서 렌더링 오류를 찾기 어려울 수 있습니다.<br>
+    하지만 렌더링 오류는 분명히 존재하며, 이것은 메시가 등장하는 순간이나 메시가 빠르게 움직이는 애니메이션에서 찾을 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>공유 텍스쳐에서 렌더 순서가 일치하지 않는 경우</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2176.jpg"/>
+    <br>
+    
+    <p>
+    <strong>공유 텍스쳐</strong> (<a href="../../kr/AdvancedManual/AD_Mask.html">관련 페이지</a>)에서 만약 각각의 마스크 데이터의 <strong>Render Order</strong>가 일치하지 않는다면 어떤 일이 발생하는지 알아봅시다.<br>
+    <strong>(1)</strong> 4개의 마스크 메시가 있는 예제입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2177.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 4개의 메시들에 대한 각각의 <strong>마스크 데이터</strong>가 존재합니다.<br>
+    <strong>(2)</strong> 이 <strong>마스크 데이터</strong>들의 <strong>Shared Texture</strong> 옵션이 활성화 되어서 동일한 <strong>공유 텍스쳐</strong>를 대상으로 마스크를 렌더링합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2178.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 그런데 만약 이 <strong>마스크 데이터</strong>들 중 일부의 <strong>Render Order</strong>가 다른 <strong>마스크 데이터</strong>와 일치하지 않는다면, 위와 같이 경고 아이콘이 발생합니다.<br>
+    <strong>공유 텍스쳐</strong>는 동일한 <strong>페이즈</strong>에서 마스크를 일괄 생성해야하는데, <strong>마스크 데이터</strong>마다 다른 <strong>페이즈</strong>를 갖는 것은 동작을 모호하게 만들기 때문입니다.<br>
+    <strong>(2)</strong> 문제를 해결하기 위해서 <strong>마스크 데이터</strong> 중 하나를 선택하여 <strong>Render Order</strong>를 설정합니다.<br>
+    <strong>(3)</strong> <strong>Sync Shared Texture Options</strong> 버튼을 누릅니다.<br>
+    <strong>(4)</strong> 동기화 메시지가 나타나면 <strong>Sync All Options</strong> 버튼을 누르거나 <strong>Sync Except Shader</strong> 버튼을 눌러서 <strong>공유 텍스쳐</strong>의 모든 <strong>마스크 데이터</strong>들의 옵션을 일치시킵니다.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_MaskCombine.html">< 마스크 조합하기</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_OnlyMaskMesh.html">마스크 전용 메시 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>
