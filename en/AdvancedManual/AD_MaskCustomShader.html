@@ -203,6 +203,20 @@
     </p>
     <br>
     
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    In Unity 2023 and later, if your project is set to <strong>URP</strong>, you cannot create a mask with a shader of the "<strong>Main Texture With Color</strong>" or "<strong>Main Texture Only</strong>" type.<br>
+    This is probably because certain versions of URP have limited the types of shaders that can be rendered by command buffers.<br>
+    The details of this issue and how to resolve it are detailed at the bottom of this manual.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
     <br>
     <br>
     <!-- 3. 서브 타이틀 -->
@@ -953,6 +967,180 @@
     <p>
     If you do <strong>Bake</strong> and check it in the Unity scene, you can see the result as above.<br>
     You can see a pretty result where "the outside of the clipping area is rendered in pink" by the custom shader.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Issue with Mask Rendering by Normal Shader in URP</h3>
+    <br>
+    
+    <p>
+    There is an issue where you cannot render masks with <strong>Normal Shader</strong> when using masks in URP environments in Unity 2023, Unity 6, and later versions.<br>
+    AnyPortrait's masks are rendered by <strong>Command Buffer</strong>.<br>
+    However, it seems that URP from Unity 2023 has added some restrictions to shaders rendered with command buffers.<br>
+    Therefore, when you try to render masks with <strong>Normal Shader</strong>, it will not work properly due to these restrictions.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2231.jpg"/>
+    <br>
+    
+    <p>
+    Above is the project setup for testing.<br>
+    The project was created with <strong>Unity 6.1</strong> and has "<strong>URP 2D</strong>" set as the render pipeline.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2229.jpg"/>
+    <br>
+    
+    <p>
+    We have prepared an example like the above with AnyPortrait.<br>
+    After creating a mask with two meshes, we will check whether the mask rendering is performed properly with <strong>Frame Debugger</strong>.<br>
+    In particular, let's create a mask with the mesh on the right with the clipping mask applied.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2230.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the <strong>Mask Setting Dialog</strong> and create <strong>Mask Data</strong> for each mesh.<br>
+    If you created a mask for a clipped mesh, set it according to the <strong>Mask Chain</strong> (<a href="../../en/AdvancedManual/AD_MaskChain.html">Related page</a>) rules.<br>
+    <strong>(2)</strong> Set the value of <strong>Shader Type</strong> to "<strong>Main Texture With Color</strong>" or "<strong>Main Texture Only</strong>" so that the normal shader is applied.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2232.jpg"/>
+    <br>
+    
+    <p>
+    Let's do <strong>Bake</strong> and run the game to check whether the mask is rendered with <strong>Frame Debugger</strong>.<br>
+    As shown above, you can see that the mask is not rendered properly with <strong>Normal Shader</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    To solve this issue, you need to copy the <strong>Normal Shader</strong> to create a <strong>Custom Shader</strong>, then change the shader's options so that it can be rendered from a command buffer.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2233.jpg"/>
+    <br>
+    
+    <p>
+    Open the <strong>Material Library</strong> and find the shader asset you need to copy.<br>
+    If you haven't changed the shader properties of the mesh, you should basically find the asset under the "<strong>Alpha Blend</strong>" category.<br>
+    If it's a shader from URP, it will be an asset of type "<strong>Shader Graph</strong>".<br>
+    <strong>(1)</strong> If the mesh you want to create the mask for is not clipped, you will duplicate the asset under the "<strong>Basic Rendering</strong>" category.<br>
+    <strong>(2)</strong> If the mesh you want to create the mask for is clipped (the right mesh in this example), you will need to duplicate the asset under the "<strong>Clipped Rendering</strong>" category.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2234.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Find the shader graph asset you checked in the <strong>Material Library</strong> in the <strong>Assets</strong> window.<br>
+    Duplicate the shader asset to create a separate custom shader graph asset.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2235.jpg"/>
+    <br>
+    
+    <p>
+    Open the duplicated custom graph shader.<br>
+    <strong>(1)</strong> Open the <strong>Graph Settings</strong> tab in the <strong>Graph Inspector</strong>.<br>
+    <strong>(2)</strong> Set the value of <strong>Material</strong> to "<strong>Canvas</strong>".<br>
+    </p>
+    <br>
+    
+    <p>
+    The shader of the "<strong>Canvas</strong>" material has been confirmed to work normally in the command buffer.<br>
+    Therefore, the material of the shader graph used to create the mask must be set to "<strong>Canvas</strong>".<br>
+    </p>
+    <br>
+    
+    <p>
+    In this example, we also test against the mesh in the clipped case, so we set up a total of two custom shader graphs as above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2236.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open the <strong>Mask Setting Dialog</strong> and select <strong>Mask Data</strong> for the "Normal Mesh" first.<br>
+    <strong>(2)</strong> Change the value of <strong>Shader Type</strong> from the existing "<strong>Main Texture With Color</strong>" to "<strong>Custom Shader</strong>".<br>
+    <strong>(3)</strong> Assign the custom shader graph asset you just created to <strong>Shader Asset</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    Since this mesh is not clipped, we select the modified asset from "Normal Shader (Basic Rendering's asset)" and assign it.<br>
+    This will make the custom shader graph behave like the original asset, but since it has been changed to a "<strong>Canvas</strong>" material, it will render normally.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2237.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Let's also change the <strong>Mask Data</strong> for the "Clipped mesh". (You can see that this <strong>Mask Data</strong> has <strong>Chain</strong>.)<br>
+    <strong>(2)</strong> Change the value of <strong>Shader Type</strong> to "<strong>Custom Shader</strong>".<br>
+    <strong>(3)</strong> Select and assign the asset copied from the "Clipping Shader (Asset of Clipped Rendering)" among the custom shader graph assets you just created to <strong>Shader Asset</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    If a clipped mesh generates a mask, <strong>Mask Chain</strong> is set. (<a href="../../en/AdvancedManual/AD_MaskChain.html">Related page</a>)<br>
+    <strong>Mask Chain</strong> will generate a render texture with clipping applied, so a <strong>Clipped Shader</strong> is used.<br>
+    Therefore, when applying a custom shader, an appropriate shader asset must be selected depending on whether clipping.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    Since "<strong>Clipped Shader</strong>" has properties for masks, you should register those properties in "<strong>Copied Properties</strong>" as usual.<br>
+    However, in <strong>Mask Chain</strong>, the result values ​​of the previous <strong>Mask Data</strong> connected as a chain are automatically copied.<br>
+    Therefore, in this case, you do not need to add properties to "<strong>Copied Properties</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2238.jpg"/>
+    <br>
+    
+    <p>
+    After <strong>Bake</strong> and running the game, if you check with <strong>Frame Debugger</strong>, you can see that the colored render texture is created normally as shown above.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Caution</strong></span><br>
+    If you create a mask with a custom shader, you cannot view the mask result in the AnyPortrait editor.<br>
     </p>
     <br>
     

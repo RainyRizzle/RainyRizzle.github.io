@@ -955,6 +955,180 @@
     </p>
     <br>
     
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>「URP」からノーマルシェーダでマスクレンダリングが不可</h3>
+    <br>
+    
+    <p>
+    「Unity 2023」、「Unity 6」、およびそれ以降のバージョンで「URP」環境でマスクを使用すると、「ノーマルシェーダ」でマスクをレンダリングできないという問題があります。<br>
+    AnyPortraitのマスクは「コマンドバッファ（Command Buffer）」によってレンダリングされます。<br>
+    しかし、「Unity 2023」以降の「URP」では、コマンドバッファとしてレンダリングされるシェーダにいくつかの制約が追加されているようです。<br>
+    だから「ノーマルシェーダ」でマスクレンダリングをしたい場合、この制約によって正しく動作しません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2231.jpg"/>
+    <br>
+    
+    <p>
+    テスト用のプロジェクト設定です。<br>
+    「Unity 6.1」で作成されたプロジェクトで、レンダリングパイプラインとして「<strong>URP 2D</strong>」が設定された状態です。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2229.jpg"/>
+    <br>
+    
+    <p>
+    「AnyPortrait」で上記の例を用意しました。<br>
+    2つのメッシュでマスクを作成したら、「フレームデバッガ」でマスクレンダリングが正しく行われていることを確認します。<br>
+    特に、右側のメッシュはクリッピングマスクが適用された状態でマスクを作成しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2230.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「マスク設定ダイアログ」を開き、各メッシュの「マスクデータ」を作成します。<br>
+    クリッピングされたメッシュに対してマスクを作成した場合は、「マスクチェーン」（<a href="../../jp/AdvancedManual/AD_MaskChain.html">関連ページ</a>）の規則に合わせて設定してください。<br>
+    <strong>(2)</strong> ノーマルシェーダが適用されるように「<strong>Shader Type</strong>」の値を「<strong>Main Texture With Color</strong>」または「<strong>Main Texture Only</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2232.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bake</strong>」をしてゲームを実行し、「フレームデバッガ」でマスクをレンダリングするかどうかを確認しましょう。<br>
+    上記のように、「ノーマルシェーダ」では、マスクが正常にレンダリングされないことがわかります。<br>
+    </p>
+    <br>
+    
+    <p>
+    この問題を解決するには、「ノーマルシェーダ」をコピーして「カスタムシェーダ」を作成し、コマンドバッファでレンダリングできるようにシェーダのオプションを変更する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2233.jpg"/>
+    <br>
+    
+    <p>
+    「マテリアルライブラリ」を開き、コピーする必要がある「シェーダアセット」を探します。<br>
+    メッシュのシェーダプロパティを変更していない場合は、デフォルトでは「<strong>Alpha Blend</strong>」項目のアセットを見つけます。<br>
+    「URP」でのシェーダなら、「<strong>シェーダグラフ（Shader Graph）</strong>」タイプのアセットになります。<br>
+    <strong>(1)</strong> マスクを作成するメッシュがクリッピングされていない場合は、「<strong>Basic Rendering</strong>」のアセットを複製します。<br>
+    <strong>(2)</strong> クリッピングされたメッシュがマスクを作成する場合（この例では右メッシュ）、「<strong>Clipped Rendering</strong>」項目のアセットを複製する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2234.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「マテリアルライブラリ」で確認したシェーダグラフアセットを「<strong>Assets</strong>」ウィンドウで探します。<br>
+    対応するシェーダーアセットを複製し、別々の「カスタムシェーダーグラフアセット」を作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2235.jpg"/>
+    <br>
+    
+    <p>
+    複製したカスタムグラフシェーダを開きます。<br>
+    <strong>(1)</strong> 「<strong>Graph Inspector</strong>」の「<strong>Graph Settings</strong>」タブを開きます。<br>
+    <strong>(2)</strong> 「<strong>Material</strong>」の値を「<strong>Canvas</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>Canvas</strong>」タイプのシェーダはコマンドバッファで正常に動作することが確認されました。<br>
+    したがって、マスクの作成に使用されるシェーダグラフのマテリアルは「<strong>Canvas</strong>」に設定する必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    この例ではクリッピングされた場合のメッシュについてもテストを行うので、合計2つのカスタムシェーダグラフを上記のように設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2236.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「マスク設定ダイアログ」を開き、まず「一般メッシュ」の「マスクデータ」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Shader Type</strong>」の値を既存の「<strong>Main Texture With Color</strong>」から「<strong>Custom Shader</strong>」に変更します。<br>
+    <strong>(3)</strong> 「<strong>Shader Asset</strong>」に作成したばかりの「カスタムシェーダグラフアセット」を割り当てます。<br>
+    </p>
+    <br>
+    
+    <p>
+    このメッシュはクリッピングされていないため、「一般シェーダ（Basic Renderingのアセット）」から変更されたアセットを選択して割り当てます。<br>
+    これにより、カスタムシェーダグラフが元のアセットのように動作しますが、「<strong>Canvas</strong>」マテリアルに変更されたため、通常のレンダリングになります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2237.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「クリッピングマスクされたメッシュ」の「マスクデータ」も変更してみましょう。 （この「マスクデータ」は「チェーン」された状態です。）<br>
+    <strong>(2)</strong> 「<strong>Shader Type</strong>」の値を「<strong>Custom Shader</strong>」に変更します。<br>
+    <strong>(3)</strong> 「<strong>Shader Asset</strong>」で作成したばかりのカスタムシェーダグラフアセットのうち、「クリッピングシェーダ（Clipped Renderingのアセット）」から複製されたアセットを選択して割り当てます。<br>
+    </p>
+    <br>
+    
+    <p>
+    クリッピングされたメッシュがマスクを作成すると、「マスクチェーン」（<a href="../../jp/AdvancedManual/AD_MaskChain.html">関連ページ</a>）が作成されます。<br>
+    「マスクチェーン」はクリッピングが適用された状態でレンダリングテクスチャを生成する必要があるため、「<strong>クリッピングシェーダ (Clipped Shader)</strong>」が使用されます。<br>
+    したがって、カスタムシェーダを適用するときも、クリッピングの有無に応じて適切なシェーダアセットを選択する必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    「クリッピングシェーダ」はマスクのためのプロパティを持っていたので、もともとなら「<strong>Copied Properties</strong>」にそのプロパティを登録する必要があります。<br>
+    ただし、「マスクチェーン」では、チェーンとして連結された以前の「マスクデータ」の結果値が自動的にコピーされます。<br>
+    したがって、この場合は「<strong>Copied Properties</strong>」にプロパティを追加する必要はありません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2238.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bake</strong>」をしてゲームを実行した後、「フレームデバッガ」で確認をしてみると、上記のように色付きのレンダーテクスチャが正常に生成されることがわかります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>注意</strong></span><br>
+    カスタムシェーダでマスクを作成すると、AnyPortraitエディタではマスク結果を表示できません。<br>
+    </p>
+    <br>
+    
     <!-- 5. 바닥 네비바 -->
     <br>
     <br>

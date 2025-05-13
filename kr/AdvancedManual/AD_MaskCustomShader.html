@@ -202,6 +202,20 @@
     </p>
     <br>
     
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    유니티 2023 및 이후 버전에서의 <strong>URP</strong>에서는 "<strong>Main Texture With Color</strong>", "<strong>Main Texture Only</strong>" 방식의 쉐이더로 마스크를 생성할 수 없습니다.<br>
+    특정 버전의 URP부터는 커맨드 버퍼에 의한 렌더링될 수 있는 쉐이더의 타입을 제한했기 때문으로 추측됩니다.<br>
+    이 이슈에 대한 내용과 해결 방법은 이 메뉴얼의 하단에서 상세히 소개합니다.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
     <br>
     <br>
     <!-- 3. 서브 타이틀 -->
@@ -952,6 +966,180 @@
     <p>
     <strong>Bake</strong>를 하고 유니티 씬에서 확인하면 위와 같은 결과를 볼 수 있습니다.<br>
     커스텀 쉐이더에 의해서 "클리핑 영역이 아닌 부분이 분홍색으로 렌더링"된 예쁜 결과를 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>URP에서 일반 쉐이더로 마스크 렌더링을 할 수 없는 경우</h3>
+    <br>
+    
+    <p>
+    유니티 2023, 유니티 6 및 그 이후 버전에서 URP 환경에서 마스크를 사용할 경우 <strong>일반 쉐이더</strong>로 마스크를 렌더링할 수 없는 이슈가 있습니다.<br>
+    AnyPortrait의 마스크는 <strong>커맨드 버퍼</strong>에 의해서 렌더링이 됩니다.<br>
+    그런데 유니티 2023부터의 URP에서는 커맨드 버퍼로 렌더링되는 쉐이더에 일부 제약을 추가한 것으로 보입니다.<br>
+    그래서 <strong>일반 쉐이더</strong>로 마스크 렌더링을 하고자 할 경우, 이 제약에 의해서 제대로 동작하지 않습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2231.jpg"/>
+    <br>
+    
+    <p>
+    테스트를 위한 프로젝트 설정입니다.<br>
+    <strong>유니티 6.1</strong>로 생성된 프로젝트이며, 렌더 파이프라인으로서 "<strong>URP 2D</strong>"가 설정된 상태입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2229.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait로 위와 같은 예제를 준비했습니다.<br>
+    두개의 메시로 마스크를 생성한 후, <strong>프레임 디버거</strong>로 마스크 렌더링이 제대로 수행되는지 확인해볼 것입니다.<br>
+    특히, 오른쪽의 메시는 클리핑 마스크가 적용된 상태에서 마스크를 생성해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2230.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>마스크 설정 다이얼로그</strong>를 열고 각각의 메시에 대한 <strong>마스크 데이터</strong>를 생성합니다.<br>
+    클리핑된 메시에 대해 마스크를 생성한 경우는 <strong>마스크 체인</strong> (<a href="../../kr/AdvancedManual/AD_MaskChain.html">관련 페이지</a>) 규칙에 맞게 설정해주세요.<br>
+    <strong>(2)</strong> 일반 쉐이더가 적용되도록 <strong>Shader Type</strong>의 값을 "<strong>Main Texture With Color</strong>"나 "<strong>Main Texture Only</strong>"로 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2232.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>를 하고 게임을 실행하여 <strong>프레임 디버거</strong>로 마스크 렌더링 여부를 확인해봅시다.<br>
+    위와 같이 <strong>일반 쉐이더</strong>로는 마스크가 정상적으로 렌더링되지 않는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이 문제를 해결하기 위해서는 <strong>일반 쉐이더</strong>를 복사하여 <strong>커스텀 쉐이더</strong>를 만든 후, 커맨드 버퍼에서 렌더링될 수 있도록 쉐이더의 옵션을 변경해야합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2233.jpg"/>
+    <br>
+    
+    <p>
+    <strong>재질 라이브러리</strong>를 열고 복사해야하는 쉐이더 에셋을 찾습니다.<br>
+    메시의 쉐이더 속성을 변경하지 않았다면, 기본적으로는 "<strong>Alpha Blend</strong>" 항목의 에셋을 찾으면 됩니다.<br>
+    URP에서의 쉐이더라면 "<strong>쉐이더 그래프 (Shader Graph)</strong>" 타입의 에셋일 것입니다.<br>
+    <strong>(1)</strong> 마스크를 생성할 메시가 클리핑되지 않았다면 "<strong>Basic Rendering</strong>"의 에셋을 복제할 것입니다.<br>
+    <strong>(2)</strong> 만약 클리핑된 메시가 마스크를 생성한다면 (이 예제에서는 오른쪽 메시), "<strong>Clipped Rendering</strong>" 항목의 에셋을 복제해야합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2234.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>재질 라이브러리</strong>에서 확인했던 쉐이더 그래프 에셋을 <strong>Assets</strong> 창에서 찾습니다.<br>
+    해당 쉐이더 에셋을 복제하여 별도의 커스텀 쉐이더 그래프 에셋을 만듭니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2235.jpg"/>
+    <br>
+    
+    <p>
+    복제한 커스텀 그래프 쉐이더를 엽니다.<br>
+    <strong>(1)</strong> <strong>Graph Inspector</strong>의 <strong>Graph Settings</strong> 탭을 엽니다.<br>
+    <strong>(2)</strong> <strong>Material</strong>의 값을 "<strong>Canvas</strong>"로 설정합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    "<strong>Canvas</strong>" 재질의 쉐이더는 커맨드 버퍼에서 정상적으로 동작하는 것이 확인되었습니다.<br>
+    그러므로, 마스크 생성에 활용되는 쉐이더 그래프의 재질은 "<strong>Canvas</strong>"로 설정되어야 합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이 예제에서는 클리핑된 경우의 메시에 대해서도 테스트를 하므로, 총 2개의 커스텀 쉐이더 그래프를 위와 같이 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2236.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>마스크 설정 다이얼로그</strong>를 열고, 먼저 "일반 메시"에 대한 <strong>마스크 데이터</strong>를 선택합니다.<br>
+    <strong>(2)</strong> <strong>Shader Type</strong>의 값을 기존의 "<strong>Main Texture With Color</strong>"에서 "<strong>Custom Shader</strong>"로 변경합니다.<br>
+    <strong>(3)</strong> <strong>Shader Asset</strong>에 방금 작성한 커스텀 쉐이더 그래프 에셋을 할당합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이 메시는 클리핑되지 않았으므로 "일반 쉐이더 (Basic Rendering의 에셋)"로부터 수정된 에셋을 선택하여 할당합니다.<br>
+    이렇게 하면 커스텀 쉐이더 그래프가 원본 에셋처럼 동작을 하되, "<strong>Canvas</strong>" 재질로 변경되었으므로 정상적으로 렌더링이 될 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2237.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> "클리핑 마스크된 메시"에 대한 <strong>마스크 데이터</strong>도 변경해봅시다. (이 <strong>마스크 데이터</strong>는 <strong>체인</strong>이 발생한 것을 볼 수 있습니다.)<br>
+    <strong>(2)</strong> <strong>Shader Type</strong>의 값을 "<strong>Custom Shader</strong>"로 변경합니다.<br>
+    <strong>(3)</strong> <strong>Shader Asset</strong>에 방금 작성한 커스텀 쉐이더 그래프 에셋 중 "클리핑 쉐이더 (Clipped Rendering의 에셋)"로부터 복제된 에셋을 선택하여 할당합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    클리핑된 메시가 마스크를 생성한 경우, <strong>마스크 체인</strong>(<a href="../../kr/AdvancedManual/AD_MaskChain.html">관련 페이지</a>)이 성립됩니다.<br>
+    <strong>마스크 체인</strong>은 클리핑이 적용된 상태로 렌더 텍스쳐를 생성해야 하므로 <strong>클리핑 쉐이더 (Clipped Shader)</strong>가 사용됩니다.<br>
+    따라서 커스텀 쉐이더를 적용할 때도, 클리핑 여부에 따른 적절한 쉐이더 에셋이 선택되어야 합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>안내</strong></span><br>
+    "<strong>클리핑 쉐이더 (Clipped Shader)</strong>"는 마스크를 위한 프로퍼티들을 가졌기 때문에, 원래대로라면 "<strong>Copied Properties</strong>"에 해당 프로퍼티들을 등록해야합니다.<br>
+    그렇지만 <strong>마스크 체인</strong>에서는 체인으로서 연결된 이전의 <strong>마스크 데이터</strong>의 결과값이 자동으로 복사됩니다.<br>
+    따라서 이 경우엔 "<strong>Copied Properties</strong>"에 프로퍼티들을 추가하지 않아도 됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2238.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>를 하고 게임을 실행한 후, <strong>프레임 디버거</strong>로 확인을 해보면 위와 같이 색상이 입혀진 렌더 텍스쳐가 정상적으로 생성되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>주의</strong></span><br>
+    커스텀 쉐이더로 마스크를 생성하는 경우, AnyPortrait 에디터에서는 마스크 결과를 볼 수 없습니다.<br>
     </p>
     <br>
     
