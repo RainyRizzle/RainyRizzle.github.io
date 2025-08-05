@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Visibility rule for multiple values</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/en/anyportrait-en/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/en/ap-video-tutorials-en/">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/en/forum-en/">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_MultiValueVisibilityRule.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MultiValueVisibilityRule.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_MultiValueVisibilityRule.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/en/anyportrait-en/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Visibility rule for multiple values</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Visibility rule for multiple values</h1>
+    <br>
+    
+    <p>
+    Hiding and showing meshes using control parameters or keyframe animation is one of the most effective ways to express things like character expressions.<br>
+    You can use this to express complex things like "the character's facial expressions according to their emotions", "the character opens or closes their eyes", "the character opens or closes his mouth", etc.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, users sometimes encounter difficulties when combining two or more control parameters or modifier values to make a mesh visible.<br>
+    We often receive inquiries from our team about the issue of "The eye mesh disappearing when a character with multiple expressions blinks."<br>
+    This issue is caused by the rules covered on this page.<br>
+    This page uses this issue as an example to explain how the Visibility Rule based on multiple modifier values works.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>The problem of combining facial expressions and blinking</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2242.jpg"/>
+    <br>
+    
+    <p>
+    Here's an example character to demonstrate the problem.<br>
+    It has two facial expressions, and we'll make it blink by toggling the visibility of meshes.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2243.jpg"/>
+    <br>
+    
+    <p>
+    The meshes mapped to the two control parameters ("<strong>Type</strong>" and "<strong>Blink</strong>") that determine the eye shape are as shown above.<br>
+    "<strong>Eye 1</strong>" represents a slight smile, while "<strong>Eye 2</strong>" represents a slightly dazed expression.<br>
+    The eye closing process consists of three frames:<br>
+    "<strong>Open</strong>", "<strong>Half Closed</strong>", and "<strong>Closed</strong>", respectively.<br>
+    A total of six shapes can be created by combining these states.<br>
+    However, since the closed eye expression is unrelated to other facial expressions, a single mesh ("<strong>Eye Closed</strong>") is used to represent it.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now, let's register a total of 5 meshes to the modifier and set them to be controlled by the control parameters.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2244.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Register the <strong>Color Only (Controller) modifier</strong>.<br>
+    <strong>(2)</strong> Register all five eye meshes to the two control parameters: "<strong>Type</strong>" and "<strong>Blink</strong>".<br>
+    </p>
+    <br>
+    
+    <p>
+    Now let's add keys to the two control parameters and set the visibility of the meshes at the keys.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2245.jpg"/>
+    <br>
+    
+    <p>
+    First, we set the visibility of the "<strong>Type</strong>" control parameter, which switches the character's expression.<br>
+    We created two keys: "<strong>1</strong>" and "<strong>2</strong>".<br>
+    - When "<strong>Type</strong>" has a value of "<strong>1</strong>", only the "<strong>Eye 1 Open</strong>" mesh is visible.<br>
+    - When "<strong>Type</strong>" has a value of "<strong>2</strong>", only the "<strong>Eye 2 Open</strong>" mesh is visible.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Hint</strong></span><br>
+    If you're already familiar with the visibility rules covered on this page, you'll know this step is the cause of the problem.<br>
+    See the following explanation for the cause and solution.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2246.jpg"/>
+    <br>
+    
+    <p>
+    Next, we'll set the visibility of the "<strong>Blink</strong>" control parameter, which causes the character's eyes to blink.<br>
+    Three keys are created: "<strong>Open</strong>", "<strong>Half Closed</strong>", and "<strong>Closed</strong>".<br>
+    - When "<strong>Blink</strong>" has a value of "<strong>Open</strong>", we set the "<strong>Eye 1 Open</strong>" and "<strong>Eye 2 Open</strong>" meshes to be visible.<br>
+    - When "<strong>Blink</strong>" has a value of "<strong>Half Closed</strong>", we set the "<strong>Eye 1 Half Closed</strong>" and "<strong>Eye 2 Half Closed</strong>" meshes to be visible.<br>
+    - When "<strong>Blink</strong>" has a value of "<strong>Closed</strong>", we set only the "<strong>Eye Closed</strong>" mesh to be visible.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2247.jpg"/>
+    <br>
+    
+    <p>
+    Let's turn off <strong>Edit Mode</strong> and manipulate the control parameters to verify that the character's eye meshes transition properly.<br>
+    You can see that the expression changes by manipulating the "<strong>Type</strong>" parameter.<br>
+    However, when you change the "<strong>Blink</strong>" control parameter to make the eyes blink, the eye meshes completely disappear.<br>
+    </p>
+    <br>
+    
+    <p>
+    While there were no issues when selecting individual control parameters and working in <strong>Edit Mode</strong>, a problem arose when combining two control parameters, causing the mesh to disappear.<br>
+    To resolve this issue, it's necessary to understand the visibility rule for multiple values.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Visibility rule</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2248.jpg"/>
+    <br>
+    
+    <p>
+    When you combine control parameters, multiple modifiers, or keyframe values to show or hide a mesh, you need to understand the rules to know what results will come from the combination of values.<br>
+    AnyPortrait uses the "<strong>Multiply</strong>" rule to all color-related operations.<br>
+    For visibility and alpha operations, the visible state is 1 and the invisible state is 0.<br>
+    Multiplying these results in "<strong>1 x 0 = 0</strong>," so if any of the visibility values is "<strong>Hide</strong>," as in the image above, the mesh will be hidden.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2249.jpg"/>
+    <br>
+    
+    <p>
+    To elaborate a bit on this, we've organized it into a table, as shown above.<br>
+    If all visibility values for a mesh are "<strong>Show</strong>," the mesh will be rendered.<br>
+    However, if any of the visibility values are "<strong>Hide</strong>," the mesh will not be rendered.<br>
+    </p>
+    <br>
+    
+    <p>
+    The rules themselves aren't difficult.<br>
+    However, applying this rule, it seems a bit difficult to figure out how to set the values to express "character expressions" and "eye blinking".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2250.jpg"/>
+    <br>
+    
+    <p>
+    When controlling the visibility of multiple meshes with two control parameters, it's easier to organize them by drawing a table like the one above.<br>
+    Let's control the visibility of six meshes with the parameters "<strong>Color</strong>" and "<strong>Shape</strong>."<br>
+    First, assign each parameter to the X-axis and Y-axis of the table, and then place the meshes corresponding to each parameter value.<br>
+    This will complete the table shown above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2251.jpg"/>
+    <br>
+    
+    <p>
+    This table sets the visibility of meshes based on the key value of each control parameter.<br>
+    For example, the "<strong>Red</strong>" key of the "<strong>Color</strong>" parameter sets all red meshes to be visible, regardless of shape, and hides all others.<br>
+    The "<strong>Circle</strong>" key of the "<strong>Shape</strong>" parameter sets all circular meshes to be visible, regardless of color, and hides all others.<br>
+    Let's assume that the keys and values for the control parameters are set in this way.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2252.jpg"/>
+    <br>
+    
+    <p>
+    Let's understand how two control parameters work together to make only one of the six meshes visible, using a table.<br>
+    First, when the "<strong>Color</strong>" parameter is "<strong>Red</strong>," the meshes in row 1 will be visible, and the blue meshes in row 2 will be hidden.<br>
+    If the "<strong>Shape</strong>" parameter is "<strong>Circle</strong>," the circle meshes in row 2 will be visible.<br>
+    As a result, the "<strong>Red Circle</strong>" mesh in row 1 and column 2, which corresponds to the "intersection of visible meshes" along each axis, will be selected and rendered.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Hint</strong></span><br>
+    It's easier to understand if you draw a table with visibility values set to 1 and 0.<br>
+    And it's easier to think of it as assigning values in bulk, without considering any other image attributes (shape, color, etc.) other than those for which each parameter is responsible.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Solving problems using the rule</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2253.jpg"/>
+    <br>
+    
+    <p>
+    Returning to our example, let's understand the visibility of this character's eye meshes by organizing them into a table.<br>
+    We'll position each eye mesh based on the character's "<strong>Type</strong>" on the Y-axis and "<strong>Blink</strong>" on the X-axis.<br>
+    Now, we'll know which meshes should be visible based on the control parameter keys.<br>
+    </p>
+    <br>
+    
+    <p>
+    If you understand the rules and go back and look at them again, you will see that the visibility of the meshes according to the "<strong>Type</strong>" parameter is set incorrectly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2254.jpg"/>
+    <br>
+    
+    <p>
+    Resets the visibility of meshes according to the rule.<br>
+    - When "<strong>Type</strong>" has a value of "<strong>1</strong>", the meshes "<span class="text-danger"><strong>Eye 1 Open</strong></span>", "<span class="text-danger"><strong>Eye 1 Half Closed</strong></span>", and "<span class="text-danger"><strong>Eye Closed</strong></span>" are all visible.<br>
+    - When "<strong>Type</strong>" has a value of "<strong>2</strong>", the meshes "<span class="text-primary"><strong>Eye 2 Open</strong></span>", "<span class="text-primary"><strong>Eye 2 Half Closed</strong></span>", and "<span class="text-primary"><strong>Eye Closed</strong></span>" are all visible.<br>
+    </p>
+    <br>
+    
+    <p>
+    In this example, the "<strong>Eye Closed</strong>" message may appear regardless of the expression.<br>
+    If so, it should always be visible for all "<strong>Type</strong>" keys.<br>
+    </p>
+    <br>
+    
+    <p>
+    Fortunately, in the case of "<strong>Blink</strong>", the visibility value is set correctly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2255.jpg"/>
+    <br>
+    
+    <p>
+    Now, let's disable edit mode and test it out.<br>
+    Unlike before, you can now close your character's eyes by combining it with an expression.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Preview visibility calculation results in edit mode</h4>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2256.jpg"/>
+    <br>
+    
+    <p>
+    In edit mode, all parameters except the target control parameter or modifier are disabled by default.<br>
+    Therefore, to view the results of multi-value combinations, you must disable edit mode.<br>
+    However, you can preview the results of operations involving other modifiers or control parameters in edit mode by changing the <strong>Edit Mode Options</strong> (<a href="../../en/AdvancedManual/AD_ModifierEditOption.html">Related Page</a>).<br>
+    <strong>(1)</strong> Turn on <strong>Edit Mode</strong>.<br>
+    <strong>(2)</strong> Open the <strong>View menu</strong> and enable "<strong>Edit Mode Options > Apply Multiple Modifiers if no conflict</strong>" (shortcut key  <kbd>D</kbd> ) to view the combined color results in Edit Mode.<br>
+    <strong>(3)</strong> Check the icon in the upper right corner of the workspace to see if multiple values are being combined and displayed in Edit Mode.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_ToggleWOTranslucent.html">< Show/hide without Translucent step</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_Rigging.html">Rigging Modifier ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

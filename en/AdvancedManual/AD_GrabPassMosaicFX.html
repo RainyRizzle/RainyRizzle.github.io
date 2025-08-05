@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Mosaic effect using Grab Pass</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/en/anyportrait-en/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/en/ap-video-tutorials-en/">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/en/forum-en/">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_GrabPassMosaicFX.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_GrabPassMosaicFX.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_GrabPassMosaicFX.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/en/anyportrait-en/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Mosaic effect using Grab Pass</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Mosaic effect using Grab Pass</h1>
+    <br>
+    
+    <p>
+    To implement special effects using AnyPortrait and Unity, you may need a texture representation of the "currently rendered screen."<br>
+    Unity uses a feature called "Grab Pass" to retrieve the screen as a texture.<br>
+    This page explains the Grab Pass, using the example of implementing the "Mosaic effect," a frequently requested feature.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Grab Pass and the Render Pipeline</h3>
+    <br>
+    
+    <p>
+    To implement effects like mosaics, we need to retrieve the screen texture just before the mesh corresponding to the mosaic area is rendered.<br>
+    This means that the rendering process must be paused and the frame buffer up to that point must be copied to a temporary texture.<br>
+    This is accomplished using the "<strong>Grab Pass</strong>" function. (<a href="https://docs.unity3d.com/6000.0/Documentation/Manual/SL-GrabPass.html" target="_sub">Unity Manual</a>)<br>
+    And you can easily implement screen effects by using the <strong>Grab Texture</strong> generated from this <strong>Grab Pass</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, how you implement the effect using <strong>Grab Pass</strong> depends on your project's render pipeline.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2277.jpg"/>
+    <br>
+    
+    <p>
+    In the <strong>Built-In Render Pipeline</strong>, you can freely call <strong>Grab Pass</strong> to retrieve <strong>Grab Texture</strong> while meshes are being rendered.<br>
+    This is because <strong>Grab Texture</strong> is generated immediately when <strong>Grab Pass</strong> is specified in the shader that requires <strong>Grab Texture</strong> (in this case, the mosaic effect shader).<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2278.jpg"/>
+    <br>
+    
+    <p>
+    However, <strong>URP</strong> doesn't natively support <strong>Grab Pass</strong>.<br>
+    While there is a shader function that functions similarly to <strong>Grab Pass</strong>, it's not suitable for this case because it only renders "opaque meshes".<br>
+    Therefore, you need to write your own "<strong>Renderer Feature</strong>" that functions as <strong>Grab Pass</strong>.<br>
+    However, <strong>Renderer Feature</strong> cannot be called during mesh rendering; it can only be called per camera and rendering event.<br>
+    Therefore, to retrieve the "rendered meshes before mosaicing," you need to separate the camera.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Mosaic Effect in the Built-In Render Pipeline</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2257.jpg"/>
+    <br>
+    
+    <p>
+    We've set up the example as shown above.<br>
+    We added an image and mesh to be the mosaic area and named it "<strong>Mosaic Mask</strong>."<br>
+    </p>
+    <br>
+    
+    <p>
+    Now let's write a shader that renders the mosaic effect. (<a href="../../en/Script/SC_CustomShader.html">Writing custom shaders</a>)<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Custom Shader/Mosaic Shader - BuiltIn"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = <span class="text-danger">"white"</span> {}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// Number of mosaic blocks (based on Y-axis)</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_NumMosaicBlocks (</strong><span class="text-danger">"Number of Mosaic Blocks (Y-Axis)"</span>, float) = 10.0<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags{ <span class="text-danger">"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// Call Grab Pass to get a Grab Texture.</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<strong>GrabPass { </strong><span class="text-danger"><strong>"_CustomGrabTexture"</strong></span><strong> }</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"LightMode" = "ForwardBase"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// A semantic for computing and passing UVs for Grab Texture</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>float4</strong></span> <strong>grabPos : TEXCOORD1;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Grab Texture generated from Grab Pass</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>sampler2D</strong></span> <strong>_CustomGrabTexture;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Mosaic count property variable</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>float</strong></span> <strong>_NumMosaicBlocks;</strong><br>
+    <br>&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert ( <span class="text-primary">appdata</span> v )<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos( v.vertex );<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX( v.uv, _MainTex );<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Calculate Grab UV.</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.grabPos = ComputeGrabScreenPos( o.vertex );</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag ( <span class="text-primary">v2f</span> i ) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D( _MainTex, i.uv );<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Calculate the number of mosaic blocks on the X-axis by calculating the Aspect Ratio.</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>float</strong></span><strong> aspect = _ScreenParams.x / _ScreenParams.y;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>float2</strong></span><strong> nBlocks = floor ( </strong><span class="text-primary"><strong>float2</strong></span><strong> ( _NumMosaicBlocks * aspect, _NumMosaicBlocks ) );</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Get colors from Grab Texture by calculating mosaic UV.</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>fixed2</strong></span><strong> mosaicUV = round( i.grabPos.xy * nBlocks ) / nBlocks;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>fixed4</strong></span><strong> grabCol = tex2D( _CustomGrabTexture, mosaicUV );</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = grabCol.rgb;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    This shader takes a <strong>Grab Texture</strong> and applies it to the RGB of the mesh for rendering.<br>
+    At this time, the <strong>round</strong> function and the <strong>_NumMosaicBlocks</strong> property are used to change the UVs in specific size units.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2258.jpg"/>
+    <br>
+    
+    <p>
+    Return to the AnyPortrait editor.<br>
+    <strong>(1)</strong> With the <strong>Mesh Group</strong> selected, select the "<strong>Mosaic Mask</strong>" mesh.<br>
+    <strong>(2)</strong> In the <strong>Shader Setting</strong> option, change the "<strong>Material Set</strong>" value to "<strong>Custom Shader</strong>."<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2259.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Assign the previously created mosaic shader.<br>
+    <strong>(2)</strong> Set the value of the "<strong>_NumMosaicBlocks</strong>" property in the shader code above here. Click the <strong>Add Custom Property</strong> button and set the property name, type, and value.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2260.jpg"/>
+    <br>
+    
+    <p>
+    After <strong>Bake</strong> and returning to the Unity scene to run the game, you'll see the mosaic effect applied, as shown above.<br>
+    Since the "<strong>Mosaic Mask</strong>" mesh is an object within AnyPortrait, you can make it transparent or allow it to move freely according to animation.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Mosaic Effect in URP</h3>
+    <br>
+    
+    <p>
+    In URP, you need to write the following three scripts, including shaders:<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Renderer Feature to Reproduce Grab Pass</strong><br>
+    : URP does not have a <strong>Grab Pass</strong>.<br>
+    Therefore, you must create your own <strong>Renderer Feature</strong> to implement <strong>Grab Pass</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Script to change mesh layers</strong><br>
+    : <strong>Renderer Feature</strong> operates when the camera and layer change.<br>
+    Therefore, the "normal meshes" and "mosaic mask meshes" must be placed on separate layers.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. Mosaic Shader Graph</strong><br>
+    : You need to create a mosaic shader using <strong>Shader Graph</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2261.jpg"/>
+    <br>
+    
+    <p>
+    First, let's implement <strong>Grab Pass</strong> by writing a <strong>Renderer Feature</strong>.<br>
+    However, the <strong>Renderer Feature</strong> API has changed significantly since <strong>URP 13</strong> and is incompatible with the other APIs.<br>
+    Therefore, before writing a <strong>Renderer Feature</strong>, you must check the <strong>URP version</strong>.<br>
+    (<a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@15.0/manual/upgrade-guide-2022-1.html" target="_sub">Related official manual</a>)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open Unity's <strong>Package Manager</strong> and set <strong>Packages</strong> to "<strong>In Project</strong>."<br>
+    <strong>(2)</strong> Installed Unity packages will be displayed. Select <strong>Universal RP</strong>.<br>
+    <strong>(3)</strong> Check the version. In the image above, it's <strong>12.1.1</strong>, so you need a script written before <strong>URP 13</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    Rather than detailing the <strong>Renderer Feature</strong> on this page, we'll leverage an open-source script developed by an external developer.<br>
+    If your URP version is older than <strong>13</strong>, you can obtain the <strong>Renderer Feature for Grab Pass</strong> script from the following link.<br>
+    <a href="https://gist.github.com/Refsa/54da34a9e2fc8e45472286572216ad17" target="_sub">GrabScreenFeature by Refsa</a> (MIT License)<br>
+    </p>
+    <br>
+    
+    <p>
+    If your URP version is <strong>13 or later</strong>, you can obtain the <strong>Renderer Feature for Grab Pass (Including Unity 6)</strong> script from the following link.<br>
+    Notably, this developer implemented two versions of <strong>Renderer Feature</strong>.<br>
+    With the introduction of <strong>Render Graph</strong> in Unity 6, the APIs have changed.<br>
+    Download the appropriate version based on whether you're using <strong>Render Graph</strong>, as described below.<br>
+    - If using Render Graph: "<strong>GrabScreenFeatureRenderGraphAPI.cs</strong>"<br>
+    - If not using Render Graph: "<strong>GrabScreenFeatureU6.cs</strong>"<br>
+    <a href="https://github.com/Smajlovycc/GrabPassU6" target="_sub">GrabPassU6 by Smajlovycc</a> (MIT License)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2262.jpg"/>
+    <br>
+    
+    <p>
+    Once you've prepared the <strong>Renderer Feature Script</strong> for your URP version, configure URP in your project.<br>
+    Create and designate a <strong>URP Asset</strong> in <strong>Project Settings > Graphics > Default Render Pipeline</strong>.<br>
+    Depending on your Unity version, you may also need to configure platform-specific render pipelines.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2263.jpg"/>
+    <br>
+    
+    <p>
+    Unity 6 and later introduced a new feature called <strong>Render Graph</strong>.<br>
+    Depending on whether you use this feature, the API for <strong>Renderer Feature</strong> changes.<br>
+    If you don't use scripts for <strong>Render Graph</strong>, you can enable <strong>Compatibility Mode</strong> to use the <strong>Renderer Feature</strong> written with the legacy API.<br>
+    Enabling this option disables <strong>Render Graph</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2264.jpg"/>
+    <br>
+    
+    <p>
+    Now, let's apply the <strong>Renderer Feature</strong>.<br>
+    <strong>(1)</strong> Select the <strong>URP Renderer Data</strong> asset from the URP asset applied to the project.<br>
+    <strong>(2)</strong> Click the <strong>Add Renderer Feature</strong> button and select the <strong>Renderer Feature</strong> for <strong>Grab Pass</strong> that you previously downloaded from open source or created yourself.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2265.jpg"/>
+    <br>
+    
+    <p>
+    Added <strong>Renderer Feature</strong> for <strong>Grab Pass</strong>.<br>
+    Check or change some properties.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Texture Name</strong><br>
+    : This is the name of the <strong>Grab Texture</strong>.<br>
+    Remember the name, as we will use it in the shader graph for the mosaic effect.<br>
+    You can change it if necessary.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Layer Mask</strong><br>
+    : This option specifies the layers of the objects to be included in <strong>Grab Texture</strong>.<br>
+    Select only the target layers to be included in the mosaic, as "<strong>None</strong>" or "<strong>Everything</strong>" will not work properly.<br>
+    Here, only the "<strong>Default</strong>" layer is specified.<br>
+    </p>
+    <br>
+    
+    <p>
+    Earlier, we explained that "normal meshes" and "mosaic mask meshes" must be rendered separately.<br>
+    Therefore, we need to separate the layers and cameras to ensure that the "mosaic mask mesh" is rendered separately.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2266.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open <strong>Project Settings > Tags and Layers</strong>.<br>
+    <strong>(2)</strong> Create a layer named "<strong>MosaicFX</strong>" in the blank space under <strong>Layers</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2267.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Duplicate the existing camera rendering the character ("<strong>Main Camera</strong>") and name it "<strong>Mosaic Camera</strong>." From the second camera onward, also delete the <strong>Audio Listener</strong> component.<br>
+    <strong>(2)</strong> Change the <strong>Render Type</strong> to "<strong>Overlay</strong>."<br>
+    <strong>(3)</strong> Set the <strong>Culling Mask</strong> value to select only the "<strong>MosaicFX</strong>" layer.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2268.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the original camera, "<strong>Main Camera</strong>" again.<br>
+    <strong>(2)</strong> Exclude the "<strong>MosaicFX</strong>" layer from the <strong>Culling Mask</strong> value.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2269.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> Register "<strong>Mosaic Camera</strong>" in <strong>Stack > Cameras</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    The scene has been set up so that the "<strong>Mosaic Mask Mesh</strong>" can be rendered separately.<br>
+    However, because the "<strong>Mosaic Mask Mesh</strong>" resides within the AnyPortrait character, it shares the same layer as the other meshes.<br>
+    Therefore, we need to write a new script to render the mesh on the "<strong>MosaicFX</strong>" layer and the "<strong>Mosaic Camera</strong>" layer.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary">using</span> AnyPortrait;<br>
+    <br>
+    <span class="text-primary">public class</span> <span class="text-success">SetPortraitMeshLayer</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">apPortrait</span> portrait; // Target apPortrait<br>
+    &emsp;&emsp;<span class="text-primary">public string</span> layerName = <span class="text-danger">"Default"</span>; // Name of the layer to be assigned<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-primary">string</span>&#91;&#93; meshNames; // Names of the meshes to which layers are assigned<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>SetPortraitMeshLayers();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">this</span>.enabled = <span class="text-primary">false</span>;<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// A function that finds the target meshes and changes the layer.<br>
+    &emsp;&emsp;<span class="text-primary">private void</span> SetPortraitMeshLayers()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> nMeshNames = (meshNames != <span class="text-primary">null</span>) ? meshNames.Length : 0;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> ( nMeshNames == 0 ) { <span class="text-primary">return</span>; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// apPortrait may not be initialized, so we try to initialize it here.<br>
+    &emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Change the name of the input layer to an int type variable.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> layer = <span class="text-success">LayerMask</span>.NameToLayer( layerName );<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">for</span> ( <span class="text-primary">int</span> i = 0; i < nMeshNames; i++ )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">string</span> meshName = meshNames&#91;i&#93;;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apOptTransform</span> targetTransform = portrait.GetOptTransform(meshName);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> ( targetTransform == <span class="text-primary">null</span> ) { <span class="text-primary">continue</span>; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Calls a function that changes the target's layer.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>SetGameObjectLayer(targetTransform.gameObject, layer);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// Recursively changes the layer of the target and its child objects.<br>
+    &emsp;&emsp;<span class="text-primary"><strong>private</strong></span> <span class="text-primary"><strong>void</strong></span> <strong>SetGameObjectLayer(</strong><span class="text-success"><strong>GameObject</strong></span><strong> targetObject, </strong><span class="text-primary"><strong>int</strong></span><strong> layer)</strong><br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> ( targetObject == <span class="text-primary">null</span> ) { <span class="text-primary">return</span>; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>targetObject.layer = layer;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Also changes the layer of child objects.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> nChildren = targetObject.transform.childCount;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> ( nChildren == 0 ) { return; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">for</span> ( <span class="text-primary">int</span> i = 0; i < nChildren; i++)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Call recursively.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>SetGameObjectLayer(targetObject.transform.GetChild(i).gameObject, layer);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2270.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Create a new <strong>GameObject</strong> to apply the script.<br>
+    <strong>(2)</strong> Add the script you created and set its values.<br>
+    - <strong>Portrait</strong>: Specify the target character.<br>
+    - <strong>Layer Name</strong>: Enter "<strong>MosaicFX</strong>," the layer where the mosaic mask mesh will be rendered.<br>
+    - <strong>Mesh Names</strong>: Enter the name of the mosaic mask mesh within the mesh group.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now finally, we create the "<strong>Mosaic Shader Graph</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2271.jpg"/>
+    <br>
+    
+    <p>
+    Create a new shader graph of type "<strong>Sprite Unlit, Transparent, Alpha Blend</strong>".<br>
+    You can learn how to write a shader graph for AnyPortrait at <a href="../../en/AdvancedManual/AD_ShaderGraph.html">Related page</a>, only the properties related to the mosaic effect are introduced here.<br>
+    <strong>(1)</strong> In addition to the basic properties, add the properties "<strong>_NumMosaicBlocks (Float)</strong>" and "<strong>_GrabPassTransparent (Texture2D)</strong>".<br>
+    <strong>(2)</strong> Set the properties of these two properties as follows:<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. _NumMosaicBlocks</strong><br>
+    : The number of mosaic blocks.<br>
+    The property name is the same as the previously introduced Built-In mosaic shader property, and the mosaic mask mesh within the AnyPortrait character can pass the value.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. _GrabPassTransparent</strong><br>
+     : The property name of the <strong>Grab Texture</strong>.<br>
+    It must be the same as the "<strong>Texture Name</strong>" value of the <strong>Renderer Feature</strong> previously added as the <strong>Grab Pass</strong>.<br>
+    The <strong>Show In Inspector</strong> (or <strong>Exposed</strong>, depending on the version) option must be disabled.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2272.jpg"/>
+    <br>
+    
+    <p>
+    Complete the shader graph as shown in the image above.<br>
+    (<a href="https://drive.google.com/file/d/1amZ5264KDZ0l1n6ofd3ue_4Vs1UNAslb/view?usp=sharing" target="_sub">View larger image</a>)<br>
+    You can think of it as rewriting the mosaic shader from the Built-In Example in graph form.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2273.jpg"/>
+    <br>
+    
+    <p>
+    Apply the mosaic shader for URP to the AnyPortrait character.<br>
+    <strong>(1)</strong> Select the "<strong>Mosaic Mask</strong>" mesh.<br>
+    <strong>(2)</strong> If the settings in the Built-In are complete, assign the "<strong>Mosaic Shader Graph Asset for URP</strong>" you just created to the <strong>Custom Shader</strong>.<br>
+    (If the Custom Shader option isn't set, please refer to the corresponding section of the implementation description in the Built-In.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2274.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the <strong>Root Unit</strong>.<br>
+    <strong>(2)</strong> Click the <strong>Material Library</strong> button.<br>
+    <strong>(3)</strong> Create and select a material set from the URP material presets.<br>
+    <strong>(4)</strong> Click the <strong>Default Material</strong> button to turn it on.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2275.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Click the <strong>Bake</strong> button.<br>
+    <strong>(2)</strong> Select the <strong>Settings</strong> tab.<br>
+    <strong>(3)</strong> Change the <strong>Render Pipeline</strong> value to "<strong>Scriptable Render Pipeline</strong>."<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2276.jpg"/>
+    <br>
+    
+    <p>
+    If you do <strong>Bake</strong> and run the game, you can see that the mosaic effect works normally even in URP.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_URPOutlineShader.html">< Creating a URP Outline Shader</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_Mecanim.html">Using Mecanim ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom Shader/Mosaic Shader - BuiltIn\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\n\t\t// Number of mosaic blocks (based on Y-axis)\n\t\t_NumMosaicBlocks (\"Number of Mosaic Blocks (Y-Axis)\", float) = 10.0\n\t}\n\n\tSubShader\n\t{\n\t\tTags{ \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\t\t\n\t\tLOD 200\n\n\t\t// Call Grab Pass to get a Grab Texture.\n\t\tGrabPass { \"_CustomGrabTexture\" }\n\n\t\tPass\n\t\t{\n\t\t\tTags { \"LightMode\" = \"ForwardBase\" }\n\t\t\tZWrite Off\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\t\t\t\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\n\t\t\t\t// A semantic for computing and passing UVs for Grab Texture\n\t\t\t\tfloat4 grabPos : TEXCOORD1;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\t// Grab Texture generated from Grab Pass\n\t\t\tsampler2D _CustomGrabTexture;\n\n\t\t\t// Mosaic count property variable\n\t\t\tfloat _NumMosaicBlocks;\n\n\t\t\n\t\t\tv2f vert ( appdata v )\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos( v.vertex );\n\t\t\t\to.uv = TRANSFORM_TEX( v.uv, _MainTex );\n\n\t\t\t\t// Calculate Grab UV.\n\t\t\t\to.grabPos = ComputeGrabScreenPos( o.vertex );\n\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\tfixed4 frag ( v2f i ) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D( _MainTex, i.uv );\n\n\t\t\t\t// Calculate the number of mosaic blocks on the X-axis by calculating the Aspect Ratio.\n\t\t\t\tfloat aspect = _ScreenParams.x / _ScreenParams.y;\n\t\t\t\tfloat2 nBlocks = floor ( float2 ( _NumMosaicBlocks * aspect, _NumMosaicBlocks ) );\n\n\t\t\t\t// Get colors from Grab Texture by calculating mosaic UV.\n\t\t\t\tfixed2 mosaicUV = round( i.grabPos.xy * nBlocks ) / nBlocks;\n\t\t\t\tfixed4 grabCol = tex2D( _CustomGrabTexture, mosaicUV );\n\t\t\t\tcol.rgb = grabCol.rgb;\n\n\t\t\t\tcol.a *= _Color.a;\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class SetPortraitMeshLayer : MonoBehaviour\n{\n\tpublic apPortrait portrait; // Target apPortrait\n\tpublic string layerName = \"Default\"; // Name of the layer to be assigned\n\tpublic string[] meshNames; // Names of the meshes to which layers are assigned\n\n\tvoid Start()\n\t{\n\t\tSetPortraitMeshLayers();\n\t\tthis.enabled = false;\n\t}\n\n\t// A function that finds the target meshes and changes the layer.\n\tprivate void SetPortraitMeshLayers()\n\t{\n\t\tint nMeshNames = (meshNames != null) ? meshNames.Length : 0;\n\t\tif ( nMeshNames == 0 ) { return; }\n\n\t\t// apPortrait may not be initialized, so we try to initialize it here.\n\t\tportrait.Initialize();\n\n\t\t// Change the name of the input layer to an int type variable.\n\t\tint layer = LayerMask.NameToLayer( layerName );\n\n\t\tfor ( int i = 0; i < nMeshNames; i++ )\n\t\t{\n\t\t\tstring meshName = meshNames[i];\n\n\t\t\tapOptTransform targetTransform = portrait.GetOptTransform(meshName);\n\t\t\tif ( targetTransform == null ) { continue; }\n\n\t\t\t// Calls a function that changes the target's layer.\n\t\t\tSetGameObjectLayer(targetTransform.gameObject, layer);\n\t\t}\n\t}\n\n\t// Recursively changes the layer of the target and its child objects.\n\tprivate void SetGameObjectLayer(GameObject targetObject, int layer)\n\t{\n\t\tif ( targetObject == null ) { return; }\n\n\t\ttargetObject.layer = layer;\n\n\t\t// Also changes the layer of child objects.\n\t\tint nChildren = targetObject.transform.childCount;\n\t\tif ( nChildren == 0 ) { return; }\n\n\t\tfor ( int i = 0; i < nChildren; i++)\n\t\t{\n\t\t\t// Call recursively.\n\t\t\tSetGameObjectLayer(targetObject.transform.GetChild(i).gameObject, layer);\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
+    <!--------------->
+
+    </body>
+</html>

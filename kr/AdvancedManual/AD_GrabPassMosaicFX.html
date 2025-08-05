@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Grab Pass를 이용한 모자이크 효과</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/ko/anyportrait-ko/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ko/ap-video-tutorials-ko/">동영상</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ko/forum-ko/">게시판</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_GrabPassMosaicFX.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_GrabPassMosaicFX.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_GrabPassMosaicFX.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/ko/anyportrait-ko/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > Grab Pass를 이용한 모자이크 효과</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Grab Pass를 이용한 모자이크 효과</h1>
+    <br>
+    
+    <p>
+    AnyPortrait 및 유니티를 이용하여 특수한 효과들을 구현하기 위하여 텍스쳐 타입의 "현재 렌더링되고 있는 화면"이 필요할 때가 있습니다.<br>
+    유니티에서는 화면을 텍스쳐 형태로 가져오기 위해 "<strong>Grab Pass</strong>"라는 것을 이용합니다.<br>
+    이 페이지에서는 많은 사용자들의 문의를 주셨던 "모자이크 효과"를 구현하는 방법을 예시로 들어서 <strong>Grab Pass</strong>를 설명합니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Grab Pass와 렌더 파이프라인</h3>
+    <br>
+    
+    <p>
+    모자이크 등의 효과를 구현하기 위해서는 모자이크 영역에 해당하는 메시가 렌더링되기 직전의 화면 텍스쳐를 가져와야 합니다.<br>
+    즉, 렌더링이 진행되는 과정을 잠시 멈추고, 그 시점까지의 프레임 버퍼를 임시 텍스쳐로 복사해야합니다.<br>
+    그것을 수행하는 것이 "<strong>Grab Pass</strong>"입니다. (<a href="https://docs.unity3d.com/kr/2023.2/Manual/SL-GrabPass.html" target="_sub">유니티 메뉴얼</a>)<br>
+    그리고 이 <strong>Grab Pass</strong>에서 생성된 <strong>Grab Texture</strong>를 이용하면 화면 효과를 쉽게 구현할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    그런데 <strong>Grab Pass</strong>를 이용하여 효과를 구현하는 방법이 프로젝트의 렌더 파이프라인에 따라 다릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2277.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Built-In 렌더 파이프라인</strong>에서는 메시들이 렌더링 되는 도중에 자유롭게 <strong>Grab Pass</strong>를 호출하여 <strong>Grab Texture</strong>를 가져올 수 있습니다.<br>
+    <strong>Grab Texture</strong>를 필요로하는 쉐이더 (여기서는 모자이크 효과 쉐이더)에 <strong>Grab Pass</strong>를 명시하면 그 순간 <strong>Grab Texture</strong>가 생성되기 때문입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2278.jpg"/>
+    <br>
+    
+    <p>
+    그런데 <strong>URP</strong>는 기본적으로 <strong>Grab Pass</strong>를 지원하지 않습니다.<br>
+    <strong>Grab Pass</strong>와 유사한 역할을 하는 쉐이더의 기능은 있지만, 이것은 "불투명 메시 (Opaque)"만 렌더링된 결과를 가지고 있으므로 이 경우에는 맞지 않습니다.<br>
+    그래서 <strong>Grab Pass</strong>의 역할을 하는 "<strong>Renderer Feature</strong>"를 직접 작성해야합니다.<br>
+    다만 <strong>Renderer Feature</strong>는 메시들의 렌더링 도중에 호출될 수 없으며, 카메라와 렌더링 이벤트 단위로만 호출될 수 있습니다.<br>
+    따라서 "모자이크 이전까지의 메시들의 렌더링 결과"를 가져오기 위해서는 카메라와 레이어를 분리할 필요가 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Built-In 렌더 파이프라인에서 효과 구현하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2257.jpg"/>
+    <br>
+    
+    <p>
+    위와 같이 예제를 구성했습니다.<br>
+    모자이크 영역이 될 이미지와 메시를 추가하고 "<strong>Mosaic Mask</strong>"라고 이름을 설정했습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이제 모자이크 효과를 렌더링하는 쉐이더를 작성해봅시다. (<a href="../../kr/Script/SC_CustomShader.html">커스텀 쉐이더 작성하기</a>)<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Custom Shader/Mosaic Shader - BuiltIn"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = <span class="text-danger">"white"</span> {}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// 모자이크 블록의 개수 (Y축 기준)</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_NumMosaicBlocks (</strong><span class="text-danger">"Number of Mosaic Blocks (Y-Axis)"</span>, float) = 10.0<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags{ <span class="text-danger">"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// Grab Pass를 호출하여 Grab Texture를 가져옵니다.</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<strong>GrabPass { </strong><span class="text-danger"><strong>"_CustomGrabTexture"</strong></span><strong> }</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"LightMode" = "ForwardBase"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Grab Texture용 UV를 계산하고 전달하기 위한 시맨틱</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>float4</strong></span> <strong>grabPos : TEXCOORD1;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Grab Pass에서 생성된 Grab Texture</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>sampler2D</strong></span> <strong>_CustomGrabTexture;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 모자이크 개수 프로퍼티 변수</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>float</strong></span> <strong>_NumMosaicBlocks;</strong><br>
+    <br>&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert ( <span class="text-primary">appdata</span> v )<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos( v.vertex );<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX( v.uv, _MainTex );<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Grab UV를 계산합니다.</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.grabPos = ComputeGrabScreenPos( o.vertex );</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag ( <span class="text-primary">v2f</span> i ) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D( _MainTex, i.uv );<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Aspect Ratio를 계산하여 X축의 모자이크 블록의 개수를 계산합니다.</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>float</strong></span><strong> aspect = _ScreenParams.x / _ScreenParams.y;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>float2</strong></span><strong> nBlocks = floor ( </strong><span class="text-primary"><strong>float2</strong></span><strong> ( _NumMosaicBlocks * aspect, _NumMosaicBlocks ) );</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 모자이크 UV를 계산하여 Grab Texture에서 색상 가져옵니다.</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>fixed2</strong></span><strong> mosaicUV = round( i.grabPos.xy * nBlocks ) / nBlocks;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>fixed4</strong></span><strong> grabCol = tex2D( _CustomGrabTexture, mosaicUV );</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = grabCol.rgb;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    이 쉐이더는 <strong>Grab Texture</strong>를 가져와서 메시의 RGB에 적용하여 렌더링을 합니다.<br>
+    이때, <strong>round</strong> 함수와 <strong>_NumMosaicBlocks</strong> 프로퍼티를 이용하여 UV가 특정 크기 단위로 변하도록 만들었습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2258.jpg"/>
+    <br>
+    
+    <p>
+    다시 AnyPortrait 에디터로 돌아옵니다.<br>
+    <strong>(1)</strong> <strong>메시 그룹</strong>을 선택한 상태에서 "<strong>Mosaic Mask</strong>" 메시를 선택합니다.<br>
+    <strong>(2)</strong> <strong>Shader Setting</strong> 옵션에서 "<strong>Material Set</strong>" 값을 "<strong>Custom Shader</strong>"로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2259.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 앞서 작성한 모자이크 쉐이더를 할당합니다.<br>
+    <strong>(2)</strong> 위 쉐이더 코드의 "<strong>_NumMosaicBlocks</strong>" 프로퍼티의 값을 여기서 설정합니다. <strong>Add Custom Property</strong> 버튼을 누르고 프로퍼티의 이름과 타입, 값을 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2260.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>를 하고 유니티 씬으로 돌아가 게임을 실행하면 위와 같이 모자이크 효과가 적용된 것을 볼 수 있습니다.<br>
+    "<strong>Mosaic Mask</strong>" 메시가 AnyPortrait 내부의 객체이므로, 투명하게 만들거나 애니메이션에 따라 자유롭게 움직이게 만들 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>URP에서 효과 구현하기</h3>
+    <br>
+    
+    <p>
+    URP에서는 쉐이더를 포함한 다음의 3개의 스크립트를 작성해야합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Grab Pass를 재현할 Renderer Feature</strong><br>
+    : URP에는 <strong>Grab Pass</strong>가 없습니다.<br>
+    그래서 직접 <strong>Renderer Feature</strong>를 작성하여 <strong>Grab Pass</strong>를 구현해야합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. 메시의 레이어 변경 스크립트</strong><br>
+    : <strong>Renderer Feature</strong>는 카메라 및 레이어가 바뀔 때 동작합니다.<br>
+    따라서 "일반 메시들"과 "모자이크 마스크 메시"가 별도의 레이어를 가지도록 만들어야 합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. 모자이크 쉐이더 그래프</strong><br>
+    : <strong>쉐이더 그래프</strong>를 이용하여 모자이크 쉐이더를 작성해야합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2261.jpg"/>
+    <br>
+    
+    <p>
+    먼저, <strong>Renderer Feature</strong>를 작성하여 <strong>Grab Pass</strong>를 구현해봅시다.<br>
+    그런데 <strong>Renderer Feature</strong>의 API가 <strong>URP 13</strong>에서 크게 바뀌었으며, 서로 호환되지 않습니다.<br>
+    따라서 <strong>Renderer Feature</strong>를 작성하기에 앞서 <strong>URP의 버전</strong>을 확인해야합니다.<br>
+    (<a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@15.0/manual/upgrade-guide-2022-1.html" target="_sub">관련 공식 메뉴얼</a>)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 유니티의 <strong>Package Manager</strong>를 열고 <strong>Packages</strong>를 "<strong>In Project</strong>"로 설정합니다.<br>
+    <strong>(2)</strong> 설치된 유니티의 패키지가 보여집니다. 그 중 <strong>Universal RP</strong>를 선택합니다.<br>
+    <strong>(3)</strong> 버전을 확인합니다. 위 이미지에서는 <strong>12.1.1</strong>이므로, <strong>URP 13</strong>보다 이전의 방식으로 작성된 스크립트가 필요합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이 페이지에서는 <strong>Renderer Feature</strong>를 자세히 설명하기 보다는, 오픈소스로서 작성된 외부의 개발자의 스크립트를 활용해볼 것입니다.<br>
+    URP의 버전이 만약 <strong>13</strong>보다 이전이라면 다음의 링크에서 <strong>Grab Pass용 Renderer Feature</strong> 스크립트를 구할 수 있습니다.<br>
+    <a href="https://gist.github.com/Refsa/54da34a9e2fc8e45472286572216ad17" target="_sub">Refsa의 GrabScreenFeature.cs</a> (MIT License)<br>
+    </p>
+    <br>
+    
+    <p>
+    만약 URP 버전이 <strong>13 혹은 그 이후 버전</strong>이라면 다음의 링크에서 <strong>Grab Pass용 Renderer Feature (Unity 6 포함)</strong> 스크립트를 구할 수 있습니다.<br>
+    특히, 이 개발자는 두가지 버전의 <strong>Renderer Feature</strong>를 구현했습니다.<br>
+    유니티 6의 <strong>Render Graph</strong>의 도입으로 API가 서로 다르게 되었는데, 후술할 <strong>Render Graph</strong> 사용 여부에 맞추어 다운로드하면 되겠습니다.<br>
+    - Render Graph를 사용할 경우 : "<strong>GrabScreenFeatureRenderGraphAPI.cs</strong>"<br>
+    - Render Graph를 사용하지 않을 경우 : "<strong>GrabScreenFeatureU6.cs</strong>"<br>
+    <a href="https://github.com/Smajlovycc/GrabPassU6" target="_sub">Smajlovycc의 GrabPassU6</a> (MIT License)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2262.jpg"/>
+    <br>
+    
+    <p>
+    URP 버전에 맞게 <strong>Renderer Feature 스크립트</strong>를 준비했다면, 프로젝트에서 URP를 설정합니다.<br>
+    <strong>Project Settings > Graphics > Default Render Pipeline</strong>에서 <strong>URP 에셋</strong>을 생성하여 지정합니다.<br>
+    유니티 버전에 따라서는 플랫폼별 렌더 파이프라인도 설정해야할 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2263.jpg"/>
+    <br>
+    
+    <p>
+    유니티 6 또는 그 이후 버전에서는 <strong>Render Graph</strong>라는 새로운 기능이 추가되었는데, 이 기능의 사용 여부에 따라 <strong>Renderer Feature</strong>의 API가 바뀝니다.<br>
+    <strong>Render Graph</strong>용 스크립트를 사용하지 않는다면 <strong>Compatibility Mode</strong>를 활성화하여 기존의 API로 작성된 <strong>Renderer Feature</strong>를 사용할 수 있습니다.<br>
+    이 옵션을 켜면 <strong>Render Graph</strong>는 비활성화됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2264.jpg"/>
+    <br>
+    
+    <p>
+    이제 <strong>Renderer Feature</strong>을 적용해봅시다.<br>
+    <strong>(1)</strong> 프로젝트에 적용된 URP 에셋의 <strong>URP Renderer Data</strong> 에셋을 선택합니다.<br>
+    <strong>(2)</strong> <strong>Add Renderer Feature</strong> 버튼을 누르고, 앞서 오픈소스에서 다운로드하거나 직접 작성한 <strong>Grab Pass</strong>용 <strong>Renderer Feature</strong>를 선택합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2265.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Grab Pass</strong>용 <strong>Renderer Feature</strong>가 추가되었습니다.<br>
+    일부 속성을 확인하거나 변경합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Texture Name</strong><br>
+    : <strong>Grab Texture</strong>의 이름입니다.<br>
+    이 값을 모자이크 효과를 위한 쉐이더 그래프에서 사용할 것이므로 이름을 기억해둡니다.<br>
+    만약 필요한 경우 변경할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Layer Mask</strong><br>
+    : <strong>Grab Texture</strong>에 포함될 오브젝트들의 레이어를 지정합니다.<br>
+    "<strong>None</strong>"이나 "<strong>Everything</strong>"이면 제대로 동작하지 않으므로, 모자이크에 포함시킬 대상 레이어만 선택하여 지정합니다.<br>
+    여기서는 "<strong>Default</strong>" 레이어만 지정했습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    앞서, "일반 메시들"과 "모자이크 마스크 메시"는 구분되어 렌더링되어야 한다고 설명을 드렸습니다.<br>
+    따라서 레이어와 카메라를 분리해서 "모자이크 마스크 메시"가 별도로 렌더링 되도록 만들어야 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2266.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Project Settings > Tags and Layers</strong>를 엽니다.<br>
+    <strong>(2)</strong> <strong>Layers</strong> 항목의 빈 칸에 "<strong>MosaicFX</strong>"라는 이름의 레이어를 생성합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2267.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 캐릭터를 렌더링하는 기존의 카메라 ("<strong>Main Camera</strong>")를 복제하고 "<strong>Mosaic Camera</strong>"라고 이름을 설정합니다. 2번째 카메라부터는 <strong>Audio Listener</strong> 컴포넌트도 삭제합니다.<br>
+    <strong>(2)</strong> <strong>Render Type</strong>을 "<strong>Overlay</strong>"로 변경합니다.<br>
+    <strong>(3)</strong> <strong>Culling Mask</strong>의 값에서 "<strong>MosaicFX</strong>" 레이어만 선택합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2268.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 다시 원래의 카메라인 "<strong>Main Camera</strong>"를 선택합니다.<br>
+    <strong>(2)</strong> <strong>Culling Mask</strong>의 값에서 "<strong>MosaicFX</strong>" 레이어를 제외합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2269.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> <strong>Stack > Cameras</strong>에서 "<strong>Mosaic Camera</strong>"를 등록합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    "<strong>모자이크 마스크 메시</strong>"를 구분하여 렌더링할 수 있도록 씬 구성이 끝났습니다.<br>
+    하지만 "<strong>모자이크 마스크 메시</strong>"는 AnyPortrait 캐릭터 내에 있기 때문에 다른 메시와 동일한 레이어를 가집니다.<br>
+    따라서 다음과 같은 스크립트를 새로 작성하여 해당 메시가 "<strong>MosaicFX</strong>" 레이어 및 "<strong>Mosaic Camera</strong>"에서 렌더링되도록 만들어야 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary">using</span> AnyPortrait;<br>
+    <br>
+    <span class="text-primary">public class</span> <span class="text-success">SetPortraitMeshLayer</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">apPortrait</span> portrait; // 대상이 되는 apPortrait&emsp;&emsp;<br>
+    &emsp;&emsp;<span class="text-primary">public string</span> layerName = <span class="text-danger">"Default"</span>; // 할당할 레이어의 이름&emsp;&emsp;<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-primary">string</span>&#91;&#93; meshNames; // 레이어를 지정할 메시들의 메시 그룹 내의 이름들<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>SetPortraitMeshLayers();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">this</span>.enabled = <span class="text-primary">false</span>;<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// 대상인 메시들을 찾아서 레이어를 변경하는 함수<br>
+    &emsp;&emsp;<span class="text-primary">private void</span> SetPortraitMeshLayers()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> nMeshNames = (meshNames != <span class="text-primary">null</span>) ? meshNames.Length : 0;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> ( nMeshNames == 0 ) { <span class="text-primary">return</span>; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// apPortrait의 초기화가 되지 않은 상태일 수 있으므로, 여기서 초기화를 시도합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 입력된 레이어의 이름을 int형 변수로 변경합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> layer = <span class="text-success">LayerMask</span>.NameToLayer( layerName );<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">for</span> ( <span class="text-primary">int</span> i = 0; i < nMeshNames; i++ )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">string</span> meshName = meshNames&#91;i&#93;;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apOptTransform</span> targetTransform = portrait.GetOptTransform(meshName);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> ( targetTransform == <span class="text-primary">null</span> ) { <span class="text-primary">continue</span>; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 대상의 레이어를 변경하는 함수를 호출합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>SetGameObjectLayer(targetTransform.gameObject, layer);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// 재귀적으로 대상 및 자식 객체들의 레이어를 변경합니다.<br>
+    &emsp;&emsp;<span class="text-primary"><strong>private</strong></span> <span class="text-primary"><strong>void</strong></span> <strong>SetGameObjectLayer(</strong><span class="text-success"><strong>GameObject</strong></span><strong> targetObject, </strong><span class="text-primary"><strong>int</strong></span><strong> layer)</strong><br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> ( targetObject == <span class="text-primary">null</span> ) { <span class="text-primary">return</span>; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>targetObject.layer = layer;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 자식 객체들의 레이어도 변경합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> nChildren = targetObject.transform.childCount;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> ( nChildren == 0 ) { return; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">for</span> ( <span class="text-primary">int</span> i = 0; i < nChildren; i++)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 재귀적으로 호출을 합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>SetGameObjectLayer(targetObject.transform.GetChild(i).gameObject, layer);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2270.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 스크립트를 적용하기 위해 새로운 <strong>GameObject</strong>를 생성합니다.<br>
+    <strong>(2)</strong> 작성한 스크립트를 추가하고 값을 설정합니다.<br>
+    - <strong>Portrait</strong> : 대상 캐릭터를 지정합니다.<br>
+    - <strong>Layer Name</strong> : 모자이크 마스크 메시가 렌더링될 레이어인 "<strong>MosaicFX</strong>"를 입력합니다.<br>
+    - <strong>Mesh Names</strong> : 모자이크 마스크 메시의 메시 그룹 내에서의 이름을 입력합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이제 마지막으로 "<strong>모자이크 쉐이더 그래프</strong>"를 만듭니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2271.jpg"/>
+    <br>
+    
+    <p>
+    새로운 "<strong>Sprite Unlit, Transparent, Alpha Blend</strong>" 타입의 쉐이더 그래프를 만듭니다.<br>
+    AnyPortrait용 쉐이더 그래프를 작성하는 방법에 대해서는 <a href="../../kr/AdvancedManual/AD_ShaderGraph.html">관련 페이지</a>에서 볼 수 있으며, 여기서는 모자이크 효과 관련 프로퍼티만 소개합니다.<br>
+    <strong>(1)</strong> 기본 프로퍼티들에 더해서 "<strong>_NumMosaicBlocks (Float)</strong>", "<strong>_GrabPassTransparent (Texture2D)</strong>" 프로퍼티를 추가합니다.<br>
+    <strong>(2)</strong> 이 두개의 프로퍼티들의 속성을 다음과 같이 설정합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. _NumMosaicBlocks</strong><br>
+    : 모자이크 블록의 개수입니다.<br>
+    프로퍼티의 이름은 앞서 소개된 Built-In의 모자이크 쉐이더 프로퍼티와 동일하며, AnyPortrait 캐릭터 내에서 모자이크 마스크 메시가 값을 전달할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. _GrabPassTransparent</strong><br>
+    : <strong>Grab Texture</strong>의 프로퍼티 이름입니다.<br>
+    앞서 <strong>Grab Pass</strong>로서 추가한 <strong>Renderer Feature</strong>의 "<strong>Texture Name</strong>" 값과 동일해야합니다.<br>
+    <strong>Show In Inspector</strong> (또는 버전에 따라 <strong>Exposed</strong>) 옵션을 비활성화해야합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2272.jpg"/>
+    <br>
+    
+    <p>
+    위 이미지와 같이 쉐이더 그래프를 완성합니다. (<a href="https://drive.google.com/file/d/1amZ5264KDZ0l1n6ofd3ue_4Vs1UNAslb/view?usp=sharing" target="_sub">큰 이미지 링크</a>)<br>
+    <strong>Built-In</strong> 예제에서의 모자이크 쉐이더를 그래프 형태로 다시 작성한다고 생각하시면 되겠습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2273.jpg"/>
+    <br>
+    
+    <p>
+    URP용 모자이크 쉐이더를 AnyPortrait 캐릭터에 적용합니다.<br>
+    <strong>(1)</strong> "<strong>Mosaic Mask</strong>" 메시를 선택합니다.<br>
+    <strong>(2)</strong> Built-In에서의 설정이 완료된 상태라면 <strong>Custom Shader</strong>에 방금 만든 "<strong>URP용 모자이크 쉐이더 그래프 에셋</strong>"을 할당합니다.<br>
+    (만약 Custom Shader 옵션이 설정되지 않았다면 Built-In에서의 구현 설명의 해당 부분을 확인해주세요.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2274.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>루트 유닛</strong>을 선택합니다.<br>
+    <strong>(2)</strong> <strong>Material Library</strong> 버튼을 누릅니다.<br>
+    <strong>(3)</strong> URP용 재질 프리셋으로부터 재질 세트를 생성하고 선택합니다.<br>
+    <strong>(4)</strong> <strong>Default Material</strong> 버튼을 눌러서 <strong>ON</strong> 상태로 만듭니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2275.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Bake</strong> 버튼을 누릅니다.<br>
+    <strong>(2)</strong> <strong>Setting</strong> 탭을 선택합니다.<br>
+    <strong>(3)</strong> <strong>Render Pipeline</strong>의 값을 "<strong>Scriptable Render Pipeline</strong>"으로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2276.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>를 하고 게임을 실행하면 URP에서도 모자이크 효과가 정상적으로 동작하는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_URPOutlineShader.html">< URP 외곽선 쉐이더 만들기</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_Mecanim.html">메카님과 연동하기 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom Shader/Mosaic Shader - BuiltIn\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\n\t\t// 모자이크 블록의 개수 (Y축 기준)\n\t\t_NumMosaicBlocks (\"Number of Mosaic Blocks (Y-Axis)\", float) = 10.0\n\t}\n\n\tSubShader\n\t{\n\t\tTags{ \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\t\t\n\t\tLOD 200\n\n\t\t// Grab Pass를 호출하여 Grab Texture를 가져옵니다.\n\t\tGrabPass { \"_CustomGrabTexture\" }\n\n\t\tPass\n\t\t{\n\t\t\tTags { \"LightMode\" = \"ForwardBase\" }\n\t\t\tZWrite Off\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\t\t\t\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\n\t\t\t\t// Grab Texture용 UV를 계산하고 전달하기 위한 시맨틱\n\t\t\t\tfloat4 grabPos : TEXCOORD1;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\t// Grab Pass에서 생성된 Grab Texture\n\t\t\tsampler2D _CustomGrabTexture;\n\n\t\t\t// 모자이크 개수 프로퍼티 변수\n\t\t\tfloat _NumMosaicBlocks;\n\n\t\t\n\t\t\tv2f vert ( appdata v )\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos( v.vertex );\n\t\t\t\to.uv = TRANSFORM_TEX( v.uv, _MainTex );\n\n\t\t\t\t// Grab UV를 계산합니다.\n\t\t\t\to.grabPos = ComputeGrabScreenPos( o.vertex );\n\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\tfixed4 frag ( v2f i ) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D( _MainTex, i.uv );\n\n\t\t\t\t// Aspect Ratio를 계산하여 X축의 모자이크 블록의 개수를 계산합니다.\n\t\t\t\tfloat aspect = _ScreenParams.x / _ScreenParams.y;\n\t\t\t\tfloat2 nBlocks = floor ( float2 ( _NumMosaicBlocks * aspect, _NumMosaicBlocks ) );\n\n\t\t\t\t// 모자이크 UV를 계산하여 Grab Texture에서 색상 가져옵니다.\n\t\t\t\tfixed2 mosaicUV = round( i.grabPos.xy * nBlocks ) / nBlocks;\n\t\t\t\tfixed4 grabCol = tex2D( _CustomGrabTexture, mosaicUV );\n\t\t\t\tcol.rgb = grabCol.rgb;\n\n\t\t\t\tcol.a *= _Color.a;\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class SetPortraitMeshLayer : MonoBehaviour\n{\n\tpublic apPortrait portrait; // 대상이 되는 apPortrait\t\n\tpublic string layerName = \"Default\"; // 할당할 레이어의 이름\t\n\tpublic string[] meshNames; // 레이어를 지정할 메시들의 메시 그룹 내의 이름들\n\n\tvoid Start()\n\t{\n\t\tSetPortraitMeshLayers();\n\t\tthis.enabled = false;\n\t}\n\n\t// 대상인 메시들을 찾아서 레이어를 변경하는 함수\n\tprivate void SetPortraitMeshLayers()\n\t{\n\t\tint nMeshNames = (meshNames != null) ? meshNames.Length : 0;\n\t\tif ( nMeshNames == 0 ) { return; }\n\n\t\t// apPortrait의 초기화가 되지 않은 상태일 수 있으므로, 여기서 초기화를 시도합니다.\n\t\tportrait.Initialize();\n\n\t\t// 입력된 레이어의 이름을 int형 변수로 변경합니다.\n\t\tint layer = LayerMask.NameToLayer( layerName );\n\n\t\tfor ( int i = 0; i < nMeshNames; i++ )\n\t\t{\n\t\t\tstring meshName = meshNames[i];\n\n\t\t\tapOptTransform targetTransform = portrait.GetOptTransform(meshName);\n\t\t\tif ( targetTransform == null ) { continue; }\n\n\t\t\t// 대상의 레이어를 변경하는 함수를 호출합니다.\n\t\t\tSetGameObjectLayer(targetTransform.gameObject, layer);\n\t\t}\n\t}\n\n\t// 재귀적으로 대상 및 자식 객체들의 레이어를 변경합니다.\n\tprivate void SetGameObjectLayer(GameObject targetObject, int layer)\n\t{\n\t\tif ( targetObject == null ) { return; }\n\n\t\ttargetObject.layer = layer;\n\n\t\t// 자식 객체들의 레이어도 변경합니다.\n\t\tint nChildren = targetObject.transform.childCount;\n\t\tif ( nChildren == 0 ) { return; }\n\n\t\tfor ( int i = 0; i < nChildren; i++)\n\t\t{\n\t\t\t// 재귀적으로 호출을 합니다.\n\t\t\tSetGameObjectLayer(targetObject.transform.GetChild(i).gameObject, layer);\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+
+    <!--------------->
+
+    </body>
+</html>

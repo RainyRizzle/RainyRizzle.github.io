@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>「Grab Pass」を使ったモザイク効果</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/ja/anyportrait-ja/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ja/ap-video-tutorials-ja/">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ja/forum-ja/">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_GrabPassMosaicFX.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_GrabPassMosaicFX.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_GrabPassMosaicFX.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/ja/anyportrait-ja/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 「Grab Pass」を使ったモザイク効果</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">「Grab Pass」を使ったモザイク効果</h1>
+    <br>
+    
+    <p>
+    「AnyPortrait」および「Unity」を利用して特殊な効果を実装するためにテクスチャタイプの「現在レンダリングされている画面」が必要な場合があります。<br>
+    「Unity」では、画面をテクスチャの形にするために「<strong>Grab Pass</strong>」というものを利用します。<br>
+    このページでは、多くのユーザーにお問い合わせいただいた「モザイク効果」の実装方法を例にして、「<strong>Grab Pass</strong>」について説明します。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>「Grab Pass」とレンダリングパイプライン</h3>
+    <br>
+    
+    <p>
+    モザイクなどの効果を実現するには、モザイク領域に対応するメッシュがレンダリングされる直前の画面テクスチャを取得する必要があります。<br>
+    つまり、レンダリングが進行するプロセスをしばらく停止し、その時点までのフレームバッファを一時的なテクスチャにコピーする必要があります。<br>
+    それを行うのが「<strong>Grab Pass</strong>」です。 (<a href="https://docs.unity3d.com/ja/2023.2/Manual/SL-GrabPass.html" target="_sub">Unityマニュアル</a>)<br>
+    そしてこの「<strong>Grab Pass</strong>」で生成された「<strong>Grab Texture</strong>」を利用すれば、画面効果を簡単に実装できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    ちなみに、「<strong>Grab Pass</strong>」を使って効果を実装する方法は、プロジェクトの「レンダリングパイプライン」によって異なります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2277.jpg"/>
+    <br>
+    
+    <p>
+    「Built-In レンダーパイプライン」では、メッシュがレンダリングされる途中で自由に「<strong>Grab Pass</strong>」を呼び出して「<strong>Grab Texture</strong>」をインポートできます。<br>
+    これは、「<strong>Grab Texture</strong>」を必要とするシェーダ（ここではモザイク効果シェーダ）に「<strong>Grab Pass</strong>」を指定すると、その瞬間に「<strong>Grab Texture</strong>」が生成されるためです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2278.jpg"/>
+    <br>
+    
+    <p>
+    ちなみに「URP」はデフォルトで「<strong>Grab Pass</strong>」をサポートしていません。<br>
+    「<strong>Grab Pass</strong>」と同様の役割を果たすシェーダの機能はありますが、これは「不透明メッシュ（Opaque）」のみレンダリングされた結果を持っているので、この場合には合いません。<br>
+    そのため、「<strong>Grab Pass</strong>」の役割を果たす「<strong>Renderer Feature</strong>」を直接作成する必要があります。<br>
+    ただし、「<strong>Renderer Feature</strong>」はメッシュのレンダリング中に呼び出すことはできず、カメラとレンダリングイベント単位でのみ呼び出すことができます。<br>
+    したがって、「モザイク前までのメッシュのレンダリング結果」を取得するには、カメラとレイヤーを分離する必要があります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Built-Inレンダリングパイプラインで効果を実装</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2257.jpg"/>
+    <br>
+    
+    <p>
+    上記のように例を設定しました。<br>
+    モザイク領域になるイメージとメッシュを追加し、「<strong>Mosaic Mask</strong>」という名前を設定しました。<br>
+    </p>
+    <br>
+    
+    <p>
+    それでは、モザイク効果をレンダリングするシェーダを作成しましょう。 (<a href="../../jp/Script/SC_CustomShader.html">カスタムシェーダの作成</a>)<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    Shader <span class="text-danger">"Custom Shader/Mosaic Shader - BuiltIn"</span><br>
+    {<br>
+    &emsp;&emsp;Properties<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;_Color (<span class="text-danger">"2X Color (RGBA Mul)"</span>, Color) = (0.5, 0.5, 0.5, 1.0)<br>
+    &emsp;&emsp;&emsp;&emsp;_MainTex (<span class="text-danger">"Main Texture (RGBA)"</span>, 2D) = <span class="text-danger">"white"</span> {}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// モザイクブロックの数（Y軸基準）</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<strong>_NumMosaicBlocks (</strong><span class="text-danger">"Number of Mosaic Blocks (Y-Axis)"</span>, float) = 10.0<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;SubShader<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;Tags{ <span class="text-danger">"RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;Blend SrcAlpha OneMinusSrcAlpha&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;LOD 200<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<strong>// Grab Pass を呼び出して Grab Texture を取得します。</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<strong>GrabPass { </strong><span class="text-danger"><strong>"_CustomGrabTexture"</strong></span><strong> }</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;Pass<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tags { <span class="text-danger">"LightMode" = "ForwardBase"</span> }<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ZWrite Off<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CGPROGRAM<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma vertex vert<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#pragma fragment frag&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;#include "UnityCG.cginc"<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> appdata<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : POSITION;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">struct</span> v2f<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float2</span> uv : TEXCOORD0;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> vertex : SV_POSITION;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Grab Texture用のUVを計算して配信するためのセマンティック</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>float4</strong></span> <strong>grabPos : TEXCOORD1;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;};<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">sampler2D</span> _MainTex;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float4</span> _MainTex_ST;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">half4</span> _Color;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Grab Pass で生成された Grab Texture</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>sampler2D</strong></span> <strong>_CustomGrabTexture;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// モザイク数プロパティ変数</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>float</strong></span> <strong>_NumMosaicBlocks;</strong><br>
+    <br>&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> vert ( <span class="text-primary">appdata</span> v )<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">v2f</span> o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.vertex = UnityObjectToClipPos( v.vertex );<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;o.uv = TRANSFORM_TEX( v.uv, _MainTex );<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// Grab UVを計算します。</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>o.grabPos = ComputeGrabScreenPos( o.vertex );</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return o;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> frag ( <span class="text-primary">v2f</span> i ) : SV_Target<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">fixed4</span> col = tex2D( _MainTex, i.uv );<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// 「Aspect Ratio」を計算して、X軸のモザイクブロックの数を計算します。</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>float</strong></span><strong> aspect = _ScreenParams.x / _ScreenParams.y;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>float2</strong></span><strong> nBlocks = floor ( </strong><span class="text-primary"><strong>float2</strong></span><strong> ( _NumMosaicBlocks * aspect, _NumMosaicBlocks ) );</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>// モザイクUVを計算してGrab Textureから色を取得します。</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>fixed2</strong></span><strong> mosaicUV = round( i.grabPos.xy * nBlocks ) / nBlocks;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary"><strong>fixed4</strong></span><strong> grabCol = tex2D( _CustomGrabTexture, mosaicUV );</strong><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>col.rgb = grabCol.rgb;</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;col.a *= _Color.a;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return col;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ENDCG<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    このシェーダは「<strong>Grab Texture</strong>」を取得し、メッシュの「RGB」に適用してレンダリングを行います。<br>
+    このとき、「<strong>round</strong>」関数と「<strong>_NumMosaicBlocks</strong>」プロパティを使用して、UVが特定のサイズ単位で変化するようにしました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2258.jpg"/>
+    <br>
+    
+    <p>
+    もう一度「AnyPortrait Editor」に戻ります。<br>
+    <strong>(1)</strong> 「メッシュグループ」を選択した状態で、「<strong>Mosaic Mask</strong>」メッシュを選択します。<br>
+    <strong>(2)</strong> 「<strong>Shader Setting</strong>」オプションで「<strong>Material Set</strong>」の値を「<strong>Custom Shader</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2259.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 前に作成したモザイクシェーダを割り当てます。<br>
+    <strong>(2)</strong> 上記のシェーダコードの「<strong>_NumMosaicBlocks</strong>」プロパティの値をここで設定します。 「<strong>Add Custom Property</strong>」ボタンを押して、プロパティの名前、タイプ、値を設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2260.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bake</strong>」をしてシーンに戻ってゲームを実行すると、上記のようにモザイク効果が適用されたことがわかります。<br>
+    「<strong>Mosaic Mask</strong>」メッシュが「AnyPortrait」内のオブジェクトなので、透明にしたりアニメーションに合わせて自由に動かしたりできます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>URPで効果を実装</h3>
+    <br>
+    
+    <p>
+    「URP」では、シェーダを含む次の3つのスクリプトを作成する必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. 「Grab Pass」を再現する「Renderer Feature」</strong><br>
+    ：「URP」には「<strong>Grab Pass</strong>」はありません。<br>
+    そのため、「<strong>Renderer Feature</strong>」を直接作成して「<strong>Grab Pass</strong>」を実装する必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2.メッシュのレイヤーを変更するスクリプト</strong><br>
+    ：「<strong>Renderer Feature</strong>」は、カメラやレイヤーが変わると動作します。<br>
+    したがって、「一般メッシュ」と「モザイクマスクメッシュ」が別々のレイヤーを持つようにする必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3.モザイクシェーダーグラフ</strong><br>
+    ：<strong>シェーダーグラフ（Shader Graph）</strong>を使用してモザイクシェーダーを作成する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2261.jpg"/>
+    <br>
+    
+    <p>
+    まず、「<strong>Renderer Feature</strong>」を作成して「<strong>Grab Pass</strong>」を実装しましょう。<br>
+    ちなみに、「<strong>Renderer Feature</strong>」の「API」は「<strong>URP 13</strong>」から大きく変わり、互いに互換性がありません。<br>
+    したがって、「<strong>Renderer Feature</strong>」を作成する前に、「URPのバージョン」を確認する必要があります。<br>
+    (<a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@15.0/manual/upgrade-guide-2022-1.html" target="_sub">関連公式マニュアル</a>)<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「Unity」の「<strong>Package Manager</strong>」を開き、「<strong>Packages</strong>」を「<strong>In Project</strong>」に設定します。<br>
+    <strong>(2)</strong> インストールされた Unity のパッケージが表示されます。その中から「<strong>Universal RP</strong>」を選択します。<br>
+    <strong>(3)</strong> バージョンを確認してください。上の画像では「<strong>12.1.1</strong>」なので、「<strong>URP 13</strong>」より前の方法で作成されたスクリプトが必要です。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページでは「<strong>Renderer Feature</strong>」を詳しく説明するのではなく、オープンソースとして作成された外部の開発者のスクリプトを活用してみます。<br>
+    「URPのバージョン」が「<strong>13</strong>より前」の場合は、次のリンクから「<strong>Grab Pass用Renderer Feature</strong>」スクリプトを入手できます。<br>
+    <a href="https://gist.github.com/Refsa/54da34a9e2fc8e45472286572216ad17" target="_sub">RefsaのGrabScreenFeature.cs</a> (MIT License)<br>
+    </p>
+    <br>
+    
+    <p>
+    「URPバージョン」が「<strong>13</strong>またはそれ以降のバージョン」の場合は、次のリンクから「<strong>Grab Pass用Renderer Feature（Unity 6を含む）</strong>」スクリプトを入手できます。<br>
+    特に、この開発者は2つのバージョンの「<strong>Renderer Feature</strong>」を実装しました。<br>
+    「Unity 6」の「<strong>Render Graph</strong>」の導入で「API」が異なることになりました。<br>
+    - 「Render Graph」を使用する場合：「<strong>GrabScreenFeatureRenderGraphAPI.cs</strong>」<br>
+    - 「Render Graph」を使用しない場合：「<strong>GrabScreenFeatureU6.cs</strong>」<br>
+    <a href="https://github.com/Smajlovycc/GrabPassU6" target="_sub">SmajlovyccのGrabPassU6</a> (MIT License)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2262.jpg"/>
+    <br>
+    
+    <p>
+    「URPバージョン」に合わせて「<strong>Renderer Featureスクリプト</strong>」を用意したら、プロジェクトでURPを設定します。<br>
+    「<strong>Project Settings > Graphics > Default Render Pipeline</strong>」で「<strong>URP アセット</strong>」を作成して指定します。<br>
+    「Unity」のバージョンによっては、「プラットフォーム別のレンダーパイプライン」も設定する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2263.jpg"/>
+    <br>
+    
+    <p>
+    「Unity 6」以降では「<strong>Render Graph</strong>」という新機能が追加されており、この機能の使用可否によって「<strong>Renderer Feature</strong>」の「API」が変わります。<br>
+    「<strong>Render Graph</strong>」のスクリプトを使用していない場合は、「<strong>Compatibility Mode</strong>」を有効にして、既存のAPIで作成された「<strong>Renderer Feature</strong>」を使用できます。<br>
+    このオプションをオンにすると、「[レンダリンググラフ」」は無効になります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2264.jpg"/>
+    <br>
+    
+    <p>
+    それでは、「<strong>Renderer Feature</strong>」を適用してみましょう。<br>
+    <strong>(1)</strong> プロジェクトに適用されたURPアセットの「<strong>URP Renderer Data</strong>」アセットを選択します。<br>
+    <strong>(2)</strong> 「<strong>Add Renderer Feature</strong>」ボタンを押して、先にオープンソースからダウンロードしたり、自分で作成した「<strong>Grab Pass</strong>」用の「<strong>Renderer Feature</strong>」を選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2265.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Grab Pass</strong>」用「<strong>Renderer Feature</strong>」を追加しました。<br>
+    一部のプロパティを確認または変更します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Texture Name</strong><br>
+    ：これは「<strong>Grab Texture</strong>」の名前です。<br>
+    この値はモザイク効果のためのシェーダーグラフで使用されるので、名前を覚えておいてください。<br>
+    必要に応じて変更できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Layer Mask</strong><br>
+    ：「<strong>Grab Texture</strong>」に含めるオブジェクトのレイヤーを指定します。<br>
+    「<strong>None</strong>」や「<strong>Everything</strong>」の場合、正常に動作しないため、モザイクに含める対象レイヤーのみを選択して指定します。<br>
+    ここでは「<strong>Default</strong>」レイヤのみを指定しました。<br>
+    </p>
+    <br>
+    
+    <p>
+    以前、「一般的なメッシュ」と「モザイクマスクのメッシュ」は区別され、レンダリングされる必要があることを説明しました。<br>
+    したがって、レイヤーとカメラを分離して「モザイクマスクメッシュ」を別々にレンダリングするようにする必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2266.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Project Settings > Tags and Layers</strong>」を開きます。<br>
+    <strong>(2)</strong> 「<strong>Layers</strong>」項目の空欄に「<strong>MosaicFX</strong>」という名前のレイヤーを作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2267.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> キャラクターをレンダリングする既存のカメラ（「<strong>Main Camera</strong>」）を複製し、「<strong>Mosaic Camera</strong>」という名前を設定します。 2台目のカメラからは「<strong>Audio Listener</strong>」コンポーネントも削除します。<br>
+    <strong>(2)</strong> 「<strong>Render Type</strong>」を「<strong>Overlay</strong>」に変更します。<br>
+    <strong>(3)</strong> 「<strong>Culling Mask</strong>」の値から「<strong>MosaicFX</strong>」レイヤーのみを選択します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2268.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 元のカメラである「<strong>Main Camera</strong>」をもう一度選択します。<br>
+    <strong>(2)</strong> 「<strong>Culling Mask</strong>」の値から「<strong>MosaicFX</strong>」レイヤーを除外します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2269.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> 「<strong>Stack > Cameras</strong>」で「<strong>Mosaic Camera</strong>」を登録します。<br>
+    </p>
+    <br>
+    
+    <p>
+    「モザイクマスクメッシュ」を区別してレンダリングできるようにシーン構成が終了しました。<br>
+    しかし、「モザイクマスクメッシュ」は「AnyPortrait」キャラクタ内にあるため、他のメッシュと同じレイヤーを持ちます。<br>
+    したがって、次のスクリプトを新しく作成して、そのメッシュを「<strong>MosaicFX</strong>」レイヤーと「<strong>Mosaic Camera</strong>」でレンダリングするようにする必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary">using</span> AnyPortrait;<br>
+    <br>
+    <span class="text-primary">public class</span> <span class="text-success">SetPortraitMeshLayer</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">apPortrait</span> portrait; // 対象となるapPortrait<br>
+    &emsp;&emsp;<span class="text-primary">public string</span> layerName = <span class="text-danger">"Default"</span>; // 割り当てるレイヤーの名前<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-primary">string</span>&#91;&#93; meshNames; // レイヤーを指定するメッシュのメッシュグループ内の名前<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>SetPortraitMeshLayers();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">this</span>.enabled = <span class="text-primary">false</span>;<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// ターゲットであるメッシュを見つけてレイヤーを変更する関数<br>
+    &emsp;&emsp;<span class="text-primary">private void</span> SetPortraitMeshLayers()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> nMeshNames = (meshNames != <span class="text-primary">null</span>) ? meshNames.Length : 0;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> ( nMeshNames == 0 ) { <span class="text-primary">return</span>; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// apPortraitの初期化が行われていない可能性があるため、ここで初期化を試みます。<br>
+    &emsp;&emsp;&emsp;&emsp;portrait.Initialize();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 入力されたレイヤーの名前をint型変数に変更します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> layer = <span class="text-success">LayerMask</span>.NameToLayer( layerName );<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">for</span> ( <span class="text-primary">int</span> i = 0; i < nMeshNames; i++ )<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">string</span> meshName = meshNames&#91;i&#93;;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apOptTransform</span> targetTransform = portrait.GetOptTransform(meshName);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> ( targetTransform == <span class="text-primary">null</span> ) { <span class="text-primary">continue</span>; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// ターゲットのレイヤーを変更する関数を呼び出します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>SetGameObjectLayer(targetTransform.gameObject, layer);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// 再帰的にターゲットオブジェクトと子オブジェクトのレイヤーを変更します。<br>
+    &emsp;&emsp;<span class="text-primary"><strong>private</strong></span> <span class="text-primary"><strong>void</strong></span> <strong>SetGameObjectLayer(</strong><span class="text-success"><strong>GameObject</strong></span><strong> targetObject, </strong><span class="text-primary"><strong>int</strong></span><strong> layer)</strong><br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> ( targetObject == <span class="text-primary">null</span> ) { <span class="text-primary">return</span>; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>targetObject.layer = layer;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 子オブジェクトのレイヤーも変更します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> nChildren = targetObject.transform.childCount;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> ( nChildren == 0 ) { return; }<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">for</span> ( <span class="text-primary">int</span> i = 0; i < nChildren; i++)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 再帰的に呼び出しを行います。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>SetGameObjectLayer(targetObject.transform.GetChild(i).gameObject, layer);</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2270.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> スクリプトを適用する新しい「<strong>GameObject</strong>」を作成します。<br>
+    <strong>(2)</strong> 作成したスクリプトを追加し、値を設定します。<br>
+    - <strong>Portrait</strong>：対象キャラクターを指定します。<br>
+    - <strong>Layer Name</strong>：モザイクマスクメッシュがレンダリングされるレイヤー「<strong>MosaicFX</strong>」を入力します。<br>
+    - <strong>Mesh Names</strong>：モザイクマスクメッシュのメッシュグループ内の名前を入力します。<br>
+    </p>
+    <br>
+    
+    <p>
+    最後に「モザイクシェーダーグラフ」を作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2271.jpg"/>
+    <br>
+    
+    <p>
+    新しい「<strong>Sprite Unlit, Transparent, Alpha Blend</strong>」タイプのシェーダーグラフを作成します。<br>
+    「AnyPortrait」用のシェーダグラフを作成する方法については、「<a href="../../jp/AdvancedManual/AD_ShaderGraph.html">関連ページ</a>」で見ることができ、ここではモザイク効果関連プロパティだけを紹介します。<br>
+    <strong>(1)</strong> 基本プロパティに加えて、「<strong>_NumMosaicBlocks（Float）</strong>」、「<strong>_GrabPassTransparent（Texture2D）</strong>」プロパティを追加します。<br>
+    <strong>(2)</strong> これら 2 つのプロパティの属性を次のように設定します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. _NumMosaicBlocks</strong><br>
+    ：モザイクブロックの数。<br>
+    プロパティの名前は、前述の「Built-In」のモザイクシェーダプロパティと同じであり、「AnyPortrait」キャラクタ内でモザイクマスクメッシュが値を渡すことができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. _GrabPassTransparent</strong><br>
+    ：これは「<strong>Grab Texture</strong>」のプロパティ名です。 <br>
+    前述の「<strong>Grab Pass</strong>」として追加した「<strong>Renderer Feature</strong>」の「<strong>Texture Name</strong>」の値と同じである必要があります。<br>
+    「<strong>Show In Inspector</strong>」（またはバージョンに応じて「<strong>Exposed</strong>」）オプションを無効にする必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2272.jpg"/>
+    <br>
+    
+    <p>
+    上の画像のようにシェーダーグラフを完成させます。 (<a href="https://drive.google.com/file/d/1amZ5264KDZ0l1n6ofd3ue_4Vs1UNAslb/view?usp=sharing" target="_sub">大きな画像リンク</a>)<br>
+    「Built-In」の例でのモザイクシェーダをグラフ形式で書き直すと思います。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2273.jpg"/>
+    <br>
+    
+    <p>
+    「URP」用のモザイクシェーダを「AnyPortrait」キャラクタに適用します。<br>
+    <strong>(1)</strong> 「<strong>Mosaic Mask</strong>」メッシュを選ぶ。<br>
+    <strong>(2)</strong> 「Built-In」での設定が完了した状態であれば、「<strong>Custom Shader</strong>」に先ほど作成した「<strong>URP用モザイクシェーダグラフアセット</strong>」を割り当てます。<br>
+    （「Custom Shader」オプションが設定されていない場合は、「Built-In」の実装説明の該当部分を確認してください。）<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2274.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「ルートユニット」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Material Library</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> 「URP用マテリアルプリセット」から「マテリアルセット」を作成して選択します。<br>
+    <strong>(4)</strong> 「<strong>Default Material</strong>」ボタンを押して「<strong>ON</strong>」状態にします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2275.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Bake</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>設定</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>Render Pipeline</strong>」の値を「<strong>Scriptable Render Pipeline</strong>」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2276.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bake</strong>」をしてゲームを実行すると、「URP」でもモザイク効果が正常に動作することがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_URPOutlineShader.html">< URPアウトラインシェーダーの作成</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_Mecanim.html">「Mecanim」利用 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "Shader \"Custom Shader/Mosaic Shader - BuiltIn\"\n{\n\tProperties\n\t{\n\t\t_Color (\"2X Color (RGBA Mul)\", Color) = (0.5, 0.5, 0.5, 1.0)\n\t\t_MainTex (\"Main Texture (RGBA)\", 2D) = \"white\" {}\n\n\t\t// モザイクブロックの数（Y軸基準）\n\t\t_NumMosaicBlocks (\"Number of Mosaic Blocks (Y-Axis)\", float) = 10.0\n\t}\n\n\tSubShader\n\t{\n\t\tTags{ \"RenderType\" = \"Transparent\" \"Queue\" = \"Transparent\" \"PreviewType\" = \"Plane\" }\n\t\tBlend SrcAlpha OneMinusSrcAlpha\t\t\n\t\tLOD 200\n\n\t\t// Grab Pass を呼び出して Grab Texture を取得します。\n\t\tGrabPass { \"_CustomGrabTexture\" }\n\n\t\tPass\n\t\t{\n\t\t\tTags { \"LightMode\" = \"ForwardBase\" }\n\t\t\tZWrite Off\n\t\t\tCGPROGRAM\n\t\t\t#pragma vertex vert\n\t\t\t#pragma fragment frag\t\t\t\n\t\t\t#include \"UnityCG.cginc\"\n\n\t\t\tstruct appdata\n\t\t\t{\n\t\t\t\tfloat4 vertex : POSITION;\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t};\n\n\t\t\tstruct v2f\n\t\t\t{\n\t\t\t\tfloat2 uv : TEXCOORD0;\n\t\t\t\tfloat4 vertex : SV_POSITION;\n\n\t\t\t\t// Grab Texture用のUVを計算して配信するためのセマンティック\n\t\t\t\tfloat4 grabPos : TEXCOORD1;\n\t\t\t};\n\n\t\t\tsampler2D _MainTex;\n\t\t\tfloat4 _MainTex_ST;\n\t\t\thalf4 _Color;\n\n\t\t\t// Grab Pass で生成された Grab Texture\n\t\t\tsampler2D _CustomGrabTexture;\n\n\t\t\t// モザイク数プロパティ変数\n\t\t\tfloat _NumMosaicBlocks;\n\n\t\t\n\t\t\tv2f vert ( appdata v )\n\t\t\t{\n\t\t\t\tv2f o;\n\t\t\t\to.vertex = UnityObjectToClipPos( v.vertex );\n\t\t\t\to.uv = TRANSFORM_TEX( v.uv, _MainTex );\n\n\t\t\t\t// Grab UVを計算します。\n\t\t\t\to.grabPos = ComputeGrabScreenPos( o.vertex );\n\n\t\t\t\treturn o;\n\t\t\t}\n\n\t\t\tfixed4 frag ( v2f i ) : SV_Target\n\t\t\t{\n\t\t\t\tfixed4 col = tex2D( _MainTex, i.uv );\n\n\t\t\t\t// 「Aspect Ratio」を計算して、X軸のモザイクブロックの数を計算します。\n\t\t\t\tfloat aspect = _ScreenParams.x / _ScreenParams.y;\n\t\t\t\tfloat2 nBlocks = floor ( float2 ( _NumMosaicBlocks * aspect, _NumMosaicBlocks ) );\n\n\t\t\t\t// モザイクUVを計算してGrab Textureから色を取得します。\n\t\t\t\tfixed2 mosaicUV = round( i.grabPos.xy * nBlocks ) / nBlocks;\n\t\t\t\tfixed4 grabCol = tex2D( _CustomGrabTexture, mosaicUV );\n\t\t\t\tcol.rgb = grabCol.rgb;\n\n\t\t\t\tcol.a *= _Color.a;\n\t\t\t\treturn col;\n\t\t\t}\n\t\t\tENDCG\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class SetPortraitMeshLayer : MonoBehaviour\n{\n\tpublic apPortrait portrait; // 対象となるapPortrait\n\tpublic string layerName = \"Default\"; // 割り当てるレイヤーの名前\n\tpublic string[] meshNames; // レイヤーを指定するメッシュのメッシュグループ内の名前\n\n\tvoid Start()\n\t{\n\t\tSetPortraitMeshLayers();\n\t\tthis.enabled = false;\n\t}\n\n\t// ターゲットであるメッシュを見つけてレイヤーを変更する関数\n\tprivate void SetPortraitMeshLayers()\n\t{\n\t\tint nMeshNames = (meshNames != null) ? meshNames.Length : 0;\n\t\tif ( nMeshNames == 0 ) { return; }\n\n\t\t// apPortraitの初期化が行われていない可能性があるため、ここで初期化を試みます。\n\t\tportrait.Initialize();\n\n\t\t// 入力されたレイヤーの名前をint型変数に変更します。\n\t\tint layer = LayerMask.NameToLayer( layerName );\n\n\t\tfor ( int i = 0; i < nMeshNames; i++ )\n\t\t{\n\t\t\tstring meshName = meshNames[i];\n\n\t\t\tapOptTransform targetTransform = portrait.GetOptTransform(meshName);\n\t\t\tif ( targetTransform == null ) { continue; }\n\n\t\t\t// ターゲットのレイヤーを変更する関数を呼び出します。\n\t\t\tSetGameObjectLayer(targetTransform.gameObject, layer);\n\t\t}\n\t}\n\n\t// 再帰的にターゲットオブジェクトと子オブジェクトのレイヤーを変更します。\n\tprivate void SetGameObjectLayer(GameObject targetObject, int layer)\n\t{\n\t\tif ( targetObject == null ) { return; }\n\n\t\ttargetObject.layer = layer;\n\n\t\t// 子オブジェクトのレイヤーも変更します。\n\t\tint nChildren = targetObject.transform.childCount;\n\t\tif ( nChildren == 0 ) { return; }\n\n\t\tfor ( int i = 0; i < nChildren; i++)\n\t\t{\n\t\t\t// 再帰的に呼び出しを行います。\n\t\t\tSetGameObjectLayer(targetObject.transform.GetChild(i).gameObject, layer);\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
+    <!--------------->
+
+    </body>
+</html>

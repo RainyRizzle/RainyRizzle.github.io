@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>複数の値の表示ルール</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/ja/anyportrait-ja/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ja/ap-video-tutorials-ja/">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ja/forum-ja/">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_MultiValueVisibilityRule.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_MultiValueVisibilityRule.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_MultiValueVisibilityRule.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/ja/anyportrait-ja/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 複数の値の表示ルール</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">複数の値の表示ルール</h1>
+    <br>
+    
+    <p>
+    制御パラメータやキーフレームアニメーションでメッシュを隠したり見せたりすることは、キャラクターの表情などを表現する最も効果的な方法の一つです。<br>
+    これを活用して、キャラクターの感情に応じた表情、ちらつき、話すなどを複合的に表現することができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    ところで、2つ以上の制御パラメータやモディファイアの値を組み合わせてメッシュを見せる過程でユーザーが困難を経験することもあります。<br>
+    しばしば私たちのチームに「複数の表情を持ったキャラクターが目を点滅したとき、目のメッシュが消えてしまう問題」を尋ねるのですが、それはまさにこのページで扱うルールによる現象です。<br>
+    このページでは、問題を例として、マルチモディファイア値による可視性ルールの動作について説明します。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>表情と目のちらつき問題再現</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2242.jpg"/>
+    <br>
+    
+    <p>
+    問題を再現するためのサンプルキャラクターです。<br>
+    2つの表情を持ち、メッシュの可視性を切り替えて目を点滅させるようにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2243.jpg"/>
+    <br>
+    
+    <p>
+    目の形状を決定する2つの制御パラメータ（「<strong>Type</strong>」、「<strong>Blink</strong>」）にマッピングするメッシュを整理すると、上記のようになります。<br>
+    「<strong>Eye 1</strong>」はちょっと笑顔の表情で、「<strong>Eye 2</strong>」はちょっと愚かな状態の表情です。<br>
+    目を閉じるプロセスは3つのフレームで構成されています。<br>
+    それぞれ「<strong>Open</strong>」、「<strong>Half Closed</strong>」、「<strong>Closed</strong>」です。<br>
+    各状態を組み合わせて合計6つの形状が出ることができますが、目を閉じた表情は表情とは無関係なので、1つのメッシュ（「<strong>Eye Closed</strong>」）を共有して表現しました。<br>
+    </p>
+    <br>
+    
+    <p>
+    次に、合計5つのメッシュをモディファイアに登録し、制御パラメータで制御できるように設定しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2244.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Color Only（Controller）</strong>」モディファイアを登録します。<br>
+    <strong>(2)</strong> 「<strong>Type</strong>」、「<strong>Blink</strong>」の2つの制御パラメータに5つの目メッシュをすべて登録します。<br>
+    </p>
+    <br>
+    
+    <p>
+    次に、2つの制御パラメータにキーを追加し、キー内のメッシュの可視性を設定しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2245.jpg"/>
+    <br>
+    
+    <p>
+    まず、キャラクターの表情を切り替える「<strong>Type</strong>」制御パラメータでの可視性を設定します。<br>
+    合計2つのキー（「<strong>1</strong>」、「<strong>2</strong>」）を生成しました。<br>
+    - 「<strong>Type</strong>」が「<strong>1</strong>」の値を持つときは、「<strong>Eye 1 Open</strong>」メッシュのみが見えるように設定しました。<br>
+    - 「<strong>Type</strong>」が「<strong>2</strong>」の値を持つときは、「<strong>Eye 2 Open</strong>」メッシュのみが見えるように設定しました。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>ヒント</strong></span><br>
+    このページで説明されている可視性規則を既に知っている場合は、この手順が問題の原因であることを確認できます。<br>
+    以下の説明で原因と解決策を確認してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2246.jpg"/>
+    <br>
+    
+    <p>
+    次に、キャラクターが目を点滅させる「<strong>Blink</strong>」制御パラメータの可視性を設定します。<br>
+    3つのキー（「<strong>Open</strong>」、「<strong>Half Closed</strong>」、「<strong>Closed</strong>」）を生成しました。<br>
+    - 「<strong>Blink</strong>」が「<strong>Open</strong>」の値を持つときは、「<strong>Eye 1 Open</strong>」メッシュと「<strong>Eye 2 Open</strong>」メッシュが表示されるように設定しました。<br>
+    - 「<strong>Blink</strong>」が「<strong>Half Closed</strong>」の値を持つときは、「<strong>Eye 1 Half Closed</strong>」メッシュと「<strong>Eye 2 Half Closed</strong>」メッシュが表示されるように設定しました。<br>
+    - 「<strong>Blink</strong>」が「<strong>Closed</strong>」の値を持つときは、「<strong>Eye Closed</strong>」メッシュのみが表示されるように設定しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2247.jpg"/>
+    <br>
+    
+    <p>
+    「編集モード」をオフにして制御パラメータを操作して、キャラクターの目メッシュが正常に切り替わるか確認してみましょう。<br>
+    「<strong>Type</strong>」パラメータを操作して表情が変わることは、正常に表現になることがわかります。<br>
+    しかし、目を点滅させるように「<strong>Blink</strong>」制御パラメータを変更すると、目のメッシュが完全に消えてしまうという問題が発生します。<br>
+    </p>
+    <br>
+    
+    <p>
+    それぞれの制御パラメータを選択して「編集モード」で作業するときは問題はありませんでした。<br>
+    この問題を解決するには、複数値での可視性規則を理解する必要があります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>可視性ルールを理解</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2248.jpg"/>
+    <br>
+    
+    <p>
+    1 つのメッシュを対象に、制御パラメータや複数のモディファイアやキーフレーム値などを組み合わせて見えるようにしたり非表示にしたりする場合、値の組み合わせによってどのような結果が出るかを知る必要があります。<br>
+    「AnyPortrait」は、色に関連するすべての操作に「乗算」ルールが適用されます。<br>
+    可視性と「Alpha」操作の場合、表示される状態は 1 で、非表示状態は 0 です。<br>
+    これを掛けると「<strong>1 x 0 = 0</strong>」なので、上の画像のように可視性値の一つでも「<strong>Hide</strong>」であればメッシュは隠された状態になります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2249.jpg"/>
+    <br>
+    
+    <p>
+    もう少し解いて表の形でまとめてみました。<br>
+    メッシュの可視性値がすべて「表示（Show）」の場合、メッシュはレンダリングされます。<br>
+    しかし、可視性の値のいずれかが「隠し（Hide）」の場合、メッシュはレンダリングされません。<br>
+    </p>
+    <br>
+    
+    <p>
+    ルール自体は難しくありません。<br>
+    しかし、このルールを応用して「キャラクターの表情」と「目のちらつき」を組み合わせて表現するとき、どのように値を設定するかは少し難しいようです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2250.jpg"/>
+    <br>
+    
+    <p>
+    2つの制御パラメータで複数のメッシュの可視性を制御したい場合は、上記のように表を描いて整理すると理解しやすくなります。<br>
+    それぞれ「<strong>Color</strong>」と「<strong>Shape</strong>」のパラメータで6つのメッシュの可視性を制御しましょう。<br>
+    まず、表の「X軸」と「Y軸」にそれぞれのパラメータを割り当て、パラメータの各値に対応するメッシュを配置すれば、上記の表を完成できるはずです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2251.jpg"/>
+    <br>
+    
+    <p>
+    この表では、各制御パラメータのキー値に応じてメッシュの可視性を設定します。<br>
+    たとえば、「<strong>Color</strong>」パラメータの「<strong>Red</strong>」キーでは、外観に関係なくすべての赤いメッシュが表示されるように設定し、残りは非表示にします。<br>
+    「<strong>Shape</strong>」パラメータの「<strong>Circle</strong>」キーでは、色は関係なくすべての円形メッシュが表示されるように設定し、残りは非表示にします。<br>
+    このように制御パラメータのキーと値を設定するとしましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2252.jpg"/>
+    <br>
+    
+    <p>
+    2つの制御パラメータを組み合わせて6つのメッシュのうち1つのメッシュのみを表示するように動作するプロセスを表を通して理解しましょう。<br>
+    まず、「<strong>Color</strong>」パラメータが「<strong>Red</strong>」の場合、1行のメッシュが表示され、2行の青いメッシュは非表示になります。<br>
+    この状態で「<strong>Shape</strong>」パラメータが「<strong>Circle</strong>」の場合、2列の円形メッシュが表示されます。<br>
+    その結果、各軸で「見えるメッシュの交点」に対応する1行2列の「<strong>Red Circle</strong>」メッシュが選択されてレンダリングされます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>ヒント</strong></span><br>
+    可視性を 1 と 0 に変えて表を描いて理解すると簡単です。<br>
+    そして、各パラメータが担当するイメージの属性（型、色など）以外の他の属性は考慮せずに値を一括して割り当てると考えれば簡単に作業ができるはずです。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>トラブルシューティング</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2253.jpg"/>
+    <br>
+    
+    <p>
+    再び例に戻って、このキャラクターの目メッシュの可視性を表の形にまとめて理解しましょう。<br>
+    キャラクターの「<strong>Type（表情）</strong>」を「Y軸」に入れ、「<strong>Blink（まばたき）</strong>」を「X軸」に入れて、それぞれの目メッシュを配置します。<br>
+    これで、制御パラメータのキーでどのメッシュが表示されるように設定する必要があるかがわかります。<br>
+    </p>
+    <br>
+    
+    <p>
+    ルールを理解し、前に戻ってもう一度振り返ると、「<strong>Type</strong>」パラメータによるメッシュの可視性が正しく設定されていないことがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2254.jpg"/>
+    <br>
+    
+    <p>
+    ルールに合わせてメッシュの可視性をリセットします。<br>
+    - 「<strong>Type</strong>」が「<strong>1</strong>」の値を持つ場合、「<span class="text-danger"><strong> Eye 1 Open</strong></span>」メッシュ、「<span class="text-danger"><strong> Eye 1 Half Closed</strong></span>」メッシュ、および「<span class="text-danger"><strong> Eye Closed</strong></span>」メッシュがすべて表示されるように設定します。<br>
+    - 「<strong>Type</strong>」が「<strong>2</strong>」の値を持つ場合、「<span class="text-primary"><strong> Eye 2 Open</strong></span>」メッシュ、「<span class="text-primary"><strong> Eye 2 Half Closed</strong></span>」メッシュ、および「<span class="text-primary"><strong> Eye Closed</strong></span>」メッシュがすべて表示されるように設定します。<br>
+    </p>
+    <br>
+    
+    <p>
+    この例では、「<strong>Eye Closed</strong>」メッシュは表情に関係なく表示されます。<br>
+    その場合は、すべての「<strong>Type</strong>」キーで常に表示されるように設定する必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>Blink</strong>」の場合は、幸いなことに可視性の値が正しく設定されています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2255.jpg"/>
+    <br>
+    
+    <p>
+    それでは、編集モードをオフにしてテストしてみましょう。<br>
+    以前とは異なり、表情と組み合わせてキャラクターの目を巻くことができるようになりました。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>編集モードでの可視性結果のプレビュー</h4>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2256.jpg"/>
+    <br>
+    
+    <p>
+    編集モードでは、デフォルトではターゲット制御パラメータやモディファイア以外はすべて無効になります。<br>
+    したがって、複数の値を組み合わせた結果を表示するには、編集モードをオフにする必要があります。<br>
+    ただし、「編集モードオプション」（<a href="../../jp/AdvancedManual/AD_ModifierEditOption.html">関連ページ</a>）を変更して、他のモディファイアや他の制御パラメータによる演算結果を編集モードでもプレビューできます。<br>
+    <strong>(1)</strong> 「編集モード」をオンにします。<br>
+    <strong>(2)</strong> 「表示メニュー」を開き、「D）を有効にすると、組み合わせたカラー結果を編集モードで表示できます。<br>
+    <strong>(3)</strong> ワークスペースの右上のアイコンを確認して、複数の値が編集モードで組み合わせて表示されている状態かどうかを確認できます。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_ToggleWOTranslucent.html">< 半透明なくメッシュを表示/非表示</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_Rigging.html">リギングモディファイヤ ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>
