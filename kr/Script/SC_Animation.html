@@ -223,6 +223,74 @@
     <!-- 17. 스크립트 설명 박스 -->
     <div class="card">
     <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>ChangeFrame</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">animClipName,</span> <span class="text-primary">int</span> <span class="text-muted">frame,</span> <span class="text-primary">bool</span> <span class="text-muted">isPauseAfterFrameChanged )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>ChangeFrame</strong> <span class="text-muted">( </span><span class="text-success">apAnimPlayData</span> <span class="text-muted">animPlayData,</span> <span class="text-primary">int</span> <span class="text-muted">frame,</span> <span class="text-primary">bool</span> <span class="text-muted">isPauseAfterFrameChanged )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.6.1</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;현재 재생 중인 애니메이션의 프레임을 변경합니다.<br>
+    &nbsp;&nbsp;&nbsp;만약 요청된 애니메이션이 현재 재생 중이 아니라면 이 함수는 동작하지 않습니다.<br>
+    &nbsp;&nbsp;&nbsp;재생 여부와 상관없이 애니메이션을 활성화하고 프레임을 지정하고자 한다면 "PlayAt" 또는 "PauseAt"을 이용해주세요.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> animClipName : 애니메이션 클립 이름<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayData</span> animPlayData : 대상이 되는 애니메이션 데이터<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> frame : 변경하고자 하는 프레임<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isPauseAfterFrameChanged : 프레임이 변경된 후 애니메이션이 일시정지할지 여부. false 입력시 현재의 재생 상태 유지 (기본값 false)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayData</span> : 프레임이 변경된 애니메이션 클립 정보. 처리 실패시 null
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
+<span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>PauseAt</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">animClipName,</span> <span class="text-primary">int</span> <span class="text-muted">frame,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayManager</span><span class="text-muted">.</span><span class="text-success">PLAY_OPTION</span> <span class="text-muted">playOption,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+<br><span class="text-primary">public</span> <span class="text-success">apAnimPlayData</span> <strong>PauseAt</strong> <span class="text-muted">( </span><span class="text-success">apAnimPlayData</span> <span class="text-muted">animPlayData,</span> <span class="text-primary">int</span> <span class="text-muted">frame,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">int</span> <span class="text-muted">layer,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> <span class="text-muted">blendMethod,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">apAnimPlayManager</span><span class="text-muted">.</span><span class="text-success">PLAY_OPTION</span> <span class="text-muted">playOption,</span> <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">bool</span> <span class="text-muted">isAutoEndIfNotloop )</span>
+    </h5>
+    <div class="card-body">
+    <h5><span class="badge badge-secondary">1.6.1</span></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;애니메이션의 프레임을 변경하며, 그 직후 바로 일시정지합니다.<br>
+    &nbsp;&nbsp;&nbsp;애니메이션이 재생 중이 아닌 상태에서도 호출이 가능합니다.<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> animClipName : 애니메이션 클립 이름<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayData</span> animPlayData : 대상이 되는 애니메이션 데이터<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> frame : 설정하고자 하는 프레임<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> layer : 애니메이션이 재생되는 레이어 (기본값 0)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayUnit</span><span class="text-muted">.</span><span class="text-success">BLEND_METHOD</span> blendMethod : 레이어된 애니메이션 블렌드 방식 (기본값 BLEND_METHOD.Interpolation)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayManager</span><span class="text-muted">.</span><span class="text-success">PLAY_OPTION</span> playOption : 재생 중인 다른 애니메이션 종료 방식 (기본값 PLAY_OPTION.StopSameLayer)<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-primary">bool</span> isAutoEndIfNotloop : Loop 옵션이 없는 애니메이션 클립일 경우 자동으로 종료시킬 것인지 여부 (기본값 false)<br>
+    </p>
+    
+    <br>
+    <h6 class="card-subtitle mb-2 text-muted">Return</h6>
+    <p class="card-text">
+    &nbsp;&nbsp;&nbsp;<span class="text-success">apAnimPlayData</span> : 요청이 처리된 애니메이션 클립 정보 (요청한 애니메이션 클립이 없으면 null)
+    </p>
+    
+    </div>
+    </div>
+    <br>
+    <!-- 17. 스크립트 설명 박스 -->
+    <div class="card">
+    <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>StopLayer</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">layer,</span> <span class="text-primary">float</span> <span class="text-muted">fadeTime )</span>
     </h5>
     <div class="card-body">
