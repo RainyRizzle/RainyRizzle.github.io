@@ -77,9 +77,17 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    <h4><span class="badge badge-secondary">1.6.2</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_17.jpg"/>
+    <br>
     
     <p>
+    Clipping is a feature that uses the shape of another mesh as a mask to render only a portion of it.<br>
+    This feature can be used to express features like a character's eyes and mouth.<br>
+    You can set a clipping layer on a mesh to use the other mesh on the layer below as a mask.<br>
     </p>
     <br>
     
@@ -107,19 +115,62 @@
     </p>
     <br>
     
-    <!-- 8. 이미지 (가운데 정렬) -->
+    <p>
+    When creating a character from a PSD file, the PSD file's clipping layer settings are applied to AnyPortrait, so clipping was automatically enabled in this example.<br>
+    Click the Clipping button to easily set the mesh's clipping rendering.<br>
+    </p>
     <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_17.jpg"/>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    You can also write your own clipping shader, following the rules for writing custom shaders.<br>
+    For instructions on writing clipping shaders, see the <a href="../../en/Script/SC_CustomShader.html">related page</a>.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    The "<strong>Mask</strong>" feature added in <strong>AnyPortrait v1.6.0</strong> allows for more flexible clipping rendering settings.<br>
+    For manuals related to "<strong>Mask</strong>," please refer to the following pages.<br>
+    - <a href="../../en/AdvancedManual/AD_Mask.html">Mask</a><br>
+    - <a href="../../en/AdvancedManual/AD_MaskCustomShader.html">Mask and Custom Shader</a><br>
+    - <a href="../../en/AdvancedManual/AD_MaskCombine.html">Combining Masks</a><br>
+    - <a href="../../en/AdvancedManual/AD_MaskChain.html">Mask Chain</a><br>
+    - <a href="../../en/AdvancedManual/AD_OnlyMaskMesh.html">Mask Only Mesh</a><br>
+    - <a href="../../en/AdvancedManual/AD_SeeThrough.html">See-Through Effect</a><br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Performance and conditions</h3>
     <br>
     
     <p>
-    The clipping function is to render only a portion of the mesh by specifying another mesh as the mask.<br>
-    It is mainly used in eyes, mouth, etc.<br>
-    However, please note the following.<br>
-    <strong>1.</strong> The clipping function causes the process to be slow, so it slows down the game. Please use only necessary parts.<br>
-    <strong>2.</strong> If you create and use a <strong>Custom Shader</strong>, you must also write code related to the clipping function.<br>
-    ​<br>
-    To create a clipping shader, see the <a href="../../en/Script/SC_CustomShader.html">Related Page</a>.<br>
+    Clipping layers work by utilizing command buffers and Render Textures.<br>
+    Therefore, overusing this feature can significantly increase draw calls, degrading your game's rendering performance.<br>
+    </p>
+    <br>
+    
+    <p>
+    Clipping layers work in conjunction with cameras.<br>
+    This means that the "camera rendering the character" must be automatically detected and properly prepared for clipping rendering.<br>
+    It is also significantly affected by the render pipeline.<br>
+    If the project, character settings, or scene configuration are not appropriate, clipping rendering will not function properly.<br>
+    If clipping rendering is not working properly, please refer to the <a href="../../en/AdvancedManual/AD_NoRenderedClippedMesh.html">related page</a>.<br>
     </p>
     <br>
     

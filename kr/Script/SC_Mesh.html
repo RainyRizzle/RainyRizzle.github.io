@@ -333,20 +333,21 @@
     <!-- 17. 스크립트 설명 박스 -->
     <div class="card">
     <h5 class="card-header">
-<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
-<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
-<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
-<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture</span> <span class="text-muted">texture,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-success">apOptTransform</span> <span class="text-muted">optTransform,</span> <span class="text-success">Texture</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Texture</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImage</strong> <span class="text-muted">( </span><span class="text-primary">int</span> <span class="text-muted">rootUnitIndex,</span> <span class="text-primary">string</span> <span class="text-muted">transformName,</span> <span class="text-success">Texture</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
 <br><span class="text-primary">...</span> </span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.5</span></h5>
+    <h5><span class="badge badge-secondary">1.6.2</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">Description</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTransform의 텍스쳐를 교체합니다.<br>
     &nbsp;&nbsp;&nbsp;텍스쳐가 교체된 경우 드로우콜이 증가할 수 있습니다.<br>
     &nbsp;&nbsp;&nbsp;"_MainTex"를 대상으로 하는 경우 "SetMeshImage" 함수를 이용해주세요.<br>
     &nbsp;&nbsp;&nbsp;optTransform 대신, transformName과 rootUnitIndex를 입력해서 대상을 지정할 수 있습니다.<br>
+    &nbsp;&nbsp;&nbsp;AnyPortrait 1.6.2에서는 입력되는 인자의 타입이 Texture2D에서 Texture로 변경되었습니다.<br>
     </p>
     
     <br>
@@ -355,7 +356,7 @@
     &nbsp;&nbsp;&nbsp;<span class="text-success">apOptTransform</span> optTransform : 참조하고자 하는 apOptTransform<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> rootUnitIndex : 루트 유닛의 인덱스 (없을 경우 전체 검색)<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> transformName : 참조 하는 apOptTransform의 이름 (에디터 상의 메시 이름)<br>
-    &nbsp;&nbsp;&nbsp;<span class="text-success">Texture2D</span> texture : 새로 지정될 텍스쳐<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Texture</span> texture : 새로 지정될 텍스쳐<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : 텍스쳐가 적용될 쉐이더 속성 이름<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : 텍스쳐가 적용될 쉐이더의 속성 ID (Shader.PropertyToID 함수를 이용하여 ID 획득)<br>
     </p>
@@ -634,8 +635,8 @@
     &nbsp;&nbsp;&nbsp;자동으로 이 텍스쳐를 이용하는 모든 메시가 변경이 됩니다.<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary"><strong>일괄 변경 함수들</strong></span><br>
     &nbsp;&nbsp;&nbsp;- SetMeshTextureAll(Texture2D texture)<br>
-    &nbsp;&nbsp;&nbsp;- SetCustomImageAll(Texture2D texture, string propertyName)<br>
-    &nbsp;&nbsp;&nbsp;- SetCustomImageAll(Texture2D texture, int propertyNameID)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomImageAll(Texture texture, string propertyName)<br>
+    &nbsp;&nbsp;&nbsp;- SetCustomImageAll(Texture texture, int propertyNameID)<br>
     &nbsp;&nbsp;&nbsp;- SetMeshColorAll(Color color)<br>
     &nbsp;&nbsp;&nbsp;- SetCustomColorAll(Color color, string propertyName)<br>
     &nbsp;&nbsp;&nbsp;- SetCustomColorAll(Color color, int propertyNameID)<br>
@@ -666,22 +667,24 @@
     <div class="card">
     <h5 class="card-header">
 <span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshImageAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture )</span>
-<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImageAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
-<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImageAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Texture2D</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImageAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Texture</span> <span class="text-muted">texture,</span> <span class="text-primary">string</span> <span class="text-muted">propertyName )</span>
+<br><span class="text-primary">public</span> <span class="text-primary">void</span> <strong>SetMeshCustomImageAll</strong> <span class="text-muted">( </span><span class="text-primary">string</span> <span class="text-muted">optTextureName,</span> <span class="text-success">Texture</span> <span class="text-muted">texture,</span> <span class="text-primary">int</span> <span class="text-muted">propertyNameID )</span>
     </h5>
     <div class="card-body">
-    <h5><span class="badge badge-secondary">1.4.3</span></h5>
+    <h5><span class="badge badge-secondary">1.6.2</span></h5>
     <h6 class="card-subtitle mb-2 text-muted">Description</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;apOptTextureData를 사용하는 모든 메시의 텍스쳐를 일괄적으로 교체합니다.<br>
     &nbsp;&nbsp;&nbsp;"_MainTex"를 대상으로 하는 경우 "SetMeshCustomImageAll" 함수 대신 "SetMeshImageAll" 함수를 이용해주세요.<br>
+    &nbsp;&nbsp;&nbsp;AnyPortrait 1.6.2에서는 커스텀 프로퍼티에 입력되는 인자의 타입이 Texture2D에서 Texture로 변경되었습니다.<br>
     </p>
     
     <br>
     <h6 class="card-subtitle mb-2 text-muted">Parameters</h6>
     <p class="card-text">
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> optTextureName : 대상이 되는 apOptTextureData의 이름. (에디터 상의 이미지 이름)<br>
-    &nbsp;&nbsp;&nbsp;<span class="text-success">Texture2D</span> texture : 교체할 텍스쳐<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Texture2D</span> texture : 교체할 메인 텍스쳐<br>
+    &nbsp;&nbsp;&nbsp;<span class="text-success">Texture</span> texture : 교체할 커스텀 프로퍼티의 텍스쳐<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">string</span> propertyName : 적용하고자 하는 재질의 프로퍼티 이름<br>
     &nbsp;&nbsp;&nbsp;<span class="text-primary">int</span> propertyNameID : 재질의 프로퍼티 ID (Shader.PropertyToID 함수를 이용하여 ID 획득)<br>
     </p>

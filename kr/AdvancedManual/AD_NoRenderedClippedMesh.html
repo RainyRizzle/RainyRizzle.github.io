@@ -77,7 +77,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.4.6</span></h4>
+    <h4><span class="badge badge-secondary">1.6.2</span></h4>
     
     <p>
     저희 팀이 사용자들로부터 많이 받았던 문의 내용 중의 하나는 <strong>클리핑 메시</strong>가 정상적으로 렌더링되지 않는다는 것입니다.<br>
@@ -87,14 +87,9 @@
     </p>
     <br>
     
-    <!-- 8. 이미지 (가운데 정렬) -->
-    <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1858.jpg"/>
-    <br>
-    
     <p>
-    이 페이지에서 사용되는 캐릭터입니다.<br>
-    눈과 입의 메시들이 클리핑 메시로 설정되어 있습니다.<br>
+    클리핑 메시 외에도 "마스크" 기능(<a href="../../kr/AdvancedManual/AD_Mask.html">관련 페이지</a>)도 같은 방식으로 동작하기 때문에, 이 페이지에서 원인을 찾을 수 있습니다.<br>
+    이 페이지의 일부 내용은 "마스크" 기능에서의 문제와 해결 방법을 다룹니다.<br>
     </p>
     <br>
     
@@ -106,6 +101,17 @@
     
     <p>
     이 경우는 주로 <strong>URP</strong>를 사용했거나, 또는 <strong>기본(Built-In) 렌더 파이프라인</strong>으로 복구했을 때 겪을 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1858.jpg"/>
+    <br>
+    
+    <p>
+    이 페이지에서 사용되는 캐릭터입니다.<br>
+    눈과 입의 메시들이 클리핑 메시로 설정되어 있습니다.<br>
     </p>
     <br>
     
@@ -182,15 +188,10 @@
     <br>
     
     <p>
-    AnyPortrait의 클리핑 메시는 크지 않은 해상도의 <strong>Render Texture</strong>를 이용하여 최적화된 마스크를 생성하기 위해 카메라의 속성을 참조합니다.<br>
-    그런데 만약 2개 이상의 카메라가 캐릭터를 렌더링하고자 한다면, 클리핑 마스크의 최적화 기능이 오작동을 일으키는 것입니다.<br>
-    </p>
-    <br>
-    
-    <p>
-    이 문제를 해결하기 위해서는 다소 예상 밖의 옵션인 <strong>VR 지원 기능</strong>을 이용해야합니다.<br>
-    <strong>VR</strong>은 기본적으로 2개의 카메라가 동작하는 시스템인데, 마침 이 경우와 같기 때문에 적절한 해결 방법이 됩니다.<br>
-    (<strong>VR 지원</strong>에 대해서는 <a href="../../kr/AdvancedManual/AD_VR.html">관련 페이지</a>에서 자세한 내용을 보실 수 있습니다.)<br>
+    AnyPortrait의 클리핑 렌더링은 카메라를 참조하여 동작합니다.<br>
+    카메라에 커맨드 버퍼를 등록하여 렌더링을 하거나, "View Matrix"를 활용하여 마스크 품질을 최적화하기 위함입니다.<br>
+    그런데 AnyPortrait의 기본 설정은 1개의 카메라만 참조합니다.<br>
+    따라서 2개 이상의 카메라가 캐릭터를 렌더링하는 경우, 이 기본 설정을 바꾸지 않는다면 클리핑 렌더링이 제대로 동작하지 않습니다.<br>
     </p>
     <br>
     
@@ -240,13 +241,113 @@
     <div class="alert alert-info" role="alert">
     
     <p>
-    다중 카메라를 배치한 상태에서, 카메라들이 <strong>Render Texture</strong>를 대상으로 렌더링을 하는 경우엔 부차적인 이슈들이 더 있습니다.<br>
-    이 경우엔 <a href="../../kr/AdvancedManual/AD_RenderTexture.html">관련 페이지</a>에서 자세한 정보를 확인하세요.<br>
+    다중 카메라를 배치한 상태이거나 <strong>Render Texture</strong>를 대상으로 렌더링을 하는 경우엔 부차적인 이슈들이 더 있습니다.<br>
+    다음의 메뉴얼들이 도움이 될 것입니다.<br>
+    - <a href="../../kr/AdvancedManual/AD_MultipleCameras.html">여러 개의 카메라로 렌더링하기</a><br>
+    - <a href="../../kr/AdvancedManual/AD_RenderTexture.html">렌더 텍스쳐로 렌더링하기</a><br>
+    - <a href="../../kr/AdvancedManual/AD_VR.html">VR로 빌드하기</a><br>
     </p>
     <br>
     
     </div>
     <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>게임 오브젝트의 레이어가 카메라와 맞지 않는 경우</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2293.jpg"/>
+    <br>
+    
+    <p>
+    다중 카메라 이슈와 비슷한 맥락에서, 카메라를 참조하는 과정에서 문제가 발생하는 다른 원인은 "레이어"입니다.<br>
+    카메라는 "<strong>Culling Mask</strong>"에 포함된 "레이어 (Layer)"가 설정된 GameObject만 렌더링을 합니다.<br>
+    이를 이용하여, AnyPortrait의 메인 스크립트인 <strong>apPortrait</strong>는 본인의 "레이어"를 대상으로 렌더링을 할 수 있는 카메라를 찾아서 클리핑 렌더링을 위한 연결을 시도합니다.<br>
+    이 연결이 완료되어야만 커맨드 버퍼 등이 생성되어 클리핑 렌더링을 수행할 수 있습니다.<br>
+    그런데 만약 <strong>apPortrait</strong>의 레이어가 이상하게 설정된 경우, 클리핑 렌더링을 위한 준비 작업이 실패될 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2287.jpg"/>
+    <br>
+    
+    <p>
+    2개의 메시를 가진 예제입니다.<br>
+    별모양 메시가 아래의 원형 메시에 의해 클리핑이 되고 있습니다.<br>
+    <strong>Bake</strong>를 하고 유니티 씬을 엽니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2288.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 이 예제의 씬에는 1개의 카메라가 있습니다.<br>
+    <strong>(2)</strong> 이 카메라의 "<strong>Culling Mask</strong>"의 값은 "<span class="text-danger"><strong>Default</strong></span>" 레이어만 포함하고 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2289.jpg"/>
+    <br>
+    
+    <p>
+    문제를 재현해봅시다.<br>
+    <strong>(1)</strong> 캐릭터의 루트 객체, 즉 "<strong>apPortrait</strong>"를 가진 "<strong>GameObject</strong>"를 선택합니다.<br>
+    <strong>(2)</strong> 이 객체의 레이어를 "<span class="text-success"><strong>UI</strong></span>"로 변경합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2290.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 이 상태에서 실제 메시를 가진 자식 오브젝트들을 선택합니다.<br>
+    <strong>(2)</strong> 자식 오브젝트들의 레이어가 "<span class="text-danger"><strong>Default</strong></span>" 되도록 설정합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2291.jpg"/>
+    <br>
+    
+    <p>
+    게임을 실행하면 메시들이 렌더링되기는 하지만 클리핑 렌더링이 동작하지 않는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    자식 메시들의 레이어가 "<span class="text-danger"><strong>Default</strong></span>" 이므로 "<strong>Culling Mask</strong>"의 값과 동일하기 때문에 렌더링 자체는 제대로 수행됩니다.<br>
+    하지만 카메라를 찾아서 연결을 수행하는 "<strong>apPortrait</strong>"의 레이어는 "<strong>Culling Mask</strong>"에 포함되지 않은 "<span class="text-success"><strong>UI</strong></span>"입니다.<br>
+    이 경우, 실제 메시 렌더링 여부와 상관없이, "<strong>apPortrait</strong>"는 "이 캐릭터를 렌더링 하는 카메라가 없다"라고 잘못 판단해버리는 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2292.jpg"/>
+    <br>
+    
+    <p>
+    문제를 수정하기 위해서는 "<strong>apPortrait의 레이어</strong>를 수정하는 방법" 또는 "카메라의 <strong>Culling Mask</strong>"를 수정하는 방법"이 고려될 수 있습니다.<br>
+    만약 apPortrait의 레이어를 변경해야하는 이유가 있다면 카메라의 <strong>Culling Mask</strong>를 변경하는 것이 맞을 수도 있지만, 이 예제에서는 <strong>apPortrait의 레이어</strong>를 변경하는 것이 더 적합해보입니다.<br>
+    <strong>(1)</strong> 다시, <strong>apPortrait</strong>를 가진 <strong>GameObject</strong>를 선택합니다.<br>
+    <strong>(2)</strong> 레이어를 "<span class="text-danger"><strong>Default</strong></span>"로 바꾸어 실제 메시들의 레이어와 동일하게 설정합니다.<br>
+    <strong>(3)</strong> 게임을 실행하면 클리핑 문제가 해결된 것을 볼 수 있습니다.<br>
+    </p>
     <br>
     
     <br>
@@ -267,6 +368,197 @@
     이 문제를 다루는 메뉴얼이 별도로 있으므로, 그것을 참조하면 되겠습니다.<br>
     - <a href="../../kr/AdvancedManual/AD_ExecutionOrderProblem.html">다른 에셋과 연동시 실행 순서 문제</a><br>
     </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>마스크 기능을 지원하는 쉐이더를 사용하지 않은 경우</h3>
+    <br>
+    
+    <p>
+    <strong>AnyPortrait v1.6.0</strong>에서 추가된 "<strong>마스크(Mask)</strong>" 기능은 여러개의 마스크 메시를 대상 메시에 전달하여 복합적으로 마스킹을 할 수 있습니다.<br>
+    이 기능을 쉐이더에서 구현하기 위해서, <strong>AnyPortrait v1.6.0</strong>에는 기존의 쉐이더들을 업그레이드했습니다.<br>
+    만약 이전의 쉐이더를 그대로 사용하고 있다면 마스크 기능은 동작하지 않을 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2282.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 2개의 메시가 1개의 메시("Star Mesh")로 마스크를 전달하여 클리핑 렌더링을 구현한 예제입니다.<br>
+    <strong>(2)</strong> 마스크 기능에 따라서, 붉은색 별 메시("Star Mesh")는 아래의 두개의 사각형 메시에 의해 클리핑이 되어 렌더링됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2283.jpg"/>
+    <br>
+    
+    <p>
+    문제를 재현하기 위해서, 마스크를 지원하지 않는 쉐이더를 적용해봅시다.<br>
+    <strong>(1)</strong> "<strong>재질 라이브러리</strong>"에서 마스크를 지원하지 않는 기존의 재질 프리셋들은 "<strong>Legacy</strong>"의 하위 메뉴로 이동했습니다. 여기서 현재 렌더 파이프라인에 맞는 <strong>재질 프리셋</strong>을 선택하여 설치합니다.<br>
+    <strong>(2)</strong> 기존 버전의 <strong>재질 프리셋</strong> 기반으로 새로운 <strong>재질 세트</strong>를 생성합니다.<br>
+    <strong>(3)</strong> 기존 버전의 경우 재질 세트의 "<strong>Description</strong>" 항목에 마스크와 관련된 키워드가 없습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2284.jpg"/>
+    <br>
+    
+    <p>
+    이 상태에서 <strong>Bake</strong>를 하고 게임을 실행하면 위와 같이 마스크가 동작하지 않는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2285.jpg"/>
+    <br>
+    
+    <p>
+    문제를 해결하기 위해서는 마스크를 지원하는 최신 버전의 재질 프리셋을 이용해야합니다.<br>
+    <strong>(1)</strong> "Legacy"가 아닌 최신 버전의 <strong>재질 프리셋</strong>을 설치합니다.<br>
+    <strong>(2)</strong> 마스크를 지원하는 <strong>재질 프리셋</strong>으로부터 <strong>재질 세트</strong>를 생성합니다.<br>
+    <strong>(3)</strong> "<strong>Description</strong>" 항목에 "<strong>Multi-Masks</strong>"라는 키워드가 추가된 것을 볼 수 있습니다. 이 키워드는 재질 세트는 다중 채널 마스크를 지원한다는 뜻이며, 이 키워드가 있어야 마스크 기능이 제대로 동작합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>참고</strong></span><br>
+    마스크 기능에서 커스텀 프로퍼티를 이용하는 경우, 재질 라이브러리를 통해서 해당 프로퍼티를 가진 쉐이더를 캐릭터에 적용해야 합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2286.jpg"/>
+    <br>
+    
+    <p>
+    적절한 재질 세트가 설정된 상태에서 다시 <strong>Bake</strong>를 하고 게임을 실행해봅시다.<br>
+    클리핑이 정상적으로 동작하는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>프레임 디버거로 검토하기</h3>
+    <br>
+    
+    <p>
+    AnyPotrait의 클리핑 렌더링은 "<strong>커맨드 버퍼</strong>"와 "<strong>렌더 텍스쳐</strong>"를 이용합니다.<br>
+    만약 클리핑 문제가 발생했다면, 일단 이 두가지 요소들이 정상적으로 생성되어 동작하는지 확인하면 문제의 원인을 더 쉽게 찾을 수 있을 것입니다.<br>
+    이때, 렌더링의 각 과정을 분석하는 "<strong>프레임 디버거 (Frame Debugger)</strong>"를 이용하면 편리합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2294.jpg"/>
+    <br>
+    
+    <p>
+    유니티 에디터의 메뉴에서 "<strong>Window > Analysis > Frame Debugger</strong>"를 실행합니다.<br>
+    (유니티의 버전에 따라서 메뉴 경로는 다를 수 있습니다.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2295.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 게임을 실행합니다.<br>
+    <strong>(2)</strong> 렌더링을 분석하고자 하는 순간에 <strong>(3)</strong> <strong>프레임 디버거</strong>의 <strong>Enable</strong> 버튼을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2296.jpg"/>
+    <br>
+    
+    <p>
+    이제 게임이 정지되고, 렌더링의 각 세부 단계들을 순서대로 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2297.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 실제로 메시들을 렌더링하기 전에 "<strong>AP</strong>.."라는 이름의 렌더링 단계가 있음을 볼 수 있습니다. 이것이 AnyPortrait의 클리핑 레이어나 마스크 시스템에 의해서 생성된 커맨드 버퍼입니다.<br>
+    <strong>(2)</strong> 이 커맨드 버퍼의 렌더링 단계에서는 기본적으로 흑백의 마스크가 생성됩니다. 마스크는 "Render Texture" 타입으로 저장되며, 크기나 렌더링 비율 등은 카메라의 속성과 AnyPortrait의 설정에 따라서 결정됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2298.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 이제 마스크를 받아서 클리핑이 되는 메시가 렌더링되는 단계를 선택해봅시다.<br>
+    <strong>(2)</strong> 앞서 커맨드 버퍼에서 생성된 마스크 이미지가 "<strong>_MaskTex</strong>"와 같은 프로퍼티에 입력되는 것을 볼 수 있습니다.<br>
+    <strong>(3)</strong> 클리핑 렌더링이 정상적으로 동작되는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    위와 같이, 클리핑 렌더링의 과정을 프레임 디버거로 볼 수 있으며, 이를 바탕으로 문제 발생시 원인을 추측해볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    1. 커맨드 버퍼가 생성되지 않았거나 카메라 숫자만큼 생성되지 않은 경우<br>
+    : apPortrait가 카메라를 찾아서 연결하는 과정이 실패했을 수 있습니다.<br>
+    다중 카메라 이슈나 레이어 불일치, 렌더 파이프라인 설정 등을 검토해보세요.<br>
+    </p>
+    <br>
+    
+    <p>
+    2. Render Texture 타입의 마스크 이미지가 제대로 생성되지 않은 경우<br>
+    : 재질 라이브러리에서 "Alpha Mask" 쉐이더가 제대로 동작하지 않았을 가능성이 있습니다.<br>
+    또는 모디파이어에 의해서 마스크 메시가 "숨겨진 상태 (Hidden)"라면 마스크 이미지가 생성되지 않을 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    3. 마스크 이미지가 클리핑 되는 메시의 프로퍼티에 입력이 되지 않은 경우<br>
+    : 클리핑용 쉐이더에 적절한 프로퍼티가 없거나, 마스크 기능에서 대상 프로퍼티를 잘못 지정했을 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    4. 클리핑 렌더링만 수행되지 않은 경우<br>
+    : 앞의 과정이 모두 정상적이었다면, 클리핑용 쉐이더가 제대로 동작하지 않았을 수 있습니다.<br>
+    쉐이더 코드를 검토해보세요.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    렌더링 문제는 다양한 원인에 의해서 발생합니다.<br>
+    저희는 사용자들로부터 다른 에셋이나 "Renderer Feature" 등과의 호환성 문제, 스크립트에서 캐릭터를 로드할 때의 에러, 카메라 조작과 관련된 문제 등에 의해서도 렌더링 문제가 발생할 수 있음을 보고받았습니다.<br>
+    이 페이지에서 소개하는 내용으로도 문제가 해결되지 않는다면 저희에게 연락을 주세요!<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
     <br>
     
     <!-- 5. 바닥 네비바 -->

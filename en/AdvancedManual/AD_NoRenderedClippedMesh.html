@@ -77,7 +77,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.4.6</span></h4>
+    <h4><span class="badge badge-secondary">1.6.2</span></h4>
     
     <p>
     One of the most common inquiries our team has received from users is "Clipping meshes are not rendering properly".<br>
@@ -87,14 +87,9 @@
     </p>
     <br>
     
-    <!-- 8. 이미지 (가운데 정렬) -->
-    <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1858.jpg"/>
-    <br>
-    
     <p>
-    This is the character used on this page.<br>
-    The eye and mouth meshes are set as clipping meshes.<br>
+    In addition to the clipping mesh, the "Mask" function (<a href="../../en/AdvancedManual/AD_Mask.html">Related page</a>) also behaves in the same way, so you can find the cause on this page.<br>
+    Some of the content on this page addresses issues and solutions that occur only with the "Mask" function.<br>
     </p>
     <br>
     
@@ -106,6 +101,17 @@
     
     <p>
     This is mostly the case when using <strong>URP</strong>, or when restoring to <strong>Built-In Render Pipeline</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_1858.jpg"/>
+    <br>
+    
+    <p>
+    This is the character used on this page.<br>
+    The eye and mouth meshes are set as clipping meshes.<br>
     </p>
     <br>
     
@@ -182,15 +188,10 @@
     <br>
     
     <p>
-    AnyPortrait's clipping mesh references the properties of the camera to create an optimized mask using a <strong>Render Texture</strong> of moderate resolution.<br>
-    However, if more than one camera is trying to render a character, the optimization of the clipping mask is malfunctioning.<br>
-    </p>
-    <br>
-    
-    <p>
-    In order to solve this problem, you have to use <strong>VR support function</strong> which is a somewhat unexpected option.<br>
-    <strong>VR</strong> is basically a two-camera system, and it's just like this case, so it's an appropriate solution.<br>
-    (You can read more about <strong>VR support</strong> at the <a href="../../en/AdvancedManual/AD_VR.html">Related page</a>.)<br>
+    AnyPortrait's clipping rendering works by referencing cameras.<br>
+    This is done by registering a command buffer to a camera for rendering or by utilizing the "View Matrix" to optimize mask quality.<br>
+    However, AnyPortrait's default settings only reference a single camera.<br>
+    Therefore, if two or more cameras are rendering a character, clipping rendering will not work properly unless this default setting is changed.<br>
     </p>
     <br>
     
@@ -240,13 +241,113 @@
     <div class="alert alert-info" role="alert">
     
     <p>
-    With multiple cameras placed, there are additional issues when the cameras render to <strong>Render Texture</strong>.<br>
-    In this case, check the <a href="../../en/AdvancedManual/AD_RenderTexture.html">Related page</a> for more information.<br>
+    There are additional issues when deploying multiple cameras or rendering to a <strong>Render Texture</strong>.<br>
+    The following manuals may be helpful.<br>
+    - <a href="../../en/AdvancedManual/AD_MultipleCameras.html">Rendering with Multiple Cameras</a><br>
+    - <a href="../../en/AdvancedManual/AD_RenderTexture.html">Rendering to Render Texture</a><br>
+    - <a href="../../en/AdvancedManual/AD_VR.html">Build to VR</a><br>
     </p>
     <br>
     
     </div>
     <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>If the game object's layer does not match the camera</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2293.jpg"/>
+    <br>
+    
+    <p>
+    In a similar vein to the multi-camera issue, another source of problems referencing cameras is the "Layer."<br>
+    Cameras only render GameObjects with a "Layer" set within the "Culling Mask."<br>
+    Using this feature, AnyPortrait's main script, <strong>apPortrait</strong>, searches for cameras capable of rendering to its "layer" and attempts to establish a connection for clipping rendering.<br>
+    Only after this connection is established can command buffers and other data be created for clipping rendering.<br>
+    However, if <strong>apPortrait</strong>'s layer is incorrectly configured, preparation for clipping rendering may fail.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2287.jpg"/>
+    <br>
+    
+    <p>
+    Here's an example with two meshes.<br>
+    The star-shaped mesh is being clipped by the circle mesh below.<br>
+    Click <strong>Bake</strong> and open the Unity scene.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2288.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> The scene in this example contains one camera.<br>
+    <strong>(2)</strong> The value of "<strong>Culling Mask</strong>" for this camera only contains the "<span class="text-danger"><strong>Default</strong></span>" layer.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2289.jpg"/>
+    <br>
+    
+    <p>
+    Let's reproduce the problem.<br>
+    <strong>(1)</strong> Select the character's root object, i.e., the "<strong>GameObject</strong>" with "<strong>apPortrait</strong>".<br>
+    <strong>(2)</strong> Change this object's layer to "<span class="text-success"><strong>UI</strong></span>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2290.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the child objects with actual meshes.<br>
+    <strong>(2)</strong> Set the layer of the child objects to "<span class="text-danger"><strong>Default</strong></span>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2291.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you will see that the meshes are rendered, but the clipping rendering is not working.<br>
+    </p>
+    <br>
+    
+    <p>
+    Since the child meshes' layers are "<span class="text-danger"><strong>Default</strong></span>", which matches the value of the "<strong>Culling Mask</strong>", rendering itself is performed correctly.<br>
+    However, the layer of "<strong>apPortrait</strong>" that detects the camera and performs the connection is "<span class="text-success"><strong>UI</strong></span>", which is not included in the "<strong>Culling Mask</strong>".<br>
+    In this case, regardless of whether the actual meshes are rendered, "<strong>apPortrait</strong>" incorrectly determines that "There is no camera rendering this character."<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2292.jpg"/>
+    <br>
+    
+    <p>
+    To fix this issue, you can consider either "modifying the <strong>apPortrait layer</strong>" or "modifying the <strong>Culling Mask</strong> of the camera".<br>
+    If there's a reasonable cause to change the apPortrait layer, changing the camera's <strong>Culling Mask</strong> might be the right approach, but in this example, modifying the <strong>apPortrait layer</strong> seems more appropriate.<br>
+    <strong>(1)</strong> Again, select the <strong>GameObject</strong> containing <strong>apPortrait</strong>.<br>
+    <strong>(2)</strong> Change the layer to "<span class="text-danger"><strong>Default</strong></span>" to match the actual mesh layer.<br>
+    <strong>(3)</strong> Run the game and you'll see that the clipping issue has been resolved.<br>
+    </p>
     <br>
     
     <br>
@@ -267,6 +368,197 @@
     There is a separate manual dealing with this issue, you can refer to it.<br>
     - <a href="../../en/AdvancedManual/AD_ExecutionOrderProblem.html">Execution order problem with assets</a><br>
     </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>When using shaders that do not support the Mask</h3>
+    <br>
+    
+    <p>
+    The "Mask" feature added in "AnyPortrait v1.6.0" allows for complex masking by passing multiple mask meshes to the target mesh.<br>
+    To implement this feature in shaders, existing shaders were upgraded in "AnyPortrait v1.6.0".<br>
+    If you are still using the previous shaders, the mask feature will not work.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2282.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> This is an example of implementing clipping rendering by creating and passing a mask from two meshes to a single mesh ("Star Mesh").<br>
+    <strong>(2)</strong> According to the mask function, the red star mesh ("Star Mesh") is rendered by being clipped by the two rectangular meshes below.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2283.jpg"/>
+    <br>
+    
+    <p>
+    To reproduce the issue, let's apply a shader that doesn't support masks.<br>
+    <strong>(1)</strong> Existing material presets that don't support masks have been moved to the "<strong>Legacy</strong>" submenu in "<strong>Material Library</strong>." Select and install the <strong>Material Preset</strong> that matches your current render pipeline.<br>
+    <strong>(2)</strong> Create a new <strong>Material Set</strong> based on the <strong>Material Preset</strong> from the previous version.<br>
+    <strong>(3)</strong> For the previous version, there are no mask-related keywords in the "<strong>Description</strong>" section of the material set.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2284.jpg"/>
+    <br>
+    
+    <p>
+    If you do <strong>Bake</strong> in this state and run the game, you can see that the mask does not work as shown above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2285.jpg"/>
+    <br>
+    
+    <p>
+    To resolve this issue, you need to use the latest version of the Material Preset that supports masks.<br>
+    <strong>(1)</strong> Install the latest version of <strong>Material Preset</strong>, not the "Legacy" version.<br>
+    <strong>(2)</strong> Create a <strong>Material Set</strong> from a <strong>Material Preset</strong> that supports masks.<br>
+    <strong>(3)</strong> You'll notice the keyword "<strong>Multi-Masks</strong>" added to the "<strong>Description</strong>" field. This keyword indicates that the material set supports multi-channel masks, and this keyword is required for the masking feature to function properly.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    If you use custom properties in the mask function, you must apply a shader with those properties to your character via the Material Library.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2286.jpg"/>
+    <br>
+    
+    <p>
+    With the appropriate material set, let's <strong>Bake</strong> again and run the game.<br>
+    You'll see that clipping is working properly.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Review with Frame Debugger</h3>
+    <br>
+    
+    <p>
+    AnyPotrait's clipping rendering utilizes the "<strong>Command Buffer</strong>" and "<strong>Render Texture</strong>."<br>
+    If clipping issues occur, verifying that these two elements are created and functioning properly will help you identify the cause.<br>
+    The "<strong>Frame Debugger</strong>," which analyzes each rendering process, can be helpful.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2294.jpg"/>
+    <br>
+    
+    <p>
+    Launch "<strong>Window > Analysis > Frame Debugger</strong>" from the Unity Editor menu.<br>
+    (The menu path may vary depending on your Unity version.)<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2295.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Run the game.<br>
+    <strong>(2)</strong> At the time you want to analyze rendering, <strong>(3)</strong> click the <strong>Enable</strong> button in the <strong>Frame Debugger</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2296.jpg"/>
+    <br>
+    
+    <p>
+    Now the game is paused and you can see each detailed step of rendering in sequence.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2297.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Before actually rendering the meshes, you can see a rendering step named "<strong>AP</strong>...". This is a command buffer generated by AnyPortrait's clipping layer or mask system.<br>
+    <strong>(2)</strong> This command buffer rendering step generates a black-and-white mask by default. The mask is saved as a "Render Texture" type, and its size and rendering ratio are determined by the camera's properties and AnyPortrait's settings.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2298.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Now, let's select the stage where the mesh that receives the mask and is clipped is rendered.<br>
+    <strong>(2)</strong> You can see that the mask image previously generated in the command buffer is input into a property like "<strong>_MaskTex</strong>".<br>
+    <strong>(3)</strong> You can see that the clipping rendering is working properly.<br>
+    </p>
+    <br>
+    
+    <p>
+    As above, you can view the clipping rendering process with the Frame Debugger, and based on this, you can guess the cause when a problem occurs.<br>
+    </p>
+    <br>
+    
+    <p>
+    1. If the Command Buffer wasn't created or wasn't created for the number of cameras<br>
+    : apPortrait may have failed to find and connect to the camera.<br>
+    Check for multi-camera issues, layer mismatches, render pipeline settings, etc.<br>
+    </p>
+    <br>
+    
+    <p>
+    2. If the Render Texture type mask image is not generated properly<br>
+    : The "Alpha Mask" shader in the Material Library may not be functioning properly.<br>
+    Alternatively, if the mask mesh is "Hidden" by a modifier, the mask image may not be generated.<br>
+    </p>
+    <br>
+    
+    <p>
+    3. If the mask image is not input to the properties of the mesh being clipped<br>
+    : The clipping shader may not have the appropriate properties, or the target property may have been incorrectly specified in the Mask function.<br>
+    </p>
+    <br>
+    
+    <p>
+    4. If only clipping rendering is not performed<br>
+    : If all the previous steps were successful, the clipping shader may not be working properly.<br>
+    Review the shader code.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    Rendering issues can arise for a variety of reasons.<br>
+    We've heard from users that rendering issues can be caused by compatibility issues with other assets or "Renderer Features," errors loading characters from scripts, or issues with camera manipulation.<br>
+    If the instructions on this page don't solve your problem, please contact us!<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
     <br>
     
     <!-- 5. 바닥 네비바 -->
