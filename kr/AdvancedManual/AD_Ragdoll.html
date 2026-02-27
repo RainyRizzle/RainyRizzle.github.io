@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>래그돌 구현하기</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/ko/anyportrait-ko/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ko/ap-video-tutorials-ko/">동영상</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ko/forum-ko/">게시판</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_Ragdoll.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_Ragdoll.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_Ragdoll.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/ko/anyportrait-ko/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > 래그돌 구현하기</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">래그돌 구현하기</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.2</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2318.jpg"/>
+    <br>
+    
+    <p>
+    "<strong>래그돌 (Ragdoll)</strong>"은 캐릭터가 봉제 인형처럼 힘없이 늘어지게끔 만드는 기법입니다.<br>
+    캐릭터의 각 본에 물리 기능을 부가하여, 오직 물리 엔진에 의해서만 캐릭터가 움직이도록 만드는 것이 이 기법의 핵심입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    유니티에서 래그돌을 구현하기 위해서는, "<strong>Joint</strong>" 종류의 물리 컴포넌트를 이용해야합니다.<br>
+    이 페이지는 "<strong>Hinge Joint 2D</strong>" 및 2D 물리 컴포넌트들을 본에 연동하여 래그돌을 구현하는 방법을 다룹니다.<br>
+    먼저, 1개의 본에 래그돌 효과를 적용하는 방법을 설명합니다.<br>
+    이어서 다수의 본에 래그돌 효과를 적용하기 위해서 저희팀이 작성한 스크립트를 적용하는 방법을 설명합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>안내</strong></span><br>
+    AnyPortrait에는 Rigidbody 등의 물리 컴포넌트와 본을 연동하기 위해서는 특별한 구현 방법을 알아야 합니다.<br>
+    이 페이지의 설명을 보기 전에 "<strong>본과 물리 컴포넌트 연동하기</strong>" (<a href="../../kr/AdvancedManual/AD_IntegratePhysics2D.html">링크</a>) 메뉴얼을 먼저 읽을 것을 권장합니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>예제 1. 한개의 본에 Hinge Joint 2D를 연동하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2319.jpg"/>
+    <br>
+    
+    <p>
+    첫번째 예제에서는 로봇의 한쪽 팔에 래그돌 효과를 적용해봅시다.<br>
+    래그돌 효과를 구현하기 위한 가장 좋은 방법은 "<strong>더미 오브젝트</strong>"를 생성하고, 여기에 "<strong>Hinge Joint 2D</strong>" 컴포넌트를 추가하는 것입니다.<br>
+    추가되는 <strong>Hinge Joint 2D</strong>는 부모 본의 "<strong>Rigidbody 2D</strong>"와 연결되어야 합니다.<br>
+    부모 본이 없는 이 예제의 경우에는 <strong>루트가 되는 GameObject</strong>에 연결하면 됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2320.jpg"/>
+    <br>
+    
+    <p>
+    캐릭터는 위와 같이 구성됩니다.<br>
+    <strong>1. Character Group</strong> : 캐릭터 전체의 루트 오브젝트입니다. "Rigidbody 2D" 컴포넌트를 가집니다.<br>
+    <strong>2. AnyPortrait</strong> : AnyPortrait로 제작된 캐릭터입니다.<br>
+    <strong>3. Default Collider</strong> : 캐릭터 전체의 크기에 맞게 설정된 콜라이더 오브젝트입니다.<br>
+    <strong>4. Dummy</strong> : 래그돌 효과가 시작될 때 임시로 생성되는 더미 오브젝트입니다. 로봇 팔에 해당하며 "Hinge Joint 2D"를 포함한 물리 컴포넌트들을 가집니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이전 페이지와 다르게, 로봇 팔이 캐릭터에 종속되어 움직이므로 "더미 오브젝트"가 캐릭터 그룹 내에 포함된다는 점에 유의하세요.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2321.jpg"/>
+    <br>
+    
+    <p>
+    스크립트를 작성하기에 앞서 "<strong>소켓</strong>"을 활성화합니다.<br>
+    <strong>(1)</strong> <strong>Bone</strong> 탭을 선택합니다.<br>
+    <strong>(2)</strong> 대상이 되는 본은 "Bone Lower Arm L"이며, 본의 길이를 계산하기 위해 자식 본인 "Bone Hand L"도 같이 참조해야합니다.<br>
+    <strong>(3)</strong>  <kbd>Ctrl</kbd>  키를 눌러서 두개의 본들을 모두 선택합니다.<br>
+    <strong>(4)</strong> "<strong>Socket</strong>" 버튼을 눌러서 소켓을 활성화합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이제 <strong>Bake</strong>를 실행하고 다음의 스크립트를 작성합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary">using</span> AnyPortrait;<br>
+    <br>
+    <span class="text-primary">public class</span> <span class="text-success">v162_HingeJointScript</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// Rigidbody2D를 가진 apPortrait의 부모 오브젝트<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">Transform</span> characterTransform;<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">Rigidbody2D</span> rootRigidbody;<br>
+    <br>
+    &emsp;&emsp;// AnyPortrait 캐릭터<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">apPortrait</span> portrait;<br>
+    <br>
+    &emsp;&emsp;// 물리 시뮬레이션 상태를 나타내는 플래그와 시뮬레이션에 사용되는 더미 오브젝트의 Rigidbody2D<br>
+    &emsp;&emsp;<span class="text-primary">private bool</span> _isSimulating = <span class="text-primary">false</span>;<br>
+    &emsp;&emsp;<span class="text-primary">private</span> <span class="text-success">Rigidbody2D</span> _dummyHingeRigidbody = <span class="text-primary">null</span>;<br>
+    <br>
+    &emsp;&emsp;// 초기 위치를 저장하기 위한 변수<br>
+    &emsp;&emsp;<span class="text-primary">private</span> <span class="text-success">Vector3</span> _initPosition;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 초기 위치를 저장합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;_initPosition = characterTransform.position;<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// A키를 누르면 더미 힌지를 생성하여 물리 시뮬레이션이 시작됩니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 더미 힌지를 생성합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>MakeDummyHinge();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 애니메이션을 일시 정지합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.PauseAll();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Rigidbody2D의 제약 조건을 해제하여 캐릭터가 물리적으로 회전할 수 있도록 만듭니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rootRigidbody.constraints = <span class="text-success"><strong>RigidbodyConstraints2D</strong></span><strong>.None;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// S키를 누르면 더미 힌지를 제거하고 원래대로 되돌립니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 더미 힌지를 제거합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>RemoveDummyHinge();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Rigidbody2D의 제약 조건을 다시 설정하여 캐릭터가 회전하지 않도록 만듭니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rootRigidbody.constraints = <span class="text-success"><strong>RigidbodyConstraints2D</strong></span><strong>.FreezeRotation</strong>;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 캐릭터의 위치와 회전을 초기 상태로 되돌리고 애니메이션을 재생합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;characterTransform.position = _initPosition;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;characterTransform.localRotation = <span class="text-success">Quaternion</span>.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Play(<span class="text-danger">"Anim"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 물리 시뮬레이션이 적용된 더미 힌지의 위치와 회전을 이용하여 "Bone Lower Arm L" 뼈의 회전을 업데이트합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_isSimulating)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> upVectorW = _dummyHingeRigidbody.transform.TransformDirection(<span class="text-success">Vector3</span>.up);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ_W = <span class="text-success">Vector3</span>.SignedAngle(<span class="text-success">Vector3</span>.up, upVectorW, <span class="text-success">Vector3</span>.forward);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;angleZ_W += 90.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBoneRotation("Bone Lower Arm L", angleZ_W, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> FixedUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 물리 시뮬레이션이 적용된 더미 힌지의 위치를 보정합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;if (_isSimulating)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> bonePosW = portrait.GetBoneSocket(<span class="text-danger">"Bone Lower Arm L"</span>).position;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> hingePosW = _dummyHingeRigidbody.position;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 뼈와 더미 힌지 사이의 거리가 일정 이상인 경우, 더미 힌지의 위치를 뼈의 위치로 보정합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Vector3</span>.Distance(bonePosW, hingePosW) > 0.1f)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_dummyHingeRigidbody.MovePosition(bonePosW);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// 더미 힌지를 생성하여 물리 시뮬레이션을 시작합니다.<br>
+    &emsp;&emsp;<span class="text-primary">private void</span> MakeDummyHinge()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_dummyHingeRigidbody != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Destroy(_dummyHingeRigidbody.gameObject);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;_dummyHingeRigidbody = <span class="text-primary">null</span>;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// "Bone Lower Arm L" 뼈와 "Bone Hand L" 뼈의 위치를 계산합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> targetSocket = portrait.GetBoneSocket(<span class="text-danger">"Bone Lower Arm L"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> childSocket = portrait.GetBoneSocket(<span class="text-danger">"Bone Hand L"</span>);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> posL_Target = characterTransform.InverseTransformPoint(targetSocket.position);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> posL_Child = characterTransform.InverseTransformPoint(childSocket.position);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 초기 회전값을 계산합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ = <span class="text-success">Vector3</span>.SignedAngle(<span class="text-success">Vector3</span>.up, posL_Child - posL_Target, <span class="text-success">Vector3</span>.forward);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 더미 힌지 오브젝트를 생성하고 캐릭터 오브젝트의 자식으로 설정한 후, 초기 위치와 회전을 설정합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject</span> dummyHingeObj = <span class="text-primary">new</span> <span class="text-success">GameObject</span>(<span class="text-danger">"DummyHinge"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> dummyHingeTransform = dummyHingeObj.transform;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>dummyHingeTransform.parent = characterTransform;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;dummyHingeTransform.localPosition = posL_Target;<br>
+    &emsp;&emsp;&emsp;&emsp;dummyHingeTransform.localRotation = <span class="text-success">Quaternion</span>.Euler(0f, 0f, angleZ);<br>
+    &emsp;&emsp;&emsp;&emsp;dummyHingeTransform.localScale = <span class="text-success">Vector3</span>.one;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 더미 힌지에 Rigidbody2D와 CapsuleCollider2D를 추가합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;_dummyHingeRigidbody = dummyHingeObj.AddComponent<<span class="text-success">Rigidbody2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;_dummyHingeRigidbody.mass = 1.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 뼈 사이의 거리를 이용하여 캡슐 콜라이더의 크기를 설정합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeLength = <span class="text-success">Vector3</span>.Distance(posL_Target, posL_Child);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeWidth = hingeLength * 0.3f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">CapsuleCollider2D</span> hingeCollider = dummyHingeObj.AddComponent<<span class="text-success">CapsuleCollider2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;hingeCollider.direction = <span class="text-success">CapsuleDirection2D</span>.Vertical;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeCollider.size = <span class="text-primary">new</span> <span class="text-success">Vector2</span>(hingeWidth, hingeLength);<br>
+    &emsp;&emsp;&emsp;&emsp;hingeCollider.offset = <span class="text-primary">new</span> <span class="text-success">Vector2</span>(0f, hingeLength * 0.5f);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 더미 힌지에 HingeJoint2D를 추가하여 캐릭터의 Rigidbody2D와 연결합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">HingeJoint2D</span> hingeJoint = dummyHingeObj.AddComponent<<span class="text-success">HingeJoint2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hingeJoint.connectedBody = rootRigidbody;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.autoConfigureConnectedAnchor = <span class="text-primary">false</span>;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.anchor = <span class="text-success">Vector2</span>.zero;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hingeJoint.connectedAnchor = posL_Target;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 회전 각도를 제한하여 더미 힌지가 일정 범위 내에서만 회전하도록 설정합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Physics2D</span>.SyncTransforms();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">JointAngleLimits2D</span> angleLimits = <span class="text-primary">new</span> <span class="text-success">JointAngleLimits2D</span>();<br>
+    &emsp;&emsp;&emsp;&emsp;angleLimits.min = -30.0f + hingeJoint.jointAngle;<br>
+    &emsp;&emsp;&emsp;&emsp;angleLimits.max = 30.0f + hingeJoint.jointAngle;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.limits = angleLimits;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.useLimits = <span class="text-primary">true</span>;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;_isSimulating = <span class="text-primary">true</span>;<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// 더미 힌지를 제거하여 물리 시뮬레이션을 종료합니다.<br>
+    &emsp;&emsp;<span class="text-primary">private void</span> RemoveDummyHinge()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_dummyHingeRigidbody != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Destroy(_dummyHingeRigidbody.gameObject);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_dummyHingeRigidbody = <span class="text-primary">null</span>;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;_isSimulating = <span class="text-primary">false</span>;<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    대부분의 코드들은 이전 메뉴얼에서 소개한 스크립트와 거의 동일합니다.<br>
+    여기서는 래그돌 구현과 관련된 코드들을 살펴봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 더미 힌지를 생성합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>MakeDummyHinge();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 애니메이션을 일시 정지합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.PauseAll();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Rigidbody2D의 제약 조건을 해제하여 캐릭터가 물리적으로 회전할 수 있도록 만듭니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rootRigidbody.constraints = <span class="text-success"><strong>RigidbodyConstraints2D</strong></span><strong>.None;</strong><br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    래그돌 시뮬레이션을 시작하는 요청을 하는 코드입니다.<br>
+    후술할 "MakeDummyHinge"함수를 호출하고, 루트 오브젝트의 Rigidbody 2D의 Constraint를 모두 해제합니다.<br>
+    이렇게 하면 캐릭터가 균형을 잃고 쓰러지는 연출을 만들 수 있습니다.<br>
+    중요한 것은 "<strong>PauseAll</strong>" 함수를 호출하여 캐릭터의 애니메이션을 일시정지했다는 점입니다.<br>
+    캐릭터의 애니메이션을 계속 재생하게 만든다면 물리 시뮬레이션이 매우 불안정하게 동작하므로, 꼭 애니메이션을 정지시켜주세요.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// 물리 시뮬레이션이 적용된 더미 힌지의 위치와 회전을 이용하여 "Bone Lower Arm L" 뼈의 회전을 업데이트합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_isSimulating)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> upVectorW = _dummyHingeRigidbody.transform.TransformDirection(<span class="text-success">Vector3</span>.up);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ_W = <span class="text-success">Vector3</span>.SignedAngle(<span class="text-success">Vector3</span>.up, upVectorW, <span class="text-success">Vector3</span>.forward);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;angleZ_W += 90.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBoneRotation("Bone Lower Arm L", angleZ_W, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    더미 힌지 오브젝트의 움직임을 매 프레임마다 캐릭터의 본에 적용하는 코드입니다.<br>
+    <strong>Hinge Joint 2D</strong>의 경우 독립되어 이동되지 않고 부모에 종속되어 회전만 하기 때문에 <strong>SetBoneRotation</strong>만 호출합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> FixedUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 물리 시뮬레이션이 적용된 더미 힌지의 위치를 보정합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;if (_isSimulating)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> bonePosW = portrait.GetBoneSocket(<span class="text-danger">"Bone Lower Arm L"</span>).position;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> hingePosW = _dummyHingeRigidbody.position;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 뼈와 더미 힌지 사이의 거리가 일정 이상인 경우, 더미 힌지의 위치를 뼈의 위치로 보정합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Vector3</span>.Distance(bonePosW, hingePosW) > 0.1f)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_dummyHingeRigidbody.MovePosition(bonePosW);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton3" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    이전 메뉴얼과 가장 크게 달라지는 코드입니다.<br>
+    물리 연산이 실행되는 "<strong>FixedUpdate</strong>"에서 더미 오브젝트의 위치를 캐릭터의 본에 맞게 보정해야합니다.<br>
+    정상적인 경우라면 AnyPortrait의 본과 더미 오브젝트는 부모에 종속된다는 공통점이 있으므로 굳이 위치를 보정하지 않아도 됩니다.<br>
+    그렇지만 <strong>Hinge Joint 2D</strong>가 부모에 강력하게 연결되도록 설정을 하더라도, 너무 강한 힘을 가하거나 충돌 에러가 발생한다면 더미 오브젝트가 부모(여기에서는 Character Group)와 분리되는 문제가 발생합니다.<br>
+    그래서 본의 위치와 더미 오브젝트의 위치를 계속 비교하면서 오류가 발생한다면 더미 오브젝트를 강제로 보정할 필요가 있습니다.<br>
+    여기서는 "<strong>0.1f</strong>"의 위치 차이를 감지하도록 했는데, 만약 이 값을 너무 작게 만든다면 "<strong>MovePosition</strong>" 함수가 너무 빈번하게 호출될 수 있습니다.<br>
+    "<strong>MovePosition</strong>"이 지나치게 많이 발생하면 더미 오브젝트의 속도에 영향을 주므로 움직임이 자연스럽지 않게 됩니다.<br>
+    따라서 테스트를 해보고 적절한 값을 입력해야합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// 더미 힌지 오브젝트를 생성하고 캐릭터 오브젝트의 자식으로 설정한 후, 초기 위치와 회전을 설정합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject</span> dummyHingeObj = <span class="text-primary">new</span> <span class="text-success">GameObject</span>(<span class="text-danger">"DummyHinge"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> dummyHingeTransform = dummyHingeObj.transform;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>dummyHingeTransform.parent = characterTransform;</strong></span>&emsp;&emsp;&emsp;&emsp;<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton4" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    더미 오브젝트를 생성할 때, 이전 메뉴얼과 달리, 캐릭터의 루트에 해당하는 "<strong>characterTransform</strong>"의 자식이 되도록 설정해주세요.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// 더미 힌지에 HingeJoint2D를 추가하여 캐릭터의 Rigidbody2D와 연결합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">HingeJoint2D</span> hingeJoint = dummyHingeObj.AddComponent<<span class="text-success">HingeJoint2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hingeJoint.connectedBody = rootRigidbody;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.autoConfigureConnectedAnchor = <span class="text-primary">false</span>;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.anchor = <span class="text-success">Vector2</span>.zero;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hingeJoint.connectedAnchor = posL_Target;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 회전 각도를 제한하여 더미 힌지가 일정 범위 내에서만 회전하도록 설정합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Physics2D</span>.SyncTransforms();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">JointAngleLimits2D</span> angleLimits = <span class="text-primary">new</span> <span class="text-success">JointAngleLimits2D</span>();<br>
+    &emsp;&emsp;&emsp;&emsp;angleLimits.min = -30.0f + hingeJoint.jointAngle;<br>
+    &emsp;&emsp;&emsp;&emsp;angleLimits.max = 30.0f + hingeJoint.jointAngle;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.limits = angleLimits;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.useLimits = <span class="text-primary">true</span>;<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton5" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    더미 오브젝트에 "<strong>Hinge Joint 2D</strong>" 컴포넌트를 추가하는 코드입니다.<br>
+    여기서는 부모 본이 존재하지 않으므로 캐릭터의 루트 오브젝트인 "<strong>rootRigidbody</strong>"에 연결합니다.<br>
+    만약 래그돌의 부모 본이 있다면, 부모 본에 해당하는 Rigidbody를 연결해야합니다.<br>
+    추가적으로, 더미 오브젝트의 회전 각도를 제한해야할 필요가 있다면 위와 같이 코드를 작성하면 됩니다.<br>
+    "<strong>JointAngleLimits2D</strong>"를 적용하기 전에 "<strong>Physics2D.SyncTransforms()</strong>"를 먼저 호출해야한다는 점에 주의해주세요.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2322.jpg"/>
+    <br>
+    
+    <p>
+    작성한 스크립트를 씬에 적용해봅시다.<br>
+    <strong>(1)</strong> <strong>GameObject</strong>를 새로 생성합니다.<br>
+    <strong>(2)</strong> 생성된 <strong>GameObject</strong>에 스크립트를 추가하고, 멤버 변수에 해당하는 오브젝트들을 적절하게 할당합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2323.jpg"/>
+    <br>
+    
+    <p>
+    게임을 실행하고 스크립트에 맞게  <kbd>A</kbd>  키를 눌러봅시다.<br>
+    위와 같이 로봇 캐릭터가 애니메이션을 멈추고 옆으로 쓰러지는 것을 볼 수 있습니다.<br>
+    로봇이 넘어지면서 팔이 자연스럽게 꺾이는 것도 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2324.jpg"/>
+    <br>
+    
+    <p>
+    이 상태에서 게임을 일시정지하고 어떤 상황이 발생했는지 살펴봅시다.<br>
+    <strong>(1)</strong> 래그돌이 활성화되면 "DummyHinge"라는 이름의 더미 오브젝트가 캐릭터 그룹 내에 생성됩니다.<br>
+    <strong>(2)</strong> 이 더미 오브젝트에는 "<strong>Rigidbody 2D</strong>", "<strong>Capsule Collider 2D</strong>" 및 "<strong>Hinge Joint 2D</strong>" 컴포넌트들이 추가되어 있습니다.<br>
+    <strong>(3)</strong> 씬에서 확인하면, 더미 오브젝트와 물리 컴포넌트들이 대상 본에 맞게 생성되었고, 본이 더미 오브젝트와 동기화되어 움직이는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>예제 2. 래그돌 구현하기</h3>
+    <br>
+    
+    <p>
+    한개의 본을 <strong>Hinge Joint 2D</strong>와 연동하는 방식을 캐릭터의 대부분의 본들에 적용하면 래그돌을 구현할 수 있을 것입니다.<br>
+    모든 본에 대해서 더미 오브젝트를 만들고 물리 시뮬레이션을 수행하도록 위의 스크립트를 수정하면 됩니다.<br>
+    다만 수정된 스크립트의 분량이 너무 많아지므로 이 페이지에서 소개하기는 어려워서, 저희가 미리 작성한 스크립트를 제공해드립니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    - <a href="https://drive.google.com/file/d/1oZL731Bb6gZ2lyUcnwKTVEZIBsY4c7u3/view?usp=sharing" target="_sub">래그돌 시뮬레이터 스크립트 다운로드</a><br>
+    </p>
+    <br>
+    
+    <p>
+    Unitypackage 파일을 다운로드받고 유니티 프로젝트에 임포트하면 1개의 스크립트가 추가될 것입니다.<br>
+    이 스크립트를 이용하여 래그돌을 구현해봅시다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>안내</strong></span><br>
+    제공되는 스크립트는 AnyPortrait v1.6.2와 Unity 6.2를 기반으로 작성되었습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2325.jpg"/>
+    <br>
+    
+    <p>
+    로봇 캐릭터의 대부분의 본에 더미 오브젝트들을 생성하기 위한 준비를 해야합니다.<br>
+    <strong>(1)</strong> <strong>Bone</strong> 탭을 선택합니다.<br>
+    <strong>(2)</strong>&nbsp;&nbsp;<kbd>Shift</kbd>&nbsp;&nbsp;키나  <kbd>Ctrl</kbd>  키를 눌러서 대부분의 본을 선택합니다. 또한 대상 본의 자식 본들도 선택해야합니다.<br>
+    <strong>(3)</strong> 거의 모든 본들이 선택된 상태입니다.<br>
+    <strong>(4)</strong> 선택한 본들의 "<strong>Socket</strong>" 옵션을 일괄적으로 활성화합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>참고</strong></span><br>
+    이 예제에서 저희는 루트 본인 "Bone Pelvis"를 선택에서 제외했습니다.<br>
+    루트 본과 메시가 연결되지 않았으며, 그 역할을 루트 오브젝트("Character Group")가 대신 했기 때문입니다.<br>
+    작업자마다 캐릭터의 구조가 다를 것이므로, 캐릭터의 구조에 맞게 적절히 설정하고 구현하시면 되겠습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2326.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Bake</strong>를 하고 유니티 씬으로 돌아옵니다.<br>
+    <strong>(1)</strong> <strong>GameObject</strong>를 새로 생성합니다.<br>
+    <strong>(2)</strong> 생성한 <strong>GameObject</strong>에 다운로드한 "<strong>Portrait Ragdoll Simulator</strong>"스크립트를 추가합니다.<br>
+    <strong>(3)</strong> "<strong>Character Objects</strong>" 항목의 멤버 변수에 오브젝트들을 적절히 할당합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2327.jpg"/>
+    <br>
+    
+    <p>
+    이 스크립트는 "Bone Infos"라는 항목에 본 정보를 입력하면, 이 정보를 바탕으로 더미 오브젝트를 생성합니다.<br>
+    캐릭터의 모든 본들의 이름을 외워서 하나씩 입력해도 되지만, 이러면 너무 번거롭습니다.<br>
+    그래서 "소켓 옵션이 활성화된 모든 본을 찾아서 자동으로 정보를 입력하는 기능"을 구현해두었습니다.<br>
+    <strong>(1)</strong> "<strong>Make Hinge Infos</strong>" 버튼을 누릅니다.<br>
+    <strong>(2)</strong> 안내 메시지를 확인한 후 <strong>Yes</strong> 버튼을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2328.jpg"/>
+    <br>
+    
+    <p>
+    소켓이 활성화된 본들을 대상으로 정보가 자동으로 채워집니다.<br>
+    다만, 본의 구조상 일부 정보가 잘못 입력될 수도 있으니 하나씩 확인해봐야 합니다.<br>
+    <strong>(1)</strong> 예를 들어 이 캐릭터의 경우, "Bone Spine"의 일부 항목이 잘못 입력된 상태입니다.<br>
+    <strong>(2)</strong> "<strong>Child Bone Name</strong>" 항목에 "Bone Upper Arm R"이 입력된 상태인데, 이렇게 입력되면 몸통에 해당하는 더미 오브젝트가 오른쪽 어깨 방향으로 기울어져서 생성될 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2329.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> "Bone Spine"의 끝점에 해당하는 본인 "Bone Head"의 이름을 "<strong>Child Bone Name</strong>"에 직접 입력해줍시다.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    "Bone Infos" 옵션의 각 항목은 다음과 같습니다.<br>
+    <strong>1. Bone Name</strong> : 더미 오브젝트가 생성될 대상 본의 이름입니다.<br>
+    <strong>2. Parent Bone Name</strong> : "Hinge Joint 2D"의 부모로서 연결될 부모 본의 이름입니다. 부모 본을 지정하지 않는 경우, 캐릭터의 루트 오브젝트에 연결됩니다.<br>
+    <strong>3. Child Bone Name</strong> : 대상 본의 끝점의 위치를 계산하기 위해 참조하는 자식 본의 이름입니다. 비어있으면 안되며, 자식 본 중에서 대상 본의 끝점에 가장 가까운 본이 입력되어야 정상적으로 콜라이더가 생성됩니다.<br>
+    <strong>4. Collider Width</strong> : 콜라이더의 폭, 즉 Size의 X 값을 지정합니다.<br>
+    <strong>4. Is Angle Limit</strong> : 더미 오브젝트의 회전 범위를 제한할 수 있습니다.<br>
+    <strong>5. Angle Limit Min/Max</strong> : 더미 오브젝트의 회전 범위입니다. 래그돌 생성 시점의 각도를 기준으로 범위를 지정합니다.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2330.jpg"/>
+    <br>
+    
+    <p>
+    다른 생성 정보들을 확인해가면서 적절히 속성을 수정합니다.<br>
+    위와 같이 회전 범위를 변경하면 더 자연스러운 래그돌을 만들 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    시뮬레이터 스크립트는 그 자체로 동작하지 않습니다.<br>
+    별도의 스크립트를 작성하여 시뮬레이션을 실행시켜봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary">using</span> AnyPortrait;<br>
+    <br>
+    <span class="text-primary">public class</span> <span class="text-success">v162_RagdollScript</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// Rigidbody2D를 가진 apPortrait의 부모 오브젝트<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">Transform</span> characterTransform;<br>
+    <br>
+    &emsp;&emsp;// AnyPortrait 캐릭터와 래그돌 시뮬레이터<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">apPortrait</span> portrait;<br>
+    &emsp;&emsp;<span class="text-danger"><strong>public PortraitRagdollSimulator ragdollSimulator;</strong></span><br>
+    <br>
+    &emsp;&emsp;// 초기 위치로 되돌리기 위한 변수<br>
+    &emsp;&emsp;<span class="text-primary">private</span> <span class="text-success">Vector3</span> _initialPosition;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 물리 시뮬레이터와 AnyPortrait 캐릭터를 초기화합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>portrait.Initialize();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<strong>ragdollSimulator.Initialize();</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 초기 위치를 저장합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;_initialPosition = characterTransform.position;<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// A키를 누르면 래그돌 시뮬레이션이 시작됩니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 애니메이션을 일시정지 합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.PauseAll();</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 래그돌 시뮬레이터를 시작합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>ragdollSimulator.StartSimulate();</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// S키를 누르면 물리 시뮬레이션을 중지하고 원래대로 되돌립니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 애니메이션을 다시 재생합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.Play(</strong><span class="text-danger"><strong>"Anim"</strong></span><strong>);</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 래그돌 시뮬레이터를 중지합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>ragdollSimulator.StopSimulate();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 캐릭터의 위치와 회전을 초기 상태로 되돌립니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;characterTransform.position = _initialPosition;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;characterTransform.rotation = Quaternion.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton6" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    "<strong>ragdollSimulator.Initialize()</strong>"를 호출하기 전에 "<strong>portrait.Initialize()</strong>"를 먼저 호출해서 정상적으로 초기화를 진행해야 합니다.<br>
+    이후에 "<strong>ragdollSimulator.StartSimulate()</strong>" 함수와 "<strong>ragdollSimulator.StopSimulate()</strong>"를 이용해서 시뮬레이터를 켜거나 종료합니다.<br>
+    래그돌 시뮬레이터를 실행할 때는 애니메이션을 일시정지해주세요.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2331.jpg"/>
+    <br>
+    
+    <p>
+    래그돌 시뮬레이터를 실행할 스크립트까지 작성했으니, 이것을 씬에 적용해봅시다.<br>
+    <strong>(1)</strong> 새로운 <strong>GameObject</strong>를 생성합니다.<br>
+    <strong>(2)</strong> 작성한 스크립트를 추가하고 멤버 변수에 적절히 할당합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2332.jpg"/>
+    <br>
+    
+    <p>
+    이제 게임을 실행해봅시다.<br>
+     <kbd>A</kbd>  키를 누르면 래그돌이 활성화되어 캐릭터가 힘없이 바닥에 쓰러지는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    여기서 약간의 수정을 더 해봅시다.<br>
+    현재 생성된 더미 오브젝트들간의 충돌이 발생하여 관절이 덜 회전되는 것 같습니다.<br>
+    구현 의도에 따라서 캐릭터의 관절들은 서로 충돌을 하지 않도록 만들어야 할 때도 있을 것입니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2333.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Project Settings</strong>를 엽니다.<br>
+    <strong>(2)</strong> <strong>Tags and Layers</strong>를 선택합니다.<br>
+    <strong>(3)</strong> <strong>Layers</strong>에 캐릭터 전용의 새로운 레이어를 추가합니다. 여기서는 "<strong>Character</strong>"라는 이름의 레이어를 추가했습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2334.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Project Settings</strong>의 <strong>Physics 2D</strong>를 선택합니다.<br>
+    <strong>(2)</strong> <strong>Layer Collision Matrix</strong> 탭을 선택합니다.<br>
+    <strong>(3)</strong> 레이어 간의 충돌 여부에서 "<strong>Character - Character</strong>"의 체크를 해제합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2335.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 캐릭터의 루트 오브젝트를 선택합니다.<br>
+    <strong>(2)</strong> <strong>Layer</strong>를 방금 추가한 "<strong>Character</strong>"로 변경하고 적용합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    래그돌 시뮬레이터 스크립트에는 다음과 같은 코드가 있어서, 생성된 더미 오브젝트들이 루트 오브젝트의 레이어와 동일한 값을 가집니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;<span class="text-success">GameObject</span> hingeGO = <span class="text-primary">new</span> <span class="text-success">GameObject</span>(info.boneName + <span class="text-danger">"_Hinge"</span>);<br>
+    ...<br>
+    &emsp;&emsp;hingeGO.layer = characterTransform.gameObject.layer;<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton7" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2336.jpg"/>
+    <br>
+    
+    <p>
+    이제 게임을 실행하고 다시 래그돌를 켜봅시다.<br>
+    캐릭터의 각 관절이 다른 관절과 충돌하지 않으므로 더 많이 구부러지는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2337.jpg"/>
+    <br>
+    
+    <p>
+    마지막으로, 래그돌 시뮬레이터가 동작할 때 씬에서 어떤 상황이 발생하는지 확인해봅니다.<br>
+    <strong>(1)</strong> 래그돌 시뮬레이터가 켜지면 더미 오브젝트들이 본의 구조와 유사하게 생성됩니다.<br>
+    <strong>(2)</strong> 더미 오브젝트 중 "Ragdoll Root"를 제외한 각 더미 오브젝트에는 <strong>Rigidbody 2D</strong>, <strong>Capsule Collider 2D</strong> 및 <strong>Hinge Joint 2D</strong> 컴포넌트가 추가되어 있습니다.<br>
+    <strong>(3)</strong> 캐릭터와 더미 오브젝트들이 동기화되어서 움직이는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    제공되는 스크립트는 기본적인 기능만 제공하며, 여러개의 루트 유닛이 있는 경우 등을 모두 지원하지는 않습니다.<br>
+    저희가 스크립트에 주석을 상세히 적었으므로, 프로젝트에 맞게 수정하여 사용하시면 되겠습니다.<br>
+    이 메뉴얼에 대해서 의견을 주신다면 더 편리하게 기능을 구현할 수 있도록 개선해보겠습니다.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_IntegratePhysics2D.html">< 본과 물리 컴포넌트 연동하기</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_CharacterCostume.html">캐릭터의 의상을 교체하기 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class v162_HingeJointScript : MonoBehaviour\n{\n\t// Rigidbody2D를 가진 apPortrait의 부모 오브젝트\n\tpublic Transform characterTransform;\n\tpublic Rigidbody2D rootRigidbody;\n\n\t// AnyPortrait 캐릭터\n\tpublic apPortrait portrait;\n\n\t// 물리 시뮬레이션 상태를 나타내는 플래그와 시뮬레이션에 사용되는 더미 오브젝트의 Rigidbody2D\n\tprivate bool _isSimulating = false;\n\tprivate Rigidbody2D _dummyHingeRigidbody = null;\n\n\t// 초기 위치를 저장하기 위한 변수\n\tprivate Vector3 _initPosition;\n\n\tvoid Start()\n\t{\n\t\t// 초기 위치를 저장합니다.\n\t\t_initPosition = characterTransform.position;\n\t}\n\n\tvoid Update()\n\t{\n\t\t// A키를 누르면 더미 힌지를 생성하여 물리 시뮬레이션이 시작됩니다.\n\t\tif (Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\t// 더미 힌지를 생성합니다.\n\t\t\tMakeDummyHinge();\n\n\t\t\t// 애니메이션을 일시 정지합니다.\n\t\t\tportrait.PauseAll();\n\n\t\t\t// Rigidbody2D의 제약 조건을 해제하여 캐릭터가 물리적으로 회전할 수 있도록 만듭니다.\n\t\t\trootRigidbody.constraints = RigidbodyConstraints2D.None;\n\t\t}\n\n\t\t// S키를 누르면 더미 힌지를 제거하고 원래대로 되돌립니다.\n\t\tif (Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\t// 더미 힌지를 제거합니다.\n\t\t\tRemoveDummyHinge();\n\n\t\t\t// Rigidbody2D의 제약 조건을 다시 설정하여 캐릭터가 회전하지 않도록 만듭니다.\n\t\t\trootRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;\n\n\t\t\t// 캐릭터의 위치와 회전을 초기 상태로 되돌리고 애니메이션을 재생합니다.\n\t\t\tcharacterTransform.position = _initPosition;\n\t\t\tcharacterTransform.localRotation = Quaternion.identity;\n\t\t\tportrait.Play(\"Anim\");\n\t\t}\n\n\t\t// 물리 시뮬레이션이 적용된 더미 힌지의 위치와 회전을 이용하여 \"Bone Lower Arm L\" 뼈의 회전을 업데이트합니다.\n\t\tif (_isSimulating)\n\t\t{\n\t\t\tVector3 upVectorW = _dummyHingeRigidbody.transform.TransformDirection(Vector3.up);\n\t\t\tfloat angleZ_W = Vector3.SignedAngle(Vector3.up, upVectorW, Vector3.forward);\n\t\t\tangleZ_W += 90.0f;\n\n\t\t\tportrait.SetBoneRotation(\"Bone Lower Arm L\", angleZ_W, Space.World);\n\t\t}\n\t}\n\n\tvoid FixedUpdate()\n\t{\n\t\t// 물리 시뮬레이션이 적용된 더미 힌지의 위치를 보정합니다.\n\t\tif (_isSimulating)\n\t\t{\n\t\t\tVector3 bonePosW = portrait.GetBoneSocket(\"Bone Lower Arm L\").position;\n\t\t\tVector3 hingePosW = _dummyHingeRigidbody.position;\n\n\t\t\t// 뼈와 더미 힌지 사이의 거리가 일정 이상인 경우, 더미 힌지의 위치를 뼈의 위치로 보정합니다.\n\t\t\tif (Vector3.Distance(bonePosW, hingePosW) > 0.1f)\n\t\t\t{\n\t\t\t\t_dummyHingeRigidbody.MovePosition(bonePosW);\n\t\t\t}\n\t\t}\n\t}\n\n\t// 더미 힌지를 생성하여 물리 시뮬레이션을 시작합니다.\n\tprivate void MakeDummyHinge()\n\t{\n\t\tif (_dummyHingeRigidbody != null)\n\t\t{\n\t\t\tDestroy(_dummyHingeRigidbody.gameObject);\n\t\t}\n\n\t\t_dummyHingeRigidbody = null;\n\n\t\t// \"Bone Lower Arm L\" 뼈와 \"Bone Hand L\" 뼈의 위치를 계산합니다.\n\t\tTransform targetSocket = portrait.GetBoneSocket(\"Bone Lower Arm L\");\n\t\tTransform childSocket = portrait.GetBoneSocket(\"Bone Hand L\");\n\n\t\tVector3 posL_Target = characterTransform.InverseTransformPoint(targetSocket.position);\n\t\tVector3 posL_Child = characterTransform.InverseTransformPoint(childSocket.position);\n\n\t\t// 초기 회전값을 계산합니다.\n\t\tfloat angleZ = Vector3.SignedAngle(Vector3.up, posL_Child - posL_Target, Vector3.forward);\n\n\t\t// 더미 힌지 오브젝트를 생성하고 캐릭터 오브젝트의 자식으로 설정한 후, 초기 위치와 회전을 설정합니다.\n\t\tGameObject dummyHingeObj = new GameObject(\"DummyHinge\");\n\t\tTransform dummyHingeTransform = dummyHingeObj.transform;\n\t\tdummyHingeTransform.parent = characterTransform;\n\t\tdummyHingeTransform.localPosition = posL_Target;\n\t\tdummyHingeTransform.localRotation = Quaternion.Euler(0f, 0f, angleZ);\n\t\tdummyHingeTransform.localScale = Vector3.one;\n\n\t\t// 더미 힌지에 Rigidbody2D와 CapsuleCollider2D를 추가합니다.\n\t\t_dummyHingeRigidbody = dummyHingeObj.AddComponent<Rigidbody2D>();\n\t\t_dummyHingeRigidbody.mass = 1.0f;\n\n\t\t// 뼈 사이의 거리를 이용하여 캡슐 콜라이더의 크기를 설정합니다.\n\t\tfloat hingeLength = Vector3.Distance(posL_Target, posL_Child);\n\t\tfloat hingeWidth = hingeLength * 0.3f;\n\n\t\tCapsuleCollider2D hingeCollider = dummyHingeObj.AddComponent<CapsuleCollider2D>();\n\t\thingeCollider.direction = CapsuleDirection2D.Vertical;\n\t\thingeCollider.size = new Vector2(hingeWidth, hingeLength);\n\t\thingeCollider.offset = new Vector2(0f, hingeLength * 0.5f);\n\n\t\t// 더미 힌지에 HingeJoint2D를 추가하여 캐릭터의 Rigidbody2D와 연결합니다.\n\t\tHingeJoint2D hingeJoint = dummyHingeObj.AddComponent<HingeJoint2D>();\n\t\thingeJoint.connectedBody = rootRigidbody;\n\t\thingeJoint.autoConfigureConnectedAnchor = false;\n\t\thingeJoint.anchor = Vector2.zero;\n\t\thingeJoint.connectedAnchor = posL_Target;\n\n\t\t// 회전 각도를 제한하여 더미 힌지가 일정 범위 내에서만 회전하도록 설정합니다.\n\t\tPhysics2D.SyncTransforms();\n\n\t\tJointAngleLimits2D angleLimits = new JointAngleLimits2D();\n\t\tangleLimits.min = -30.0f + hingeJoint.jointAngle;\n\t\tangleLimits.max = 30.0f + hingeJoint.jointAngle;\n\t\thingeJoint.limits = angleLimits;\n\t\thingeJoint.useLimits = true;\n\n\t\t_isSimulating = true;\n\t}\n\n\t// 더미 힌지를 제거하여 물리 시뮬레이션을 종료합니다.\n\tprivate void RemoveDummyHinge()\n\t{\n\t\tif (_dummyHingeRigidbody != null)\n\t\t{\n\t\t\tDestroy(_dummyHingeRigidbody.gameObject);\n\t\t\t_dummyHingeRigidbody = null;\n\t\t}\n\n\t\t\n\t\t_isSimulating = false;\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t\t// 더미 힌지를 생성합니다.\n\t\t\tMakeDummyHinge();\n\n\t\t\t// 애니메이션을 일시 정지합니다.\n\t\t\tportrait.PauseAll();\n\n\t\t\t// Rigidbody2D의 제약 조건을 해제하여 캐릭터가 물리적으로 회전할 수 있도록 만듭니다.\n\t\t\trootRigidbody.constraints = RigidbodyConstraints2D.None;\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// 물리 시뮬레이션이 적용된 더미 힌지의 위치와 회전을 이용하여 \"Bone Lower Arm L\" 뼈의 회전을 업데이트합니다.\n\t\tif (_isSimulating)\n\t\t{\n\t\t\tVector3 upVectorW = _dummyHingeRigidbody.transform.TransformDirection(Vector3.up);\n\t\t\tfloat angleZ_W = Vector3.SignedAngle(Vector3.up, upVectorW, Vector3.forward);\n\t\t\tangleZ_W += 90.0f;\n\n\t\t\tportrait.SetBoneRotation(\"Bone Lower Arm L\", angleZ_W, Space.World);\n\t\t}\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton3").addEventListener("click", function() {
+    const textToCopy = "\tvoid FixedUpdate()\n\t{\n\t\t// 물리 시뮬레이션이 적용된 더미 힌지의 위치를 보정합니다.\n\t\tif (_isSimulating)\n\t\t{\n\t\t\tVector3 bonePosW = portrait.GetBoneSocket(\"Bone Lower Arm L\").position;\n\t\t\tVector3 hingePosW = _dummyHingeRigidbody.position;\n\n\t\t\t// 뼈와 더미 힌지 사이의 거리가 일정 이상인 경우, 더미 힌지의 위치를 뼈의 위치로 보정합니다.\n\t\t\tif (Vector3.Distance(bonePosW, hingePosW) > 0.1f)\n\t\t\t{\n\t\t\t\t_dummyHingeRigidbody.MovePosition(bonePosW);\n\t\t\t}\n\t\t}\n\t}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton4").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// 더미 힌지 오브젝트를 생성하고 캐릭터 오브젝트의 자식으로 설정한 후, 초기 위치와 회전을 설정합니다.\n\t\tGameObject dummyHingeObj = new GameObject(\"DummyHinge\");\n\t\tTransform dummyHingeTransform = dummyHingeObj.transform;\n\t\tdummyHingeTransform.parent = characterTransform;\t\t\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton5").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// 더미 힌지에 HingeJoint2D를 추가하여 캐릭터의 Rigidbody2D와 연결합니다.\n\t\tHingeJoint2D hingeJoint = dummyHingeObj.AddComponent<HingeJoint2D>();\n\t\thingeJoint.connectedBody = rootRigidbody;\n\t\thingeJoint.autoConfigureConnectedAnchor = false;\n\t\thingeJoint.anchor = Vector2.zero;\n\t\thingeJoint.connectedAnchor = posL_Target;\n\n\t\t// 회전 각도를 제한하여 더미 힌지가 일정 범위 내에서만 회전하도록 설정합니다.\n\t\tPhysics2D.SyncTransforms();\n\n\t\tJointAngleLimits2D angleLimits = new JointAngleLimits2D();\n\t\tangleLimits.min = -30.0f + hingeJoint.jointAngle;\n\t\tangleLimits.max = 30.0f + hingeJoint.jointAngle;\n\t\thingeJoint.limits = angleLimits;\n\t\thingeJoint.useLimits = true;\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton6").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class v162_RagdollScript : MonoBehaviour\n{\n\t// Rigidbody2D를 가진 apPortrait의 부모 오브젝트\n\tpublic Transform characterTransform;\n\n\t// AnyPortrait 캐릭터와 래그돌 시뮬레이터\n\tpublic apPortrait portrait;\n\tpublic PortraitRagdollSimulator ragdollSimulator;\n\n\t// 초기 위치로 되돌리기 위한 변수\n\tprivate Vector3 _initialPosition;\n\n\tvoid Start()\n\t{\n\t\t// 물리 시뮬레이터와 AnyPortrait 캐릭터를 초기화합니다.\n\t\tportrait.Initialize();\n\t\tragdollSimulator.Initialize();\n\n\t\t// 초기 위치를 저장합니다.\n\t\t_initialPosition = characterTransform.position;\n\t}\n\n\tvoid Update()\n\t{\n\t\t// A키를 누르면 래그돌 시뮬레이션이 시작됩니다.\n\t\tif (Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\t// 애니메이션을 일시정지 합니다.\n\t\t\tportrait.PauseAll();\n\n\t\t\t// 래그돌 시뮬레이터를 시작합니다.\n\t\t\tragdollSimulator.StartSimulate();\n\t\t}\n\n\t\t// S키를 누르면 물리 시뮬레이션을 중지하고 원래대로 되돌립니다.\n\t\tif (Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\t// 애니메이션을 다시 재생합니다.\n\t\t\tportrait.Play(\"Anim\");\n\n\t\t\t// 래그돌 시뮬레이터를 중지합니다.\n\t\t\tragdollSimulator.StopSimulate();\n\n\t\t\t// 캐릭터의 위치와 회전을 초기 상태로 되돌립니다.\n\t\t\tcharacterTransform.position = _initialPosition;\n\t\t\tcharacterTransform.rotation = Quaternion.identity;\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton7").addEventListener("click", function() {
+    const textToCopy = "...\n\tGameObject hingeGO = new GameObject(info.boneName + \"_Hinge\");\n...\n\thingeGO.layer = characterTransform.gameObject.layer;\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+
+    <!--------------->
+
+    </body>
+</html>

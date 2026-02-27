@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Implementing Ragdoll</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/en/anyportrait-en/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/en/ap-video-tutorials-en/">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/en/forum-en/">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_Ragdoll.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_Ragdoll.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_Ragdoll.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/en/anyportrait-en/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Implementing Ragdoll</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Implementing Ragdoll</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.2</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2318.jpg"/>
+    <br>
+    
+    <p>
+    "<strong>Ragdoll</strong>" is a technique that makes a character move limply, like a stuffed doll.<br>
+    The core of this technique is to add physics functions to each bone of the character, so that the character moves only by the physics engine.<br>
+    </p>
+    <br>
+    
+    <p>
+    To implement a ragdoll in Unity, you need to use physics components of the <strong>Joint</strong> type.<br>
+    This page explains how to implement a ragdoll by connecting "<strong>Hinge Joint 2D</strong>" and other 2D physics components to bones.<br>
+    First, we will explain how to apply the ragdoll effect to a single bone.<br>
+    Then, we will explain how to apply a script developed by our team to implement the ragdoll effect on multiple bones.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    AnyPortrait requires special implementation details to link bones with physics components like Rigidbody.<br>
+    Before reading the instructions on this page, we recommend reading the "Bone and Physics Components" (<a href="../../en/AdvancedManual/AD_IntegratePhysics2D.html">Link</a>) manual.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Example 1. Linking a Hinge Joint 2D to a single bone</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2319.jpg"/>
+    <br>
+    
+    <p>
+    In our first example, let's apply a ragdoll effect to one of our robot's arms.<br>
+    The best way to implement a ragdoll is to create a "<strong>dummy object</strong>" and add a "<strong>Hinge Joint 2D</strong>" component to it.<br>
+    The added "<strong>Hinge Joint 2D</strong>" should be connected to the "<strong>Rigidbody 2D</strong>" component of the parent bone.<br>
+    For this example, which doesn't have a parent bone, simply connect it to the "root GameObject."<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2320.jpg"/>
+    <br>
+    
+    <p>
+    The character is structured as shown above.<br>
+    <strong>1. Character Group</strong>: This is the root object for the entire character. It has a "Rigidbody 2D" component.<br>
+    <strong>2. AnyPortrait</strong>: This character was created with AnyPortrait.<br>
+    <strong>3. Default Collider</strong>: This is a collider object set to the size of the entire character.<br>
+    <strong>4. Dummy</strong>: This is a dummy object temporarily created when the ragdoll effect begins. It corresponds to a robotic arm and has physics components, including a "Hinge Joint 2D."<br>
+    </p>
+    <br>
+    
+    <p>
+    Note that unlike the previous manual, the robot arm is dependent on the character's movement, so the "Dummy object" is included within the character group.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2321.jpg"/>
+    <br>
+    
+    <p>
+    Before writing the script, activate the "<strong>Socket</strong>" function.<br>
+    <strong>(1)</strong> Select the <strong>Bone</strong> tab.<br>
+    <strong>(2)</strong> The target bone is "Bone Lower Arm L." To calculate the length of the bone, its child, "Bone Hand L," must also be referenced.<br>
+    <strong>(3)</strong> Press the  <kbd>Ctrl</kbd>  key to select both bones.<br>
+    <strong>(4)</strong> Click the "<strong>Socket</strong>" button to activate the socket.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now run <strong>Bake</strong> and write the following script:<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary">using</span> AnyPortrait;<br>
+    <br>
+    <span class="text-primary">public class</span> <span class="text-success">v162_HingeJointScript</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// Parent objects of apPortrait with Rigidbody2D<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">Transform</span> characterTransform;<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">Rigidbody2D</span> rootRigidbody;<br>
+    <br>
+    &emsp;&emsp;// AnyPortrait Character<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">apPortrait</span> portrait;<br>
+    <br>
+    &emsp;&emsp;// A flag indicating the physics simulation status and a Rigidbody2D for the dummy object used in the simulation.<br>
+    &emsp;&emsp;<span class="text-primary">private bool</span> _isSimulating = <span class="text-primary">false</span>;<br>
+    &emsp;&emsp;<span class="text-primary">private</span> <span class="text-success">Rigidbody2D</span> _dummyHingeRigidbody = <span class="text-primary">null</span>;<br>
+    <br>
+    &emsp;&emsp;// Variable to store the initial position<br>
+    &emsp;&emsp;<span class="text-primary">private</span> <span class="text-success">Vector3</span> _initPosition;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Save the initial position.<br>
+    &emsp;&emsp;&emsp;&emsp;_initPosition = characterTransform.position;<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Pressing the A key creates a dummy hinge, making it appear as if physics simulation is applied.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Make a dummy hinge and start ragdoll simulation<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>MakeDummyHinge();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Pause the animation<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.PauseAll();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Release the constraints on the Rigidbody2D to allow the character to physically rotate.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rootRigidbody.constraints = <span class="text-success"><strong>RigidbodyConstraints2D</strong></span><strong>.None;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Pressing the S key will remove the dummy hinge and return it to its original state.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Remove the dummy hinge.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>RemoveDummyHinge();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Reset the constraints of the Rigidbody2D to prevent the character from rotating.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rootRigidbody.constraints = <span class="text-success"><strong>RigidbodyConstraints2D</strong></span><strong>.FreezeRotation</strong>;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Reset the character's position and rotation to their initial state and plays the animation.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;characterTransform.position = _initPosition;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;characterTransform.localRotation = <span class="text-success">Quaternion</span>.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Play(<span class="text-danger">"Anim"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Update the rotation of the "Bone Lower Arm L" bone using the position and rotation of the dummy hinge with physics simulation applied.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_isSimulating)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> upVectorW = _dummyHingeRigidbody.transform.TransformDirection(<span class="text-success">Vector3</span>.up);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ_W = <span class="text-success">Vector3</span>.SignedAngle(<span class="text-success">Vector3</span>.up, upVectorW, <span class="text-success">Vector3</span>.forward);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;angleZ_W += 90.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBoneRotation("Bone Lower Arm L", angleZ_W, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> FixedUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Correct the position of the dummy hinge with physics simulation applied.<br>
+    &emsp;&emsp;&emsp;&emsp;if (_isSimulating)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> bonePosW = portrait.GetBoneSocket(<span class="text-danger">"Bone Lower Arm L"</span>).position;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> hingePosW = _dummyHingeRigidbody.position;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// If the distance between the bone and the dummy hinge is greater than a certain value, correct the position of the dummy.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Vector3</span>.Distance(bonePosW, hingePosW) > 0.1f)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_dummyHingeRigidbody.MovePosition(bonePosW);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// Start the physics simulation by creating a dummy hinge.<br>
+    &emsp;&emsp;<span class="text-primary">private void</span> MakeDummyHinge()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_dummyHingeRigidbody != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Destroy(_dummyHingeRigidbody.gameObject);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;_dummyHingeRigidbody = <span class="text-primary">null</span>;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Calculate the positions of the "Bone Lower Arm L" bone and the "Bone Hand L" bone.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> targetSocket = portrait.GetBoneSocket(<span class="text-danger">"Bone Lower Arm L"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> childSocket = portrait.GetBoneSocket(<span class="text-danger">"Bone Hand L"</span>);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> posL_Target = characterTransform.InverseTransformPoint(targetSocket.position);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> posL_Child = characterTransform.InverseTransformPoint(childSocket.position);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Calculate the initial rotation value.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ = <span class="text-success">Vector3</span>.SignedAngle(<span class="text-success">Vector3</span>.up, posL_Child - posL_Target, <span class="text-success">Vector3</span>.forward);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Create a dummy hinge object and set it as a child of the character object, then set its initial position and rotation.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject</span> dummyHingeObj = <span class="text-primary">new</span> <span class="text-success">GameObject</span>(<span class="text-danger">"DummyHinge"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> dummyHingeTransform = dummyHingeObj.transform;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>dummyHingeTransform.parent = characterTransform;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;dummyHingeTransform.localPosition = posL_Target;<br>
+    &emsp;&emsp;&emsp;&emsp;dummyHingeTransform.localRotation = <span class="text-success">Quaternion</span>.Euler(0f, 0f, angleZ);<br>
+    &emsp;&emsp;&emsp;&emsp;dummyHingeTransform.localScale = <span class="text-success">Vector3</span>.one;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Add a Rigidbody2D and a CapsuleCollider2D to the dummy hinge.<br>
+    &emsp;&emsp;&emsp;&emsp;_dummyHingeRigidbody = dummyHingeObj.AddComponent<<span class="text-success">Rigidbody2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;_dummyHingeRigidbody.mass = 1.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Set the size of the capsule collider using the distance between the bones.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeLength = <span class="text-success">Vector3</span>.Distance(posL_Target, posL_Child);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeWidth = hingeLength * 0.3f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">CapsuleCollider2D</span> hingeCollider = dummyHingeObj.AddComponent<<span class="text-success">CapsuleCollider2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;hingeCollider.direction = <span class="text-success">CapsuleDirection2D</span>.Vertical;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeCollider.size = <span class="text-primary">new</span> <span class="text-success">Vector2</span>(hingeWidth, hingeLength);<br>
+    &emsp;&emsp;&emsp;&emsp;hingeCollider.offset = <span class="text-primary">new</span> <span class="text-success">Vector2</span>(0f, hingeLength * 0.5f);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Add a HingeJoint2D to the dummy hinge and connect it to the character's Rigidbody2D.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">HingeJoint2D</span> hingeJoint = dummyHingeObj.AddComponent<<span class="text-success">HingeJoint2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hingeJoint.connectedBody = rootRigidbody;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.autoConfigureConnectedAnchor = <span class="text-primary">false</span>;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.anchor = <span class="text-success">Vector2</span>.zero;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hingeJoint.connectedAnchor = posL_Target;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Limit the rotation angle so that the dummy hinge only rotates within a certain range.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Physics2D</span>.SyncTransforms();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">JointAngleLimits2D</span> angleLimits = <span class="text-primary">new</span> <span class="text-success">JointAngleLimits2D</span>();<br>
+    &emsp;&emsp;&emsp;&emsp;angleLimits.min = -30.0f + hingeJoint.jointAngle;<br>
+    &emsp;&emsp;&emsp;&emsp;angleLimits.max = 30.0f + hingeJoint.jointAngle;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.limits = angleLimits;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.useLimits = <span class="text-primary">true</span>;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;_isSimulating = <span class="text-primary">true</span>;<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// Stop the physics simulation by removing the dummy hinge.<br>
+    &emsp;&emsp;<span class="text-primary">private void</span> RemoveDummyHinge()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_dummyHingeRigidbody != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Destroy(_dummyHingeRigidbody.gameObject);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_dummyHingeRigidbody = <span class="text-primary">null</span>;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;_isSimulating = <span class="text-primary">false</span>;<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    Most of the code is almost identical to the script introduced in the previous manual.<br>
+    Let's examine the code related to the ragdoll implementation.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Make a dummy hinge and start ragdoll simulation<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>MakeDummyHinge();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Pause the animation<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.PauseAll();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Release the constraints on the Rigidbody2D to allow the character to physically rotate.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rootRigidbody.constraints = <span class="text-success"><strong>RigidbodyConstraints2D</strong></span><strong>.None;</strong><br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    This code requests the ragdoll simulation to begin.<br>
+    It calls the "MakeDummyHinge" function, described later, and releases all constraints on the root object's Rigidbody 2D.<br>
+    This allows us to create the movement of the character losing balance and falling.<br>
+    It's important to note that we pause the character's animation by calling the "<strong>PauseAll</strong>" function.<br>
+    Continuing the character's animation will cause the physics simulation to become very unstable, so please be sure to pause the animation.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// Update the rotation of the "Bone Lower Arm L" bone using the position and rotation of the dummy hinge with physics simulation applied.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_isSimulating)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> upVectorW = _dummyHingeRigidbody.transform.TransformDirection(<span class="text-success">Vector3</span>.up);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ_W = <span class="text-success">Vector3</span>.SignedAngle(<span class="text-success">Vector3</span>.up, upVectorW, <span class="text-success">Vector3</span>.forward);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;angleZ_W += 90.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBoneRotation("Bone Lower Arm L", angleZ_W, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    This code applies the movement of a dummy hinge object to the character's bones every frame.<br>
+    For <strong>Hinge Joint 2D</strong>, only <strong>SetBoneRotation</strong> is called, as it is dependent on its parent and does not move independently.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> FixedUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Correct the position of the dummy hinge with physics simulation applied.<br>
+    &emsp;&emsp;&emsp;&emsp;if (_isSimulating)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> bonePosW = portrait.GetBoneSocket(<span class="text-danger">"Bone Lower Arm L"</span>).position;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> hingePosW = _dummyHingeRigidbody.position;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// If the distance between the bone and the dummy hinge is greater than a certain value, correct the position of the dummy.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Vector3</span>.Distance(bonePosW, hingePosW) > 0.1f)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_dummyHingeRigidbody.MovePosition(bonePosW);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton3" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    This is the code that differs most significantly from the previous manual.<br>
+    In the "<strong>FixedUpdate</strong>" section, where physics calculations are performed, the dummy object's position must be adjusted to match the character's bones.<br>
+    Normal, the AnyPortrait bones and dummy objects share the commonality of being dependent on their parent, so position adjustments are unnecessary.<br>
+    However, even if the <strong>Hinge Joint 2D</strong> is set to be strongly connected to the parent, if too much force is applied or a collision error occurs, the dummy object will separate from its parent (in this case, the Character Group).<br>
+    Therefore, if an error occurs while continuously comparing the position of the dummy object with the position of the bone, it's necessary to force compensation of the dummy object.<br>
+    We've set the position difference detection to "<strong>0.1f</strong>".<br>
+    If this value is set too small, the "<strong>MovePosition</strong>" function may be called too frequently.<br>
+    Excessive "<strong>MovePosition</strong>" calls will affect the speed of the dummy object, resulting in unnatural movement.<br>
+    Therefore, you should test and set an appropriate value.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// Create a dummy hinge object and set it as a child of the character object, then set its initial position and rotation.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject</span> dummyHingeObj = <span class="text-primary">new</span> <span class="text-success">GameObject</span>(<span class="text-danger">"DummyHinge"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> dummyHingeTransform = dummyHingeObj.transform;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>dummyHingeTransform.parent = characterTransform;</strong></span>&emsp;&emsp;&emsp;&emsp;<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton4" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    When creating a dummy object, unlike the previous manual, set it to be a child of "<strong>characterTransform</strong>", which corresponds to the root of the character.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// Add a HingeJoint2D to the dummy hinge and connect it to the character's Rigidbody2D.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">HingeJoint2D</span> hingeJoint = dummyHingeObj.AddComponent<<span class="text-success">HingeJoint2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hingeJoint.connectedBody = rootRigidbody;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.autoConfigureConnectedAnchor = <span class="text-primary">false</span>;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.anchor = <span class="text-success">Vector2</span>.zero;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hingeJoint.connectedAnchor = posL_Target;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Limit the rotation angle so that the dummy hinge only rotates within a certain range.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Physics2D</span>.SyncTransforms();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">JointAngleLimits2D</span> angleLimits = <span class="text-primary">new</span> <span class="text-success">JointAngleLimits2D</span>();<br>
+    &emsp;&emsp;&emsp;&emsp;angleLimits.min = -30.0f + hingeJoint.jointAngle;<br>
+    &emsp;&emsp;&emsp;&emsp;angleLimits.max = 30.0f + hingeJoint.jointAngle;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.limits = angleLimits;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.useLimits = <span class="text-primary">true</span>;<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton5" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    Here's the code for adding a "<strong>Hinge Joint 2D</strong>" component to the dummy object.<br>
+    Since there's no parent bone here, we'll attach it to the character's root object, "<strong>rootRigidbody</strong>."<br>
+    If the ragdoll has a parent bone, we'll need to attach a Rigidbody corresponding to that parent bone.<br>
+    Additionally, if you need to limit the dummy object's rotation angle, you can do so by writing the code as shown above.<br>
+    Note that you must call "<strong>Physics2D.SyncTransforms()</strong>" before applying "<strong>JointAngleLimits2D</strong>."<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2322.jpg"/>
+    <br>
+    
+    <p>
+    Let's apply the script we've written to the scene.<br>
+    <strong>(1)</strong> Create a new <strong>GameObject</strong>.<br>
+    <strong>(2)</strong> Add the script to the created <strong>GameObject</strong> and assign the appropriate objects to the member variables.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2323.jpg"/>
+    <br>
+    
+    <p>
+    Let's run the game and press  <kbd>A</kbd>  as per the script.<br>
+    You'll see the robot character stop its animation and fall to the side, as shown above.<br>
+    You'll also see the robot's arm naturally bend as it falls.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2324.jpg"/>
+    <br>
+    
+    <p>
+    Let's pause the game at this point and see what happens.<br>
+    <strong>(1)</strong> When ragdoll is activated, a dummy object named "DummyHinge" is created within the character group.<br>
+    <strong>(2)</strong> This dummy object has the following components: "<strong>Rigidbody 2D</strong>," "<strong>Capsule Collider 2D</strong>," and "<strong>Hinge Joint 2D</strong>."<br>
+    <strong>(3)</strong> You can see that the dummy object and physics components are created according to the target bone, and the bone moves in sync with the dummy object.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Example 2. Implementing a Ragdoll</h3>
+    <br>
+    
+    <p>
+    By applying the method of linking a single bone with "<strong>Hinge Joint 2D</strong>" to other bones in a character, you can create a ragdoll.<br>
+    You can modify the above script to create dummy objects for multiple bones and perform physics simulations.<br>
+    However, the modified script is too large to be presented on this page, so we've provided a pre-written script.<br>
+    </p>
+    <br>
+    
+    <p>
+    - <a href="https://drive.google.com/file/d/1oZL731Bb6gZ2lyUcnwKTVEZIBsY4c7u3/view?usp=sharing" target="_sub">Download the Ragdoll Simulator Script</a><br>
+    </p>
+    <br>
+    
+    <p>
+    After downloading the Unitypackage file and importing it into your Unity project, a script will be added.<br>
+    Let's use this script to create a ragdoll.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    The provided script is based on AnyPortrait v1.6.2 and Unity 6.2.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2325.jpg"/>
+    <br>
+    
+    <p>
+    You need to prepare to create dummy objects for most of the bones of the robot character.<br>
+    <strong>(1)</strong> Select the <strong>Bone</strong> tab.<br>
+    <strong>(2)</strong> Press&nbsp;&nbsp;<kbd>Shift</kbd>&nbsp;&nbsp;or  <kbd>Ctrl</kbd>  to select most of the bones. Also, select the child bones of the target bones.<br>
+    <strong>(3)</strong> Almost all of the bones should be selected.<br>
+    <strong>(4)</strong> Activate the "<strong>Socket</strong>" option for all selected bones.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    In this example, we excluded the root bone, "Bone Pelvis," from selection.<br>
+    This is because the root bone and mesh are not connected, and the root object ("Character Group") takes over that role.<br>
+    Since each artist's character structure will vary, you should configure and implement it appropriately for your character's structure.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2326.jpg"/>
+    <br>
+    
+    <p>
+    After performing <strong>Bake</strong>, return to the Unity scene.<br>
+    <strong>(1)</strong> Create a new <strong>GameObject</strong>.<br>
+    <strong>(2)</strong> Add the downloaded "<strong>Portrait Ragdoll Simulator</strong>" script to the created <strong>GameObject</strong>.<br>
+    <strong>(3)</strong> Assign the appropriate objects to the member variables of the "<strong>Character Objects</strong>" section.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2327.jpg"/>
+    <br>
+    
+    <p>
+    This script creates a dummy object based on the bone information entered in the "Bone Infos" field.<br>
+    You could memorize the names of all the bones in your character and enter them one by one, but that would be too cumbersome.<br>
+    Therefore, we implemented a function that automatically finds all bones with the socket option enabled and enters their information.<br>
+    <strong>(1)</strong> Click the "<strong>Make Hinge Infos</strong>" button.<br>
+    <strong>(2)</strong> A dialog box will appears. Click the <strong>Yes</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2328.jpg"/>
+    <br>
+    
+    <p>
+    Information will be automatically filled in for bones with the socket option enabled.<br>
+    However, due to the structure of the bones, some information may be entered incorrectly, so please check each bone individually.<br>
+    <strong>(1)</strong> For example, in this character, some items in the "Bone Spine" field are entered incorrectly.<br>
+    <strong>(2)</strong> The "<strong>Child Bone Name</strong>" field contains "Bone Upper Arm R." If this is entered, the dummy object corresponding to the torso will be created tilted toward the right shoulder.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2329.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Please enter the name of your own “Bone Head” corresponding to the end point of “Bone Spine” directly in "<strong>Child Bone Name</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    The "Bone Info" options contain the following:<br>
+    <strong>1. Bone Name</strong>: The name of the target bone from which the dummy bone will be created.<br>
+    <strong>2. Parent Bone Name</strong>: The name of the parent bone to be connected as the parent of the "Hinge Joint 2D." If no parent bone is specified, it will be connected to the character's root object.<br>
+    <strong>3. Child Bone Name</strong>: The name of the child bone referenced to calculate the position of the target bone's end point. This cannot be empty; the child bone closest to the target bone's end point must be entered for the collider to be created properly.<br>
+    <strong>4. Collider Width</strong>: Specifies the width of the collider, i.e., the X value of the Size.<br>
+    <strong>4. Is Angle Limit</strong>: You can limit the rotation range of the dummy object.<br>
+    <strong>5. Angle Limit Min/Max</strong>: The rotation range of the dummy object. The range is specified based on the angle at the time of ragdoll creation.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2330.jpg"/>
+    <br>
+    
+    <p>
+    Check other creation information and adjust the properties as appropriate.<br>
+    Changing the rotation range as shown above will create a more natural ragdoll.<br>
+    </p>
+    <br>
+    
+    <p>
+    The simulator script doesn't work on its own.<br>
+    Let's write a separate script to run the simulation.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary">using</span> AnyPortrait;<br>
+    <br>
+    <span class="text-primary">public class</span> <span class="text-success">v162_RagdollScript</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// Parent object of apPortrait with Rigidbody2D<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">Transform</span> characterTransform;<br>
+    <br>
+    &emsp;&emsp;// AnyPortrait Character and Ragdoll Simulator<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">apPortrait</span> portrait;<br>
+    &emsp;&emsp;<span class="text-danger"><strong>public PortraitRagdollSimulator ragdollSimulator;</strong></span><br>
+    <br>
+    &emsp;&emsp;// Variable to return to initial position<br>
+    &emsp;&emsp;<span class="text-primary">private</span> <span class="text-success">Vector3</span> _initialPosition;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Initialize the physics simulator and AnyPortrait character.<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>portrait.Initialize();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<strong>ragdollSimulator.Initialize();</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Save the initial position.<br>
+    &emsp;&emsp;&emsp;&emsp;_initialPosition = characterTransform.position;<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Pressing the A key will start the ragdoll simulation.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Pause the animation.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.PauseAll();</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Start the ragdoll simulator.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>ragdollSimulator.StartSimulate();</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Pressing the S key will stop the simulation and revert the character.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Replay the animation.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.Play(</strong><span class="text-danger"><strong>"Anim"</strong></span><strong>);</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Stop the ragdoll simulator.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>ragdollSimulator.StopSimulate();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Resets the character's position and rotation to their initial state.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;characterTransform.position = _initialPosition;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;characterTransform.rotation = Quaternion.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton6" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    Before calling "<strong>ragdollSimulator.Initialize()</strong>", you have to first call "<strong>portrait.Initialize()</strong>" to properly initialize the simulator.<br>
+    Afterwards, use the "<strong>ragdollSimulator.StartSimulate()</strong>" and "<strong>ragdollSimulator.StopSimulate()</strong>" functions to start or stop the simulator.<br>
+    When running the ragdoll simulator, please pause the animation.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2331.jpg"/>
+    <br>
+    
+    <p>
+    Now that we've written a script to run the ragdoll simulator, let's apply it to the scene.<br>
+    <strong>(1)</strong> Create a new <strong>GameObject</strong>.<br>
+    <strong>(2)</strong> Add the script we wrote and assign the appropriate targets to its member variables.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2332.jpg"/>
+    <br>
+    
+    <p>
+    Now let's run the game.<br>
+    Press  <kbd>A</kbd>  to activate the ragdoll, and you'll see the character fall helplessly to the ground.<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's make a few more adjustments here.<br>
+    It seems like the currently generated dummy objects are colliding with each other, causing the joints to rotate less.<br>
+    Sometimes, depending on your intent, you may want to prevent a character's joints from colliding with each other.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2333.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Open <strong>Project Settings</strong>.<br>
+    <strong>(2)</strong> Select <strong>Tags and Layers</strong>.<br>
+    <strong>(3)</strong> Add a new layer specifically for the character to <strong>Layers</strong>. Here, we named it "<strong>Character</strong>."<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2334.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select <strong>Physics 2D</strong> in <strong>Project Settings</strong>.<br>
+    <strong>(2)</strong> Select the <strong>Layer Collision Matrix</strong> tab.<br>
+    <strong>(3)</strong> Uncheck "<strong>Character - Character</strong>" for collision between layers.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2335.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the character's root object.<br>
+    <strong>(2)</strong> Change the <strong>Layer</strong> to the "<strong>Character</strong>" you just added and apply it.<br>
+    </p>
+    <br>
+    
+    <p>
+    The ragdoll simulator script contains the following code, which causes the generated dummy objects to have the same layer value as the root object.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;<span class="text-success">GameObject</span> hingeGO = <span class="text-primary">new</span> <span class="text-success">GameObject</span>(info.boneName + <span class="text-danger">"_Hinge"</span>);<br>
+    ...<br>
+    &emsp;&emsp;hingeGO.layer = characterTransform.gameObject.layer;<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton7" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2336.jpg"/>
+    <br>
+    
+    <p>
+    Now, let's run the game and turn on the ragdoll again.<br>
+    You'll see that the character's joints bend more, as they no longer collide with each other.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2337.jpg"/>
+    <br>
+    
+    <p>
+    Finally, let's examine what happens in the scene when the ragdoll simulator is running.<br>
+    <strong>(1)</strong> When the ragdoll simulator is turned on, dummy objects are created with a structure similar to the bone structure.<br>
+    <strong>(2)</strong> Except for the "Ragdoll Root," each dummy object has <strong>Rigidbody 2D</strong>, <strong>Capsule Collider 2D</strong>, and <strong>Hinge Joint 2D</strong> components added.<br>
+    <strong>(3)</strong> You can see that the character and dummy objects move in sync.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    The provided script only provides basic functionality and doesn't fully support cases such as multiple root units.<br>
+    We've provided detailed comments within the script, so you can modify it to suit your project.<br>
+    Please provide feedback on this manual so we can improve its functionality for greater convenience.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_IntegratePhysics2D.html">< Bone and Physics Components</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_CharacterCostume.html">Replace a character's costume ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class v162_HingeJointScript : MonoBehaviour\n{\n\t// Parent objects of apPortrait with Rigidbody2D\n\tpublic Transform characterTransform;\n\tpublic Rigidbody2D rootRigidbody;\n\n\t// AnyPortrait Character\n\tpublic apPortrait portrait;\n\n\t// A flag indicating the physics simulation status and a Rigidbody2D for the dummy object used in the simulation.\n\tprivate bool _isSimulating = false;\n\tprivate Rigidbody2D _dummyHingeRigidbody = null;\n\n\t// Variable to store the initial position\n\tprivate Vector3 _initPosition;\n\n\tvoid Start()\n\t{\n\t\t// Save the initial position.\n\t\t_initPosition = characterTransform.position;\n\t}\n\n\tvoid Update()\n\t{\n\t\t// Pressing the A key creates a dummy hinge, making it appear as if physics simulation is applied.\n\t\tif (Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\t// Make a dummy hinge and start ragdoll simulation\n\t\t\tMakeDummyHinge();\n\n\t\t\t// Pause the animation\n\t\t\tportrait.PauseAll();\n\n\t\t\t// Release the constraints on the Rigidbody2D to allow the character to physically rotate.\n\t\t\trootRigidbody.constraints = RigidbodyConstraints2D.None;\n\t\t}\n\n\t\t// Pressing the S key will remove the dummy hinge and return it to its original state.\n\t\tif (Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\t// Remove the dummy hinge.\n\t\t\tRemoveDummyHinge();\n\n\t\t\t// Reset the constraints of the Rigidbody2D to prevent the character from rotating.\n\t\t\trootRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;\n\n\t\t\t// Reset the character's position and rotation to their initial state and plays the animation.\n\t\t\tcharacterTransform.position = _initPosition;\n\t\t\tcharacterTransform.localRotation = Quaternion.identity;\n\t\t\tportrait.Play(\"Anim\");\n\t\t}\n\n\t\t// Update the rotation of the \"Bone Lower Arm L\" bone using the position and rotation of the dummy hinge with physics simulation applied.\n\t\tif (_isSimulating)\n\t\t{\n\t\t\tVector3 upVectorW = _dummyHingeRigidbody.transform.TransformDirection(Vector3.up);\n\t\t\tfloat angleZ_W = Vector3.SignedAngle(Vector3.up, upVectorW, Vector3.forward);\n\t\t\tangleZ_W += 90.0f;\n\n\t\t\tportrait.SetBoneRotation(\"Bone Lower Arm L\", angleZ_W, Space.World);\n\t\t}\n\t}\n\n\tvoid FixedUpdate()\n\t{\n\t\t// Correct the position of the dummy hinge with physics simulation applied.\n\t\tif (_isSimulating)\n\t\t{\n\t\t\tVector3 bonePosW = portrait.GetBoneSocket(\"Bone Lower Arm L\").position;\n\t\t\tVector3 hingePosW = _dummyHingeRigidbody.position;\n\n\t\t\t// If the distance between the bone and the dummy hinge is greater than a certain value, correct the position of the dummy.\n\t\t\tif (Vector3.Distance(bonePosW, hingePosW) > 0.1f)\n\t\t\t{\n\t\t\t\t_dummyHingeRigidbody.MovePosition(bonePosW);\n\t\t\t}\n\t\t}\n\t}\n\n\t// Start the physics simulation by creating a dummy hinge.\n\tprivate void MakeDummyHinge()\n\t{\n\t\tif (_dummyHingeRigidbody != null)\n\t\t{\n\t\t\tDestroy(_dummyHingeRigidbody.gameObject);\n\t\t}\n\n\t\t_dummyHingeRigidbody = null;\n\n\t\t// Calculate the positions of the \"Bone Lower Arm L\" bone and the \"Bone Hand L\" bone.\n\t\tTransform targetSocket = portrait.GetBoneSocket(\"Bone Lower Arm L\");\n\t\tTransform childSocket = portrait.GetBoneSocket(\"Bone Hand L\");\n\n\t\tVector3 posL_Target = characterTransform.InverseTransformPoint(targetSocket.position);\n\t\tVector3 posL_Child = characterTransform.InverseTransformPoint(childSocket.position);\n\n\t\t// Calculate the initial rotation value.\n\t\tfloat angleZ = Vector3.SignedAngle(Vector3.up, posL_Child - posL_Target, Vector3.forward);\n\n\t\t// Create a dummy hinge object and set it as a child of the character object, then set its initial position and rotation.\n\t\tGameObject dummyHingeObj = new GameObject(\"DummyHinge\");\n\t\tTransform dummyHingeTransform = dummyHingeObj.transform;\n\t\tdummyHingeTransform.parent = characterTransform;\n\t\tdummyHingeTransform.localPosition = posL_Target;\n\t\tdummyHingeTransform.localRotation = Quaternion.Euler(0f, 0f, angleZ);\n\t\tdummyHingeTransform.localScale = Vector3.one;\n\n\t\t// Add a Rigidbody2D and a CapsuleCollider2D to the dummy hinge.\n\t\t_dummyHingeRigidbody = dummyHingeObj.AddComponent<Rigidbody2D>();\n\t\t_dummyHingeRigidbody.mass = 1.0f;\n\n\t\t// Set the size of the capsule collider using the distance between the bones.\n\t\tfloat hingeLength = Vector3.Distance(posL_Target, posL_Child);\n\t\tfloat hingeWidth = hingeLength * 0.3f;\n\n\t\tCapsuleCollider2D hingeCollider = dummyHingeObj.AddComponent<CapsuleCollider2D>();\n\t\thingeCollider.direction = CapsuleDirection2D.Vertical;\n\t\thingeCollider.size = new Vector2(hingeWidth, hingeLength);\n\t\thingeCollider.offset = new Vector2(0f, hingeLength * 0.5f);\n\n\t\t// Add a HingeJoint2D to the dummy hinge and connect it to the character's Rigidbody2D.\n\t\tHingeJoint2D hingeJoint = dummyHingeObj.AddComponent<HingeJoint2D>();\n\t\thingeJoint.connectedBody = rootRigidbody;\n\t\thingeJoint.autoConfigureConnectedAnchor = false;\n\t\thingeJoint.anchor = Vector2.zero;\n\t\thingeJoint.connectedAnchor = posL_Target;\n\n\t\t// Limit the rotation angle so that the dummy hinge only rotates within a certain range.\n\t\tPhysics2D.SyncTransforms();\n\n\t\tJointAngleLimits2D angleLimits = new JointAngleLimits2D();\n\t\tangleLimits.min = -30.0f + hingeJoint.jointAngle;\n\t\tangleLimits.max = 30.0f + hingeJoint.jointAngle;\n\t\thingeJoint.limits = angleLimits;\n\t\thingeJoint.useLimits = true;\n\n\t\t_isSimulating = true;\n\t}\n\n\t// Stop the physics simulation by removing the dummy hinge.\n\tprivate void RemoveDummyHinge()\n\t{\n\t\tif (_dummyHingeRigidbody != null)\n\t\t{\n\t\t\tDestroy(_dummyHingeRigidbody.gameObject);\n\t\t\t_dummyHingeRigidbody = null;\n\t\t}\n\n\t\t\n\t\t_isSimulating = false;\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t\t// Make a dummy hinge and start ragdoll simulation\n\t\t\tMakeDummyHinge();\n\n\t\t\t// Pause the animation\n\t\t\tportrait.PauseAll();\n\n\t\t\t// Release the constraints on the Rigidbody2D to allow the character to physically rotate.\n\t\t\trootRigidbody.constraints = RigidbodyConstraints2D.None;\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// Update the rotation of the \"Bone Lower Arm L\" bone using the position and rotation of the dummy hinge with physics simulation applied.\n\t\tif (_isSimulating)\n\t\t{\n\t\t\tVector3 upVectorW = _dummyHingeRigidbody.transform.TransformDirection(Vector3.up);\n\t\t\tfloat angleZ_W = Vector3.SignedAngle(Vector3.up, upVectorW, Vector3.forward);\n\t\t\tangleZ_W += 90.0f;\n\n\t\t\tportrait.SetBoneRotation(\"Bone Lower Arm L\", angleZ_W, Space.World);\n\t\t}\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton3").addEventListener("click", function() {
+    const textToCopy = "\tvoid FixedUpdate()\n\t{\n\t\t// Correct the position of the dummy hinge with physics simulation applied.\n\t\tif (_isSimulating)\n\t\t{\n\t\t\tVector3 bonePosW = portrait.GetBoneSocket(\"Bone Lower Arm L\").position;\n\t\t\tVector3 hingePosW = _dummyHingeRigidbody.position;\n\n\t\t\t// If the distance between the bone and the dummy hinge is greater than a certain value, correct the position of the dummy.\n\t\t\tif (Vector3.Distance(bonePosW, hingePosW) > 0.1f)\n\t\t\t{\n\t\t\t\t_dummyHingeRigidbody.MovePosition(bonePosW);\n\t\t\t}\n\t\t}\n\t}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton4").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// Create a dummy hinge object and set it as a child of the character object, then set its initial position and rotation.\n\t\tGameObject dummyHingeObj = new GameObject(\"DummyHinge\");\n\t\tTransform dummyHingeTransform = dummyHingeObj.transform;\n\t\tdummyHingeTransform.parent = characterTransform;\t\t\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton5").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// Add a HingeJoint2D to the dummy hinge and connect it to the character's Rigidbody2D.\n\t\tHingeJoint2D hingeJoint = dummyHingeObj.AddComponent<HingeJoint2D>();\n\t\thingeJoint.connectedBody = rootRigidbody;\n\t\thingeJoint.autoConfigureConnectedAnchor = false;\n\t\thingeJoint.anchor = Vector2.zero;\n\t\thingeJoint.connectedAnchor = posL_Target;\n\n\t\t// Limit the rotation angle so that the dummy hinge only rotates within a certain range.\n\t\tPhysics2D.SyncTransforms();\n\n\t\tJointAngleLimits2D angleLimits = new JointAngleLimits2D();\n\t\tangleLimits.min = -30.0f + hingeJoint.jointAngle;\n\t\tangleLimits.max = 30.0f + hingeJoint.jointAngle;\n\t\thingeJoint.limits = angleLimits;\n\t\thingeJoint.useLimits = true;\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton6").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class v162_RagdollScript : MonoBehaviour\n{\n\t// Parent object of apPortrait with Rigidbody2D\n\tpublic Transform characterTransform;\n\n\t// AnyPortrait Character and Ragdoll Simulator\n\tpublic apPortrait portrait;\n\tpublic PortraitRagdollSimulator ragdollSimulator;\n\n\t// Variable to return to initial position\n\tprivate Vector3 _initialPosition;\n\n\tvoid Start()\n\t{\n\t\t// Initialize the physics simulator and AnyPortrait character.\n\t\tportrait.Initialize();\n\t\tragdollSimulator.Initialize();\n\n\t\t// Save the initial position.\n\t\t_initialPosition = characterTransform.position;\n\t}\n\n\tvoid Update()\n\t{\n\t\t// Pressing the A key will start the ragdoll simulation.\n\t\tif (Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\t// Pause the animation.\n\t\t\tportrait.PauseAll();\n\n\t\t\t// Start the ragdoll simulator.\n\t\t\tragdollSimulator.StartSimulate();\n\t\t}\n\n\t\t// Pressing the S key will stop the simulation and revert the character.\n\t\tif (Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\t// Replay the animation.\n\t\t\tportrait.Play(\"Anim\");\n\n\t\t\t// Stop the ragdoll simulator.\n\t\t\tragdollSimulator.StopSimulate();\n\n\t\t\t// Resets the character's position and rotation to their initial state.\n\t\t\tcharacterTransform.position = _initialPosition;\n\t\t\tcharacterTransform.rotation = Quaternion.identity;\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton7").addEventListener("click", function() {
+    const textToCopy = "...\n\tGameObject hingeGO = new GameObject(info.boneName + \"_Hinge\");\n...\n\thingeGO.layer = characterTransform.gameObject.layer;\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
+    <!--------------->
+
+    </body>
+</html>

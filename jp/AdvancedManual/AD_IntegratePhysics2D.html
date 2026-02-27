@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>ボーンと物理コンポーネントの連携</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/ja/anyportrait-ja/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ja/ap-video-tutorials-ja/">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ja/forum-ja/">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_IntegratePhysics2D.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_IntegratePhysics2D.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_IntegratePhysics2D.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/ja/anyportrait-ja/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > ボーンと物理コンポーネントの連携</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">ボーンと物理コンポーネントの連携</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.2</span></h4>
+    
+    <p>
+    「Unity」の「2D物理システム」をキャラクターに適用すると、ゲームははるかに動的に見えます。<br>
+    特に、キャラクターのボーンに「Rigidbody」コンポーネントなどを追加すれば、物理衝突による動きを持つこともできるはずです。<br>
+    しかし残念ながら、「AnyPortrait」のシステムと「Unity」の物理コンポーネント間の互換性は良くない方です。<br>
+    したがって、物理コンポーネントの動きを「AnyPortrait」の骨格構造に適用するには、特別な方法を使用する必要があります。<br>
+    このページでは、この特別なテクニックのアイデアを最初に紹介し、それを活用して「ロボットキャラクターの腕を分離するスクリプト」を作成します。<br>
+    また、このページで紹介した内容を応用して「ラグドール」を作成することもできます。<br>
+    このページの説明をご覧の上、<a href="../../jp/AdvancedManual/AD_Ragdoll.html">次ページ</a>でラグドル実装方法も確認してみてください！<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    このページの内容は「Unity 6.2」に基づいて作成されました。<br>
+    バージョンによっては、スクリプトやコンポーネントの実装方法が異なる場合があります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>キャラクターを制作してシーンを構成</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2306.jpg"/>
+    <br>
+    
+    <p>
+    このページで使用するロボットキャラクターを作成しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2307.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Transformモディファイア</strong>」を利用して、「Anim」という名前のシンプルなループアニメーションを制作しました。<br>
+    「ルートユニット」画面で、このアニメーションがゲーム開始時に自動的に再生されるように設定しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2308.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Bake</strong>」を実行してキャラクターをシーンに配置し、物理衝突テスト用の四角スプライトを追加した状態です。<br>
+    <strong>(2)</strong> キャラクターに基本的な物理効果を実装するために、上記のように「GameObject」を追加して「親子関係」を構成しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2309.jpg"/>
+    <br>
+    
+    <p>
+    シーンに配置されたオブジェクトの役割に合わせてコンポーネントを追加しました。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Character Group</strong><br>
+    ロボットキャラクタのルートオブジェクトです。<br>
+    キャラクターの場合、「AnyPortrait」で制作したキャラクターとは別に、役割に合わせてオブジェクトを分離することが効果的です。<br>
+    そのため、「AnyPortrait」キャラクタの親として新しい「GameObject」を作成して制御するのが便利です。<br>
+    「<strong>Sorting Group</strong>」と「<strong>Rigidbody 2D</strong>」コンポーネントを追加して、子オブジェクトを物理的に移動させます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Robot Portrait</strong><br>
+    「AnyPortrait」で製作したロボットキャラクターです。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. Default Collider</strong><br>
+    キャラクター全体の衝突領域に対応する「Collider」コンポーネントを持つオブジェクトです。<br>
+    「Collider」コンポーネントの種類はキャラクター形態に合わせて決めればいいです。<br>
+    ここでは「<strong>Capsule Collider 2D</strong>」を利用しました。<br>
+    「Collider」コンポーネントを「Character Group」に追加する場合、このオブジェクトは必要ありません。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>4. Ground</strong><br>
+    キャラクターの下に位置する長方形のスプライトです。<br>
+    「<strong>Box Collider 2D</strong>」が追加されており、落ちるキャラクターがここに着地できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2310.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、上のようにキャラクターが下に落ちた後に着地するのがわかります。<br>
+    上記のように「Rigidbody」と「Collider」を利用して、キャラクターの全体的なサイズに合わせて物理的な動きを実現することができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    これで、キャラクターの個々のボーンに物理的な動きを実装する準備が整いました。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>実装のアイデア</h3>
+    <br>
+    
+    <p>
+    スクリプトを作成する前に、どのように実装するかをしばらく考えてみましょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    「Unity」の「スケルタルアニメーションシステム」に物理効果を与えたい場合は、ボーンに対応する「GameObject」にコンポーネントを追加するだけです。<br>
+    しかし、「AnyPortrait」で制作されたキャラクターにはこのように物理的な効果を与えることはできません。<br>
+    したがって、物理コンポーネントと連携するためにはスクリプトを書く必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    「AnyPortrait」のボーンを任意の場所に移動するスクリプトを書くことは難しくありません。 （<a href="../../jp/Script/SC_Bone.html">関連ページ</a>）<br>
+    物理コンポーネントを活用した動きを計算した結果値をキャラクターに渡すスクリプトを作成する必要がありますが、そのためには次の問題を解決する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2311.jpg"/>
+    <br>
+    
+    <p>
+    最大の難関は、「AnyPortrait」と「Unity」の座標系が異なることです。<br>
+    「AnyPortrait」には独自の座標系があり、「Unity」でレンダリングされるには変換操作が必要です。<br>
+    この違いは、単に位置値が異なるだけでなく、「AnyPortrait」のスケルタルアニメーションでは「GameObject」を活用しないことを意味することもあります。<br>
+    つまり、システム特性と座標系の問題で物理コンポーネントを「AnyPortraitキャラクタ内部のボーンに該当するGameObject」に付けても全く動作しなくなります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2312.jpg"/>
+    <br>
+    
+    <p>
+    しかし、座標系の変換プロセスを詳しく見ると、連動が完全に不可能なわけではありません。<br>
+    特に、「<strong>ソケット（Socket）</strong>」（<a href="../../jp/AdvancedManual/AD_Socket.html">関連ページ</a>）を利用すれば実装が可能です。<br>
+    「ソケット」は、もともとボーンやメッシュに「Unity」のオブジェクトを取り付けるための機能です。<br>
+    そのため、「ソケット」は「Transform」の形で提供されますが、これらの特性のおかげで他のコンポーネントと連動するのにも最適です。<br>
+    </p>
+    <br>
+    
+    <p>
+    しかし、「ソケット」に物理コンポーネントを取り付けるだけでは、物理的な動きを実現することはできません。<br>
+    「ソケット」は単に「AnyPortrait」アニメーションの結果だけを反映するだけで、その逆で動作するわけではありません。<br>
+    だから、「Rigidbody」によって「ソケット」が動いても、その結果がキャラクターのアニメーションに反映されません。<br>
+    スクリプトで「ソケット」の位置変換をキャラクターに反映したいとしても、スクリプトの実行順序の問題により安定した物理的な動きを実現することは難しい。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2313.jpg"/>
+    <br>
+    
+    <p>
+    そこで考案された方法は、物理的な動きを代わりに行う「<strong>ダミーオブジェクト</strong>」を一時的に生成することです。<br>
+    「ダミーオブジェクト」に物理コンポーネントを取り付けた後、物理的な動きをキャラクターの代わりに行うように委託します。<br>
+    そしてスクリプトを作成し、フレームごとにダミーオブジェクトの位置や回転値などをキャラクターのボーンに反映します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2313_2.jpg"/>
+    <br>
+    
+    <p>
+    この実装方法の最初のステップは、キャラクターのボーンの形に合わせて物理コンポーネントを持つ「ダミーオブジェクト」を作成することです。<br>
+    まず、「対象となるボーン」とその「子ボーン」の位置をそれぞれ求めます。<br>
+    このとき、「ソケット」を使ってボーンの位置を知ることができます。<br>
+    そして、2つの位置を結ぶ「Collider」と「Rigidbody」を持つ「GameObject」を作成します。<br>
+    「GameObject」の中心はターゲットボーンの位置と同じでなければならず、次に「Collider」の「Offset」と「Length」を適切に設定します。<br>
+    このオブジェクトがターゲットボーンの物理的な動きをシミュレートするダミーオブジェクトになります。<br>
+    </p>
+    <br>
+    
+    <p>
+    「ダミーオブジェクト」が作成された場合、「ダミーオブジェクト」の物理的な動きは物理コンポーネントによって自動的に実行されます。<br>
+    次のステップで実装する必要があるのは、「ダミーオブジェクトの位置または回転値」を「AnyPortraitのボーン」に適用することです。<br>
+    「apPortrait」の「<strong>SetBonePosition</strong>」や「<strong>SetBoneRotation</strong>」関数などを「Update」関数から呼び出すだけです。<br>
+    </p>
+    <br>
+    
+    <p>
+    ダミーを活用した物理コンポーネント連動のアイデアは上記のとおりです。<br>
+    このアイデアに基づいて実際に実装してみましょう。<br>
+    このページでは、「ロボットの腕が離れて物理的な動きを持つ例」を作成します。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>ロボットの腕が離れて物理的に動く例</h3>
+    <br>
+    
+    <p>
+    アニメーション中にロボットの腕が分離され、落ちた腕があちこち衝突しながら物理的に動くようにしましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2314.jpg"/>
+    <br>
+    
+    <p>
+    スクリプトを作成する前に、文字を最初に変更する必要があります。<br>
+    <strong>(1)</strong> 「<strong>Bone</strong>」タブを選択します。<br>
+    <strong>(2)</strong> 分離する腕に対応するボーンの名前は「<strong>Bone Lower Arm L</strong>」です。 「Collider」の長さなどを計算するには、ターゲットの子である「<strong>Bone Hand L</strong>」も参照できる必要があります。<br>
+    <strong>(3)</strong> 右側の「Hierarchy UI」で <kbd> Ctrl</kbd> キーを押して、対象となるボーンとその子ボーンの両方を選択します。<br>
+    <strong>(4)</strong> 「<strong>Socket</strong>」オプションを有効にします。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>なぜ子ボーンが必要なのですか？</h4>
+    <br>
+    
+    <p>
+    「AnyPortraitエディタ」では、ボーンは「長い針の形」で表示されます。<br>
+    しかし、これは作業の利便性のためであり、実際にはボーンのエンドポイントは有効なデータとして扱われません。<br>
+    だから、ボンのエンドポイントをシーンで参照するには、「子ボーン」を使用する必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    もし対象ボーンに子が2つ以上存在する場合、ボーンの終点に該当するボーンを選択してください。<br>
+    逆に、子ボーンがない場合は、1つの子ボーンを必ず追加してください。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    上記の作業が完了したら、「<strong>Bake</strong>」を実行します。<br>
+    そして、次のようにスクリプトを作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary">using</span> AnyPortrait;<br>
+    <br>
+    <span class="text-primary">public class</span> <span class="text-success">v162_DetachBoneScript</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// ターゲットPortrait<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">apPortrait</span> portrait;<br>
+    <br>
+    &emsp;&emsp;// 生成された物理シミュレーション用ダミーオブジェクト<br>
+    &emsp;&emsp;<span class="text-primary">private</span> <span class="text-success">Transform</span> <strong>_detachedDummy</strong> = <span class="text-primary">null</span>;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start() { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Aキーを押すとボーンが切り離され、物理シミュレーションが適用されます。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>MakeDetachedBone();</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Sキーを押すと元に戻ります。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// ダミーオブジェクトを削除した後、アニメーションを再び再生します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_detachedDummy != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>Destroy(_detachedDummy.gameObject);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_detachedDummy = <span class="text-primary">null</span>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Play("Anim");<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// ダミーオブジェクトが存在する場合は、物理シミュレーションとなったダミーオブジェクトの位置と回転をボーンに適用します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_detachedDummy != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> upVectorW = _detachedDummy.<strong>TransformDirection</strong>(<span class="text-success">Vector3</span>.up);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ_W = <span class="text-success">Vector3</span>.<strong>SignedAngle</strong>(<span class="text-success">Vector3</span>.up, upVectorW, <span class="text-success">Vector3</span>.forward);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;angleZ_W += 90.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBonePosition("Bone Lower Arm L", _detachedDummy.position, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBoneRotation("Bone Lower Arm L", angleZ_W, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// 「Rigidbody2D」と「Collider2D」が追加されたダミーオブジェクトを作成し、ボーンが分離されているように見えます。<br>
+    &emsp;&emsp;<span class="text-primary">private void</span> MakeDetachedBone()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// すでにダミーオブジェクトが存在する場合、重複生成を防止します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_detachedDummy != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 「Bone Lower Arm L」と「Bone Hand L」の位置を利用してダミーオブジェクトを作成します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> boneSocket = portrait.<strong>GetBoneSocket</strong>(<span class="text-danger">"Bone Lower Arm L"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> childBoneSocket = portrait.<strong>GetBoneSocket</strong>(<span class="text-danger">"Bone Hand L"</span>);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> worldPos = boneSocket.position;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ = <span class="text-success">Vector3</span>.<strong>SignedAngle</strong>(<span class="text-success">Vector3</span>.up, childBoneSocket.position - boneSocket.position, <span class="text-success">Vector3</span>.forward);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// ダミーオブジェクトを作成し、初期位置と回転を設定します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject</span> dummyGameObject = <span class="text-primary">new</span> <span class="text-success">GameObject</span>(<span class="text-danger">"Detached Dummy"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;_detachedDummy = dummyGameObject.transform;<br>
+    &emsp;&emsp;&emsp;&emsp;_detachedDummy.parent = <span class="text-primary">null</span>;<br>
+    &emsp;&emsp;&emsp;&emsp;_detachedDummy.position = worldPos;<br>
+    &emsp;&emsp;&emsp;&emsp;_detachedDummy.localRotation = <span class="text-success">Quaternion</span>.Euler(0.0f, 0.0f, angleZ);<br>
+    &emsp;&emsp;&emsp;&emsp;_detachedDummy.localScale = <span class="text-success">Vector3</span>.one;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Rigidbody2D</span> detachedRigidbody = dummyGameObject.AddComponent<<span class="text-success">Rigidbody2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;detachedRigidbody.mass = 1.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 2本のボーンの距離を利用して「Capsule Collider 2D」のサイズを設定します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeHeight = <span class="text-success">Vector3</span>.Distance(boneSocket.position, childBoneSocket.position);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeWidth = hingeHeight * 0.5f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">CapsuleCollider2D</span> capsuleCollider = dummyGameObject.AddComponent<<span class="text-success">CapsuleCollider2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.direction = <span class="text-success">CapsuleDirection2D</span>.Vertical;<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.size = <span class="text-primary">new</span> Vector2(hingeWidth, hingeHeight);<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.offset = <span class="text-primary">new</span> Vector2(0.0f, hingeHeight * 0.5f);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// ダミーオブジェクトに初期力を加え、物理シミュレーションが適用されたように見えます。<br>
+    &emsp;&emsp;&emsp;&emsp;detachedRigidbody.AddForce(<span class="text-primary">new</span> <span class="text-success">Vector2</span>(3.0f, 2.0f), <span class="text-success">ForceMode2D</span>.Impulse);<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    上記のスクリプトの主要なコードを見てみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// ダミーオブジェクトが存在する場合は、物理シミュレーションとなったダミーオブジェクトの位置と回転をボーンに適用します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_detachedDummy != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> upVectorW = _detachedDummy.<strong>TransformDirection</strong>(<span class="text-success">Vector3</span>.up);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ_W = <span class="text-success">Vector3</span>.<strong>SignedAngle</strong>(<span class="text-success">Vector3</span>.up, upVectorW, <span class="text-success">Vector3</span>.forward);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;angleZ_W += 90.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBonePosition("Bone Lower Arm L", _detachedDummy.position, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBoneRotation("Bone Lower Arm L", angleZ_W, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    これは、「ダミーオブジェクト」が存在する場合に「Update」関数でフレームごとに実行されるコードです。<br>
+    「ダービーオブジェクト」が物理コンポーネントによって移動しながら「分離された腕」の物理シミュレーションを行った結果を「AnyPortrait」キャラクターの「ターゲットボーン（Bone Lower Arm L）」に渡します。<br>
+    「_detachedDummy.position」を「<strong>SetBonePosition</strong>」関数を通してボーンに渡してボーンの位置を更新します。<br>
+    ボーンの回転角度の場合、座標系が異なるため、そのまま入力することはできません。<br>
+    したがって、上記のコードのように角度を計算した後、その結果を「<strong>SetBoneRotation</strong>」関数を通して適用する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    「apPortrait」の「SetBonePosition」または「SetBoneRotation」関数は、「LateUpdate」ではなく「<strong>Update</strong>」関数から呼び出す必要があります。<br>
+    これは、その関数が実行された時点でボーンが直接移動するのではなく、そのフレームの「AnyPortraitアニメーション演算」で要求された値が適用される方法だからです。<br>
+    だから「AnyPortraitキャラクターのアップデート」より先に呼び出さなければなりません。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// 「Bone Lower Arm L」と「Bone Hand L」の位置を利用してダミーオブジェクトを作成します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> boneSocket = portrait.<strong>GetBoneSocket</strong>(<span class="text-danger">"Bone Lower Arm L"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> childBoneSocket = portrait.<strong>GetBoneSocket</strong>(<span class="text-danger">"Bone Hand L"</span>);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> worldPos = boneSocket.position;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ = <span class="text-success">Vector3</span>.<strong>SignedAngle</strong>(<span class="text-success">Vector3</span>.up, childBoneSocket.position - boneSocket.position, <span class="text-success">Vector3</span>.forward);<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    「ダミーオブジェクト」を作成するとき、「ターゲットボーン（Bone Lower Arm L）」の位置と回転角度を求めるコードです。<br>
+    まず、「ソケット」を使用して各ボーンに対応する「Transform」を取得します。<br>
+    位置の場合、ボーンの「Transform」の位置をそのまま参照すれば良いのですが、回転角度は上記のように変換して使用する必要があります。<br>
+    続く「GameObject生成コード」で計算した位置と回転角度を適用してください。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// 2本のボーンの距離を利用して「Capsule Collider 2D」のサイズを設定します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeHeight = <span class="text-success">Vector3</span>.Distance(boneSocket.position, childBoneSocket.position);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeWidth = hingeHeight * 0.5f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">CapsuleCollider2D</span> capsuleCollider = dummyGameObject.AddComponent<<span class="text-success">CapsuleCollider2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.direction = <span class="text-success">CapsuleDirection2D</span>.Vertical;<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.size = <span class="text-primary">new</span> Vector2(hingeWidth, hingeHeight);<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.offset = <span class="text-primary">new</span> Vector2(0.0f, hingeHeight * 0.5f);<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton3" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    「ダミーオブジェクト」に「<strong>Rigidbody2D</strong>」を追加した後、「<strong>CapsuleCollider2D</strong>」を追加するコードです。<br>
+    「コライダー」の大きさを求めるために、先に求めた2つの「ソケット」の位置を利用します。<br>
+    ただし、「コライダーの幅」を正確に求める方法はないので、高さを基準に任意に計算されるように作成しました。<br>
+    「コライダー」の「Offset」の「Y」の値が高さの半分であることも確認してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2315.jpg"/>
+    <br>
+    
+    <p>
+    スクリプトをすべて書いたら、シーンに戻ります。<br>
+    <strong>(1)</strong> スクリプトを適用するための「<strong>GameObject</strong>」を生成します。<br>
+    <strong>(2)</strong> スクリプトを「<strong>GameObject</strong>」に追加した後、メンバー変数にロボットキャラクタを割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2316.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行してスクリプトに合わせて <kbd>A</kbd> キーを押すと、上記のように腕が外れて落ちるのがわかります。<br>
+    また、別々の腕が床に衝突することもあります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2317.jpg"/>
+    <br>
+    
+    <p>
+    この状態でシーンにどんな変化があったかを確認しましょう。<br>
+    <strong>(1)</strong> 腕が分離されると、スクリプトによって「ダミーオブジェクト」が生成されます。<br>
+    <strong>(2)</strong> 「ダミーオブジェクト」に「<strong>Rigidbody 2D</strong>」、「<strong>Capsule Collider 2D</strong>」コンポーネントが追加されています。<br>
+    <strong>(3)</strong> シーンビューでは、「ダミーオブジェクト」と「ロボットの腕」が同期して動いていることがわかります。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページで紹介した方法を活用してキャラクターの個々のボーンに物理的な動きを与えることが可能です。<br>
+    ダミーオブジェクトをどのように作成して設定するかに応じて、さまざまな効果を与えることができます。<br>
+    さまざまなアイデアを想像してみてください！<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_SpriteMask.html">< 「Sprite Mask」適用</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_Ragdoll.html">ラグドールの実装 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class v162_DetachBoneScript : MonoBehaviour\n{\n\t// ターゲットPortrait\n\tpublic apPortrait portrait;\n\n\t// 生成された物理シミュレーション用ダミーオブジェクト\n\tprivate Transform _detachedDummy = null;\n\n\tvoid Start() { }\n\n\tvoid Update()\n\t{\n\t\t// Aキーを押すとボーンが切り離され、物理シミュレーションが適用されます。\n\t\tif (Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\tMakeDetachedBone();\n\t\t}\n\n\t\t// Sキーを押すと元に戻ります。\n\t\tif (Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\t// ダミーオブジェクトを削除した後、アニメーションを再び再生します。\n\t\t\tif (_detachedDummy != null)\n\t\t\t{\n\t\t\t\tDestroy(_detachedDummy.gameObject);\n\t\t\t\t_detachedDummy = null;\n\t\t\t}\n\t\t\tportrait.Play(\"Anim\");\n\t\t}\n\n\t\t// ダミーオブジェクトが存在する場合は、物理シミュレーションとなったダミーオブジェクトの位置と回転をボーンに適用します。\n\t\tif (_detachedDummy != null)\n\t\t{\n\t\t\tVector3 upVectorW = _detachedDummy.TransformDirection(Vector3.up);\n\t\t\tfloat angleZ_W = Vector3.SignedAngle(Vector3.up, upVectorW, Vector3.forward);\n\t\t\tangleZ_W += 90.0f;\n\n\t\t\tportrait.SetBonePosition(\"Bone Lower Arm L\", _detachedDummy.position, Space.World);\n\t\t\tportrait.SetBoneRotation(\"Bone Lower Arm L\", angleZ_W, Space.World);\n\t\t}\n\t}\n\n\t// 「Rigidbody2D」と「Collider2D」が追加されたダミーオブジェクトを作成し、ボーンが分離されているように見えます。\n\tprivate void MakeDetachedBone()\n\t{\n\t\t// すでにダミーオブジェクトが存在する場合、重複生成を防止します。\n\t\tif (_detachedDummy != null)\n\t\t{\n\t\t\treturn;\n\t\t}\n\n\t\t// 「Bone Lower Arm L」と「Bone Hand L」の位置を利用してダミーオブジェクトを作成します。\n\t\tTransform boneSocket = portrait.GetBoneSocket(\"Bone Lower Arm L\");\n\t\tTransform childBoneSocket = portrait.GetBoneSocket(\"Bone Hand L\");\n\n\t\tVector3 worldPos = boneSocket.position;\n\t\tfloat angleZ = Vector3.SignedAngle(Vector3.up, childBoneSocket.position - boneSocket.position, Vector3.forward);\n\n\t\t// ダミーオブジェクトを作成し、初期位置と回転を設定します。\n\t\tGameObject dummyGameObject = new GameObject(\"Detached Dummy\");\n\t\t_detachedDummy = dummyGameObject.transform;\n\t\t_detachedDummy.parent = null;\n\t\t_detachedDummy.position = worldPos;\n\t\t_detachedDummy.localRotation = Quaternion.Euler(0.0f, 0.0f, angleZ);\n\t\t_detachedDummy.localScale = Vector3.one;\n\n\t\tRigidbody2D detachedRigidbody = dummyGameObject.AddComponent<Rigidbody2D>();\n\t\tdetachedRigidbody.mass = 1.0f;\n\n\t\t// 2本のボーンの距離を利用して「Capsule Collider 2D」のサイズを設定します。\n\t\tfloat hingeHeight = Vector3.Distance(boneSocket.position, childBoneSocket.position);\n\t\tfloat hingeWidth = hingeHeight * 0.5f;\n\n\t\tCapsuleCollider2D capsuleCollider = dummyGameObject.AddComponent<CapsuleCollider2D>();\n\t\tcapsuleCollider.direction = CapsuleDirection2D.Vertical;\n\t\tcapsuleCollider.size = new Vector2(hingeWidth, hingeHeight);\n\t\tcapsuleCollider.offset = new Vector2(0.0f, hingeHeight * 0.5f);\n\n\t\t// ダミーオブジェクトに初期力を加え、物理シミュレーションが適用されたように見えます。\n\t\tdetachedRigidbody.AddForce(new Vector2(3.0f, 2.0f), ForceMode2D.Impulse);\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// ダミーオブジェクトが存在する場合は、物理シミュレーションとなったダミーオブジェクトの位置と回転をボーンに適用します。\n\t\tif (_detachedDummy != null)\n\t\t{\n\t\t\tVector3 upVectorW = _detachedDummy.TransformDirection(Vector3.up);\n\t\t\tfloat angleZ_W = Vector3.SignedAngle(Vector3.up, upVectorW, Vector3.forward);\n\t\t\tangleZ_W += 90.0f;\n\n\t\t\tportrait.SetBonePosition(\"Bone Lower Arm L\", _detachedDummy.position, Space.World);\n\t\t\tportrait.SetBoneRotation(\"Bone Lower Arm L\", angleZ_W, Space.World);\n\t\t}\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// 「Bone Lower Arm L」と「Bone Hand L」の位置を利用してダミーオブジェクトを作成します。\n\t\tTransform boneSocket = portrait.GetBoneSocket(\"Bone Lower Arm L\");\n\t\tTransform childBoneSocket = portrait.GetBoneSocket(\"Bone Hand L\");\n\n\t\tVector3 worldPos = boneSocket.position;\n\t\tfloat angleZ = Vector3.SignedAngle(Vector3.up, childBoneSocket.position - boneSocket.position, Vector3.forward);\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton3").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// 2本のボーンの距離を利用して「Capsule Collider 2D」のサイズを設定します。\n\t\tfloat hingeHeight = Vector3.Distance(boneSocket.position, childBoneSocket.position);\n\t\tfloat hingeWidth = hingeHeight * 0.5f;\n\n\t\tCapsuleCollider2D capsuleCollider = dummyGameObject.AddComponent<CapsuleCollider2D>();\n\t\tcapsuleCollider.direction = CapsuleDirection2D.Vertical;\n\t\tcapsuleCollider.size = new Vector2(hingeWidth, hingeHeight);\n\t\tcapsuleCollider.offset = new Vector2(0.0f, hingeHeight * 0.5f);\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
+    <!--------------->
+
+    </body>
+</html>

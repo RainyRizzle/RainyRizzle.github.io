@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>ラグドールの実装</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/ja/anyportrait-ja/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ja/ap-video-tutorials-ja/">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ja/forum-ja/">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_Ragdoll.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_Ragdoll.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_Ragdoll.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/ja/anyportrait-ja/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > ラグドールの実装</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">ラグドールの実装</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.2</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2318.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>ラグドール（Ragdoll）</strong>」は、キャラクターがぬいぐるみのように力なく動くようにする技術です。<br>
+    キャラクターのボーンに物理機能を追加し、物理エンジンだけでキャラクターが動くようにするのがこの技法の核心です。<br>
+    </p>
+    <br>
+    
+    <p>
+    「Unity」でラグドールを実装するには、「<strong>Joint</strong>」の種類の物理コンポーネントを利用する必要があります。<br>
+    このページでは、「<strong>Hinge Joint 2D</strong>」と2D物理コンポーネントをボーンに連携してラグドールを実装する方法について説明します。<br>
+    まず、1つのボーンにラグドールを適用する方法について説明します。<br>
+    次に、多くのボーンにラグドールを適用するために私たちのチームが書いたスクリプトを適用する方法について説明します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    「AnyPortrait」には、「Rigidbody」などの物理コンポーネントとBoneを連動させるためには、特別な実装方法を知る必要があります。<br>
+    このページの説明を見る前に、「ボーンと物理コンポーネントの連携」（<a href="../../jp/AdvancedManual/AD_IntegratePhysics2D.html">リンク</a>）のマニュアルを最初に読むことをお勧めします。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>例 1. 1 つのボーンに「Hinge Joint 2D」を連動</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2319.jpg"/>
+    <br>
+    
+    <p>
+    最初の例では、ロボットの片腕にラグドールを適用しましょう。<br>
+    「ラグドール」効果を実装するための最良の方法は、「ダミーオブジェクト」を作成し、ここに「<strong>Hinge Joint 2D</strong>」コンポーネントを追加することです。<br>
+    「<strong>Hinge Joint 2D</strong>」は親ボーンの「<strong>Rigidbody 2D</strong>」と接続する必要があります。<br>
+    親ボーンを持たないこの例では、「ルートとなるGameObject」に接続するだけです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2320.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターは上記のように構成されています。<br>
+    <strong>1. Character Group</strong> : キャラクター全体のルートオブジェクトです。 「Rigidbody 2D」コンポーネントを持ちます。<br>
+    <strong>2. AnyPortrait</strong> : 「AnyPortrait」で制作されたキャラクターです。<br>
+    <strong>3. Default Collider</strong> : キャラクター全体のサイズに合わせて設定された「Collider」を持つオブジェクトです。<br>
+    <strong>4. Dummy</strong> : ラグドールの開始時に一時的に生成されるダミーオブジェクトです。ロボットアームに対応し、「Hinge Joint 2D」を含む物理コンポーネントを持っています。<br>
+    </p>
+    <br>
+    
+    <p>
+    前のページとは異なり、ロボットアームがキャラクターに依存して移動するため、「ダミーオブジェクト」がキャラクターグループ内に含まれることに注意してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2321.jpg"/>
+    <br>
+    
+    <p>
+    スクリプトを作成する前に「<strong>ソケット（Socket）</strong>」を有効にします。<br>
+    <strong>(1)</strong> 「<strong>Bone</strong>」タブを選択します。<br>
+    <strong>(2)</strong> 対象となるボーンは「Bone Lower Arm L」であり、対象ボーンの長さを計算するために子である「Bone Hand L」も同様に参照する必要があります。<br>
+    <strong>(3)</strong>  <kbd>Ctrl</kbd> キーを押して両方のボーンを選択します。<br>
+    <strong>(4)</strong> 「<strong>Socket</strong>」ボタンを押してソケットを有効にします。<br>
+    </p>
+    <br>
+    
+    <p>
+    ここで「<strong>Bake</strong>」を実行し、次のスクリプトを作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary">using</span> AnyPortrait;<br>
+    <br>
+    <span class="text-primary">public class</span> <span class="text-success">v162_HingeJointScript</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// 「Rigidbody2D」を持つ「apPortrait」の親オブジェクト<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">Transform</span> characterTransform;<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">Rigidbody2D</span> rootRigidbody;<br>
+    <br>
+    &emsp;&emsp;// 「AnyPortrait」で制作されたキャラクター<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">apPortrait</span> portrait;<br>
+    <br>
+    &emsp;&emsp;// 物理シミュレーション状態を示すフラグとシミュレーションに使用されるダミーオブジェクトの「Rigidbody2D」<br>
+    &emsp;&emsp;<span class="text-primary">private bool</span> _isSimulating = <span class="text-primary">false</span>;<br>
+    &emsp;&emsp;<span class="text-primary">private</span> <span class="text-success">Rigidbody2D</span> _dummyHingeRigidbody = <span class="text-primary">null</span>;<br>
+    <br>
+    &emsp;&emsp;// 初期位置を保存するための変数<br>
+    &emsp;&emsp;<span class="text-primary">private</span> <span class="text-success">Vector3</span> _initPosition;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 初期位置を保存します。<br>
+    &emsp;&emsp;&emsp;&emsp;_initPosition = characterTransform.position;<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Aキーを押すとダミーヒンジが生成され、物理シミュレーションが開始されます。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// ダミーヒンジを生成します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>MakeDummyHinge();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// アニメーションを一時停止します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.PauseAll();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 「Rigidbody2D」の制約を解除して、キャラクターが物理的に回転できるようにします。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rootRigidbody.constraints = <span class="text-success"><strong>RigidbodyConstraints2D</strong></span><strong>.None;</strong><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Sキーを押すとダミーヒンジを外し、元に戻します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// ダミーヒンジを取り外します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>RemoveDummyHinge();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 「Rigidbody2D」の制約をリセットし、キャラクターが回転しないようにします。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rootRigidbody.constraints = <span class="text-success"><strong>RigidbodyConstraints2D</strong></span><strong>.FreezeRotation</strong>;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// キャラクターの位置と回転を初期状態に戻し、アニメーションを再生します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;characterTransform.position = _initPosition;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;characterTransform.localRotation = <span class="text-success">Quaternion</span>.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Play(<span class="text-danger">"Anim"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 物理シミュレーションを適用したダミーヒンジの位置と回転を利用して、「Bone Lower Arm L」の回転を更新します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_isSimulating)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> upVectorW = _dummyHingeRigidbody.transform.TransformDirection(<span class="text-success">Vector3</span>.up);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ_W = <span class="text-success">Vector3</span>.SignedAngle(<span class="text-success">Vector3</span>.up, upVectorW, <span class="text-success">Vector3</span>.forward);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;angleZ_W += 90.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBoneRotation("Bone Lower Arm L", angleZ_W, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> FixedUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 物理シミュレーションが適用されたダミーヒンジの位置を補正します。<br>
+    &emsp;&emsp;&emsp;&emsp;if (_isSimulating)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> bonePosW = portrait.GetBoneSocket(<span class="text-danger">"Bone Lower Arm L"</span>).position;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> hingePosW = _dummyHingeRigidbody.position;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// ボーンとダミーヒンジの間の距離が一定以上の場合は、ダミーヒンジの位置を補正します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Vector3</span>.Distance(bonePosW, hingePosW) > 0.1f)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_dummyHingeRigidbody.MovePosition(bonePosW);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// ダミーヒンジを生成して物理シミュレーションを開始します。<br>
+    &emsp;&emsp;<span class="text-primary">private void</span> MakeDummyHinge()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_dummyHingeRigidbody != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Destroy(_dummyHingeRigidbody.gameObject);<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;_dummyHingeRigidbody = <span class="text-primary">null</span>;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 「Bone Lower Arm L」と「Bone Hand L」の位置を計算します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> targetSocket = portrait.GetBoneSocket(<span class="text-danger">"Bone Lower Arm L"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> childSocket = portrait.GetBoneSocket(<span class="text-danger">"Bone Hand L"</span>);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> posL_Target = characterTransform.InverseTransformPoint(targetSocket.position);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> posL_Child = characterTransform.InverseTransformPoint(childSocket.position);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 初期回転値を計算します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ = <span class="text-success">Vector3</span>.SignedAngle(<span class="text-success">Vector3</span>.up, posL_Child - posL_Target, <span class="text-success">Vector3</span>.forward);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// ダミーヒンジオブジェクトを作成し、キャラクターオブジェクトの子に設定した後、初期位置と回転を設定します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject</span> dummyHingeObj = <span class="text-primary">new</span> <span class="text-success">GameObject</span>(<span class="text-danger">"DummyHinge"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> dummyHingeTransform = dummyHingeObj.transform;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>dummyHingeTransform.parent = characterTransform;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;dummyHingeTransform.localPosition = posL_Target;<br>
+    &emsp;&emsp;&emsp;&emsp;dummyHingeTransform.localRotation = <span class="text-success">Quaternion</span>.Euler(0f, 0f, angleZ);<br>
+    &emsp;&emsp;&emsp;&emsp;dummyHingeTransform.localScale = <span class="text-success">Vector3</span>.one;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// ダミーヒンジに「Rigidbody2D」と「CapsuleCollider2D」を追加します。<br>
+    &emsp;&emsp;&emsp;&emsp;_dummyHingeRigidbody = dummyHingeObj.AddComponent<<span class="text-success">Rigidbody2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;_dummyHingeRigidbody.mass = 1.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 2つのボーンの距離を使って「CapsuleCollider2D」のサイズを設定します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeLength = <span class="text-success">Vector3</span>.Distance(posL_Target, posL_Child);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeWidth = hingeLength * 0.3f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">CapsuleCollider2D</span> hingeCollider = dummyHingeObj.AddComponent<<span class="text-success">CapsuleCollider2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;hingeCollider.direction = <span class="text-success">CapsuleDirection2D</span>.Vertical;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeCollider.size = <span class="text-primary">new</span> <span class="text-success">Vector2</span>(hingeWidth, hingeLength);<br>
+    &emsp;&emsp;&emsp;&emsp;hingeCollider.offset = <span class="text-primary">new</span> <span class="text-success">Vector2</span>(0f, hingeLength * 0.5f);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// ダミーヒンジに「HingeJoint2D」を追加して、キャラクターの「Rigidbody2D」に接続します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">HingeJoint2D</span> hingeJoint = dummyHingeObj.AddComponent<<span class="text-success">HingeJoint2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hingeJoint.connectedBody = rootRigidbody;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.autoConfigureConnectedAnchor = <span class="text-primary">false</span>;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.anchor = <span class="text-success">Vector2</span>.zero;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hingeJoint.connectedAnchor = posL_Target;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 回転角度を制限して、ダミーヒンジが一定の範囲内でのみ回転するように設定します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Physics2D</span>.SyncTransforms();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">JointAngleLimits2D</span> angleLimits = <span class="text-primary">new</span> <span class="text-success">JointAngleLimits2D</span>();<br>
+    &emsp;&emsp;&emsp;&emsp;angleLimits.min = -30.0f + hingeJoint.jointAngle;<br>
+    &emsp;&emsp;&emsp;&emsp;angleLimits.max = 30.0f + hingeJoint.jointAngle;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.limits = angleLimits;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.useLimits = <span class="text-primary">true</span>;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;_isSimulating = <span class="text-primary">true</span>;<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// ダミーヒンジを取り外して物理シミュレーションを終了します。<br>
+    &emsp;&emsp;<span class="text-primary">private void</span> RemoveDummyHinge()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;if (_dummyHingeRigidbody != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Destroy(_dummyHingeRigidbody.gameObject);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_dummyHingeRigidbody = <span class="text-primary">null</span>;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>&emsp;&emsp;&emsp;&emsp;<br>
+    &emsp;&emsp;&emsp;&emsp;_isSimulating = <span class="text-primary">false</span>;<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    ほとんどのコードは、前のマニュアルで紹介したスクリプトとほぼ同じです。<br>
+    ここでは、ラグドールの実装に関するコードを見てみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// ダミーヒンジを生成します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>MakeDummyHinge();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// アニメーションを一時停止します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.PauseAll();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 「Rigidbody2D」の制約を解除して、キャラクターが物理的に回転できるようにします。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;rootRigidbody.constraints = <span class="text-success"><strong>RigidbodyConstraints2D</strong></span><strong>.None;</strong><br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    ラグドールシミュレーションを開始する要求をするコードです。<br>
+    後述する「MakeDummyHinge」関数を呼び出し、ルートオブジェクトの「Rigidbody 2D」の「Constraint」をすべて解除します。<br>
+    これにより、キャラクターがバランスを崩して倒れる演出を作ることができます。<br>
+    重要なのは、「<strong>PauseAll</strong>」関数を呼び出してキャラクターのアニメーションを一時停止したことです。<br>
+    キャラクターのアニメーションを再生し続ける場合は、物理シミュレーションが非常に不安定に動作するので、必ずアニメーションを停止させてください。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// 物理シミュレーションを適用したダミーヒンジの位置と回転を利用して、「Bone Lower Arm L」の回転を更新します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_isSimulating)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> upVectorW = _dummyHingeRigidbody.transform.TransformDirection(<span class="text-success">Vector3</span>.up);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ_W = <span class="text-success">Vector3</span>.SignedAngle(<span class="text-success">Vector3</span>.up, upVectorW, <span class="text-success">Vector3</span>.forward);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;angleZ_W += 90.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBoneRotation("Bone Lower Arm L", angleZ_W, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    ダミーヒンジオブジェクトの動きをフレームごとにキャラクターのボーンに適用するコードです。<br>
+    「<strong>Hinge Joint 2D</strong>」の場合、独立して移動せず、親に依存して回転のみするため、「<strong>SetBoneRotation</strong>」のみ呼び出します。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> FixedUpdate()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 物理シミュレーションが適用されたダミーヒンジの位置を補正します。<br>
+    &emsp;&emsp;&emsp;&emsp;if (_isSimulating)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> bonePosW = portrait.GetBoneSocket(<span class="text-danger">"Bone Lower Arm L"</span>).position;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> hingePosW = _dummyHingeRigidbody.position;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// ボーンとダミーヒンジの間の距離が一定以上の場合は、ダミーヒンジの位置を補正します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Vector3</span>.Distance(bonePosW, hingePosW) > 0.1f)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>_dummyHingeRigidbody.MovePosition(bonePosW);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton3" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    以前のマニュアルと最も大きく異なるコードです。<br>
+    物理演算が実行される「<strong>FixedUpdate</strong>」では、ダミーオブジェクトの位置をキャラクタのボーンに合わせて補正する必要があります。<br>
+    通常の場合は「AnyPortrait」のボーンと「ダミーオブジェクト」は親に依存するという共通点があるので、あえて位置を補正する必要はありません。<br>
+    ただし、「<strong>Hinge Joint 2D</strong>」が親に強く接続するように設定しても、強すぎる力を加えたり、衝突エラーが発生した場合、ダミーオブジェクトが親（ここでは「Character Group」）と分離する問題が発生することがあります。<br>
+    したがって、ボーンの位置とダミーオブジェクトの位置を比較し続けてエラーが発生した場合は、ダミーオブジェクトを強制的に移動する必要があります。<br>
+    ここでは「<strong>0.1f</strong>」の位置の違いを検出するようにしましたが、この値を小さすぎると、「<strong>MovePosition</strong>」関数が頻繁に呼び出される可能性があります。<br>
+    「<strong>MovePosition</strong>」が多すぎると、ダミーオブジェクトの速度に影響を与えるため、動きが自然になりません。<br>
+    したがって、テストを行い、適切な値を入力する必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// ダミーヒンジオブジェクトを作成し、キャラクターオブジェクトの子に設定した後、初期位置と回転を設定します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject</span> dummyHingeObj = <span class="text-primary">new</span> <span class="text-success">GameObject</span>(<span class="text-danger">"DummyHinge"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> dummyHingeTransform = dummyHingeObj.transform;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>dummyHingeTransform.parent = characterTransform;</strong></span>&emsp;&emsp;&emsp;&emsp;<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton4" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    ダミーオブジェクトを生成するとき、前のマニュアルとは異なり、キャラクターのルートに該当する「<strong>characterTransform</strong>」の子になるように設定してください。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// ダミーヒンジに「HingeJoint2D」を追加して、キャラクターの「Rigidbody2D」に接続します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">HingeJoint2D</span> hingeJoint = dummyHingeObj.AddComponent<<span class="text-success">HingeJoint2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hingeJoint.connectedBody = rootRigidbody;</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.autoConfigureConnectedAnchor = <span class="text-primary">false</span>;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.anchor = <span class="text-success">Vector2</span>.zero;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>hingeJoint.connectedAnchor = posL_Target;</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 回転角度を制限して、ダミーヒンジが一定の範囲内でのみ回転するように設定します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Physics2D</span>.SyncTransforms();<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">JointAngleLimits2D</span> angleLimits = <span class="text-primary">new</span> <span class="text-success">JointAngleLimits2D</span>();<br>
+    &emsp;&emsp;&emsp;&emsp;angleLimits.min = -30.0f + hingeJoint.jointAngle;<br>
+    &emsp;&emsp;&emsp;&emsp;angleLimits.max = 30.0f + hingeJoint.jointAngle;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.limits = angleLimits;<br>
+    &emsp;&emsp;&emsp;&emsp;hingeJoint.useLimits = <span class="text-primary">true</span>;<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton5" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    ダミーオブジェクトに「<strong>Hinge Joint 2D</strong>」コンポーネントを追加するコードです。<br>
+    ここでは親ボーンが存在しないので、キャラクターのルートオブジェクトである「<strong>rootRigidbody</strong>」と連結するように作成します。<br>
+    ラグドールの親ボーンがある場合は、親ボーンに対応する「Rigidbody」を接続する必要があります。<br>
+    さらに、ダミーオブジェクトの回転角度を制限する必要がある場合は、上記のようにコードを書くだけです。<br>
+    「<strong>JointAngleLimits2D</strong>」を適用する前に、「<strong>Physics2D.SyncTransforms()</strong>」を最初に呼び出す必要があることに注意してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2322.jpg"/>
+    <br>
+    
+    <p>
+    作成したスクリプトをシーンに適用しましょう。<br>
+    <strong>(1)</strong> 「<strong>GameObject</strong>」を新規作成します。<br>
+    <strong>(2)</strong> 生成された「<strong>GameObject</strong>」に「スクリプト」を追加し、メンバー変数に対応するオブジェクトを適切に割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2323.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行し、スクリプトに合わせて <kbd>A</kbd> キーを押してみましょう。<br>
+    上記のように、ロボットのキャラクターがアニメーションを止めて横に倒れるのを見ることができます。<br>
+    ロボットが倒れて腕が自然に折れるのも見られます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2324.jpg"/>
+    <br>
+    
+    <p>
+    この状態でゲームを一時停止し、どのような状況が発生したかを見てみましょう。<br>
+    <strong>(1)</strong> ラグドールが有効になると、「DummyHinge」という名前のダミーオブジェクトがキャラクターグループ内に生成されます。<br>
+    <strong>(2)</strong> このダミーオブジェクトには、「<strong>Rigidbody 2D</strong>」、「<strong>Capsule Collider 2D</strong>」、および「<strong>Hinge Joint 2D</strong>」コンポーネントが追加されています。<br>
+    <strong>(3)</strong> シーンで確認すると、ダミーオブジェクトと物理コンポーネントがターゲットボーンに合わせて作成され、ボーンがダミーオブジェクトと同期して移動していることがわかります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>例 2. ラグドールの実装</h3>
+    <br>
+    
+    <p>
+    一つのボーンを「<strong>Hinge Joint 2D</strong>」と連動する方式を応用すればラグドールを実装できるはずです。<br>
+    複数のボーンに対してダミーオブジェクトを作成し、物理シミュレーションを実行するように上記のスクリプトを変更します。<br>
+    ただし、修正されたスクリプトの分量が多すぎるため、このページで紹介するのは難しく、私たちがあらかじめ作成したスクリプトを提供いたします。<br>
+    </p>
+    <br>
+    
+    <p>
+    - <a href="https://drive.google.com/file/d/1oZL731Bb6gZ2lyUcnwKTVEZIBsY4c7u3/view?usp=sharing" target="_sub">ラグドールシミュレータスクリプトのダウンロード</a><br>
+    </p>
+    <br>
+    
+    <p>
+    「Unitypackage」ファイルをダウンロードしてプロジェクトにインポートすると、1つのスクリプトが追加されます。<br>
+    このスクリプトを使ってラグドールを実装しましょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>参考</strong></span><br>
+    提供されるスクリプトは、「AnyPortrait v1.6.2」と「Unity 6.2」に基づいて作成されました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2325.jpg"/>
+    <br>
+    
+    <p>
+    ロボットキャラクターのほとんどのボーンにダミーオブジェクトを作成する準備をする必要があります。<br>
+    <strong>(1)</strong> 「<strong>Bone</strong>」タブを選択します。<br>
+    <strong>(2)</strong>&nbsp;&nbsp;<kbd>Shift</kbd> キーまたは <kbd>Ctrl</kbd> キーを押して、ほとんどのボーンを選択します。また、ターゲットの子ボーンも同様に選択します。<br>
+    <strong>(3)</strong> ほぼすべてのボーンが選択された状態です。<br>
+    <strong>(4)</strong> 選択したボーンの「<strong>ソケット（Socket）</strong>」オプションを一括で有効にします。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>参考</strong></span><br>
+    この例では、ルートボーン「Bone Pelvis」を選択から除外しました。<br>
+    これは、ルートボーンとメッシュが関連付けられておらず、その役割をルートオブジェクト（「Character Group」）が置き換えたためです。<br>
+    作業者ごとにキャラクターの構造が異なるので、キャラクターの構造に合わせて適切に設定して実装してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2326.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Bake</strong>」を実行してシーンに戻ります。<br>
+    <strong>(1)</strong> 「<strong>GameObject</strong>」を新規作成します。<br>
+    <strong>(2)</strong> 作成した「<strong>GameObject</strong>」にダウンロードした「<strong>Portrait Ragdoll Simulator</strong>」スクリプトを追加します。<br>
+    <strong>(3)</strong> 「<strong>Character Objects</strong>」項目のメンバー変数にオブジェクトを適切に割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2327.jpg"/>
+    <br>
+    
+    <p>
+    このスクリプトは、「Bone Infos」という項目にbone情報を入力すると、この情報に基づいてダミーオブジェクトを生成します。<br>
+    キャラクターのすべてのボーンの名前を覚えて1つずつ入力してもいいのですが、これはとても面倒です。<br>
+    そのため、「ソケットオプションが有効になっているすべてのボーンを見つけて自動的に情報を入力する機能」を実装しておきました。<br>
+    <strong>(1)</strong> 「<strong>Make Hinge Infos</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 案内メッセージを確認したら、「<strong>Yes</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2328.jpg"/>
+    <br>
+    
+    <p>
+    ソケットが有効なボーンを対象に情報が自動的に入力されます。<br>
+    ただし、ボーンの構造上、一部の情報が誤って入力されることがありますので、一つずつ確認してください。<br>
+    <strong>(1)</strong> 例えばこのキャラクターの場合、「Bone Spine」の一部項目が誤って入力された状態です。<br>
+    <strong>(2)</strong> 「<strong>Child Bone Name</strong>」項目に「Bone Upper Arm R」が入力された状態で、このように入力されると、胴体に対応するダミーオブジェクトが右肩方向に傾いて生成されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2329.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「Bone Spine」の終点に該当する本人「Bone Head」の名前を「<strong>Child Bone Name</strong>」に直接入力しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    「Bone Infos」オプションの各項目は次のとおりです。<br>
+    <strong>1. Bone Name</strong> : ダミーオブジェクトが作成されるターゲットボーンの名前。<br>
+    <strong>2. Parent Bone Name</strong> : 「Hinge Joint 2D」の親として接続する親ボーンの名前です。親ボーンを指定しない場合、キャラクターのルートオブジェクトに連結されます。<br>
+    <strong>3. Child Bone Name</strong> : ターゲットボーンの終点の位置を計算するために参照する子ボーンの名前です。空にしてはいけません。子ボーンのうち、ターゲットボーンの終点に最も近いボーンを入力する必要があり、通常はコライダーが生成されます。<br>
+    <strong>4. Collider Width</strong> : 「Collider」の幅、つまり「SizeのX値」を指定します。<br>
+    <strong>4. Is Angle Limit</strong> : ダミーオブジェクトの回転範囲を制限できます。<br>
+    <strong>5. Angle Limit Min/Max</strong> : ダミーオブジェクトの回転範囲です。 ラグドール作成時の角度に基づいて範囲を指定します。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2330.jpg"/>
+    <br>
+    
+    <p>
+    他の生成情報を確認しながら、適切に属性を変更します。<br>
+    上記のように回転範囲を変更すると、より自然なラグドールを作成できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    シミュレータスクリプトはそれ自体では動作しません。<br>
+    別のスクリプトを作成してシミュレーションを実行しましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary">using</span> AnyPortrait;<br>
+    <br>
+    <span class="text-primary">public class</span> <span class="text-success">v162_RagdollScript</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// 「Rigidbody2D」を持つ「apPortrait」の親オブジェクト<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">Transform</span> characterTransform;<br>
+    <br>
+    &emsp;&emsp;// 「AnyPortrait」キャラクターとラグドールシミュレータ<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">apPortrait</span> portrait;<br>
+    &emsp;&emsp;<span class="text-danger"><strong>public PortraitRagdollSimulator ragdollSimulator;</strong></span><br>
+    <br>
+    &emsp;&emsp;// 初期位置に戻すための変数<br>
+    &emsp;&emsp;<span class="text-primary">private</span> <span class="text-success">Vector3</span> _initialPosition;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 物理シミュレータと「AnyPortrait」キャラクターを初期化します。<br>
+    &emsp;&emsp;&emsp;&emsp;<strong>portrait.Initialize();</strong><br>
+    &emsp;&emsp;&emsp;&emsp;<strong>ragdollSimulator.Initialize();</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 初期位置を保存します。<br>
+    &emsp;&emsp;&emsp;&emsp;_initialPosition = characterTransform.position;<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Aキーを押すとラグドールシミュレーションが始まります。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// アニメーションを一時停止します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.PauseAll();</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// ラグドールシミュレータを起動します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>ragdollSimulator.StartSimulate();</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Sキーを押すと物理シミュレーションを停止し、元に戻します。<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// アニメーションをもう一度再生します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<strong>portrait.Play(</strong><span class="text-danger"><strong>"Anim"</strong></span><strong>);</strong><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// ラグドールシミュレータを停止します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>ragdollSimulator.StopSimulate();</strong></span><br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// キャラクターの位置と回転を初期状態に戻します。<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;characterTransform.position = _initialPosition;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;characterTransform.rotation = Quaternion.identity;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton6" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    「<strong>ragdollSimulator.Initialize()</strong>」を呼び出す前に、最初に「<strong>portrait.Initialize()</strong>」を呼び出して正常に初期化を進める必要があります。<br>
+    その後、「<strong>ragdollSimulator.StartSimulate()</strong>」関数と「<strong>ragdollSimulator.StopSimulate()</strong>」を使ってシミュレータをオンまたは終了します。<br>
+    ラグドールシミュレータを実行するときは、アニメーションを一時停止してください。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2331.jpg"/>
+    <br>
+    
+    <p>
+    ラグドールシミュレータを実行するスクリプトまで作成したので、これをシーンに適用してみましょう。<br>
+    <strong>(1)</strong> 新しい「<strong>GameObject</strong>」を作成します。<br>
+    <strong>(2)</strong> 作成したスクリプトを追加し、メンバ変数に対象を適切に割り当てます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2332.jpg"/>
+    <br>
+    
+    <p>
+    それではゲームを実行しましょう。<br>
+     <kbd>A</kbd> キーを押すとラグドールがアクティブになり、キャラクターが力なく床に倒れるのを見ることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    ここでいくつかの修正を加えましょう。<br>
+    現在作成されているダミーオブジェクト間の衝突が発生し、関節が回転しにくいようです。<br>
+    実装意図によって、キャラクターの関節は互いに衝突しないように作らなければならない時もあります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2333.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Project Settings</strong>」を開きます。<br>
+    <strong>(2)</strong> 「<strong>Tags and Layers</strong>」を選択します。<br>
+    <strong>(3)</strong> 「<strong>Layers</strong>」にキャラクター専用の新しいレイヤーを追加します。ここでは「<strong>Character</strong>」という名前のレイヤーを追加しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2334.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Project Settings</strong>」の「<strong>Physics 2D</strong>」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Layer Collision Matrix</strong>」タブを選択します。<br>
+    <strong>(3)</strong> レイヤ間の衝突の有無で「<strong>Character - Character</strong>」のチェックを解除します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2335.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> キャラクターのルートオブジェクトを選択します。<br>
+    <strong>(2)</strong> 「<strong>Layer</strong>」を追加したばかりの「<strong>Character</strong>」に変更して適用します。<br>
+    </p>
+    <br>
+    
+    <p>
+    ラグドールシミュレータスクリプトには次のコードがあり、生成されたダミーオブジェクトはルートオブジェクトのレイヤと同じ値を持ちます。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;<span class="text-success">GameObject</span> hingeGO = <span class="text-primary">new</span> <span class="text-success">GameObject</span>(info.boneName + <span class="text-danger">"_Hinge"</span>);<br>
+    ...<br>
+    &emsp;&emsp;hingeGO.layer = characterTransform.gameObject.layer;<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton7" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2336.jpg"/>
+    <br>
+    
+    <p>
+    それでは、ゲームを実行して再びラグドールをオンにしましょう。<br>
+    キャラクターの各関節が他の関節と衝突しないので、より多くの曲がりを見ることができます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2337.jpg"/>
+    <br>
+    
+    <p>
+    最後に、ラグドールシミュレータが動作しているときにシーンでどのような状況が発生するかを確認します。<br>
+    <strong>(1)</strong> ラグドールシミュレータがオンになると、ダミーオブジェクトはボーンの構造と同様に生成されます。<br>
+    <strong>(2)</strong> ダミーオブジェクトのうち「Ragdoll Root」を除く各ダミーオブジェクトには、「<strong>Rigidbody 2D</strong>」、「<strong>Capsule Collider 2D</strong>」、「<strong>Hinge Joint 2D</strong>」コンポーネントが追加されています。<br>
+    <strong>(3)</strong> キャラクターとダミーオブジェクトが同期して動いているのがわかります。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    提供されるスクリプトは基本的な機能のみを提供し、複数のルートユニットがある場合などをすべてサポートするわけではありません。<br>
+    私たちがスクリプトにコメントを詳細に書いたので、プロジェクトに合わせて修正して使用してください。<br>
+    このマニュアルについて私たちのチームにご意見をいただいたら、より便利に機能を実装できるように改善してみましょう。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_IntegratePhysics2D.html">< ボーンと物理コンポーネントの連携</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_CharacterCostume.html">キャラクターの衣装を交換 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class v162_HingeJointScript : MonoBehaviour\n{\n\t// 「Rigidbody2D」を持つ「apPortrait」の親オブジェクト\n\tpublic Transform characterTransform;\n\tpublic Rigidbody2D rootRigidbody;\n\n\t// 「AnyPortrait」で制作されたキャラクター\n\tpublic apPortrait portrait;\n\n\t// 物理シミュレーション状態を示すフラグとシミュレーションに使用されるダミーオブジェクトの「Rigidbody2D」\n\tprivate bool _isSimulating = false;\n\tprivate Rigidbody2D _dummyHingeRigidbody = null;\n\n\t// 初期位置を保存するための変数\n\tprivate Vector3 _initPosition;\n\n\tvoid Start()\n\t{\n\t\t// 初期位置を保存します。\n\t\t_initPosition = characterTransform.position;\n\t}\n\n\tvoid Update()\n\t{\n\t\t// Aキーを押すとダミーヒンジが生成され、物理シミュレーションが開始されます。\n\t\tif (Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\t// ダミーヒンジを生成します。\n\t\t\tMakeDummyHinge();\n\n\t\t\t// アニメーションを一時停止します。\n\t\t\tportrait.PauseAll();\n\n\t\t\t// 「Rigidbody2D」の制約を解除して、キャラクターが物理的に回転できるようにします。\n\t\t\trootRigidbody.constraints = RigidbodyConstraints2D.None;\n\t\t}\n\n\t\t// Sキーを押すとダミーヒンジを外し、元に戻します。\n\t\tif (Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\t// ダミーヒンジを取り外します。\n\t\t\tRemoveDummyHinge();\n\n\t\t\t// 「Rigidbody2D」の制約をリセットし、キャラクターが回転しないようにします。\n\t\t\trootRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;\n\n\t\t\t// キャラクターの位置と回転を初期状態に戻し、アニメーションを再生します。\n\t\t\tcharacterTransform.position = _initPosition;\n\t\t\tcharacterTransform.localRotation = Quaternion.identity;\n\t\t\tportrait.Play(\"Anim\");\n\t\t}\n\n\t\t// 物理シミュレーションを適用したダミーヒンジの位置と回転を利用して、「Bone Lower Arm L」の回転を更新します。\n\t\tif (_isSimulating)\n\t\t{\n\t\t\tVector3 upVectorW = _dummyHingeRigidbody.transform.TransformDirection(Vector3.up);\n\t\t\tfloat angleZ_W = Vector3.SignedAngle(Vector3.up, upVectorW, Vector3.forward);\n\t\t\tangleZ_W += 90.0f;\n\n\t\t\tportrait.SetBoneRotation(\"Bone Lower Arm L\", angleZ_W, Space.World);\n\t\t}\n\t}\n\n\tvoid FixedUpdate()\n\t{\n\t\t// 物理シミュレーションが適用されたダミーヒンジの位置を補正します。\n\t\tif (_isSimulating)\n\t\t{\n\t\t\tVector3 bonePosW = portrait.GetBoneSocket(\"Bone Lower Arm L\").position;\n\t\t\tVector3 hingePosW = _dummyHingeRigidbody.position;\n\n\t\t\t// ボーンとダミーヒンジの間の距離が一定以上の場合は、ダミーヒンジの位置を補正します。\n\t\t\tif (Vector3.Distance(bonePosW, hingePosW) > 0.1f)\n\t\t\t{\n\t\t\t\t_dummyHingeRigidbody.MovePosition(bonePosW);\n\t\t\t}\n\t\t}\n\t}\n\n\t// ダミーヒンジを生成して物理シミュレーションを開始します。\n\tprivate void MakeDummyHinge()\n\t{\n\t\tif (_dummyHingeRigidbody != null)\n\t\t{\n\t\t\tDestroy(_dummyHingeRigidbody.gameObject);\n\t\t}\n\n\t\t_dummyHingeRigidbody = null;\n\n\t\t// 「Bone Lower Arm L」と「Bone Hand L」の位置を計算します。\n\t\tTransform targetSocket = portrait.GetBoneSocket(\"Bone Lower Arm L\");\n\t\tTransform childSocket = portrait.GetBoneSocket(\"Bone Hand L\");\n\n\t\tVector3 posL_Target = characterTransform.InverseTransformPoint(targetSocket.position);\n\t\tVector3 posL_Child = characterTransform.InverseTransformPoint(childSocket.position);\n\n\t\t// 初期回転値を計算します。\n\t\tfloat angleZ = Vector3.SignedAngle(Vector3.up, posL_Child - posL_Target, Vector3.forward);\n\n\t\t// ダミーヒンジオブジェクトを作成し、キャラクターオブジェクトの子に設定した後、初期位置と回転を設定します。\n\t\tGameObject dummyHingeObj = new GameObject(\"DummyHinge\");\n\t\tTransform dummyHingeTransform = dummyHingeObj.transform;\n\t\tdummyHingeTransform.parent = characterTransform;\n\t\tdummyHingeTransform.localPosition = posL_Target;\n\t\tdummyHingeTransform.localRotation = Quaternion.Euler(0f, 0f, angleZ);\n\t\tdummyHingeTransform.localScale = Vector3.one;\n\n\t\t// ダミーヒンジに「Rigidbody2D」と「CapsuleCollider2D」を追加します。\n\t\t_dummyHingeRigidbody = dummyHingeObj.AddComponent<Rigidbody2D>();\n\t\t_dummyHingeRigidbody.mass = 1.0f;\n\n\t\t// 2つのボーンの距離を使って「CapsuleCollider2D」のサイズを設定します。\n\t\tfloat hingeLength = Vector3.Distance(posL_Target, posL_Child);\n\t\tfloat hingeWidth = hingeLength * 0.3f;\n\n\t\tCapsuleCollider2D hingeCollider = dummyHingeObj.AddComponent<CapsuleCollider2D>();\n\t\thingeCollider.direction = CapsuleDirection2D.Vertical;\n\t\thingeCollider.size = new Vector2(hingeWidth, hingeLength);\n\t\thingeCollider.offset = new Vector2(0f, hingeLength * 0.5f);\n\n\t\t// ダミーヒンジに「HingeJoint2D」を追加して、キャラクターの「Rigidbody2D」に接続します。\n\t\tHingeJoint2D hingeJoint = dummyHingeObj.AddComponent<HingeJoint2D>();\n\t\thingeJoint.connectedBody = rootRigidbody;\n\t\thingeJoint.autoConfigureConnectedAnchor = false;\n\t\thingeJoint.anchor = Vector2.zero;\n\t\thingeJoint.connectedAnchor = posL_Target;\n\n\t\t// 回転角度を制限して、ダミーヒンジが一定の範囲内でのみ回転するように設定します。\n\t\tPhysics2D.SyncTransforms();\n\n\t\tJointAngleLimits2D angleLimits = new JointAngleLimits2D();\n\t\tangleLimits.min = -30.0f + hingeJoint.jointAngle;\n\t\tangleLimits.max = 30.0f + hingeJoint.jointAngle;\n\t\thingeJoint.limits = angleLimits;\n\t\thingeJoint.useLimits = true;\n\n\t\t_isSimulating = true;\n\t}\n\n\t// ダミーヒンジを取り外して物理シミュレーションを終了します。\n\tprivate void RemoveDummyHinge()\n\t{\n\t\tif (_dummyHingeRigidbody != null)\n\t\t{\n\t\t\tDestroy(_dummyHingeRigidbody.gameObject);\n\t\t\t_dummyHingeRigidbody = null;\n\t\t}\n\n\t\t\n\t\t_isSimulating = false;\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t\t// ダミーヒンジを生成します。\n\t\t\tMakeDummyHinge();\n\n\t\t\t// アニメーションを一時停止します。\n\t\t\tportrait.PauseAll();\n\n\t\t\t// 「Rigidbody2D」の制約を解除して、キャラクターが物理的に回転できるようにします。\n\t\t\trootRigidbody.constraints = RigidbodyConstraints2D.None;\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// 物理シミュレーションを適用したダミーヒンジの位置と回転を利用して、「Bone Lower Arm L」の回転を更新します。\n\t\tif (_isSimulating)\n\t\t{\n\t\t\tVector3 upVectorW = _dummyHingeRigidbody.transform.TransformDirection(Vector3.up);\n\t\t\tfloat angleZ_W = Vector3.SignedAngle(Vector3.up, upVectorW, Vector3.forward);\n\t\t\tangleZ_W += 90.0f;\n\n\t\t\tportrait.SetBoneRotation(\"Bone Lower Arm L\", angleZ_W, Space.World);\n\t\t}\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton3").addEventListener("click", function() {
+    const textToCopy = "\tvoid FixedUpdate()\n\t{\n\t\t// 物理シミュレーションが適用されたダミーヒンジの位置を補正します。\n\t\tif (_isSimulating)\n\t\t{\n\t\t\tVector3 bonePosW = portrait.GetBoneSocket(\"Bone Lower Arm L\").position;\n\t\t\tVector3 hingePosW = _dummyHingeRigidbody.position;\n\n\t\t\t// ボーンとダミーヒンジの間の距離が一定以上の場合は、ダミーヒンジの位置を補正します。\n\t\t\tif (Vector3.Distance(bonePosW, hingePosW) > 0.1f)\n\t\t\t{\n\t\t\t\t_dummyHingeRigidbody.MovePosition(bonePosW);\n\t\t\t}\n\t\t}\n\t}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton4").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// ダミーヒンジオブジェクトを作成し、キャラクターオブジェクトの子に設定した後、初期位置と回転を設定します。\n\t\tGameObject dummyHingeObj = new GameObject(\"DummyHinge\");\n\t\tTransform dummyHingeTransform = dummyHingeObj.transform;\n\t\tdummyHingeTransform.parent = characterTransform;\t\t\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton5").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// ダミーヒンジに「HingeJoint2D」を追加して、キャラクターの「Rigidbody2D」に接続します。\n\t\tHingeJoint2D hingeJoint = dummyHingeObj.AddComponent<HingeJoint2D>();\n\t\thingeJoint.connectedBody = rootRigidbody;\n\t\thingeJoint.autoConfigureConnectedAnchor = false;\n\t\thingeJoint.anchor = Vector2.zero;\n\t\thingeJoint.connectedAnchor = posL_Target;\n\n\t\t// 回転角度を制限して、ダミーヒンジが一定の範囲内でのみ回転するように設定します。\n\t\tPhysics2D.SyncTransforms();\n\n\t\tJointAngleLimits2D angleLimits = new JointAngleLimits2D();\n\t\tangleLimits.min = -30.0f + hingeJoint.jointAngle;\n\t\tangleLimits.max = 30.0f + hingeJoint.jointAngle;\n\t\thingeJoint.limits = angleLimits;\n\t\thingeJoint.useLimits = true;\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton6").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class v162_RagdollScript : MonoBehaviour\n{\n\t// 「Rigidbody2D」を持つ「apPortrait」の親オブジェクト\n\tpublic Transform characterTransform;\n\n\t// 「AnyPortrait」キャラクターとラグドールシミュレータ\n\tpublic apPortrait portrait;\n\tpublic PortraitRagdollSimulator ragdollSimulator;\n\n\t// 初期位置に戻すための変数\n\tprivate Vector3 _initialPosition;\n\n\tvoid Start()\n\t{\n\t\t// 物理シミュレータと「AnyPortrait」キャラクターを初期化します。\n\t\tportrait.Initialize();\n\t\tragdollSimulator.Initialize();\n\n\t\t// 初期位置を保存します。\n\t\t_initialPosition = characterTransform.position;\n\t}\n\n\tvoid Update()\n\t{\n\t\t// Aキーを押すとラグドールシミュレーションが始まります。\n\t\tif (Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\t// アニメーションを一時停止します。\n\t\t\tportrait.PauseAll();\n\n\t\t\t// ラグドールシミュレータを起動します。\n\t\t\tragdollSimulator.StartSimulate();\n\t\t}\n\n\t\t// Sキーを押すと物理シミュレーションを停止し、元に戻します。\n\t\tif (Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\t// アニメーションをもう一度再生します。\n\t\t\tportrait.Play(\"Anim\");\n\n\t\t\t// ラグドールシミュレータを停止します。\n\t\t\tragdollSimulator.StopSimulate();\n\n\t\t\t// キャラクターの位置と回転を初期状態に戻します。\n\t\t\tcharacterTransform.position = _initialPosition;\n\t\t\tcharacterTransform.rotation = Quaternion.identity;\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton7").addEventListener("click", function() {
+    const textToCopy = "...\n\tGameObject hingeGO = new GameObject(info.boneName + \"_Hinge\");\n...\n\thingeGO.layer = characterTransform.gameObject.layer;\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+
+    <!--------------->
+
+    </body>
+</html>

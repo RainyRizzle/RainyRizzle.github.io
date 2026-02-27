@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>본과 물리 컴포넌트 연동하기</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/ko/anyportrait-ko/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ko/ap-video-tutorials-ko/">동영상</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ko/forum-ko/">게시판</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_IntegratePhysics2D.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_IntegratePhysics2D.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_IntegratePhysics2D.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/ko/anyportrait-ko/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > 본과 물리 컴포넌트 연동하기</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">본과 물리 컴포넌트 연동하기</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.2</span></h4>
+    
+    <p>
+    유니티의 2D 물리 시스템을 캐릭터에 적용한다면 게임이 훨씬 동적으로 보여질 것입니다.<br>
+    특히, 캐릭터의 본에 Rigidbody 컴포넌트등을 추가하면, 물리 충돌에 의한 움직임을 가질 수도 있을 것입니다.<br>
+    하지만 안타깝게도 AnyPortrait의 시스템과 유니티의 물리 컴포넌트들간의 호환성은 좋지 않은 편입니다.<br>
+    그래서 물리 컴포넌트의 움직임을 AnyPortrait의 스켈레탈 구조에 적용하기 위해서는 우회 방법을 이용해야합니다.<br>
+    이 페이지에서는 이 우회 기법에 대한 아이디어를 먼저 소개하고, 이를 활용하여 "로봇 캐릭터의 팔을 분리하는 스크립트"를 작성해봅니다.<br>
+    그리고 이 페이지에서 소개한 내용을 응용하여 "래그돌 (Ragdoll)"을 구현할 수도 있습니다.<br>
+    이 페이지의 설명을 보신 후, <a href="../../kr/AdvancedManual/AD_Ragdoll.html">다음 페이지</a>에서 래그돌 구현 방법도 확인해보세요!<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>참고</strong></span><br>
+    이 페이지의 내용은 Unity 6.2를 기반으로 작성되었습니다.<br>
+    버전에 따라서는 스크립트나 컴포넌트에 대한 구현 방법이 다를 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>캐릭터를 제작하고 씬을 구성하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2306.jpg"/>
+    <br>
+    
+    <p>
+    이 페이지에서 사용될 로봇 캐릭터를 만들었습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2307.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Transform 모디파이어</strong>을 이용하여 "Anim"이라는 이름의 간단한 루프 애니메이션을 제작했습니다.<br>
+    루트 유닛 화면에서 이 애니메이션이 게임 시작시 자동으로 재생되도록 설정했습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2308.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> <strong>Bake</strong>를 실행하여 캐릭터를 유니티 씬에 배치하고, 물리 충돌 테스트를 위한 사각형 스프라이트를 추가한 상태입니다.<br>
+    <strong>(2)</strong> 캐릭터에 기본적인 물리 효과를 구현하기 위해서 위와 같이 GameObject들을 추가하여 부모-자식 관계를 구성했습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2309.jpg"/>
+    <br>
+    
+    <p>
+    씬에 배치된 오브젝트들의 역할에 맞게 컴포넌트들을 추가했습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Character Group</strong><br>
+    캐릭터의 루트 오브젝트입니다.<br>
+    캐릭터의 경우, AnyPortrait로 제작한 캐릭터와 별개로, 역할에 맞게 오브젝트들을 분리하는 것이 효과적입니다.<br>
+    따라서 AnyPortrait 캐릭터의 부모로서 새로운 GameObject를 생성하여 제어하는 것이 편리합니다.<br>
+    "<strong>Sorting Group</strong>"과 "<strong>Rigidbody 2D</strong>" 컴포넌트를 추가하여 자식 오브젝트들이 물리적으로 움직이도록 만듭니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Robot Portrait</strong><br>
+    AnyPortrait로 제작한 로봇 캐릭터입니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. Default Collider</strong><br>
+    캐릭터 전체의 충돌 영역에 해당하는 Collider 컴포넌트를 가진 오브젝트입니다.<br>
+    Collider 컴포넌트의 종류는 캐릭터 형태에 맞게 정하면 됩니다.<br>
+    여기서는 "<strong>Capsule Collider 2D</strong>"를 이용했습니다.<br>
+    만약 Collider 컴포넌트를 "Character Group"에 추가한다면 이 오브젝트는 필요없습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>4. Ground</strong><br>
+    캐릭터 아래에 위치한 사각형의 스프라이트입니다.<br>
+    "<strong>Box Collider 2D</strong>"가 추가되어 있어서 떨어지는 캐릭터가 여기에 착지할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2310.jpg"/>
+    <br>
+    
+    <p>
+    게임을 실행하면 위와 같이 캐릭터가 아래로 떨어진 후 착지하는 것을 볼 수 있습니다.<br>
+    위와 같이 Rigidbody와 Collider를 이용하여 캐릭터의 전체적인 크기에 맞추어 물리적인 움직임을 구현할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이제 캐릭터의 개별 본에 물리적인 움직임을 구현할 준비가 완료되었습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>구현 아이디어</h3>
+    <br>
+    
+    <p>
+    실제로 구현하기에 앞서서, 어떤 방식으로 구현할 지를 잠시 고민해봅시다.<br>
+    </p>
+    <br>
+    
+    <p>
+    유니티의 기본적인 스켈레탈 애니메이션 시스템에 물리 효과를 주고자 한다면, 본에 해당하는 GameObject에 컴포넌트를 추가하면 됩니다.<br>
+    하지만 AnyPortrait로 제작된 캐릭터에는 이 방식으로 물리적인 효과를 줄 수 없습니다.<br>
+    따라서 물리 컴포넌트와 연동하기 위해서는 스크립트를 작성해야합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    AnyPortrait의 본을 임의의 위치로 이동시키는 스크립트를 작성하는 것은 어렵지 않습니다. (<a href="../../kr/Script/SC_Bone.html">관련 페이지</a>)<br>
+    물리 컴포넌트를 활용한 움직임을 계산한 결과값을 캐릭터에 전달하는 스크립트를 작성해야하는데, 이를 위해서는 다음의 이슈를 해결해야합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2311.jpg"/>
+    <br>
+    
+    <p>
+    가장 큰 난관은 AnyPortrait와 유니티의 좌표계가 서로 다르다는 것입니다.<br>
+    AnyPortrait는 자체적인 좌표계를 갖고 있으며, 유니티에서 렌더링되기 위해서는 변환 작업이 필요합니다.<br>
+    이 차이는 단순히 위치 값이 다르다는 점 뿐만 아니라, AnyPortrait의 본 애니메이션에서는 유니티의 GameObject를 활용하지 않는다는 점을 의미하기도 합니다.<br>
+    즉, 시스템 특성과 좌표계 문제로 물리 컴포넌트를 AnyPortrait 캐릭터 내부의 본에 해당하는 GameObject에 부착하더라도 전혀 동작하지 않게 됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2312.jpg"/>
+    <br>
+    
+    <p>
+    하지만 좌표계 변환 과정을 자세히 살펴보면 연동이 완전히 불가능한 것은 아닙니다.<br>
+    특히, "<strong>소켓 (Socket)</strong>" (<a href="../../kr/AdvancedManual/AD_Socket.html">관련 페이지</a>)을 이용하면 구현이 가능합니다.<br>
+    소켓은 원래 본이나 메시에 유니티의 오브젝트들을 부착하기 위한 기능입니다.<br>
+    소켓은 "Transform"의 형태로 제공되기 때문에, 원래 목적과 달리, 유니티의 다른 컴포넌트들과 연동하기에도 좋습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    하지만 소켓에 물리 컴포넌트를 부착하는 방식만으로는 물리적인 움직임을 구현할 수 없습니다.<br>
+    소켓은 단순히 AnyPortrait 애니메이션의 결과만 반영할 뿐, 그 역으로 동작하지는 않습니다.<br>
+    그래서 Rigidbody에 의하여 소켓이 움직이더라도, 그 결과가 캐릭터의 애니메이션에 반영되지는 않습니다.<br>
+    스크립트로 소켓의 위치 변환을 캐릭터에 반영하고자 해도, 스크립트 실행 순서 문제로 인하여 안정적인 물리 움직임을 구현하는 것은 어렵습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2313.jpg"/>
+    <br>
+    
+    <p>
+    그래서 고안된 방법은, 물리적인 움직임을 대신 수행하는 "<strong>더미 오브젝트</strong>"를 임시로 생성하는 것입니다.<br>
+    더미 오브젝트에 물리 컴포넌트를 부착한 후, 물리적인 움직임을 캐릭터 대신 수행하도록 위탁합니다.<br>
+    그리고 스크립트를 작성하여, 매 프레임마다 더미 오브젝트의 위치와 회전값 등을 캐릭터의 본에 반영합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2313_2.jpg"/>
+    <br>
+    
+    <p>
+    이 구현 방법의 첫 단계는 캐릭터의 본의 형태에 맞게 물리 컴포넌트들을 가진 더미 오브젝트를 생성하는 것입니다.<br>
+    먼저, 대상이 되는 본("Target Bone")과 그 자식 본("Child Bone")의 위치를 각각 알아냅니다.<br>
+    이때, <strong>소켓</strong>을 이용하여 본의 위치를 알 수 있습니다.<br>
+    그리고 2개의 위치를 이용하여 두 위치를 잇는 Collider와 Rigidbody를 가진 GameObject를 만듭니다.<br>
+    GameObject의 중심은 대상 본의 위치와 동일해야 하며, Collider의 "Offset"과 "Length"를 적절히 설정합니다.<br>
+    이 오브젝트가 대상 본의 물리 움직임을 시뮬레이션하는 더미 오브젝트가 됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    더미 오브젝트가 생성되었다면, 더미 오브젝트의 물리적인 움직임은 물리 컴포넌트에 의해서 자동으로 수행될 것입니다.<br>
+    다음 단계로 구현해야하는 것은 "더미 오브젝트의 위치나 회전값"을 다시 AnyPortrait의 본에 적용하는 것입니다.<br>
+    apPortrait의 "<strong>SetBonePosition</strong>"나 "<strong>SetBoneRotation</strong>" 함수 등을 Update 함수에서 호출하면 됩니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    더미를 활용한 물리 컴포넌트 연동 아이디어는 위와 같습니다.<br>
+    이 아이디어를 바탕으로 실제로 구현을 해봅시다.<br>
+    이 페이지에서는 "로봇의 팔이 떨어져서 물리적인 움직임을 갖는 예제"를 만들어봅니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>로봇의 팔이 떨어져서 물리적으로 움직이는 예제</h3>
+    <br>
+    
+    <p>
+    애니메이션 도중에 로봇의 팔이 분리되고, 떨어진 팔이 여기저기 충돌하면서 물리적으로 움직이도록 만들어봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2314.jpg"/>
+    <br>
+    
+    <p>
+    스크립트 작성에 앞서, 캐릭터를 먼저 수정해야합니다.<br>
+    <strong>(1)</strong> <strong>Bone</strong> 탭을 선택합니다.<br>
+    <strong>(2)</strong> 분리될 팔에 해당하는 본의 이름은 "<strong>Bone Lower Arm L</strong>"입니다. Collider의 길이 등을 계산하기 위해서 자식 본인 "<strong>Bone Hand L</strong>"도 참조될 수 있어야 합니다.<br>
+    <strong>(3)</strong> 오른쪽 Hierarchy UI에서  <kbd>Ctrl</kbd>  키를 눌러서 대상이 되는 본과 그 자식 본을 모두 선택합니다.<br>
+    <strong>(4)</strong> <strong>Socket</strong> 옵션을 활성화합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>왜 자식 본을 이용하나요?</h4>
+    <br>
+    
+    <p>
+    AnyPortrait 작업 공간에서는 본이 긴 바늘 모양으로 보여집니다.<br>
+    하지만 이것은 작업의 편의성을 위한 것으로, 실제로는 본의 끝점은 유효한 데이터로 취급되지 않습니다.<br>
+    그래서 본의 끝점을 유니티 씬에서 참조하기 위해서 "자식 본"을 이용해야합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    만약 대상 본에 자식 본들이 2개 이상 존재하는 경우, 본의 끝점에 해당하는 본을 선택해주세요.<br>
+    반대로, 자식 본이 없다면, 1개의 자식 본을 꼭 추가해주세요.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    위 작업이 완료되면 <strong>Bake</strong>를 실행합니다.<br>
+    그리고 다음과 같이 스크립트를 작성합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary">using</span> AnyPortrait;<br>
+    <br>
+    <span class="text-primary">public class</span> <span class="text-success">v162_DetachBoneScript</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// 대상 Portrait<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">apPortrait</span> portrait;<br>
+    <br>
+    &emsp;&emsp;// 생성된 물리 시뮬레이션용 더미 오브젝트<br>
+    &emsp;&emsp;<span class="text-primary">private</span> <span class="text-success">Transform</span> <strong>_detachedDummy</strong> = <span class="text-primary">null</span>;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start() { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// A키를 누르면 뼈가 분리되어 물리 시뮬레이션이 적용됩니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>MakeDetachedBone();</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// S키를 누르면 원래대로 되돌립니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// 더미 오브젝트 제거 후 애니메이션을 다시 재생합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_detachedDummy != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>Destroy(_detachedDummy.gameObject);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_detachedDummy = <span class="text-primary">null</span>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Play("Anim");<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 더미 오브젝트가 존재하는 경우, 물리 시뮬레이션이 된 더미 오브젝트의 위치와 회전을 뼈에 적용합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_detachedDummy != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> upVectorW = _detachedDummy.<strong>TransformDirection</strong>(<span class="text-success">Vector3</span>.up);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ_W = <span class="text-success">Vector3</span>.<strong>SignedAngle</strong>(<span class="text-success">Vector3</span>.up, upVectorW, <span class="text-success">Vector3</span>.forward);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;angleZ_W += 90.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBonePosition("Bone Lower Arm L", _detachedDummy.position, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBoneRotation("Bone Lower Arm L", angleZ_W, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// Rigidbody2D와 Collider2D가 추가된 더미 오브젝트를 생성하여 뼈가 분리된 것처럼 보이도록 합니다.<br>
+    &emsp;&emsp;<span class="text-primary">private void</span> MakeDetachedBone()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// 이미 더미 오브젝트가 존재하는 경우, 중복 생성을 방지합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_detachedDummy != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// "Bone Lower Arm L" 뼈와 "Bone Hand L" 뼈의 위치를 이용하여 더미 오브젝트를 생성합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> boneSocket = portrait.<strong>GetBoneSocket</strong>(<span class="text-danger">"Bone Lower Arm L"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> childBoneSocket = portrait.<strong>GetBoneSocket</strong>(<span class="text-danger">"Bone Hand L"</span>);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> worldPos = boneSocket.position;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ = <span class="text-success">Vector3</span>.<strong>SignedAngle</strong>(<span class="text-success">Vector3</span>.up, childBoneSocket.position - boneSocket.position, <span class="text-success">Vector3</span>.forward);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 더미 오브젝트를 생성하고 초기 위치와 회전을 설정합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject</span> dummyGameObject = <span class="text-primary">new</span> <span class="text-success">GameObject</span>(<span class="text-danger">"Detached Dummy"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;_detachedDummy = dummyGameObject.transform;<br>
+    &emsp;&emsp;&emsp;&emsp;_detachedDummy.parent = <span class="text-primary">null</span>;<br>
+    &emsp;&emsp;&emsp;&emsp;_detachedDummy.position = worldPos;<br>
+    &emsp;&emsp;&emsp;&emsp;_detachedDummy.localRotation = <span class="text-success">Quaternion</span>.Euler(0.0f, 0.0f, angleZ);<br>
+    &emsp;&emsp;&emsp;&emsp;_detachedDummy.localScale = <span class="text-success">Vector3</span>.one;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Rigidbody2D</span> detachedRigidbody = dummyGameObject.AddComponent<<span class="text-success">Rigidbody2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;detachedRigidbody.mass = 1.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 뼈 사이의 거리를 이용하여 캡슐 콜라이더의 크기를 설정합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeHeight = <span class="text-success">Vector3</span>.Distance(boneSocket.position, childBoneSocket.position);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeWidth = hingeHeight * 0.5f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">CapsuleCollider2D</span> capsuleCollider = dummyGameObject.AddComponent<<span class="text-success">CapsuleCollider2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.direction = <span class="text-success">CapsuleDirection2D</span>.Vertical;<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.size = <span class="text-primary">new</span> Vector2(hingeWidth, hingeHeight);<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.offset = <span class="text-primary">new</span> Vector2(0.0f, hingeHeight * 0.5f);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// 더미 오브젝트에 초기 힘을 가하여 물리 시뮬레이션이 적용된 것처럼 보이도록 합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;detachedRigidbody.AddForce(<span class="text-primary">new</span> <span class="text-success">Vector2</span>(3.0f, 2.0f), <span class="text-success">ForceMode2D</span>.Impulse);<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    위 스크립트 중 주요 코드들을 확인해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// 더미 오브젝트가 존재하는 경우, 물리 시뮬레이션이 된 더미 오브젝트의 위치와 회전을 뼈에 적용합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_detachedDummy != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> upVectorW = _detachedDummy.<strong>TransformDirection</strong>(<span class="text-success">Vector3</span>.up);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ_W = <span class="text-success">Vector3</span>.<strong>SignedAngle</strong>(<span class="text-success">Vector3</span>.up, upVectorW, <span class="text-success">Vector3</span>.forward);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;angleZ_W += 90.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBonePosition("Bone Lower Arm L", _detachedDummy.position, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBoneRotation("Bone Lower Arm L", angleZ_W, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    더미 오브젝트가 존재하는 경우 <strong>Update</strong> 함수에서 매 프레임마다 실행되는 코드입니다.<br>
+    더비 오브젝트가 물리 컴포넌트에 의해 움직이면서 "분리된 팔"의 물리 시뮬레이션을 수행한 결과를 AnyPortrait 캐릭터의 본("Bone Lower Arm L")에 전달합니다.<br>
+    "_detachedDummy.position"를 "<strong>SetBonePosition</strong>" 함수를 통해서 본에 전달하여 본의 위치를 설정합니다.<br>
+    본의 회전 각도의 경우, 좌표계가 다르므로 그대로 입력할 수 없습니다.<br>
+    따라서 위의 코드처럼 각도를 계산한 후, 그 결과를 "<strong>SetBoneRotation</strong>" 함수를 통해서 적용해야합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    apPortrait의 SetBonePosition이나 SetBoneRotation 함수는 LateUpdate가 아닌 <strong>Update</strong> 함수에서 호출이 되어야 합니다.<br>
+    해당 함수가 호출되는 시점에서 본이 바로 이동하는 것이 아니라, 그 프레임의 AnyPortrait 애니메이션 연산에서 요청된 값이 적용되는 방식이기 때문입니다.<br>
+    그래서 AnyPortrait 캐릭터의 업데이트보다 먼저 호출되어야 합니다.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// "Bone Lower Arm L" 뼈와 "Bone Hand L" 뼈의 위치를 이용하여 더미 오브젝트를 생성합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> boneSocket = portrait.<strong>GetBoneSocket</strong>(<span class="text-danger">"Bone Lower Arm L"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> childBoneSocket = portrait.<strong>GetBoneSocket</strong>(<span class="text-danger">"Bone Hand L"</span>);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> worldPos = boneSocket.position;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ = <span class="text-success">Vector3</span>.<strong>SignedAngle</strong>(<span class="text-success">Vector3</span>.up, childBoneSocket.position - boneSocket.position, <span class="text-success">Vector3</span>.forward);<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    더미 오브젝트를 생성할 때, 대상이 되는 본("Bone Lower Arm L")의 위치와 회전 각도를 구하는 코드입니다.<br>
+    먼저, "소켓"을 이용하여 각 본에 해당하는 "Transform"을 가져옵니다.<br>
+    위치의 경우, 대상 본의 "Transform"의 위치를 그대로 참조하면 되지만, 회전 각도는 위와 같이 변환해서 사용해야합니다.<br>
+    이어지는 GameObject 생성 코드에서 계산한 위치와 회전 각도를 적용해주세요.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// 뼈 사이의 거리를 이용하여 캡슐 콜라이더의 크기를 설정합니다.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeHeight = <span class="text-success">Vector3</span>.Distance(boneSocket.position, childBoneSocket.position);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeWidth = hingeHeight * 0.5f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">CapsuleCollider2D</span> capsuleCollider = dummyGameObject.AddComponent<<span class="text-success">CapsuleCollider2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.direction = <span class="text-success">CapsuleDirection2D</span>.Vertical;<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.size = <span class="text-primary">new</span> Vector2(hingeWidth, hingeHeight);<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.offset = <span class="text-primary">new</span> Vector2(0.0f, hingeHeight * 0.5f);<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton3" class="btn btn-info float-right">클립보드로 복사</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    더미 오브젝트에 "<strong>Rigidbody2D</strong>"를 추가한 후 "<strong>CapsuleCollider2D</strong>"를 추가하는 코드입니다.<br>
+    콜라이더의 크기를 구하기 위해 앞서 구한 2개의 본 소켓의 위치를 이용합니다.<br>
+    다만, 콜라이더의 폭을 정확하게 구하는 방법은 없으므로, 높이를 기준으로 임의로 계산되도록 작성했습니다.<br>
+    콜라이더의 "<strong>Offset</strong>"의 Y 값이 높이의 절반인 점도 확인해주세요.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2315.jpg"/>
+    <br>
+    
+    <p>
+    스크립트를 모두 작성했다면 유니티 씬으로 돌아옵니다.<br>
+    <strong>(1)</strong> 스크립트를 적용하기 위한 <strong>GameObject</strong>를 생성합니다.<br>
+    <strong>(2)</strong> 스크립트를 <strong>GameObject</strong>에 추가한 후, 멤버 변수에 로봇 캐릭터를 할당합니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2316.jpg"/>
+    <br>
+    
+    <p>
+    게임을 실행하고 스크립트에 맞게  <kbd>A</kbd>  키를 누르면 위와 같이 팔이 분리되어 떨어지는 것을 볼 수 있습니다.<br>
+    또한, 분리된 팔이 바닥에 충돌하는 것도 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2317.jpg"/>
+    <br>
+    
+    <p>
+    이 상태에서 씬에 어떤 변화가 있었는지 확인해봅시다.<br>
+    <strong>(1)</strong> 팔이 분리될 때, 스크립트에 의해서 "더미 오브젝트"가 생성됩니다.<br>
+    <strong>(2)</strong> 더미 오브젝트에 <strong>Rigidbody 2D</strong>, <strong>Capsule Collider 2D</strong> 컴포넌트가 추가되어 있습니다.<br>
+    <strong>(3)</strong> 씬 뷰에서 더미 오브젝트와 팔이 동기화되어 움직이는 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이 페이지에서 소개한 방법을 활용하여 캐릭터의 개별 본에 물리적인 움직임을 주는 것이 가능합니다.<br>
+    더미 오브젝트를 어떻게 생성하고 설정하느냐에 따라 다양한 효과를 줄 수 있습니다.<br>
+    다양한 아이디어를 구상해보세요!<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_SpriteMask.html">< Sprite Mask 적용하기</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_Ragdoll.html">래그돌 구현하기 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class v162_DetachBoneScript : MonoBehaviour\n{\n\t// 대상 Portrait\n\tpublic apPortrait portrait;\n\n\t// 생성된 물리 시뮬레이션용 더미 오브젝트\n\tprivate Transform _detachedDummy = null;\n\n\tvoid Start() { }\n\n\tvoid Update()\n\t{\n\t\t// A키를 누르면 뼈가 분리되어 물리 시뮬레이션이 적용됩니다.\n\t\tif (Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\tMakeDetachedBone();\n\t\t}\n\n\t\t// S키를 누르면 원래대로 되돌립니다.\n\t\tif (Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\t// 더미 오브젝트 제거 후 애니메이션을 다시 재생합니다.\n\t\t\tif (_detachedDummy != null)\n\t\t\t{\n\t\t\t\tDestroy(_detachedDummy.gameObject);\n\t\t\t\t_detachedDummy = null;\n\t\t\t}\n\t\t\tportrait.Play(\"Anim\");\n\t\t}\n\n\t\t// 더미 오브젝트가 존재하는 경우, 물리 시뮬레이션이 된 더미 오브젝트의 위치와 회전을 뼈에 적용합니다.\n\t\tif (_detachedDummy != null)\n\t\t{\n\t\t\tVector3 upVectorW = _detachedDummy.TransformDirection(Vector3.up);\n\t\t\tfloat angleZ_W = Vector3.SignedAngle(Vector3.up, upVectorW, Vector3.forward);\n\t\t\tangleZ_W += 90.0f;\n\n\t\t\tportrait.SetBonePosition(\"Bone Lower Arm L\", _detachedDummy.position, Space.World);\n\t\t\tportrait.SetBoneRotation(\"Bone Lower Arm L\", angleZ_W, Space.World);\n\t\t}\n\t}\n\n\t// Rigidbody2D와 Collider2D가 추가된 더미 오브젝트를 생성하여 뼈가 분리된 것처럼 보이도록 합니다.\n\tprivate void MakeDetachedBone()\n\t{\n\t\t// 이미 더미 오브젝트가 존재하는 경우, 중복 생성을 방지합니다.\n\t\tif (_detachedDummy != null)\n\t\t{\n\t\t\treturn;\n\t\t}\n\n\t\t// \"Bone Lower Arm L\" 뼈와 \"Bone Hand L\" 뼈의 위치를 이용하여 더미 오브젝트를 생성합니다.\n\t\tTransform boneSocket = portrait.GetBoneSocket(\"Bone Lower Arm L\");\n\t\tTransform childBoneSocket = portrait.GetBoneSocket(\"Bone Hand L\");\n\n\t\tVector3 worldPos = boneSocket.position;\n\t\tfloat angleZ = Vector3.SignedAngle(Vector3.up, childBoneSocket.position - boneSocket.position, Vector3.forward);\n\n\t\t// 더미 오브젝트를 생성하고 초기 위치와 회전을 설정합니다.\n\t\tGameObject dummyGameObject = new GameObject(\"Detached Dummy\");\n\t\t_detachedDummy = dummyGameObject.transform;\n\t\t_detachedDummy.parent = null;\n\t\t_detachedDummy.position = worldPos;\n\t\t_detachedDummy.localRotation = Quaternion.Euler(0.0f, 0.0f, angleZ);\n\t\t_detachedDummy.localScale = Vector3.one;\n\n\t\tRigidbody2D detachedRigidbody = dummyGameObject.AddComponent<Rigidbody2D>();\n\t\tdetachedRigidbody.mass = 1.0f;\n\n\t\t// 뼈 사이의 거리를 이용하여 캡슐 콜라이더의 크기를 설정합니다.\n\t\tfloat hingeHeight = Vector3.Distance(boneSocket.position, childBoneSocket.position);\n\t\tfloat hingeWidth = hingeHeight * 0.5f;\n\n\t\tCapsuleCollider2D capsuleCollider = dummyGameObject.AddComponent<CapsuleCollider2D>();\n\t\tcapsuleCollider.direction = CapsuleDirection2D.Vertical;\n\t\tcapsuleCollider.size = new Vector2(hingeWidth, hingeHeight);\n\t\tcapsuleCollider.offset = new Vector2(0.0f, hingeHeight * 0.5f);\n\n\t\t// 더미 오브젝트에 초기 힘을 가하여 물리 시뮬레이션이 적용된 것처럼 보이도록 합니다.\n\t\tdetachedRigidbody.AddForce(new Vector2(3.0f, 2.0f), ForceMode2D.Impulse);\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// 더미 오브젝트가 존재하는 경우, 물리 시뮬레이션이 된 더미 오브젝트의 위치와 회전을 뼈에 적용합니다.\n\t\tif (_detachedDummy != null)\n\t\t{\n\t\t\tVector3 upVectorW = _detachedDummy.TransformDirection(Vector3.up);\n\t\t\tfloat angleZ_W = Vector3.SignedAngle(Vector3.up, upVectorW, Vector3.forward);\n\t\t\tangleZ_W += 90.0f;\n\n\t\t\tportrait.SetBonePosition(\"Bone Lower Arm L\", _detachedDummy.position, Space.World);\n\t\t\tportrait.SetBoneRotation(\"Bone Lower Arm L\", angleZ_W, Space.World);\n\t\t}\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// \"Bone Lower Arm L\" 뼈와 \"Bone Hand L\" 뼈의 위치를 이용하여 더미 오브젝트를 생성합니다.\n\t\tTransform boneSocket = portrait.GetBoneSocket(\"Bone Lower Arm L\");\n\t\tTransform childBoneSocket = portrait.GetBoneSocket(\"Bone Hand L\");\n\n\t\tVector3 worldPos = boneSocket.position;\n\t\tfloat angleZ = Vector3.SignedAngle(Vector3.up, childBoneSocket.position - boneSocket.position, Vector3.forward);\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton3").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// 뼈 사이의 거리를 이용하여 캡슐 콜라이더의 크기를 설정합니다.\n\t\tfloat hingeHeight = Vector3.Distance(boneSocket.position, childBoneSocket.position);\n\t\tfloat hingeWidth = hingeHeight * 0.5f;\n\n\t\tCapsuleCollider2D capsuleCollider = dummyGameObject.AddComponent<CapsuleCollider2D>();\n\t\tcapsuleCollider.direction = CapsuleDirection2D.Vertical;\n\t\tcapsuleCollider.size = new Vector2(hingeWidth, hingeHeight);\n\t\tcapsuleCollider.offset = new Vector2(0.0f, hingeHeight * 0.5f);\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("스크립트가 클립보드에 복사되었습니다.");
+    }).catch(err => {
+        console.error("클립보드 복사 실패:", err);
+    });
+    });
+    </script>
+    
+
+    <!--------------->
+
+    </body>
+</html>

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Bone and Physics Components</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/en/anyportrait-en/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/en/ap-video-tutorials-en/">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/en/forum-en/">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_IntegratePhysics2D.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_IntegratePhysics2D.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_IntegratePhysics2D.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/en/anyportrait-en/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Bone and Physics Components</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Bone and Physics Components</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.6.2</span></h4>
+    
+    <p>
+    Applying Unity's 2D physics system to characters would make games appear much more dynamic.<br>
+    In particular, by adding Rigidbody components to character bones, you could achieve movement based on physics collisions.<br>
+    Unfortunately, however, the compatibility between AnyPortrait's system and Unity's physics components is not very good.<br>
+    Therefore, to apply physics component movement to AnyPortrait's skeletal structure, a workaround is necessary.<br>
+    This page introduces the idea behind this workaround and then uses it to create a "script that detaches the arms of a robot character."<br>
+    You can also apply the concepts presented on this page to create a "Ragdoll."<br>
+    After reading the explanation on this page, check out how to implement ragdolls on <a href="../../en/AdvancedManual/AD_Ragdoll.html">Next page</a>!<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    The content on this page is based on Unity 6.2.<br>
+    Implementation methods for scripts and components may vary depending on the version.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Create a character and compose a scene</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2306.jpg"/>
+    <br>
+    
+    <p>
+    We created a robot character to be used on this page.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2307.jpg"/>
+    <br>
+    
+    <p>
+    We created a simple looping animation called "Anim" using the <strong>Transform modifier</strong>.<br>
+    And we set this animation to play automatically at game start on the root unit screen.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2308.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Run <strong>Bake</strong> to place the character in the Unity scene and add a square sprite for physics collision testing.<br>
+    <strong>(2)</strong> To implement basic physics effects on the character, add GameObjects as shown above and establish a parent-child relationship.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2309.jpg"/>
+    <br>
+    
+    <p>
+    Add components according to the roles of the objects placed in the scene.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>1. Character Group</strong><br>
+    This is the character's root object.<br>
+    For characters, it's effective to separate objects based on their roles, separate from the character created with AnyPortrait.<br>
+    Therefore, it's convenient to create a new GameObject as the parent of the AnyPortrait character and control it.<br>
+    Add the "<strong>Sorting Group</strong>" and "<strong>Rigidbody 2D</strong>" components to allow the child objects to physically move.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>2. Robot Portrait</strong><br>
+    This is a robot character created with AnyPortrait.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>3. Default Collider</strong><br>
+    This object has a Collider component that corresponds to the collision area of ​​the entire character.<br>
+    The Collider component type can be chosen based on the character's shape.<br>
+    Here, we used "<strong>Capsule Collider 2D</strong>."<br>
+    If you add the Collider component to the "Character Group," this object is not needed.<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>4. Ground</strong><br>
+    A rectangle sprite located beneath the character.<br>
+    It has a "<strong>Box Collider 2D</strong>" added so that falling characters can land on it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2310.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you'll see the character fall and land, as shown above.<br>
+    Using Rigidbody and Collider, you can implement physical movement that matches the character's overall size.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now we're ready to implement physical movement into the individual bones of our character.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Implementation idea</h3>
+    <br>
+    
+    <p>
+    Before we actually write the script, let's take a moment to think about how we're going to implement it.<br>
+    </p>
+    <br>
+    
+    <p>
+    To apply physics effects to Unity's basic skeletal animation system, you can simply add a component to the corresponding GameObject bone.<br>
+    However, this method doesn't work for characters created with AnyPortrait.<br>
+    Therefore, you'll need to write a script to integrate with the physics component.<br>
+    </p>
+    <br>
+    
+    <p>
+    Writing a script to move a bone in AnyPortrait to a specific location isn't difficult. (<a href="../../en/Script/SC_Bone.html">Related page</a>)<br>
+    You need to write a script that calculates movement using physics components and passes the results to the character.<br>
+    To do this, you need to address the following issues:<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2311.jpg"/>
+    <br>
+    
+    <p>
+    The biggest challenge is the difference between AnyPortrait and Unity's coordinate systems.<br>
+    AnyPortrait has its own coordinate system, and rendering in Unity requires transformations.<br>
+    This difference not only means different position values, but also means that AnyPortrait bone animations don't utilize Unity GameObjects.<br>
+    This means that attaching physics components to the GameObjects corresponding to the bones within an AnyPortrait character won't work at all due to system-specific and coordinate-system issues.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2312.jpg"/>
+    <br>
+    
+    <p>
+    However, if we take a closer look at the coordinate system transformation process, integration is not completely impossible.<br>
+    In particular, implementation is possible using the "<strong>Socket</strong>" (<a href="../../en/AdvancedManual/AD_Socket.html">Related page</a>).<br>
+    Sockets are a feature originally designed to attach Unity objects to bones or meshes.<br>
+    Because they are provided in the form of "Transforms," ​​they are also ideal for integration with other Unity components, despite their original purpose.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, simply attaching a physics component to a socket isn't enough to implement physical movement.<br>
+    Sockets simply reflect the results of AnyPortrait animations, not the reverse.<br>
+    Sockets, even if moved by a Rigidbody, won't be reflected in the character's animation.<br>
+    Even if you want to apply the socket's position transformation to the character via script, it's difficult to implement stable physical movement due to issues with the script execution order.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2313.jpg"/>
+    <br>
+    
+    <p>
+    So, the solution we devised was to temporarily create a "<strong>Dummy object</strong>" that would perform the physical movements on behalf of the character.<br>
+    We attached a physics component to the dummy object and delegated the physical movements to it.<br>
+    We then wrote a script that would apply the dummy object's position and rotation to the character's bone every frame.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2313_2.jpg"/>
+    <br>
+    
+    <p>
+    The first step in implementing this method is to create a dummy object with physics components that match the shape of the character's bone.<br>
+    First, get the positions of the target bone and its child bones.<br>
+    At this point, you can use <strong>Socket</strong> to find the bone's location.<br>
+    Then, using the two locations, create a GameObject with a Collider and Rigidbody that connect the two locations.<br>
+    The origin of the GameObject should be the same as the target bone's position, and the Collider's "Offset" and "Length" should be set appropriately.<br>
+    This object will be a dummy object that simulates the target bone's physics movement.<br>
+    </p>
+    <br>
+    
+    <p>
+    Once the dummy object is created, its physical movement will be automatically handled by the physics component.<br>
+    The next step is to apply the "dummy object's position or rotation" back to the AnyPortrait bone.<br>
+    This can be done by calling apPortrait's "<strong>SetBonePosition</strong>" or "<strong>SetBoneRotation</strong>" functions in the Update function.<br>
+    </p>
+    <br>
+    
+    <p>
+    As shown above, you can integrate physics components using dummies.<br>
+    Let's implement this idea in practice.<br>
+    On this page, we'll create an example where a robot arm detaches and physically moves.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Make a detachable robotic arm</h3>
+    <br>
+    
+    <p>
+    Let's make the robot's arm detach and physically move during the animation.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2314.jpg"/>
+    <br>
+    
+    <p>
+    Before writing the script, let's edit the character.<br>
+    <strong>(1)</strong> Select the <strong>Bone</strong> tab.<br>
+    <strong>(2)</strong> The bone corresponding to the arm to be separated is named "<strong>Bone Lower Arm L</strong>." Its child, "<strong>Bone Hand L</strong>," must also be referenced to calculate Collider lengths, etc.<br>
+    <strong>(3)</strong> In the Hierarchy UI on the right, press  <kbd>Ctrl</kbd>  to select the target bone and all its children.<br>
+    <strong>(4)</strong> Activate the <strong>Socket</strong> option.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Why child bone is used</h4>
+    <br>
+    
+    <p>
+    In the AnyPortrait workspace, bones appear as long needles.<br>
+    However, this is for convenience; in reality, bone end points are not treated as valid data.<br>
+    Therefore, to reference bone's end points in the Unity scene, we have to use "a child bone."<br>
+    </p>
+    <br>
+    
+    <p>
+    If the target bone has two or more child bones, select the bone corresponding to the end point of the bone.<br>
+    Conversely, if there are no child bones, be sure to add at least one child bone.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <p>
+    Once the above steps are complete, run <strong>Bake</strong>.<br>
+    Then, write the script as follows:<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <span class="text-primary">using</span> UnityEngine;<br>
+    <span class="text-primary">using</span> AnyPortrait;<br>
+    <br>
+    <span class="text-primary">public class</span> <span class="text-success">v162_DetachBoneScript</span> : <span class="text-success">MonoBehaviour</span><br>
+    {<br>
+    &emsp;&emsp;// Target Portrait<br>
+    &emsp;&emsp;<span class="text-primary">public</span> <span class="text-success">apPortrait</span> portrait;<br>
+    <br>
+    &emsp;&emsp;// Generated dummy object for the physics simulation<br>
+    &emsp;&emsp;<span class="text-primary">private</span> <span class="text-success">Transform</span> <strong>_detachedDummy</strong> = <span class="text-primary">null</span>;<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Start() { }<br>
+    <br>
+    &emsp;&emsp;<span class="text-primary">void</span> Update()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Pressing the A key will detach the bone and apply physics simulation.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.A))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>MakeDetachedBone();</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Pressing the S key will revert it back to normal.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (<span class="text-success">Input</span>.GetKeyDown(<span class="text-success">KeyCode</span>.S))<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;// Replay the animation after removing the dummy object.<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_detachedDummy != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>Destroy(_detachedDummy.gameObject);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_detachedDummy = <span class="text-primary">null</span>;<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;portrait.Play("Anim");<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// If a dummy object exists, the position and rotation of the physics-simulated dummy object are applied to the bone.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_detachedDummy != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> upVectorW = _detachedDummy.<strong>TransformDirection</strong>(<span class="text-success">Vector3</span>.up);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ_W = <span class="text-success">Vector3</span>.<strong>SignedAngle</strong>(<span class="text-success">Vector3</span>.up, upVectorW, <span class="text-success">Vector3</span>.forward);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;angleZ_W += 90.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBonePosition("Bone Lower Arm L", _detachedDummy.position, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBoneRotation("Bone Lower Arm L", angleZ_W, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    &emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;// Create a dummy object with a Rigidbody2D and a Collider2D added to it to make it look like the bone is detached.<br>
+    &emsp;&emsp;<span class="text-primary">private void</span> MakeDetachedBone()<br>
+    &emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;// Prevent duplicate creation if a dummy object already exists.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_detachedDummy != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return;<br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Create a dummy object using the positions of the "Bone Lower Arm L" and "Bone Hand L" bones.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> boneSocket = portrait.<strong>GetBoneSocket</strong>(<span class="text-danger">"Bone Lower Arm L"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> childBoneSocket = portrait.<strong>GetBoneSocket</strong>(<span class="text-danger">"Bone Hand L"</span>);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> worldPos = boneSocket.position;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ = <span class="text-success">Vector3</span>.<strong>SignedAngle</strong>(<span class="text-success">Vector3</span>.up, childBoneSocket.position - boneSocket.position, <span class="text-success">Vector3</span>.forward);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Create a dummy object and set its initial position and rotation.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">GameObject</span> dummyGameObject = <span class="text-primary">new</span> <span class="text-success">GameObject</span>(<span class="text-danger">"Detached Dummy"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;_detachedDummy = dummyGameObject.transform;<br>
+    &emsp;&emsp;&emsp;&emsp;_detachedDummy.parent = <span class="text-primary">null</span>;<br>
+    &emsp;&emsp;&emsp;&emsp;_detachedDummy.position = worldPos;<br>
+    &emsp;&emsp;&emsp;&emsp;_detachedDummy.localRotation = <span class="text-success">Quaternion</span>.Euler(0.0f, 0.0f, angleZ);<br>
+    &emsp;&emsp;&emsp;&emsp;_detachedDummy.localScale = <span class="text-success">Vector3</span>.one;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Rigidbody2D</span> detachedRigidbody = dummyGameObject.AddComponent<<span class="text-success">Rigidbody2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;detachedRigidbody.mass = 1.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Set the size of the capsule collider using the distance between the bones.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeHeight = <span class="text-success">Vector3</span>.Distance(boneSocket.position, childBoneSocket.position);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeWidth = hingeHeight * 0.5f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">CapsuleCollider2D</span> capsuleCollider = dummyGameObject.AddComponent<<span class="text-success">CapsuleCollider2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.direction = <span class="text-success">CapsuleDirection2D</span>.Vertical;<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.size = <span class="text-primary">new</span> Vector2(hingeWidth, hingeHeight);<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.offset = <span class="text-primary">new</span> Vector2(0.0f, hingeHeight * 0.5f);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;// Apply initial forces to the dummy object to make it appear as if physics simulation is applied.<br>
+    &emsp;&emsp;&emsp;&emsp;detachedRigidbody.AddForce(<span class="text-primary">new</span> <span class="text-success">Vector2</span>(3.0f, 2.0f), <span class="text-success">ForceMode2D</span>.Impulse);<br>
+    &emsp;&emsp;}<br>
+    }<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton0" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    Let's take a look at the main codes in the above script.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// If a dummy object exists, the position and rotation of the physics-simulated dummy object are applied to the bone.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">if</span> (_detachedDummy != <span class="text-primary">null</span>)<br>
+    &emsp;&emsp;&emsp;&emsp;{<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> upVectorW = _detachedDummy.<strong>TransformDirection</strong>(<span class="text-success">Vector3</span>.up);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ_W = <span class="text-success">Vector3</span>.<strong>SignedAngle</strong>(<span class="text-success">Vector3</span>.up, upVectorW, <span class="text-success">Vector3</span>.forward);<br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;angleZ_W += 90.0f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBonePosition("Bone Lower Arm L", _detachedDummy.position, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class="text-danger"><strong>portrait.SetBoneRotation("Bone Lower Arm L", angleZ_W, Space.World);</strong></span><br>
+    &emsp;&emsp;&emsp;&emsp;}<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton1" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    This code executes every frame in the <strong>Update</strong> function when a dummy object exists.<br>
+    As the dummy object moves with the physics components, the physics simulation of the "detached arm" is performed and the results are passed to the AnyPortrait character's bone ("Bone Lower Arm L").<br>
+    The bone's position is set by passing "_detachedDummy.position" to the bone using the "<strong>SetBonePosition</strong>" function.<br>
+    The bone's rotation angle cannot be directly entered due to different coordinate systems.<br>
+    Therefore, the angle must be calculated as shown in the code above and then applied using the "<strong>SetBoneRotation</strong>" function.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    apPortrait's SetBonePosition and SetBoneRotation functions should be called within the <strong>Update</strong> function, not within LateUpdate.<br>
+    This is because the bone doesn't move immediately when these functions are called; instead, the values ​​requested by the AnyPortrait animation calculation for that frame are applied.<br>
+    Therefore, they must be called before the AnyPortrait character is updated.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// Create a dummy object using the positions of the "Bone Lower Arm L" and "Bone Hand L" bones.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> boneSocket = portrait.<strong>GetBoneSocket</strong>(<span class="text-danger">"Bone Lower Arm L"</span>);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Transform</span> childBoneSocket = portrait.<strong>GetBoneSocket</strong>(<span class="text-danger">"Bone Hand L"</span>);<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">Vector3</span> worldPos = boneSocket.position;<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> angleZ = <span class="text-success">Vector3</span>.<strong>SignedAngle</strong>(<span class="text-success">Vector3</span>.up, childBoneSocket.position - boneSocket.position, <span class="text-success">Vector3</span>.forward);<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    Above is the code for calculating the position and rotation angle of the target bone ("Bone Lower Arm L") when creating a dummy object.<br>
+    First, use the "Socket" to retrieve the "Transform" corresponding to each bone.<br>
+    For the position, you can directly reference the "Transform" position of the target bone, but the rotation angle must be converted as described above.<br>
+    Apply the position and rotation angle calculated in the following GameObject creation code.<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    &emsp;&emsp;&emsp;&emsp;// Set the size of the capsule collider using the distance between the bones.<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeHeight = <span class="text-success">Vector3</span>.Distance(boneSocket.position, childBoneSocket.position);<br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-primary">float</span> hingeWidth = hingeHeight * 0.5f;<br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;<span class="text-success">CapsuleCollider2D</span> capsuleCollider = dummyGameObject.AddComponent<<span class="text-success">CapsuleCollider2D</span>>();<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.direction = <span class="text-success">CapsuleDirection2D</span>.Vertical;<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.size = <span class="text-primary">new</span> Vector2(hingeWidth, hingeHeight);<br>
+    &emsp;&emsp;&emsp;&emsp;capsuleCollider.offset = <span class="text-primary">new</span> Vector2(0.0f, hingeHeight * 0.5f);<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton3" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    Here's the code for adding "<strong>Rigidbody2D</strong>" and "<strong>CapsuleCollider2D</strong>" to the dummy object.<br>
+    To calculate the collider's size, we use the positions of the two bone sockets previously calculated.<br>
+    However, since there's no way to accurately determine the collider's width, we've arbitrarily calculated it based on its height.<br>
+    Please also note that the Y value of the collider's "<strong>Offset</strong>" is half its height.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2315.jpg"/>
+    <br>
+    
+    <p>
+    Once you've written all the scripts, return to the Unity scene.<br>
+    <strong>(1)</strong> Create a <strong>GameObject</strong> to which you want to apply the script.<br>
+    <strong>(2)</strong> After adding the script to the <strong>GameObject</strong>, assign the robot character to a member variable.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2316.jpg"/>
+    <br>
+    
+    <p>
+    If you run the game and press  <kbd>A</kbd>  according to the script, you will see the arm detach and fall, as shown above.<br>
+    You will also see the detached arm collide with the floor.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2317.jpg"/>
+    <br>
+    
+    <p>
+    Let's examine what changes have occurred in the scene in this state.<br>
+    <strong>(1)</strong> When the arm is detached, a "Dummy object" is created by the script.<br>
+    <strong>(2)</strong> <strong>Rigidbody 2D</strong> and <strong>Capsule Collider 2D</strong> components are added to the dummy object.<br>
+    <strong>(3)</strong> In the scene view, you can see the dummy object and the arm moving in sync.<br>
+    </p>
+    <br>
+    
+    <p>
+    Using the methods introduced on this page, you can apply physical movement to individual bones of a character.<br>
+    Depending on how you create and configure the dummy objects, you can achieve a variety of effects.<br>
+    Try out different techniques!<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_SpriteMask.html">< Applying Sprite Mask</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_Ragdoll.html">Implementing Ragdoll ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+    <script>
+    document.getElementById("scriptcopybutton0").addEventListener("click", function() {
+    const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class v162_DetachBoneScript : MonoBehaviour\n{\n\t// Target Portrait\n\tpublic apPortrait portrait;\n\n\t// Generated dummy object for the physics simulation\n\tprivate Transform _detachedDummy = null;\n\n\tvoid Start() { }\n\n\tvoid Update()\n\t{\n\t\t// Pressing the A key will detach the bone and apply physics simulation.\n\t\tif (Input.GetKeyDown(KeyCode.A))\n\t\t{\n\t\t\tMakeDetachedBone();\n\t\t}\n\n\t\t// Pressing the S key will revert it back to normal.\n\t\tif (Input.GetKeyDown(KeyCode.S))\n\t\t{\n\t\t\t// Replay the animation after removing the dummy object.\n\t\t\tif (_detachedDummy != null)\n\t\t\t{\n\t\t\t\tDestroy(_detachedDummy.gameObject);\n\t\t\t\t_detachedDummy = null;\n\t\t\t}\n\t\t\tportrait.Play(\"Anim\");\n\t\t}\n\n\t\t// If a dummy object exists, the position and rotation of the physics-simulated dummy object are applied to the bone.\n\t\tif (_detachedDummy != null)\n\t\t{\n\t\t\tVector3 upVectorW = _detachedDummy.TransformDirection(Vector3.up);\n\t\t\tfloat angleZ_W = Vector3.SignedAngle(Vector3.up, upVectorW, Vector3.forward);\n\t\t\tangleZ_W += 90.0f;\n\n\t\t\tportrait.SetBonePosition(\"Bone Lower Arm L\", _detachedDummy.position, Space.World);\n\t\t\tportrait.SetBoneRotation(\"Bone Lower Arm L\", angleZ_W, Space.World);\n\t\t}\n\t}\n\n\t// Create a dummy object with a Rigidbody2D and a Collider2D added to it to make it look like the bone is detached.\n\tprivate void MakeDetachedBone()\n\t{\n\t\t// Prevent duplicate creation if a dummy object already exists.\n\t\tif (_detachedDummy != null)\n\t\t{\n\t\t\treturn;\n\t\t}\n\n\t\t// Create a dummy object using the positions of the \"Bone Lower Arm L\" and \"Bone Hand L\" bones.\n\t\tTransform boneSocket = portrait.GetBoneSocket(\"Bone Lower Arm L\");\n\t\tTransform childBoneSocket = portrait.GetBoneSocket(\"Bone Hand L\");\n\n\t\tVector3 worldPos = boneSocket.position;\n\t\tfloat angleZ = Vector3.SignedAngle(Vector3.up, childBoneSocket.position - boneSocket.position, Vector3.forward);\n\n\t\t// Create a dummy object and set its initial position and rotation.\n\t\tGameObject dummyGameObject = new GameObject(\"Detached Dummy\");\n\t\t_detachedDummy = dummyGameObject.transform;\n\t\t_detachedDummy.parent = null;\n\t\t_detachedDummy.position = worldPos;\n\t\t_detachedDummy.localRotation = Quaternion.Euler(0.0f, 0.0f, angleZ);\n\t\t_detachedDummy.localScale = Vector3.one;\n\n\t\tRigidbody2D detachedRigidbody = dummyGameObject.AddComponent<Rigidbody2D>();\n\t\tdetachedRigidbody.mass = 1.0f;\n\n\t\t// Set the size of the capsule collider using the distance between the bones.\n\t\tfloat hingeHeight = Vector3.Distance(boneSocket.position, childBoneSocket.position);\n\t\tfloat hingeWidth = hingeHeight * 0.5f;\n\n\t\tCapsuleCollider2D capsuleCollider = dummyGameObject.AddComponent<CapsuleCollider2D>();\n\t\tcapsuleCollider.direction = CapsuleDirection2D.Vertical;\n\t\tcapsuleCollider.size = new Vector2(hingeWidth, hingeHeight);\n\t\tcapsuleCollider.offset = new Vector2(0.0f, hingeHeight * 0.5f);\n\n\t\t// Apply initial forces to the dummy object to make it appear as if physics simulation is applied.\n\t\tdetachedRigidbody.AddForce(new Vector2(3.0f, 2.0f), ForceMode2D.Impulse);\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton1").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// If a dummy object exists, the position and rotation of the physics-simulated dummy object are applied to the bone.\n\t\tif (_detachedDummy != null)\n\t\t{\n\t\t\tVector3 upVectorW = _detachedDummy.TransformDirection(Vector3.up);\n\t\t\tfloat angleZ_W = Vector3.SignedAngle(Vector3.up, upVectorW, Vector3.forward);\n\t\t\tangleZ_W += 90.0f;\n\n\t\t\tportrait.SetBonePosition(\"Bone Lower Arm L\", _detachedDummy.position, Space.World);\n\t\t\tportrait.SetBoneRotation(\"Bone Lower Arm L\", angleZ_W, Space.World);\n\t\t}\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// Create a dummy object using the positions of the \"Bone Lower Arm L\" and \"Bone Hand L\" bones.\n\t\tTransform boneSocket = portrait.GetBoneSocket(\"Bone Lower Arm L\");\n\t\tTransform childBoneSocket = portrait.GetBoneSocket(\"Bone Hand L\");\n\n\t\tVector3 worldPos = boneSocket.position;\n\t\tfloat angleZ = Vector3.SignedAngle(Vector3.up, childBoneSocket.position - boneSocket.position, Vector3.forward);\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton3").addEventListener("click", function() {
+    const textToCopy = "...\n\t\t// Set the size of the capsule collider using the distance between the bones.\n\t\tfloat hingeHeight = Vector3.Distance(boneSocket.position, childBoneSocket.position);\n\t\tfloat hingeWidth = hingeHeight * 0.5f;\n\n\t\tCapsuleCollider2D capsuleCollider = dummyGameObject.AddComponent<CapsuleCollider2D>();\n\t\tcapsuleCollider.direction = CapsuleDirection2D.Vertical;\n\t\tcapsuleCollider.size = new Vector2(hingeWidth, hingeHeight);\n\t\tcapsuleCollider.offset = new Vector2(0.0f, hingeHeight * 0.5f);\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+
+    <!--------------->
+
+    </body>
+</html>
