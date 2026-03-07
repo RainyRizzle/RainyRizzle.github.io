@@ -127,6 +127,31 @@
     </p>
     <br>
     
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Download scripts and shaders</h4>
+    <br>
+    
+    <p>
+    The shaders and scripts introduced in this manual can be downloaded from the following links.<br>
+    Apply the files appropriate for your Unity version or render pipeline to your project.<br>
+    For information on open source for URP, please refer to the description below.<br>
+    </p>
+    <br>
+    
+    <p>
+    - Mosaic shader and layer change script for Built-In and URP : <a href="https://drive.google.com/file/d/1FualOvW3cQYaY0fgdqjr7RqkUhQicwxO/view?usp=sharing" target="_sub">Download</a><br>
+    - GrabPass in versions prior to URP 13 (GrabScreenFeature by Refsa, MIT License) : <a href="https://gist.github.com/Refsa/54da34a9e2fc8e45472286572216ad17" target="_sub">Github page</a>, <a href="https://drive.google.com/file/d/1wg3aZj0ONRYSdOvGg376eS0qVX0Vc7yZ/view?usp=sharing" target="_sub">Download copy</a><br>
+    - GrabPass in URP 13 and later (GrabPassU6 by Smajlovycc, MIT License) : <a href="https://github.com/Smajlovycc/GrabPassU6" target="_sub">Github page</a>, <a href="https://drive.google.com/file/d/1SBbudSuFq4h5ulaw42kcaS48rtpXaiFp/view?usp=sharing" target="_sub">Download copy</a><br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
     <br>
     <br>
     <!-- 3. 서브 타이틀 -->
@@ -654,6 +679,159 @@
     </p>
     <br>
     
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Troubleshooting rendering issues in URP with Light 2D placed</h3>
+    <br>
+    
+    <p>
+    The open source code introduced above allows you to create a mosaic effect in URP, but it suffers from rendering issues.<br>
+    The open source code implemented <strong>Grab Pass</strong> as a <strong>Renderer Feature</strong>, which caused a conflict with the lighting in <strong>URP 2D</strong>.<br>
+    This page handles rendering issues in <strong>URP 2D</strong> and solutions.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2338.jpg"/>
+    <br>
+    
+    <p>
+    To apply lighting in <strong>URP 2D</strong>, you need to change the character's material.<br>
+    <strong>(1)</strong> Open the <strong>Material Library</strong>.<br>
+    <strong>(2)</strong> Select the "<strong>2D Lit</strong>" preset from the URP Material Presets, create a Material Set, and apply it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2339.jpg"/>
+    <br>
+    
+    <p>
+    Review that <strong>URP 2D</strong> is applied to the project.<br>
+    <strong>(1)</strong> Select "<strong>Project Settings > Graphics</strong>".<br>
+    <strong>(2)</strong> Check that "<strong>URP Asset for 2D</strong>" is applied.<br>
+    <strong>(3)</strong> Check that the previously introduced "<strong>Renderer Feature for Grab Pass</strong>" is applied to the <strong>Renderer 2D Data</strong> of this <strong>URP Asset</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2340.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Add objects with the "<strong>Light 2D</strong>" component to the scene.<br>
+    <strong>(2)</strong> Change the properties of the "<strong>Light 2D</strong>" component appropriately to apply 2D lighting.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2341.jpg"/>
+    <br>
+    
+    <p>
+    When you run the game, you'll see that lighting isn't applied properly, as shown above.<br>
+    While the mosaic effect meshes are rendered with lighting applied, the normal meshes are not.<br>
+    </p>
+    <br>
+    
+    <p>
+    When one or more "<strong>Light 2D</strong>" elements are placed in a scene with <strong>URP 2D</strong> applied, a render texture that stores the results of the 2D lighting is internally generated.<br>
+    Meshes with "<strong>Sprite Lit</strong>" materials applied use this render texture to perform 2D lighting.<br>
+    However, depending on how the <strong>Renderer Feature</strong> works, the render texture containing the 2D lighting may not be referenced properly.<br>
+    </p>
+    <br>
+    
+    <p>
+    The open-source codes introduced above appear to have been implemented in an "Unlit" environment.<br>
+    Therefore, the open-source codes, namely the "Renderer Feature for Grab Pass" script, need to be appropriately modified.<br>
+    </p>
+    <br>
+    
+    <p>
+    Open the "<strong>Renderer Feature that Generates Grab Pass</strong>" script applied to the current project.<br>
+    Then, within the "<strong>RenderPass</strong>" class, find the code that initializes "<strong>ShaderTagId</strong>" and modify it as follows:<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    m_ShaderTagIdList.Add(<span class="text-primary">new</span> <span class="text-success">ShaderTagId</span>(<span class="text-danger">"SRPDefaultUnlit"</span>));<br>
+    <span class="text-danger"><strong>// m_ShaderTagIdList.Add(new ShaderTagId("UniversalForward")); < Delete</strong></span><br>
+    <span class="text-danger"><strong>// m_ShaderTagIdList.Add(new ShaderTagId("LightweightForward")); < Delete</strong></span><br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    As shown above, delete the code related to the "<strong>UniversalForward</strong>" and "<strong>LightweightForward</strong>" tags.<br>
+    If you wish to retain the original code, please comment it out instead of deleting it.<br>
+    Since the writing style of open source authors varies slightly, the script may be written as follows:<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <br>
+    ...<br>
+    <span class="text-success">List</span><<span class="text-success">ShaderTagId</span>> shaderTagIds = <span class="text-primary">new</span> <span class="text-success">List</span><<span class="text-success">ShaderTagId</span>><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">new</span> <span class="text-success">ShaderTagId</span>(<span class="text-danger">"SRPDefaultUnlit"</span>),<br>
+    &emsp;&emsp;<span class="text-danger"><strong>// new ShaderTagId("UniversalForward"), < Delete</strong></span><br>
+    &emsp;&emsp;<span class="text-danger"><strong>// new ShaderTagId("LightweightForward") < Delete</strong></span><br>
+    };<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton3" class="btn btn-info float-right">Copy to Clipboard</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    Similarly, remove the codes related to the "<strong>UniversalForward</strong>" and "<strong>LightweightForward</strong>" tags.<br>
+    This should resolve the issue where render textures for 2D lighting are not referenced.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    Our team doesn't have detailed knowledge of URP's behavior, so this solution may not be perfect.<br>
+    If the issue persists or new issues arise, please contact us.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2342.jpg"/>
+    <br>
+    
+    <p>
+    If you run the game again, you will see that both the 2D lighting and mosaic effects of URP are rendered normally, as shown above.<br>
+    </p>
+    <br>
+    
     <!-- 5. 바닥 네비바 -->
     <br>
     <br>
@@ -690,6 +868,28 @@
     <script>
     document.getElementById("scriptcopybutton1").addEventListener("click", function() {
     const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class SetPortraitMeshLayer : MonoBehaviour\n{\n\tpublic apPortrait portrait; // Target apPortrait\n\tpublic string layerName = \"Default\"; // Name of the layer to be assigned\n\tpublic string[] meshNames; // Names of the meshes to which layers are assigned\n\n\tvoid Start()\n\t{\n\t\tSetPortraitMeshLayers();\n\t\tthis.enabled = false;\n\t}\n\n\t// A function that finds the target meshes and changes the layer.\n\tprivate void SetPortraitMeshLayers()\n\t{\n\t\tint nMeshNames = (meshNames != null) ? meshNames.Length : 0;\n\t\tif ( nMeshNames == 0 ) { return; }\n\n\t\t// apPortrait may not be initialized, so we try to initialize it here.\n\t\tportrait.Initialize();\n\n\t\t// Change the name of the input layer to an int type variable.\n\t\tint layer = LayerMask.NameToLayer( layerName );\n\n\t\tfor ( int i = 0; i < nMeshNames; i++ )\n\t\t{\n\t\t\tstring meshName = meshNames[i];\n\n\t\t\tapOptTransform targetTransform = portrait.GetOptTransform(meshName);\n\t\t\tif ( targetTransform == null ) { continue; }\n\n\t\t\t// Calls a function that changes the target's layer.\n\t\t\tSetGameObjectLayer(targetTransform.gameObject, layer);\n\t\t}\n\t}\n\n\t// Recursively changes the layer of the target and its child objects.\n\tprivate void SetGameObjectLayer(GameObject targetObject, int layer)\n\t{\n\t\tif ( targetObject == null ) { return; }\n\n\t\ttargetObject.layer = layer;\n\n\t\t// Also changes the layer of child objects.\n\t\tint nChildren = targetObject.transform.childCount;\n\t\tif ( nChildren == 0 ) { return; }\n\n\t\tfor ( int i = 0; i < nChildren; i++)\n\t\t{\n\t\t\t// Call recursively.\n\t\t\tSetGameObjectLayer(targetObject.transform.GetChild(i).gameObject, layer);\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "...\nm_ShaderTagIdList.Add(new ShaderTagId(\"SRPDefaultUnlit\"));\n// m_ShaderTagIdList.Add(new ShaderTagId(\"UniversalForward\")); < Delete\n// m_ShaderTagIdList.Add(new ShaderTagId(\"LightweightForward\")); < Delete\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("The script has been copied to the clipboard.");
+    }).catch(err => {
+        console.error("Clipboard copy failed:", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton3").addEventListener("click", function() {
+    const textToCopy = "\n...\nList<ShaderTagId> shaderTagIds = new List<ShaderTagId>\n{\n\tnew ShaderTagId(\"SRPDefaultUnlit\"),\n\t// new ShaderTagId(\"UniversalForward\"), < Delete\n\t// new ShaderTagId(\"LightweightForward\") < Delete\n};\n...\n";
     navigator.clipboard.writeText(textToCopy).then(() => {
         alert("The script has been copied to the clipboard.");
     }).catch(err => {

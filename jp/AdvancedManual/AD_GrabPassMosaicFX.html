@@ -127,6 +127,31 @@
     </p>
     <br>
     
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>スクリプト、シェーダをダウンロードする</h4>
+    <br>
+    
+    <p>
+    このマニュアルで紹介されているシェーダとスクリプトは、次のリンクからダウンロードできます。<br>
+    「Unity」バージョンまたはレンダリングパイプラインに合ったファイルをプロジェクトに適用します。<br>
+    「URP用オープンソース」の説明は、以下の説明を参照してください。<br>
+    </p>
+    <br>
+    
+    <p>
+    - 「Built-In/URP」用のモザイクシェーダとレイヤー変更スクリプト : <a href="https://drive.google.com/file/d/1FualOvW3cQYaY0fgdqjr7RqkUhQicwxO/view?usp=sharing" target="_sub">ダウンロード</a><br>
+    - 「URP 13」以前のバージョンでの「GrabPass」（Refsa の GrabScreenFeature、MIT License） : <a href="https://gist.github.com/Refsa/54da34a9e2fc8e45472286572216ad17" target="_sub">Githubページ</a>, <a href="https://drive.google.com/file/d/1wg3aZj0ONRYSdOvGg376eS0qVX0Vc7yZ/view?usp=sharing" target="_sub">コピーをダウンロード</a><br>
+    - 「URP 13」以降のバージョンでの「GrabPass」（SmajlovyccのGrabPassU6、MIT License） : <a href="https://github.com/Smajlovycc/GrabPassU6" target="_sub">Githubページ</a>, <a href="https://drive.google.com/file/d/1SBbudSuFq4h5ulaw42kcaS48rtpXaiFp/view?usp=sharing" target="_sub">コピーをダウンロード</a><br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
     <br>
     <br>
     <!-- 3. 서브 타이틀 -->
@@ -651,6 +676,159 @@
     </p>
     <br>
     
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>「Light 2D」が配置された「URP」でのレンダリングのトラブルシューティング</h3>
+    <br>
+    
+    <p>
+    先ほど紹介したオープンソースを活用すれば「URP」でモザイク効果を作ることができますが、レンダリング問題がありました。<br>
+    オープンソースは「<strong>Grab Pass</strong>」を「<strong>Renderer Feature</strong>」として実装したが、その過程で「<strong>URP 2D</strong>」のライティングと衝突が発生した。<br>
+    このトピックでは、「<strong>URP 2D</strong>」でのレンダリングの問題を調べて解決する方法について説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2338.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>URP 2D</strong>」でライティングを適用するには、キャラクターのマテリアルを変更する必要があります。<br>
+    <strong>(1)</strong> 「<strong>Material Library</strong>」を開きます。<br>
+    <strong>(2)</strong> 「URP」用の「マテリアルプリセット」の中から「<strong>2D Lit</strong>」方式のプリセットを選択し、それを使ってマテリアルセットを作成して適用します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2339.jpg"/>
+    <br>
+    
+    <p>
+    プロジェクトに「<strong>URP 2D</strong>」が正しく適用されていることを再確認してください。<br>
+    <strong>(1)</strong> 「<strong>Project Settings > Graphics</strong>」を選ぶ。<br>
+    <strong>(2)</strong> 「<strong>2D用URP Asset</strong>」が適用されていることを確認してください。<br>
+    <strong>(3)</strong> この「<strong>URP Asset</strong>」の「<strong>Renderer 2D Data</strong>」を選択し、先ほど紹介した「<strong>Grab Pass用Renderer Feature</strong>」が正しく適用されていることを確認します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2340.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> シーンに「<strong>L​​ight 2D</strong>」コンポーネントを持つオブジェクトを追加します。<br>
+    <strong>(2)</strong> 「<strong>Light 2D</strong>」コンポーネントのプロパティを適切に変更して、2Dライティングがきれいに適用されるようにします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2341.jpg"/>
+    <br>
+    
+    <p>
+    ゲームを実行すると、上記のようにライティングが正しく適用されないことがわかります。<br>
+    モザイク効果のメッシュはライティングが適用されてレンダリングされますが、むしろ基本メッシュにはライティングが適用されていません。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>URP 2D</strong>」が適用されたシーンで、「<strong>Light 2D</strong>」が1つ以上のシーンに配置されている場合、2Dライティングの結果が保存されるレンダーテクスチャが内部で生成されます。<br>
+    そして、「<strong>Sprite Lit</strong>」方式のマテリアルが適用されたメッシュは、このレンダーテクスチャを利用して2D方式のライティングを行います。<br>
+    ちなみに、ユーザーの「<strong>Renderer Feature</strong>」がどのように動作するかによって、2Dライティングが保存されているレンダーテクスチャが正常に参照されないことがあります。<br>
+    </p>
+    <br>
+    
+    <p>
+    先に紹介したオープンソースは、ライティングのない「Unlit」環境で実装されたようです。<br>
+    そのため、オープンソース、つまり「<strong>Grab Pass用のRenderer Feature</strong>」スクリプトを適切に修正する必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    現在のプロジェクトに適用した「<strong>Grab Passを生成するRenderer Feature</strong>」スクリプトを開きます。<br>
+    そして、スクリプトの内容の中で、「<strong>RenderPass</strong>」内で「<strong>ShaderTagId</strong>」を初期化するコードを見つけて、次のように修正します。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    ...<br>
+    m_ShaderTagIdList.Add(<span class="text-primary">new</span> <span class="text-success">ShaderTagId</span>(<span class="text-danger">"SRPDefaultUnlit"</span>));<br>
+    <span class="text-danger"><strong>// m_ShaderTagIdList.Add(new ShaderTagId("UniversalForward")); < 削除する</strong></span><br>
+    <span class="text-danger"><strong>// m_ShaderTagIdList.Add(new ShaderTagId("LightweightForward")); < 削除する</strong></span><br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton2" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    上記のように、「<strong>UniversalForward</strong>」、「<strong>LightweightForward</strong>」タグに関連するコードを削除します。<br>
+    元のコードを残したい場合は、削除の代わりにコメントに変更してください。<br>
+    オープンソースの作成者によってスクリプトの作成スタイルが少しずつ異なるため、次のように作成された可能性があります。<br>
+    </p>
+    <br>
+    
+    <!-- 23. 코드 예시 -->
+    <div class="alert alert-warning" role="alert">
+    <p>
+    <br>
+    <br>
+    ...<br>
+    <span class="text-success">List</span><<span class="text-success">ShaderTagId</span>> shaderTagIds = <span class="text-primary">new</span> <span class="text-success">List</span><<span class="text-success">ShaderTagId</span>><br>
+    {<br>
+    &emsp;&emsp;<span class="text-primary">new</span> <span class="text-success">ShaderTagId</span>(<span class="text-danger">"SRPDefaultUnlit"</span>),<br>
+    &emsp;&emsp;<span class="text-danger"><strong>// new ShaderTagId("UniversalForward"), < 削除する</strong></span><br>
+    &emsp;&emsp;<span class="text-danger"><strong>// new ShaderTagId("LightweightForward") < 削除する</strong></span><br>
+    };<br>
+    ...<br>
+    <br>
+    </p>
+    <button id="scriptcopybutton3" class="btn btn-info float-right">クリップボードにコピー</button>
+    <br><br>
+    
+    </div>
+    <br>
+    
+    <p>
+    同様に、「<strong>UniversalForward</strong>」、「<strong>LightweightForward</strong>」タグに関連するコードを削除します。<br>
+    これにより、2Dライティングのレンダリングテクスチャが参照されない問題を解決できます。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    「URP」内部の動作について私たちのチームが詳しく知っているわけではないので、この回避策は完璧ではないかもしれません。<br>
+    問題が解決しない場合、または新しい問題が発生した場合は、お問い合わせください。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2342.jpg"/>
+    <br>
+    
+    <p>
+    再びゲームを実行すると、上記のように「URP」の2Dライティングとモザイク効果の両方が正常にレンダリングされることがわかります。<br>
+    </p>
+    <br>
+    
     <!-- 5. 바닥 네비바 -->
     <br>
     <br>
@@ -687,6 +865,28 @@
     <script>
     document.getElementById("scriptcopybutton1").addEventListener("click", function() {
     const textToCopy = "using UnityEngine;\nusing AnyPortrait;\n\npublic class SetPortraitMeshLayer : MonoBehaviour\n{\n\tpublic apPortrait portrait; // 対象となるapPortrait\n\tpublic string layerName = \"Default\"; // 割り当てるレイヤーの名前\n\tpublic string[] meshNames; // レイヤーを指定するメッシュのメッシュグループ内の名前\n\n\tvoid Start()\n\t{\n\t\tSetPortraitMeshLayers();\n\t\tthis.enabled = false;\n\t}\n\n\t// ターゲットであるメッシュを見つけてレイヤーを変更する関数\n\tprivate void SetPortraitMeshLayers()\n\t{\n\t\tint nMeshNames = (meshNames != null) ? meshNames.Length : 0;\n\t\tif ( nMeshNames == 0 ) { return; }\n\n\t\t// apPortraitの初期化が行われていない可能性があるため、ここで初期化を試みます。\n\t\tportrait.Initialize();\n\n\t\t// 入力されたレイヤーの名前をint型変数に変更します。\n\t\tint layer = LayerMask.NameToLayer( layerName );\n\n\t\tfor ( int i = 0; i < nMeshNames; i++ )\n\t\t{\n\t\t\tstring meshName = meshNames[i];\n\n\t\t\tapOptTransform targetTransform = portrait.GetOptTransform(meshName);\n\t\t\tif ( targetTransform == null ) { continue; }\n\n\t\t\t// ターゲットのレイヤーを変更する関数を呼び出します。\n\t\t\tSetGameObjectLayer(targetTransform.gameObject, layer);\n\t\t}\n\t}\n\n\t// 再帰的にターゲットオブジェクトと子オブジェクトのレイヤーを変更します。\n\tprivate void SetGameObjectLayer(GameObject targetObject, int layer)\n\t{\n\t\tif ( targetObject == null ) { return; }\n\n\t\ttargetObject.layer = layer;\n\n\t\t// 子オブジェクトのレイヤーも変更します。\n\t\tint nChildren = targetObject.transform.childCount;\n\t\tif ( nChildren == 0 ) { return; }\n\n\t\tfor ( int i = 0; i < nChildren; i++)\n\t\t{\n\t\t\t// 再帰的に呼び出しを行います。\n\t\t\tSetGameObjectLayer(targetObject.transform.GetChild(i).gameObject, layer);\n\t\t}\n\t}\n}\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton2").addEventListener("click", function() {
+    const textToCopy = "...\nm_ShaderTagIdList.Add(new ShaderTagId(\"SRPDefaultUnlit\"));\n// m_ShaderTagIdList.Add(new ShaderTagId(\"UniversalForward\")); < 削除する\n// m_ShaderTagIdList.Add(new ShaderTagId(\"LightweightForward\")); < 削除する\n...\n";
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("スクリプトがクリップボードにコピーされました。");
+    }).catch(err => {
+        console.error("クリップボードのコピーに失敗しました", err);
+    });
+    });
+    </script>
+    
+    <script>
+    document.getElementById("scriptcopybutton3").addEventListener("click", function() {
+    const textToCopy = "\n...\nList<ShaderTagId> shaderTagIds = new List<ShaderTagId>\n{\n\tnew ShaderTagId(\"SRPDefaultUnlit\"),\n\t// new ShaderTagId(\"UniversalForward\"), < 削除する\n\t// new ShaderTagId(\"LightweightForward\") < 削除する\n};\n...\n";
     navigator.clipboard.writeText(textToCopy).then(() => {
         alert("スクリプトがクリップボードにコピーされました。");
     }).catch(err => {
