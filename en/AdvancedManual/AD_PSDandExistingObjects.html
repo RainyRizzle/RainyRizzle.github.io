@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>A PSD File and Existing Objects</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/en/anyportrait-en/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/en/ap-video-tutorials-en/">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/en/forum-en/">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_PSDandExistingObjects.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_PSDandExistingObjects.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_PSDandExistingObjects.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/en/anyportrait-en/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > A PSD File and Existing Objects</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">A PSD File and Existing Objects</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.7.0</span></h4>
+    
+    <p>
+    The "Re-import PSD" function allows you to apply a modified PSD file to your existing work.<br>
+    However, this feature can lead to various issues depending on how the PSD file has been modified.<br>
+    A previous section of the manual (<a href="../../en/AdvancedManual/AD_RePSD.html">Link</a>) covered how to map PSDs to mesh groups and how to handle changes to layers.<br>
+    </p>
+    <br>
+    
+    <p>
+    When re-importing a PSD file, the objects within the existing mesh group are readjusted—in terms of position, scale, and so on—to best match the images in the PSD file.<br>
+    However, this process can sometimes lead to unintended results.<br>
+    Objects might shift to unexpected locations, or there may be instances where you wish to update only the atlas without adjusting object positions.<br>
+    <strong>AnyPortrait v1.7.0</strong> introduces options for managing how existing objects are handled during this process.<br>
+    This page explains these options.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Position adjustment method</h3>
+    <br>
+    
+    <p>
+    When re-importing a PSD, the position, scale, and rotation values ​​of the mapped objects are adjusted to match the PSD file.<br>
+    Consequently, the result closely resembles the source PSD file.<br>
+    However, the internal processing method varies slightly depending on how the positions of the existing objects are adjusted.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2343.jpg"/>
+    <br>
+    
+    <p>
+    This is a robot character created from a PSD file.<br>
+    <strong>(1)</strong> Let's modify the image of the robot's arm and observe the differences in positioning based on the options.<br>
+    <strong>(2)</strong> Enable <strong>Edit Default Transform</strong> mode and note that the position of this robot arm mesh is approximately "(-253, -147)."<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2344.jpg"/>
+    <br>
+    
+    <p>
+    As shown in the image on the right, we modified the PSD file to change the robot's arm from a "claw" shape to a "spike" shape.<br>
+    Now, let's re-import the modified PSD file.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2345.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> When re-importing the modified PSD file, you can see that the shape of the robot arm has changed compared to the original.<br>
+    <strong>(2)</strong> You can see that an "<strong>Adjusting Transforms of Existing Objects</strong>" item and two options have been added to the UI on the left.<br>
+    </p>
+    <br>
+    
+    <p>
+    This option determines how existing objects are handled in relation to the PSD file.<br>
+    - <strong>Connected Objects</strong>: Determines how to adjust the positions of existing objects that have been mapped and linked to PSD layers.<br>
+    - <strong>Unconnected Meshes</strong>: Determines whether to leave unmapped mesh objects as they are or to adjust at least their size.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2346.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> The <strong>Connected Objects</strong> option includes the following values:<br>
+    - <strong>Adjust to PSD (Legacy)</strong>: A legacy method that adjusts the positions and other properties of existing objects to match the PSD.<br>
+    - <strong>Adjust to PSD (Pivot Moved)</strong>: Adjusts the positions of existing objects to match the PSD, prioritizing the adjustment of the mesh's <strong>Pivot</strong>.<br>
+    - <strong>Keep Current</strong>: Updates only the atlas without adjusting the positions or other properties of existing objects.<br>
+    </p>
+    <br>
+    
+    <p>
+    Here, let's select the "<strong>Adjust to PSD (Legacy)</strong>" and "<strong>Adjust to PSD (Pivot Moved)</strong>" options respectively to observe the differences.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2347.jpg"/>
+    <br>
+    
+    <p>
+    The difference between the two options arises when the shape of the image in the modified PSD file changes, causing a misalignment with the original object that requires adjustment.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2348.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Use the position adjustment tool to align the PSD image with the existing object.<br>
+    <strong>(2)</strong> Once aligned, click the <strong>Next</strong> button to complete the re-import process.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now, let's check the results of re-importing the PSD for each of the two options.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2350.jpg"/>
+    <br>
+    
+    <p>
+    On the surface, the results of both options appear identical.<br>
+    However, if you select the robot arm mesh object and check its position, the difference becomes apparent.<br>
+    With the "<strong>Adjust to PSD (Legacy)</strong>" option, the resulting position is "(-256, -205)," which differs from the original position of "(-253, -147)."<br>
+    In contrast, the result obtained using the "<strong>Adjust to PSD (Pivot Moved)</strong>" option yields a position value very similar to the original.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2351.jpg"/>
+    <br>
+    
+    <p>
+    The ability to maintain the object's position values—even when the image shape changed—while using the "<strong>Adjust to PSD (Pivot Moved)</strong>" option is due to the fact that the mesh's <strong>Pivot</strong> was moved instead.<br>
+    With the "<strong>Adjust to PSD (Legacy)</strong>" option, the mesh's <strong>Pivot</strong> is simply placed at the center of the newly imported PSD layer image.<br>
+    With the "<strong>Adjust to PSD (Pivot Moved)</strong>" option, however, you can see that the <strong>Pivot</strong> has been shifted slightly away from the center.<br>
+    </p>
+    <br>
+    
+    <p>
+    In <strong>AnyPortrait v1.7.0</strong>, the "<strong>Adjust to PSD (Pivot Moved)</strong>" option is set as the default.<br>
+    Understanding the differences in how each option processes data will make it easier to handle issues that may arise when re-importing a PSD.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Maintain the existing Default Transform</h3>
+    <br>
+    
+    <p>
+    After creating a character from a PSD file, you may find yourself directly modifying the objects' "Default Transform" within AnyPortrait.<br>
+    However, if you re-import the modified PSD file, the changes you made—such as object positions or sizes—will be reset.<br>
+    Let's resolve this issue using the option added in <strong>AnyPortrait v1.7.0</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2352.jpg"/>
+    <br>
+    
+    <p>
+    This is a robot created from a PSD file.<br>
+    <strong>(1)</strong> Click the <strong>Edit Default Transform</strong> button on the mesh group editing screen.<br>
+    <strong>(2)</strong> Move and rotate the robot's arm object as shown above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2353.jpg"/>
+    <br>
+    
+    <p>
+    Let's re-import the PSD file.<br>
+    For this explanation, we will re-import the same PSD file used when the robot was originally created.<br>
+    In the PSD re-import window, you can see that the robot's arm in the mesh group has been deformed.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2354.jpg"/>
+    <br>
+    
+    <p>
+    If you complete the PSD file re-import process in this state, the robot arm's transform will revert to its original state, as shown above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2355.jpg"/>
+    <br>
+    
+    <p>
+    To retain the modified basic transform, you must change the option.<br>
+    <strong>(1)</strong> In the "<strong>Basic Setting</strong>" step of re-importing the PSD file, change the <strong>Connected Objects</strong> option setting to <strong>(2)</strong> "<strong>Keep Current</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2356.jpg"/>
+    <br>
+    
+    <p>
+    Once you complete the process of re-importing the PSD file, you will see that the existing transformations are preserved.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Adjusting the Transform of a Duplicated Mesh</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2357.jpg"/>
+    <br>
+    
+    <p>
+    Consider a scenario where you duplicate a mesh object generated from an image layer in a PSD file.<br>
+    The key to re-importing a PSD file lies in the "mapping" that connects the PSD layer to the objects within the mesh group.<br>
+    However, it is not possible to map a single image layer from the PSD file to multiple duplicated mesh objects within the same mesh group.<br>
+    Consequently, duplicated meshes are generally not subject to separate processing, except for the updating of the atlas shared with the originally mapped mesh.<br>
+    </p>
+    <br>
+    
+    <p>
+    Generally, this method does not cause any major issues.<br>
+    However, problems arise in specific cases where the overall size needs to be adjusted because the dimensions of the PSD image or mesh group do not match.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2358.jpg"/>
+    <br>
+    
+    <p>
+    Let's reduce the size of the PSD image file by half, then import it back and apply it to the character.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2359.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> If you re-import a PSD file with altered image dimensions, you will notice a size mismatch between the mesh group and the image.<br>
+    <strong>(2)</strong> You must adjust the "<strong>Bake Scale</strong>" option to align the size of the PSD image with that of the mesh group.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2360.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> The <strong>Unconnected Meshes</strong> option includes the following settings:<br>
+    - <strong>Ignore</strong>: No specific action is taken for existing mesh objects that are not connected to the PSD.<br>
+    - <strong>Resize by Scale Factor</strong>: If overall resizing is required, the same scaling is applied to duplicated meshes affected by the PSD.<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's complete the process of re-importing the PSD file for each of the two options and compare the results.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2361.jpg"/>
+    <br>
+    
+    <p>
+    When re-importing a PSD file that requires resizing, the atlas resizing process described above is necessary during the "<strong>Adjust</strong>" step.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2362.jpg"/>
+    <br>
+    
+    <p>
+    These are the results after re-importing the PSD file for each of the two options.<br>
+    With the "<strong>Ignore</strong>" option, the arms of the duplicated mesh objects appeared smaller.<br>
+    This issue occurred because the image size in the PSD file had decreased, yet no corresponding scaling adjustment was applied.<br>
+    In contrast, the "<strong>Resize by Scale Factor</strong>" option yielded the correct result.<br>
+    The solution involved increasing the size of the mesh objects to compensate for the reduction in the PSD image size—a process that was also applied to the duplicated meshes.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    This process applies only to mesh objects that share the same mesh.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Issue of mismatched layer hierarchy</h3>
+    <br>
+    
+    <p>
+    The PSD import function involves a process of converting the positions and dimensions of PSD layers to align with the AnyPortrait system.<br>
+    While AnyPortrait aims to utilize the data from the PSD file as fully as possible, a specific issue arises here.<br>
+    Unlike image layers, "Folder layers" in PSD files do not possess specific positional data.<br>
+    In contrast, the "Sub-Mesh Group" in AnyPortrait—which corresponds to the PSD folder layer—includes transform properties such as position.<br>
+    To resolve this discrepancy, AnyPortrait calculates the average position of the image layers contained within the folder layer and applies that value as the position for the "Sub-Mesh Group."<br>
+    </p>
+    <br>
+    
+    <p>
+    Generally, this method works without major issues.<br>
+    However, if the layer structure of the PSD file differs from the structure of the mesh groups, misalignment issues occur.<br>
+    This happens because incorrect values—derived during the process of calculating the average position of image layers—affect the sub-mesh groups and their child objects.<br>
+    </p>
+    <br>
+    
+    <p>
+    Here, let's look at how this problem occurs and how to resolve it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2363.jpg"/>
+    <br>
+    
+    <p>
+    To reproduce the issue, let's set up the layer hierarchy in the PSD file differently from the mesh group hierarchy.<br>
+    First, here is the layer hierarchy in the PSD file.<br>
+    In this case, no folder layers were created, so all image layers are located at the same hierarchical level.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2364.jpg"/>
+    <br>
+    
+    <p>
+    On the other hand, the robot mesh group in AnyPortrait contains a sub-mesh group.<br>
+    You can see that a mesh named "Arm" belongs to the sub-mesh group.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2365.jpg"/>
+    <br>
+    
+    <p>
+    Let's try re-importing the PSD file in this state.<br>
+    <strong>(1)</strong> In the "<strong>Mapping</strong>" step, you can see that the layer hierarchy of the PSD does not match the hierarchy within the mesh group.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2366.jpg"/>
+    <br>
+    
+    <p>
+    If you attempt to proceed by clicking the <strong>Next</strong> button in this state, a warning message like the one shown above will appear.<br>
+    This message indicates that a discrepancy in the hierarchical structure was detected during the mapping process, meaning the hierarchy of the PSD file must be aligned with that of the message group.<br>
+    Let’s ignore this warning and click the <strong>Ignore and Proceed</strong> button to force the process to completion.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    This warning message only checks whether the "hierarchy levels" of the mapped targets match.<br>
+    It does not detect cases where levels match but the items belong to unmapped folder layers or sub-mesh groups.<br>
+    Therefore, rather than relying on the warning message, it is recommended to verify the status of the PSD file and mesh groups beforehand.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2367.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Let's examine the "Arm" mesh, where a structural discrepancy compared to the PSD occurred.<br>
+    <strong>(2)</strong> You can see that it has shifted to an incorrect position, as shown above, due to an error in the positioning process.<br>
+    </p>
+    <br>
+    
+    <p>
+    The most reliable solution in this case is to modify the hierarchy of the PSD file or the mesh groups so that they match each other.<br>
+    In particular, it is generally easier to add folder layers within the PSD file.<br>
+    Once you map the folder layers to the sub-mesh groups, the re-import process should complete successfully.<br>
+    </p>
+    <br>
+    
+    <p>
+    However, you can also resolve this issue by using the "<strong>Keep Current</strong>" option mentioned earlier.<br>
+    This issue can be avoided because the "<strong>Keep Current</strong>" option does not perform position adjustments.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2368.jpg"/>
+    <br>
+    
+    <p>
+    Let's re-import the PSD file with the <strong>Connected Objects</strong> option set to "<strong>Keep Current</strong>," as explained earlier.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2369.jpg"/>
+    <br>
+    
+    <p>
+    When the "<strong>Keep Current</strong>" option is enabled, no warning message appears during the "<strong>Mapping</strong>" step, even if there are differences in the layer structure compared to the PSD file.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2370.jpg"/>
+    <br>
+    
+    <p>
+    You can see that the process of re-importing the PSD file completes successfully without any need for position adjustments.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_RePSD.html">< Re-importing a PSD File</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_SecondaryAtlas.html">Creating Secondary Atlas ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

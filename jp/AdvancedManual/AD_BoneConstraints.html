@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>ボーンコンストレイント</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/ja/anyportrait-ja/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ja/ap-video-tutorials-ja/">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ja/forum-ja/">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_BoneConstraints.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_BoneConstraints.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_BoneConstraints.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/ja/anyportrait-ja/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > ボーンコンストレイント</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">ボーンコンストレイント</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.7.0</span></h4>
+    
+    <p>
+    ゲームでキャラクターを動かす際、ボーンを常に特定の範囲内で動作させる必要がある場合があります。<br>
+    例えば、肘や膝が関節の可動域を超えて回転しないように制限したり、手や足の位置を一定の範囲内に収めたりするといったケースです。<br>
+    こうした動きを毎回キーフレームで直接制御する代わりに、ボーンのトランスフォームを特定の範囲に合わせて制限する機能があれば、非常に役立つでしょう。<br>
+    「<strong>ボーンコンストレイント</strong>」は、ボーンの動きを自動的に制限する機能です。<br>
+    この機能は「IKによるコンストレイント」にも対応しているため、様々な状況で役立つでしょう。<br>
+    このページでは、「ボーンコンストレイント」の使用例とともに、関連するオプションについて説明します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2417.jpg"/>
+    <br>
+    
+    <p>
+    <strong>ボーンコンストレイント</strong>を適用してみましょう。<br>
+    <strong>(1)</strong> 「メッシュグループ」編集画面で、「<strong>Bone</strong>」タブを選択します。<br>
+    <strong>(2)</strong> 「ボーンコンストレイント」を適用するボーンを選択します。<br>
+    <strong>(3)</strong> 「<strong>IK and Constraints</strong>」タブを選択します。<br>
+    <strong>(4)</strong> 「<strong>Add Constraint</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2418.jpg"/>
+    <br>
+    
+    <p>
+    ボーンコンストレイントを追加すると、上記のように様々なオプションが表示されるのが確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2419.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    <strong>1. Constraint Stack</strong> : 追加されたボーンコンストレイントです。編集するボーンコンストレイントを選択したり、「<strong>X</strong>」ボタンを押して削除したりできます。<br>
+    <strong>2​​. Add Constraint</strong> : ボーンコンストレイントを追加するボタンです。<br>
+    <strong>3. Layer Up/Down</strong> : ボーンコンストレイントの演算順序を調整できます。同じ演算タイミングの場合、リストの下側にあるボーンコンストレイントが先に演算されます。<br>
+    <strong>4. Constraint Method</strong> : ボーンコンストレイントが適用されるトランスフォームの種類です。<br>
+    <strong>5. Coordinate</strong> : ボーンコンストレイントの計算が行われる軸を決定する座標系です。オプションによっては、計算の基準となるタイミングが変わることもあります。<br>
+    <strong>6. Axis, Range</strong> : ボーンコンストレイントが適用される軸と範囲の値です。<br>
+    <strong>7. Weight</strong> : ボーンコンストレイントの適用度合いを決定します。「制御パラメータ」を接続することも可能です。<br>
+    <strong>8. Smooth Clipping</strong> : ボーンコンストレイントの範囲付近で、コンストレイントが滑らかに適用されるように設定できます。<br>
+    <strong>9. Guidelines</strong> : 作業スペース上でボーンコンストレイントの範囲を視覚的に確認するためのオプションです。<br>
+    <strong>10. 共通オプション</strong> : 対象となるボーンコンストレイントに共通して適用されるオプションです。<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <p>
+    いくつかの例とともに、ボーンコンストレイントのオプションを見ていきましょう。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>例1.「Position + Delta」ボーンコンストレイント</h3>
+    <br>
+    
+    <p>
+    「<strong>Position</strong>」コンストレイントを使用して、ボーンの位置を制限することができます。<br>
+    この際、「<strong>Coordinate</strong>」の値を「<strong>Delta</strong>」に設定すると、親ボーンを基準として、モディファイアーやアニメーションによる移動を制限できます。<br>
+    「<strong>Position + Delta</strong>」方式のコンストレイントの効果を確認しながら、他のオプションについても見ていきましょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    この方式は、モディファイアやアニメーションにおけるボーンの移動値を制限します。<br>
+    対象のボーンが親ボーンとIKチェーンで接続されている場合、ギズモを使ってボーンの位置を編集することはできません。<br>
+    IKチェーンを先に解除してから、コンストレイントを設定することをお勧めします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2420.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Add Constraint</strong>」ボタンを押して新しいボーンコンストレイントを追加し、リストから選択します。<br>
+    <strong>(2)</strong> 「<strong>Constraint Method</strong>」の値を「<strong>Position</strong>」に、「<strong>Coordinate</strong>」の値を「<strong>Delta</strong>」に設定します。<br>
+    <strong>(3)</strong> 作業スペース上で、選択したボーンの周囲に四角形のガイドラインが表示されます。このガイドラインは、現在適用されているコンストレイントの範囲を示しています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2421.jpg"/>
+    <br>
+    
+    <p>
+    制約（コンストレイント）が適用される範囲を変更してみましょう。<br>
+    <strong>(1)</strong> 「<strong>Axis</strong>」を選択します。<strong>X</strong>軸または<strong>Y</strong>軸のいずれかを選択して制限したり、<strong>XとY</strong>軸を同時に制限したりすることができます。ここでは<strong>X</strong>軸を選択してみます。<br>
+    <strong>(2)</strong> 選択した軸に対してのみ、ガイドラインが表示されることが確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2422.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> 「<strong>Range Type</strong>」の値を変更します。<br>
+    最大範囲または最小範囲のいずれか、あるいはその両方を指定できます。<br>
+    「Fixed」を選択すると、トランスフォームの値が指定した値になるように設定されます。<br>
+    この例では、「<strong>Max</strong>」を選択してみました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2423.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> 制限範囲の値を入力します。<br>
+    <strong>(5)</strong> 指定した軸、制限範囲の種類と値に合わせて、ガイドラインが描画されるのが確認できます。<br>
+    「<strong>Delta</strong>」タイプの座標系では、親ボーンの座標系を基準とするため、上記のようにコンストレイントの範囲が設定されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    以上の手順で、このボーンコンストレイントの基本設定が完了します。<br>
+    この例で、いくつかのオプションをさらに見ていきましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2424.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Weight</strong>」に関連するオプションです。「<strong>Weight</strong>」が1より小さい場合、コンストレイントが適用される度合いが弱まります。「制御パラメータ」と接続することも可能です。<br>
+    <strong>(2)</strong> 「<strong>Smooth Clipping</strong>」を有効にすると、範囲の境界付近でトランスフォームが滑らかに制限されるように設定できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2425.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ガイドラインの表示方法を決定するオプションです。「<strong>Guidelines</strong>」オプションには、「非表示 (Hidden)」、「選択の有無にかかわらず常に表示 (Always)」、「ボーンが選択された時のみ表示 (Selected Only)」という設定値があります。<br>
+    <strong>(2)</strong> 設定された色とスタイルに基づいて、作業スペースにガイドラインが描画されます。<br>
+    <strong>(3)</strong> また、「<strong>View Menu > Bone Guides > Show Constraint Info</strong>」項目から、ガイドラインを一括して非表示または表示に切り替えることができます。<br>
+    </p>
+    <br>
+    
+    <p>
+    オプションの設定が完了したら、ボーンコンストレイントをテストしてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2426.jpg"/>
+    <br>
+    
+    <p>
+    ボーンコンストレイントをテストするために、簡単なアニメーションを作成してみましょう。<br>
+    <strong>(1)</strong> 「アニメーションクリップ」を作成します。<br>
+    <strong>(2)</strong> 「編集モード」をオンにします。<br>
+    <strong>(3)</strong> コンストレイントが適用されたボーンをアニメーションに登録し、移動させます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2427.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「編集モード」をオフにします。<br>
+    <strong>(2)</strong> ボーンの位置が、コンストレイントによって設定された範囲内に制限されることが確認できます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>例2.「Rotation + Delta」ボーンコンストレイント</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2428.jpg"/>
+    <br>
+    
+    <p>
+    今回は、ボーンの回転を制限するコンストレイントを設定してみましょう。<br>
+    <strong>(1)</strong> コンストレイントを適用したいボーンを選択します。<br>
+    <strong>(2)</strong> 「<strong>Add Constraint</strong>」ボタンを押して、コンストレイントを追加します。<br>
+    <strong>(3)</strong> 「<strong>Constraint Method</strong>」オプションの値を「<strong>Rotation</strong>」に設定します。<br>
+    <strong>(4)</strong> 回転範囲を示すガイドラインが表示されます。<br>
+    回転の場合、ボーンの基本角度（ローカル座標系）を基準に範囲が設定されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2429.jpg"/>
+    <br>
+    
+    <p>
+    回転範囲を設定します。<br>
+    <strong>(1)</strong> 「<strong>Range Type</strong>」の値を「<strong>Min ~ Max</strong>」に設定します。<br>
+    <strong>(2)</strong> 「<strong>Angle Range</strong>」の値を適切に設定します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    「Rotation」タイプのコンストレイントの場合、その特性上「Coordinate」オプションは表示されず、常に「Delta」タイプとして動作します。<br>
+    また、「Range Type」の値は、回転という特性により「Min ~ Max」と「Fixed」のみが存在します。<br>
+    </p>
+    <br>
+    
+    <p>
+    コンストレイントの基本設定作業が完了したら、次は「<strong>Weight</strong>」オプションについてさらに詳しく見ていきましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2430.jpg"/>
+    <br>
+    
+    <p>
+    基本的には、「<strong>Default Weight</strong>」オプションによって、コンストレイントが適用される度合い（0～1）が決まります。<br>
+    しかし、このオプションに「制御パラメータ」を関連付けると、コンストレイントの度合いをリアルタイムで変更できるようになります。<br>
+    <strong>(1)</strong> 「Weight」オプション内の「<strong>Control Parameter</strong>」オプションを有効にし、「<strong>Set</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「Float」タイプの「制御パラメータ」を選択し、「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2431.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> テスト用に「アニメーションクリップ」を作成します。<br>
+    <strong>(2)</strong> ボーンを回転させるアニメーションを作成します。<br>
+    現在はコンストレイントが適用されていないため、ボーンが設定された範囲を超えて回転しているのが確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2432.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> ボーンコンストレイントに接続した「制御パラメータ」をアニメーションに登録します。<br>
+    <strong>(2)</strong> キーフレームを追加します。<br>
+    <strong>(3)</strong> 「制御パラメータ」の値を<strong>1</strong>に設定します。<br>
+    <strong>(4)</strong> コンストレイントが正常に動作し、ボーンの回転が設定された範囲によって制限されることが確認できます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>例3.「Scale + Delta」ボーンコンストレイント</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2433.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Scale</strong>」方式のコンストレイントを使用すると、ボーンのサイズを制限できます。<br>
+    <strong>(1)</strong> 上記のように、制限する座標系、軸、および範囲を設定します。<br>
+    <strong>(2)</strong> 作業スペースにサイズを示すいくつかの長方形のガイドラインが表示されます。そのうち、グレーのものは基本サイズを表します。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>Delta</strong>」座標系の「<strong>Scale</strong>」コンストレイントは、「<strong>Position</strong>」と同様のオプションを持ち、実際にも同様に動作します。<br>
+    ただし、「<strong>Scale</strong>」コンストレイントでは、範囲の値が常に「正の数」でなければならないという点で違いがあります。<br>
+    これは、「<strong>Scale</strong>」コンストレイントがボーンの「Scale」の反転を考慮していないためです。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>例4.「Position + World (FK)」ボーンコンストレイント</h3>
+    <br>
+    
+    <p>
+    今回は、「<strong>Coordinate</strong>」の値を「<strong>World</strong>」に設定してみましょう。<br>
+    「<strong>Position</strong>」と「<strong>Scale</strong>」のコンストレイントはどちらも「<strong>World</strong>」座標系をサポートしていますが、その動作は異なります。<br>
+    また、「<strong>Position</strong>」コンストレイントにおいて「<strong>IK</strong>」を使用するかどうかによっても、動作や結果が変わります。<br>
+    今回の例では、IKを使用しない状態で、「<strong>Position</strong>」コンストレイントに「<strong>World</strong>」座標系を適用してみます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2434.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> コンストレイントを追加・選択した後、「<strong>Constraint Method</strong>」の値を「<strong>Position</strong>」に、「<strong>Coordinate</strong>」の値を「<strong>World</strong>」に設定します。<br>
+    <strong>(2)</strong> ガイドラインの座標系が、本件とは無関係なワールド座標系で描画されていることが確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2435.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 位置を制限するための範囲の軸と値を設定します。ワールド座標系では範囲の設定が難しいため、「<strong>Set Current Position to Property</strong>」ボタンを押すと現在のボーンの位置が範囲の値に入力されます。これを利用して位置を推測し、入力することも可能です。<br>
+    <strong>(2)</strong> 設定されたコンストレイントの領域をワークスペース上で確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2436.jpg"/>
+    <br>
+    
+    <p>
+    「Move by IK」オプションは、位置を制限する際にIKを使用するかどうかを決定します。<br>
+    今回の例ではIKを使用せずにテストを行うため、チェックを外します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2437.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> テスト用に「アニメーションクリップ」を作成します。<br>
+    <strong>(2)</strong> 「編集モード」をオンにします。<br>
+    <strong>(3)</strong> 今回は、「<strong>World</strong>」座標系の特性を確認するため、親ボーンが移動するアニメーションを作成してみました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2438.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「編集モード」をオフにします。<br>
+    <strong>(2)</strong> 親ボーンを移動させても、コンストレイントが適用されたボーンは設定範囲の外へは移動しないことが確認できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    「World」座標系のコンストレイントは、モディファイアやアニメーションの値とは無関係に、全体的なポーズを基準として動作することがわかります。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>例5.「Position + World (IK)」ボーンコンストレイント</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2439.jpg"/>
+    <br>
+    
+    <p>
+    今回は、「<strong>IK</strong>」を適用した「<strong>Position + World</strong>」コンストレイントについて見ていきましょう。<br>
+    このコンストレイントを適切に使用するには、上記のように「IKチェーン」が設定されている必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2440.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> IKチェーンが設定されたボーンを選択します。<br>
+    <strong>(2)</strong> 「<strong>Add Constraint</strong>」ボタンを押して、コンストレイントを追加します。<br>
+    <strong>(3)</strong> 上記のように「<strong>Position</strong>」および「<strong>World</strong>」方式のコンストレイントになるよう設定し、範囲の値を適切に入力します。<br>
+    <strong>(4)</strong> 「<strong>Move by IK</strong>」オプションを有効にします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2441.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「アニメーションクリップ」を作成します。<br>
+    <strong>(2)</strong> 「編集モード」をオンにします。<br>
+    <strong>(3)</strong> IKチェーンのルートボーンを動かし、コンストレイントが動作するように誘導します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2442.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「編集モード」をオフにします。<br>
+    <strong>(2)</strong> 「<strong>Position</strong>」コンストレイントが動作していることが確認できます。また、このコンストレイントによって、IKチェーン全体のポーズがIKにより変化することも確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2443.jpg"/>
+    <br>
+    
+    <p>
+    IKと組み合わせてコンストレイントが動作する様子です。<br>
+    上の結果からわかるように、この方式のコンストレイントは、「歩行中のキャラクターの足が地面にめり込むのを防ぐ」といった処理を実装するのに非常に効果的です。<br>
+    </p>
+    <br>
+    
+    <p>
+    他のオプションを活用して、コンストレイントをより柔軟に使ってみましょう。<br>
+    これまでは、コンストレイントの範囲を設定するために値を直接入力していました。<br>
+    この方法では手間がかかるうえ、リアルタイムに変更することもできません。<br>
+    そこで、「別のボーン」の位置をコンストレイントの範囲の値として利用すれば、この問題を解決できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2444.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「地面」の高さの役割を果たす「Bone Ground」というボーンを新たに追加しました。<br>
+    <strong>(2)</strong> コンストレイントが設定されていたIKチェーンのボーンを選択します。<br>
+    <strong>(3)</strong> 先ほど作成したコンストレイントを選択します。<br>
+    <strong>(4)</strong> 「<strong>Refer to Bones</strong>」オプションを有効にし、「<strong>Set</strong>」ボタンを押します。<br>
+    <strong>(5)</strong> 「Bone Ground」を選択し、「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <p>
+    「<strong>Refer to Bones</strong>」オプションは、他のボーンを参照して、制限範囲に該当する値を置き換える役割を果たします。<br>
+    この際、X軸・Y軸および最小・最大範囲のそれぞれに、異なるボーンを割り当てることが可能です。<br>
+    ボーンが割り当てられていない場合は、入力した数値が使用されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2445.jpg"/>
+    <br>
+    
+    <p>
+    アニメーション編集画面でテストしてみましょう。<br>
+    <strong>(1)</strong> 「Bone Ground」を動かしてみると、<strong>(2)</strong> ガイドラインも一緒に動くのが確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2446.jpg"/>
+    <br>
+    
+    <p>
+    この状態で「編集モード」を終了すると、「Bone Ground」のY位置を基準にコンストレイントが動作することを確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2447.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Position + World (IK)</strong>」コンストレイントで使用されるオプションについて、さらに詳しく見ていきましょう。<br>
+    「Common Constraint Properties」の項目には、「<strong>FK-based IK</strong>」と「<strong>Smooth IK</strong>」というオプションがあります。<br>
+    これらは、コンストレイントによってIKが動作する際に使用されるオプションです。<br>
+    まずは、「<strong>FK-based IK</strong>」オプションの役割について見ていきましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>IK方式のコンストレイント</h4>
+    <br>
+    
+    <p>
+    IKを利用する複数のコンストレイントによってボーンが移動する場合、まずコンストレイントによる位置を最終的に計算します。<br>
+    そして、その位置へボーンが移動するようにIKを1回実行します。<br>
+    そのため、IKに関連するオプションはコンストレイントごとに設定されるわけではありません。<br>
+    </p>
+    <br>
+    
+    <p>
+    FKによるコンストレイントは、IK演算の前に一括処理されます。<br>
+    一方、IKによるコンストレイントは、IK演算の過程で処理されます。<br>
+    処理順序は、「モディファイア／アニメーションによるFK > FK方式のコンストレイント > IKコントローラー > IK方式のコンストレイント > 最終回転補正 > ジグルボーン」となります。<br>
+    </p>
+    <br>
+    
+    <p>
+    IK方式のコンストレイントは、IKコントローラーと同様にIKチェーンのオプションを活用します。<br>
+    つまり、IKの角度制限や初期ポーズが同様に適用されます。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2448.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>FK-based IK</strong>」オプションは、コンストレイントによるIKが動作する際の初期ポーズをどのように設定するかを決定します。<br>
+    「<strong>FK-based IK</strong>」オプションを有効にすると、「FKによるポーズ」を基準にIK演算を行います。<br>
+    「<strong>FK-based IK</strong>」オプションを無効にすると、コンストレイントが適用される直前のポーズを基準にIK演算を行います。つまり、「他のボーンのコンストレイント」や「IKコントローラー」などの影響を受ける可能性があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    そこで、このオプションの効果を確認するために、「IKコントローラー」を活用してみます。<br>
+    上記のように、1つのIKチェーンに2つの「Effector Bone」を接続する「IKコントローラー」を設定しました。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    IKチェーン内の「初期ポーズ（Initial Pose）」オプションの値が「<strong>Prefer Angle</strong>」である場合、「<strong>FK-based IK</strong>」かどうかによる大きな違いはない可能性があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2449.jpg"/>
+    <br>
+    
+    <p>
+    アニメーション編集画面で、上記のように編集してみました。<br>
+    <strong>(1)</strong> IKチェーンが左側に曲がるように、キーフレームアニメーション（FK）を作成してみました。<br>
+    <strong>(2)</strong> 逆に、「Effector Bone」は右側に配置しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2450.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「編集モード」をオフにします。<br>
+    <strong>(2)</strong> 「Effector Bone」と「IKコントローラー」によって、IKチェーンの関節がFKとは逆に右側へ曲がっていることが確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2451.jpg"/>
+    <br>
+    
+    <p>
+    この状態でコンストレイントを動作させてみましょう。<br>
+    「<strong>FK-based IK</strong>」が有効な左側の結果では、FKのポーズを基準に関節が左側に曲がった状態で、コンストレイントとIKが動作します。<br>
+    一方、「<strong>FK-based IK</strong>」が無効な右側の結果では、IKコントローラーの結果に基づいてコンストレイントが動作します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2452.jpg"/>
+    <br>
+    
+    <p>
+    次に、「<strong>Smooth IK</strong>」オプションを見てみましょう。<br>
+    このオプションは、コンストレイントが適用されるタイミングで「IKのウェイト」を徐々に増加させる役割を果たします。<br>
+    その際、制限範囲までの距離に比例してウェイトが調整されるため、距離の値を別途入力する必要があります。<br>
+    <strong>(1)</strong> 「<strong>Smooth IK</strong>」オプションを有効にし、「<strong>Transition Distance</strong>」の値を大きめに変更して、確認しやすくします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2453.jpg"/>
+    <br>
+    
+    <p>
+    ボーンが下へ移動する簡単なアニメーションを作成し、コンストレイントが適用される過程を確認してみましょう。<br>
+    コンストレイントが適用されたボーンが制限範囲に達したにもかかわらず、一瞬その範囲よりさらに下へ移動してから戻ってくる様子が確認できます。<br>
+    これは、「<strong>Smooth IK</strong>」によってIKのウェイトが徐々に増加し、その分コンストレイントの適用が緩やかになったためです。<br>
+    このようにコンストレイントの範囲を緩和することで、滑らかな動きを作り出すことができます。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>「Smooth IK」と「Smooth Clipping」の違い</h4>
+    <br>
+    
+    <p>
+    コンストレイントのオプションには「Smooth Clipping」があります。<br>
+    このオプションも、制限範囲の付近でコンストレイントの強度を調整し、滑らかな動きを促します。<br>
+    「Smooth IK」が「IKのウェイト」を調整するのに対し、「Smooth Clipping」は「制限されたトランスフォームの値」を調整するという点で違いがあります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2454.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「Smooth Clipping」オプションを有効にし、「Smooth Area Size」を適切に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2455.jpg"/>
+    <br>
+    
+    <p>
+    同じアニメーションを再生した結果です。<br>
+    「<strong>Smooth IK</strong>」の結果とは異なり、「<strong>Smooth Clipping</strong>」では、ボーンがコンストレイントの範囲外に出ないことが確認できます。<br>
+    これは、IKとは無関係にボーンの位置を徐々に制限しつつ範囲内には収めるという、「<strong>Smooth Clipping</strong>」オプションの特性によるものです。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>例6.「Scale + World」ボーンコンストレイント</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2456.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Scale</strong>」と「<strong>World</strong>」を組み合わせたコンストレイントは、別の用途で使用されます。<br>
+    <strong>(1)</strong> 親ボーンのサイズが変更されると、<strong>(2)</strong> 子ボーンのサイズもそれに比例して変化するのが、基本的なスケルタル演算の仕組みです。<br>
+    しかし、親ボーンのサイズとは無関係に、子ボーンのサイズを適度に制限したり、あるいは完全に固定したりしたい場合もあるでしょう。<br>
+    その際に使用されるのが、「<strong>Scale + World</strong>」コンストレイントです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2457.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> サイズを固定したい子ボーンを選択します。<br>
+    <strong>(2)</strong> コンストレイントを追加し、「<strong>Constraint Method</strong>」の値を「<strong>Scale</strong>」、「<strong>Coordinate</strong>」の値を「<strong>World</strong>」に設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2458.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> 「Axis」の値を「<strong>X, Y</strong>」、「Range Type」の値を「<strong>Fixed</strong>」に設定した後、それぞれの軸のサイズが「1」に固定されるように設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2459.jpg"/>
+    <br>
+    
+    <p>
+    これで、親ボーンのサイズが変更されても、子ボーンのサイズは変わらないことが確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_LookAtIKController.html">< 「Look At」IKコントローラー</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_BoneFinalRotationCorrection.html">最終回転補正 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

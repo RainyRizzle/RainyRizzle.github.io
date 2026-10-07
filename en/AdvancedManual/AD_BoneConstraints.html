@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Bone Constraints</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/en/anyportrait-en/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/en/ap-video-tutorials-en/">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/en/forum-en/">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_BoneConstraints.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_BoneConstraints.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_BoneConstraints.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/en/anyportrait-en/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Bone Constraints</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Bone Constraints</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.7.0</span></h4>
+    
+    <p>
+    When moving characters in a game, there are times when a bone must stay within a specific range of motion.<br>
+    For instance, you might need to prevent elbows or knees from rotating beyond their physical limits or ensure that hands and feet remain within a certain area.<br>
+    Instead of manually controlling such movements with keyframes every time, it is highly beneficial to have a feature that automatically constrains a bone's transform to a specific range.<br>
+    <strong>Bone Constraint</strong> is a feature that automatically restricts bone movement in this way.<br>
+    Since this feature also supports constraints driven by IK, it will prove useful in a variety of situations.<br>
+    This page explains the options related to Bone Constraints, along with examples of their use.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2417.jpg"/>
+    <br>
+    
+    <p>
+    Let's apply a <strong>Bone Constraint</strong>.<br>
+    <strong>(1)</strong> Select the <strong>Bone</strong> tab on the mesh group editing screen.<br>
+    <strong>(2)</strong> Select the bone to which you want to apply the constraint.<br>
+    <strong>(3)</strong> Select the <strong>IK and Constraints</strong> tab.<br>
+    <strong>(4)</strong> Click the <strong>Add Constraint</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2418.jpg"/>
+    <br>
+    
+    <p>
+    When you add a <strong>Bone Constraint</strong>, you can see various options appear, as shown above.<br>
+    </p>
+    <br>
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2419.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    <strong>1. Constraint Stack</strong> : Displays the added bone constraints. You can select a constraint to edit or click the <strong>X</strong> button to delete it.<br>
+    <strong>2. Add Constraint</strong> : Button to add a bone constraint.<br>
+    <strong>3. Layer Up/Down</strong> : Adjusts the calculation order of bone constraints. If constraints share the same calculation timing, the one lower in the list is calculated first.<br>
+    <strong>4. Constraint Method</strong> : Specifies the type of transform to which the constraint applies.<br>
+    <strong>5. Coordinate</strong> : Defines the coordinate system used for the constraint's calculation. Depending on the option selected, the calculation timing may also change.<br>
+    <strong>6. Axis, Range</strong> : Specifies the axis and range values ​​for the constraint.<br>
+    <strong>7. Weight</strong> : Determines the strength of the constraint's effect; control parameters can also be linked here.<br>
+    <strong>8. Smooth Clipping</strong> : Enables a smooth transition for the constraint as it approaches the edge of its range.<br>
+    <strong>9. Guidelines</strong> : Options for visually displaying the constraint range within the workspace.<br>
+    <strong>10. Common Options</strong> : Options that apply to the relevant bone constraints.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <p>
+    Let's explore the Bone Constraint options with a few examples.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Example 1. "Position + Delta" Constraint</h3>
+    <br>
+    
+    <p>
+    You can restrict a bone's position using the "<strong>Position</strong>" constraint.<br>
+    By setting the <strong>Coordinate</strong> value to "<strong>Delta</strong>," you can limit movement caused by modifiers or animations relative to the parent bone.<br>
+    Let's examine the effects of the "<strong>Position + Delta</strong>" constraint while also looking at the other options.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Caution</strong></span><br>
+    This method limits bone movement values ​​resulting from modifiers or animations.<br>
+    If the target bone is connected to a parent bone via an IK chain, you cannot edit the bone's position using the gizmo.<br>
+    It is recommended to disable the IK chain before setting up the constraint.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2420.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Click the <strong>Add Constraint</strong> button to add a new Bone Constraint and select it from the list.<br>
+    <strong>(2)</strong> Set the <strong>Constraint Method</strong> to "<strong>Position</strong>" and the <strong>Coordinate</strong> to "<strong>Delta</strong>."<br>
+    <strong>(3)</strong> You will see a rectangular guideline drawn around the selected bone in the workspace. This guideline indicates the range of the currently applied constraint.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2421.jpg"/>
+    <br>
+    
+    <p>
+    Let's change the area of the constraint.<br>
+    <strong>(1)</strong> Select an <strong>Axis</strong>. You can restrict movement along the <strong>X</strong> or <strong>Y</strong> axis individually, or restrict both the <strong>X and Y</strong> axes simultaneously. In this example, the <strong>X</strong> axis has been selected.<br>
+    <strong>(2)</strong> You can see that the guideline is drawn only for the selected axis.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2422.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> Change the value of <strong>Range Type</strong>.<br>
+    You can specify either the maximum range, the minimum range, or both.<br>
+    Selecting "Fixed" sets the transform value to a specific, fixed value.<br>
+    In this example, "<strong>Max</strong>" was selected.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2423.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(4)</strong> Enter the range values.<br>
+    <strong>(5)</strong> You can see the guidelines drawn according to the specified axis, limit range type, and values.<br>
+    In the <strong>Delta</strong> coordinate system, the constraint range is set as shown above because it is based on the parent bone's coordinate system.<br>
+    </p>
+    <br>
+    
+    <p>
+    Completing the steps above finishes the basic setup for the Bone Constraint.<br>
+    Let's take a look at a few more options in this example.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2424.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> These are options related to <strong>Weight</strong>. If <strong>Weight</strong> is less than 1, the extent to which the constraint is applied is reduced. It can also be linked to a control parameter.<br>
+    <strong>(2)</strong> Enabling <strong>Smooth Clipping</strong> allows the transform to be limited smoothly near the boundaries of the range.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2425.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> This option determines how the guidelines are displayed. The <strong>Guidelines</strong> option has the following settings: "Hidden," "Always" (visible regardless of selection), and "Selected Only" (visible only when the bone is selected).<br>
+    <strong>(2)</strong> Guidelines are drawn in the workspace based on the specified color and style.<br>
+    <strong>(3)</strong> Additionally, you can globally show or hide the guidelines via the <strong>View Menu > Bone Guides > Show Constraint Info</strong> option.<br>
+    </p>
+    <br>
+    
+    <p>
+    Once the option settings are complete, let's test the Bone Constraint.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2426.jpg"/>
+    <br>
+    
+    <p>
+    Let's create a simple animation to test the Bone Constraint.<br>
+    <strong>(1)</strong> Create an animation clip.<br>
+    <strong>(2)</strong> Enable <strong>Edit Mode</strong>.<br>
+    <strong>(3)</strong> Register the bone with the applied constraint to the animation, then move it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2427.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Turn off <strong>Edit Mode</strong>.<br>
+    <strong>(2)</strong> You can see that the bone's position is restricted to the range defined by the constraint.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Example 2. "Rotation + Delta" Constraint</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2428.jpg"/>
+    <br>
+    
+    <p>
+    Now, let's set up a constraint to limit the bone's rotation.<br>
+    <strong>(1)</strong> Select the bone to which you want to apply the constraint.<br>
+    <strong>(2)</strong> Click the <strong>Add Constraint</strong> button to add a constraint.<br>
+    <strong>(3)</strong> Set the <strong>Constraint Method</strong> option to "<strong>Rotation</strong>."<br>
+    <strong>(4)</strong> You will see a guideline appear, indicating the rotation range.<br>
+    For rotation, the range is defined based on the bone's default angle (in the local coordinate system).<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2429.jpg"/>
+    <br>
+    
+    <p>
+    Set the rotation range.<br>
+    <strong>(1)</strong> Set the <strong>Range Type</strong> value to "<strong>Min ~ Max</strong>".<br>
+    <strong>(2)</strong> Set the <strong>Angle Range</strong> value appropriately.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    For constraints of the "<strong>Rotation</strong>" type, the <strong>Coordinate</strong> option does not appear due to the nature of the constraint; instead, it always operates in "<strong>Delta</strong>" mode.<br>
+    Additionally, regarding the <strong>Range Type</strong>, only "<strong>Min ~ Max</strong>" and "<strong>Fixed</strong>" options are available, given the rotational nature of the constraint.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now that the basic setup for the constraint is complete, let's take a closer look at <strong>Weight</strong> options.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2430.jpg"/>
+    <br>
+    
+    <p>
+    By default, the degree to which the constraint is applied (ranging from 0 to 1) is determined by the <strong>Default Weight</strong> option.<br>
+    However, if you link a Control Parameter to this option, the constraint intensity can be adjusted in real time.<br>
+    <strong>(1)</strong> Enable the <strong>Control Parameter</strong> option among the "Weight" settings and click the <strong>Set</strong> button.<br>
+    <strong>(2)</strong> Select a Control Parameter of the <strong>Float</strong> type and click the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2431.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Create an <strong>Animation Clip</strong> for testing.<br>
+    <strong>(2)</strong> Create an animation that rotates the bone.<br>
+    Currently, since no constraint is applied, you can see the bone rotating beyond the set range.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2432.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Register the Control Parameter linked to the Bone Constraint in the animation.<br>
+    <strong>(2)</strong> Add a keyframe.<br>
+    <strong>(3)</strong> Set the Control Parameter value to <strong>1</strong>.<br>
+    <strong>(4)</strong> You can see the constraint functioning fully, with the bone's rotation limited to the specified range.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Example 3. "Scale + Delta" Constraint</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2433.jpg"/>
+    <br>
+    
+    <p>
+    You can constrain the size of a bone using the "<strong>Scale</strong>" constraint.<br>
+    <strong>(1)</strong> Configure the coordinate system, axes, and range limits as shown above.<br>
+    <strong>(2)</strong> Several rectangular guidelines indicating the size will appear in the workspace; the gray rectangle represents the default size.<br>
+    </p>
+    <br>
+    
+    <p>
+    The "<strong>Scale</strong>" constraint in the <strong>Delta</strong> coordinate system offers options similar to the "<strong>Position</strong>" constraint and functions in much the same way.<br>
+    However, the "<strong>Scale</strong>" constraint differs in that the range values ​​must always be positive.<br>
+    This is because the "<strong>Scale</strong>" constraint does not account for the inversion of the bone's scale.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Example 4. "Position + World (FK)" Constraint</h3>
+    <br>
+    
+    <p>
+    Now, let's set the <strong>Coordinate</strong> value to "<strong>World</strong>."<br>
+    While both "<strong>Position</strong>" and "<strong>Scale</strong>" constraints support the "<strong>World</strong>" coordinate system, they operate differently.<br>
+    Additionally, the behavior and results of the "<strong>Position</strong>" constraint vary depending on whether <strong>IK</strong> is used.<br>
+    In this example, we will apply the "<strong>World</strong>" coordinate system to a "<strong>Position</strong>" constraint without using IK.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2434.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> After adding and selecting a constraint, set the <strong>Constraint Method</strong> to "<strong>Position</strong>" and the <strong>Coordinate</strong> to "<strong>World</strong>".<br>
+    <strong>(2)</strong> You can see that the guideline's coordinate system is drawn based on the World coordinate system, independent of the bone.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2435.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Set the axes and values ​​for the position limit range. Since it can be difficult to define the range in the world coordinate system, clicking the <strong>Set Current Position to Property</strong> button inputs the bone's current position into the range settings; you can use this as a reference to determine and enter the appropriate values.<br>
+    <strong>(2)</strong> You can view the defined constraint area within the workspace.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2436.jpg"/>
+    <br>
+    
+    <p>
+    <strong>Move by IK</strong> option determines whether to use IK when constraining the position.<br>
+    In this example, we will test without IK, so we will uncheck it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2437.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Create an <strong>Animation Clip</strong> for testing.<br>
+    <strong>(2)</strong> Enable <strong>Edit Mode</strong>.<br>
+    <strong>(3)</strong> This time, we created an animation where the parent bone moves in order to observe the characteristics of the "<strong>World</strong>" coordinate system.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2438.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Turn off <strong>Edit Mode</strong>.<br>
+    <strong>(2)</strong> You can see that the bone with the constraint applied does not move outside the set range, even though the parent bone has moved.<br>
+    </p>
+    <br>
+    
+    <p>
+    You can see that the "<strong>World</strong>" coordinate system constraint operates based on the overall pose, regardless of modifier or animation values.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Example 5. "Position + World (IK)" Constraint</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2439.jpg"/>
+    <br>
+    
+    <p>
+    Now, let's look at the "<strong>Position + World</strong>" constraint that utilizes "<strong>IK</strong>."<br>
+    To use this constraint effectively, an <strong>IK chain</strong> must be set up as shown above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2440.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the bone with the IK chain set up.<br>
+    <strong>(2)</strong> Click the <strong>Add Constraint</strong> button to add a constraint.<br>
+    <strong>(3)</strong> Configure the constraint to use the "<strong>Position</strong>" and "<strong>World</strong>" settings as shown above, and enter appropriate range values.<br>
+    <strong>(4)</strong> Enable the <strong>Move by IK</strong> option.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2441.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Create an <strong>Animation Clip</strong>.<br>
+    <strong>(2)</strong> Enable <strong>Edit Mode</strong>.<br>
+    <strong>(3)</strong> Move the root bone of the IK chain to trigger the constraint.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2442.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Turn off <strong>Edit Mode</strong>.<br>
+    <strong>(2)</strong> You can see the "<strong>Position</strong>" constraint in action. You can also observe how this constraint causes the pose of the entire IK chain to change via IK.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2443.jpg"/>
+    <br>
+    
+    <p>
+    This demonstrates how constraints function in conjunction with IK.<br>
+    As shown in the results above, this type of constraint is highly effective for implementing features such as "preventing a walking character's feet from sinking into the ground".<br>
+    </p>
+    <br>
+    
+    <p>
+    Let's explore using constraints more flexibly with other options.<br>
+    Until now, we have manually entered values ​​to define the constraint range.<br>
+    This method is cumbersome and does not allow for real-time adjustments.<br>
+    However, using the position of "another bone" as the constraint range value can solve this problem.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2444.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Add a new bone named "Bone Ground" to serve as the "ground" height reference.<br>
+    <strong>(2)</strong> Select the bone belonging to the IK chain that has a constraint applied.<br>
+    <strong>(3)</strong> Select the previously created constraint.<br>
+    <strong>(4)</strong> Enable the <strong>Refer to Bones</strong> option and click the <strong>Set</strong> button.<br>
+    <strong>(5)</strong> Select "Bone Ground" and click the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <p>
+    The <strong>Refer to Bones</strong> option allows you to reference other bones to substitute values ​​within the specified range.<br>
+    You can assign different bones to the X and Y axes, as well as to the minimum and maximum ranges.<br>
+    If no bone is assigned, the entered numerical value is used.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2445.jpg"/>
+    <br>
+    
+    <p>
+    Let's test this on the animation editing screen.<br>
+    <strong>(1)</strong> If you move "Bone Ground," you can see <strong>(2)</strong> the guideline moving along with it.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2446.jpg"/>
+    <br>
+    
+    <p>
+    If you exit <strong>Edit Mode</strong> in this state, you can see the constraint operating based on the Y-position of "Bone Ground."<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2447.jpg"/>
+    <br>
+    
+    <p>
+    Let's explore the options used in the "<strong>Position + World (IK)</strong>" Constraint.<br>
+    The "Common Constraint Properties" section includes the <strong>FK-based IK</strong> and <strong>Smooth IK</strong> options.<br>
+    These options are utilized when IK operates via the constraint.<br>
+    First, let's look at the function of the <strong>FK-based IK</strong> option.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>Constraints using  IK</h4>
+    <br>
+    
+    <p>
+    When a bone is moved by multiple constraints utilizing IK, the position determined by the constraints is calculated first.<br>
+    Then, IK is executed once to move the bone to that position.<br>
+    Therefore, IK-related options are not configured for each individual constraint.<br>
+    </p>
+    <br>
+    
+    <p>
+    FK-based constraints are processed in a batch before the IK calculation.<br>
+    However, IK-based constraints are processed during the IK calculation itself.<br>
+    The processing order is: "<strong>FK via Modifiers/Animation > FK-based Constraints > IK Controller > IK-based Constraints > Final Rotation Correction > Jiggle Bones</strong>."<br>
+    </p>
+    <br>
+    
+    <p>
+    IK constraints utilize the IK chain's options, just like the IK controller.<br>
+    In other words, the IK angle limits or initial pose apply in the same way.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2448.jpg"/>
+    <br>
+    
+    <p>
+    The <strong>FK-based IK</strong> option determines how the initial pose is set when constraint-based IK operates.<br>
+    When the <strong>FK-based IK</strong> option is enabled, IK calculations are performed based on the pose defined by FK.<br>
+    When the <strong>FK-based IK</strong> option is disabled, IK calculations are performed based on the pose immediately preceding the application of the constraint; this means the result may be influenced by factors such as constraints on other bones or <strong>IK Controllers</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    So, to verify the effect of this option, we will use the <strong>IK Controller</strong>.<br>
+    As shown above, we have set up an <strong>IK Controller</strong> that connects two <strong>Effector Bones</strong> to a single IK chain.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    If the "Initial Pose" option within the IK chain is set to "<strong>Prefer Angle</strong>," the distinction between <strong>FK-based IK</strong> and other modes may not make a significant difference.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2449.jpg"/>
+    <br>
+    
+    <p>
+    We performed the editing shown above on the animation editing screen.<br>
+    <strong>(1)</strong> We created a keyframe animation (FK) so that the IK chain bends to the left.<br>
+    <strong>(2)</strong> Conversely, we positioned the <strong>Effector Bone</strong> on the right.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2450.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Turn off <strong>Edit Mode</strong>.<br>
+    <strong>(2)</strong> You can see that the joints of the IK chain are bent to the right—opposite to the FK pose—due to the <strong>Effector Bone</strong> and <strong>IK Controller</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2451.jpg"/>
+    <br>
+    
+    <p>
+    Let's activate the constraint in this state.<br>
+    In the result on the left, where <strong>FK-based IK</strong> is enabled, the constraint and IK operate with the joint bent to the left based on the FK pose.<br>
+    Conversely, in the result on the right, where <strong>FK-based IK</strong> is disabled, the constraint operates based on the output of the IK Controller.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2452.jpg"/>
+    <br>
+    
+    <p>
+    Next, let's look at the "<strong>Smooth IK</strong>" option.<br>
+    This option gradually increases the IK weight when a constraint is applied.<br>
+    Since the weight is adjusted in proportion to the distance from the limit range, you need to input a distance value.<br>
+    <strong>(1)</strong> Enable the <strong>Smooth IK</strong> option and set the <strong>Transition Distance</strong> to a sufficiently large value to make it easier to observe the effect.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2453.jpg"/>
+    <br>
+    
+    <p>
+    Let's create a simple animation where a bone moves downward to observe how the constraint is applied.<br>
+    You can see that even after the constrained bone reaches its limit, it briefly moves further down before returning upward.<br>
+    This occurs because <strong>Smooth IK</strong> causes the IK weight to increase gradually, resulting in a reduced constraint effect during that interval.<br>
+    This mechanism allows you to soften the constraint boundaries and create smoother motion.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 3. 서브 타이틀(참고 박스) -->
+    <h4>The difference between Smooth IK and Smooth Clipping</h4>
+    <br>
+    
+    <p>
+    Among the constraint options, there is <strong>Smooth Clipping</strong>.<br>
+    This option also adjusts the constraint's strength near the limit boundaries to produce smooth motion.<br>
+    The difference is that while <strong>Smooth IK</strong> adjusts the "IK weight," <strong>Smooth Clipping</strong> adjusts the "constrained transform values."<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2454.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Enable the <strong>Smooth Clipping</strong> option and set the <strong>Smooth Area Size</strong> appropriately.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2455.jpg"/>
+    <br>
+    
+    <p>
+    These are the results of playing back the same animation.<br>
+    Unlike the result with <strong>Smooth IK</strong>, you can see that with <strong>Smooth Clipping</strong>, the bone does not move outside the constraint's range.<br>
+    This is due to the nature of the <strong>Smooth Clipping</strong> option, which gradually limits the bone's position while ensuring it stays within the specified range, independent of the IK system.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Example 6. "Scale + World" Constraint</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2456.jpg"/>
+    <br>
+    
+    <p>
+    The "<strong>Scale</strong>" and "<strong>World</strong>" combination constraint serves a specific purpose.<br>
+    <strong>(1)</strong> The standard skeletal operation involves child bones scaling proportionally when <strong>(2)</strong> the parent bone's scale changes.<br>
+    However, there are times when you might want to limit the scale of child bones or lock it entirely, independent of the parent bone's scale.<br>
+    This is where the "<strong>Scale + World</strong>" constraint is used.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2457.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the child bone for which you want to fix the scale.<br>
+    <strong>(2)</strong> Add a constraint, and set the <strong>Constraint Method</strong> to "<strong>Scale</strong>" and the <strong>Coordinate</strong> to "<strong>World</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2458.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(3)</strong> Set the <strong>Axis</strong> value to "<strong>X, Y</strong>" and the <strong>Range Type</strong> value to "<strong>Fixed</strong>," then configure the settings so that the size for each axis is fixed at 1.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2459.jpg"/>
+    <br>
+    
+    <p>
+    Now, you can see that the size of the child bone does not change even if the size of the parent bone is altered.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_LookAtIKController.html">< Look At IK Controller</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_BoneFinalRotationCorrection.html">Final Rotation Correction ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

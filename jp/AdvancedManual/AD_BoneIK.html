@@ -77,7 +77,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    <h4><span class="badge badge-secondary">1.7.0</span></h4>
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
@@ -85,20 +85,26 @@
     <br>
     
     <p>
-    骨をコントロールするときは、基本的に骨を回転させてコントロールします。<br>
-    一方、ユーザが1つの骨を動かすと、他の骨が自動的に回転することがあります。<br>
+    ボーンをコントロールするときは、基本的にボーンを回転させてコントロールします。<br>
+    一方、ユーザが1つのボーンを動かすと、他のボーンが自動的に回転することがあります。<br>
     この方法は「<strong>IK(Inverse Kinematics)」</strong>と呼ばれています。<br>
     IKは、直感的なコントロールを可能にします。<br>
     AnyPortraitは <strong>(1)</strong> 「エディタでの編集のためのIKを制御する機能」と <strong>(2)</strong> 「ゲームで呼び出すことができるIK機能」を提供しています。<br>
     このページでは、IK有効とエディタで使用する方法について説明します。<br>
-    IKが有効になって骨をゲームで使用するスクリプトは、<a href="../../jp/Script/SC_Bone.html">関連ページ</a>で見つけることができます。<br>
+    IKが有効になってボーンをゲームで使用するスクリプトは、<a href="../../jp/Script/SC_Bone.html">関連ページ</a>で見つけることができます。<br>
     </p>
     <br>
     
     <br>
     <br>
     <!-- 3. 서브 타이틀 -->
-    <h3>骨の詳細UI</h3>
+    <h3>ボーンの詳細UI</h3>
+    <br>
+    
+    <p>
+    ボーンIKを設定する前に、ボーンの詳細情報UIについて説明します。<br>
+    ボーン情報UIは、3つのタブに分かれています。<br>
+    </p>
     <br>
     
     <!-- 14. 가로 배치 시작 -->
@@ -110,7 +116,7 @@
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_67.jpg"/>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2495.jpg"/>
     <br>
     
     
@@ -118,16 +124,16 @@
     <div class="col-sm">
     
     <p>
-    骨の詳細UIは次のように構成されています。<br>
-    <strong>1. Name</strong> : 骨の名前<br>
-    <strong>2. Base Pose Transformation</strong> : デフォルトの位置、回転、スケール<br>
-    <strong>3. Socket</strong>: ソケットを設定するかどうか<br>
-    <strong>4. IK Mode</strong> : 4つのIKモード(Single, Head, Chain, Disabled)の現在のステータス<br>
-    <strong>5. IKチェーン情報</strong>: 「IKチェーン」接続情報<br>
-    <strong>6. Constraint</strong> : IK角度の限界設定<br>
-    <strong>7. Hierarchy</strong> : 骨の親子の接続情報<br>
-    <strong>8. Shape</strong> :  シェイプとカラーをエディタにレンダリングします。 位置は「Helper」がチェックされているときにのみ表示されます。<br>
-    <strong>9. Remove Bone</strong><br>
+    共通オプションおよび「Basic Properties」タブの画面です。<br>
+    <strong>1. Name</strong> : 名前を設定します。<br>
+    <strong>2. サブタブ</strong> : ボーンのプロパティUIを種類ごとに分類したタブです。<br>
+    <strong>3. Base Pose Transformation</strong> : 基本的な位置、回転、スケールの値を設定できます。<br>
+    <strong>4. Shape</strong> : エディターに表示される形状と色を設定します。「Helper」オプションにチェックを入れると、ボーンの位置のみが表示されます。<br>
+    <strong>5. Hierarchy</strong> : ボーンの親子関係情報を表示し、変更することもできます。「Snap to Child Bone」を押すと、ボーンの端が子ボーンに吸着します。<br>
+    <strong>6. Mirror Bone</strong> : このボーンと対称に動作するボーンを設定できます。<br>
+    <strong>7. Other Properties</strong> : ソケットなどのその他のプロパティを設定します。（<a href="../../jp/AdvancedManual/AD_Socket.html">関連ページ</a>）<br>
+    <strong>8. Duplicate</strong> : ボーンを複製します。<br>
+    <strong>9. Remove Bone</strong> : ボーンを削除します。<br>
     </p>
     <br>
     
@@ -138,8 +144,70 @@
     
     <!-- 가로 배치 종료 -->
     
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
     
-    <br><br>
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2496.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    「IK and Constraints」タブの画面です。<br>
+    このページで解説するUIは、このタブで確認できます。<br>
+    <strong>1. IK Chain Type</strong> : IKチェーンの種類（Single、Head、Chain、Disabled）を変更します。<br>
+    <strong>2. IK Chain接続情報</strong> : IKチェーンの開始や終了、次に接続されているボーンなどを確認でき、IKチェーンのターゲットを変更できます。<br>
+    <strong>3. Rotation Limit Options</strong> : IK計算時に適用される回転制限の範囲を設定します。（<a href="../../jp/AdvancedManual/AD_MakeIKIntended.html">関連ページ</a>）<br>
+    <strong>4. IK Initial Pose</strong> : IK計算時に参照される初期ポーズを設定します。<br>
+    <strong>5. IK Controller Settings</strong> : 常時動作するIKコントローラーを設定します。（<a href="../../jp/AdvancedManual/AD_BoneIKController.html">関連ページ</a>）<br>
+    <strong>6. Constraints</strong> : ボーンのトランスフォームを制限する制約を追加・設定します。（<a href="../../jp/AdvancedManual/AD_BoneConstraints.html">関連ページ</a>）<br>
+    <strong>7. Final Rotation Correction</strong> : IKの最終段階で、ボーンを追加的に回転させるオプションです。（<a href="../../jp/AdvancedManual/AD_BoneFinalRotationCorrection.html">関連ページ</a>）<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2497.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    「Physics」タブの画面です。<br>
+    <strong>1. Jiggle Bone</strong> : 慣性によって動く「ジグルボーン」を設定します。（<a href="../../jp/AdvancedManual/AD_JiggleBone.html">関連ページ</a>）<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
     
     <br>
     <br>
@@ -161,16 +229,16 @@
     <p>
     IKチェーンの概念図です。<br>
     IKチェーンは「<strong>Head、Chain,、Target</strong>」で構成されます。<br>
-    IKは「<strong>Head</strong>」の骨を出発点とし、「<strong>Target</strong>」の骨の位置まで計算されます。<br>
+    IKは「<strong>Head</strong>」のボーンを出発点とし、「<strong>Target</strong>」のボーンの位置まで計算されます。<br>
     </p>
     <br>
     
     <p>
-    IKチェーンの場合、骨は4つのIKモードのうちの1つを有する。<br>
-    <strong>1. Single</strong> : これは「Chain」なく「Target」のみの「Head」の状態です。これは、子の骨があるすべての骨のデフォルト値です。<br>
+    IKチェーンの場合、ボーンは4つのIKモードのうちの1つを有する。<br>
+    <strong>1. Single</strong> : これは「Chain」なく「Target」のみの「Head」の状態です。これは、子のボーンがあるすべてのボーンのデフォルト値です。<br>
     <strong>2. Head</strong> : これはIKチェーンの出発点です。<br>
-    <strong>3. Chain</strong> : IKチェーンの中間骨の状態です。「Head」と「Target」の間のすべての骨は、「Chain」モードに強制されます。<br>
-    <strong>4. Disabled</strong> : IKチェーンがありません。子の骨が存在しないか、ランダム指定された場合に、このモードが設定されます。<br>
+    <strong>3. Chain</strong> : IKチェーンの中間ボーンの状態です。「Head」と「Target」の間のすべてのボーンは、「Chain」モードに強制されます。<br>
+    <strong>4. Disabled</strong> : IKチェーンがありません。子のボーンが存在しないか、ランダム指定された場合に、このモードが設定されます。<br>
     </p>
     <br>
     
@@ -181,7 +249,7 @@
     
     <p>
     IKチェーンを作成するには、<br>
-    <strong>(1)</strong> 骨を選択して、<br>
+    <strong>(1)</strong> ボーンを選択して、<br>
     <strong>(2)</strong> IKモードを「<strong>Head</strong>」に変更します。<br>
     </p>
     <br>
@@ -192,7 +260,7 @@
     <br>
     
     <p>
-    <strong>(3)</strong> <strong>「Change IK Target」</strong>ボタンを押して、<strong>(4)</strong> 対象となる骨を選択します。<br>
+    <strong>(3)</strong> <strong>「Change IK Target」</strong>ボタンを押して、<strong>(4)</strong> 対象となるボーンを選択します。<br>
     </p>
     <br>
     
@@ -207,9 +275,9 @@
     <br>
     
     <p>
-    IKチェーンが作成されると、中間の骨は、自動的に「Chain」モードに変更されます。<br>
-    ターゲットの骨は、IKチェーンの影響を受けません。<br>
-    (現在選択されて、骨は、子がないので、「Disabled」モードであり、他の新しいIKチェーンを構成することもできます。)<br>
+    IKチェーンが作成されると、中間のボーンは、自動的に「Chain」モードに変更されます。<br>
+    ターゲットのボーンは、IKチェーンの影響を受けません。<br>
+    (現在選択されて、ボーンは、子がないので、「Disabled」モードであり、他の新しいIKチェーンを構成することもできます。)<br>
     </p>
     <br>
     
@@ -219,8 +287,8 @@
     <br>
     
     <p>
-    IKチェーンを使用すると、骨を移動したとき、チェーンの骨が自動的に回転することを見ることができます。<br>
-    (骨の編集、モディファイヤとアニメーションで確認することもできます。)<br>
+    IKチェーンを使用すると、ボーンを移動したとき、チェーンのボーンが自動的に回転することを見ることができます。<br>
+    (ボーンの編集、モディファイヤとアニメーションで確認することもできます。)<br>
     </p>
     <br>
     
@@ -242,9 +310,31 @@
     
     <p>
     回転角度を制限する機能を使用する方法は次のとおりです。<br>
-    <strong>(1)</strong> 骨を選択します。<br>
+    <strong>(1)</strong> ボーンを選択します。<br>
     <strong>(2)</strong> 「<strong>Constraint</strong>」ボタンを押して 「<strong>Constraint On</strong>」状態にします。<br>
     </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.7.0</span></h4>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2498.jpg"/>
+    <br>
+    
+    <p>
+    「AnyPortrait v1.7.0」にて、UIの配置や用語が変更されました。<br>
+    「IK Angle Constraint」項目は、「IK Rotation Options」内の「<strong>Rotation Limit Options</strong>」項目に変更されました。<br>
+    角度を制限する項目の名称は「<strong>Limit Rotation</strong>」となり、チェックボックス形式のUIに変更されました。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
     <br>
     
     <!-- 8. 이미지 (가운데 정렬) -->
@@ -256,7 +346,7 @@
     回転限度の範囲を設定します。<br>
     「<strong>Min</strong>」と「<strong>Max</strong>」の値を使用して限界範囲を設定することができます。<br>
     「<strong>Preferred</strong>」の値は、IKの計算式の基礎となる角度です。<br>
-    角度制限がある骨を画面上で直感的に見ることができます。<br>
+    角度制限があるボーンを画面上で直感的に見ることができます。<br>
     </p>
     <br>
     
@@ -309,7 +399,7 @@
     <br>
     <br>
     <!-- 3. 서브 타이틀 -->
-    <h3>IKなしの骨</h3>
+    <h3>IKなしのボーン</h3>
     <br>
     
     <!-- 8. 이미지 (가운데 정렬) -->
@@ -319,19 +409,19 @@
     
     <p>
     IKを適用しない場合があります。<br>
-    以下の場合、親骨はIK連鎖関係には関係しません。<br>
+    以下の場合、親ボーンはIK連鎖関係には関係しません。<br>
     </p>
     <br>
     
     <p>
-    - 親の骨がない場合<br>
-    - 親骨が「Disabled」モードにある場合<br>
-    - 親骨がIK鎖を有するが、別の子骨に標的化されている場合<br>
+    - 親のボーンがない場合<br>
+    - 親ボーンが「Disabled」モードにある場合<br>
+    - 親ボーンがIK鎖を有するが、別の子ボーンに標的化されている場合<br>
     </p>
     <br>
     
     <p>
-    上の写真は、親骨がIK鎖を有するが、IK鎖が他の子供骨のために形成されるため、IK鎖が形成されないことを示している。<br>
+    上の写真は、親ボーンがIK鎖を有するが、IK鎖が他の子供ボーンのために形成されるため、IK鎖が形成されないことを示している。<br>
     </p>
     <br>
     
@@ -341,7 +431,7 @@
     <br>
     
     <p>
-    IKが設定されていない場合、親の骨は回転しません。<br>
+    IKが設定されていない場合、親のボーンは回転しません。<br>
     </p>
     <br>
     

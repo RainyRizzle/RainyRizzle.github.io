@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>デフォルトのレンダーパイプライン設定</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/ja/anyportrait-ja/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ja/ap-video-tutorials-ja/">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ja/forum-ja/">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_DefaultRenderPipeline.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_DefaultRenderPipeline.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_DefaultRenderPipeline.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/ja/anyportrait-ja/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > デフォルトのレンダーパイプライン設定</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">デフォルトのレンダーパイプライン設定</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.7.0</span></h4>
+    
+    <p>
+    AnyPortraitで作成した成果物には、プロジェクトの「レンダーパイプライン（Render Pipeline）」に適したマテリアルとシェーダーを適用する必要があります。<br>
+    そのため、AnyPortraitエディターの「マテリアルライブラリ」（<a href="../../jp/AdvancedManual/AD_MaterialLibrary.html">リンク</a>）を使用して、マテリアルとシェーダーを適切に変更しなければなりません。<br>
+    AnyPortraitのデフォルトのマテリアルは「<strong>Built-In RP</strong>」であるため、「<strong>Universal RP（以下URP）</strong>」に設定されたプロジェクトでは、すべての成果物のマテリアルをURP用に変更する必要があります。<br>
+    </p>
+    <br>
+    
+    <p>
+    最新バージョンのUnityでは「URP」が推奨されていますが、その場合、毎回「URP」用のマテリアルに差し替える作業はかなり煩雑なものとなるでしょう。<br>
+    この不便さを解消するため、「AnyPortrait v1.7.0」には、新しいポートレートを作成する際のデフォルトマテリアルをレンダリングパイプラインに合わせて変更する機能とオプションが追加されました。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>AnyPortraitインストール後の基本レンダーパイプラインの選択</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2371.jpg"/>
+    <br>
+    
+    <p>
+    Unityプロジェクトを新規作成し、AnyPortraitをプロジェクトにインポートした後、AnyPortraitを実行してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2372.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitエディターが開く前に、現在のプロジェクトのレンダーパイプラインを選択するダイアログが表示されます。<br>
+    このオプションによって、AnyPortraitにおける「デフォルトのレンダーパイプライン」が決定されます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2373.jpg"/>
+    <br>
+    
+    <p>
+    現在のプロジェクトのレンダーパイプラインが「URP」であると仮定して、設定を行ってみましょう。<br>
+    <strong>(1)</strong> 「<strong>Universal RP</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Launch AnyPortrait</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2374.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitエディターが開いたら、新しいポートレートを作成してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2375.jpg"/>
+    <br>
+    
+    <p>
+    キャラクターの制作作業をすべて完了し、「Bake」を行う前に、「URP」用のマテリアルが適用されているか確認してみましょう。<br>
+    <strong>(1)</strong> 「<strong>Root Unit</strong>」を選択します。<br>
+    <strong>(2)</strong> 「<strong>Material Library</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> 「URP」用の「Unlit」マテリアルセットが設定されていることが確認できます。<br>
+    <strong>(4)</strong> また、「URP」用のマテリアルプリセットが追加されていることも確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2376.jpg"/>
+    <br>
+    
+    <p>
+    レンダーパイプラインに応じてマテリアルだけでなく「Bake」設定も変更する必要がありますが、この値も初期設定に合わせて変更されます。<br>
+    <strong>(1)</strong> 「<strong>Bake</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> 「<strong>Setting</strong>」タブを選択します。<br>
+    <strong>(3)</strong> 「<strong>Render Pipeline</strong>」オプションの値が、「URP」に合わせて「<strong>Scriptable Render Pipeline</strong>」に変更されていることが確認できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    このページでは「URP」が設定されたプロジェクトについて説明しましたが、「Built-In RP」が適用されたプロジェクトでも、同様の手順でオプションを設定すれば問題ありません。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>デフォルトのレンダーパイプラインの変更</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2377.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortraitの初期画面以外にも、「設定ダイアログ」から「デフォルトのレンダーパイプライン」を変更できます。<br>
+    <strong>(1)</strong> 「設定ダイアログ」を開きます。<br>
+    <strong>(2)</strong> 「<strong>Editor</strong>」タブを開き、「Default Settings for New Portraits」セクションにある「<strong>Render Pipeline</strong>」オプションを変更することで、「デフォルトのレンダーパイプライン」を変更できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    「デフォルトのレンダーパイプライン」設定には、以下の特徴があります。<br>
+    - このオプションは新規のポートレートにのみ適用され、既存の作業物には適用されません。<br>
+    - このオプションは、Unity 2023以降のバージョンでのみ利用可能です。<br>
+    - このオプションは、Unityプロジェクト単位で設定されます。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_SettingDialog.html">< 設定ダイアログ</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_Shortcuts.html">ショートカット ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

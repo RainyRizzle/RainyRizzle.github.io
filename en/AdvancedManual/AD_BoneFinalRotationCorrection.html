@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Final Rotation Correction</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/en/anyportrait-en/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/en/ap-video-tutorials-en/">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/en/forum-en/">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_BoneFinalRotationCorrection.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_BoneFinalRotationCorrection.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_BoneFinalRotationCorrection.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/en/anyportrait-en/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Final Rotation Correction</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Final Rotation Correction</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.7.0</span></h4>
+    
+    <p>
+    Skeletal animation is executed through a multi-stage process.<br>
+    Excluding specialized operations such as physics effects, these processing stages are broadly categorized into "<strong>FK</strong>" and "<strong>IK</strong>" calculations.<br>
+    Animation data based on FK is calculated first, followed by motion adjustments driven by IK options; this sequence can sometimes lead to unintended results.<br>
+    In particular, the orientation of a bone moved by IK may shift significantly compared to its FK-based state.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2460.jpg"/>
+    <br>
+    
+    <p>
+    To address this issue, <strong>AnyPortrait v1.7.0</strong> introduces a step called "<strong>Final Rotation Correction</strong>."<br>
+    <strong>Final Rotation Correction</strong> operates at the end of the IK processing stage and serves to adjust the bone's rotation angle determined during that stage.<br>
+    This page explains the process of applying <strong>Final Rotation Correction</strong> and the available options.<br>
+    It also presents an example that incorporates <strong>Bone Constraint</strong>.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    Before reading this page, we recommend that you first read the following manual on IK.<br>
+    - <a href="../../en/AdvancedManual/AD_BoneIK.html">IK Settings</a><br>
+    - <a href="../../en/AdvancedManual/AD_BoneIKController.html">IK Controller</a><br>
+    - <a href="../../en/AdvancedManual/AD_BoneConstraints.html">Bone Constraints</a><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2461.jpg"/>
+    <br>
+    
+    <p>
+    We have prepared an example of a robot swinging a sword.<br>
+    To observe the effect of <strong>Final Rotation Correction</strong>, you should use the IK function.<br>
+    After setting up the IK chain as shown above, configure an IK controller of the "Position" type.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2462.jpg"/>
+    <br>
+    
+    <p>
+    Create an animation of a robot holding a sword.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2463.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> When <strong>Edit Mode</strong> is turned off, <strong>(2)</strong> the IK controller activates, causing the robot's arm to point toward the target.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2464.jpg"/>
+    <br>
+    
+    <p>
+    This allows you to easily create animations using the IK controller's <strong>Effector Bone</strong>.<br>
+    <strong>(1)</strong> However, depending on the position of the <strong>Effector Bone</strong>, the sword might end up pointing toward the robot's face, resulting in an awkward pose.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2465.jpg"/>
+    <br>
+    
+    <p>
+    To resolve this issue, let's apply <strong>Final Rotation Correction</strong>.<br>
+    <strong>(1)</strong> Select the <strong>Bone</strong> tab on the mesh group editing screen.<br>
+    <strong>(2)</strong> Select the bone to which the IK controller is applied.<br>
+    <strong>(3)</strong> Select the <strong>IK and Constraints</strong> tab.<br>
+    <strong>(4)</strong> You will see the <strong>Final Rotation Correction</strong> item and its options.<br>
+    </p>
+    <br>
+    
+    <p>
+    These options are as follows:<br>
+    <strong>1. Keep World Angle</strong> : Preserves the bone's rotation angle in world space—as edited in FK—and reapplies it at the end of the IK calculation.<br>
+    <strong>2. Look At</strong> : Rotates the bone to face another bone at the end of the IK calculation.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    The <strong>Keep World Angle</strong> and <strong>Look At</strong> options can be set simultaneously.<br>
+    When both options are enabled, <strong>Keep World Angle</strong> is applied first, followed by <strong>Look At</strong>.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2466.jpg"/>
+    <br>
+    
+    <p>
+    First, let's apply <strong>Keep World Angle</strong>.<br>
+    <strong>(1)</strong> Enable <strong>Keep World Angle</strong>.<br>
+    <strong>(2)</strong> <strong>Default Weight</strong> determines the extent of the correction. Here, we entered "<strong>0.6</strong>" to apply it only partially.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2467.jpg"/>
+    <br>
+    
+    <p>
+    If you play the animation again, you will see that the hand holding the sword rotates less, preventing it from pointing toward the face.<br>
+    Since the <strong>Keep World Angle</strong> option restores the angle to its FK state, the pose set in the keyframe is reflected in the IK result.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2468.jpg"/>
+    <br>
+    
+    <p>
+    Next, let's use the <strong>Look At</strong> option instead of <strong>Keep World Angle</strong>.<br>
+    <strong>(1)</strong> Add the bone to be used as the target for <strong>Look At</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2469.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the bone with the IK controller applied.<br>
+    <strong>(2)</strong> Enable <strong>Look At</strong> and click the <strong>Set</strong> button.<br>
+    <strong>(3)</strong> Select the bone added previously.<br>
+    <strong>(4)</strong> Click the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2470.jpg"/>
+    <br>
+    
+    <p>
+    Let's play the animation.<br>
+    This time, you can see the hand tracking a specific bone—independent of the IK controller.<br>
+    The <strong>Look At</strong> option uses an external bone to determine the adjustment angle and is effectively used to lock the orientation of a bone.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    The <strong>Look At</strong> option functions similarly to the "<strong>Look At IK Controller</strong>."<br>
+    The results are virtually identical, particularly when a bone rotates independently without an IK chain.<br>
+    Although the results are similar, please consider the differences in supported detailed options and processing order when selecting the appropriate feature for your needs.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2471.jpg"/>
+    <br>
+    
+    <p>
+    Let's look at the other options.<br>
+    The <strong>Limit Rotation</strong> option appears when either <strong>Keep World Angle</strong> or <strong>Look At</strong> is enabled.<br>
+    This option limits the range of the bone's rotation angle.<br>
+    When the <strong>Smooth Clipping</strong> option is enabled, the limit range is softened by the <strong>Smooth Area Size</strong> value, resulting in a smooth transition at the limit.<br>
+    You can view the limited angle range in the workspace.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2472.jpg"/>
+    <br>
+    
+    <p>
+    You can assign individual weights to <strong>Keep World Angle</strong> and <strong>Look At</strong>.<br>
+    In particular, by connecting a Float-type <strong>Control Parameter</strong>, you can adjust the degree of <strong>Final Rotation Correction</strong> in real time.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Example of using the Bone Constraint together</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2473.jpg"/>
+    <br>
+    
+    <p>
+    This time, let's use a <strong>Bone Constraint</strong> instead of an IK controller.<br>
+    As shown above, we have prepared a cute character that looks like it belongs in a 2D game.<br>
+    We have added a green box beneath the character's feet to represent the "ground."<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2474.jpg"/>
+    <br>
+    
+    <p>
+    We added bones to create the character's "running" animation as shown above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2475.jpg"/>
+    <br>
+    
+    <p>
+    However, you may notice moments where the character's feet dip below the ground.<br>
+    To resolve this issue using keyframe animation, you would need to specify the position of the character's feet for every single frame.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2476.jpg"/>
+    <br>
+    
+    <p>
+    However, you can easily solve this problem by using constraints and IK.<br>
+    <strong>(1)</strong> Create a bone named "Bone Ground" positioned at the Y-coordinate of the ground.<br>
+    <strong>(2)</strong> Set up an <strong>IK chain</strong> on the bones of the character's legs.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2477.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the bone corresponding to the character's foot.<br>
+    <strong>(2)</strong> Add a <strong>Constraint</strong>.<br>
+    <strong>(3)</strong> Configure the constraint as shown in the image above so that the character's foot is positioned above "Bone Ground."<br>
+    - Constraint Method : Position<br>
+    - Coordinate : World<br>
+    - Axis : Y<br>
+    - Range Type : Min<br>
+    - Refer to Bones : Enabled targeting "Bone Ground"<br>
+    - Move by IK : Enabled<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2478.jpg"/>
+    <br>
+    
+    <p>
+    Now, when you play the animation, you can see that the character's foot does not sink below the "Bone Ground."<br>
+    This effectively prevents the character's foot from going underground.<br>
+    <strong>(1)</strong> However, the foot is still pointing downwards, which looks a bit unnatural.<br>
+    This occurs because, although the IK system was activated by the constraint, the resulting IK movement did not control the angle of the character's foot.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2479.jpg"/>
+    <br>
+    
+    <p>
+    Return to the mesh group editing screen and apply <strong>Final Rotation Correction</strong>.<br>
+    <strong>(1)</strong> Select the bone to which the constraint was applied.<br>
+    <strong>(2)</strong> Enable the <strong>Keep World Angle</strong> option under <strong>Final Rotation Correction</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2480.jpg"/>
+    <br>
+    
+    <p>
+    The angle of the character's foot is now natural.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2481.jpg"/>
+    <br>
+    
+    <p>
+    An animation of running with a more natural foot-to-ground contact has been completed.<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    On this page, the <strong>Final Rotation Correction</strong> option was applied to bones configured with IK controllers or constraints.<br>
+    However, <strong>Final Rotation Correction</strong> can be used regardless of whether IK functionality is enabled.<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_BoneConstraints.html">< Bone Constraints</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_SaveBoneSettings.html">Export / Import Bone settings ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

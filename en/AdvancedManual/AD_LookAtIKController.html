@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>Look At IK Controller</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/en/anyportrait-en/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/GettingStarted.html">Getting Started</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../en/AdManual.html">Manual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../en/Script.html">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/en/ap-video-tutorials-en/">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/en/forum-en/">Forum</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary active" href="../../en/AdvancedManual/AD_LookAtIKController.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_LookAtIKController.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_LookAtIKController.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../en/Search.html">Search</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/en/anyportrait-en/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../en/AdManual.html"><span class="text-dark">Manual</span></a> > Look At IK Controller</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">Look At IK Controller</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.7.0</span></h4>
+    
+    <p>
+    There are two types of <strong>IK Controller</strong> used to move IK chains: "<strong>Position</strong>" and "<strong>Look At</strong>."<br>
+    Among them, the <strong>Look At</strong> type IK Controller has been significantly improved in <strong>AnyPortrait v1.7.0</strong>.<br>
+    Changes to its operation have led to the addition of various options.<br>
+    This page covers the improved <strong>Look At IK Controller</strong>.<br>
+    It explains the options corresponding to each stage of the procedural calculation process.<br>
+    Special cases are also discussed.<br>
+    We recommend reading the following manuals regarding IK Controllers first.<br>
+    - <a href="../../en/AdvancedManual/AD_BoneIK.html">IK Settings</a><br>
+    - <a href="../../en/AdvancedManual/AD_BoneIKController.html">IK Controller </a><br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Applying Look At IK</h3>
+    <br>
+    
+    <p>
+    Before diving into the details, let’s review how to set up a <strong>Look At</strong> IK Controller.<br>
+    This explanation assumes that bones have been added to the mesh group and the IK chain has already been configured.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2381.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the <strong>Bone</strong> tab.<br>
+    <strong>(2)</strong> Select the bone to which you want to apply IK.<br>
+    <strong>(3)</strong> Select the <strong>IK and Constraints</strong> tab in the right-hand UI.<br>
+    <strong>(4)</strong> You can apply an <strong>IK Controller</strong> by changing the <strong>Controller Type</strong> option under "IK Controller Settings."<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2382.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Set the Effector Bone for the IK.<br>
+    <strong>(2)</strong> You can see that the IK Controller is applied.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2383.jpg"/>
+    <br>
+    
+    <p>
+    The way a bone follows the Effector Bone depends on the IK Controller type.<br>
+    With the "<strong>Position</strong>" type, the bone moves so that its position aligns with the Effector Bone.<br>
+    With the "<strong>Look At</strong>" type, the bone moves close to the Effector Bone and then rotates so that its tip faces the Effector Bone.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Look At Process</h3>
+    <br>
+    
+    <p>
+    The improved "<strong>Look At</strong>" operates based on location and involves a three-step calculation process.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2378.jpg"/>
+    <br>
+    
+    <p>
+    There is an IK chain connecting the Head Bone to the Target Bone.<br>
+    The "<strong>Look At</strong>" IK is a setup where this IK chain causes the bone to "look at" the Effector Bone.<br>
+    If we consider only the act of "looking," simply rotating the Target Bone would suffice.<br>
+    However, allowing the Target Bone to shift slightly toward the Effector Bone would result in a more natural appearance.<br>
+    Therefore, the goal of the first step is to determine the appropriate position for the Target Bone to move to—specifically, the "<strong>Follow Point</strong>."<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2379.jpg"/>
+    <br>
+    
+    <p>
+    In Step 2, the final position to which the Target Bone is moved by the IK system is determined using the "<strong>Follow Point</strong>" calculated in Step 1.<br>
+    The "<strong>Follow Point</strong>" represents the position the bone would occupy if it followed the Effector Bone as closely as possible.<br>
+    The "<strong>Follow Ratio</strong>" option is used to determine the extent to which this "<strong>Follow Point</strong>" is applied.<br>
+    In other words, if the "<strong>Follow Ratio</strong>" is 0, the Target Bone does not move from its original location but simply rotates in place.<br>
+    As the "<strong>Follow Ratio</strong>" increases toward 1, the Target Bone moves progressively closer to the Effector Bone.<br>
+    Additionally, the IK process is executed upon the completion of Step 2.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2380.jpg"/>
+    <br>
+    
+    <p>
+    By the time Stage 2 is complete, the IK process has been executed, and the bones in the IK chain have moved.<br>
+    Although the IK chain has moved toward the Effector Bone, the Target Bone is not yet perfectly aligned to face the Effector Bone.<br>
+    Therefore, in Step 3, only the Target Bone rotates slightly further to face the Effector Bone.<br>
+    </p>
+    <br>
+    
+    <p>
+    Now, let's look at the options used at each step.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Step 1. Calculating the Follow Point</h3>
+    <br>
+    
+    <p>
+    The goal of the first step is to determine the "<strong>Follow Point</strong>," the position toward which the Target Bone moves as naturally as possible.<br>
+    The "<strong>Follow Point</strong>" uses the Effector Bone's position as its initial value and adjusts its location according to the following conditions.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2384.jpg"/>
+    <br>
+    
+    <p>
+    The first thing to consider is the case where the Effector Bone is too close to the head bone.<br>
+    If the Effector Bone is close to the IK chain—specifically the Head Bone, which is the chain's starting point—it can easily result in an unnatural shape, as shown above.<br>
+    Therefore, if they are too close, you need to disregard this proximity to some extent.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2385.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the Target Bone to which the IK controller is applied.<br>
+    <strong>(2)</strong> Increase the value of the <strong>Safe Zone</strong> option.<br>
+    <strong>(3)</strong> You will see a green circle centered on the Head Bone expand based on the setting, and the Target Bone orienting itself outward from the Head Bone accordingly.<br>
+    </p>
+    <br>
+    
+    <p>
+    When the Effector Bone enters the <strong>Safe Zone</strong>, "<strong>Follow Point</strong>" is configured to treat the Effector Bone as if it were outside the <strong>Safe Zone</strong>.<br>
+    This causes the Target Bone to face outward from the <strong>Safe Zone</strong>, as shown above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2386.jpg"/>
+    <br>
+    
+    <p>
+    The second factor to consider is the appropriate distance between the Target Bone and the Effector Bone.<br>
+    The primary difference between "<strong>Look At</strong>" and "<strong>Position</strong>" type IK controllers is whether the Target Bone moves to align its position with the Effector Bone.<br>
+    With the "<strong>Look At</strong>" IK controller, the Target Bone and the Effector Bone must be separated by an appropriate distance.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2387.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Change the value of the <strong>Optimal Distance</strong> option. (Clicking the <strong>Use Bone Length as Distance</strong> button automatically enters a value based on the bone's shape.)<br>
+    <strong>(2)</strong> A red circle is drawn around the Target Bone based on the entered value, and you can see the Target Bone and Effector Bone positioned apart by that distance.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2388.jpg"/>
+    <br>
+    
+    <p>
+    The third point to consider is how the IK chain behaves as the Effector Bone approaches.<br>
+    While the first case concerned the "minimum range," what we are discussing here is the overall shape of the IK chain.<br>
+    As shown in the image above, the Effector Bone has not yet entered the "minimum range" (indicated by the green circle), yet the shape of the IK chain has already changed significantly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2389.jpg"/>
+    <br>
+    
+    <p>
+    In the "<strong>Look At</strong>" IK ㅊontroller, the system recognizes that the "Effector Bone has come close enough" if the distance between the Effector Bone and the Head Bone is less than the following value:<br>
+    "<span class="text-primary"><strong>(Distance between Head Bone and Target Bone) + (Optimal Distance value x 1.5)</strong></span>"<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2390.jpg"/>
+    <br>
+    
+    <p>
+    When the Effector Bone comes within range, the "<strong>Follow Point</strong>" is shifted slightly to ensure the IK-driven pose looks natural.<br>
+    The closer the Effector Bone gets, the stronger the positional correction becomes.<br>
+    The following options are used to determine how the "<strong>Follow Point</strong>" moves.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2391.jpg"/>
+    <br>
+    
+    <p>
+    The method for adjusting the position of the "<strong>Follow Point</strong>" is determined by the <strong>Correction Method</strong> option under "Options for Close Effector."<br>
+    - <strong>None</strong>: Do not move the "<strong>Follow Point</strong>."<br>
+    - <strong>By Current Pose</strong>: Move the "<strong>Follow Point</strong>" based on the pose held immediately before the "<strong>Look At</strong>" IK Controller activates.<br>
+    - <strong>Rotated By Angle</strong>: Set the "<strong>Follow Point</strong>" at a position rotated by the specified angle relative to the head bone.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2392.jpg"/>
+    <br>
+    
+    <p>
+    You can achieve the result shown above by setting <strong>Correction Method</strong> to "<strong>None</strong>".<br>
+    By default, the "<strong>Follow Point</strong>" is positioned on the line connecting the Head Bone and the Effector Bone.<br>
+    Unless the Effector Bone is positioned too close, the "<strong>None</strong>" method does not move the "<strong>Follow Point</strong>", resulting in the behavior shown above.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2393.jpg"/>
+    <br>
+    
+    <p>
+    When <strong>Correction Method</strong> is set to "<strong>By Current Pose</strong>", the "<strong>Follow Point</strong>" shifts, altering the IK result as shown above.<br>
+    This method operates based on the pose immediately preceding the activation of the <strong>Look At</strong> IK Controller (accounting for FK, previously active IK Controllers, and so on).<br>
+    Since the "<strong>Follow Point</strong>" moves toward the IK chain's Target Bone, the resulting movement appears more natural.<br>
+    Let’s observe how this method works in the animation editing view.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2394.jpg"/>
+    <br>
+    
+    <p>
+    Create an Animation Clip, enable <strong>Animation Edit Mode</strong>, and then move the IK chain bones appropriately to complete the FK pose.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2395.jpg"/>
+    <br>
+    
+    <p>
+    Turning off <strong>Animation Edit Mode</strong> activates the IK controller.<br>
+    If you observe the result of the "<strong>Look At</strong>" IK Controller at this stage, you will see that the IK chain's Target Bone is positioned slightly lower while facing the Effector Bone.<br>
+    This is because the Target Bone was positioned lower in the pose originally created using FK.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2396.jpg"/>
+    <br>
+    
+    <p>
+    Therefore, setting the FK pose differently results in a different outcome for the "<strong>Look At</strong>" IK controller.<br>
+    As shown in the image above, the result of the "<strong>Look At</strong>" IK Controller changes depending on the two poses.<br>
+    In particular, please note the position of the Target Bone relative to the line connecting the Head Bone and the Effector Bone—specifically, whether it is located above or below that line.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2397.jpg"/>
+    <br>
+    
+    <p>
+    When <strong>Correction Method</strong> is set to "<strong>Rotation By Angle</strong>", a green guide line extending from the Head Bone appears.<br>
+    This green line indicates the direction in which the position of "<strong>Follow Point</strong>" is being corrected.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2398.jpg"/>
+    <br>
+    
+    <p>
+    When you change the <strong>Correction Angle</strong> value, you can see the green guide line rotating around the Head Bone.<br>
+    The "<strong>Follow Point</strong>" is located on the vector connecting the Head Bone and the Effector Bone; "<strong>Rotation By Angle</strong>" rotates this vector to adjust the position of the "<strong>Follow Point</strong>".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2399.jpg"/>
+    <br>
+    
+    <p>
+    If you turn off <strong>Edit Mode</strong> in this state, the "<strong>Look At</strong>" IK Controller activates, allowing you to see the result.<br>
+    The Target Bone moves according to the <strong>Correction Angle</strong> value, which indicates that the "<strong>Follow Point</strong>" has shifted by that amount.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>Note</strong></span><br>
+    The option values ​​applied when moving the "<strong>Follow Point</strong>" represent the values ​​at the point of maximum possible movement.<br>
+    As the Effector Bone moves further away, the degree of positional adjustment gradually decreases, resulting in less actual movement than the value entered.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Step 2. Executing IK with the Follow Ratio</h3>
+    <br>
+    
+    <p>
+    The "<strong>Follow Point</strong>" obtained in Step 1 represents the position the Target Bone would occupy if it followed the Effector Bone as closely as possible.<br>
+    If the "<strong>Follow Point</strong>" is applied fully, the bones in the IK chain tend to move significantly.<br>
+    If only a small amount of the "<strong>Follow Point</strong>" is applied, the IK chain bones move minimally, while the Target Bone rotates toward the Effector Bone.<br>
+    The result of the "<strong>Look At</strong>" IK Controller varies significantly depending on the extent to which the "<strong>Follow Point</strong>" is applied.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2400.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> You can determine the extent to which the "<strong>Follow Point</strong>" is applied by using the <strong>Follow Ratio</strong> option under "Follow Target."<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2401.jpg"/>
+    <br>
+    
+    <p>
+    The <strong>Follow Ratio</strong> ranges from 0 to 1, and adjusting this value alters the IK result as shown above.<br>
+    When <strong>Follow Ratio</strong> is 0, only the Target Bone rotates, yielding the same result as the "<strong>Single Bone Look At</strong>" described below.<br>
+    As <strong>Follow Ratio</strong> approaches 1, the Target Bone moves toward the Effector Bone.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2402.jpg"/>
+    <br>
+    
+    <p>
+    The value of <strong>Follow Ratio</strong> can be controlled using a <strong>Control Parameter</strong>.<br>
+    By enabling the <strong>Control Parameter</strong> option and selecting a "Float" type control parameter, you can change the <strong>Follow Ratio</strong> in real time.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Step 3. Rotating the Target Bone</h3>
+    <br>
+    
+    <p>
+    IK is executed once Step 2 is complete.<br>
+    While IK moves the bones in the IK chain, the Target Bone is not yet oriented toward the effector bone even after the IK process finishes.<br>
+    Therefore, Step 3 involves rotating the Target Bone to face the Effector Bone.<br>
+    At this Step, the <strong>Limit Rotation</strong> option for the IK chain can be used to restrict the Target Bone's rotation.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2403.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the Target Bone.<br>
+    <strong>(2)</strong> Enable <strong>Limit Rotation</strong> among the IK chain options.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2404.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Adjust the <strong>Angle Range</strong> value.<br>
+    <strong>(2)</strong> You can see that the rotation angle of the Target Bone is restricted by the option.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2405.jpg"/>
+    <br>
+    
+    <p>
+    If you wish to apply a smooth limit to the rotation angle, you can use the options above.<br>
+    <strong>(1)</strong> Enable the <strong>Soft Limit</strong> option.<br>
+    <strong>(2)</strong> <strong>Smooth Area Size</strong> defines the angular range over which the limit is applied smoothly. Increasing this value results in a gradual limitation across a wider angular range.<br>
+    </p>
+    <br>
+    
+    <p>
+    The <strong>Soft Limit</strong> for the Target Bone operates as follows:<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2406.jpg"/>
+    <br>
+    
+    <p>
+    The angle limit of the <strong>Angle Range</strong> is relaxed by the angle specified in the <strong>Smooth Area Size</strong> option.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2407.jpg"/>
+    <br>
+    
+    <p>
+    When the angle toward the Effector Bone falls within the <strong>Smooth Area</strong>, the Target Bone gradually "looks less" at the Effector Bone.<br>
+    If the angle toward the Effector Bone lies outside the <strong>Smooth Area</strong>, the Target Bone rotates by the angle specified in the <strong>Angle Range</strong> and then stops.<br>
+    </p>
+    <br>
+    
+    <p>
+    Once step 3 is completed, the operation of the "<strong>Look At</strong>" IK Controller is finished.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>"Look At" of a Single Bone</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2408.jpg"/>
+    <br>
+    
+    <p>
+    If you apply a "Look At" IK Controller to a bone that is not part of an IK chain, the system skips the IK calculation and performs only a simple rotation.<br>
+    <strong>(1)</strong> Select the parent bone.<br>
+    <strong>(2)</strong> Release the IK chain leading to the child bone, or set up the IK chain to target a different bone instead.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2409.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select the bone to which the IK will be applied.<br>
+    <strong>(2)</strong> Set up the "<strong>Look At</strong>" IK Controller.<br>
+    <strong>(3)</strong> Since there is no IK chain, you can see the bone rotating independently to face the Effector Bone.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>Indirect Aim</h3>
+    <br>
+    
+    <p>
+    The role of the "<strong>Look At</strong>" IK Controller is to make the Target Bone face the Effector Bone within an IK chain.<br>
+    However, there are certainly cases where you need a bone other than the Target Bone to face the Effector Bone.<br>
+    A prime example is "a hand holding a gun".<br>
+    The muzzle needs to point at the aiming target, but since the IK is applied to the hand, the result would be inaccurate.<br>
+    Even if you applied the IK chain to the gun itself, the IK might not function correctly because the gun and the hand are fixed relative to each other.<br>
+    The option used in this scenario is <strong>Indirect Aim</strong>.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2410.jpg"/>
+    <br>
+    
+    <p>
+    We have prepared a simple example as shown above.<br>
+    The bone representing the muzzle, "<strong>Bone Gun</strong>," is currently connected as a child of the IK chain's bone, "<strong>Bone Hand</strong>."<br>
+    Next, we will create "<strong>Bone Effector</strong>"—representing the aiming point—and set it as the target for the "<strong>Look At</strong>" function.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2411.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Select "Bone Hand".<br>
+    <strong>(2)</strong> Set up a "<strong>Look At</strong>" IK Controller targeting "Bone Effector".<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2412.jpg"/>
+    <br>
+    
+    <p>
+    At first glance, moving the "Bone Effector" seems to work well.<br>
+    However, a closer look reveals that the IK controller operates independently of the "Bone Gun," meaning the gun fails to aim correctly.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2413.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Reselect the "Bone Hand" to which the "<strong>Look At</strong>" IK controller is applied.<br>
+    <strong>(2)</strong> Enable the <strong>Indirect Aim</strong> option.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2414.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> Press the <strong>Set</strong> button.<br>
+    <strong>(2)</strong> The child bones of "Bone Hand" appear, and select "<strong>Bone Gun</strong>" here.<br>
+    <strong>(3)</strong> Press the <strong>Select</strong> button.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2415.jpg"/>
+    <br>
+    
+    <p>
+    You need to readjust the optimal distance from the "Bone Effector" based on the "Bone Gun."<br>
+    <strong>(1)</strong> Increase the <strong>Optimal Distance</strong> value so that <strong>(2)</strong> the "Bone Gun" falls within the red circle.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2416.jpg"/>
+    <br>
+    
+    <p>
+    If you check the results, you can see that the gun, not the hand, is properly aimed.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_MakeIKIntended.html">< Making IK work as intended</a>
+        <a class="btn btn-light" role="button" href="../../en/AdvancedManual/AD_BoneConstraints.html">Bone Constraints ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

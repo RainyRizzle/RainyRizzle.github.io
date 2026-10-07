@@ -77,7 +77,7 @@
     <br>
     
     <!-- 4. 버전 설명 -->
-    <h4><span class="badge badge-secondary">1.0.0</span></h4>
+    <h4><span class="badge badge-secondary">1.7.0</span></h4>
     
     <p>
     본(Bone) 애니메이션을 위해서 본을 추가하는 방법을 다룹니다.<br>
@@ -285,7 +285,7 @@
     <br>
     
     <p>
-    화면 상단의 본을 보이게 하거나 숨기는 버튼이 있습니다. 이 버튼은 3가지 상태가 있습니다.<br>
+    화면 상단의 본을 보이게 하거나 숨기는 버튼(단축키 :  <kbd>B</kbd> )이 있습니다. 이 버튼은 3가지 상태가 있습니다.<br>
     1. ​버튼이 꺼진 상태에서는 본이 보이지 않습니다.<br>
     2. 버튼이 켜진 상태에서는 본이 색이 채워진 형태로 나타납니다.<br>
     3. 버튼이 켜져있으나 속이 빈 아이콘인 상태에서는 본이 선으로만 나타납니다.<br>
@@ -298,8 +298,11 @@
     
     <p>
     <strong>참고</strong> : 이 페이지에서는 본 설정을 자세히 다루지 않고 개략적으로 다루었습니다.<br>
-    본 설정 화면의 구조는 다음과 같습니다.<br>
-    ​사용법은 <a href="../../kr/AdvancedManual/AD_BoneIK.html">관련 페이지</a>를 참조하세요.<br>
+    </p>
+    <br>
+    
+    <p>
+    본 설정 화면의 구조는 다음과 같습니다. (AnyPortrait v1.7.0 기준)<br>
     </p>
     <br>
     
@@ -312,7 +315,7 @@
     
     <!-- 8. 이미지 (가운데 정렬) -->
     <br>
-    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/GettingStarted/AP가이드_GS2_35.jpg"/>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2492.jpg"/>
     <br>
     
     
@@ -320,13 +323,78 @@
     <div class="col-sm">
     
     <p>
-    <strong>1. Name : </strong>본의 이름을 설정합니다.<br>
-    <strong>2. Base Pose Transformation : </strong>본의 위치, 회전, 크기값입니다.<br>
-    <strong>3. Socket : </strong>Bake 후에 본을 참조하기 위해선 소켓을 켜면 됩니다.<br>
-    <strong>4. IK Setting : </strong>본의 IK 기능을 설정하는 구역입니다.<br>
-    <strong>5. Hierarchy : </strong>부모 본, 자식 본을 여기서 직접 선택할 수 있습니다.<br>
-    <strong>6. Shape : </strong>색상과 모양을 설정합니다. Taper가 클수록 끝이 뾰족하게 됩니다.<br>
-    <strong>7. Remove Bone : </strong>본을 삭제합니다. 다이얼로그 선택에 따라 모든 자식 본들을 삭제할 수도 있습니다.<br>
+    공통 옵션 및 "Basic Properties" 탭의 화면입니다.<br>
+    <strong>1. Name</strong> : 본의 이름을 설정합니다.<br>
+    <strong>2. 서브 탭</strong> : 본 UI들을 종류별로 구분한 탭입니다.<br>
+    <strong>3. Base Pose Transformation</strong> : 본의 기본 위치, 회전, 크기값입니다.<br>
+    <strong>4. Shape</strong> : 색상과 모양을 설정합니다.<br>
+    <strong>5. Hierarchy</strong> : 부모 본, 자식 본을 여기서 직접 선택할 수 있습니다.<br>
+    <strong>6. Mirror Bone</strong> : 이 본과 대칭되어 동작하는 본을 설정할 수 있습니다.<br>
+    <strong>7. Other Properties</strong> : 소켓과 같은 그외의 속성들을 설정합니다.<br>
+    <strong>8. Duplicate/Remove Bone</strong> : 본을 복제하거나 삭제합니다.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2493.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    "IK and Constraints" 탭의 화면입니다.<br>
+    자세한 설명은 ​<a href="../../kr/AdvancedManual/AD_BoneIK.html">관련 페이지</a>를 참조하세요.<br>
+    <strong>1. IK Chain</strong> : IK 체인 종류를 변경하고 체인의 대상을 설정합니다.<br>
+    <strong>2. IK Rotation Option</strong> : IK 연산시 사용되는 회전 제한 범위와 초기 포즈를 설정할 수 있습니다.<br>
+    <strong>3. IK Controller Settings</strong> : IK 컨트롤러를 설정합니다.<br>
+    <strong>4. Constraints</strong> : 본의 위치, 회전, 크기를 제한하는 제약(Constraint)를 추가합니다.<br>
+    <strong>5. Final Rotation Correction</strong> : IK를 마치고 추가적으로 본을 회전시키는 옵션입니다.<br>
+    </p>
+    <br>
+    
+    
+    </div>
+    </div>
+    </div>
+    
+    <!-- 가로 배치 종료 -->
+    
+    <!-- 14. 가로 배치 시작 -->
+    <div class="container">
+    <div class="row">
+    <div class="col-sm">
+    
+    <!-- 가로 배치 첫줄 시작 -->
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2494.jpg"/>
+    <br>
+    
+    
+    </div>
+    <div class="col-sm">
+    
+    <p>
+    "Physics" 탭의 화면입니다.<br>
+    <strong>1. Jiggle Bone</strong> : 관성에 의해 움직이는 "지글본"을 설정합니다.<br>
     </p>
     <br>
     

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>PSDファイルと既存のオブジェクト</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/ja/anyportrait-ja/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ja/ap-video-tutorials-ja/">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ja/forum-ja/">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_PSDandExistingObjects.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_PSDandExistingObjects.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_PSDandExistingObjects.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/ja/anyportrait-ja/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > PSDファイルと既存のオブジェクト</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">PSDファイルと既存のオブジェクト</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.7.0</span></h4>
+    
+    <p>
+    PSDファイルの再インポート機能を使用すると、修正されたPSDファイルを既存の作業物に適用することができます。<br>
+    しかし、この機能はPSDファイルがどのように修正されたかによって、多くの問題を引き起こす可能性があります。<br>
+    以前のマニュアル（<a href="../../jp/AdvancedManual/AD_RePSD.html">リンク</a>）では、PSDとメッシュグループ間のマッピング方法や、レイヤーに変更があった場合の対処法について解説しました。<br>
+    </p>
+    <br>
+    
+    <p>
+    PSDファイルを再インポートすると、既存のメッシュグループ内のオブジェクトは、PSDファイルの画像と最も一致するように位置やサイズなどが再調整されます。<br>
+    しかし、この場合、意図しない結果が生じることがあります。<br>
+    オブジェクトが意図しない位置に移動してしまったり、位置の補正を行わずにアトラス（Atlas）のみを更新したい場合もあるでしょう。<br>
+    「AnyPortrait v1.7.0」では、既存のオブジェクトをどのように処理するかを選択できるオプションが追加されました。<br>
+    このページでは、それらのオプションについて説明します。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>位置調整方式</h3>
+    <br>
+    
+    <p>
+    PSDを再インポートすると、基本的に、マッピングされたオブジェクトの位置、サイズ、回転値がPSDファイルに合わせて調整されます。<br>
+    そのため、PSDの再インポートを実行すると、PSDファイルとほぼ同じ状態になります。<br>
+    この際、既存のオブジェクトの位置を調整する方法によって、内部的な処理方式が若干異なります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2343.jpg"/>
+    <br>
+    
+    <p>
+    PSDファイルから生成されたロボットのキャラクターです。<br>
+    <strong>(1)</strong> このロボットの腕の画像を修正した後、オプションによる位置調整の違いを確認してみましょう。<br>
+    <strong>(2)</strong> 「<strong>Edit Default Transform</strong>」モードを有効にし、このロボットの腕のメッシュの位置が約「(-253, -147)」であることを覚えておきましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2344.jpg"/>
+    <br>
+    
+    <p>
+    右の画像のように、ロボットの腕を「ハサミ」から「錐（きり）」の形状になるようPSDファイルを修正しました。<br>
+    それでは、修正したPSDファイルを再度インポートしてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2345.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 変更されたPSDファイルを再インポートすると、ロボットアーム部分の形状が以前とは変わっていることが確認できます。<br>
+    <strong>(2)</strong> 左側のUIには、「<strong>Adjusting Transforms of Existing Objects</strong>」という項目と2つのオプションが追加されていることが確認できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    このオプションは、PSDファイルに合わせて既存のオブジェクトをどのように処理するかを決定します。<br>
+    - <strong>Connected Objects</strong> : マッピングが完了し、PSDのレイヤーと接続された既存オブジェクトの位置を調整する方法を決定します。<br>
+    - <strong>Unconnected Meshes</strong> : マッピングされていないメッシュオブジェクトをそのままにするか、あるいは少なくともサイズだけでも調整するかを決定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2346.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Connected Objects</strong>」オプションには、次のような値があります。<br>
+    - <strong>Adjust to PSD (Legacy)</strong> : PSDに合わせて既存のオブジェクトの位置などを調整する、旧バージョンの処理方式です。<br>
+    - <strong>Adjust to PSD (Pivot Moved)</strong> : PSDに合わせて既存のオブジェクトの位置を調整しますが、メッシュの「<strong>Pivot</strong>」を優先的に調整します。<br>
+    - <strong>Keep Current</strong> : アトラスのみを更新し、既存のオブジェクトの位置などは調整しません。<br>
+    </p>
+    <br>
+    
+    <p>
+    ここでは、「<strong>Adjust to PSD (Legacy)</strong>」と「<strong>Adjust to PSD (Pivot Moved)</strong>」のオプションをそれぞれ選択し、その違いを確認してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2347.jpg"/>
+    <br>
+    
+    <p>
+    これら2つのオプションの違いは、修正されたPSDファイルの画像形状が変化したことで、既存のオブジェクトと位置が合わなくなり、補正が必要になる場合に生じます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2348.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 位置補正ツールを使用して、PSDの画像と既存のオブジェクトの位置を合わせます。<br>
+    <strong>(2)</strong> 位置が合ったら、「<strong>Next</strong>」ボタンを押して、その後のインポート作業を完了します。<br>
+    </p>
+    <br>
+    
+    <p>
+    それでは、PSDを再インポートした結果を、2つのオプションそれぞれについて確認してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2350.jpg"/>
+    <br>
+    
+    <p>
+    見た目上、両方のオプションによる結果は同じように見えます。<br>
+    しかし、ロボットアームのメッシュオブジェクトを選択して位置を確認すると、その違いがわかります。<br>
+    「<strong>Adjust to PSD (Legacy)</strong>」オプションの結果では、元の位置である「(-253, -147)」とは異なる「(-256, -205)」という値になります。<br>
+    一方、「<strong>Adjust to PSD (Pivot Moved)</strong>」オプションを使用した結果では、元の位置とほぼ同様の値になります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2351.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Adjust to PSD (Pivot Moved)</strong>」オプションで、画像の形状が変化してもオブジェクトの位置情報を維持できたのは、メッシュの「<strong>Pivot</strong>」を移動させたためです。<br>
+    「<strong>Adjust to PSD (Legacy)</strong>」オプションの場合、単に新しくインポートしたPSDレイヤー画像の中心にメッシュの「<strong>Pivot</strong>」を配置します。<br>
+    「<strong>Adjust to PSD (Pivot Moved)</strong>」オプションの場合、<strong>Pivot</strong>が中心から少し移動していることが確認できます。<br>
+    </p>
+    <br>
+    
+    <p>
+    <strong>AnyPortrait v1.7.0</strong>では、「<strong>Adjust to PSD (Pivot Moved)</strong>」オプションがデフォルト設定になりました。<br>
+    オプションごとの処理の違いを理解しておけば、PSDを再インポートする際に生じる問題に対処しやすくなるでしょう。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>既存の「基本トランスフォーム」を維持</h3>
+    <br>
+    
+    <p>
+    PSDファイルからキャラクターを生成した後、AnyPortrait上でオブジェクトの基本トランスフォーム（Default Transform）を直接修正することもあるでしょう。<br>
+    しかし、その状態で修正済みのPSDファイルを再度インポートすると、せっかく変更したオブジェクトの位置やサイズなどがリセットされてしまいます。<br>
+    <strong>AnyPortrait v1.7.0</strong>で追加されたオプションを使用して、この問題を解決してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2352.jpg"/>
+    <br>
+    
+    <p>
+    PSDファイルから生成したロボットです。<br>
+    <strong>(1)</strong> メッシュグループ編集画面で「<strong>Edit Default Transform</strong>」ボタンを押します。<br>
+    <strong>(2)</strong> ロボットの腕のオブジェクトを、上記のように移動および回転させます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2353.jpg"/>
+    <br>
+    
+    <p>
+    PSDファイルを再インポートしてみましょう。<br>
+    今回は、ロボットを作成した際のPSDファイルをそのまま再インポートします。<br>
+    PSDファイルの再インポートウィンドウで、メッシュグループ内のロボットの腕が変形していることが確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2354.jpg"/>
+    <br>
+    
+    <p>
+    もしこの状態でPSDファイルの再インポート作業を完了すると、上記のようにロボットアームのトランスフォームが元に戻ってしまいます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2355.jpg"/>
+    <br>
+    
+    <p>
+    修正した基本トランスフォームを維持するには、オプションを変更する必要があります。<br>
+    <strong>(1)</strong> PSDファイルの再インポートにおける「Basic Setting」の段階で、「Connected Objects」オプションの値を <strong>(2)</strong> 「Keep Current」に変更します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2356.jpg"/>
+    <br>
+    
+    <p>
+    PSDファイルの再インポート作業を完了すると、既存のトランスフォームが維持されていることが確認できます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>複製されたメッシュのトランスフォーム調整</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2357.jpg"/>
+    <br>
+    
+    <p>
+    PSDファイルの画像レイヤーから生成されたメッシュオブジェクトを複製する場合を想定してみましょう。<br>
+    PSDファイルの再インポート作業における鍵となるのは、PSDレイヤーとメッシュグループ内のオブジェクトを関連付ける「マッピング」です。<br>
+    しかし、PSDファイル内の1つの画像レイヤーを、メッシュグループ内に存在する複数の複製メッシュオブジェクトにマッピングすることはできません。<br>
+    そのため、一般的に、複製されたメッシュは、マッピングされたメッシュと共有しているアトラスの更新を除き、個別の処理対象とはなりません。<br>
+    </p>
+    <br>
+    
+    <p>
+    この方法には、一般的に大きな問題はありません。<br>
+    しかし、PSD画像やメッシュグループのサイズが合わず、全体的なサイズ調整が必要となるような特殊な場合には問題が生じます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2358.jpg"/>
+    <br>
+    
+    <p>
+    PSD画像ファイルのサイズを半分に縮小し、そのPSDファイルを再度インポートしてキャラクターに適用してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2359.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 画像サイズが変更されたPSDファイルを再インポートすると、メッシュグループとサイズが一致していないことがわかります。<br>
+    <strong>(2)</strong> 「<strong>Bake Scale</strong>」オプションの値を調整して、PSD画像とメッシュグループのサイズを一致させる必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2360.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「<strong>Unconnected Meshes</strong>」オプションには、以下の設定があります。<br>
+    - <strong>Ignore</strong> : PSDと接続されていない既存のメッシュオブジェクトに対して、特別な処理は行いません。<br>
+    - <strong>Resize by Scale Factor</strong> : 全体的なサイズ調整が必要な場合、PSDの影響を受ける複製されたメッシュに対しても同様のサイズ調整を適用します。<br>
+    </p>
+    <br>
+    
+    <p>
+    2つのオプションについて、それぞれPSDファイルの再インポート作業を完了させ、結果を比較してみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2361.jpg"/>
+    <br>
+    
+    <p>
+    サイズ調整が必要なPSDファイルを再インポートする際、「<strong>Adjust</strong>」の段階で、上記のようなサイズ調整作業を行う必要があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2362.jpg"/>
+    <br>
+    
+    <p>
+    2つのオプションについて、それぞれPSDファイルを再インポートした結果です。<br>
+    「<strong>Ignore</strong>」オプションでは、複製されたメッシュオブジェクトの腕が小さくなってしまいました。<br>
+    PSDファイルの画像サイズが小さくなったにもかかわらず、サイズ調整が行われなかったために、このような問題が発生したのです。<br>
+    一方、「<strong>Resize by Scale Factor</strong>」オプションの場合は、正常な結果が得られています。<br>
+    PSDファイルの画像サイズが小さくなった分、メッシュオブジェクトのサイズを拡大する必要がありますが、その処理を複製されたメッシュにも適用することで問題を解決しています。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    この処理は、同一のメッシュを共有するメッシュオブジェクトにのみ適用されます。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>レイヤー構造が異なる場合の問題</h3>
+    <br>
+    
+    <p>
+    PSDファイルをインポートする機能では、PSDのレイヤー位置や領域サイズをAnyPortraitのシステムに適した形式へ変換する処理が行われます。<br>
+    AnyPortraitはPSDファイル上の値を最大限に活用しますが、ここで一つの問題が生じます。<br>
+    PSDファイルの「フォルダレイヤー」は、画像レイヤーとは異なり、「位置情報」を持っていません。<br>
+    一方、PSDファイルのフォルダレイヤーに対応するAnyPortraitの「サブメッシュグループ」は、位置を含むトランスフォーム値を持っています。<br>
+    この差異を解消するため、AnyPortraitは「フォルダレイヤー」に含まれる各画像レイヤーの位置を利用し、その平均値を「サブメッシュグループ」の位置として適用します。<br>
+    </p>
+    <br>
+    
+    <p>
+    概ね、この方式は大きな問題なく動作します。<br>
+    しかし、PSDファイルのレイヤー構造がメッシュグループの構造と異なる場合、位置調整が正しく行われないという問題が発生します。<br>
+    画像レイヤーの平均位置を算出する過程で生じた誤った値が、サブメッシュグループやその配下のオブジェクトに影響を及ぼすためです。<br>
+    </p>
+    <br>
+    
+    <p>
+    ここでは、この問題がどのように発生するのか、そしてその解決方法について見ていきましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2363.jpg"/>
+    <br>
+    
+    <p>
+    問題を再現するために、PSDファイルのレイヤー構造とメッシュグループの構造を異なるものにしてみましょう。<br>
+    まず、PSDファイル上のレイヤー構造です。<br>
+    ここではフォルダレイヤーを作成していないため、すべての画像レイヤーが同じ階層に配置されています。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2364.jpg"/>
+    <br>
+    
+    <p>
+    一方、AnyPortraitにおけるロボットメッシュグループは、サブメッシュグループを持っています。<br>
+    サブメッシュグループには、「Arm」という名前のメッシュが属していることが確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2365.jpg"/>
+    <br>
+    
+    <p>
+    この状態で、PSDファイルの再インポートを試してみましょう。<br>
+    <strong>(1)</strong> 「<strong>Mapping</strong>」の段階で、PSDのレイヤー構造とメッシュグループ内の構造が一致していないことが確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2366.jpg"/>
+    <br>
+    
+    <p>
+    この状態で「<strong>Next</strong>」ボタンを押して進めようとすると、上記のような警告メッセージが表示されます。<br>
+    このメッセージは、マッピングの過程で構造の不一致が検出されたため、PSDファイルとメッセージグループの階層構造を一致させる必要があることを伝えています。<br>
+    この警告を無視して「<strong>Ignore and Proceed</strong>」ボタンを押し、その後の作業を強制的に完了させてみましょう。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    この警告メッセージは、マッピングされた対象の「レベル」が一致しているかどうかのみをチェックします。<br>
+    互いにマッピングされていないフォルダレイヤーやメッシュグループに属している状態でレベルが同じ場合、それは検知されません。<br>
+    そのため、警告メッセージに頼るのではなく、PSDファイルとメッシュグループの状態を事前に確認しておくことを推奨します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2367.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> PSDとの構造的な差異が生じていた「Arm」メッシュを確認してみましょう。<br>
+    <strong>(2)</strong> 位置調整の処理が誤って行われた結果、上記のように間違った位置へ移動してしまっていることがわかります。<br>
+    </p>
+    <br>
+    
+    <p>
+    この場合、最も確実な解決策は、PSDファイルまたはメッシュグループの構造を変更して、互いに一致させることです。<br>
+    特に、PSDファイル内でフォルダレイヤーを追加する作業の方が容易でしょう。<br>
+    その後、フォルダレイヤーとサブメッシュグループをマッピングすれば、正常に再インポートが行われるはずです。<br>
+    </p>
+    <br>
+    
+    <p>
+    しかし、先ほどご紹介した「<strong>Keep Current</strong>」オプションを利用することでも、この問題を解決できます。<br>
+    「<strong>Keep Current</strong>」オプションは位置調整を行わないという特性があるため、この問題を回避できるのです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2368.jpg"/>
+    <br>
+    
+    <p>
+    先ほど説明した「<strong>Connected Objects</strong>」オプションの値を「<strong>Keep Current</strong>」に設定した状態で、PSDファイルを再度インポートしてみましょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2369.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Keep Current</strong>」オプションが適用されている状態では、「<strong>Mapping</strong>」の段階でPSDファイルとの構造上の違いがあっても、警告メッセージは表示されません。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2370.jpg"/>
+    <br>
+    
+    <p>
+    位置調整を行うことなく、PSDファイルを正常に再インポートする作業が完了することを確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_RePSD.html">< PSDファイルの再インポート</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_SecondaryAtlas.html">「Secondary Atlas」の作成 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

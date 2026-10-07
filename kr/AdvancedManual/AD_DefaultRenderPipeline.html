@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>기본 렌더 파이프라인 설정</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/ko/anyportrait-ko/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/GettingStarted.html">시작하기</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../kr/AdManual.html">메뉴얼</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../kr/Script.html">스크립트</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ko/ap-video-tutorials-ko/">동영상</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ko/forum-ko/">게시판</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_DefaultRenderPipeline.html">EN</a>
+                    <a role="button" class="btn btn-secondary active" href="../../kr/AdvancedManual/AD_DefaultRenderPipeline.html">KR</a>
+                    <a role="button" class="btn btn-secondary" href="../../jp/AdvancedManual/AD_DefaultRenderPipeline.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../kr/Search.html">검색</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/ko/anyportrait-ko/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../kr/AdManual.html"><span class="text-dark">메뉴얼</span></a> > 기본 렌더 파이프라인 설정</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">기본 렌더 파이프라인 설정</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.7.0</span></h4>
+    
+    <p>
+    AnyPortrait로 제작한 작업물에는 프로젝트의 <strong>렌더 파이프라인</strong>에 맞는 재질과 쉐이더가 적용되어야 합니다.<br>
+    그래서 AnyPortrait 에디터의 <strong>재질 라이브러리</strong>(<a href="../../kr/AdvancedManual/AD_MaterialLibrary.html">링크</a>)를 이용하여 재질과 쉐이더를 적절히 변경해야합니다.<br>
+    AnyPortrait의 기본 재질은 "<strong>Built-In RP</strong>"이기 때문에, 만약 "<strong>Universal RP(이하 URP)</strong>"로 설정된 프로젝트에서는 모든 작업물의 재질을 URP에 맞게 변경해야합니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    최신 버전의 유니티에서는 URP가 권장되며, 이 경우 매번 URP용의 재질로 교체하는 작업은 꽤 번거로울 것입니다.<br>
+    이 불편함을 해결하기 위해서, <strong>AnyPortrait v1.7.0</strong>에는 새로운 포트레이트를 생성할 때의 기본 재질을 렌더 파이프라인에 따라 변경하는 기능과 옵션이 추가되었습니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>AnyPortrait 설치 후 기본 렌더 파이프라인 선택하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2371.jpg"/>
+    <br>
+    
+    <p>
+    유니티 프로젝트를 새로 생성하고 AnyPortrait를 프로젝트에 임포트한 후, AnyPortrait를 실행해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2372.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait 에디터가 열리기 전에 현재 프로젝트의 렌더 파이프라인을 선택하라는 다이얼로그가 나옵니다.<br>
+    이 옵션에 따라서 AnyPortrait에서의 <strong>기본 렌더 파이프라인</strong>이 결정됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2373.jpg"/>
+    <br>
+    
+    <p>
+    현재 프로젝트의 렌더 파이프라인이 URP라고 가정하고 설정을 해봅시다.<br>
+    <strong>(1)</strong> <strong>Universal RP</strong> 버튼을 누릅니다.<br>
+    <strong>(2)</strong> <strong>Launch AnyPortrait</strong> 버튼을 누릅니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2374.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait 에디터가 열리면 새 포트레이트를 생성해봅시다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2375.jpg"/>
+    <br>
+    
+    <p>
+    캐릭터를 제작하는 작업을 모두 완료한 후 Bake를 하기 전에 URP용 재질이 적용되었는지 확인해봅시다.<br>
+    <strong>(1)</strong> <strong>루트 유닛</strong>을 선택합니다.<br>
+    <strong>(2)</strong> <strong>Material Library</strong> 버튼을 누릅니다.<br>
+    <strong>(3)</strong> URP용 "Unlit" 재질 세트가 설정된 것을 볼 수 있습니다.<br>
+    <strong>(4)</strong> 또한 URP용 재질 프리셋들이 추가된 것도 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2376.jpg"/>
+    <br>
+    
+    <p>
+    렌더 파이프라인에 따라 재질 뿐만 아니라 Bake 설정도 변경되어야 하는데, 이 값도 초기 설정에 맞게 바뀌게 됩니다.<br>
+    <strong>(1)</strong> <strong>Bake</strong> 버튼을 누릅니다.<br>
+    <strong>(2)</strong> <strong>Setting</strong> 탭을 선택합니다.<br>
+    <strong>(3)</strong> <strong>Render Pipeline</strong> 옵션의 값이 URP에 맞게 "<strong>Scriptable Render Pipeline</strong>"으로 변경된 것을 볼 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    이 페이지에서는 URP가 설정된 프로젝트에 대해서 설명했지만, Built-In RP가 적용된 프로젝트에서도 동일한 과정을 거쳐서 옵션을 설정하면 됩니다.<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>기본 렌더 파이프라인 변경하기</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2377.jpg"/>
+    <br>
+    
+    <p>
+    AnyPortrait의 초기 화면 외에도 <strong>설정 다이얼로그</strong>에서 <strong>기본 렌더 파이프라인</strong>을 변경할 수 있습니다.<br>
+    <strong>(1)</strong> <strong>설정 다이얼로그</strong>를 엽니다.<br>
+    <strong>(2)</strong> <strong>Editor</strong> 탭을 열고 "<strong>Default Settings for New Portraits</strong>" 부분의 "<strong>Render Pipeline</strong>" 옵션을 변경하여 <strong>기본 렌더 파이프라인</strong>을 변경할 수 있습니다.<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>참고</strong></span><br>
+    <strong>기본 렌더 파이프라인</strong> 설정은 다음의 특징을 가집니다.<br>
+    - 이 옵션은 새로운 포트레이트에만 적용되며, 기존의 작업물에는 적용되지 않습니다.<br>
+    - 이 옵션은 유니티 2023 및 이후 버전에서만 등장하고 동작합니다.<br>
+    - 이 옵션은 유니티 프로젝트 단위로 설정됩니다.<br>
+    </p>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_SettingDialog.html">< 설정 다이얼로그</a>
+        <a class="btn btn-light" role="button" href="../../kr/AdvancedManual/AD_Shortcuts.html">단축키 모음 ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>

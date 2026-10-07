@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 제목 -->
+        <title>最終回転補正</title>
+        <!-- 파비콘 -->
+        <link rel="shortcut icon" href="../../Images/favicon.ico"/>
+        <!-- 부트스트랩 -->
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <!--------------->
+
+    </head>
+
+    <body>
+        <p>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--로고 : AnyPortrait 홈페이지로 가야한다. (언어별)-->
+            <a class="navbar-brand" href="https://rainyrizzle.com/ja/anyportrait-ja/">
+                <img src="../../Images/AP_Logo.png" width="150" height="30" class="d-inline-block align-top" alt="">
+            </a>
+
+            <!--메뉴들 : 현재 페이지의 카테고리에 active 붙인다. (언어별 링크) -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/GettingStarted.html">入門ガイド</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="../../jp/AdManual.html">マニュアル</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../jp/Script.html">スクリプト</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ja/ap-video-tutorials-ja/">ビデオ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://rainyrizzle.com/ja/forum-ja/">フォーラム</a>
+                </li>
+
+                </ul>
+
+                <!-- 언어 변경. 현재 페이지의 주소에서 언어 주소만 변경한다. (해당 언어에 active) -->
+                <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                    <a role="button" class="btn btn-secondary" href="../../en/AdvancedManual/AD_BoneFinalRotationCorrection.html">EN</a>
+                    <a role="button" class="btn btn-secondary" href="../../kr/AdvancedManual/AD_BoneFinalRotationCorrection.html">KR</a>
+                    <a role="button" class="btn btn-secondary active" href="../../jp/AdvancedManual/AD_BoneFinalRotationCorrection.html">JP</a>
+                </div>
+
+                <!-- 여백 -->
+                <p></p>
+
+                <!-- 검색버튼 -->
+                <form class="form-inline">
+                    <a class="btn btn-light" role="button" href="../../jp/Search.html">サーチ</a>
+                </form>
+            </div>
+        </nav>
+    </p>
+
+    <!-- 실제 바디 부분 -->
+    <div class="container">
+    <br>
+    <br>
+    <!-- 여기에 내용을 적어주세요 -->
+
+    <!-- 여기서부터 페이지 내용이 작성됩니다. -->
+    <!-- 1. 페이지 진입 경로 -->
+    <p><a href="https://rainyrizzle.com/ja/anyportrait-ja/"><span class="text-dark">AnyPortrait</span></a> > <a href="../../jp/AdManual.html"><span class="text-dark">マニュアル</span></a> > 最終回転補正</p>
+    
+    <!-- 2. 페이지 메인 타이틀 -->
+    <h1 class="display-5">最終回転補正</h1>
+    <br>
+    
+    <!-- 4. 버전 설명 -->
+    <h4><span class="badge badge-secondary">1.7.0</span></h4>
+    
+    <p>
+    スケルタルアニメーションは、いくつかの処理工程を経て実行されます。<br>
+    これらの処理工程は、物理効果のような特殊な演算を除けば、大きく「FK」と「IK」の演算段階に分けられます。<br>
+    まずFKによるアニメーションデータが演算され、その後にIKオプションによってモーションが補正されますが、この際、意図しない結果が生じることがあります。<br>
+    特に、IKによって動かされたボーンの向きが、FKの状態に比べて大きく変化してしまう場合があります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2460.jpg"/>
+    <br>
+    
+    <p>
+    この問題を解決するために、「AnyPortrait v1.7.0」では「最終回転補正 (Final Rotation Correction)」というステップが追加されました。<br>
+    「最終回転補正」はIK処理の最後で動作し、IK処理段階におけるボーンの回転角度を補正する役割を担います。<br>
+    このページでは、「最終回転補正」を適用する手順とオプションについて解説します。<br>
+    また、「ボーンコンストレイント (Bone Constraint)」を併用する例も紹介します。<br>
+    </p>
+    <br>
+    
+    <p>
+    <span class="text-danger"><strong>メモ</strong></span><br>
+    このページをお読みになる前に、IKに関する以下のマニュアルを先にお読みいただくことをお勧めします。<br>
+    - <a href="../../jp/AdvancedManual/AD_BoneIK.html">IK設定</a><br>
+    - <a href="../../jp/AdvancedManual/AD_BoneIKController.html">IKコントローラ</a><br>
+    - <a href="../../jp/AdvancedManual/AD_BoneConstraints.html">ボーンコンストレイント</a><br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2461.jpg"/>
+    <br>
+    
+    <p>
+    ロボットが剣を振るう例を用意してみました。<br>
+    「最終回転補正」の効果を確認するには、IK機能を利用する必要があります。<br>
+    上記のようにIKチェーンを設定した後、「Position」タイプのIKコントローラーを設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2462.jpg"/>
+    <br>
+    
+    <p>
+    ロボットが剣を構えている姿勢のアニメーションを作成します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2463.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> 「編集モード」をオフにすると、<strong>(2)</strong> IKコントローラーが動作し、ロボットの腕が目標に向くようになります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2464.jpg"/>
+    <br>
+    
+    <p>
+    こうすることで、IKコントローラーの「Effector Bone」を使って簡単にアニメーションを作成できます。<br>
+    <strong>(1)</strong> 「Effector Bone」の位置によっては、剣がロボットの顔の方を向いてしまうような、不自然な姿勢になることもあります。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2465.jpg"/>
+    <br>
+    
+    <p>
+    この問題を解決するために、「最終回転補正」を適用してみましょう。<br>
+    <strong>(1)</strong> メッシュグループ編集画面で、「<strong>Bone</strong>」タブを選択します。<br>
+    <strong>(2)</strong> IKコントローラーが適用されたボーンを選択します。<br>
+    <strong>(3)</strong> 「<strong>IK and Constraints</strong>」タブを選択します。<br>
+    <strong>(4)</strong> 「<strong>Final Rotation Correction</strong>」の項目とオプションが表示されます。<br>
+    </p>
+    <br>
+    
+    <p>
+    これらのオプションは以下の通りです。<br>
+    <strong>1. Keep World Angle</strong> : FKで編集されたワールド座標系におけるボーンの回転角度を保持し、IK演算の最後に再適用します。<br>
+    <strong>2​​. Look At</strong> : IK演算の最後に、別のボーンの方を向くように回転します。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    「<strong>Keep World Angle</strong>」オプションと「<strong>Look At</strong>」オプションは、同時に設定可能です。<br>
+    両方のオプションが有効な場合、まず「<strong>Keep World Angle</strong>」が適用され、続いて「<strong>Look At</strong>」が適用されます。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2466.jpg"/>
+    <br>
+    
+    <p>
+    まず、「<strong>Keep World Angle</strong>」を適用してみましょう。<br>
+    <strong>(1)</strong> 「<strong>Keep World Angle</strong>」を有効にします。<br>
+    <strong>(2)</strong> 「<strong>Default Weight</strong>」は、補正が適用される度合いです。ここでは少しだけ適用してみるために、「<strong>0.6</strong>」と入力してみました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2467.jpg"/>
+    <br>
+    
+    <p>
+    改めてアニメーションを再生してみると、上記のように、剣を握った手の回転が抑えられ、顔の方を向かないようになりました。<br>
+    「<strong>Keep World Angle</strong>」オプションはFKでの角度を維持するため、キーフレームで設定したポーズがIKの結果に反映されるのです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2468.jpg"/>
+    <br>
+    
+    <p>
+    次に、「Keep World Angle」の代わりに「<strong>Look At</strong>」オプションを使ってみましょう。<br>
+    <strong>(1)</strong> 「<strong>Look At</strong>」の対象となるボーンを追加します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2469.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> IKコントローラーが適用されたボーンを選択します。<br>
+    <strong>(2)</strong> 「<strong>Look At</strong>」を有効にし、「<strong>Set</strong>」ボタンを押します。<br>
+    <strong>(3)</strong> 先ほど追加したボーンを選択します。<br>
+    <strong>(4)</strong> 「<strong>Select</strong>」ボタンを押します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2470.jpg"/>
+    <br>
+    
+    <p>
+    アニメーションを再生してみましょう。<br>
+    今回は、手がIKコントローラーとは無関係に、追加されたボーンの方を向き続けているのが確認できます。<br>
+    「<strong>Look At</strong>」オプションは、補正する角度を指定するために外部のボーンを利用するもので、ボーンの向きを固定する場合に効果的です。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    「Look At」オプションは、「Look At IKコントローラ」と同様に動作します。<br>
+    特に、IKチェーンを使用せずボーン単独で回転させる場合、その結果はほぼ同じになります。<br>
+    結果は似ていますが、サポートされている詳細オプションや処理順序の違いを考慮し、適切な機能を選択して使用してみてください。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2471.jpg"/>
+    <br>
+    
+    <p>
+    他のオプションも見てみましょう。<br>
+    「<strong>Limit Rotation</strong>」オプションは、「<strong>Keep World Angle</strong>」または「<strong>Look At</strong>」のいずれかが有効になると表示されます。<br>
+    このオプションは、ボーンの回転角度の範囲を制限します。<br>
+    「<strong>Smooth Clipping</strong>」オプションを有効にすると、「<strong>Smooth Area Size</strong>」の値の分だけ制限範囲が緩和され、ボーンの回転が滑らかに制限されるようになります。<br>
+    作業スペース上で、制限される角度の範囲を確認できます。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2472.jpg"/>
+    <br>
+    
+    <p>
+    「<strong>Keep World Angle</strong>」や「<strong>Look At</strong>」に対して、それぞれ重みを指定できます。<br>
+    特に「Float」型の「制御パラメータ」を接続すれば、リアルタイムで「最終回転補正」の適用度合いを変更することが可能です。<br>
+    </p>
+    <br>
+    
+    <br>
+    <br>
+    <!-- 3. 서브 타이틀 -->
+    <h3>ボーンコンストレイントを併用する例</h3>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2473.jpg"/>
+    <br>
+    
+    <p>
+    今回はIKコントローラーの代わりに、「ボーンコンストレイント」を併用してみましょう。<br>
+    上のように、2Dゲームに出てきそうな可愛らしいキャラクターを用意しました。<br>
+    キャラクターの足元には、「地面」を意味する緑色のボックスを追加しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2474.jpg"/>
+    <br>
+    
+    <p>
+    ボーンを追加して、キャラクターの「走り」のアニメーションを上記のように作成しました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2475.jpg"/>
+    <br>
+    
+    <p>
+    しかし、キャラクターの足が地面よりも下に入り込んでしまう瞬間が見受けられます。<br>
+    キーフレームアニメーションを使ってこの問題を解決するには、キャラクターの足の位置をフレームごとに指定する必要があるでしょう。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2476.jpg"/>
+    <br>
+    
+    <p>
+    しかし、コンストレイントとIKを利用すれば、この問題を簡単に解決できます。<br>
+    <strong>(1)</strong> 地面のY位置に相当する「Bone Ground」という名前のボーンを作成します。<br>
+    <strong>(2)</strong> キャラクターの脚のボーンに「IKチェーン」を設定します。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2477.jpg"/>
+    <br>
+    
+    <p>
+    <strong>(1)</strong> キャラクターの足に該当するボーンを選択します。<br>
+    <strong>(2)</strong> 「コンストレイント」を追加します。<br>
+    <strong>(3)</strong> 上の画像のようにコンストレイントを設定し、キャラクターの足が「Bone Ground」より上側に位置するようにします。<br>
+    - Constraint Method : Position<br>
+    - Coordinate : World<br>
+    - Axis : Y<br>
+    - Range Type : Min<br>
+    - Refer to Bones : オン、「Bone Ground」を対象<br>
+    - Move by IK : オン<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2478.jpg"/>
+    <br>
+    
+    <p>
+    これでアニメーションを再生すると、キャラクターの足が「Bone Ground」より下には下がらないことが確認できます。<br>
+    こうすることで、ひとまずキャラクターの足が地面に埋まってしまうのを防ぐことができます。<br>
+    <strong>(1)</strong> しかし、足の向きは下を向いたままなので、まだ少し不自然に見えます。<br>
+    コンストレイントによってIKが動作しましたが、IKの結果としてキャラクターの足の角度までは制御されなかったため、このような結果になったのです。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2479.jpg"/>
+    <br>
+    
+    <p>
+    再びメッシュグループ編集画面に戻り、「最終回転補正」を適用します。<br>
+    <strong>(1)</strong> コンストレイントを適用したボーンを選択します。<br>
+    <strong>(2)</strong> 「最終回転補正」の「<strong>Keep World Angle</strong>」オプションを有効にします。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2480.jpg"/>
+    <br>
+    
+    <p>
+    これで、キャラクターの足の角度が自然になりました。<br>
+    </p>
+    <br>
+    
+    <!-- 8. 이미지 (가운데 정렬) -->
+    <br>
+    <img class="img-fluid rounded-sm mx-auto d-block" style="max-width:80%;" src="../../Images/Advanced/AdManual_2481.jpg"/>
+    <br>
+    
+    <p>
+    より自然に地面を蹴って走るアニメーションを完成させました。<br>
+    </p>
+    <br>
+    
+    <!-- 12. 참고 박스 시작 -->
+    <div class="alert alert-info" role="alert">
+    
+    <p>
+    このページでは、IKコントローラーやコンストレイントが設定されたボーンを対象に、「最終回転補正」オプションを適用してみました。<br>
+    しかし、「最終回転補正」はIK機能の使用有無にかかわらず利用可能です。<br>
+    </p>
+    <br>
+    
+    </div>
+    <br>
+    <br>
+    
+    <!-- 5. 바닥 네비바 -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_BoneConstraints.html">< ボーンコンストレイント</a>
+        <a class="btn btn-light" role="button" href="../../jp/AdvancedManual/AD_SaveBoneSettings.html">ボーンの設定をエクスポート/インポート ></a>
+    </nav>
+    
+    <!-- 페이지 내용 끝! -->
+
+    
+    <!-- 종료 -->
+    </div>
+
+    <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <!--------------->
+
+    <!-- 클립보드 스크립트 -->
+<!-- NO SCRIPT -->
+    <!--------------->
+
+    </body>
+</html>
